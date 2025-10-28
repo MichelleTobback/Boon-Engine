@@ -3,6 +3,13 @@
 
 #include "Renderer/VertexInput.h"
 #include "Renderer/Shader.h"
+#include "Renderer/UniformBuffer.h"
+#include "Renderer/UBData.h"
+#include "Renderer/Camera.h"
+
+//temp
+#include "Core/Application.h"
+#include <glm/gtc/matrix_transform.hpp>
 
 #include <glad/glad.h>
 
@@ -31,28 +38,31 @@ Boon::SceneRenderer::SceneRenderer()
 	m_pQuadVertexInput->SetIndexBuffer(IndexBuffer::Create(quadIndices, sizeof(quadIndices) / sizeof(uint32_t)));
 
 	std::string vertexSrc = R"(
-			#version 330 core
+			#version 450 core
 			
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
 
-			out vec3 v_Position;
 			out vec4 v_Color;
+
+			layout(std140, binding = 0) uniform Camera
+			{
+				mat4 u_ViewProjection;
+			};
+
 
 			void main()
 			{
-				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = vec4(a_Position, 1.0);	
+				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
 			}
 		)";
 
 	std::string fragmentSrc = R"(
-			#version 330 core
+			#version 450 core
 			
 			layout(location = 0) out vec4 color;
 
-			in vec3 v_Position;
 			in vec4 v_Color;
 
 			void main()
@@ -62,11 +72,23 @@ Boon::SceneRenderer::SceneRenderer()
 		)";
 
 	m_pShader = Shader::Create(vertexSrc, fragmentSrc);
+
+	m_pCameraUniformBuffer = UniformBuffer::Create<UBData::Camera>(0);
+	Camera camera{ 90.f, (float)Application::Get().GetWindow().GetWidth(), (float)Application::Get().GetWindow().GetHeight(), 0.01f, 1000.f };
+	m_CameraData.ViewProjection = camera.GetProjection() * glm::translate(glm::mat4(1.f), { 0.f, 0.f, -1.f });
+
+	Application::Get().GetOnWindowResize() += [this](int width, int height)
+		{
+			Camera camera{ 90.f, (float)width, (float)height, 0.01f, 1000.f };
+			m_CameraData.ViewProjection = camera.GetProjection() * glm::translate(glm::mat4(1.f), { 0.f, 0.f, -1.f });
+		};
 }
 
 void Boon::SceneRenderer::Render()
 {
 	Renderer::BeginFrame();
+
+	m_pCameraUniformBuffer->SetValue(m_CameraData);
 
 	m_pShader->Bind();
 	m_pQuadVertexInput->Bind();

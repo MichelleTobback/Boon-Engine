@@ -1,6 +1,7 @@
 #include "Core/Window.h"
 #include <GLFW/glfw3.h>
 #include "Core/Assert.h"
+#include "Core/Application.h"
 #include <iostream>
 #include <functional>
 
@@ -98,6 +99,7 @@ namespace Boon
 			m_Desc.width = width;
 			m_Desc.height = height;
 			glViewport(0, 0, width, height);
+			Application::Get().GetOnWindowResize().Invoke(width, height);
 		}
 
 		WindowDesc m_Desc;

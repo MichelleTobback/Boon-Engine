@@ -1,10 +1,12 @@
 #pragma once
 #include <memory>
+#include "UBData.h"
 
 namespace Boon
 {
 	class Shader;
 	class VertexInput;
+	class UniformBuffer;
 	class SceneRenderer final
 	{ 
 	public:
@@ -21,5 +23,7 @@ namespace Boon
 	private:
 		std::shared_ptr<VertexInput> m_pQuadVertexInput{};
 		std::shared_ptr<Shader> m_pShader{};
+		std::shared_ptr<UniformBuffer> m_pCameraUniformBuffer{};
+		UBData::Camera m_CameraData{};
 	};
 }
