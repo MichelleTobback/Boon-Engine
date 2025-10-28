@@ -30,3 +30,45 @@
 *.exe
 *.out
 *.app
+
+# Build directories
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# CMake-generated files
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+CTestTestfile.cmake
+cmake_install.cmake
+Makefile
+install_manifest.txt
+compile_commands.json
+CPackConfig.cmake
+CPackSourceConfig.cmake
+out/
+
+# Visual Studio / Xcode CMake generators
+.vs/
+*.sln
+*.vcxproj*
+*.xcodeproj/
+*.xcworkspace/
+
+# Logs and temporary files
+*.log
+*.cache
+*.tmp

@@ -1,0 +1,6 @@
+[submodule "Boon/external/glm"]
+	path = Boon/external/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "Boon/external/glfw"]
+	path = Boon/external/glfw
+	url = https://github.com/glfw/glfw.git
