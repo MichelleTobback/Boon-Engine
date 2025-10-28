@@ -1,5 +1,8 @@
 #pragma once
 #include <Core/AppState.h>
+#include <Renderer/SceneRenderer.h>
+
+#include <memory>
 
 using namespace Boon;
 
@@ -22,5 +25,7 @@ namespace BoonEditor
 
 	private:
 		void OnRender();
+
+		std::unique_ptr<SceneRenderer> m_pSceneRenderer;
 	};
 }

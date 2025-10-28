@@ -4,13 +4,13 @@
 
 using namespace Boon;
 
-RenderAPI Boon::BaseRenderAPI::s_Api = RenderAPI::OpenGL;
+ERenderAPI Boon::BaseRenderAPI::s_Api = ERenderAPI::OpenGL;
 
 std::unique_ptr<Boon::BaseRenderAPI> Boon::BaseRenderAPI::Create()
 {
 	switch (s_Api)
 	{
-	case RenderAPI::OpenGL:
+	case ERenderAPI::OpenGL:
 		return std::move(std::make_unique<OpenGLApi>());
 	}
 

@@ -6,7 +6,7 @@ using namespace BoonEditor;
 
 void EditorState::OnEnter()
 {
-
+	m_pSceneRenderer = std::make_unique<SceneRenderer>();
 }
 
 void EditorState::OnUpdate()
@@ -22,6 +22,8 @@ void EditorState::OnExit()
 void EditorState::OnRender()
 {
 	Renderer::BeginFrame();
+
+	m_pSceneRenderer->Render();
 
 	Renderer::EndFrame();
 }

@@ -3,7 +3,7 @@
 
 namespace Boon
 {
-	enum class RenderAPI
+	enum class ERenderAPI
 	{
 		None,
 		OpenGL
@@ -28,8 +28,10 @@ namespace Boon
 
 		static std::unique_ptr<BaseRenderAPI> Create();
 
-		static RenderAPI GetAPI() { return s_Api; }
+		static ERenderAPI GetAPI() { return s_Api; }
 
-		static RenderAPI s_Api;
+	private:
+		static ERenderAPI s_Api;
 	};
+	typedef BaseRenderAPI RenderAPI;
 }
