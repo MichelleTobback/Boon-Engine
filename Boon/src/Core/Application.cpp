@@ -1,6 +1,10 @@
 #include "Core/Application.h"
 #include "Core/AppStateMachine.h"
 #include "Core/Time.h"
+#include "Core/ServiceLocator.h"
+
+#include "Asset/AssetLibrary.h"
+
 #include "Renderer/Renderer.h"
 
 Boon::Application* Boon::Application::s_pInstance{ nullptr };
@@ -21,6 +25,9 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 {
 	m_pWindow = std::make_unique<Window>(m_Desc.windowDesc);
 	Renderer::Init();
+
+	ServiceLocator::Register(std::make_shared<AssetLibrary>("Assets/"));
+
 	m_pStateMachine->PushState(std::move(pState));
 	pState = nullptr;
 
@@ -36,6 +43,9 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 		m_pWindow->Present();
 	}
 	m_pStateMachine->Shutdown();
+
+	ServiceLocator::Shutdown();
+
 	Renderer::Shutdown();
 	m_pWindow->Destroy();
 }

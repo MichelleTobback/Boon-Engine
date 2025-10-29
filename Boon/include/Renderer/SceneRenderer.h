@@ -7,6 +7,7 @@ namespace Boon
 	class Shader;
 	class VertexInput;
 	class UniformBuffer;
+	class Camera;
 	class SceneRenderer final
 	{ 
 	public:
@@ -25,5 +26,8 @@ namespace Boon
 		std::shared_ptr<Shader> m_pShader{};
 		std::shared_ptr<UniformBuffer> m_pCameraUniformBuffer{};
 		UBData::Camera m_CameraData{};
+
+		//temp
+		std::shared_ptr<Camera> m_pCamera;
 	};
 }

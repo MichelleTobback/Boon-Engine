@@ -24,9 +24,9 @@ target_include_directories(BoonEngine
 # === Output directories
 # =========================================
 set_target_properties(BoonEngine PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/Boon
-    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/Boon
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/Boon
+    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/Boon/$<CONFIG>
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/Boon/$<CONFIG>
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/Boon/$<CONFIG>
 )
 
 # =========================================

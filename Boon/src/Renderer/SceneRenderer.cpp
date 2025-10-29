@@ -7,7 +7,13 @@
 #include "Renderer/UBData.h"
 #include "Renderer/Camera.h"
 
+#include "Core/ServiceLocator.h"
+
+#include "Asset/AssetLibrary.h"
+#include "Asset/ShaderAsset.h"
+
 //temp
+#include "Core/Time.h"
 #include "Core/Application.h"
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -71,23 +77,22 @@ Boon::SceneRenderer::SceneRenderer()
 			}
 		)";
 
-	m_pShader = Shader::Create(vertexSrc, fragmentSrc);
+	AssetLibrary& assets{ ServiceLocator::Get<AssetLibrary>()};
+	AssetHandle quadHandle = assets.Load<ShaderAssetLoader>("shaders/Quad.glsl");
+	m_pShader = assets.GetAsset<ShaderAsset>(quadHandle);
 
 	m_pCameraUniformBuffer = UniformBuffer::Create<UBData::Camera>(0);
-	Camera camera{ 90.f, (float)Application::Get().GetWindow().GetWidth(), (float)Application::Get().GetWindow().GetHeight(), 0.01f, 1000.f };
-	m_CameraData.ViewProjection = camera.GetProjection() * glm::translate(glm::mat4(1.f), { 0.f, 0.f, -1.f });
-
-	Application::Get().GetOnWindowResize() += [this](int width, int height)
-		{
-			Camera camera{ 90.f, (float)width, (float)height, 0.01f, 1000.f };
-			m_CameraData.ViewProjection = camera.GetProjection() * glm::translate(glm::mat4(1.f), { 0.f, 0.f, -1.f });
-		};
+	m_pCamera = std::make_shared<Camera>( 90.f, (float)Application::Get().GetWindow().GetWidth(), (float)Application::Get().GetWindow().GetHeight(), 0.01f, 1000.f );
 }
 
 void Boon::SceneRenderer::Render()
 {
 	Renderer::BeginFrame();
 
+	static float rot{ 1.f };
+	rot += Time::Get().GetDeltaTime() * glm::sin(Time::Get().GetDuration());
+	glm::mat4 rotator = glm::rotate(glm::mat4(1.f), rot, glm::vec3(0.f, 0.f, 1.f));
+	m_CameraData.ViewProjection = m_pCamera->GetProjection() * (glm::translate(glm::mat4(1.f), { 0.f, 0.f, -1.f }) * rotator);
 	m_pCameraUniformBuffer->SetValue(m_CameraData);
 
 	m_pShader->Bind();

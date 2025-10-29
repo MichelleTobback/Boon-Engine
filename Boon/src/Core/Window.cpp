@@ -48,7 +48,6 @@ namespace Boon
 
 			glfwSetWindowUserPointer(m_pWindow, this);
 
-			auto* pInstance = this;
 			glfwSetFramebufferSizeCallback(m_pWindow, [](GLFWwindow* win, int w, int h)
 				{
 					GlfwWindowImpl* pInstance = static_cast<GlfwWindowImpl*>(glfwGetWindowUserPointer(win));

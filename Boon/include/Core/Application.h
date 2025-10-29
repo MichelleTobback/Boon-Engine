@@ -7,6 +7,7 @@
 
 namespace Boon
 {
+	class AssetLibrary;
 	class AppState;
 	class AppStateMachine;
 	class Application final
@@ -39,6 +40,7 @@ namespace Boon
 		AppDesc m_Desc;
 		std::unique_ptr<AppStateMachine> m_pStateMachine;
 		std::unique_ptr<Window> m_pWindow{ nullptr };
+
 		uint32_t m_CurrentFrameIndex{};
 
 		Delegate<void(int, int)> m_OnWindowResize;
