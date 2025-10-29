@@ -1,4 +1,6 @@
 #pragma once
+#include "Event/Event.h"
+
 #include <glm/glm.hpp>
 
 namespace Boon
@@ -14,7 +16,7 @@ namespace Boon
 		Camera() = default;
 		Camera(float fov, float width, float height, float near = 0.1f, float far = 10.0f);
 		Camera(float width, float height, float near = 0.1, float far = 1.f);
-		~Camera() = default;
+		~Camera();
 
 		Camera(const Camera& other) = default;
 		Camera(Camera&& other) = default;
@@ -45,6 +47,8 @@ namespace Boon
 		float m_Fov;
 		float m_Near;
 		float m_Far;
+
+		EventListenerID m_WindowResizeEvent;
 
 		enum class CameraFlags
 		{

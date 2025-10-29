@@ -1,13 +1,11 @@
 #pragma once
 #include "Core/Window.h"
-#include "Core/Delegate.h"
 
 #include <string>
 #include <memory>
 
 namespace Boon
 {
-	class AssetLibrary;
 	class AppState;
 	class AppStateMachine;
 	class Application final
@@ -32,7 +30,6 @@ namespace Boon
 		inline Window& GetWindow() const { return *m_pWindow; }
 		inline AppStateMachine* GetStateMachine() const { return m_pStateMachine.get(); }
 		inline uint32_t GetCurrentFrameIndex() const { return m_CurrentFrameIndex; }
-		inline Delegate<void(int, int)>& GetOnWindowResize() { return m_OnWindowResize; }
 
 		static Application& Get() { return *s_pInstance; }
 
@@ -42,8 +39,6 @@ namespace Boon
 		std::unique_ptr<Window> m_pWindow{ nullptr };
 
 		uint32_t m_CurrentFrameIndex{};
-
-		Delegate<void(int, int)> m_OnWindowResize;
 
 		static Application* s_pInstance;
 	};

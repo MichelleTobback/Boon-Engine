@@ -1,7 +1,12 @@
 #include "Core/Window.h"
-#include <GLFW/glfw3.h>
 #include "Core/Assert.h"
 #include "Core/Application.h"
+#include "Core/ServiceLocator.h"
+
+#include "Event/EventBus.h"
+#include "Event/WindowEvents.h"
+
+#include <GLFW/glfw3.h>
 #include <iostream>
 #include <functional>
 
@@ -54,6 +59,11 @@ namespace Boon
 					if (pInstance)
 						pInstance->OnResize(w, h);
 				});
+
+			glfwSetWindowCloseCallback(m_pWindow, [](GLFWwindow* window)
+				{
+					ServiceLocator::Get<EventBus>().Post(WindowCloseEvent());
+				});
 		}
 
 		void Destroy()
@@ -98,7 +108,7 @@ namespace Boon
 			m_Desc.width = width;
 			m_Desc.height = height;
 			glViewport(0, 0, width, height);
-			Application::Get().GetOnWindowResize().Invoke(width, height);
+			ServiceLocator::Get<EventBus>().Post(WindowResizeEvent(width, height));
 		}
 
 		WindowDesc m_Desc;

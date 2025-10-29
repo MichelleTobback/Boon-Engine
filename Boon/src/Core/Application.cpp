@@ -5,6 +5,8 @@
 
 #include "Asset/AssetLibrary.h"
 
+#include "Event/EventBus.h"
+
 #include "Renderer/Renderer.h"
 
 Boon::Application* Boon::Application::s_pInstance{ nullptr };
@@ -27,6 +29,7 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 	Renderer::Init();
 
 	ServiceLocator::Register(std::make_shared<AssetLibrary>("Assets/"));
+	ServiceLocator::Register(std::make_shared<EventBus>());
 
 	m_pStateMachine->PushState(std::move(pState));
 	pState = nullptr;

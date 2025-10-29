@@ -1,16 +1,22 @@
 #include "Renderer/Camera.h"
-#include "Core/BitFlag.h"
-#include "glm/gtc/matrix_transform.hpp"
 
-//temp
-#include "Core/Application.h"
+#include "Core/BitFlag.h"
+#include "Core/ServiceLocator.h"
+
+#include "Event/EventBus.h"
+#include "Event/WindowEvents.h"
+
+#include <glm/gtc/matrix_transform.hpp>
 
 Boon::Camera::Camera(float fov, float width, float height, float near, float far)
 	: m_Fov{ fov }, m_Size{ width, height }, m_Near{ near }, m_Far{ far }, m_Dirty{ true }, m_Type{ ProjectionType::Perspective }
 {
 	BitFlag::Set(m_Dirty, CameraFlags::PerspectiveDirty, true);
 
-	Application::Get().GetOnWindowResize() += [this](int width, int height) {SetSize((float)width, (float)height); };
+	m_WindowResizeEvent = ServiceLocator::Get<EventBus>().Subscribe<WindowResizeEvent>([this](const WindowResizeEvent& e)
+		{ 
+			SetSize((float)e.Width, (float)e.Height);
+		});
 }
 
 Boon::Camera::Camera(float width, float height, float near, float far)
@@ -18,7 +24,15 @@ Boon::Camera::Camera(float width, float height, float near, float far)
 {
 	BitFlag::Set(m_Dirty, CameraFlags::PerspectiveDirty, true);
 
-	Application::Get().GetOnWindowResize() += [this](int width, int height) {SetSize((float)width, (float)height); };
+	m_WindowResizeEvent = ServiceLocator::Get<EventBus>().Subscribe<WindowResizeEvent>([this](const WindowResizeEvent& e)
+		{
+			SetSize((float)e.Width, (float)e.Height);
+		});
+}
+
+Boon::Camera::~Camera()
+{
+	ServiceLocator::Get<EventBus>().Unsubscribe<WindowResizeEvent>(m_WindowResizeEvent);
 }
 
 const glm::mat4& Boon::Camera::GetProjection()
