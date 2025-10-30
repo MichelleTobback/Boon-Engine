@@ -10,3 +10,7 @@
 [submodule "Boon/external/entt"]
 	path = Boon/external/entt
 	url = https://github.com/skypjack/entt.git
+[submodule "Editor/external/imgui"]
+	path = Editor/external/imgui
+	url = https://github.com/ocornut/imgui.git
+	branch = docking
