@@ -7,6 +7,8 @@
 #include "Renderer/UBData.h"
 #include "Renderer/Camera.h"
 
+#include "Component/TransformComponent.h"
+
 #include "Core/ServiceLocator.h"
 
 #include "Asset/AssetLibrary.h"
@@ -49,19 +51,13 @@ Boon::SceneRenderer::SceneRenderer()
 	m_pShader = assets.GetAsset<ShaderAsset>(quadHandle);
 
 	m_pCameraUniformBuffer = UniformBuffer::Create<UBData::Camera>(0);
-	m_pCamera = std::make_shared<Camera>( 90.f, (float)Application::Get().GetWindow().GetWidth(), (float)Application::Get().GetWindow().GetHeight(), 0.01f, 1000.f );
-	m_CameraData.ViewProjection = m_pCamera->GetProjection() * (glm::translate(glm::mat4(1.f), { 0.f, 0.f, -1.f }));
 }
 
-void Boon::SceneRenderer::Render()
+void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTransform)
 {
 	Renderer::BeginFrame();
 
-	Input& input = ServiceLocator::Get<Input>();
-	Window& window = Application::Get().GetWindow();
-	glm::vec3 pos{0.f, 0.f, -1.f};
-
-	m_CameraData.ViewProjection = m_pCamera->GetProjection() * (glm::translate(glm::mat4(1.f), pos));
+	m_CameraData.ViewProjection = camera->GetProjection() * glm::inverse(cameraTransform->GetWorld());
 	m_pCameraUniformBuffer->SetValue(m_CameraData);
 
 	m_pShader->Bind();

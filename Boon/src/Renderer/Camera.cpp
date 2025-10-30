@@ -15,7 +15,13 @@ Boon::Camera::Camera(float fov, float width, float height, float near, float far
 
 	m_WindowResizeEvent = ServiceLocator::Get<EventBus>().Subscribe<WindowResizeEvent>([this](const WindowResizeEvent& e)
 		{ 
-			SetSize((float)e.Width, (float)e.Height);
+			if (m_Type == ProjectionType::Perspective)
+				SetSize((float)e.Width, (float)e.Height);
+			else
+			{
+				float aspect = (float)e.Width / (float)e.Height;
+				SetSize(this->GetSize().y * aspect, this->GetSize().y);
+			}
 		});
 }
 
@@ -26,13 +32,24 @@ Boon::Camera::Camera(float width, float height, float near, float far)
 
 	m_WindowResizeEvent = ServiceLocator::Get<EventBus>().Subscribe<WindowResizeEvent>([this](const WindowResizeEvent& e)
 		{
-			SetSize((float)e.Width, (float)e.Height);
+			if (m_Type == ProjectionType::Perspective)
+				SetSize((float)e.Width, (float)e.Height);
+			else
+			{
+				float aspect = (float)e.Width / (float)e.Height;
+				SetSize(this->GetSize().y * aspect, this->GetSize().y);
+			}
 		});
 }
 
 Boon::Camera::~Camera()
 {
 	ServiceLocator::Get<EventBus>().Unsubscribe<WindowResizeEvent>(m_WindowResizeEvent);
+}
+
+Boon::Camera::ProjectionType Boon::Camera::GetProjectionType() const
+{
+	return m_Type;
 }
 
 const glm::mat4& Boon::Camera::GetProjection()

@@ -4,3 +4,6 @@
 [submodule "Boon/external/glfw"]
 	path = Boon/external/glfw
 	url = https://github.com/glfw/glfw.git
+[submodule "Boon/external/external/entt"]
+	path = Boon/external/external/entt
+	url = https://github.com/skypjack/entt

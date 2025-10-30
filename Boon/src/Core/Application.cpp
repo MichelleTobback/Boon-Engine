@@ -11,6 +11,9 @@
 
 #include "Renderer/Renderer.h"
 
+//temp
+#include "Scene/GameObject.h"
+
 Boon::Application* Boon::Application::s_pInstance{ nullptr };
 
 Boon::Application::Application(const AppDesc& desc)
@@ -37,6 +40,10 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 	m_pStateMachine->PushState(std::move(pState));
 	pState = nullptr;
 
+	Scene* pScene{ new Scene() };
+
+	pScene->Instantiate();
+
 	bool quit{ false };
 	Time& time{ Time::Get() };
 	time.Start();
@@ -46,6 +53,7 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 		quit = m_pWindow->Update();
 		ServiceLocator::Get<Input>().Update();
 		m_pStateMachine->Update();
+		pScene->EndUpdate();
 		time.Wait();
 		m_pWindow->Present();
 	}
@@ -55,4 +63,6 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 
 	Renderer::Shutdown();
 	m_pWindow->Destroy();
+
+	delete pScene;
 }

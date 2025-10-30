@@ -8,6 +8,7 @@ namespace Boon
 	class VertexInput;
 	class UniformBuffer;
 	class Camera;
+	class TransformComponent;
 	class SceneRenderer final
 	{ 
 	public:
@@ -19,7 +20,7 @@ namespace Boon
 		SceneRenderer& operator=(const SceneRenderer& other) = delete;
 		SceneRenderer& operator=(SceneRenderer&& other) = delete;
 
-		void Render();
+		void Render(Camera* camera, TransformComponent* cameraTransform);
 
 	private:
 		std::shared_ptr<VertexInput> m_pQuadVertexInput{};

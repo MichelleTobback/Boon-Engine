@@ -53,6 +53,10 @@ target_include_directories(BoonEngine
         ${CMAKE_CURRENT_SOURCE_DIR}/external/stb
 )
 
+# --- EnTT (ecs)
+add_subdirectory(external/entt)
+target_link_libraries(${PROJECT_NAME} PUBLIC EnTT::EnTT)
+
 # =========================================
 # === Platform-specific settings
 # =========================================

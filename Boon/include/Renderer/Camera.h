@@ -32,6 +32,7 @@ namespace Boon
 		void SetNear(float near);
 		void SetFar(float far);
 
+		ProjectionType GetProjectionType() const;
 		const glm::mat4& GetProjection();
 		const glm::vec2& GetSize() const;
 		float GetFov() const;
