@@ -7,6 +7,8 @@
 
 #include "Event/EventBus.h"
 
+#include "Input/Input.h"
+
 #include "Renderer/Renderer.h"
 
 Boon::Application* Boon::Application::s_pInstance{ nullptr };
@@ -30,6 +32,7 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 
 	ServiceLocator::Register(std::make_shared<AssetLibrary>("Assets/"));
 	ServiceLocator::Register(std::make_shared<EventBus>());
+	ServiceLocator::Register(std::make_shared<Input>());
 
 	m_pStateMachine->PushState(std::move(pState));
 	pState = nullptr;
@@ -41,6 +44,7 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 	{
 		time.Step();
 		quit = m_pWindow->Update();
+		ServiceLocator::Get<Input>().Update();
 		m_pStateMachine->Update();
 		time.Wait();
 		m_pWindow->Present();

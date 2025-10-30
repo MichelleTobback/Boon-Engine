@@ -13,6 +13,7 @@
 #include "Asset/ShaderAsset.h"
 
 //temp
+#include "Input/Input.h"
 #include "Core/Time.h"
 #include "Core/Application.h"
 #include <glm/gtc/matrix_transform.hpp>
@@ -56,7 +57,11 @@ void Boon::SceneRenderer::Render()
 {
 	Renderer::BeginFrame();
 
-	m_CameraData.ViewProjection = m_pCamera->GetProjection() * (glm::translate(glm::mat4(1.f), { 0.f, 0.f, -1.f }));
+	Input& input = ServiceLocator::Get<Input>();
+	Window& window = Application::Get().GetWindow();
+	glm::vec3 pos{0.f, 0.f, -1.f};
+
+	m_CameraData.ViewProjection = m_pCamera->GetProjection() * (glm::translate(glm::mat4(1.f), pos));
 	m_pCameraUniformBuffer->SetValue(m_CameraData);
 
 	m_pShader->Bind();
