@@ -1,2 +1,2 @@
 # Boon Engine
-Vulkan multiplayer game engine
+multiplayer game engine
