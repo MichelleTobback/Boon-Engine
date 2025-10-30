@@ -1,4 +1,5 @@
 #pragma once
+#include "EditorObject.h"
 #include "Renderer/Camera.h"
 #include "Component/TransformComponent.h"
 
@@ -6,19 +7,19 @@ using namespace Boon;
 
 namespace BoonEditor
 {
-	class EditorCamera final
+	class EditorCamera final : public EditorObject
 	{
 	public:
 		EditorCamera(float width, float height);
 		EditorCamera(float fov, float width, float height, float near = 0.1f, float far = 500.0f);
-		~EditorCamera();
+		virtual ~EditorCamera();
 
 		EditorCamera(const EditorCamera& other) = default;
 		EditorCamera(EditorCamera&& other) = default;
 		EditorCamera& operator=(const EditorCamera& other) = default;
 		EditorCamera& operator=(EditorCamera&& other) = default;
 
-		void Update();
+		virtual void Update() override;
 
 		const TransformComponent& GetTransform() const;
 		TransformComponent& GetTransform();
