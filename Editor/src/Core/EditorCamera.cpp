@@ -106,11 +106,16 @@ void BoonEditor::EditorCamera::UpdateOrthographicController()
 
         // Mouse rotation handling
         glm::vec2 deltaMouse = mousePos - prevMousePos;
-        if (input.IsMouseHeld(Mouse::ButtonRight))
+        if (input.IsMouseHeld(Mouse::ButtonLeft))
+        {
+            m_Transform.Translate({ dt * -deltaMouse.x, dt * -deltaMouse.y, 0.f }); // Elevate the camera
+        }
+        else if (input.IsMouseHeld(Mouse::ButtonRight))
         {
             glm::vec2 size{ m_Camera.GetSize() };
-            float aspect{ size.x / size.y };
-            m_Camera.SetSize( size.x + dt * deltaMouse.y * aspect, size.y + dt * deltaMouse.y );
+            float aspect{ size.x / size.y }; 
+            float speed{ 2.f };
+            m_Camera.SetSize( size.x + dt * deltaMouse.y * aspect * speed, size.y + dt * deltaMouse.y * speed );
         }
     }
 

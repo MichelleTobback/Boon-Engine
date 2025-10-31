@@ -17,7 +17,8 @@ namespace Boon
 	class SceneRenderer final
 	{ 
 	public:
-		SceneRenderer(Scene* pScene);
+		SceneRenderer(Scene* pScene, bool isSwapchainTarget = false);
+		SceneRenderer(Scene* pScene, int viewportWidth, int viewportHeight, bool isSwapchainTarget = false);
 		virtual ~SceneRenderer();
 
 		SceneRenderer(const SceneRenderer& other) = delete;
@@ -28,6 +29,8 @@ namespace Boon
 		void Render(Camera* camera, TransformComponent* cameraTransform);
 
 		Framebuffer* GetOutputTarget() const { return m_pOutputFB.get(); }
+
+		void SetViewport(int width, int height);
 
 	private:
 		void StartBatch();
@@ -49,5 +52,8 @@ namespace Boon
 		glm::vec4 m_QuadVertexPositions[4];
 
 		Scene* m_pScene;
+
+		int m_ViewportWidth, m_ViewportHeight;
+		bool m_ViewportDirty{ false };
 	};
 }

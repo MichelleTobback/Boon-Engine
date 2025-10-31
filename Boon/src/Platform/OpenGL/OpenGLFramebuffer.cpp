@@ -170,6 +170,12 @@ void Boon::OpenGLFramebuffer::Invalidate()
 
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	glBindTexture(GL_TEXTURE_2D, m_ColorAttachments[0]);
+	GLint width = 0, height = 0;
+	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &width);
+	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &height);
+	printf("Color tex size: %d x %d\n", width, height);
 }
 
 void Boon::OpenGLFramebuffer::Bind()
@@ -181,16 +187,23 @@ void Boon::OpenGLFramebuffer::Bind()
 void Boon::OpenGLFramebuffer::Unbind()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	if (m_Desc.SwapChainTarget)
+	{
+		glBindFramebuffer(GL_READ_FRAMEBUFFER, m_ID);
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // backbuffer
+		glBlitFramebuffer(0, 0, m_Desc.Width, m_Desc.Height, 0, 0, m_Desc.Width, m_Desc.Height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+	}
 }
 
 void Boon::OpenGLFramebuffer::Resize(uint32_t width, uint32_t height)
 {
-	if (width == 0 || height == 0 || width > s_MaxFramebufferSize || height > s_MaxFramebufferSize)
-	{
+	// Avoid recreating FBO with zero size
+	if (width == 0 || height == 0)
 		return;
-	}
-	m_Desc.Width = width;
-	m_Desc.Height = height;
+
+	m_Desc.Width = std::min(width, s_MaxFramebufferSize);
+	m_Desc.Height = std::min(height, s_MaxFramebufferSize);
 
 	Invalidate();
 }

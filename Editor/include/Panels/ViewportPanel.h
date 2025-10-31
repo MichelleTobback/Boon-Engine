@@ -2,6 +2,8 @@
 #include "EditorPanel.h"
 #include "Core/EditorCamera.h"
 
+#include <Scene/GameObject.h>
+
 #include <memory>
 
 #include <glm/glm.hpp>
@@ -32,5 +34,8 @@ namespace BoonEditor
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 		glm::vec2 m_ViewportBounds[2];
+
+		GameObject m_HoveredGameObject{};
+		Scene* m_pContext;
 	};
 }

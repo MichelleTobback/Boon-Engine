@@ -11,7 +11,7 @@
 using namespace BoonEditor;
 
 BoonEditor::ViewportPanel::ViewportPanel(const std::string& name, Scene* pContext)
-	: EditorPanel(name)
+	: EditorPanel(name), m_pContext{ pContext }
 {
 	m_Camera.SetActive(true);
 	m_pRenderer = std::make_unique<SceneRenderer>(pContext);
@@ -23,7 +23,22 @@ BoonEditor::ViewportPanel::~ViewportPanel()
 
 void BoonEditor::ViewportPanel::Update()
 {
-	m_Camera.Update();
+	if (m_ViewportHovered)
+		m_Camera.Update();
+
+	auto [mx, my] = ImGui::GetMousePos();
+	mx -= m_ViewportBounds[0].x;
+	my -= m_ViewportBounds[0].y;
+	glm::vec2 viewportSize = m_ViewportBounds[1] - m_ViewportBounds[0];
+	my = viewportSize.y - my;
+	int mouseX = (int)mx;
+	int mouseY = (int)my;
+
+	if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
+	{
+		int pixelData = m_pRenderer->GetOutputTarget()->ReadPixel(1, mouseX, mouseY);
+		m_HoveredGameObject = pixelData == -1 ? GameObject() : GameObject((GameObjectID)pixelData, m_pContext);
+	}
 
 	m_pRenderer->Render(&m_Camera.GetCamera(), &m_Camera.GetTransform());
 }

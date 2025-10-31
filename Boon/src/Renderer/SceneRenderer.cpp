@@ -35,8 +35,11 @@ namespace Boon
 	static const uint32_t s_MaxTextureSlots = 32;
 }
 
-Boon::SceneRenderer::SceneRenderer(Scene* pScene)
-	: m_pScene{pScene}
+Boon::SceneRenderer::SceneRenderer(Scene* pScene, bool isSwapchainTarget)
+	: SceneRenderer{pScene, 1080, 720, isSwapchainTarget} {}
+
+Boon::SceneRenderer::SceneRenderer(Scene* pScene, int viewportWidth, int viewportHeight, bool isSwapchainTarget)
+	: m_pScene{pScene}, m_ViewportWidth{viewportWidth}, m_ViewportHeight{viewportHeight}
 {
 	m_QuadVertexPositions[0] = { -0.5f, -0.5f, 0.f, 1.f, };
 	m_QuadVertexPositions[1] = {  0.5f, -0.5f, 0.f, 1.f, };
@@ -81,8 +84,9 @@ Boon::SceneRenderer::SceneRenderer(Scene* pScene)
 
 	FramebufferDescriptor fbDesc;
 	fbDesc.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::RED_INTEGER, FramebufferTextureFormat::Depth };
-	fbDesc.Width = 1280;
-	fbDesc.Height = 720;
+	fbDesc.Width = viewportWidth;
+	fbDesc.Height = viewportHeight;
+	fbDesc.SwapChainTarget = isSwapchainTarget;
 	m_pOutputFB = Framebuffer::Create(fbDesc);
 }
 Boon::SceneRenderer::~SceneRenderer()
@@ -115,6 +119,12 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 	Flush();
 
 	m_pOutputFB->Unbind();
+
+	if (m_ViewportDirty)
+	{
+		m_pOutputFB->Resize(m_ViewportWidth, m_ViewportHeight);
+		m_ViewportDirty = false;
+	}
 }
 
 void Boon::SceneRenderer::RenderQuad(const glm::mat4& transform, const glm::vec4& color, int gameObjectHandle)
@@ -160,4 +170,11 @@ void Boon::SceneRenderer::Flush()
 		m_pShader->Bind();
 		Renderer::DrawIndexed(m_pQuadVertexInput, m_QuadIndexCount);
 	}
+}
+
+void Boon::SceneRenderer::SetViewport(int width, int height)
+{
+	m_ViewportWidth = width;
+	m_ViewportHeight = height;
+	m_ViewportDirty = true;
 }

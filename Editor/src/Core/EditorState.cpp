@@ -32,7 +32,7 @@ void EditorState::OnEnter()
 
 	GameObject quad = m_pScene->Instantiate();
 	SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
-	sprite.Color = { 1.f, 1.f, 1.f, 1.f };
+	sprite.Color = { 0.9f, 0.1f, 0.3f, 1.f };
 }
 
 void EditorState::OnUpdate()
@@ -56,7 +56,7 @@ void EditorState::OnExit()
 void EditorState::OnRender()
 {
 	m_PRenderer->BeginFrame();
-
+	
 	for (auto& pPanel : m_Panels)
 	{
 		pPanel->RenderUI();
