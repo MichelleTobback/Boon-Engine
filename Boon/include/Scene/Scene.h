@@ -8,10 +8,13 @@
 
 namespace Boon
 {
+	using SceneRegistry = entt::registry;
+
 	class GameObject;
 	class Scene final
 	{
 	public:
+		explicit Scene() {}
 		~Scene();
 		Scene(const Scene& other) = delete;
 		Scene(Scene&& other) = delete;
@@ -32,15 +35,16 @@ namespace Boon
 
 		void DestroyGameObject(GameObject object);
 
+		inline SceneRegistry& GetRegistry() { return m_Registry; }
+
 	private:
 		friend class GameObject;
 		//friend Scene& SceneManager::CreateScene(bool openOnLoad);
-		friend class Application;
-		explicit Scene(){}
+		//explicit Scene(){}
 
 		std::unordered_map<UUID, GameObjectID> m_EntityMap;
 		std::queue<UUID> m_ObjectsPendingDestroy{};
-		entt::registry m_Registry;
+		SceneRegistry m_Registry;
 
 		bool m_Running{ false };
 	};

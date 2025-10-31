@@ -21,6 +21,8 @@ namespace Boon
 		virtual void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& pVertexBuffer) override;
 		virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& pIndexBuffer) override;
 
+		inline std::shared_ptr<IndexBuffer> GetIndexBuffer() override { return m_pIndexBuffer; }
+
 	private:
 		uint32_t m_ID{};
 		uint32_t m_VertexBufferIndex{};

@@ -13,6 +13,6 @@ namespace BoonEditor
 		virtual void Update() override {}
 
 	protected:
-		virtual void OnRender() override;
+		virtual void OnRenderUI() override;
 	};
 }

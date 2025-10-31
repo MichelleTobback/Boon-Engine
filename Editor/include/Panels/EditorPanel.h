@@ -21,10 +21,12 @@ namespace BoonEditor
 		virtual void Update() override {};
 		virtual void OnResize(uint32_t width, uint32_t height) {}
 
-		void Render();
+		virtual void OnRender(){}
+
+		void RenderUI();
 
 	protected:
-		virtual void OnRender() = 0;
+		virtual void OnRenderUI() = 0;
 
 		void RenderFloat3Control(const std::string& label, glm::vec3& vector, float resetValue = 0.0f, float columnWidth = 100.0f);
 

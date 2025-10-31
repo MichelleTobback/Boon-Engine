@@ -5,10 +5,10 @@ using namespace BoonEditor;
 BoonEditor::PropertiesPanel::PropertiesPanel(const std::string& name)
 	: EditorPanel(name)
 {
-
+	
 }
 
-void BoonEditor::PropertiesPanel::OnRender()
+void BoonEditor::PropertiesPanel::OnRenderUI()
 {
 	
 }

@@ -2,11 +2,16 @@
 #include "Core/EditorCamera.h"
 
 #include "Panels/PropertiesPanel.h"
+#include "Panels/ViewportPanel.h"
 
 #include "UI/EditorRenderer.h"
 
 #include <Core/Application.h>
+#include <Scene/Scene.h>
 #include <Renderer/Renderer.h>
+#include <Scene/GameObject.h>
+
+#include <Component/SpriteRendererComponent.h>
 
 using namespace BoonEditor;
 
@@ -18,19 +23,23 @@ void EditorState::OnEnter()
 	Window& window{ Application::Get().GetWindow() };
 
 	m_PRenderer = std::make_unique<EditorRenderer>();
-	m_pSceneRenderer = std::make_unique<SceneRenderer>();
 
-	float aspect = (float)window.GetWidth() / (float)window.GetHeight();
-	m_pEditorCamera = &CreateObject<EditorCamera>(2.f * aspect, 2.f);
-	m_pEditorCamera->SetActive(true);
+	m_pScene = std::make_unique<Scene>();
 
+	CreatePanel<ViewportPanel>("Viewport", m_pScene.get());
 	CreatePanel<PropertiesPanel>("Properties");
-	CreatePanel<PropertiesPanel>("Viewport");
 	CreatePanel<PropertiesPanel>("Scene");
+
+	GameObject quad = m_pScene->Instantiate();
+	SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
+	sprite.Color = { 1.f, 1.f, 1.f, 1.f };
 }
 
 void EditorState::OnUpdate()
 {
+	m_pScene->Update();
+	m_pScene->EndUpdate();
+
 	for (auto& pObject : m_Objects)
 	{
 		pObject->Update();
@@ -46,17 +55,11 @@ void EditorState::OnExit()
 
 void EditorState::OnRender()
 {
-	Renderer::BeginFrame();
-
-	m_pSceneRenderer->Render(&m_pEditorCamera->GetCamera(), &m_pEditorCamera->GetTransform());
-
-	Renderer::EndFrame();
-
 	m_PRenderer->BeginFrame();
 
 	for (auto& pPanel : m_Panels)
 	{
-		pPanel->Render();
+		pPanel->RenderUI();
 	}
 	
 	m_PRenderer->EndFrame();

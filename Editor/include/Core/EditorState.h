@@ -8,6 +8,11 @@
 #include <type_traits>
 #include <vector>
 
+namespace Boon
+{
+	class Scene;
+}
+
 using namespace Boon;
 
 namespace BoonEditor
@@ -50,13 +55,11 @@ namespace BoonEditor
 			return ref;
 		}
 
-
 	private:
 		void OnRender();
 
-		std::unique_ptr<SceneRenderer> m_pSceneRenderer;
 		std::unique_ptr<EditorRenderer> m_PRenderer;
-		EditorCamera* m_pEditorCamera;
+		std::unique_ptr<Scene> m_pScene;
 
 		std::vector<std::unique_ptr<EditorObject>> m_Objects;
 		std::vector<EditorPanel*> m_Panels;

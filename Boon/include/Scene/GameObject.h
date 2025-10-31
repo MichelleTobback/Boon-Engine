@@ -79,7 +79,7 @@ namespace Boon
 		template <typename T>
 		bool HasComponent() const
 		{
-			return m_pScene->m_Registry.has<T>(m_Handle);
+			return m_pScene->m_Registry.any_of<T>(m_Handle);
 		}
 
 		void Destroy();

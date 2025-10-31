@@ -35,10 +35,10 @@ namespace Boon
 		TransformComponent(SceneComponent* owner);
 		~TransformComponent() = default;
 
-		TransformComponent(const TransformComponent& other) = delete;
-		TransformComponent(TransformComponent&& other) = delete;
-		TransformComponent& operator=(const TransformComponent& other) = delete;
-		TransformComponent& operator=(TransformComponent&& other) = delete;
+		TransformComponent(const TransformComponent& other) = default;
+		TransformComponent(TransformComponent&& other) = default;
+		TransformComponent& operator=(const TransformComponent& other) = default;
+		TransformComponent& operator=(TransformComponent&& other) = default;
 
 		const glm::mat4& GetWorld();
 		const glm::vec3& GetWorldPosition();

@@ -11,11 +11,12 @@ BoonEditor::EditorPanel::EditorPanel(const std::string& name)
 
 }
 
-void BoonEditor::EditorPanel::Render()
+void BoonEditor::EditorPanel::RenderUI()
 {
 	ImGui::Begin(m_Name.c_str());
 
-	OnRender();
+	OnRenderUI();
+
 	ImGui::End();
 }
 
