@@ -7,6 +7,12 @@
 
 namespace BoonEditor
 {
+	enum class EditorPanelFlag
+	{
+		None = 0,
+		Hovered = 1 < 1
+	};
+
 	class EditorPanel : public EditorObject
 	{
 	public:
@@ -25,6 +31,8 @@ namespace BoonEditor
 
 		void RenderUI();
 
+		bool IsHovered() const;
+
 	protected:
 		virtual void OnRenderUI() = 0;
 
@@ -34,5 +42,6 @@ namespace BoonEditor
 
 	private:
 		std::string m_Name;
+		EditorPanelFlag m_Flags;
 	};
 }

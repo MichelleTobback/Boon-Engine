@@ -250,7 +250,7 @@ namespace Boon
     };
 
     // -------------------------------------------------------
-    // Public interface — only forwards to Impl (no logic)
+    // Public interface
     // -------------------------------------------------------
     Input::Input() : m_pImpl(new Impl()) {}
     Input::~Input() { delete m_pImpl; }

@@ -4,6 +4,7 @@
 #include <Component/NameComponent.h>
 #include <Component/SceneComponent.h>
 #include <Component/SpriteRendererComponent.h>
+#include <Component/CameraComponent.h>
 
 #include <imgui.h>
 
@@ -148,6 +149,24 @@ GameObject BoonEditor::ScenePanel::AddGameObjectPopup(GameObject parent)
 			}
 			ImGui::EndMenu();
 		}
+
+		if (ImGui::BeginMenu("Camera"))
+		{
+			if (ImGui::MenuItem("Orthographic"))
+			{
+				instance = m_pSceneContext->Get()->Instantiate();
+				instance.AddComponent<CameraComponent>(Camera(1.f, 1.2f, 0.1f, 1.f));
+				instance.GetComponent<NameComponent>().Name = "Camera";
+			}
+			if (ImGui::MenuItem("Perspective"))
+			{
+				instance = m_pSceneContext->Get()->Instantiate();
+				instance.AddComponent<CameraComponent>(Camera(90.f, 0.1f, 10.f));
+				instance.GetComponent<NameComponent>().Name = "Camera";
+			}
+			ImGui::EndMenu();
+		}
+
 		ImGui::EndMenu();
 	}
 	return instance;

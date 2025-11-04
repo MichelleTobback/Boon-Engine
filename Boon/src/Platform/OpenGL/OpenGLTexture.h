@@ -31,5 +31,4 @@ namespace Boon
 		uint32_t m_RendererID;
 		GLenum m_InternalFormat, m_DataFormat;
 	};
-
 }

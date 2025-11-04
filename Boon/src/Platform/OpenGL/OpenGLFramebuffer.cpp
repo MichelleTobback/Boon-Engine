@@ -204,9 +204,19 @@ void Boon::OpenGLFramebuffer::Resize(uint32_t width, uint32_t height)
 
 int Boon::OpenGLFramebuffer::ReadPixel(uint32_t attachmentIndex, int x, int y)
 {
+	if (attachmentIndex >= m_ColorAttachments.size())
+	{
+		int x{};
+	}
+
+	glBindFramebuffer(GL_READ_FRAMEBUFFER, m_ID);
+
 	glReadBuffer(GL_COLOR_ATTACHMENT0 + attachmentIndex);
 	int pixelData;
 	glReadPixels(x, y, 1, 1, GL_RED_INTEGER, GL_INT, &pixelData);
+
+	glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
+
 	return pixelData;
 }
 

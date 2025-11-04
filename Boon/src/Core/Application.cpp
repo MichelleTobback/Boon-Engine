@@ -47,8 +47,8 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 	{
 		time.Step();
 		quit = m_pWindow->Update();
-		ServiceLocator::Get<Input>().Update();
 		m_pStateMachine->Update();
+		ServiceLocator::Get<Input>().Update();
 		time.Wait();
 		m_pWindow->Present();
 	}

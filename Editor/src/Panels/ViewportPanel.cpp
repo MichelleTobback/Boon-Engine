@@ -3,10 +3,15 @@
 #include <Renderer/SceneRenderer.h>
 #include <Renderer/Framebuffer.h>
 
+#include <Core/ServiceLocator.h>
+#include <Input/Input.h>
+
 #include <imgui.h>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+#include <iostream>
 
 using namespace BoonEditor;
 
@@ -32,20 +37,26 @@ void BoonEditor::ViewportPanel::Update()
 	if (m_ViewportHovered)
 		m_Camera.Update();
 
-	auto [mx, my] = ImGui::GetMousePos();
-	mx -= m_ViewportBounds[0].x;
-	my -= m_ViewportBounds[0].y;
-	glm::vec2 viewportSize = m_ViewportBounds[1] - m_ViewportBounds[0];
-	my = viewportSize.y - my;
-	int mouseX = (int)mx;
-	int mouseY = (int)my;
+    Input& input = ServiceLocator::Get<Input>();
+
+    float mx = ImGui::GetMousePos().x;
+    float my = ImGui::GetMousePos().y;
+	
+    mx -= m_ViewportBounds[0].x;
+    my -= m_ViewportBounds[0].y;
+    glm::vec2 viewportSize = m_ViewportBounds[1] - m_ViewportBounds[0];
+    my = viewportSize.y - my;
+    int mouseX = (int)mx;
+    int mouseY = (int)my;
 
 	if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
 	{
 		int pixelData = m_pRenderer->GetOutputTarget()->ReadPixel(1, mouseX, mouseY);
-		m_HoveredGameObject = pixelData == -1 ? GameObject() : GameObject((GameObjectID)pixelData, m_pContext->Get());
+		m_HoveredGameObject = pixelData < 0 ? GameObject() : GameObject((GameObjectID)pixelData, m_pContext->Get());
 
-        if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) && m_HoveredGameObject.IsValid())
+        //std::cout << "mouse : x " << mouseX << ", y " << mouseY << " Object " << pixelData << "\n";
+
+        if (input.IsMousePressed(Mouse::ButtonLeft))
         {
             m_pSelectionContext->Set(m_HoveredGameObject);
         }
@@ -76,8 +87,8 @@ void BoonEditor::ViewportPanel::OnRenderUI()
     auto viewportMinRegion = ImGui::GetWindowContentRegionMin();
     auto viewportMaxRegion = ImGui::GetWindowContentRegionMax();
 
-    m_ViewportBounds[0] = { viewportMinRegion.x + viewportOffset.x, viewportMinRegion.y + viewportOffset.y };
-    m_ViewportBounds[1] = { viewportMaxRegion.x + viewportOffset.x, viewportMaxRegion.y + viewportOffset.y };
+    m_ViewportBounds[0] = minBound;
+    m_ViewportBounds[1] = maxBound;
 
     m_ViewportFocused = ImGui::IsWindowFocused();
     m_ViewportHovered = ImGui::IsWindowHovered();
