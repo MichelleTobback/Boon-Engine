@@ -6,6 +6,7 @@
 #include "Renderer/UniformBuffer.h"
 #include "Renderer/Camera.h"
 #include "Renderer/Framebuffer.h"
+#include "Renderer/Texture.h"
 
 #include "Scene/Scene.h"
 
@@ -17,6 +18,7 @@
 
 #include "Asset/AssetLibrary.h"
 #include "Asset/ShaderAsset.h"
+#include "Asset/TextureAsset.h"
 
 //temp
 #include "Input/Input.h"
@@ -69,9 +71,12 @@ Boon::SceneRenderer::SceneRenderer(Scene* pScene, int viewportWidth, int viewpor
 
 	m_pQuadVertexBuffer = VertexBuffer::Create(s_MaxVertices * sizeof(QuadVertex));
 	m_pQuadVertexBuffer->SetLayout({
-		{ShaderDataType::Float3, "a_Position"},
-		{ShaderDataType::Float4, "a_Color"},
-		{ShaderDataType::Int, "a_ID"}
+		{ ShaderDataType::Float3, "a_Position"	   },
+		{ ShaderDataType::Float4, "a_Color"		   },
+		{ ShaderDataType::Float2, "a_TexCoord"     },
+		{ ShaderDataType::Float,  "a_TexIndex"     },
+		{ ShaderDataType::Float,  "a_TilingFactor" },
+		{ ShaderDataType::Int,	  "a_ID"		   }
 	});
 	m_pQuadVertexInput->AddVertexBuffer(m_pQuadVertexBuffer);
 	m_pQuadVertexInput->SetIndexBuffer(IndexBuffer::Create(quadIndices, s_MaxIndices));
@@ -89,6 +94,10 @@ Boon::SceneRenderer::SceneRenderer(Scene* pScene, int viewportWidth, int viewpor
 	fbDesc.Height = viewportHeight;
 	fbDesc.SwapChainTarget = isSwapchainTarget;
 	m_pOutputFB = Framebuffer::Create(fbDesc);
+
+	m_TextureSlots[0] = Texture2D::Create(TextureDescriptor());
+	uint32_t whiteTextureData = 0xffffffff;
+	m_TextureSlots[0]->SetData(&whiteTextureData, sizeof(uint32_t));
 }
 Boon::SceneRenderer::~SceneRenderer()
 {
@@ -126,11 +135,20 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 
 	StartBatch();
 
+	AssetLibrary& assetLib{ ServiceLocator::Get<AssetLibrary>() };
+
 	auto group = m_pScene->GetRegistry().group<TransformComponent, SpriteRendererComponent>();
 	for (auto gameObject : group)
 	{
 		auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(gameObject);
-		RenderQuad(transform.GetWorld(), sprite.Color, (int)gameObject);
+
+		if (assetLib.IsValidAsset(sprite.TextureHandle))
+		{
+			auto tex = assetLib.GetAsset<Texture2DAsset>(sprite.TextureHandle);
+			RenderQuad(transform.GetWorld(), tex, sprite.Tiling, sprite.Color, (int)gameObject, { sprite.TexRect.x, sprite.TexRect.y }, { sprite.TexRect.z, sprite.TexRect.w });
+		}
+		else
+			RenderQuad(transform.GetWorld(), sprite.Color, (int)gameObject);
 	}
 
 	Flush();
@@ -156,7 +174,7 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 void Boon::SceneRenderer::RenderQuad(const glm::mat4& transform, const glm::vec4& color, int gameObjectHandle)
 {
 	constexpr size_t quadVertexCount = 4;
-	const float textureIndex = 0.0f; // White Texture
+	const float textureIndex = 0.0f;
 	constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 	const float tilingFactor = 1.0f;
 
@@ -167,6 +185,70 @@ void Boon::SceneRenderer::RenderQuad(const glm::mat4& transform, const glm::vec4
 	{
 		m_QuadVertexBufferPtr->Position = transform * m_QuadVertexPositions[i];
 		m_QuadVertexBufferPtr->Color = color;
+		m_QuadVertexBufferPtr->TexCoord = textureCoords[i];
+		m_QuadVertexBufferPtr->TexIndex = textureIndex;
+		m_QuadVertexBufferPtr->TilingFactor = tilingFactor;
+		m_QuadVertexBufferPtr->GameObjectID = gameObjectHandle;
+		m_QuadVertexBufferPtr++;
+	}
+
+	m_QuadIndexCount += 6;
+}
+
+void Boon::SceneRenderer::RenderQuad(const glm::mat4& transform, const std::shared_ptr<Texture2D>& texture, float tilingFactor, const glm::vec4& color, int gameObjectHandle)
+{
+	RenderQuad(transform, texture, tilingFactor, color, gameObjectHandle, { 0.f, 0.f }, { 1.f, 1.f });
+}
+
+void Boon::SceneRenderer::RenderQuad(const glm::mat4& transform, const std::shared_ptr<Texture2D>& texture, float tilingFactor, 
+	const glm::vec4& color, int gameObjectHandle, const glm::vec2& spriteTexCoord, const glm::vec2& spriteTexSize)
+{
+	constexpr size_t quadVertexCount = 4;
+
+	glm::vec2 texCoords[quadVertexCount] = {
+		{ spriteTexCoord.x,                    spriteTexCoord.y },                     // bottom-left
+		{ spriteTexCoord.x + spriteTexSize.x,  spriteTexCoord.y },                     // bottom-right
+		{ spriteTexCoord.x + spriteTexSize.x,  spriteTexCoord.y + spriteTexSize.y },   // top-right
+		{ spriteTexCoord.x,                    spriteTexCoord.y + spriteTexSize.y }    // top-left
+	};
+
+	if (m_QuadIndexCount >= s_MaxIndices)
+		NextBatch();
+
+	float textureIndex = 0.0f;
+	bool found = false;
+	for (uint32_t i = 1; i < m_TextureSlotIndex; i++)
+	{
+		if (m_TextureSlots[i]->GetRendererID() == texture->GetRendererID())
+		{
+			textureIndex = (float)i;
+			found = true;
+			break;
+		}
+	}
+	if (!found)
+	{
+		if (m_TextureSlotIndex >= s_MaxTextureSlots)
+			NextBatch();
+
+		textureIndex = (float)m_TextureSlotIndex;
+		m_TextureSlots[m_TextureSlotIndex] = texture;
+		m_TextureSlotIndex++;
+	}
+
+	for (size_t i = 0; i < quadVertexCount; i++)
+	{
+		//float width = texture->GetWidth() * spriteTexSize.x / 100.f;
+		//float height = texture->GetHeight() * spriteTexSize.y / 100.f;
+		//m_QuadVertexBufferPtr->Position.x = m_QuadVertexPositions[i].x * width;
+		//m_QuadVertexBufferPtr->Position.y = m_QuadVertexPositions[i].y * height;
+		//m_QuadVertexBufferPtr->Position.z = m_QuadVertexPositions[i].z;
+		//m_QuadVertexBufferPtr->Position = transform * glm::vec4(m_QuadVertexBufferPtr->Position, 1.f);
+		m_QuadVertexBufferPtr->Position = transform * m_QuadVertexPositions[i];
+		m_QuadVertexBufferPtr->Color = color;
+		m_QuadVertexBufferPtr->TexCoord = texCoords[i];
+		m_QuadVertexBufferPtr->TexIndex = textureIndex;
+		m_QuadVertexBufferPtr->TilingFactor = tilingFactor;
 		m_QuadVertexBufferPtr->GameObjectID = gameObjectHandle;
 		m_QuadVertexBufferPtr++;
 	}
@@ -178,6 +260,7 @@ void Boon::SceneRenderer::StartBatch()
 {
 	m_QuadIndexCount = 0;
 	m_QuadVertexBufferPtr = m_QuadVertexBufferBase;
+	m_TextureSlotIndex = 1;
 }
 
 void Boon::SceneRenderer::NextBatch()
@@ -192,6 +275,9 @@ void Boon::SceneRenderer::Flush()
 	{
 		uint32_t dataSize = (uint32_t)((uint8_t*)m_QuadVertexBufferPtr - (uint8_t*)m_QuadVertexBufferBase);
 		m_pQuadVertexBuffer->SetData(m_QuadVertexBufferBase, dataSize);
+
+		for (uint32_t i = 0; i < m_TextureSlotIndex; i++)
+			m_TextureSlots[i]->Bind(i);
 
 		m_pShader->Bind();
 		Renderer::DrawIndexed(m_pQuadVertexInput, m_QuadIndexCount);

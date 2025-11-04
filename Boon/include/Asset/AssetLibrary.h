@@ -29,6 +29,8 @@ namespace Boon
 		template <typename T>
 		void RegisterLoader();
 
+		bool IsValidAsset(AssetHandle handle) const;
+
 	private:
 		std::vector<std::unique_ptr<AssetLoader>> m_AssetLoaders;
 		std::unordered_map<std::string, AssetLoader*> m_ExtensionsToLoaders;
@@ -76,6 +78,7 @@ namespace Boon
 		BN_ASSERT(m_Assets.find(handle) != m_Assets.end(), "asset does not exist");
 		T* pAsset{ dynamic_cast<T*>(m_Assets[handle].get()) };
 		BN_ASSERT(pAsset, "asset is not valid");
+
 		return pAsset->GetInstance();
 	}
 

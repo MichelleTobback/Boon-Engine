@@ -96,10 +96,22 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
 
     RenderComponentNode<SpriteRendererComponent>("Sprite", [this](SpriteRendererComponent& spriteComponent)
         {
-            glm::vec4 value = spriteComponent.Color;
-            if (UI::ColorPicker("Tint", value))
+            glm::vec4 value4 = spriteComponent.Color;
+            if (UI::ColorPicker("Tint", value4))
             {
-                spriteComponent.Color = value;
+                spriteComponent.Color = value4;
+            }
+
+            value4 = spriteComponent.TexRect;
+            if (UI::DragFloat4("Source", value4, 0.f, 1.f, 0.05f))
+            {
+                spriteComponent.TexRect = value4;
+            }
+
+            float value = spriteComponent.Tiling;
+            if (UI::DragFloat("Tiling", value, 0.1f, 10.f, 0.1f))
+            {
+                spriteComponent.Tiling = value;
             }
         });
 }

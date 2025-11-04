@@ -148,7 +148,7 @@ void BoonEditor::ViewportPanel::CameraSettings(float posX, float posY, float max
 
     if (UI::Combo("Mode", projectionType, projectionTypes, IM_ARRAYSIZE(projectionTypes)))
     {
-        camera.SetProjectionType((Camera::ProjectionType)projectionType);
+        m_Camera.SetMode((Camera::ProjectionType)projectionType);
     }
 
     switch (camera.GetProjectionType())

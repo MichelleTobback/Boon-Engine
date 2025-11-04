@@ -8,6 +8,7 @@
 #include "UI/EditorRenderer.h"
 
 #include <Asset/AssetLibrary.h>
+#include <Asset/TextureAsset.h>
 #include <Core/ServiceLocator.h>
 #include <Core/Application.h>
 #include <Scene/Scene.h>
@@ -25,6 +26,7 @@ EditorState::~EditorState() = default;
 void EditorState::OnEnter()
 {
 	Window& window{ Application::Get().GetWindow() };
+	AssetLibrary& assetLib{ ServiceLocator::Get<AssetLibrary>() };
 
 	m_PRenderer = std::make_unique<EditorRenderer>();
 
@@ -41,7 +43,9 @@ void EditorState::OnEnter()
 
 	GameObject quad = m_pScene->Instantiate();
 	SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
-	sprite.Color = { 0.9f, 0.1f, 0.3f, 1.f };
+	sprite.TextureHandle = assetLib.Load<Texture2DAssetLoader>("game/Blue_witch/B_witch_idle.png");
+	auto tex = assetLib.GetAsset<Texture2DAsset>(sprite.TextureHandle);
+	sprite.TexRect.w = tex->GetHeight() / 6.f / tex->GetHeight();
 }
 
 void EditorState::OnUpdate()

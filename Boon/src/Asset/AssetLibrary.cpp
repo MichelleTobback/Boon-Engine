@@ -22,3 +22,8 @@ void Boon::AssetLibrary::AddDirectory(const std::string& directory)
 {
     m_Dirs.push_back(directory);
 }
+
+bool Boon::AssetLibrary::IsValidAsset(AssetHandle handle) const
+{
+    return m_Assets.find(handle) != m_Assets.end();
+}
