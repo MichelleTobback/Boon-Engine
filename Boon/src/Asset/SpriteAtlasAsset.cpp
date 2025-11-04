@@ -41,10 +41,20 @@ std::unique_ptr<Asset> Boon::SpriteAtlasAssetLoader::Load(const std::string& pat
 
     for (auto& [name, entry] : j["sprites"].items())
     {
-        SpriteUV uv;
+        SpriteFrame uv;
         uv.UV = { entry["x"], entry["y"] };
         uv.Size = { entry["w"], entry["h"] };
-        pInstance->SetSpriteUV(uv, entry["id"]);
+        uv.FrameTime = entry["time"];
+        pInstance->SetSpriteFrame(uv, entry["id"]);
+    }
+
+    for (auto& [name, entry] : j["clips"].items())
+    {
+        SpriteAnimClip clip;
+        clip.Frames = entry["frames"].get<std::vector<int>>();
+        clip.Speed = entry["speed"];
+        clip.pAtlas = pInstance.get();
+        pInstance->AddClip(clip);
     }
 
     pResult = SpriteAtlasAsset::Create(handle, pInstance);

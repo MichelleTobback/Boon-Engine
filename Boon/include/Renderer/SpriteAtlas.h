@@ -4,13 +4,23 @@
 #include <memory>
 #include <unordered_map>
 #include <queue>
+#include <vector>
 
 namespace Boon
 {
-	struct SpriteUV
+	struct SpriteFrame
 	{
 		glm::vec2 UV;
 		glm::vec2 Size;
+		float FrameTime;
+	};
+
+	class SpriteAtlas;
+	struct SpriteAnimClip
+	{
+		float Speed;
+		SpriteAtlas* pAtlas;
+		std::vector<int> Frames;
 	};
 
 	class Texture2D;
@@ -28,7 +38,7 @@ namespace Boon
 		inline void SetTexture(const std::shared_ptr<Texture2D>& pTexture) { m_pTexture = pTexture; }
 		inline const std::shared_ptr<Texture2D>& GetTexture() const { return m_pTexture; }
 
-		inline void AddSpriteUV(const SpriteUV& uv)
+		inline void AddSpriteFrame(const SpriteFrame& uv)
 		{
 			int id = (int)m_Sprites.size();
 			if (!m_FreeIds.empty())
@@ -39,13 +49,20 @@ namespace Boon
 			m_Sprites[id] = uv;
 		}
 
-		inline void RemoveSpriteUV(int index) { m_Sprites.erase(index); m_FreeIds.push(index); }
-		inline void SetSpriteUV(const SpriteUV& uv, int index = 0) { m_Sprites[index] = uv; }
-		inline const SpriteUV& GetSpriteUV(int index) const { return m_Sprites.at(index); }
+		inline void RemoveSpriteFrame(int index) { m_Sprites.erase(index); m_FreeIds.push(index); }
+		inline void SetSpriteFrame(const SpriteFrame& uv, int index = 0) { m_Sprites[index] = uv; }
+		inline const SpriteFrame& GetSpriteFrame(int index) const { return m_Sprites.at(index); }
+
+		inline void AddClip(const SpriteAnimClip& clip) { m_Clips.push_back(clip); }
+		inline void RemoveClip(int index) { m_Clips.erase(m_Clips.begin() + index); }
+		inline const std::vector<SpriteAnimClip>& GetClips() const { return m_Clips; }
+		inline SpriteAnimClip& GetClip(int index) { return m_Clips[index]; }
 
 	private:
 		std::shared_ptr<Texture2D> m_pTexture;
-		std::unordered_map<int, SpriteUV> m_Sprites;
+		std::unordered_map<int, SpriteFrame> m_Sprites;
 		std::queue<int> m_FreeIds;
+
+		std::vector<SpriteAnimClip> m_Clips;
 	};
 }

@@ -21,6 +21,7 @@
 
 #include <Component/CameraComponent.h>
 #include <Component/SpriteRendererComponent.h>
+#include <Component/SpriteAnimatorComponent.h>
 
 using namespace BoonEditor;
 
@@ -49,11 +50,23 @@ void EditorState::OnEnter()
 	SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
 	sprite.SpriteAtlasHandle = assetLib.Load<SpriteAtlasAssetLoader>("game/Blue_witch/B_witch_idle.bsa");
 	sprite.Sprite = 0;
+	SpriteAnimatorComponent& animator = quad.AddComponent<SpriteAnimatorComponent>();
+	auto atlas = assetLib.GetAsset<SpriteAtlasAsset>(sprite.SpriteAtlasHandle);
+	animator.Clip = 0;
+	animator.Atlas = atlas;
+	animator.pRenderer = &sprite;
 }
 
 void EditorState::OnUpdate()
 {
 	m_pScene->Update();
+
+	auto view = m_pScene->GetRegistry().view<SpriteAnimatorComponent>();
+	for (auto anim : view)
+	{
+		m_pScene->GetRegistry().get<SpriteAnimatorComponent>(anim).Update();
+	}
+
 	m_pScene->EndUpdate();
 
 	for (auto& pObject : m_Objects)

@@ -1,5 +1,7 @@
 #pragma once
 #include "Asset/Asset.h"
+#include "Renderer/SpriteAtlas.h"
+
 #include <glm/glm.hpp>
 
 namespace Boon

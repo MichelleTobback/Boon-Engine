@@ -4,6 +4,14 @@
 #include <Component/CameraComponent.h>
 #include <Component/NameComponent.h>
 #include <Component/SpriteRendererComponent.h>
+#include <Component/SpriteAnimatorComponent.h>
+
+#include <Asset/AssetLibrary.h>
+#include <Asset/SpriteAtlasAsset.h>
+
+#include "Renderer/Texture.h"
+
+#include <Core/ServiceLocator.h>
 
 using namespace BoonEditor;
 
@@ -95,24 +103,39 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
             }
         });
 
-    RenderComponentNode<SpriteRendererComponent>("Sprite", [this](SpriteRendererComponent& spriteComponent)
+    RenderComponentNode<SpriteRendererComponent>("Sprite renderer", [this](SpriteRendererComponent& spriteComponent)
         {
+            auto atlas = ServiceLocator::Get<AssetLibrary>().GetAsset<SpriteAtlasAsset>(spriteComponent.SpriteAtlasHandle);
+
             glm::vec4 value4 = spriteComponent.Color;
             if (UI::ColorPicker("Tint", value4))
             {
                 spriteComponent.Color = value4;
             }
 
-            int sprite = spriteComponent.Sprite;
-            if (UI::SliderInt("Sprite", sprite, 0, 5))
-            {
-                spriteComponent.Sprite = sprite;
-            }
-
             float value = spriteComponent.Tiling;
             if (UI::DragFloat("Tiling", value, 0.1f, 10.f, 0.1f))
             {
                 spriteComponent.Tiling = value;
+            }
+
+            auto tex = atlas->GetTexture();
+            ImGui::ImageButton("Atlas", tex->GetRendererID(), {25.f, 25.f});
+        });
+
+    RenderComponentNode<SpriteAnimatorComponent>("Sprite animator", [this](SpriteAnimatorComponent& spriteComponent)
+        {
+            auto& pAtlas = spriteComponent.Atlas;
+            int clip = spriteComponent.Clip;
+            if (UI::SliderInt("Clip", clip, 0, pAtlas->GetClips().size() - 1))
+            {
+                spriteComponent.Clip = clip;
+            }
+
+            float value = spriteComponent.GetClip().Speed;
+            if (UI::DragFloat("Speed", value, 0.1f, 10.f, 0.1f))
+            {
+                spriteComponent.GetClip().Speed = value;
             }
         });
 }
