@@ -2,6 +2,7 @@
 #include "AssetLoader.h"
 #include "Core/Assert.h"
 
+#include <vector>
 #include <unordered_map>
 #include <filesystem>
 
@@ -19,9 +20,11 @@ namespace Boon
 		AssetLibrary& operator=(AssetLibrary&& other) = delete;
 
 		template <typename T>
-		AssetHandle Load(const std::string& path);
+		AssetHandle Load(const std::string& path, uint32_t location = 0);
 		template <typename T, typename TType = T::Type>
 		std::shared_ptr<TType> GetAsset(AssetHandle handle);
+
+		void AddDirectory(const std::string& directory);
 
 		template <typename T>
 		void RegisterLoader();
@@ -34,13 +37,13 @@ namespace Boon
 		std::unordered_map<AssetTypeID, std::vector<AssetHandle>> m_TypesToHandles;
 		std::unordered_map<std::string, AssetHandle> m_Paths;
 
-		std::string m_Root{};
+		std::vector<std::string> m_Dirs{};
 	};
 
 	template<typename T>
-	inline AssetHandle AssetLibrary::Load(const std::string& path)
+	inline AssetHandle AssetLibrary::Load(const std::string& path, uint32_t location)
 	{
-		std::filesystem::path fullPath = std::filesystem::path(m_Root) / path;
+		std::filesystem::path fullPath = std::filesystem::path(m_Dirs[location]) / path;
 
 		auto it{ m_Paths.find(fullPath.string()) };
 		if (it != m_Paths.end())

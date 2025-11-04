@@ -7,6 +7,8 @@
 
 #include "UI/EditorRenderer.h"
 
+#include <Asset/AssetLibrary.h>
+#include <Core/ServiceLocator.h>
 #include <Core/Application.h>
 #include <Scene/Scene.h>
 #include <Renderer/Renderer.h>
@@ -23,6 +25,8 @@ EditorState::~EditorState() = default;
 void EditorState::OnEnter()
 {
 	Window& window{ Application::Get().GetWindow() };
+
+	ServiceLocator::Get<AssetLibrary>().AddDirectory("Resources");
 
 	m_PRenderer = std::make_unique<EditorRenderer>();
 

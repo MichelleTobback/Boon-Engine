@@ -1,8 +1,14 @@
 #pragma once
 #include "Core/BoonEditor.h"
 #include "EditorPanel.h"
+
 #include <memory>
 #include <glm/glm.hpp>
+
+namespace Boon
+{
+	class Texture2D;
+}
 
 namespace BoonEditor
 {
@@ -45,5 +51,9 @@ namespace BoonEditor
 		std::function<void()> m_fnOnStopCallback{ nullptr };
 		EditorPlayState m_PlayState{ EditorPlayState::Edit };
 		ViewportToolbarSetting m_ActiveSetting{};
+
+		std::shared_ptr<Texture2D> m_pPlayIcon;
+		std::shared_ptr<Texture2D> m_pStopIcon;
+		std::shared_ptr<Texture2D> m_pCameraIcon;
 	};
 }
