@@ -11,9 +11,6 @@
 
 #include "Renderer/Renderer.h"
 
-//temp
-#include "Scene/GameObject.h"
-
 Boon::Application* Boon::Application::s_pInstance{ nullptr };
 
 Boon::Application::Application(const AppDesc& desc)

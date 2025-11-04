@@ -46,6 +46,7 @@ void BoonEditor::ViewportToolbar::OnRender(const glm::vec2& boundsMin, const glm
         const float toolbarX{ (boundsMin.x + boundsMax.x) / 2.0f };
 
         ImGui::SetNextWindowPos(ImVec2(toolbarX - (backgroundWidth / 2.0f), boundsMin.y + edgeOffset + buttonSize));
+        ImGui::SetNextWindowBgAlpha(0.55f);
 
         ImGui::Begin("##viewportToolbar", nullptr,
             ImGuiWindowFlags_NoDecoration |
@@ -79,6 +80,7 @@ void BoonEditor::ViewportToolbar::OnRender(const glm::vec2& boundsMin, const glm
         const float toolbarX = boundsMax.x - backgroundWidth - edgeOffset * 2.f;
 
         ImGui::SetNextWindowPos(ImVec2(toolbarX, boundsMin.y + edgeOffset + buttonSize));
+        ImGui::SetNextWindowBgAlpha(0.55f);
 
         ImGui::Begin("##viewportToolbarSettings", nullptr,
             ImGuiWindowFlags_NoDecoration |

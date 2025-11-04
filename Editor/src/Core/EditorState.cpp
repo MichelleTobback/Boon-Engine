@@ -26,8 +26,6 @@ void EditorState::OnEnter()
 {
 	Window& window{ Application::Get().GetWindow() };
 
-	ServiceLocator::Get<AssetLibrary>().AddDirectory("Resources");
-
 	m_PRenderer = std::make_unique<EditorRenderer>();
 
 	m_pScene = std::make_unique<Scene>();

@@ -1,12 +1,11 @@
 ﻿#include "Panels/ViewportPanel.h"
+#include "UI/UI.h"
 
 #include <Renderer/SceneRenderer.h>
 #include <Renderer/Framebuffer.h>
 
 #include <Core/ServiceLocator.h>
 #include <Input/Input.h>
-
-#include <imgui.h>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -112,27 +111,11 @@ void BoonEditor::ViewportPanel::OnRenderUI()
         const float panelWidth = 260.0f;
         const float panelGap = 6.0f;
         const float topMargin = 20.0f;
-        const float toolbarHeight = 64.0f;
+        const float toolbarHeight = 36.0f;
 
-        const float vpLeft = m_ViewportBounds[0].x;
-        const float vpTop = m_ViewportBounds[0].y;
-        const float vpRight = m_ViewportBounds[1].x;
-        const float vpBottom = m_ViewportBounds[1].y;
+        float panelX = maxBound.x - panelWidth - panelGap;
+        float panelY = m_ViewportBounds[0].y + topMargin + toolbarHeight + panelGap;
 
-        float panelX = vpRight + panelGap;
-        float panelY = vpTop + topMargin + toolbarHeight;
-
-        ImVec2 displaySize = ImGui::GetIO().DisplaySize;
-        if (panelX + panelWidth > displaySize.x - 4.0f) 
-        {
-            // fallback: place inside viewport, flush to right edge (so it's still visible)
-            panelX = vpRight - panelWidth - panelGap;
-            // if that would go past left edge as well, clamp to a safe value
-            if (panelX < vpLeft + 4.0f)
-                panelX = vpLeft + 4.0f;
-        }
-
-        // call your CameraSettings with the computed X,Y and known width
         CameraSettings(panelX, panelY, panelWidth);
     }
 
@@ -156,44 +139,50 @@ void BoonEditor::ViewportPanel::CameraSettings(float posX, float posY, float max
         ImGuiWindowFlags_NoFocusOnAppearing |
         ImGuiWindowFlags_NoNav);
 
-    Camera& camera = m_Camera.GetCamera();
-    int projectionType = (int)m_Camera.GetMode();
-    const char* projectionTypes[] = { "Perspective", "Orthographic" };
-
     ImGui::TextUnformatted("Camera Settings");
     ImGui::Separator();
 
-    ImGui::SetNextItemWidth(150);
-    if (ImGui::Combo("Mode", &projectionType, projectionTypes, IM_ARRAYSIZE(projectionTypes)))
-        m_Camera.SetMode((Camera::ProjectionType)projectionType);
+    Camera& camera = m_Camera.GetCamera();
+    int projectionType = (int)camera.GetProjectionType();
+    const char* projectionTypes[] = { "Perspective", "Orthographic" };
 
-    ImGui::SetNextItemWidth(120);
-    switch (m_Camera.GetMode())
+    if (UI::Combo("Mode", projectionType, projectionTypes, IM_ARRAYSIZE(projectionTypes)))
+    {
+        camera.SetProjectionType((Camera::ProjectionType)projectionType);
+    }
+
+    switch (camera.GetProjectionType())
     {
     case Camera::ProjectionType::Perspective:
     {
         float fov = camera.GetFov();
-        if (ImGui::SliderFloat("FOV", &fov, 10.0f, 120.0f))
+        if (UI::SliderFloat("FOV", fov, 1.0f, 180.0f))
+        {
             camera.SetFov(fov);
+        }
     }
     break;
-
     case Camera::ProjectionType::Orthographic:
     {
         float size = camera.GetSize();
-        if (ImGui::SliderFloat("Zoom", &size, 1.0f, 100.0f))
+        if (UI::SliderFloat("size", size, 1.0f, 100.0f))
+        {
             camera.SetSize(size);
+        }
     }
     break;
     }
 
-    float nearVal = camera.GetNear();
-    if (ImGui::DragFloat("Near", &nearVal, 0.01f))
-        camera.SetNear(nearVal);
-
-    float farVal = camera.GetFar();
-    if (ImGui::DragFloat("Far", &farVal, 1.0f))
-        camera.SetFar(farVal);
+    float value = camera.GetNear();
+    if (UI::DragFloat("near", value))
+    {
+        camera.SetNear(value);
+    }
+    value = camera.GetFar();
+    if (UI::DragFloat("far", value))
+    {
+        camera.SetFar(value);
+    }
 
     ImGui::End();
 }
