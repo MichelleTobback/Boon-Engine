@@ -1,6 +1,7 @@
 #include "Core/EditorState.h"
 #include "Core/EditorCamera.h"
 
+#include "Panels/ScenePanel.h"
 #include "Panels/PropertiesPanel.h"
 #include "Panels/ViewportPanel.h"
 
@@ -11,6 +12,7 @@
 #include <Renderer/Renderer.h>
 #include <Scene/GameObject.h>
 
+#include <Component/CameraComponent.h>
 #include <Component/SpriteRendererComponent.h>
 
 using namespace BoonEditor;
@@ -26,9 +28,14 @@ void EditorState::OnEnter()
 
 	m_pScene = std::make_unique<Scene>();
 
-	CreatePanel<ViewportPanel>("Viewport", m_pScene.get());
-	CreatePanel<PropertiesPanel>("Properties");
-	CreatePanel<PropertiesPanel>("Scene");
+	CreatePanel<ViewportPanel>("Viewport", &m_SceneContext, &m_SelectionContext);
+	CreatePanel<PropertiesPanel>(&m_SelectionContext);
+	CreatePanel<ScenePanel>(&m_SceneContext, &m_SelectionContext);
+
+	GameObject camera = m_pScene->Instantiate({ 0.f, 0.f, 1.f });
+	camera.AddComponent<CameraComponent>(Camera(2.f, 2.f, 0.1f, 1.f), false).Active = true;
+	m_SelectionContext.Set(camera);
+	m_SceneContext.Set(m_pScene.get());
 
 	GameObject quad = m_pScene->Instantiate();
 	SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();

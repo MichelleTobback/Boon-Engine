@@ -11,7 +11,7 @@ namespace BoonEditor
 	{
 	public:
 		EditorCamera(float width, float height);
-		EditorCamera(float fov, float width, float height, float near = 0.1f, float far = 500.0f);
+		EditorCamera(float size, float aspectRatio, float near, float far);
 		virtual ~EditorCamera();
 
 		EditorCamera(const EditorCamera& other) = default;
@@ -21,11 +21,26 @@ namespace BoonEditor
 
 		virtual void Update() override;
 
+		void Resize(float width, float height);
+
 		const TransformComponent& GetTransform() const;
 		TransformComponent& GetTransform();
+		const TransformComponent& GetOrthographicTransform() const;
+		TransformComponent& GetOrthographicTransform();
+		const TransformComponent& GetPerspectiveTransform() const;
+		TransformComponent& GetPerspectiveTransform();
+
 		const Camera& GetCamera() const;
 		Camera& GetCamera();
+		const Camera& GetOrthographicCamera() const;
+		Camera& GetOrthographicCamera();
+		const Camera& GetPerspectiveCamera() const;
+		Camera& GetPerspectiveCamera();
+
 		glm::mat4 GetView();
+
+		inline void SetMode(Camera::ProjectionType mode) { m_Mode = mode; }
+		inline Camera::ProjectionType GetMode() const { return m_Mode; }
 
 		void SetActive(bool active);
 
@@ -33,8 +48,9 @@ namespace BoonEditor
 		void UpdatePerspectiveController();
 		void UpdateOrthographicController();
 
-		Camera m_Camera;
-		TransformComponent m_Transform{ nullptr };
+		Camera m_OrthoCamera, m_PerspCamera;
+		TransformComponent m_OrthoTransform{nullptr}, m_PerspTransform{nullptr};
 		bool m_Active{ false };
+		Camera::ProjectionType m_Mode{ Camera::ProjectionType::Orthographic };
 	};
 }

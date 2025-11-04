@@ -1,6 +1,7 @@
 #include "Scene/Scene.h"
 #include "Scene/GameObject.h"
 #include "Component/SceneComponent.h"
+#include "Component/NameComponent.h"
 
 using namespace Boon;
 
@@ -13,8 +14,11 @@ GameObject Boon::Scene::Instantiate(const glm::vec3& pos)
 	GameObjectID handle{ m_Registry.create() };
 	GameObject instance{ handle, this };
 	SceneComponent& sceneComp = instance.AddComponent<SceneComponent>(instance);
-	instance.AddComponent<UUIDComponent>();
-	instance.AddComponent<TransformComponent>(&sceneComp);
+	UUIDComponent uuid = instance.AddComponent<UUIDComponent>();
+	m_EntityMap[uuid.Uuid] = handle;
+
+	instance.AddComponent<TransformComponent>(&sceneComp).SetLocalPosition(pos);
+	instance.AddComponent<NameComponent>("GameObject");
 	return instance;
 }
 
@@ -24,7 +28,10 @@ GameObject Boon::Scene::Instantiate(UUID uuid, const glm::vec3& pos)
 	GameObject instance{ handle, this };
 	SceneComponent& sceneComp = instance.AddComponent<SceneComponent>(instance);
 	instance.AddComponent<UUIDComponent>(uuid);
-	instance.AddComponent<TransformComponent>(&sceneComp);
+	instance.AddComponent<TransformComponent>(&sceneComp).SetLocalPosition(pos);
+	instance.AddComponent<NameComponent>("GameObject");
+	m_EntityMap[uuid] = handle;
+
 	return instance;
 }
 
@@ -56,8 +63,9 @@ void Boon::Scene::EndUpdate()
 		auto it = m_EntityMap.find(uuid);
 		if (it != m_EntityMap.end())
 		{
-			m_EntityMap.erase(uuid);
+			GameObject(it->second, this).DetachFromParent();
 			m_Registry.destroy(it->second);
+			m_EntityMap.erase(uuid);
 		}
 		m_ObjectsPendingDestroy.pop();
 	}
@@ -71,6 +79,15 @@ GameObject Boon::Scene::GetGameObject(UUID uuid)
 	if (it != m_EntityMap.end())
 		handle = it->second;
 	return GameObject(handle, this);
+}
+
+void Boon::Scene::ForeachGameObject(const std::function<void(GameObject)>& fn)
+{
+	for (GameObjectID handle : m_Registry.view<GameObjectID>())
+	{
+		GameObject obj(handle, this);
+		fn(obj);
+	}
 }
 
 void Boon::Scene::DestroyGameObject(GameObject object)

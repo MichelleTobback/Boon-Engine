@@ -1,97 +1,145 @@
 #include "Component/SceneComponent.h"
 #include "Component/TransformComponent.h"
+#include "Scene/GameObject.h"
+
+#include <glm/gtx/matrix_decompose.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <algorithm>
 
 using namespace Boon;
 
-Boon::SceneComponent::SceneComponent(GameObject owner, GameObject parent)
-	: m_Owner{owner}, m_Parent{parent}
+SceneComponent::SceneComponent(GameObject owner, GameObject parent)
+    : m_Owner{ owner }, m_Parent{ parent }
 {
 }
 
-void Boon::SceneComponent::AttachTo(SceneComponent& parent, bool keepWorld)
+// -----------------------------------------------------------------------------
+// AttachTo
+// -----------------------------------------------------------------------------
+void SceneComponent::AttachTo(SceneComponent& parent, bool keepWorld)
 {
-	TransformComponent& transform{ m_Owner.GetTransform() };
+    TransformComponent& transform = m_Owner.GetTransform();
 
-	if (m_Parent)
-		m_Parent.Detach(GetOwner());
+    // Detach from previous parent (if any)
+    if (m_Parent.IsValid())
+    {
+        auto& oldParentScene = m_Parent.GetComponent<SceneComponent>();
+        oldParentScene.RemoveChild(m_Owner);
+    }
 
-	m_Parent = parent.GetOwner();
-	if (m_Parent)
-	{
-		parent.AddChild(GetOwner());
+    // Reassign parent
+    m_Parent = parent.GetOwner();
+    parent.AddChild(m_Owner);
 
-		if (keepWorld)
-		{
-			TransformComponent& parentTransform{ m_Parent.GetTransform() };
-			glm::vec3 localPos{ transform.GetLocalPosition() - parentTransform.GetWorldPosition() };
-			transform.SetLocalPosition(localPos);
-		}
-	}
+    // Keep world transform if requested
+    if (keepWorld)
+    {
+        TransformComponent& parentTransform = m_Parent.GetTransform();
 
-	transform.SetDirty(TransformComponent::TransformFlag::All, true);
+        // Convert world-space position to local-space position
+        const glm::mat4 parentWorldInv = glm::inverse(parentTransform.GetWorld());
+        glm::vec4 worldPos = glm::vec4(transform.GetWorldPosition(), 1.0f);
+        glm::vec4 localPos = parentWorldInv * worldPos;
+        transform.SetLocalPosition(glm::vec3(localPos));
+
+        // Convert world rotation to local rotation
+        glm::quat localRot = glm::inverse(parentTransform.GetWorldRotation()) * transform.GetWorldRotation();
+        transform.SetLocalRotation(localRot);
+
+        // Convert world scale to local scale
+        glm::vec3 localScale = transform.GetWorldScale() / parentTransform.GetWorldScale();
+        transform.SetLocalScale(localScale);
+    }
+
+    transform.SetDirty(TransformComponent::TransformFlag::All, true);
 }
 
-void Boon::SceneComponent::Detach(SceneComponent& child)
+// -----------------------------------------------------------------------------
+// Detach
+// -----------------------------------------------------------------------------
+void SceneComponent::Detach(SceneComponent& child)
 {
-	child.m_Parent = GameObject();
-	RemoveChild(child.GetOwner());
+    TransformComponent& childTransform = child.GetOwner().GetTransform();
 
-	TransformComponent& transform{ GetOwner().GetTransform() };
-	TransformComponent& childTransform{ child.GetOwner().GetTransform()};
+    // Preserve child's world transform before detaching
+    glm::mat4 world = childTransform.GetWorld();
 
-	childTransform.Translate(transform.GetWorldPosition());
-	childTransform.Rotate(transform.GetWorldRotation());
-	childTransform.Scale(transform.GetWorldScale());
+    // Remove parent relationship
+    child.m_Parent = GameObject();
+    RemoveChild(child.GetOwner());
+
+    // Decompose world transform to position, rotation, scale
+    glm::vec3 scale, translation, skew;
+    glm::quat rotation;
+    glm::vec4 perspective;
+    glm::decompose(world, scale, rotation, translation, skew, perspective);
+
+    // Apply world transform as new local transform
+    childTransform.SetLocalPosition(translation);
+    childTransform.SetLocalRotation(rotation);
+    childTransform.SetLocalScale(scale);
+
+    childTransform.SetDirty(TransformComponent::TransformFlag::All, true);
 }
 
-void Boon::SceneComponent::AddChild(GameObject child)
+// -----------------------------------------------------------------------------
+// Child Management
+// -----------------------------------------------------------------------------
+void SceneComponent::AddChild(GameObject child)
 {
-	m_Children.push_back(child);
+    if (std::find(m_Children.begin(), m_Children.end(), child) == m_Children.end())
+        m_Children.push_back(child);
 }
 
-void Boon::SceneComponent::RemoveChild(GameObject child)
+void SceneComponent::RemoveChild(GameObject child)
 {
-	auto it = std::find(m_Children.begin(), m_Children.end(), child);
-	if (it != m_Children.end())
-		m_Children.erase(it);
+    auto it = std::find(m_Children.begin(), m_Children.end(), child);
+    if (it != m_Children.end())
+        m_Children.erase(it);
 }
 
-GameObject Boon::SceneComponent::GetRootObject()
+bool SceneComponent::HasChildren() const
 {
-	GameObject current{ GetOwner() };
-	while (!current.IsRoot())
-	{
-		current = current.GetParent();
-	}
-	return current;
+    return !m_Children.empty();
 }
 
-GameObject Boon::SceneComponent::GetRootObject() const
+// -----------------------------------------------------------------------------
+// Root Queries
+// -----------------------------------------------------------------------------
+GameObject SceneComponent::GetRootObject()
 {
-	GameObject current{ GetOwner() };
-	while (!current.IsRoot())
-	{
-		current = current.GetParent();
-	}
-	return current;
+    GameObject current = GetOwner();
+    while (!current.IsRoot())
+    {
+        current = current.GetParent();
+    }
+    return current;
 }
 
-SceneComponent Boon::SceneComponent::GetRoot()
+GameObject SceneComponent::GetRootObject() const
 {
-	return GetRootObject().GetComponent<SceneComponent>();
+    GameObject current = GetOwner();
+    while (!current.IsRoot())
+    {
+        current = current.GetParent();
+    }
+    return current;
 }
 
-SceneComponent Boon::SceneComponent::GetRoot() const
+SceneComponent SceneComponent::GetRoot()
 {
-	return GetRootObject().GetComponent<SceneComponent>();
+    return GetRootObject().GetComponent<SceneComponent>();
 }
 
-bool Boon::SceneComponent::IsRoot() const
+SceneComponent SceneComponent::GetRoot() const
 {
-	return GetRoot().GetOwner().IsValid();
+    return GetRootObject().GetComponent<SceneComponent>();
 }
 
-bool Boon::SceneComponent::HasChildren() const
+// -----------------------------------------------------------------------------
+// State Queries
+// -----------------------------------------------------------------------------
+bool SceneComponent::IsRoot() const
 {
-	return m_Children.size();
+    return !m_Parent.IsValid();
 }

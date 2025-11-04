@@ -28,7 +28,7 @@ namespace BoonEditor
 	protected:
 		virtual void OnRenderUI() = 0;
 
-		void RenderFloat3Control(const std::string& label, glm::vec3& vector, float resetValue = 0.0f, float columnWidth = 100.0f);
+		bool RenderFloat3Control(const std::string& label, glm::vec3& vector, float resetValue = 0.0f, float columnWidth = 100.0f);
 
 		inline const std::string& GetName() const { return  m_Name; }
 

@@ -44,7 +44,7 @@ GameObject Boon::GameObject::GetRoot() const
 
 bool Boon::GameObject::IsValid() const
 {
-	return m_Handle != NullGameObject;
+	return m_pScene && m_pScene->GetRegistry().valid(m_Handle);
 }
 
 bool Boon::GameObject::IsRoot() const
@@ -69,12 +69,19 @@ inline const std::vector<GameObject> Boon::GameObject::GetChildren() const
 
 void Boon::GameObject::AttachTo(GameObject parent, bool keepWorld)
 {
-	return GetComponent<SceneComponent>().AttachTo(parent.GetComponent<SceneComponent>(), keepWorld);
+	GetComponent<SceneComponent>().AttachTo(parent.GetComponent<SceneComponent>(), keepWorld);
 }
 
 void Boon::GameObject::Detach(GameObject child)
 {
-	return GetComponent<SceneComponent>().Detach(child.GetComponent<SceneComponent>());
+	GetComponent<SceneComponent>().Detach(child.GetComponent<SceneComponent>());
+}
+
+void Boon::GameObject::DetachFromParent()
+{
+	GameObject parent = GetParent();
+	if (parent.IsValid())
+		parent.Detach(*this);
 }
 
 UUID Boon::GameObject::GetUUID() const

@@ -1,5 +1,8 @@
 #pragma once
 #include "EditorPanel.h"
+#include "Core/BoonEditor.h"
+#include "Panels/ViewportToolbar.h"
+
 #include "Core/EditorCamera.h"
 
 #include <Scene/GameObject.h>
@@ -19,15 +22,19 @@ namespace BoonEditor
 	class ViewportPanel final : public EditorPanel
 	{
 	public:
-		ViewportPanel(const std::string& name, Scene* pContext);
+		ViewportPanel(const std::string& name, SceneContext* pContext, GameObjectContext* pSelectionContext);
 		virtual ~ViewportPanel();
 
 		virtual void Update() override;
+
+		inline ViewportToolbar* GetToolbar() const { return m_pToolbar.get(); }
 
 	protected:
 		virtual void OnRenderUI() override;
 
 	private:
+		void CameraSettings(float posX, float posY, float maxWidth);
+
 		std::unique_ptr<SceneRenderer> m_pRenderer;
 		EditorCamera m_Camera{0.f, 0.f};
 
@@ -36,6 +43,8 @@ namespace BoonEditor
 		glm::vec2 m_ViewportBounds[2];
 
 		GameObject m_HoveredGameObject{};
-		Scene* m_pContext;
+		SceneContext* m_pContext;
+		GameObjectContext* m_pSelectionContext{};
+		std::unique_ptr<ViewportToolbar> m_pToolbar{};
 	};
 }

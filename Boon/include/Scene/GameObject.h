@@ -103,6 +103,7 @@ namespace Boon
 
 		void AttachTo(GameObject parent, bool keepWorld = false);
 		void Detach(GameObject child);
+		void DetachFromParent();
 
 		UUID GetUUID() const;
 		TransformComponent& GetTransform();

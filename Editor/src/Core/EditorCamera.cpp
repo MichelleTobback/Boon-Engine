@@ -7,23 +7,20 @@ using namespace BoonEditor;
 using namespace Boon;
 
 BoonEditor::EditorCamera::EditorCamera(float width, float height)
-    : m_Camera{ width, height }
-{
-    m_Transform.SetLocalPosition(0.f, 0.f, 1.f);
-    m_Camera.SetOrthographic(width, height);
-}
+    : EditorCamera(2.f, width / height, 0.1f, 1.f){}
 
-BoonEditor::EditorCamera::EditorCamera(float fov, float width, float height, float near, float far)
-    : m_Camera{ fov, width, height, near, far }
+BoonEditor::EditorCamera::EditorCamera(float size, float aspectRatio, float near, float far)
+    : m_OrthoCamera{ size, aspectRatio, near, far }, m_PerspCamera{}
 {
-    m_Transform.SetLocalPosition(0.f, 0.f, 1.f);
+    m_OrthoTransform.SetLocalPosition(0.f, 0.f, 1.f);
+    m_PerspTransform.SetLocalPosition(0.f, 0.f, 1.f);
 }
 
 BoonEditor::EditorCamera::~EditorCamera(){}
 
 void BoonEditor::EditorCamera::Update()
 {
-    switch (m_Camera.GetProjectionType())
+    switch (m_Mode)
     {
     case Boon::Camera::ProjectionType::Orthographic:
         UpdateOrthographicController();
@@ -32,6 +29,13 @@ void BoonEditor::EditorCamera::Update()
         UpdatePerspectiveController();
         break;
     }
+}
+
+void BoonEditor::EditorCamera::Resize(float width, float height)
+{
+    float aspect = width / height;
+    m_OrthoCamera.SetAspectRatio(aspect);
+    m_PerspCamera.SetAspectRatio(aspect);
 }
 
 void BoonEditor::EditorCamera::UpdatePerspectiveController()
@@ -43,35 +47,35 @@ void BoonEditor::EditorCamera::UpdatePerspectiveController()
 
     if (m_Active)
     {
-        glm::vec3 forwardVector = m_Transform.GetForward();
-        glm::vec3 rightVector = m_Transform.GetRight();
-        glm::vec3 upVector = m_Transform.GetUp();
+        glm::vec3 forwardVector = m_PerspTransform.GetForward();
+        glm::vec3 rightVector = m_PerspTransform.GetRight();
+        glm::vec3 upVector = m_PerspTransform.GetUp();
         const float moveSpeed = input.IsKeyHeld(Key::LeftShift) ? 5.f : 1.6f;
         const float rotateSpeed = 15.0f;
         const float dt = Time::Get().GetDeltaTime();
 
         // Movement
         if (input.IsKeyHeld(Key::W))
-            m_Transform.Translate(dt * moveSpeed * forwardVector);
+            m_PerspTransform.Translate(dt * moveSpeed * forwardVector);
         if (input.IsKeyHeld(Key::S))
-            m_Transform.Translate(-dt * moveSpeed * forwardVector);
+            m_PerspTransform.Translate(-dt * moveSpeed * forwardVector);
         if (input.IsKeyHeld(Key::A))
-            m_Transform.Translate(-dt * moveSpeed * rightVector);
+            m_PerspTransform.Translate(-dt * moveSpeed * rightVector);
         if (input.IsKeyHeld(Key::D))
-            m_Transform.Translate(dt * moveSpeed * rightVector);
+            m_PerspTransform.Translate(dt * moveSpeed * rightVector);
 
         // Mouse rotation handling
         glm::vec2 deltaMouse = mousePos - prevMousePos;
         if (input.IsMouseHeld(Mouse::ButtonRight) && input.IsMouseHeld(Mouse::ButtonLeft))
         {
-            m_Transform.Translate({ dt * deltaMouse.x, dt * deltaMouse.y, 0.f }); // Elevate the camera
+            m_PerspTransform.Translate({ dt * deltaMouse.x, dt * deltaMouse.y, 0.f }); // Elevate the camera
         }
         else if (input.IsMouseHeld(Mouse::ButtonRight))
         {
             // Apply rotation
             float yaw = rotateSpeed * dt * -deltaMouse.x;
             float pitch = rotateSpeed * dt * -deltaMouse.y;
-            m_Transform.Rotate(pitch, yaw, 0.0f);
+            m_PerspTransform.Rotate(pitch, yaw, 0.0f);
         }
     }
 
@@ -87,35 +91,34 @@ void BoonEditor::EditorCamera::UpdateOrthographicController()
 
     if (m_Active)
     {
-        glm::vec3 forwardVector = m_Transform.GetForward();
-        glm::vec3 rightVector = m_Transform.GetRight();
-        glm::vec3 upVector = m_Transform.GetUp();
+        glm::vec3 forwardVector = m_OrthoTransform.GetForward();
+        glm::vec3 rightVector = m_OrthoTransform.GetRight();
+        glm::vec3 upVector = m_OrthoTransform.GetUp();
         const float moveSpeed = input.IsKeyHeld(Key::LeftShift) ? 5.f : 1.6f;
         const float rotateSpeed = 15.0f;
         const float dt = Time::Get().GetDeltaTime();
 
         // Movement
         if (input.IsKeyHeld(Key::W))
-            m_Transform.Translate(-dt * moveSpeed * upVector);
+            m_OrthoTransform.Translate(dt * moveSpeed * upVector);
         if (input.IsKeyHeld(Key::S))
-            m_Transform.Translate(dt * moveSpeed * upVector);
+            m_OrthoTransform.Translate(-dt * moveSpeed * upVector);
         if (input.IsKeyHeld(Key::A))
-            m_Transform.Translate(-dt * moveSpeed * rightVector);
+            m_OrthoTransform.Translate(-dt * moveSpeed * rightVector);
         if (input.IsKeyHeld(Key::D))
-            m_Transform.Translate(dt * moveSpeed * rightVector);
+            m_OrthoTransform.Translate(dt * moveSpeed * rightVector);
 
         // Mouse rotation handling
         glm::vec2 deltaMouse = mousePos - prevMousePos;
         if (input.IsMouseHeld(Mouse::ButtonLeft))
         {
-            m_Transform.Translate({ dt * -deltaMouse.x, dt * -deltaMouse.y, 0.f }); // Elevate the camera
+            m_OrthoTransform.Translate({ dt * -deltaMouse.x, dt * deltaMouse.y, 0.f }); // Elevate the camera
         }
         else if (input.IsMouseHeld(Mouse::ButtonRight))
         {
-            glm::vec2 size{ m_Camera.GetSize() };
-            float aspect{ size.x / size.y }; 
+            float size{ m_OrthoCamera.GetSize() };
             float speed{ 2.f };
-            m_Camera.SetSize( size.x + dt * deltaMouse.y * aspect * speed, size.y + dt * deltaMouse.y * speed );
+            m_OrthoCamera.SetSize( size + dt * deltaMouse.y * speed );
         }
     }
 
@@ -124,27 +127,67 @@ void BoonEditor::EditorCamera::UpdateOrthographicController()
 
 Camera& BoonEditor::EditorCamera::GetCamera()
 {
-    return m_Camera;
+    return m_Mode == Camera::ProjectionType::Orthographic ? m_OrthoCamera : m_PerspCamera;
 }
 
 const Camera& BoonEditor::EditorCamera::GetCamera() const
 {
-    return m_Camera;
+    return m_Mode == Camera::ProjectionType::Orthographic ? m_OrthoCamera : m_PerspCamera;
+}
+
+const Camera& BoonEditor::EditorCamera::GetOrthographicCamera() const
+{
+    return m_OrthoCamera;
+}
+
+Camera& BoonEditor::EditorCamera::GetOrthographicCamera()
+{
+    return m_OrthoCamera;
+}
+
+const Camera& BoonEditor::EditorCamera::GetPerspectiveCamera() const
+{
+    return m_PerspCamera;
+}
+
+Camera& BoonEditor::EditorCamera::GetPerspectiveCamera()
+{
+    return m_PerspCamera;
 }
 
 TransformComponent& BoonEditor::EditorCamera::GetTransform()
 {
-    return m_Transform;
+    return m_Mode == Camera::ProjectionType::Orthographic ? m_OrthoTransform : m_PerspTransform;
 }
 
 const TransformComponent& BoonEditor::EditorCamera::GetTransform() const
 {
-    return m_Transform;
+    return m_Mode == Camera::ProjectionType::Orthographic ? m_OrthoTransform : m_PerspTransform;
+}
+
+const TransformComponent& BoonEditor::EditorCamera::GetOrthographicTransform() const
+{
+    return m_OrthoTransform;
+}
+
+TransformComponent& BoonEditor::EditorCamera::GetOrthographicTransform()
+{
+    return m_OrthoTransform;
+}
+
+const TransformComponent& BoonEditor::EditorCamera::GetPerspectiveTransform() const
+{
+    return m_PerspTransform;
+}
+
+TransformComponent& BoonEditor::EditorCamera::GetPerspectiveTransform()
+{
+    return m_PerspTransform;
 }
 
 glm::mat4 BoonEditor::EditorCamera::GetView()
 {
-    return glm::inverse(m_Transform.GetWorld());
+    return glm::inverse(GetTransform().GetWorld());
 }
 
 void BoonEditor::EditorCamera::SetActive(bool active)

@@ -11,6 +11,7 @@
 
 #include "Component/SpriteRendererComponent.h"
 #include "Component/TransformComponent.h"
+#include "Component/CameraComponent.h"
 
 #include "Core/ServiceLocator.h"
 
@@ -96,6 +97,22 @@ Boon::SceneRenderer::~SceneRenderer()
 
 void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTransform)
 {
+	if (!camera || !cameraTransform)
+	{
+		auto view = m_pScene->GetRegistry().view<TransformComponent, CameraComponent>();
+		for (auto entity : view)
+		{
+			auto [transform, cam] = view.get<TransformComponent, CameraComponent>(entity);
+
+			if (cam.Active)
+			{
+				camera = &cam.Camera;
+				cameraTransform = &transform;
+				break;
+			}
+		}
+	}
+
 	m_CameraData.ViewProjection = camera->GetProjection() * glm::inverse(cameraTransform->GetWorld());
 	m_pCameraUniformBuffer->SetValue(m_CameraData);
 
@@ -123,6 +140,15 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 	if (m_ViewportDirty)
 	{
 		m_pOutputFB->Resize(m_ViewportWidth, m_ViewportHeight);
+
+		auto view = m_pScene->GetRegistry().view<CameraComponent>();
+		for (auto entity : view)
+		{
+			CameraComponent& cam = view.get<CameraComponent>(entity);
+
+			cam.Camera.SetAspectRatio(m_ViewportWidth, m_ViewportHeight);
+		}
+
 		m_ViewportDirty = false;
 	}
 }

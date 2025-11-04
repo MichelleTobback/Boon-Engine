@@ -38,8 +38,8 @@ namespace Sandbox
 		std::unique_ptr<Scene> m_pScene;
 		std::unique_ptr<SceneRenderer> m_pRenderer;
 
-		std::unique_ptr<Camera> m_pCamera;
-		std::unique_ptr<TransformComponent> m_pCameraTransform;
+		Camera* m_pCamera;
+		TransformComponent* m_pCameraTransform;
 
 		EventListenerID m_WindowResizeEvent;
 	};

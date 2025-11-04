@@ -20,8 +20,10 @@ void BoonEditor::EditorPanel::RenderUI()
 	ImGui::End();
 }
 
-void BoonEditor::EditorPanel::RenderFloat3Control(const std::string& label, glm::vec3& vector, float resetValue, float columnWidth)
+bool BoonEditor::EditorPanel::RenderFloat3Control(const std::string& label, glm::vec3& vector, float resetValue, float columnWidth)
 {
+	bool result{ false };
+
 	ImGuiIO& io{ ImGui::GetIO() };
 	auto boldFont{ io.Fonts->Fonts[0] };
 
@@ -46,12 +48,16 @@ void BoonEditor::EditorPanel::RenderFloat3Control(const std::string& label, glm:
 	if (ImGui::Button("X", buttonSize))
 	{
 		vector.x = resetValue;
+		result = true;
 	}
 	ImGui::PopFont();
 	ImGui::PopStyleColor(3);
 
 	ImGui::SameLine();
-	ImGui::DragFloat("##X", &vector.x, 0.1f, 0.0f, 0.0f, "%.2f");
+	if (ImGui::DragFloat("##X", &vector.x, 0.1f, 0.0f, 0.0f, "%.2f"))
+	{
+		result = true;
+	}
 	ImGui::PopItemWidth();
 	ImGui::SameLine();
 
@@ -64,12 +70,16 @@ void BoonEditor::EditorPanel::RenderFloat3Control(const std::string& label, glm:
 	if (ImGui::Button("Y", buttonSize))
 	{
 		vector.y = resetValue;
+		result = true;
 	}
 	ImGui::PopFont();
 	ImGui::PopStyleColor(3);
 
 	ImGui::SameLine();
-	ImGui::DragFloat("##Y", &vector.y, 0.1f, 0.0f, 0.0f, "%.2f");
+	if (ImGui::DragFloat("##Y", &vector.y, 0.1f, 0.0f, 0.0f, "%.2f"))
+	{
+		result = true;
+	}
 	ImGui::PopItemWidth();
 	ImGui::SameLine();
 
@@ -81,12 +91,16 @@ void BoonEditor::EditorPanel::RenderFloat3Control(const std::string& label, glm:
 	if (ImGui::Button("Z", buttonSize))
 	{
 		vector.z = resetValue;
+		result = true;
 	}
 	ImGui::PopFont();
 	ImGui::PopStyleColor(3);
 
 	ImGui::SameLine();
-	ImGui::DragFloat("##Z", &vector.z, 0.1f, 0.0f, 0.0f, "%.2f");
+	if (ImGui::DragFloat("##Z", &vector.z, 0.1f, 0.0f, 0.0f, "%.2f"))
+	{
+		result = true;
+	}
 	ImGui::PopItemWidth();
 
 	ImGui::PopStyleVar();
@@ -94,4 +108,6 @@ void BoonEditor::EditorPanel::RenderFloat3Control(const std::string& label, glm:
 	ImGui::Columns(1);
 
 	ImGui::PopID();
+
+	return result;
 }

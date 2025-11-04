@@ -2,10 +2,12 @@
 
 #include <Scene/Scene.h>
 #include <Scene/GameObject.h>
+
 #include <Renderer/SceneRenderer.h>
 #include <Renderer/Framebuffer.h>
-
 #include <Renderer/Camera.h>
+
+#include <Component/CameraComponent.h>
 #include <Component/TransformComponent.h>
 #include <Component/SpriteRendererComponent.h>
 
@@ -34,9 +36,8 @@ void Sandbox::SandboxState::OnEnter()
 	m_pScene = std::make_unique<Scene>();
 	m_pRenderer = std::make_unique<SceneRenderer>(m_pScene.get(), window.GetWidth(), window.GetHeight(), true);
 
-	m_pCamera = std::make_unique<Camera>(3.f * aspect, 3.f);
-	m_pCameraTransform = std::make_unique<TransformComponent>(nullptr);
-	m_pCameraTransform->SetLocalPosition(0.f, 0.f, 1.f);
+	GameObject camera = m_pScene->Instantiate({ 0.f, 0.f, 1.f });
+	camera.AddComponent<CameraComponent>(Camera(2.f, aspect, 0.1f, 1.f)).Active = true;
 
 	GameObject quad = m_pScene->Instantiate();
 	SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
@@ -63,5 +64,5 @@ void Sandbox::SandboxState::OnExit()
 
 void Sandbox::SandboxState::OnRender()
 {
-	m_pRenderer->Render(m_pCamera.get(), m_pCameraTransform.get());
+	m_pRenderer->Render();
 }

@@ -1,4 +1,6 @@
 #pragma once
+#include "Core/BoonEditor.h"
+#include "Core/EditorContext.h"
 #include "Panels/EditorPanel.h"
 
 #include <Core/AppState.h>
@@ -60,6 +62,8 @@ namespace BoonEditor
 
 		std::unique_ptr<EditorRenderer> m_PRenderer;
 		std::unique_ptr<Scene> m_pScene;
+		GameObjectContext m_SelectionContext{};
+		SceneContext m_SceneContext{};
 
 		std::vector<std::unique_ptr<EditorObject>> m_Objects;
 		std::vector<EditorPanel*> m_Panels;

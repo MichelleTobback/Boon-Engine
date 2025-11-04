@@ -5,6 +5,7 @@
 #include <queue>
 #include <glm/glm.hpp>
 #include <unordered_map>
+#include <functional>
 
 namespace Boon
 {
@@ -32,6 +33,7 @@ namespace Boon
 		void EndUpdate();
 
 		GameObject GetGameObject(UUID uuid);
+		void ForeachGameObject(const std::function<void(GameObject)>& fn);
 
 		void DestroyGameObject(GameObject object);
 

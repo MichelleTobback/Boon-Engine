@@ -170,12 +170,6 @@ void Boon::OpenGLFramebuffer::Invalidate()
 
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-	glBindTexture(GL_TEXTURE_2D, m_ColorAttachments[0]);
-	GLint width = 0, height = 0;
-	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &width);
-	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &height);
-	printf("Color tex size: %d x %d\n", width, height);
 }
 
 void Boon::OpenGLFramebuffer::Bind()

@@ -26,11 +26,13 @@ namespace Boon
 		SceneRenderer& operator=(const SceneRenderer& other) = delete;
 		SceneRenderer& operator=(SceneRenderer&& other) = delete;
 
-		void Render(Camera* camera, TransformComponent* cameraTransform);
+		void Render(Camera* camera = nullptr, TransformComponent* cameraTransform = nullptr);
 
 		Framebuffer* GetOutputTarget() const { return m_pOutputFB.get(); }
 
 		void SetViewport(int width, int height);
+
+		inline void SetContext(Scene* pScene) { m_pScene = pScene; }
 
 	private:
 		void StartBatch();

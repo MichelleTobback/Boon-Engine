@@ -4,274 +4,297 @@
 #include "Core/BitFlag.h"
 
 #include <glm/gtx/matrix_decompose.hpp>
-#include "glm/gtc/quaternion.hpp"
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/quaternion.hpp>
+#include <cmath>
+#include <algorithm>
 
-Boon::TransformComponent::TransformComponent(SceneComponent* owner)
-	: m_Owner{owner}
-	, m_LocalRotQ{ glm::quat(1, 0, 0, 0) }
-	, m_WorldRotQ{ glm::quat(1, 0, 0, 0) }
+using namespace Boon;
+
+TransformComponent::TransformComponent(SceneComponent* owner)
+    : m_Owner{ owner }
 {
+    SetDirty(TransformFlag::All, true);
 }
 
-const glm::mat4& Boon::TransformComponent::GetWorld()
+// -----------------------------------------------------------------------------
+// World getters
+// -----------------------------------------------------------------------------
+const glm::mat4& TransformComponent::GetWorld()
 {
-	if (IsDirty(TransformFlag::World))
-	{
-		RecalculateWorldTransform();
-	}
-	return m_WorldTransform;
+    if (IsDirty(TransformFlag::World))
+        RecalculateWorldTransform();
+    return m_WorldTransform;
 }
 
-const glm::vec3& Boon::TransformComponent::GetWorldPosition()
+const glm::vec3& TransformComponent::GetWorldPosition()
 {
-	if (IsDirty(TransformFlag::Position))
-	{
-		RecalculateWorldPosition();
-	}
-	return m_WorldPosition;
+    if (IsDirty(TransformFlag::Position))
+        RecalculateWorldPosition();
+    return m_WorldPosition;
 }
 
-const glm::vec3& Boon::TransformComponent::GetLocalPosition() const
+const glm::quat& TransformComponent::GetWorldRotation()
 {
-	return m_LocalPosition;
+    if (IsDirty(TransformFlag::Rotation))
+        RecalculateWorldRotation();
+    return m_WorldRotQ;
 }
 
-const glm::quat& Boon::TransformComponent::GetWorldRotation()
+const glm::vec3& TransformComponent::GetWorldEulerRotation()
 {
-	if (IsDirty(TransformFlag::Rotation))
-	{
-		RecalculateWorldRotation();
-	}
-	return m_WorldRotQ;
+    if (IsDirty(TransformFlag::Rotation))
+        RecalculateWorldRotation();
+    return m_WorldEuler;
 }
 
-const glm::quat& Boon::TransformComponent::GetLocalRotation() const
+const glm::vec3& TransformComponent::GetWorldScale()
 {
-	return m_LocalRotQ;
+    if (IsDirty(TransformFlag::Scale))
+        RecalculateWorldScale();
+    return m_WorldScale;
 }
 
-const glm::vec3& Boon::TransformComponent::GetWorldEulerRotation()
+// -----------------------------------------------------------------------------
+// Local getters
+// -----------------------------------------------------------------------------
+const glm::vec3& TransformComponent::GetLocalPosition() const { return m_LocalPosition; }
+const glm::quat& TransformComponent::GetLocalRotation() const { return m_LocalRotQ; }
+const glm::vec3& TransformComponent::GetLocalEulerRotation() const { return m_LocalEuler; }
+const glm::vec3& TransformComponent::GetLocalScale() const { return m_LocalScale; }
+
+// -----------------------------------------------------------------------------
+// Setters
+// -----------------------------------------------------------------------------
+void TransformComponent::SetLocalPosition(float x, float y, float z)
 {
-	if (IsDirty(TransformFlag::Rotation))
-	{
-		RecalculateWorldRotation();
-	}
-	return m_WorldEuler;
+    SetLocalPosition({ x, y, z });
 }
 
-const glm::vec3& Boon::TransformComponent::GetLocalEulerRotation() const
+void TransformComponent::SetLocalPosition(const glm::vec3& position)
 {
-	return m_LocalEuler;
+    if (m_LocalPosition != position)
+    {
+        m_LocalPosition = position;
+        SetDirty(TransformFlag::All, true);
+    }
 }
 
-const glm::vec3& Boon::TransformComponent::GetWorldScale()
+void TransformComponent::SetLocalRotation(float x, float y, float z)
 {
-	if (IsDirty(TransformFlag::Scale))
-	{
-		RecalculateWorldScale();
-	}
-	return m_WorldScale;
+    SetLocalRotation({ x, y, z });
 }
 
-const glm::vec3& Boon::TransformComponent::GetLocalScale() const
+void TransformComponent::SetLocalRotation(const glm::vec3& rotation)
 {
-	return m_LocalScale;
+    m_LocalEuler = rotation;
+    m_LocalRotQ = glm::quat(glm::radians(rotation));
+    SetDirty(TransformFlag::All, true);
+    SetDirty(TransformFlag::Scale, false);
 }
 
-void Boon::TransformComponent::SetLocalPosition(float x, float y, float z)
+void TransformComponent::SetLocalRotation(const glm::quat& rotation)
 {
-	SetLocalPosition({ x, y, z });
+    m_LocalRotQ = rotation;
+    glm::vec3 originalEuler = m_LocalEuler;
+    m_LocalEuler = glm::degrees(glm::eulerAngles(rotation));
+
+    // Handle 180° Euler gimbal flips
+    if ((std::fabs(m_LocalEuler.x - originalEuler.x) == 180.f) &&
+        (std::fabs(m_LocalEuler.z - originalEuler.z) == 180.f))
+    {
+        m_LocalEuler.x = originalEuler.x;
+        m_LocalEuler.y = 180.f - m_LocalEuler.y;
+        m_LocalEuler.z = originalEuler.z;
+    }
+
+    SetDirty(TransformFlag::All, true);
+    SetDirty(TransformFlag::Scale, false);
 }
 
-void Boon::TransformComponent::SetLocalPosition(const glm::vec3& position)
+void TransformComponent::SetLocalScale(float x, float y, float z)
 {
-	m_LocalPosition = position;
-	SetDirty(TransformFlag::All, true);
+    SetLocalScale({ x, y, z });
 }
 
-void Boon::TransformComponent::SetLocalRotation(float x, float y, float z)
+void TransformComponent::SetLocalScale(const glm::vec3& scale)
 {
-	SetLocalRotation({ x, y, z });
+    if (m_LocalScale != scale)
+    {
+        m_LocalScale = scale;
+        SetDirty(TransformFlag::All, true);
+    }
 }
 
-void Boon::TransformComponent::SetLocalRotation(const glm::vec3& rotation)
+// -----------------------------------------------------------------------------
+// Modifiers
+// -----------------------------------------------------------------------------
+void TransformComponent::Translate(float x, float y, float z)
 {
-	m_LocalEuler = rotation;
-	m_LocalRotQ = glm::quat(glm::radians(rotation));
-	SetDirty(TransformFlag::All, true);
-	SetDirty(TransformFlag::Scale, false);
+    Translate({ x, y, z });
 }
 
-void Boon::TransformComponent::SetLocalRotation(const glm::quat& rotation)
+void TransformComponent::Translate(const glm::vec3& translation)
 {
-	m_LocalRotQ = rotation;
-	glm::vec3 originalEuler{ m_LocalEuler };
-	m_LocalEuler = glm::degrees(glm::eulerAngles(rotation));
-
-	if ((std::fabs(m_LocalEuler.x - originalEuler.x) == 180.f) &&
-		(std::fabs(m_LocalEuler.z - originalEuler.z) == 180.f))
-	{
-		m_LocalEuler.x = originalEuler.x;
-		m_LocalEuler.y = 180.f - m_LocalEuler.y;
-		m_LocalEuler.z = originalEuler.z;
-	}
-	SetDirty(TransformFlag::All, true);
-	SetDirty(TransformFlag::Scale, false);
+    m_LocalPosition += translation;
+    SetDirty(TransformFlag::All, true);
 }
 
-void Boon::TransformComponent::SetLocalScale(float x, float y, float z)
+void TransformComponent::Rotate(float x, float y, float z)
 {
-	SetLocalScale({ x, y, z });
+    Rotate({ x, y, z });
 }
 
-void Boon::TransformComponent::SetLocalScale(const glm::vec3& scale)
+void TransformComponent::Rotate(const glm::vec3& rotation)
 {
-	m_LocalScale = scale;
-	SetDirty(TransformFlag::All, true);
+    SetLocalRotation(GetLocalEulerRotation() + rotation);
 }
 
-void Boon::TransformComponent::Translate(float x, float y, float z)
+void TransformComponent::Rotate(const glm::quat& rotation)
 {
-	Translate({ x, y, z });
+    SetLocalRotation(GetLocalRotation() * rotation);
 }
 
-void Boon::TransformComponent::Translate(const glm::vec3& translation)
+void TransformComponent::Scale(float x, float y, float z)
 {
-	m_LocalPosition += translation;
-	SetDirty(TransformFlag::All, true);
+    Scale({ x, y, z });
 }
 
-void Boon::TransformComponent::Rotate(float x, float y, float z)
+void TransformComponent::Scale(const glm::vec3& scale)
 {
-	Rotate({ x, y, z });
+    m_LocalScale += scale;
+    SetDirty(TransformFlag::All, true);
 }
 
-void Boon::TransformComponent::Rotate(const glm::vec3& rotation)
+void TransformComponent::RotateTowards(const glm::vec3 direction)
 {
-	SetLocalRotation(GetLocalEulerRotation() + rotation);
+    SetLocalRotation(glm::quatLookAt(glm::normalize(direction), glm::vec3(0.f, 1.f, 0.f)));
 }
 
-void Boon::TransformComponent::Rotate(const glm::quat& rotation)
+void TransformComponent::RotateToPoint(const glm::vec3 point)
 {
-	SetLocalRotation(GetLocalRotation() * rotation);
+    glm::vec3 direction = point - GetLocalPosition();
+    RotateTowards(direction);
 }
 
-void Boon::TransformComponent::Scale(float x, float y, float z)
+// -----------------------------------------------------------------------------
+// Direction vectors
+// -----------------------------------------------------------------------------
+const glm::vec3& TransformComponent::GetForward()
 {
-	Scale({ x, y, z });
+    if (IsDirty(TransformFlag::Forward))
+        RecalculateForward();
+    return m_Forward;
 }
 
-void Boon::TransformComponent::Scale(const glm::vec3& scale)
+const glm::vec3& TransformComponent::GetUp()
 {
-	m_LocalScale += scale;
-	SetDirty(TransformFlag::All, true);
+    if (IsDirty(TransformFlag::Up))
+        RecalculateUp();
+    return m_Up;
 }
 
-void Boon::TransformComponent::RotateTowards(const glm::vec3 direction)
+const glm::vec3& TransformComponent::GetRight()
 {
-	SetLocalRotation(glm::quatLookAt(glm::normalize(direction), glm::vec3(0.f, 1.f, 0.f)));
+    if (IsDirty(TransformFlag::Right))
+        RecalculateRight();
+    return m_Right;
 }
 
-void Boon::TransformComponent::RotateToPoint(const glm::vec3 point)
+// -----------------------------------------------------------------------------
+// Recalculation
+// -----------------------------------------------------------------------------
+void TransformComponent::RecalculateWorldTransform()
 {
-	glm::vec3 direction{ point - GetLocalPosition() };
-	RotateTowards(direction);
+    glm::mat4 translation = glm::translate(glm::mat4(1.0f), m_LocalPosition);
+    glm::mat4 rotation = glm::toMat4(m_LocalRotQ);
+    glm::mat4 scale = glm::scale(glm::mat4(1.0f), m_LocalScale);
+    glm::mat4 localMatrix = translation * rotation * scale;
+
+    if (m_Owner && !m_Owner->IsRoot())
+        m_WorldTransform = m_Owner->GetParent().GetTransform().GetWorld() * localMatrix;
+    else
+        m_WorldTransform = localMatrix;
+
+    SetDirty(TransformFlag::World, false);
+    SetDirty(TransformFlag::Position, true);
+    SetDirty(TransformFlag::Rotation, true);
+    SetDirty(TransformFlag::Scale, true);
+    SetDirty(TransformFlag::Forward, true);
+    SetDirty(TransformFlag::Up, true);
+    SetDirty(TransformFlag::Right, true);
 }
 
-const glm::vec3& Boon::TransformComponent::GetForward()
+void TransformComponent::RecalculateWorldPosition()
 {
-	if (IsDirty(TransformFlag::Forward))
-		RecalculateForward();
-	return m_Forward;
+    m_WorldPosition = glm::vec3(GetWorld()[3]);
+    SetDirty(TransformFlag::Position, false);
 }
 
-const glm::vec3& Boon::TransformComponent::GetUp()
+void TransformComponent::RecalculateWorldRotation()
 {
-	if (IsDirty(TransformFlag::Up))
-		RecalculateUp();
-	return m_Up;
+    glm::mat4 world = GetWorld();
+    glm::vec3 skew, scale, translation;
+    glm::quat rotation;
+    glm::vec4 perspective;
+    glm::decompose(world, scale, rotation, translation, skew, perspective);
+
+    m_WorldRotQ = rotation;
+    m_WorldEuler = glm::degrees(glm::eulerAngles(rotation));
+    SetDirty(TransformFlag::Rotation, false);
 }
 
-const glm::vec3& Boon::TransformComponent::GetRight()
+void TransformComponent::RecalculateWorldScale()
 {
-	if (IsDirty(TransformFlag::Right))
-		RecalculateRight();
-	return m_Right;
+    const glm::mat4& world = GetWorld();
+    m_WorldScale.x = glm::length(glm::vec3(world[0]));
+    m_WorldScale.y = glm::length(glm::vec3(world[1]));
+    m_WorldScale.z = glm::length(glm::vec3(world[2]));
+    SetDirty(TransformFlag::Scale, false);
 }
 
-void Boon::TransformComponent::RecalculateWorldPosition()
+void TransformComponent::RecalculateForward()
 {
-	m_WorldPosition = glm::vec3(GetWorld()[3]);
-	SetDirty(TransformFlag::Position, false);
+    m_Forward = glm::normalize(glm::rotate(GetWorldRotation(), glm::vec3(0.f, 0.f, -1.f)));
+    SetDirty(TransformFlag::Forward, false);
 }
 
-void Boon::TransformComponent::RecalculateWorldRotation()
+void TransformComponent::RecalculateUp()
 {
-	if (m_Owner && !m_Owner->IsRoot())
-		m_WorldEuler = m_Owner->GetParent().GetTransform().GetWorldEulerRotation() + GetLocalEulerRotation();
-	else
-		m_WorldEuler = GetLocalEulerRotation();
-
-	m_WorldRotQ = glm::quat(glm::radians(m_WorldEuler));
-	SetDirty(TransformFlag::Rotation, false);
+    m_Up = glm::normalize(glm::rotate(GetWorldRotation(), glm::vec3(0.f, 1.f, 0.f)));
+    SetDirty(TransformFlag::Up, false);
 }
 
-void Boon::TransformComponent::RecalculateWorldScale()
+void TransformComponent::RecalculateRight()
 {
-	const glm::mat4& world{ GetWorld() };
-	m_WorldScale.x = glm::length(world[0]);
-	m_WorldScale.y = glm::length(world[1]);
-	m_WorldScale.z = glm::length(world[2]);
-	SetDirty(TransformFlag::Scale, false);
+    m_Right = glm::normalize(glm::rotate(GetWorldRotation(), glm::vec3(1.f, 0.f, 0.f)));
+    SetDirty(TransformFlag::Right, false);
 }
 
-void Boon::TransformComponent::RecalculateWorldTransform()
+// -----------------------------------------------------------------------------
+// Dirty flags
+// -----------------------------------------------------------------------------
+void TransformComponent::SetDirty(TransformFlag flag, bool isDirty)
 {
-	glm::mat4 translation{ glm::translate(glm::mat4(1.0f), m_LocalPosition) };
-	glm::mat4 rotation{ glm::toMat4(m_LocalRotQ) };
-	glm::mat4 scale{ glm::scale(glm::mat4(1.0f), m_LocalScale) };
-	glm::mat4 trs{ translation * rotation * scale };
-	m_WorldTransform = !m_Owner || m_Owner->IsRoot() ? trs : m_Owner->GetParent().GetTransform().GetWorld() * trs;
-	SetDirty(TransformFlag::World, false);
+    BitFlag::Set(m_DirtyFlags, flag, isDirty);
+
+    if (isDirty)
+        SetChildrenDirty(flag);
 }
 
-void Boon::TransformComponent::SetDirty(TransformFlag flag, bool isDirty)
+bool TransformComponent::IsDirty(TransformFlag flag) const
 {
-	BitFlag::Set(m_DirtyFlags, flag, isDirty);
-	if (isDirty)
-		SetChildrenDirty(flag);
+    return BitFlag::IsSet(m_DirtyFlags, flag);
 }
 
-bool Boon::TransformComponent::IsDirty(TransformFlag flag) const
+void TransformComponent::SetChildrenDirty(TransformFlag flag)
 {
-	return BitFlag::IsSet(m_DirtyFlags, flag);
-}
+    if (!m_Owner)
+        return;
 
-void Boon::TransformComponent::SetChildrenDirty(TransformFlag flag)
-{
-	if (!m_Owner)
-		return;
-
-	for (auto child : m_Owner->GetChildren())
-	{
-		child.GetTransform().SetDirty(flag, true);
-	}
-}
-
-void Boon::TransformComponent::RecalculateForward()
-{
-	m_Forward = glm::normalize(glm::rotate(GetWorldRotation(), glm::vec3(0.f, 0.f, -1.f)));
-	SetDirty(TransformFlag::Forward, false);
-}
-
-void Boon::TransformComponent::RecalculateUp()
-{
-	m_Up = glm::normalize(glm::rotate(GetWorldRotation(), glm::vec3(0.f, 1.f, 0.f)));
-	SetDirty(TransformFlag::Up, false);
-}
-
-void Boon::TransformComponent::RecalculateRight()
-{
-	m_Right = glm::normalize(glm::rotate(GetWorldRotation(), glm::vec3(1.f, 0.f, 0.f)));
-	SetDirty(TransformFlag::Right, false);
+    for (auto child : m_Owner->GetChildren())
+    {
+        if (child.IsValid())
+            child.GetTransform().SetDirty(flag, true);
+    }
 }
