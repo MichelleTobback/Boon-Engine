@@ -53,6 +53,9 @@ target_include_directories(BoonEngine
         ${CMAKE_CURRENT_SOURCE_DIR}/external/stb
 )
 
+# --- json
+target_include_directories(BoonEngine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/external/json/single_include)
+
 # --- EnTT (ecs)
 add_subdirectory(external/entt)
 target_link_libraries(${PROJECT_NAME} PUBLIC EnTT::EnTT)

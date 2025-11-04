@@ -19,6 +19,7 @@
 #include "Asset/AssetLibrary.h"
 #include "Asset/ShaderAsset.h"
 #include "Asset/TextureAsset.h"
+#include "Asset/SpriteAtlasAsset.h"
 
 //temp
 #include "Input/Input.h"
@@ -142,10 +143,11 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 	{
 		auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(gameObject);
 
-		if (assetLib.IsValidAsset(sprite.TextureHandle))
+		if (assetLib.IsValidAsset(sprite.SpriteAtlasHandle))
 		{
-			auto tex = assetLib.GetAsset<Texture2DAsset>(sprite.TextureHandle);
-			RenderQuad(transform.GetWorld(), tex, sprite.Tiling, sprite.Color, (int)gameObject, { sprite.TexRect.x, sprite.TexRect.y }, { sprite.TexRect.z, sprite.TexRect.w });
+			auto atlas = assetLib.GetAsset<SpriteAtlasAsset>(sprite.SpriteAtlasHandle);
+			const SpriteUV& spriteUv = atlas->GetSpriteUV(sprite.Sprite);
+			RenderQuad(transform.GetWorld(), atlas->GetTexture(), sprite.Tiling, sprite.Color, (int)gameObject, spriteUv.UV, spriteUv.Size);
 		}
 		else
 			RenderQuad(transform.GetWorld(), sprite.Color, (int)gameObject);
@@ -238,12 +240,6 @@ void Boon::SceneRenderer::RenderQuad(const glm::mat4& transform, const std::shar
 
 	for (size_t i = 0; i < quadVertexCount; i++)
 	{
-		//float width = texture->GetWidth() * spriteTexSize.x / 100.f;
-		//float height = texture->GetHeight() * spriteTexSize.y / 100.f;
-		//m_QuadVertexBufferPtr->Position.x = m_QuadVertexPositions[i].x * width;
-		//m_QuadVertexBufferPtr->Position.y = m_QuadVertexPositions[i].y * height;
-		//m_QuadVertexBufferPtr->Position.z = m_QuadVertexPositions[i].z;
-		//m_QuadVertexBufferPtr->Position = transform * glm::vec4(m_QuadVertexBufferPtr->Position, 1.f);
 		m_QuadVertexBufferPtr->Position = transform * m_QuadVertexPositions[i];
 		m_QuadVertexBufferPtr->Color = color;
 		m_QuadVertexBufferPtr->TexCoord = texCoords[i];

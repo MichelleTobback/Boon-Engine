@@ -20,6 +20,7 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
 
     if (!m_pContext->Get().HasComponent<NameComponent>())
         m_pContext->Get().AddComponent<NameComponent>();
+
     NameComponent& nameComponent{ m_pContext->Get().GetComponent<NameComponent>() };
     std::string gameObjectName{ nameComponent.Name };
     const size_t nameBufferSize{ 64 };
@@ -102,10 +103,10 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
                 spriteComponent.Color = value4;
             }
 
-            value4 = spriteComponent.TexRect;
-            if (UI::DragFloat4("Source", value4, 0.f, 1.f, 0.05f))
+            int sprite = spriteComponent.Sprite;
+            if (UI::SliderInt("Sprite", sprite, 0, 5))
             {
-                spriteComponent.TexRect = value4;
+                spriteComponent.Sprite = sprite;
             }
 
             float value = spriteComponent.Tiling;

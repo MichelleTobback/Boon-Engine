@@ -14,3 +14,9 @@
 	path = Editor/external/imgui
 	url = https://github.com/ocornut/imgui.git
 	branch = docking
+[submodule "Boon/external/external/json"]
+	path = Boon/external/external/json
+	url = https://github.com/nlohmann/json.git
+[submodule "Boon/external/json"]
+	path = Boon/external/json
+	url = https://github.com/nlohmann/json.git

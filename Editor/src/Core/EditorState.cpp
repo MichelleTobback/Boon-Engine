@@ -9,10 +9,14 @@
 
 #include <Asset/AssetLibrary.h>
 #include <Asset/TextureAsset.h>
+#include <Asset/SpriteAtlasAsset.h>
+
 #include <Core/ServiceLocator.h>
 #include <Core/Application.h>
-#include <Scene/Scene.h>
+
 #include <Renderer/Renderer.h>
+
+#include <Scene/Scene.h>
 #include <Scene/GameObject.h>
 
 #include <Component/CameraComponent.h>
@@ -43,9 +47,8 @@ void EditorState::OnEnter()
 
 	GameObject quad = m_pScene->Instantiate();
 	SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
-	sprite.TextureHandle = assetLib.Load<Texture2DAssetLoader>("game/Blue_witch/B_witch_idle.png");
-	auto tex = assetLib.GetAsset<Texture2DAsset>(sprite.TextureHandle);
-	sprite.TexRect.w = tex->GetHeight() / 6.f / tex->GetHeight();
+	sprite.SpriteAtlasHandle = assetLib.Load<SpriteAtlasAssetLoader>("game/Blue_witch/B_witch_idle.bsa");
+	sprite.Sprite = 0;
 }
 
 void EditorState::OnUpdate()

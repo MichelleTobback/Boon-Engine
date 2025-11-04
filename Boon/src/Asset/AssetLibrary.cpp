@@ -1,12 +1,14 @@
 #include "Asset/AssetLibrary.h"
 #include "Asset/ShaderAsset.h"
 #include "Asset/TextureAsset.h"
+#include "Asset/SpriteAtlasAsset.h"
 
 Boon::AssetLibrary::AssetLibrary(const std::string& assetDirectory)
 	: m_Dirs{assetDirectory}
 {
     RegisterLoader<ShaderAssetLoader>();
     RegisterLoader<Texture2DAssetLoader>();
+    RegisterLoader<SpriteAtlasAssetLoader>();
 }
 
 Boon::AssetLibrary::~AssetLibrary()
