@@ -58,12 +58,6 @@ void EditorState::OnUpdate()
 {
 	m_pScene->Update();
 
-	//auto view = m_pScene->GetRegistry().view<SpriteAnimatorComponent>();
-	//for (auto anim : view)
-	//{
-	//	m_pScene->GetRegistry().get<SpriteAnimatorComponent>(anim).Update();
-	//}
-
 	m_pScene->EndUpdate();
 
 	for (auto& pObject : m_Objects)

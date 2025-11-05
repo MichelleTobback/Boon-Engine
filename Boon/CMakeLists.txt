@@ -1,5 +1,3 @@
-# Boon/CMakeLists.txt
-
 cmake_minimum_required(VERSION 3.15)
 project(BoonEngine LANGUAGES CXX)
 
@@ -7,12 +5,21 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # =========================================
-# === Source and header files
+# === Find Engine Sources
 # =========================================
 file(GLOB_RECURSE ENGINE_SOURCES CONFIGURE_DEPENDS src/*.cpp)
 file(GLOB_RECURSE ENGINE_HEADERS CONFIGURE_DEPENDS include/*.h)
 
-add_library(BoonEngine STATIC ${ENGINE_SOURCES} ${ENGINE_HEADERS})
+# =========================================
+# === Build Engine Lib
+# =========================================
+add_library(BoonEngine STATIC
+    ${ENGINE_SOURCES}
+    ${ENGINE_HEADERS}
+    ${GENERATED_COMPONENTS}
+)
+
+add_dependencies(BoonEngine GenerateReflection)
 
 target_include_directories(BoonEngine
     PUBLIC
@@ -33,35 +40,35 @@ set_target_properties(BoonEngine PROPERTIES
 # === External dependencies
 # =========================================
 
-# --- glm (header-only)
-target_include_directories(BoonEngine
-    PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/external/glm
-)
+# glm
+target_include_directories(BoonEngine PUBLIC external/glm)
 
-# GLAD (OpenGL loader)
+# glad
 add_subdirectory(external/glad)
 target_link_libraries(BoonEngine PUBLIC glad)
 
-# --- glfw (window + input)
+# glfw
 add_subdirectory(external/glfw)
 target_link_libraries(BoonEngine PUBLIC glfw)
 
-# --- stb_image (header-only image loader)
-target_include_directories(BoonEngine
-    PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/external/stb
-)
+# stb
+target_include_directories(BoonEngine PUBLIC external/stb)
 
-# --- json
-target_include_directories(BoonEngine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/external/json/single_include)
+# json (nlohmann)
+target_include_directories(BoonEngine PUBLIC external/json/single_include)
 
-# --- EnTT (ecs)
+# EnTT
 add_subdirectory(external/entt)
-target_link_libraries(${PROJECT_NAME} PUBLIC EnTT::EnTT)
+target_link_libraries(BoonEngine PUBLIC EnTT::EnTT)
 
 # =========================================
-# === Platform-specific settings
+# === OpenGL
+# =========================================
+find_package(OpenGL REQUIRED)
+target_link_libraries(BoonEngine PUBLIC OpenGL::GL)
+
+# =========================================
+# === Platform Defines
 # =========================================
 if (WIN32)
     target_compile_definitions(BoonEngine PRIVATE BOON_PLATFORM_WINDOWS)
@@ -72,13 +79,7 @@ elseif(UNIX)
 endif()
 
 # =========================================
-# === Link core libraries
-# =========================================
-find_package(OpenGL REQUIRED)
-target_link_libraries(BoonEngine PUBLIC OpenGL::GL)
-
-# =========================================
-# === Misc compiler options
+# === Warnings
 # =========================================
 if (MSVC)
     target_compile_options(BoonEngine PRIVATE /W4)

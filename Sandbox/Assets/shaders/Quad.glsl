@@ -52,8 +52,8 @@ layout (location = 0) in VertexInput Input;
 layout (location = 3) in flat float v_TexIndex;
 layout (location = 4) in flat int v_ID;
 
-layout(location = 0) out vec4 color;
-layout(location = 1) out int id;
+layout(location = 0) out vec4 o_Color;
+layout(location = 1) out int o_Id;
 
 layout (binding = 0) uniform sampler2D u_Textures[32];
 
@@ -101,5 +101,5 @@ void main()
 		discard;
 
 	o_Color = texColor;
-	id = v_ID;
+	o_Id = v_ID;
 }

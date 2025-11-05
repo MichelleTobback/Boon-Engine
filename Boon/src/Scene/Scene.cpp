@@ -4,6 +4,8 @@
 #include "Component/NameComponent.h"
 #include "Component/ECSLifecycle.h"
 
+#include "Component/SpriteAnimatorComponent.h"
+
 using namespace Boon;
 
 Boon::Scene::Scene()

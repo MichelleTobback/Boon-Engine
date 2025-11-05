@@ -4,15 +4,16 @@
 
 file(GLOB_RECURSE EDITOR_SOURCES CONFIGURE_DEPENDS src/*.cpp)
 
-add_executable(Editor ${EDITOR_SOURCES})
-
-target_link_libraries(Editor
-    PRIVATE BoonEngine
+# ============================
+# === Editor Executable
+# ============================
+add_executable(Editor
+    ${EDITOR_SOURCES}
 )
 
-target_include_directories(Editor
-    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
+target_link_libraries(Editor PRIVATE BoonEngine)
+
+target_include_directories(Editor PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # =========================================
 # === Output directories
@@ -30,18 +31,18 @@ add_custom_command(TARGET Editor POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_CURRENT_SOURCE_DIR}/Assets
         $<TARGET_FILE_DIR:Editor>/Assets
-    COMMENT "Copying Editor Assets folder to output directory..."
+    COMMENT "Copying Editor Assets..."
 )
 
 add_custom_command(TARGET Editor POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_CURRENT_SOURCE_DIR}/Resources
         $<TARGET_FILE_DIR:Editor>/Assets
-    COMMENT "Copying Editor Assets folder to output directory..."
+    COMMENT "Copying Editor Resources..."
 )
 
 # =========================================
-# === ImGui (docking branch)
+# === ImGui (docking)
 # =========================================
 set(IMGUI_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/imgui)
 
@@ -60,22 +61,17 @@ add_library(imgui STATIC ${IMGUI_SOURCES})
 target_include_directories(imgui PUBLIC
     ${IMGUI_DIR}
     ${IMGUI_DIR}/backends
-    ${CMAKE_SOURCE_DIR}/Boon/external/glfw/include
+    ${CMAKE_SOURCE_DIR}/BoonEngine/external/glfw/include
 )
 
 target_link_libraries(imgui PUBLIC glfw)
 
-# =========================================
-# === Link ImGui to Editor
-# =========================================
-target_link_libraries(Editor
-    PRIVATE
-        BoonEngine
-        imgui
-)
+target_link_libraries(Editor PRIVATE imgui)
 
-# Give Editor access to ImGui headers
 target_include_directories(Editor PRIVATE
     ${IMGUI_DIR}
     ${IMGUI_DIR}/backends
 )
+
+add_dependencies(Editor GenerateReflection)
+target_sources(Editor PRIVATE ${CMAKE_SOURCE_DIR}/Editor/generated/Generated_Components.cpp)

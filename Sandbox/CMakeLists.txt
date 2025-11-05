@@ -26,5 +26,9 @@ add_custom_command(TARGET Sandbox POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_CURRENT_SOURCE_DIR}/Assets
         $<TARGET_FILE_DIR:Sandbox>/Assets
-    COMMENT "Copying Editor Assets folder to output directory..."
+    COMMENT "Copying Sandbox Assets folder to output directory..."
 )
+
+add_dependencies(Sandbox GenerateReflection)
+
+target_sources(Sandbox PRIVATE ${CMAKE_SOURCE_DIR}/Sandbox/generated/Generated_Components.cpp)

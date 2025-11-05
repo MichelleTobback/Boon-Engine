@@ -21,6 +21,7 @@ namespace Boon
 		GameObjectFlag Flags;
 	};
 
+	struct BClass;
 	class TransformComponent;
 	class GameObject final
 	{
@@ -46,6 +47,8 @@ namespace Boon
 
 		bool IsValid() const;
 		bool IsRoot() const;
+
+		void* AddComponent(BClass* pClass);
 
 		template <typename T, typename ... TArgs>
 		T& AddComponent(TArgs&& ... args)

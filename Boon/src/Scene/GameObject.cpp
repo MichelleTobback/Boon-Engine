@@ -1,6 +1,7 @@
 #include "Scene/GameObject.h"
 #include "Scene/Scene.h"
 #include "Component/SceneComponent.h"
+#include "Reflection/BClass.h"
 
 using namespace Boon;
 
@@ -50,6 +51,11 @@ bool Boon::GameObject::IsValid() const
 bool Boon::GameObject::IsRoot() const
 {
 	return !GetParent().IsValid();
+}
+
+void* Boon::GameObject::AddComponent(BClass* pClass)
+{
+	return pClass->addComponent(*this);
 }
 
 void Boon::GameObject::Destroy()

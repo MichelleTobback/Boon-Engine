@@ -72,3 +72,6 @@ out/
 *.log
 *.cache
 *.tmp
+
+# Boon files and folder
+generated/
