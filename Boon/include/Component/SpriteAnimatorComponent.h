@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Reflection/RegisterBClass.h"
+
 #include "SpriteRendererComponent.h"
 #include "Asset/SpriteAtlasAsset.h"
 #include "Asset/AssetLibrary.h"
@@ -17,7 +19,7 @@ namespace Boon
 
 		inline SpriteAnimClip& GetClip() const { return Atlas->GetClip(Clip); }
 
-		void Update()
+		void Update(GameObject)
 		{
 			SpriteAnimClip& clip = GetClip();
 
@@ -49,4 +51,6 @@ namespace Boon
 		int m_Current = 0;
 		float m_Timer = 0.f;
 	};
+
+	REGISTER_BCLASS(SpriteAnimatorComponent);
 }

@@ -7,11 +7,8 @@
 
 #include "UI/EditorRenderer.h"
 
-#include <Asset/AssetLibrary.h>
-#include <Asset/TextureAsset.h>
-#include <Asset/SpriteAtlasAsset.h>
+#include <Asset/Assets.h>
 
-#include <Core/ServiceLocator.h>
 #include <Core/Application.h>
 
 #include <Renderer/Renderer.h>
@@ -31,7 +28,7 @@ EditorState::~EditorState() = default;
 void EditorState::OnEnter()
 {
 	Window& window{ Application::Get().GetWindow() };
-	AssetLibrary& assetLib{ ServiceLocator::Get<AssetLibrary>() };
+	AssetLibrary& assetLib{ Assets::Get() };
 
 	m_PRenderer = std::make_unique<EditorRenderer>();
 
@@ -61,11 +58,11 @@ void EditorState::OnUpdate()
 {
 	m_pScene->Update();
 
-	auto view = m_pScene->GetRegistry().view<SpriteAnimatorComponent>();
-	for (auto anim : view)
-	{
-		m_pScene->GetRegistry().get<SpriteAnimatorComponent>(anim).Update();
-	}
+	//auto view = m_pScene->GetRegistry().view<SpriteAnimatorComponent>();
+	//for (auto anim : view)
+	//{
+	//	m_pScene->GetRegistry().get<SpriteAnimatorComponent>(anim).Update();
+	//}
 
 	m_pScene->EndUpdate();
 

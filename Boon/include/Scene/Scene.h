@@ -6,16 +6,18 @@
 #include <glm/glm.hpp>
 #include <unordered_map>
 #include <functional>
+#include <memory>
 
 namespace Boon
 {
 	using SceneRegistry = entt::registry;
 
+	struct ECSLifecycleSystem;
 	class GameObject;
 	class Scene final
 	{
 	public:
-		explicit Scene() {}
+		explicit Scene();
 		~Scene();
 		Scene(const Scene& other) = delete;
 		Scene(Scene&& other) = delete;
@@ -47,6 +49,7 @@ namespace Boon
 		std::unordered_map<UUID, GameObjectID> m_EntityMap;
 		std::queue<UUID> m_ObjectsPendingDestroy{};
 		SceneRegistry m_Registry;
+		std::unique_ptr<ECSLifecycleSystem> m_pECSlifecycle;
 
 		bool m_Running{ false };
 	};

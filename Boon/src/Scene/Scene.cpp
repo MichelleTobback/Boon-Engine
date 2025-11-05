@@ -2,8 +2,14 @@
 #include "Scene/GameObject.h"
 #include "Component/SceneComponent.h"
 #include "Component/NameComponent.h"
+#include "Component/ECSLifecycle.h"
 
 using namespace Boon;
+
+Boon::Scene::Scene()
+{
+	m_pECSlifecycle = std::make_unique<ECSLifecycleSystem>(*this);
+}
 
 Boon::Scene::~Scene()
 {
@@ -37,22 +43,27 @@ GameObject Boon::Scene::Instantiate(UUID uuid, const glm::vec3& pos)
 
 void Boon::Scene::Awake()
 {
+	
 }
 
 void Boon::Scene::Sleep()
 {
+	
 }
 
 void Boon::Scene::Update()
 {
+	m_pECSlifecycle->UpdateAll();
 }
 
 void Boon::Scene::FixedUpdate()
 {
+	m_pECSlifecycle->FixedUpdateAll();
 }
 
 void Boon::Scene::LateUpdate()
 {
+	m_pECSlifecycle->LateUpdateAll();
 }
 
 void Boon::Scene::EndUpdate()
