@@ -1,10 +1,8 @@
 #pragma once
-#include "Scene/GameObject.h"
+#include "Core/Boon.h"
 #include "Asset/SpriteAtlasAsset.h"
 
 #include <vector>
-
-#define BCLASS()
 
 namespace Boon
 {

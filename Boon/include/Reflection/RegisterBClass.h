@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "BClass.h"
 #include "Component/ECSLifecycle.h"
+#include "Scene/GameObject.h"
 
 namespace Boon
 {
@@ -19,9 +20,17 @@ namespace Boon
                 sys.RegisterType<T>();
             };
 
-        cls.createInstance = +[]() -> void* { return new T(); };
+        cls.createInstance = []() -> void* 
+            {
+                return new T();
+            };
         cls.destroyInstance = +[](void* p) { delete (T*)p; };
-        cls.addComponent = +[](GameObject& obj) -> void* { return &obj.AddComponent<T>(); };
+        cls.addComponent = [](GameObject& go) -> void*
+            {
+                T& comp = go.template AddComponent<T>();
+
+                return static_cast<void*>(&comp);
+            };
 
         BClassRegistry::Get().Register(&cls);
         return &cls;

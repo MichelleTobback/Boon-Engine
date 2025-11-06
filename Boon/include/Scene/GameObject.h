@@ -48,14 +48,20 @@ namespace Boon
 		bool IsValid() const;
 		bool IsRoot() const;
 
-		void* AddComponent(BClass* pClass);
+		void* AddComponentFromClass(BClass* pClass);
 
 		template <typename T, typename ... TArgs>
 		T& AddComponent(TArgs&& ... args)
 		{
+			static_assert(!std::is_empty_v<T>,
+				"Component type T is empty. Empty components are stored as tags by entt and "
+				"cannot be added as normal components. Add at least one data member.");
+
 			BN_ASSERT(!HasComponent<T>(), "GameObject already has component!");
-			T& component = m_pScene->m_Registry.emplace<T>(m_Handle, std::forward<TArgs>(args)...);
-			return component;
+
+			entt::registry& reg = m_pScene->GetRegistry();
+
+			return reg.emplace<T>(m_Handle, std::forward<TArgs>(args)...);
 		}
 
 		template<typename T>

@@ -53,8 +53,11 @@ bool Boon::GameObject::IsRoot() const
 	return !GetParent().IsValid();
 }
 
-void* Boon::GameObject::AddComponent(BClass* pClass)
+void* GameObject::AddComponentFromClass(BClass* pClass)
 {
+	if (!pClass || !pClass->addComponent)
+		return nullptr;
+
 	return pClass->addComponent(*this);
 }
 

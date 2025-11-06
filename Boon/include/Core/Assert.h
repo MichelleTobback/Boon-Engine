@@ -1,19 +1,34 @@
 #pragma once
 
-#ifdef BN_DEBUG
-	#define NV_ENABLE_ASSERT
+#include <string>
+#include <cstdlib>
+
+#ifdef _DEBUG
+#define BN_ENABLE_ASSERT
 #endif
 
-#ifdef BN_ENABLE_ASSERT
-#include <string>
-#include <cassert>
-	namespace Boon
-	{
-		void BnAssert(bool condition, const std::string& message, const char* file, int line);
-	}
+namespace Boon
+{
+    // Optional logging hook if you want printed output:
+    inline void BnAssertFail(const char* expr, const char* msg, const char* file, int line)
+    {
+        // You can replace this with your logger:
+        // printf("ASSERT FAILED: %s | %s | %s:%d\n", expr, msg, file, line);
+        __debugbreak(); // halt in debugger
+    }
+}
 
-	#define BN_ASSERT(condition, ...) assert(condition && #__VA_ARGS__) 
-	//{NvAssert(condition, #__VA_ARGS__, __FILE__, __LINE__);}
+#ifdef BN_ENABLE_ASSERT
+
+#define BN_ASSERT(condition, ...) \
+        do { \
+            if(!(condition)) { \
+                ::Boon::BnAssertFail(#condition, ##__VA_ARGS__, __FILE__, __LINE__); \
+            } \
+        } while(0)
+
 #else
-	#define BN_ASSERT(condition, ...)
+
+#define BN_ASSERT(condition, ...) do {} while(0)
+
 #endif

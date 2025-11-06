@@ -80,6 +80,15 @@ namespace Boon
                 fn(*cls);
         }
 
+        template <typename T>
+        T* Instantiate()
+        {
+            BClass* cls = Find(typeid(T));
+            if (cls && cls->createInstance)
+                return reinterpret_cast<T*>(cls->createInstance());
+            return nullptr;
+        }
+
     private:
         std::unordered_map<std::type_index, BClass*> m_Classes;
         std::vector<std::function<void(BClass&)>> m_Listeners;

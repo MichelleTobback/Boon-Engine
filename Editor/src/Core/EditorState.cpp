@@ -20,6 +20,8 @@
 #include <Component/SpriteRendererComponent.h>
 #include <Component/SpriteAnimatorComponent.h>
 
+#include <Reflection/BClass.h>
+
 using namespace BoonEditor;
 
 EditorState::EditorState() = default;

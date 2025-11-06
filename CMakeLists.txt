@@ -19,7 +19,9 @@ add_subdirectory(Boon/tools/BClassGenerator)
 # ---------------------------
 
 # Directory to scan for components
-set(COMPONENT_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/Boon/include)
+set(BOON_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/Boon/include)
+set(EDITOR_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/Editor/include)
+set(SANDBOX_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/Sandbox/include)
 
 # Output locations for generated files
 set(GENERATED_EDITOR   ${CMAKE_SOURCE_DIR}/Editor/generated/Generated_Components.cpp)
@@ -32,11 +34,10 @@ file(WRITE ${GENERATED_SANDBOX} "// Generated - will be overwritten\n")
 # Run generator
 add_custom_command(
     OUTPUT ${GENERATED_EDITOR} ${GENERATED_SANDBOX}
-    COMMENT "Generating BClass reflection (Editor)"
-    COMMAND BClassGenerator ${COMPONENT_INCLUDE_DIR} ${GENERATED_EDITOR}
-    COMMENT "Generating BClass reflection (Sandbox)"
-    COMMAND BClassGenerator ${COMPONENT_INCLUDE_DIR} ${GENERATED_SANDBOX}
     DEPENDS BClassGenerator
+    COMMAND BClassGenerator ${GENERATED_EDITOR} ${BOON_INCLUDE_DIR} ${EDITOR_INCLUDE_DIR}
+    COMMAND BClassGenerator ${GENERATED_SANDBOX} ${BOON_INCLUDE_DIR} ${SANDBOX_INCLUDE_DIR}
+    COMMENT "Generating BClass reflection for Editor and Sandbox..."
 )
 
 add_custom_target(GenerateReflection

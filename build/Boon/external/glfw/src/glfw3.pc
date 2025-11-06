@@ -1,7 +1,7 @@
-prefix=C:/Program Files (x86)/BoonEngineProject
+prefix=C:/Program Files (x86)/BoonEngineWorkspace
 exec_prefix=${prefix}
-includedir=C:/Program Files (x86)/BoonEngineProject/include
-libdir=C:/Program Files (x86)/BoonEngineProject/lib
+includedir=C:/Program Files (x86)/BoonEngineWorkspace/include
+libdir=C:/Program Files (x86)/BoonEngineWorkspace/lib
 
 Name: GLFW
 Description: A multi-platform library for OpenGL, window and input

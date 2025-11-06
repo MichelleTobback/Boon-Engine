@@ -15,12 +15,15 @@ struct FoundClass {
 int main(int argc, char** argv)
 {
     if (argc < 3) {
-        std::cerr << "Usage: BClassGenerator <include_dir> <output_file>\n";
+        std::cerr << "Usage: BClassGenerator <output_file> <include_dir1> [include_dir2 ...]\n";
         return 1;
     }
 
-    fs::path includeDir = argv[1];
-    fs::path outputFile = argv[2];
+    fs::path outputFile = argv[1];
+    std::vector<fs::path> includeDirs;
+
+    for (int i = 2; i < argc; i++)
+        includeDirs.push_back(fs::path(argv[i]));
 
     std::vector<FoundClass> found;
 
@@ -28,30 +31,49 @@ int main(int argc, char** argv)
         R"(BCLASS\s*\(\s*\)\s*(class|struct)\s+([A-Za-z_][A-Za-z0-9_]*)\b)"
     );
 
-    for (auto& file : fs::recursive_directory_iterator(includeDir))
+    for (auto& includeDir : includeDirs)
     {
-        if (!file.is_regular_file())
+        if (!fs::exists(includeDir)) {
+            std::cerr << "[BClassGenerator] Warning: Directory does not exist: " << includeDir << "\n";
             continue;
+        }
 
-        auto ext = file.path().extension().string();
-        if (ext != ".h" && ext != ".hpp")
-            continue;
-
-        std::ifstream in(file.path());
-        std::string content((std::istreambuf_iterator<char>(in)), {});
-
-        std::smatch match;
-        auto begin = content.cbegin();
-
-        while (std::regex_search(begin, content.cend(), match, classRegex))
+        for (auto& file : fs::recursive_directory_iterator(includeDir))
         {
-            FoundClass c;
-            c.typeName = match[2];
-            fs::path rel = fs::relative(file.path(), includeDir);
-            c.includePath = rel.generic_string();
-            found.push_back(c);
+            if (!file.is_regular_file())
+                continue;
 
-            begin = match.suffix().first;
+            auto ext = file.path().extension().string();
+            if (ext != ".h" && ext != ".hpp")
+                continue;
+
+            std::ifstream in(file.path());
+            if (!in.is_open())
+                continue;
+
+            std::string content((std::istreambuf_iterator<char>(in)), {});
+
+            std::smatch match;
+            auto begin = content.cbegin();
+
+            while (std::regex_search(begin, content.cend(), match, classRegex))
+            {
+                FoundClass c;
+                c.typeName = match[2];
+
+                // Make include relative to root of scanned directory group
+                for (auto& dir : includeDirs)
+                {
+                    if (file.path().string().find(dir.string()) != std::string::npos) {
+                        fs::path rel = fs::relative(file.path(), dir);
+                        c.includePath = rel.generic_string();
+                        break;
+                    }
+                }
+
+                found.push_back(c);
+                begin = match.suffix().first;
+            }
         }
     }
 

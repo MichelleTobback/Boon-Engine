@@ -23,6 +23,8 @@
 #include "Reflection/BClass.h"
 #include <iostream>
 
+#include "Game/PlayerController.h"
+
 using namespace Boon;
 
 Sandbox::SandboxState::SandboxState()
@@ -53,6 +55,7 @@ void Sandbox::SandboxState::OnEnter()
 	animator.Clip = 0;
 	animator.Atlas = Assets::GetSpriteAtlas(sprite.SpriteAtlasHandle);
 	animator.pRenderer = &sprite;
+	quad.AddComponent<PlayerController>();
 
 	m_WindowResizeEvent = ServiceLocator::Get<EventBus>().Subscribe<WindowResizeEvent>([this](const WindowResizeEvent& e)
 		{

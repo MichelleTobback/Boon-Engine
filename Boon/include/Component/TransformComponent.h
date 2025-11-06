@@ -1,4 +1,5 @@
 #pragma once
+#include "Core/Boon.h"
 #include <glm/glm.hpp>
 
 //TODO - Make wrapper class so these includes can be moved to a cpp file
@@ -9,9 +10,12 @@
 #include <glm/gtx/quaternion.hpp>
 #pragma warning(pop)
 
+#define BCLASS()
+
 namespace Boon
 {
 	class SceneComponent;
+	BCLASS()
 	class TransformComponent final
 	{
 	public:
@@ -31,7 +35,7 @@ namespace Boon
 
 			All = 0xffffffff
 		};
-
+		TransformComponent() = default;
 		TransformComponent(SceneComponent* owner);
 		~TransformComponent() = default;
 
