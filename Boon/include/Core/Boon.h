@@ -1,4 +1,4 @@
 #pragma once
 #include "Scene/GameObject.h"
 
-#define BCLASS()
+#include "Reflection/BClassBase.h"

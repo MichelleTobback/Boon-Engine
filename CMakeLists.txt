@@ -27,17 +27,18 @@ set(SANDBOX_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/Sandbox/include)
 set(GENERATED_EDITOR   ${CMAKE_SOURCE_DIR}/Editor/generated/Generated_Components.cpp)
 set(GENERATED_SANDBOX  ${CMAKE_SOURCE_DIR}/Sandbox/generated/Generated_Components.cpp)
 
-# Ensure initial files exist (IDE indexing)
-file(WRITE ${GENERATED_EDITOR}  "// Generated - will be overwritten\n")
-file(WRITE ${GENERATED_SANDBOX} "// Generated - will be overwritten\n")
-
-# Run generator
 add_custom_command(
-    OUTPUT ${GENERATED_EDITOR} ${GENERATED_SANDBOX}
-    DEPENDS BClassGenerator
+    OUTPUT ${GENERATED_EDITOR}
+    DEPENDS BClassGenerator ${BOON_INCLUDE_DIR} ${EDITOR_INCLUDE_DIR}
     COMMAND BClassGenerator ${GENERATED_EDITOR} ${BOON_INCLUDE_DIR} ${EDITOR_INCLUDE_DIR}
+    COMMENT "Generating BClass reflection for Editor ..."
+)
+
+add_custom_command(
+    OUTPUT ${GENERATED_SANDBOX}
+    DEPENDS BClassGenerator ${BOON_INCLUDE_DIR} ${SANDBOX_INCLUDE_DIR}
     COMMAND BClassGenerator ${GENERATED_SANDBOX} ${BOON_INCLUDE_DIR} ${SANDBOX_INCLUDE_DIR}
-    COMMENT "Generating BClass reflection for Editor and Sandbox..."
+    COMMENT "Generating BClass reflection for Sandbox ..."
 )
 
 add_custom_target(GenerateReflection

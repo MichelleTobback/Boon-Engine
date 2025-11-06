@@ -1,5 +1,4 @@
 #pragma once
-#include "Core/Boon.h"
 #include <glm/glm.hpp>
 
 //TODO - Make wrapper class so these includes can be moved to a cpp file
@@ -10,7 +9,7 @@
 #include <glm/gtx/quaternion.hpp>
 #pragma warning(pop)
 
-#define BCLASS()
+#include "Reflection/BClassBase.h"
 
 namespace Boon
 {
