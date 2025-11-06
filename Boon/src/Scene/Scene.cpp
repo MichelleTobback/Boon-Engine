@@ -8,7 +8,8 @@
 
 using namespace Boon;
 
-Boon::Scene::Scene()
+Boon::Scene::Scene(const std::string& name)
+	: m_Name{name}
 {
 	m_pECSlifecycle = std::make_unique<ECSLifecycleSystem>(*this);
 }
@@ -66,6 +67,8 @@ void Boon::Scene::FixedUpdate()
 void Boon::Scene::LateUpdate()
 {
 	m_pECSlifecycle->LateUpdateAll();
+
+	EndUpdate();
 }
 
 void Boon::Scene::EndUpdate()

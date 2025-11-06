@@ -16,6 +16,8 @@ namespace Boon
 
 		operator uint64_t() const { return m_Uuid; }
 
+		static const UUID Null;
+
 	private:
 		uint64_t m_Uuid{};
 	};

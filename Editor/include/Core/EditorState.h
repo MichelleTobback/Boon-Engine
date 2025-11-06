@@ -6,14 +6,11 @@
 #include <Core/AppState.h>
 #include <Renderer/SceneRenderer.h>
 
+#include <Event/Event.h>
+
 #include <memory>
 #include <type_traits>
 #include <vector>
-
-namespace Boon
-{
-	class Scene;
-}
 
 using namespace Boon;
 
@@ -61,11 +58,12 @@ namespace BoonEditor
 		void OnRender();
 
 		std::unique_ptr<EditorRenderer> m_PRenderer;
-		std::unique_ptr<Scene> m_pScene;
 		GameObjectContext m_SelectionContext{};
 		SceneContext m_SceneContext{};
 
 		std::vector<std::unique_ptr<EditorObject>> m_Objects;
 		std::vector<EditorPanel*> m_Panels;
+
+		EventListenerID m_SceneChangedEvent;
 	};
 }

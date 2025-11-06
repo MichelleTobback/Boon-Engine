@@ -5,6 +5,8 @@
 #include <unordered_map>
 #include <string>
 
+const Boon::UUID Boon::UUID::Null = UUID(0);
+
 Boon::UUID::UUID()
 	: m_Uuid{}
 {
@@ -18,5 +20,5 @@ Boon::UUID::UUID(uint64_t uuid)
 
 bool Boon::UUID::IsValid() const
 {
-	return m_Uuid != 0u;
+	return m_Uuid != Null;
 }

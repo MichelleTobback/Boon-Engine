@@ -6,7 +6,6 @@
 
 namespace Boon
 {
-	class Scene;
 	class SceneRenderer;
 
 	class Camera;
@@ -34,13 +33,12 @@ namespace Sandbox
 
 	private:
 		void OnRender();
-
-		std::unique_ptr<Scene> m_pScene;
 		std::unique_ptr<SceneRenderer> m_pRenderer;
 
 		Camera* m_pCamera;
 		TransformComponent* m_pCameraTransform;
 
 		EventListenerID m_WindowResizeEvent;
+		EventListenerID m_SceneChangedEvent;
 	};
 }

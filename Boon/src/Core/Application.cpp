@@ -11,6 +11,8 @@
 
 #include "Renderer/Renderer.h"
 
+#include "Scene/SceneManager.h"
+
 Boon::Application* Boon::Application::s_pInstance{ nullptr };
 
 Boon::Application::Application(const AppDesc& desc)
@@ -33,19 +35,21 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 	ServiceLocator::Register(std::make_shared<AssetLibrary>("Assets/"));
 	ServiceLocator::Register(std::make_shared<EventBus>());
 	ServiceLocator::Register(std::make_shared<Input>());
+	ServiceLocator::Register(std::make_shared<SceneManager>());
 
 	m_pStateMachine->PushState(std::move(pState));
 	pState = nullptr;
 
 	bool quit{ false };
 	Time& time{ Time::Get() };
+	Input& input{ ServiceLocator::Get<Input>() };
 	time.Start();
 	while (!quit)
 	{
 		time.Step();
 		quit = m_pWindow->Update();
 		m_pStateMachine->Update();
-		ServiceLocator::Get<Input>().Update();
+		input.Update();
 		time.Wait();
 		m_pWindow->Present();
 	}
