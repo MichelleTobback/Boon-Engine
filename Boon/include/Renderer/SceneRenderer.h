@@ -44,6 +44,9 @@ namespace Boon
 
 		void RenderLine(const glm::vec3& p0, const glm::vec3& p1, const glm::vec4& color);
 		void RenderRect(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color);
+		void RenderRect(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color);
+		void RenderRect(const glm::mat4& transform, const glm::vec2& size, const glm::vec4& color);
+		void RenderPolygon(const std::vector<glm::vec3>& positions, const glm::vec4& color);
 
 		void BeginScene(Camera* camera = nullptr, TransformComponent* cameraTransform = nullptr);
 		void EndScene();

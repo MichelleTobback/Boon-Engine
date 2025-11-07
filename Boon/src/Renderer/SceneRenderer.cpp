@@ -21,6 +21,10 @@
 #include "Asset/TextureAsset.h"
 #include "Asset/SpriteAtlasAsset.h"
 
+#ifdef BOON_WITH_EDITOR
+	#include "Component/BoxCollider2D.h"
+#endif //BOON_WITH_EDITOR
+
 //temp
 #include "Input/Input.h"
 #include "Core/Time.h"
@@ -133,20 +137,37 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 
 	AssetLibrary& assetLib{ ServiceLocator::Get<AssetLibrary>() };
 
-	auto group = m_pScene->GetRegistry().group<TransformComponent, SpriteRendererComponent>();
-	for (auto gameObject : group)
 	{
-		auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(gameObject);
-
-		if (assetLib.IsValidAsset(sprite.SpriteAtlasHandle))
+		auto group = m_pScene->GetAllGameObjectsWith<TransformComponent, SpriteRendererComponent>();
+		for (auto gameObject : group)
 		{
-			auto atlas = assetLib.GetAsset<SpriteAtlasAsset>(sprite.SpriteAtlasHandle);
-			const SpriteFrame& spriteUv = atlas->GetSpriteFrame(sprite.Sprite);
-			RenderQuad(transform.GetWorld(), atlas->GetTexture(), sprite.Tiling, sprite.Color, (int)gameObject, spriteUv.UV, spriteUv.Size);
+			auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(gameObject);
+
+			if (assetLib.IsValidAsset(sprite.SpriteAtlasHandle))
+			{
+				auto atlas = assetLib.GetAsset<SpriteAtlasAsset>(sprite.SpriteAtlasHandle);
+				const SpriteFrame& spriteUv = atlas->GetSpriteFrame(sprite.Sprite);
+				RenderQuad(transform.GetWorld(), atlas->GetTexture(), sprite.Tiling, sprite.Color, (int)gameObject, spriteUv.UV, spriteUv.Size);
+			}
+			else
+				RenderQuad(transform.GetWorld(), sprite.Color, (int)gameObject);
 		}
-		else
-			RenderQuad(transform.GetWorld(), sprite.Color, (int)gameObject);
 	}
+
+#ifdef BOON_WITH_EDITOR
+	{
+		auto group = m_pScene->GetAllGameObjectsWith<TransformComponent, BoxCollider2D>();
+		for (auto gameObject : group)
+		{
+			auto [transform, collider] = group.get<TransformComponent, BoxCollider2D>(gameObject);
+			{
+				if (!collider.DrawDebug)
+					continue;
+				RenderRect(transform.GetWorld(), collider.Size, glm::vec4(1.f, 1.f, 1.f, 1.f));
+			}
+		}
+	}
+#endif // BOON_WITH_EDITOR
 
 	EndScene();
 }
@@ -263,6 +284,40 @@ void Boon::SceneRenderer::RenderRect(const glm::vec3& position, const glm::vec2&
 	RenderLine(p1, p2, color);
 	RenderLine(p2, p3, color);
 	RenderLine(p3, p0, color);
+}
+
+void Boon::SceneRenderer::RenderRect(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
+{
+	glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
+		* glm::rotate(glm::mat4(1.0f), rotation, glm::vec3(0.0f, 0.0f, 1.0f));
+
+	RenderRect(transform, size, color);
+}
+
+void Boon::SceneRenderer::RenderRect(const glm::mat4& transform, const glm::vec2& size, const glm::vec4& color)
+{
+	glm::vec3 p0 = glm::vec3(transform * (m_QuadVertexPositions[0] * glm::vec4(size.x, size.y, 1.0f, 1.0f)));
+	glm::vec3 p1 = glm::vec3(transform * (m_QuadVertexPositions[1] * glm::vec4(size.x, size.y, 1.0f, 1.0f)));
+	glm::vec3 p2 = glm::vec3(transform * (m_QuadVertexPositions[2] * glm::vec4(size.x, size.y, 1.0f, 1.0f)));
+	glm::vec3 p3 = glm::vec3(transform * (m_QuadVertexPositions[3] * glm::vec4(size.x, size.y, 1.0f, 1.0f)));
+
+	RenderLine(p0, p1, color);
+	RenderLine(p1, p2, color);
+	RenderLine(p2, p3, color);
+	RenderLine(p3, p0, color);
+}
+
+void Boon::SceneRenderer::RenderPolygon(const std::vector<glm::vec3>& positions, const glm::vec4& color)
+{
+	if (positions.size() < 2)
+		return;
+
+	for (size_t i = 0; i < positions.size() - 1; ++i)
+	{
+		RenderLine(positions[i], positions[i + 1], color);
+	}
+
+	RenderLine(positions.back(), positions.front(), color);
 }
 
 void Boon::SceneRenderer::BeginScene(Camera* camera, TransformComponent* cameraTransform)

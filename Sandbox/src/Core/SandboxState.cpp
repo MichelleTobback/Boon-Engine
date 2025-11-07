@@ -13,6 +13,7 @@
 #include <Component/TransformComponent.h>
 #include <Component/SpriteRendererComponent.h>
 #include <Component/SpriteAnimatorComponent.h>
+#include <Component/BoxCollider2D.h>
 
 #include <Core/Application.h>
 #include <Core/ServiceLocator.h>
@@ -60,6 +61,8 @@ Scene& CreateScene(const std::string& name, float playPosX, float playerPosY)
 	animator.Atlas = Assets::GetSpriteAtlas(sprite.SpriteAtlasHandle);
 	animator.pRenderer = &sprite;
 	player.AddComponent<PlayerController>();
+	BoxCollider2D& col = player.AddComponent<BoxCollider2D>();
+	col.Size = { 0.8f, 1.f };
 
 	sceneManager.SetActiveScene(scene.GetID());
 

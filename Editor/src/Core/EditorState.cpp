@@ -23,6 +23,7 @@
 #include <Component/CameraComponent.h>
 #include <Component/SpriteRendererComponent.h>
 #include <Component/SpriteAnimatorComponent.h>
+#include <Component/BoxCollider2D.h>
 
 #include <Reflection/BClass.h>
 
@@ -60,6 +61,9 @@ void EditorState::OnEnter()
 	animator.Clip = 0;
 	animator.Atlas = atlas;
 	animator.pRenderer = &sprite;
+
+	BoxCollider2D& col = quad.AddComponent<BoxCollider2D>();
+	col.Size = { 0.8f, 1.f };
 
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	m_SceneChangedEvent = eventBus.Subscribe<SceneChangedEvent>([this](const SceneChangedEvent& e)

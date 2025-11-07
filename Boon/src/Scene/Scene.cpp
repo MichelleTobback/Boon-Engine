@@ -5,6 +5,14 @@
 #include "Component/ECSLifecycle.h"
 
 #include "Component/SpriteAnimatorComponent.h"
+#include "Component/Rigidbody2D.h"
+
+// Box2D
+#include "box2d/b2_world.h"
+#include "box2d/b2_body.h"
+#include "box2d/b2_fixture.h"
+#include "box2d/b2_polygon_shape.h"
+#include "box2d/b2_circle_shape.h"
 
 using namespace Boon;
 
@@ -16,6 +24,7 @@ Boon::Scene::Scene(const std::string& name)
 
 Boon::Scene::~Scene()
 {
+	delete m_PhysicsWorld;
 }
 
 GameObject Boon::Scene::Instantiate(const glm::vec3& pos)
@@ -46,12 +55,12 @@ GameObject Boon::Scene::Instantiate(UUID uuid, const glm::vec3& pos)
 
 void Boon::Scene::Awake()
 {
-	
+	OnPhysics2DStart();
 }
 
 void Boon::Scene::Sleep()
 {
-	
+	OnPhysics2DStop();
 }
 
 void Boon::Scene::Update()
@@ -84,6 +93,43 @@ void Boon::Scene::EndUpdate()
 			m_EntityMap.erase(uuid);
 		}
 		m_ObjectsPendingDestroy.pop();
+	}
+}
+
+void Boon::Scene::OnPhysics2DStart()
+{
+
+}
+
+void Boon::Scene::OnPhysics2DStop()
+{
+
+}
+
+void Boon::Scene::UpdatePhysics2D()
+{
+	// Physics
+	{
+		const float timeStep = Time::Get().GetFixedTimeStep(); // e.g. 1/60
+		const int32 velocityIterations = 8;
+		const int32 positionIterations = 3;
+
+		m_PhysicsWorld->Step(timeStep, velocityIterations, positionIterations);
+
+		// Retrieve transform from Box2D
+		auto view = m_Registry.view<Rigidbody2D>();
+		for (auto e : view)
+		{
+			GameObject gameObject = { e, this };
+			auto& transform = gameObject.GetComponent<TransformComponent>();
+			auto& rb2d = gameObject.GetComponent<Rigidbody2D>();
+
+			b2Body* body = (b2Body*)rb2d.RuntimeBody;
+			const auto& position = body->GetPosition();
+			transform.Translation.x = position.x;
+			transform.Translation.y = position.y;
+			transform.Rotation.z = body->GetAngle();
+		}
 	}
 }
 

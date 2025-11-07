@@ -5,6 +5,7 @@
 #include <Component/NameComponent.h>
 #include <Component/SpriteRendererComponent.h>
 #include <Component/SpriteAnimatorComponent.h>
+#include <Component/BoxCollider2D.h>
 
 #include <Asset/AssetLibrary.h>
 #include <Asset/SpriteAtlasAsset.h>
@@ -136,6 +137,15 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
             if (UI::DragFloat("Speed", value, 0.1f, 10.f, 0.1f))
             {
                 spriteComponent.GetClip().Speed = value;
+            }
+        });
+
+    RenderComponentNode<BoxCollider2D>("Box collider 2D", [this](BoxCollider2D& collider)
+        {
+            glm::vec2 size = collider.Size;
+            if (UI::DragFloat2("Size", size, 0.1f, 100.f))
+            {
+                collider.Size = size;
             }
         });
 }

@@ -15,6 +15,7 @@ namespace Boon
 	using SceneRegistry = entt::registry;
 	using SceneID = UUID;
 
+	class class b2World;;
 	struct ECSLifecycleSystem;
 	class GameObject;
 	class Scene final
@@ -38,6 +39,12 @@ namespace Boon
 		GameObject GetGameObject(UUID uuid);
 		void ForeachGameObject(const std::function<void(GameObject)>& fn);
 
+		template<typename... Components>
+		auto GetAllGameObjectsWith()
+		{
+			return m_Registry.view<Components...>();
+		}
+
 		void DestroyGameObject(GameObject object);
 
 		inline SceneRegistry& GetRegistry() { return m_Registry; }
@@ -50,6 +57,10 @@ namespace Boon
 
 		void EndUpdate();
 
+		void OnPhysics2DStart();
+		void OnPhysics2DStop();
+		void UpdatePhysics2D();
+
 		std::unordered_map<UUID, GameObjectID> m_EntityMap;
 		std::queue<UUID> m_ObjectsPendingDestroy{};
 		SceneRegistry m_Registry;
@@ -58,5 +69,6 @@ namespace Boon
 		SceneID m_ID;
 		std::string m_Name;
 		bool m_Running{ false };
+		b2World* m_PhysicsWorld = nullptr;
 	};
 }

@@ -13,6 +13,8 @@ add_executable(Editor
 
 target_link_libraries(Editor PRIVATE BoonEngine)
 
+target_compile_definitions(BoonEngine PRIVATE BOON_WITH_EDITOR)
+
 target_include_directories(Editor PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # =========================================
