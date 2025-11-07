@@ -60,6 +60,7 @@ compile_commands.json
 CPackConfig.cmake
 CPackSourceConfig.cmake
 out/
+[Bb]uid/
 
 # Visual Studio / Xcode CMake generators
 .vs/
