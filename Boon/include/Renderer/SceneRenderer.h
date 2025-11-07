@@ -37,21 +37,17 @@ namespace Boon
 		inline void SetContext(Scene* pScene) { m_pScene = pScene; m_ViewportDirty = true; }
 
 	private:
-		void StartBatch();
-		void NextBatch();
-		void Flush();
-
 		void RenderQuad(const glm::mat4& transform, const glm::vec4& color, int gameObjectHandle);
 		void RenderQuad(const glm::mat4& transform, const std::shared_ptr<Texture2D>& texture, float tilingFactor, const glm::vec4& color, int gameObjectHandle);
 		void RenderQuad(const glm::mat4& transform, const std::shared_ptr<Texture2D>& texture, float tilingFactor,
 			const glm::vec4& color, int gameObjectHandle, const glm::vec2& spriteTexCoord, const glm::vec2& spriteTexSize);
 
+		void RenderLine(const glm::vec3& p0, const glm::vec3& p1, const glm::vec4& color);
+		void RenderRect(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color);
+
 		void BeginScene(Camera* camera = nullptr, TransformComponent* cameraTransform = nullptr);
 		void EndScene();
 
-		std::shared_ptr<VertexInput> m_pQuadVertexInput{};
-		std::shared_ptr<VertexBuffer> m_pQuadVertexBuffer{};
-		std::shared_ptr<Shader> m_pShader{};
 		std::shared_ptr<UniformBuffer> m_pCameraUniformBuffer{};
 		std::shared_ptr<Framebuffer> m_pOutputFB;
 		UBData::Camera m_CameraData{};
@@ -60,10 +56,30 @@ namespace Boon
 		std::array<std::shared_ptr<Texture2D>, s_MaxTextureSlots> m_TextureSlots;
 		uint32_t m_TextureSlotIndex = 1; // 0 = white texture
 
-		uint32_t m_QuadIndexCount{};
+		//quads
+		void StartBatch();
+		void NextBatch();
+		void Flush();
+
+		std::shared_ptr<Shader> m_pSpriteShader{};
+		std::shared_ptr<VertexInput> m_pQuadVertexInput{};
+		std::shared_ptr<VertexBuffer> m_pQuadVertexBuffer{};
 		QuadVertex* m_QuadVertexBufferBase{ nullptr };
 		QuadVertex* m_QuadVertexBufferPtr{ nullptr };
+		uint32_t m_QuadIndexCount{};
 		glm::vec4 m_QuadVertexPositions[4];
+
+		//lines
+		void StartLineBatch();
+		void NextLineBatch();
+		void FlushLines();
+
+		std::shared_ptr<Shader> m_pLinesShader{};
+		std::shared_ptr<VertexInput> m_LineVertexInput;
+		std::shared_ptr<VertexBuffer> m_LineVertexBuffer;
+		LineVertex* m_LineVertexBufferBase = nullptr;
+		LineVertex* m_LineVertexBufferPtr = nullptr;
+		uint32_t m_LineCount = 0;
 
 		Scene* m_pScene;
 

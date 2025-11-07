@@ -1,4 +1,4 @@
-#include "OpenGLApi.h"
+﻿#include "OpenGLApi.h"
 #include "Renderer/VertexInput.h"
 
 #include <glad/glad.h>
@@ -52,4 +52,12 @@ void Boon::OpenGLApi::DrawIndexed(const std::shared_ptr<VertexInput>& vertexInpu
     vertexInput->Bind();
     uint32_t count = indexCount ? indexCount : vertexInput->GetIndexBuffer()->GetCount();
     glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
+}
+
+void Boon::OpenGLApi::DrawLines(const std::shared_ptr<VertexInput>& vertexInput, uint32_t lineCount)
+{
+    vertexInput->Bind();
+    uint32_t count = lineCount ? lineCount * 2 : vertexInput->GetIndexBuffer()->GetCount();
+    glLineWidth(2.f);
+    glDrawArrays(GL_LINES, 0, count);
 }

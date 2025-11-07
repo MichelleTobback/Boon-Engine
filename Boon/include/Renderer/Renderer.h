@@ -21,6 +21,7 @@ namespace Boon
 		static void Clear();
 		
 		static void DrawIndexed(const std::shared_ptr<VertexInput>& vertexInput, uint32_t indexCount = 0);
+		static void DrawLines(const std::shared_ptr<VertexInput>& vertexInput, uint32_t lineCount = 0);
 
 	private:
 		Renderer() = delete;

@@ -33,6 +33,7 @@ namespace Boon
 		virtual void Clear() = 0;
 		
 		virtual void DrawIndexed(const std::shared_ptr<VertexInput>& vertexInput, uint32_t indexCount = 0) = 0;
+		virtual void DrawLines(const std::shared_ptr<VertexInput>& vertexInput, uint32_t lineCount) = 0;
 
 		static std::unique_ptr<BaseRenderAPI> Create();
 

@@ -59,6 +59,7 @@ std::unique_ptr<Boon::ShaderAssetLoader> Boon::ShaderAssetLoader::Create()
 bool Boon::ShaderAssetLoader::ReadShaderFile(const std::string& filepath, std::string& vert, std::string& frag)
 {
     std::ifstream in(filepath, std::ios::in);
+
     if (!in)
         return false;
 

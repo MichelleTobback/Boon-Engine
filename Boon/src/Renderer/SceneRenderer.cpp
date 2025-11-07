@@ -34,6 +34,7 @@ using namespace Boon;
 namespace Boon
 {
 	static const uint32_t s_MaxQuads = 20000;
+	static const uint32_t s_MaxLines = s_MaxQuads / 2;
 	static const uint32_t s_MaxVertices = s_MaxQuads * 4;
 	static const uint32_t s_MaxIndices = s_MaxQuads * 6;
 	static const uint32_t s_MaxTextureSlots = 32;
@@ -84,10 +85,26 @@ Boon::SceneRenderer::SceneRenderer(Scene* pScene, int viewportWidth, int viewpor
 	m_pQuadVertexInput->SetIndexBuffer(IndexBuffer::Create(quadIndices, s_MaxIndices));
 	delete[] quadIndices;
 
+	//shaders
 	AssetLibrary& assets{ ServiceLocator::Get<AssetLibrary>()};
-	AssetHandle quadHandle = assets.Load<ShaderAssetLoader>("shaders/Quad.glsl");
-	m_pShader = assets.GetAsset<ShaderAsset>(quadHandle);
 
+	AssetHandle lineShaderHandle = assets.Load<ShaderAssetLoader>("shaders/Line.glsl");
+	m_pLinesShader = assets.GetAsset<ShaderAsset>(lineShaderHandle);
+
+	AssetHandle quadHandle = assets.Load<ShaderAssetLoader>("shaders/Quad.glsl");
+	m_pSpriteShader = assets.GetAsset<ShaderAsset>(quadHandle);
+
+	//lines
+	m_LineVertexInput = VertexInput::Create();
+	m_LineVertexBuffer = VertexBuffer::Create(s_MaxVertices * sizeof(LineVertex));
+	m_LineVertexBuffer->SetLayout({
+		{ ShaderDataType::Float3, "a_Position"	},
+		{ ShaderDataType::Float4, "a_Color"		}
+	});
+	m_LineVertexInput->AddVertexBuffer(m_LineVertexBuffer);
+	m_LineVertexBufferBase = new LineVertex[s_MaxVertices];
+
+	//scene
 	m_pCameraUniformBuffer = UniformBuffer::Create<UBData::Camera>(0);
 
 	FramebufferDescriptor fbDesc;
@@ -104,6 +121,10 @@ Boon::SceneRenderer::SceneRenderer(Scene* pScene, int viewportWidth, int viewpor
 Boon::SceneRenderer::~SceneRenderer()
 {
 	delete[] m_QuadVertexBufferBase;
+	m_QuadVertexBufferBase = nullptr;
+
+	delete[] m_LineVertexBufferBase;
+	m_LineVertexBufferBase = nullptr;
 }
 
 void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTransform)
@@ -215,6 +236,35 @@ void Boon::SceneRenderer::RenderQuad(const glm::mat4& transform, const std::shar
 	m_QuadIndexCount += 6;
 }
 
+void Boon::SceneRenderer::RenderLine(const glm::vec3& p0, const glm::vec3& p1, const glm::vec4& color)
+{
+	if (m_LineCount >= s_MaxLines)
+		FlushLines();
+
+	m_LineVertexBufferPtr->Position = p0;
+	m_LineVertexBufferPtr->Color = color;
+	m_LineVertexBufferPtr++;
+
+	m_LineVertexBufferPtr->Position = p1;
+	m_LineVertexBufferPtr->Color = color;
+	m_LineVertexBufferPtr++;
+
+	m_LineCount++;
+}
+
+void Boon::SceneRenderer::RenderRect(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
+{
+	glm::vec3 p0 = position + glm::vec3(m_QuadVertexPositions[0]) * glm::vec3(size.x, size.y, 1.f);
+	glm::vec3 p1 = position + glm::vec3(m_QuadVertexPositions[1]) * glm::vec3(size.x, size.y, 1.f);
+	glm::vec3 p2 = position + glm::vec3(m_QuadVertexPositions[2]) * glm::vec3(size.x, size.y, 1.f);
+	glm::vec3 p3 = position + glm::vec3(m_QuadVertexPositions[3]) * glm::vec3(size.x, size.y, 1.f);
+
+	RenderLine(p0, p1, color);
+	RenderLine(p1, p2, color);
+	RenderLine(p2, p3, color);
+	RenderLine(p3, p0, color);
+}
+
 void Boon::SceneRenderer::BeginScene(Camera* camera, TransformComponent* cameraTransform)
 {
 	Scene* pScene = m_pScene;
@@ -250,11 +300,13 @@ void Boon::SceneRenderer::BeginScene(Camera* camera, TransformComponent* cameraT
 	m_pOutputFB->ClearAttachment(1, -1);
 
 	StartBatch();
+	StartLineBatch();
 }
 
 void Boon::SceneRenderer::EndScene()
 {
 	Flush();
+	FlushLines();
 
 	m_pOutputFB->Unbind();
 
@@ -274,6 +326,30 @@ void Boon::SceneRenderer::EndScene()
 	}
 }
 
+void Boon::SceneRenderer::StartLineBatch()
+{
+	m_LineCount = 0;
+	m_LineVertexBufferPtr = m_LineVertexBufferBase;
+}
+
+void Boon::SceneRenderer::NextLineBatch()
+{
+	FlushLines();
+	StartLineBatch();
+}
+
+void Boon::SceneRenderer::FlushLines()
+{
+	if (!m_LineCount)
+		return;
+
+	uint32_t dataSize = (uint32_t)((uint8_t*)m_LineVertexBufferPtr - (uint8_t*)m_LineVertexBufferBase);
+	m_LineVertexBuffer->SetData(m_LineVertexBufferBase, dataSize);
+
+	m_pLinesShader->Bind();
+	Renderer::DrawLines(m_LineVertexInput, m_LineCount);
+}
+
 void Boon::SceneRenderer::StartBatch()
 {
 	m_QuadIndexCount = 0;
@@ -289,17 +365,17 @@ void Boon::SceneRenderer::NextBatch()
 
 void Boon::SceneRenderer::Flush()
 {
-	if (m_QuadIndexCount)
-	{
-		uint32_t dataSize = (uint32_t)((uint8_t*)m_QuadVertexBufferPtr - (uint8_t*)m_QuadVertexBufferBase);
-		m_pQuadVertexBuffer->SetData(m_QuadVertexBufferBase, dataSize);
+	if (!m_QuadIndexCount)
+		return;
 
-		for (uint32_t i = 0; i < m_TextureSlotIndex; i++)
-			m_TextureSlots[i]->Bind(i);
+	uint32_t dataSize = (uint32_t)((uint8_t*)m_QuadVertexBufferPtr - (uint8_t*)m_QuadVertexBufferBase);
+	m_pQuadVertexBuffer->SetData(m_QuadVertexBufferBase, dataSize);
 
-		m_pShader->Bind();
-		Renderer::DrawIndexed(m_pQuadVertexInput, m_QuadIndexCount);
-	}
+	for (uint32_t i = 0; i < m_TextureSlotIndex; i++)
+		m_TextureSlots[i]->Bind(i);
+
+	m_pSpriteShader->Bind();
+	Renderer::DrawIndexed(m_pQuadVertexInput, m_QuadIndexCount);
 }
 
 void Boon::SceneRenderer::SetViewport(int width, int height)

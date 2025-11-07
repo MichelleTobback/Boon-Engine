@@ -40,6 +40,11 @@ void Boon::Renderer::Clear()
 	s_pApi->Clear(); 
 }
 
+void Boon::Renderer::DrawLines(const std::shared_ptr<VertexInput>& vertexInput, uint32_t lineCount)
+{
+	s_pApi->DrawLines(vertexInput, lineCount);
+}
+
 void Boon::Renderer::DrawIndexed(const std::shared_ptr<VertexInput>& vertexInput, uint32_t indexCount) 
 { 
 	s_pApi->DrawIndexed(vertexInput, indexCount); 

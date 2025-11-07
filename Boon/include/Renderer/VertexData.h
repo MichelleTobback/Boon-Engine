@@ -14,4 +14,11 @@ namespace Boon
 
 		int GameObjectID{};
 	};
+
+	struct LineVertex
+	{
+		glm::vec3 Position{};
+		glm::vec4 Color{1.f, 1.f, 1.f, 1.f};
+
+	};
 }
