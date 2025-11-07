@@ -107,8 +107,8 @@ namespace Boon
 			return !(*this == other);
 		}
 
-		inline GameObject GetParent() const;
-		inline const std::vector<GameObject> GetChildren() const;
+		GameObject GetParent() const;
+		const std::vector<GameObject> GetChildren() const;
 
 		void AttachTo(GameObject parent, bool keepWorld = false);
 		void Detach(GameObject child);

@@ -33,6 +33,21 @@ namespace Boon
         m_Scenes.erase(id);
     }
 
+    void SceneManager::ReloadScene(SceneID id)
+    {
+        if (!IsLoaded(id))
+            return;
+
+        bool wasActive = (id == m_ActiveScene);
+
+        UnloadScene(id);
+
+        Scene& scene = CreateScene("");
+
+        if (wasActive)
+            SetActiveScene(scene.GetID());
+    }
+
     void SceneManager::SetActiveScene(SceneID id)
     {
         m_ActiveScene = id;

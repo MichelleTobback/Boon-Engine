@@ -52,6 +52,7 @@ Boon::SceneRenderer::SceneRenderer(Scene* pScene, int viewportWidth, int viewpor
 
 	m_QuadVertexBufferBase = new QuadVertex[s_MaxVertices];
 
+
 	uint32_t* quadIndices = new uint32_t[s_MaxIndices];
 
 	uint32_t offset = 0;
@@ -107,34 +108,7 @@ Boon::SceneRenderer::~SceneRenderer()
 
 void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTransform)
 {
-	if (!camera || !cameraTransform)
-	{
-		auto view = m_pScene->GetRegistry().view<TransformComponent, CameraComponent>();
-		for (auto entity : view)
-		{
-			auto [transform, cam] = view.get<TransformComponent, CameraComponent>(entity);
-
-			if (cam.Active)
-			{
-				camera = &cam.Camera;
-				cameraTransform = &transform;
-				break;
-			}
-		}
-	}
-
-	m_CameraData.ViewProjection = camera->GetProjection() * glm::inverse(cameraTransform->GetWorld());
-	m_pCameraUniformBuffer->SetValue(m_CameraData);
-
-	m_pOutputFB->Bind();
-
-	Renderer::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
-	Renderer::Clear();
-
-	// Clear our entity ID attachment to -1
-	m_pOutputFB->ClearAttachment(1, -1);
-
-	StartBatch();
+	BeginScene(camera, cameraTransform);
 
 	AssetLibrary& assetLib{ ServiceLocator::Get<AssetLibrary>() };
 
@@ -153,24 +127,7 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 			RenderQuad(transform.GetWorld(), sprite.Color, (int)gameObject);
 	}
 
-	Flush();
-
-	m_pOutputFB->Unbind();
-
-	if (m_ViewportDirty)
-	{
-		m_pOutputFB->Resize(m_ViewportWidth, m_ViewportHeight);
-
-		auto view = m_pScene->GetRegistry().view<CameraComponent>();
-		for (auto entity : view)
-		{
-			CameraComponent& cam = view.get<CameraComponent>(entity);
-
-			cam.Camera.SetAspectRatio(m_ViewportWidth, m_ViewportHeight);
-		}
-
-		m_ViewportDirty = false;
-	}
+	EndScene();
 }
 
 void Boon::SceneRenderer::RenderQuad(const glm::mat4& transform, const glm::vec4& color, int gameObjectHandle)
@@ -238,9 +195,15 @@ void Boon::SceneRenderer::RenderQuad(const glm::mat4& transform, const std::shar
 		m_TextureSlotIndex++;
 	}
 
+	float ppu = 32.0f;
+	glm::vec2 pixelSize = spriteTexSize * glm::vec2(texture->GetWidth(), texture->GetHeight());
+	glm::vec2 worldSize = pixelSize / ppu;
+
+	glm::mat4 scaledTransform = glm::scale(transform, glm::vec3(worldSize.x, worldSize.y, 1.0f));
+
 	for (size_t i = 0; i < quadVertexCount; i++)
 	{
-		m_QuadVertexBufferPtr->Position = transform * m_QuadVertexPositions[i];
+		m_QuadVertexBufferPtr->Position = scaledTransform * m_QuadVertexPositions[i];
 		m_QuadVertexBufferPtr->Color = color;
 		m_QuadVertexBufferPtr->TexCoord = texCoords[i];
 		m_QuadVertexBufferPtr->TexIndex = textureIndex;
@@ -250,6 +213,65 @@ void Boon::SceneRenderer::RenderQuad(const glm::mat4& transform, const std::shar
 	}
 
 	m_QuadIndexCount += 6;
+}
+
+void Boon::SceneRenderer::BeginScene(Camera* camera, TransformComponent* cameraTransform)
+{
+	Scene* pScene = m_pScene;
+
+	if (!camera || !cameraTransform)
+	{
+		auto view = m_pScene->GetRegistry().view<TransformComponent, CameraComponent>();
+		for (auto entity : view)
+		{
+			auto [transform, cam] = view.get<TransformComponent, CameraComponent>(entity);
+
+			if (cam.Active)
+			{
+				camera = &cam.Camera;
+				cameraTransform = &transform;
+				break;
+			}
+		}
+	}
+
+	if (camera && cameraTransform)
+	{
+		m_CameraData.ViewProjection = camera->GetProjection() * glm::inverse(cameraTransform->GetWorld());
+		m_pCameraUniformBuffer->SetValue(m_CameraData);
+	}
+
+	m_pOutputFB->Bind();
+
+	Renderer::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+	Renderer::Clear();
+
+	// Clear our entity ID attachment to -1
+	m_pOutputFB->ClearAttachment(1, -1);
+
+	StartBatch();
+}
+
+void Boon::SceneRenderer::EndScene()
+{
+	Flush();
+
+	m_pOutputFB->Unbind();
+
+	if (m_ViewportDirty)
+	{
+		m_pOutputFB->Resize(m_ViewportWidth, m_ViewportHeight);
+
+		auto view = m_pScene->GetRegistry().view<CameraComponent>();
+		for (auto entity : view)
+		{
+			CameraComponent& cam = view.get<CameraComponent>(entity);
+
+			cam.Camera.SetAspectRatio(m_ViewportWidth, m_ViewportHeight);
+		}
+
+		m_ViewportDirty = false;
+	}
 }
 
 void Boon::SceneRenderer::StartBatch()

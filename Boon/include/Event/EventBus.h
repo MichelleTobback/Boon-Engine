@@ -107,6 +107,7 @@ namespace Boon
 
         void ProcessQueueThread() 
         {
+            //return;
             while (!m_Stop) 
             {
                 auto job = m_EventQueue.Dequeue();

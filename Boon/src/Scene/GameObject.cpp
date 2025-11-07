@@ -66,12 +66,12 @@ void Boon::GameObject::Destroy()
 	m_pScene->DestroyGameObject(*this);
 }
 
-inline GameObject Boon::GameObject::GetParent() const
+GameObject Boon::GameObject::GetParent() const
 {
 	return GetComponent<SceneComponent>().GetParent();
 }
 
-inline const std::vector<GameObject> Boon::GameObject::GetChildren() const
+const std::vector<GameObject> Boon::GameObject::GetChildren() const
 {
 	return GetComponent<SceneComponent>().GetChildren();
 }

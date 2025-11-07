@@ -9,6 +9,7 @@
 #include <string>
 #include <cmath>
 #include <algorithm>
+#include <cstring>
 
 namespace Boon
 {
@@ -20,8 +21,13 @@ namespace Boon
         static constexpr int MAX_CONTROLLERS = 4;
 
         // -------- Key/Mouse State --------
-        uint64_t keyStates[(MAX_KEYS + 31) / 32]{};
-        uint64_t mouseStates[1]{};
+        uint64_t keyStates[(MAX_KEYS + 31) / 32]{};      // current keys down
+        uint64_t pressedKeys[(MAX_KEYS + 31) / 32]{};    // pressed this frame
+        uint64_t releasedKeys[(MAX_KEYS + 31) / 32]{};   // released this frame
+
+        uint64_t mouseStates[1]{};                       // current mouse buttons
+        uint64_t pressedMouse[1]{};                      // pressed this frame
+        uint64_t releasedMouse[1]{};                     // released this frame
 
         double mouseX = 0.0, mouseY = 0.0;
         double scrollX = 0.0, scrollY = 0.0;
@@ -38,13 +44,10 @@ namespace Boon
             float axisSensitivity = 1.0f;
         } controllers[MAX_CONTROLLERS];
 
-        float defaultDeadZone = 0.15f;
-        float defaultAxisSensitivity = 1.0f;
-
-        // -------- Constructor / Destructor --------
+        // -------- Constructor --------
         Impl()
         {
-            GLFWwindow* window = (GLFWwindow*)Application::Get().GetWindow().GetApiWindow();
+            GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetApiWindow());
             glfwSetKeyCallback(window, KeyCallbackStatic);
             glfwSetMouseButtonCallback(window, MouseButtonCallbackStatic);
             glfwSetCursorPosCallback(window, CursorPosCallbackStatic);
@@ -53,16 +56,29 @@ namespace Boon
 
         ~Impl() = default;
 
-        // -------- Main Update --------
+        // -------- Utility Bit Ops --------
+        inline void SetBit(uint64_t* arr, int index, bool value)
+        {
+            const uint64_t mask = 1ULL << (index % 64);
+            if (value) arr[index / 64] |= mask;
+            else       arr[index / 64] &= ~mask;
+        }
+
+        inline bool GetBit(const uint64_t* arr, int index) const
+        {
+            return (arr[index / 64] >> (index % 64)) & 1ULL;
+        }
+
+        // -------- Update --------
         void Update()
         {
-            // Update key and mouse states
-            for (int i = 0; i < MAX_KEYS; ++i)
-                UpdateKeyState(i, true);
-            for (int i = 0; i < MAX_MOUSE_BUTTONS; ++i)
-                UpdateMouseState(i, true);
+            // Clear transient press/release buffers
+            std::memset(pressedKeys, 0, sizeof(pressedKeys));
+            std::memset(releasedKeys, 0, sizeof(releasedKeys));
+            std::memset(pressedMouse, 0, sizeof(pressedMouse));
+            std::memset(releasedMouse, 0, sizeof(releasedMouse));
 
-            // Reset scroll
+            // Reset scroll delta
             scrollX = scrollY = 0.0;
 
             // Update controllers
@@ -70,22 +86,7 @@ namespace Boon
                 UpdateController(jid);
         }
 
-        // -------- State Helpers --------
-        void UpdateKeyState(int key, bool transition)
-        {
-            KeyState s = GetKeyState(key);
-            if (s == KeyState::Pressed) SetKeyState(key, KeyState::Held);
-            else if (s == KeyState::Released) SetKeyState(key, KeyState::Up);
-        }
-
-        void UpdateMouseState(int button, bool transition)
-        {
-            KeyState s = GetMouseState(button);
-            if (s == KeyState::Pressed) SetMouseState(button, KeyState::Held);
-            else if (s == KeyState::Released) SetMouseState(button, KeyState::Up);
-        }
-
-        // -------- Gamepad Update --------
+        // -------- Controller Update --------
         void UpdateController(int jid)
         {
             if (!glfwJoystickPresent(jid))
@@ -95,89 +96,148 @@ namespace Boon
             }
 
             controllers[jid].connected = true;
-
             GLFWgamepadstate state;
             if (glfwGetGamepadState(jid, &state))
             {
                 // Buttons
                 for (int b = 0; b <= Gamepad::ButtonLast; ++b)
                 {
-                    KeyState current = GetGamepadButtonState(jid, b);
-                    if (state.buttons[b] == GLFW_PRESS)
-                    {
-                        if (current == KeyState::Up || current == KeyState::Released)
-                            SetGamepadButtonState(jid, b, KeyState::Pressed);
-                        else
-                            SetGamepadButtonState(jid, b, KeyState::Held);
-                    }
+                    bool pressed = (state.buttons[b] == GLFW_PRESS);
+                    const int idx = b / 64;
+                    const uint64_t mask = 1ULL << (b % 64);
+                    if (pressed)
+                        controllers[jid].buttonStates[idx] |= mask;
                     else
-                    {
-                        if (current == KeyState::Pressed || current == KeyState::Held)
-                            SetGamepadButtonState(jid, b, KeyState::Released);
-                        else
-                            SetGamepadButtonState(jid, b, KeyState::Up);
-                    }
+                        controllers[jid].buttonStates[idx] &= ~mask;
                 }
 
-                // Axes (apply deadzone and sensitivity)
+                // Axes (apply deadzone + sensitivity)
                 for (int a = 0; a <= Gamepad::AxisLast; ++a)
                 {
                     float v = state.axes[a];
-                    float dz = controllers[jid].deadZone;
-                    float sens = controllers[jid].axisSensitivity;
+                    const float dz = controllers[jid].deadZone;
+                    const float sens = controllers[jid].axisSensitivity;
 
                     if (std::fabs(v) < dz)
                         v = 0.0f;
                     else
-                        v = (std::fabs(v) - dz) / (1.0f - dz) * (v > 0 ? 1 : -1);
+                        v = ((std::fabs(v) - dz) / (1.0f - dz)) * (v > 0 ? 1.0f : -1.0f);
 
                     controllers[jid].axes[a] = v * sens;
                 }
             }
         }
 
-        // -------- Bit Operations --------
+        // -------- Getters --------
         KeyState GetKeyState(KeyCode key) const
         {
-            int idx = key / 32;
-            int shift = (key % 32) * 2;
-            return (KeyState)((keyStates[idx] >> shift) & 0b11);
-        }
+            const int idx = key / 64;
+            const uint64_t mask = 1ULL << (key % 64);
 
-        void SetKeyState(KeyCode key, KeyState state)
-        {
-            int idx = key / 32;
-            int shift = (key % 32) * 2;
-            keyStates[idx] &= ~(0b11ULL << shift);
-            keyStates[idx] |= ((uint64_t)state << shift);
+            const bool down = keyStates[idx] & mask;
+            const bool pressed = pressedKeys[idx] & mask;
+            const bool released = releasedKeys[idx] & mask;
+
+            if (pressed)  return KeyState::Pressed;
+            if (released) return KeyState::Released;
+            if (down)     return KeyState::Held;
+            return KeyState::Up;
         }
 
         KeyState GetMouseState(MouseCode button) const
         {
-            return (KeyState)((mouseStates[0] >> (button * 2)) & 0b11);
-        }
+            const int idx = button / 64;
+            const uint64_t mask = 1ULL << (button % 64);
 
-        void SetMouseState(MouseCode button, KeyState state)
-        {
-            mouseStates[0] &= ~(0b11ULL << (button * 2));
-            mouseStates[0] |= ((uint64_t)state << (button * 2));
+            const bool down = mouseStates[idx] & mask;
+            const bool pressed = pressedMouse[idx] & mask;
+            const bool released = releasedMouse[idx] & mask;
+
+            if (pressed)  return KeyState::Pressed;
+            if (released) return KeyState::Released;
+            if (down)     return KeyState::Held;
+            return KeyState::Up;
         }
 
         KeyState GetGamepadButtonState(int jid, GamepadButtonCode button) const
         {
             const auto& c = controllers[jid];
-            int idx = button / 32;
-            int shift = (button % 32) * 2;
-            return (KeyState)((c.buttonStates[idx] >> shift) & 0b11);
+            const int idx = button / 64;
+            const uint64_t mask = 1ULL << (button % 64);
+            const bool pressed = (c.buttonStates[idx] & mask) != 0;
+            return pressed ? KeyState::Held : KeyState::Up;
         }
 
-        void SetGamepadButtonState(int jid, GamepadButtonCode button, KeyState state)
+        // -------- GLFW Callbacks --------
+        static void KeyCallbackStatic(GLFWwindow*, int key, int, int action, int)
         {
-            auto& c = controllers[jid];
-            int idx = button / 32;
-            int shift = (button % 32) * 2;
-            c.buttonStates[idx] &= ~(0b11ULL << shift);
-            c.buttonStates[idx] |= ((uint64_t)state << shift);
+            ServiceLocator::Get<Input>().m_pImpl->KeyCallback(key, action);
+        }
+
+        static void MouseButtonCallbackStatic(GLFWwindow*, int button, int action, int)
+        {
+            ServiceLocator::Get<Input>().m_pImpl->MouseButtonCallback(button, action);
+        }
+
+        static void CursorPosCallbackStatic(GLFWwindow*, double xpos, double ypos)
+        {
+            ServiceLocator::Get<Input>().m_pImpl->CursorPosCallback(xpos, ypos);
+        }
+
+        static void ScrollCallbackStatic(GLFWwindow*, double xoffset, double yoffset)
+        {
+            ServiceLocator::Get<Input>().m_pImpl->ScrollCallback(xoffset, yoffset);
+        }
+
+        // -------- Event Handlers --------
+        void KeyCallback(int key, int action)
+        {
+            if (key < 0 || key >= MAX_KEYS) return;
+
+            const int idx = key / 64;
+            const uint64_t mask = 1ULL << (key % 64);
+
+            if (action == GLFW_PRESS)
+            {
+                pressedKeys[idx] |= mask;
+                keyStates[idx] |= mask;
+            }
+            else if (action == GLFW_RELEASE)
+            {
+                releasedKeys[idx] |= mask;
+                keyStates[idx] &= ~mask;
+            }
+        }
+
+        void MouseButtonCallback(int button, int action)
+        {
+            if (button < 0 || button >= MAX_MOUSE_BUTTONS) return;
+
+            const int idx = button / 64;
+            const uint64_t mask = 1ULL << (button % 64);
+
+            if (action == GLFW_PRESS)
+            {
+                pressedMouse[idx] |= mask;
+                mouseStates[idx] |= mask;
+            }
+            else if (action == GLFW_RELEASE)
+            {
+                releasedMouse[idx] |= mask;
+                mouseStates[idx] &= ~mask;
+            }
+        }
+
+        void CursorPosCallback(double xpos, double ypos)
+        {
+            mouseX = xpos;
+            mouseY = ypos;
+        }
+
+        void ScrollCallback(double xoffset, double yoffset)
+        {
+            scrollX += xoffset;
+            scrollY += yoffset;
         }
 
         // -------- Action Queries --------
@@ -200,57 +260,10 @@ namespace Boon
                     return true;
             return false;
         }
-
-        // -------- Callbacks --------
-        static void KeyCallbackStatic(GLFWwindow*, int key, int, int action, int)
-        {
-            ServiceLocator::Get<Input>().m_pImpl->KeyCallback(key, action);
-        }
-
-        static void MouseButtonCallbackStatic(GLFWwindow*, int button, int action, int)
-        {
-            ServiceLocator::Get<Input>().m_pImpl->MouseButtonCallback(button, action);
-        }
-
-        static void CursorPosCallbackStatic(GLFWwindow*, double xpos, double ypos)
-        {
-            ServiceLocator::Get<Input>().m_pImpl->CursorPosCallback(xpos, ypos);
-        }
-
-        static void ScrollCallbackStatic(GLFWwindow*, double xoffset, double yoffset)
-        {
-            ServiceLocator::Get<Input>().m_pImpl->ScrollCallback(xoffset, yoffset);
-        }
-
-        void KeyCallback(int key, int action)
-        {
-            if (key < 0 || key >= MAX_KEYS) return;
-            if (action == GLFW_PRESS) SetKeyState(key, KeyState::Pressed);
-            else if (action == GLFW_RELEASE) SetKeyState(key, KeyState::Released);
-        }
-
-        void MouseButtonCallback(int button, int action)
-        {
-            if (button < 0 || button >= MAX_MOUSE_BUTTONS) return;
-            if (action == GLFW_PRESS) SetMouseState(button, KeyState::Pressed);
-            else if (action == GLFW_RELEASE) SetMouseState(button, KeyState::Released);
-        }
-
-        void CursorPosCallback(double xpos, double ypos)
-        {
-            mouseX = xpos;
-            mouseY = ypos;
-        }
-
-        void ScrollCallback(double xoffset, double yoffset)
-        {
-            scrollX += xoffset;
-            scrollY += yoffset;
-        }
     };
 
     // -------------------------------------------------------
-    // Public interface
+    // Public Interface
     // -------------------------------------------------------
     Input::Input() : m_pImpl(new Impl()) {}
     Input::~Input() { delete m_pImpl; }

@@ -89,6 +89,7 @@ namespace Boon
 
 		void Present()
 		{
+			//glFlush();
 			glfwSwapBuffers(m_pWindow);
 		}
 

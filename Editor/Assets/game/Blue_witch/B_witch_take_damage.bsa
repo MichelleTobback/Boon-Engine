@@ -1,0 +1,16 @@
+{
+  "uuid": 0,
+  "texture": "game/Blue_witch/B_witch_take_damage.png",
+  "sprites": {
+    "sprite_0": {"x": 0.0, "y": 0.0,      "w": 1.0, "h": 0.3333333, "id": 0, "time": 0.14},
+    "sprite_1": {"x": 0.0, "y": 0.3333333,"w": 1.0, "h": 0.3333333, "id": 1, "time": 0.14},
+    "sprite_2": {"x": 0.0, "y": 0.6666667,"w": 1.0, "h": 0.3333333, "id": 2, "time": 0.14}
+  },
+  "clips": {
+    "death": {
+      "frames": [0, 1, 2],
+      "speed": 1.0,
+      "looping": false
+    }
+  }
+}

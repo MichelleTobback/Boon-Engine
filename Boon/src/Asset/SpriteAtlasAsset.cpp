@@ -31,8 +31,13 @@ std::unique_ptr<Asset> Boon::SpriteAtlasAssetLoader::Load(const std::string& pat
     std::shared_ptr<SpriteAtlas> pInstance = std::make_shared<SpriteAtlas>();
 
     std::ifstream file(path);
+
+    if (!file)
+        return pResult;
+
     nlohmann::json j;
     file >> j;
+
 
     AssetHandle handle{j["uuid"] == 0 ? AssetHandle() : AssetHandle(j["uuid"]) };
 
@@ -48,7 +53,7 @@ std::unique_ptr<Asset> Boon::SpriteAtlasAssetLoader::Load(const std::string& pat
         pInstance->SetSpriteFrame(uv, entry["id"]);
     }
 
-    for (auto& [name, entry] : j["clips"].items())
+    for (auto& entry : j["clips"])
     {
         SpriteAnimClip clip;
         clip.Frames = entry["frames"].get<std::vector<int>>();

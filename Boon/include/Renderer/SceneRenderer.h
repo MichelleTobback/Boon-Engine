@@ -34,7 +34,7 @@ namespace Boon
 
 		void SetViewport(int width, int height);
 
-		inline void SetContext(Scene* pScene) { m_pScene = pScene; }
+		inline void SetContext(Scene* pScene) { m_pScene = pScene; m_ViewportDirty = true; }
 
 	private:
 		void StartBatch();
@@ -45,6 +45,9 @@ namespace Boon
 		void RenderQuad(const glm::mat4& transform, const std::shared_ptr<Texture2D>& texture, float tilingFactor, const glm::vec4& color, int gameObjectHandle);
 		void RenderQuad(const glm::mat4& transform, const std::shared_ptr<Texture2D>& texture, float tilingFactor,
 			const glm::vec4& color, int gameObjectHandle, const glm::vec2& spriteTexCoord, const glm::vec2& spriteTexSize);
+
+		void BeginScene(Camera* camera = nullptr, TransformComponent* cameraTransform = nullptr);
+		void EndScene();
 
 		std::shared_ptr<VertexInput> m_pQuadVertexInput{};
 		std::shared_ptr<VertexBuffer> m_pQuadVertexBuffer{};

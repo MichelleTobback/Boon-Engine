@@ -52,8 +52,9 @@ void EditorState::OnEnter()
 
 	GameObject quad = scene.Instantiate();
 	SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
-	sprite.SpriteAtlasHandle = assetLib.Load<SpriteAtlasAssetLoader>("game/Blue_witch/B_witch_idle.bsa");
+	sprite.SpriteAtlasHandle = assetLib.Load<SpriteAtlasAssetLoader>("game/Blue_witch/B_witch_atlas_compact.bsa");
 	sprite.Sprite = 0;
+
 	SpriteAnimatorComponent& animator = quad.AddComponent<SpriteAnimatorComponent>();
 	auto atlas = assetLib.GetAsset<SpriteAtlasAsset>(sprite.SpriteAtlasHandle);
 	animator.Clip = 0;

@@ -50,8 +50,8 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 		quit = m_pWindow->Update();
 		m_pStateMachine->Update();
 		input.Update();
-		time.Wait();
 		m_pWindow->Present();
+		time.Wait();
 	}
 	m_pStateMachine->Shutdown();
 
