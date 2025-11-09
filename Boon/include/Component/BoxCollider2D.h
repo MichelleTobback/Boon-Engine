@@ -1,3 +1,4 @@
+#pragma once
 #include <glm/glm.hpp>
 
 namespace Boon
@@ -8,7 +9,7 @@ namespace Boon
 
 		float Density = 1.f;
 		float Friction = 0.5f;
-		float Restitution = 0.f;
+		float Restitution = 0.96f;
 		float RestitutionThreshold = 0.5f;
 
 		void* RuntimeFixture = nullptr;

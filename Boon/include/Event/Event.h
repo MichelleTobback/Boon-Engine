@@ -9,7 +9,9 @@ namespace Boon
         Application = 1 << 0,
         Window = 1 << 1,
         Input = 1 << 2,
-        Scene = 1 << 3
+        Scene = 1 << 3,
+        Last = Scene,
+        Custom = Last << 1
     };
 
     // combine categories with | operator

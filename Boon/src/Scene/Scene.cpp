@@ -1,18 +1,15 @@
 #include "Scene/Scene.h"
 #include "Scene/GameObject.h"
+
 #include "Component/SceneComponent.h"
 #include "Component/NameComponent.h"
 #include "Component/ECSLifecycle.h"
 
-#include "Component/SpriteAnimatorComponent.h"
-#include "Component/Rigidbody2D.h"
+#include "Core/Time.h"
 
-// Box2D
-#include "box2d/b2_world.h"
-#include "box2d/b2_body.h"
-#include "box2d/b2_fixture.h"
-#include "box2d/b2_polygon_shape.h"
-#include "box2d/b2_circle_shape.h"
+#include "Physics/Physics2D.h"
+
+#include <iostream>
 
 using namespace Boon;
 
@@ -24,7 +21,7 @@ Boon::Scene::Scene(const std::string& name)
 
 Boon::Scene::~Scene()
 {
-	delete m_PhysicsWorld;
+	
 }
 
 GameObject Boon::Scene::Instantiate(const glm::vec3& pos)
@@ -55,33 +52,37 @@ GameObject Boon::Scene::Instantiate(UUID uuid, const glm::vec3& pos)
 
 void Boon::Scene::Awake()
 {
-	OnPhysics2DStart();
+	m_Running = true;
+	m_Physics2D.Begin(this);
 }
 
 void Boon::Scene::Sleep()
 {
-	OnPhysics2DStop();
+	m_Physics2D.End(this);
+	m_Running = false;
 }
 
 void Boon::Scene::Update()
 {
-	m_pECSlifecycle->UpdateAll();
+	OnUpdate();
+	LateUpdate();
 }
 
 void Boon::Scene::FixedUpdate()
 {
 	m_pECSlifecycle->FixedUpdateAll();
+	m_Physics2D.Step(this);
+}
+
+void Boon::Scene::OnUpdate()
+{
+	m_pECSlifecycle->UpdateAll();
 }
 
 void Boon::Scene::LateUpdate()
 {
 	m_pECSlifecycle->LateUpdateAll();
 
-	EndUpdate();
-}
-
-void Boon::Scene::EndUpdate()
-{
 	while (!m_ObjectsPendingDestroy.empty())
 	{
 		UUID uuid = m_ObjectsPendingDestroy.front();
@@ -93,43 +94,6 @@ void Boon::Scene::EndUpdate()
 			m_EntityMap.erase(uuid);
 		}
 		m_ObjectsPendingDestroy.pop();
-	}
-}
-
-void Boon::Scene::OnPhysics2DStart()
-{
-
-}
-
-void Boon::Scene::OnPhysics2DStop()
-{
-
-}
-
-void Boon::Scene::UpdatePhysics2D()
-{
-	// Physics
-	{
-		const float timeStep = Time::Get().GetFixedTimeStep(); // e.g. 1/60
-		const int32 velocityIterations = 8;
-		const int32 positionIterations = 3;
-
-		m_PhysicsWorld->Step(timeStep, velocityIterations, positionIterations);
-
-		// Retrieve transform from Box2D
-		auto view = m_Registry.view<Rigidbody2D>();
-		for (auto e : view)
-		{
-			GameObject gameObject = { e, this };
-			auto& transform = gameObject.GetComponent<TransformComponent>();
-			auto& rb2d = gameObject.GetComponent<Rigidbody2D>();
-
-			b2Body* body = (b2Body*)rb2d.RuntimeBody;
-			const auto& position = body->GetPosition();
-			transform.Translation.x = position.x;
-			transform.Translation.y = position.y;
-			transform.Rotation.z = body->GetAngle();
-		}
 	}
 }
 

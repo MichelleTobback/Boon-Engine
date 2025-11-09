@@ -161,8 +161,8 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 		{
 			auto [transform, collider] = group.get<TransformComponent, BoxCollider2D>(gameObject);
 			{
-				if (!collider.DrawDebug)
-					continue;
+				//if (!collider.DrawDebug)
+				//	continue;
 				RenderRect(transform.GetWorld(), collider.Size, glm::vec4(1.f, 1.f, 1.f, 1.f));
 			}
 		}

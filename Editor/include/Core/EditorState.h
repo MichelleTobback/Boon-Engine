@@ -57,12 +57,17 @@ namespace BoonEditor
 	private:
 		void OnRender();
 
+		void OnBeginPlay();
+		void OnStopPlay();
+
 		std::unique_ptr<EditorRenderer> m_PRenderer;
 		GameObjectContext m_SelectionContext{};
 		SceneContext m_SceneContext{};
 
 		std::vector<std::unique_ptr<EditorObject>> m_Objects;
 		std::vector<EditorPanel*> m_Panels;
+
+		EditorPlayState m_PlayState{ EditorPlayState::Edit };
 
 		EventListenerID m_SceneChangedEvent;
 	};

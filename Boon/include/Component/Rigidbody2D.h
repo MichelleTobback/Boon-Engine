@@ -1,3 +1,5 @@
+#pragma once
+#include <box2d/id.h>
 
 namespace Boon
 {
@@ -13,6 +15,6 @@ namespace Boon
 		BodyType Type = BodyType::Static;
 		bool FixedRotation = false;
 
-		void* RuntimeBody = nullptr;
+		b2BodyId RuntimeBody;
 	};
 }

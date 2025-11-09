@@ -28,9 +28,9 @@ namespace Boon
         // Called every frame:
         void Update();
         void FixedUpdate();
-        void LateUpdate();
 
     private:
+
         SceneID m_ActiveScene = UUID::Null;
         std::unordered_map<SceneID, std::unique_ptr<Scene>> m_Scenes;
     };

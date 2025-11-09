@@ -63,7 +63,8 @@ target_link_libraries(BoonEngine PUBLIC EnTT::EnTT)
 
 # Box2D
 add_subdirectory(external/box2d)
-target_link_libraries(BoonEngine PUBLIC box2d)
+target_include_directories(BoonEngine PUBLIC external/box2d/include)
+target_link_libraries(BoonEngine PRIVATE box2d)
 
 # OpenGL
 find_package(OpenGL REQUIRED)

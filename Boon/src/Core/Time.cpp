@@ -18,6 +18,10 @@ void Boon::Time::Step()
     m_LastTime = m_CurrentTime;
 
     m_Accumulator += m_DeltaTime;
+    const float maxAccumulatedTime = 0.5f;
+    if (m_Accumulator > maxAccumulatedTime)
+        m_Accumulator = maxAccumulatedTime;
+
 }
 
 bool Boon::Time::FixedStep()

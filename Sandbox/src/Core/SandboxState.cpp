@@ -102,21 +102,7 @@ void Sandbox::SandboxState::OnUpdate()
 		sceneManager.FixedUpdate();
 	}
 
-	static float timer = 0.0f;
-	static int frames = 0;
-
-	frames++;
-	timer += time.GetDeltaTime();
-
-	if (timer >= 1.0f)
-	{
-		std::cout << "FPS: " << frames << '\n';
-		frames = 0;
-		timer -= 1.0f;
-	}
-
 	sceneManager.Update();
-	sceneManager.LateUpdate();
 	
 	Input& input{ ServiceLocator::Get<Input>() };
 	if (input.IsKeyPressed(Key::Q))

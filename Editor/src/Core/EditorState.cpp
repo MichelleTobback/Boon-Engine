@@ -11,6 +11,7 @@
 
 #include <Core/Application.h>
 #include <Core/ServiceLocator.h>
+#include <Core/Time.h>
 
 #include <Event/EventBus.h>
 #include <Event/SceneEvents.h>
@@ -24,6 +25,7 @@
 #include <Component/SpriteRendererComponent.h>
 #include <Component/SpriteAnimatorComponent.h>
 #include <Component/BoxCollider2D.h>
+#include <Component/Rigidbody2D.h>
 
 #include <Reflection/BClass.h>
 
@@ -43,6 +45,9 @@ void EditorState::OnEnter()
 	Scene& scene = sceneManager.CreateScene("Game");
 
 	ViewportPanel& viewport = CreatePanel<ViewportPanel>("Viewport", &m_SceneContext, &m_SelectionContext);
+	viewport.GetToolbar()->BindOnPlayCallback(std::bind(&EditorState::OnBeginPlay, this));
+	viewport.GetToolbar()->BindOnStopCallback(std::bind(&EditorState::OnStopPlay, this));
+
 	CreatePanel<PropertiesPanel>(&m_SelectionContext);
 	CreatePanel<ScenePanel>(&m_SceneContext, &m_SelectionContext);
 
@@ -51,19 +56,37 @@ void EditorState::OnEnter()
 	m_SelectionContext.Set(camera);
 	m_SceneContext.Set(&scene);
 
-	GameObject quad = scene.Instantiate();
-	SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
-	sprite.SpriteAtlasHandle = assetLib.Load<SpriteAtlasAssetLoader>("game/Blue_witch/B_witch_atlas_compact.bsa");
-	sprite.Sprite = 0;
+	//player
+	{
+		GameObject quad = scene.Instantiate();
+		SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
+		sprite.SpriteAtlasHandle = assetLib.Load<SpriteAtlasAssetLoader>("game/Blue_witch/B_witch_atlas_compact.bsa");
+		sprite.Sprite = 0;
 
-	SpriteAnimatorComponent& animator = quad.AddComponent<SpriteAnimatorComponent>();
-	auto atlas = assetLib.GetAsset<SpriteAtlasAsset>(sprite.SpriteAtlasHandle);
-	animator.Clip = 0;
-	animator.Atlas = atlas;
-	animator.pRenderer = &sprite;
+		SpriteAnimatorComponent& animator = quad.AddComponent<SpriteAnimatorComponent>();
+		auto atlas = assetLib.GetAsset<SpriteAtlasAsset>(sprite.SpriteAtlasHandle);
+		animator.Clip = 0;
+		animator.Atlas = atlas;
+		animator.pRenderer = &sprite;
 
-	BoxCollider2D& col = quad.AddComponent<BoxCollider2D>();
-	col.Size = { 0.8f, 1.f };
+		BoxCollider2D& col = quad.AddComponent<BoxCollider2D>();
+		col.Size = { 0.8f, 1.f };
+		col.Friction = 0.1f;
+
+		Rigidbody2D& rb = quad.AddComponent<Rigidbody2D>();
+		rb.Type = Boon::Rigidbody2D::BodyType::Dynamic;
+	}
+
+	//floor
+	{
+		GameObject floor = scene.Instantiate({ 0.f, -1.f, 0.f });
+	
+		BoxCollider2D& floorCol = floor.AddComponent<BoxCollider2D>();
+		floorCol.Size = { 10.f, 0.2f };
+	
+		Rigidbody2D& floorRb = floor.AddComponent<Rigidbody2D>();
+		floorRb.Type = Boon::Rigidbody2D::BodyType::Static;
+	}
 
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	m_SceneChangedEvent = eventBus.Subscribe<SceneChangedEvent>([this](const SceneChangedEvent& e)
@@ -78,9 +101,21 @@ void EditorState::OnEnter()
 
 void EditorState::OnUpdate()
 {
+	Time& time = Boon::Time::Get();
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
-	sceneManager.Update();
-	sceneManager.LateUpdate();
+
+	switch (m_PlayState)
+	{
+	case EditorPlayState::Play:
+	{
+		while (time.FixedStep())
+		{
+			sceneManager.FixedUpdate();
+		}
+
+		sceneManager.Update();
+	}
+	}
 
 	for (auto& pObject : m_Objects)
 	{
@@ -106,4 +141,18 @@ void EditorState::OnRender()
 	}
 	
 	m_PRenderer->EndFrame();
+}
+
+void EditorState::OnBeginPlay()
+{
+	m_PlayState = EditorPlayState::Play;
+	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
+	sceneManager.GetActiveScene().Awake();
+}
+
+void EditorState::OnStopPlay()
+{
+	m_PlayState = EditorPlayState::Edit;
+	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
+	sceneManager.GetActiveScene().Sleep();
 }

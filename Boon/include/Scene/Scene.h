@@ -2,6 +2,7 @@
 #include <entt/entt.hpp>
 #include "Core/UUID.h"
 #include "GameObjectID.h"
+#include "Physics/PhysicsWorld2D.h"
 
 #include <queue>
 #include <glm/glm.hpp>
@@ -15,7 +16,6 @@ namespace Boon
 	using SceneRegistry = entt::registry;
 	using SceneID = UUID;
 
-	class class b2World;;
 	struct ECSLifecycleSystem;
 	class GameObject;
 	class Scene final
@@ -34,7 +34,6 @@ namespace Boon
 		void Sleep();
 		void Update();
 		void FixedUpdate();
-		void LateUpdate();
 
 		GameObject GetGameObject(UUID uuid);
 		void ForeachGameObject(const std::function<void(GameObject)>& fn);
@@ -55,20 +54,17 @@ namespace Boon
 		friend class SceneManager;
 		explicit Scene(const std::string& name);
 
-		void EndUpdate();
-
-		void OnPhysics2DStart();
-		void OnPhysics2DStop();
-		void UpdatePhysics2D();
+		void OnUpdate();
+		void LateUpdate();
 
 		std::unordered_map<UUID, GameObjectID> m_EntityMap;
 		std::queue<UUID> m_ObjectsPendingDestroy{};
 		SceneRegistry m_Registry;
 		std::unique_ptr<ECSLifecycleSystem> m_pECSlifecycle;
+		PhysicsWorld2D m_Physics2D;
 
 		SceneID m_ID;
 		std::string m_Name;
 		bool m_Running{ false };
-		b2World* m_PhysicsWorld = nullptr;
 	};
 }
