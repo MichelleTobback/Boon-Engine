@@ -43,6 +43,7 @@ namespace BoonEditor
 		inline Camera::ProjectionType GetMode() const { return m_Mode; }
 
 		void SetActive(bool active);
+		inline bool GetActive() const { return m_Active; }
 
 	private:
 		void UpdatePerspectiveController();

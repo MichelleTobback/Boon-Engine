@@ -70,5 +70,6 @@ namespace BoonEditor
 		EditorPlayState m_PlayState{ EditorPlayState::Edit };
 
 		EventListenerID m_SceneChangedEvent;
+		EventListenerID m_StateChangedEvent;
 	};
 }

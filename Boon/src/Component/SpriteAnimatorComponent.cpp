@@ -31,3 +31,14 @@ void Boon::SpriteAnimatorComponent::Update(GameObject)
 			m_Current = 0;
 	}
 }
+
+void Boon::SpriteAnimatorComponent::SetClip(int clip, bool restart)
+{
+	if (Clip != clip && restart)
+	{
+		m_Timer = 0.f;
+		m_Current = 0;
+	}
+
+	Clip = clip;
+}

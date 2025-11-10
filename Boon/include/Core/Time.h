@@ -23,6 +23,7 @@ namespace Boon
         inline const TimePoint& GetTime() const { return m_CurrentTime; }
         inline float GetFixedTimeStep() const { return m_FixedTimeStep; }
         inline void SetFixedTimeStep(float value) { m_FixedTimeStep = value; }
+        inline float Time::GetInterpolationAlpha() const { return m_InterpolationAlpha; }
 
     private:
         float m_DeltaTime{};            // seconds

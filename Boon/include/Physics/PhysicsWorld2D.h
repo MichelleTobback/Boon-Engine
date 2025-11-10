@@ -1,6 +1,11 @@
 #pragma once
+#include "Physics2DTypes.h"
+
 #include <box2d/id.h>
 
+#include <functional>
+
+struct b2ContactBeginTouchEvent;
 namespace Boon
 {
 	class Scene;
@@ -18,8 +23,13 @@ namespace Boon
 		void Begin(Scene* pScene);
 		void End(Scene* pScene);
 		void Step(Scene* pScene);
+		void Update(Scene* pScene);
+
+		bool Raycast(const Ray2D& ray, HitResult2D& result) const;
 
 	private:
+		void HandleEvents(Scene* pScene);
+
 		b2WorldId m_PhysicsWorldId = b2_nullWorldId;
 	};
 }

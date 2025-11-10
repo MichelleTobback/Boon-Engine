@@ -15,6 +15,7 @@
 
 #include <Event/EventBus.h>
 #include <Event/SceneEvents.h>
+#include "Event/EditorEvent.h"
 
 #include <Renderer/Renderer.h>
 
@@ -26,6 +27,8 @@
 #include <Component/SpriteAnimatorComponent.h>
 #include <Component/BoxCollider2D.h>
 #include <Component/Rigidbody2D.h>
+
+#include "Game/PlayerController.h"
 
 #include <Reflection/BClass.h>
 
@@ -52,7 +55,7 @@ void EditorState::OnEnter()
 	CreatePanel<ScenePanel>(&m_SceneContext, &m_SelectionContext);
 
 	GameObject camera = scene.Instantiate({ 0.f, 0.f, 1.f });
-	camera.AddComponent<CameraComponent>(Camera(2.f, 2.f, 0.1f, 1.f), false).Active = true;
+	camera.AddComponent<CameraComponent>(Camera(4.f, 2.f, 0.1f, 1.f), false).Active = true;
 	m_SelectionContext.Set(camera);
 	m_SceneContext.Set(&scene);
 
@@ -71,10 +74,11 @@ void EditorState::OnEnter()
 
 		BoxCollider2D& col = quad.AddComponent<BoxCollider2D>();
 		col.Size = { 0.8f, 1.f };
-		col.Friction = 0.1f;
 
 		Rigidbody2D& rb = quad.AddComponent<Rigidbody2D>();
 		rb.Type = Boon::Rigidbody2D::BodyType::Dynamic;
+
+		quad.AddComponent<PlayerController>();
 	}
 
 	//floor
@@ -96,6 +100,19 @@ void EditorState::OnEnter()
 			m_SceneContext.Set(&scene);
 		});
 
+	m_StateChangedEvent = eventBus.Subscribe<EditorPlayStateChangeEvent>([&viewport](const EditorPlayStateChangeEvent& e)
+		{
+			switch (e.State)
+			{
+			case EditorPlayState::Play:
+				viewport.GetCamera().SetActive(false);
+				break;
+			case EditorPlayState::Edit:
+				viewport.GetCamera().SetActive(true);
+				break;
+			}
+		});
+
 	sceneManager.SetActiveScene(scene.GetID());
 }
 
@@ -106,15 +123,15 @@ void EditorState::OnUpdate()
 
 	switch (m_PlayState)
 	{
-	case EditorPlayState::Play:
-	{
-		while (time.FixedStep())
+		case EditorPlayState::Play:
 		{
-			sceneManager.FixedUpdate();
-		}
+			while (time.FixedStep())
+			{
+				sceneManager.FixedUpdate();
+			}
 
-		sceneManager.Update();
-	}
+			sceneManager.Update();
+		}
 	}
 
 	for (auto& pObject : m_Objects)
@@ -129,6 +146,7 @@ void EditorState::OnExit()
 {
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	eventBus.Unsubscribe<SceneChangedEvent>(m_SceneChangedEvent);
+	eventBus.Unsubscribe<EditorPlayStateChangeEvent>(m_StateChangedEvent);
 }
 
 void EditorState::OnRender()
@@ -148,6 +166,9 @@ void EditorState::OnBeginPlay()
 	m_PlayState = EditorPlayState::Play;
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 	sceneManager.GetActiveScene().Awake();
+
+	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	eventBus.Post(EditorPlayStateChangeEvent(m_PlayState));
 }
 
 void EditorState::OnStopPlay()
@@ -155,4 +176,7 @@ void EditorState::OnStopPlay()
 	m_PlayState = EditorPlayState::Edit;
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 	sceneManager.GetActiveScene().Sleep();
+
+	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	eventBus.Post(EditorPlayStateChangeEvent(m_PlayState));
 }

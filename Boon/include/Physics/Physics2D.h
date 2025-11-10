@@ -1,6 +1,7 @@
 #pragma once
 #include "Component/Rigidbody2D.h"
 #include "Component/BoxCollider2D.h"
+#include "Physics2DTypes.h"
 #include <box2d/box2d.h>
 
 namespace Boon

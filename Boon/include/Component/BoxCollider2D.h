@@ -8,11 +8,10 @@ namespace Boon
 		glm::vec2 Size = {1.f, 1.f};
 
 		float Density = 1.f;
-		float Friction = 0.5f;
-		float Restitution = 0.96f;
-		float RestitutionThreshold = 0.5f;
+		float Friction = 0.f;
+		float Restitution = 0.f;
 
-		void* RuntimeFixture = nullptr;
+		bool IsTrigger = false;
 
 #ifdef BOON_WITH_EDITOR
 		bool DrawDebug{ true };

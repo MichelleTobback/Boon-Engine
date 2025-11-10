@@ -16,6 +16,8 @@ namespace Boon
 
 		void Update(GameObject);
 
+		void SetClip(int clip, bool restart = true);
+
 		int Clip;
 		std::shared_ptr<SpriteAtlas> Atlas;
 		SpriteRendererComponent* pRenderer;

@@ -1,4 +1,4 @@
-#include "Physics/PhysicsWorld2D.h"
+﻿#include "Physics/PhysicsWorld2D.h"
 #include "Physics/Physics2D.h"
 
 #include "Scene/GameObject.h"
@@ -26,6 +26,7 @@ void Boon::PhysicsWorld2D::Begin(Scene* pScene)
 
 	b2WorldDef worldDef = b2DefaultWorldDef();
 	worldDef.gravity = { 0.0f, -9.8f };
+	//worldDef.gravity = {};
 	m_PhysicsWorldId = b2CreateWorld(&worldDef);
 
 	auto view = pScene->GetAllGameObjectsWith<Rigidbody2D>();
@@ -39,6 +40,7 @@ void Boon::PhysicsWorld2D::Begin(Scene* pScene)
 		bodyDef.type = Rigidbody2DTypeToBox2DBody(rb2d.Type);
 		bodyDef.position = { transform.GetLocalPosition().x, transform.GetLocalPosition().y };
 		bodyDef.rotation = b2MakeRot(glm::radians(transform.GetWorldRotation().z));
+		bodyDef.userData = reinterpret_cast<void*>(static_cast<uintptr_t>(e));
 		rb2d.RuntimeBody = b2CreateBody(m_PhysicsWorldId, &bodyDef);
 
 		if (gameObject.HasComponent<BoxCollider2D>())
@@ -47,6 +49,7 @@ void Boon::PhysicsWorld2D::Begin(Scene* pScene)
 
 			b2ShapeDef shapeDef = b2DefaultShapeDef();
 			shapeDef.density = bc2d.Density;
+			shapeDef.isSensor = bc2d.IsTrigger;
 
 			// Set surface material properties
 			shapeDef.material.friction = bc2d.Friction;
@@ -78,30 +81,151 @@ void Boon::PhysicsWorld2D::Step(Scene* pScene)
 {
 	if (!b2World_IsValid(m_PhysicsWorldId))
 		return;
+
+	auto view = pScene->GetAllGameObjectsWith<Rigidbody2D, TransformComponent>();
+	for (auto e : view)
 	{
-		const float timeStep = Time::Get().GetFixedTimeStep(); // e.g. 1/60
-		const int32_t iterations = 1;
+		Rigidbody2D& rb = view.get<Rigidbody2D>(e);
+		auto& transform = view.get<TransformComponent>(e);
+		if (!b2Body_IsValid(rb.RuntimeBody))
+			continue;
 
-		b2World_Step(m_PhysicsWorldId, timeStep, iterations);
-
-		auto view = pScene->GetAllGameObjectsWith<Rigidbody2D>();
-		for (auto e : view)
+		if (rb.Type == Rigidbody2D::BodyType::Kinematic)
 		{
-			GameObject gameObject( e, pScene );
-			auto& transform = gameObject.GetComponent<TransformComponent>();
-			auto& rb2d = gameObject.GetComponent<Rigidbody2D>();
+			// For kinematic: push Transform -> Box2D
+			glm::vec3 pos = transform.GetWorldPosition();
+			glm::vec3 rot = transform.GetWorldEulerRotation();
 
-			b2BodyId bodyId = rb2d.RuntimeBody;
-			if (!b2Body_IsValid(bodyId)) continue;
+			b2Body_SetTransform(rb.RuntimeBody, { pos.x, pos.y }, b2MakeRot(glm::radians(rot.z)));
 
-			b2Vec2 pos = b2Body_GetPosition(bodyId);
-			float angle = b2Rot_GetAngle(b2Body_GetRotation(bodyId));
+			// Cache for interpolation
+			rb.PrevPosition = { pos.x, pos.y };
+			rb.PrevRotation = glm::radians(rot.z);
+		}
+		else
+		{
+			// For dynamic/static: pull from Box2D
+			b2Transform t = b2Body_GetTransform(rb.RuntimeBody);
+			rb.PrevPosition = { t.p.x, t.p.y };
+			rb.PrevRotation = b2Rot_GetAngle(t.q);
+		}
+	}
 
-			glm::vec3 transformPos = transform.GetWorldPosition();
-			transformPos.x = pos.x;
-			transformPos.y = pos.y;
-			transform.SetLocalPosition(transformPos);
-			transform.SetLocalRotation(glm::vec3(0.f, 0.f, glm::degrees(angle)));
+	const float timeStep = Time::Get().GetFixedTimeStep();
+	const int32_t iterations = 1;
+
+	b2World_Step(m_PhysicsWorldId, timeStep, iterations);
+
+	HandleEvents(pScene);
+
+	float alpha = Time::Get().GetInterpolationAlpha();
+	alpha = glm::clamp(alpha, 0.0f, 1.0f);
+
+	auto view2 = pScene->GetAllGameObjectsWith<Rigidbody2D, TransformComponent>();
+	for (auto e : view)
+	{
+		auto& rb = view2.get<Rigidbody2D>(e);
+		auto& transform = view2.get<TransformComponent>(e);
+
+		b2Transform t = b2Body_GetTransform(rb.RuntimeBody);
+
+		glm::vec2 interpPos = glm::mix(rb.PrevPosition, { t.p.x,t.p.y }, alpha);
+		float interpRot = glm::degrees(glm::mix(rb.PrevRotation, b2Rot_GetAngle(t.q), alpha));
+
+		glm::vec3 pos3 = transform.GetWorldPosition();
+		pos3.x = interpPos.x;
+		pos3.y = interpPos.y;
+
+		transform.SetLocalPosition(pos3);
+		transform.SetLocalRotation({ 0.f, 0.f, interpRot });
+	}
+}
+
+void Boon::PhysicsWorld2D::Update(Scene* pScene)
+{
+	if (!b2World_IsValid(m_PhysicsWorldId))
+		return;
+
+	float alpha = Time::Get().GetInterpolationAlpha();
+	alpha = glm::clamp(alpha, 0.0f, 1.0f);
+
+	auto view = pScene->GetAllGameObjectsWith<Rigidbody2D, TransformComponent>();
+	for (auto e : view)
+	{
+		auto& rb = view.get<Rigidbody2D>(e);
+		auto& transform = view.get<TransformComponent>(e);
+
+		b2Transform t = b2Body_GetTransform(rb.RuntimeBody);
+
+		glm::vec2 interpPos = glm::mix(rb.PrevPosition, { t.p.x,t.p.y }, alpha);
+		float interpRot = glm::degrees(glm::mix(rb.PrevRotation, b2Rot_GetAngle(t.q), alpha));
+
+		glm::vec3 pos3 = transform.GetWorldPosition();
+		pos3.x = interpPos.x;
+		pos3.y = interpPos.y;
+
+		transform.SetLocalPosition(pos3);
+		transform.SetLocalRotation({ 0.f, 0.f, interpRot });
+	}
+}
+
+bool Boon::PhysicsWorld2D::Raycast(const Ray2D& ray, HitResult2D& result) const
+{
+	b2RayCastInput b2Ray;
+	b2Ray.origin = { ray.Origin.x, ray.Origin.y };
+	b2Ray.translation = { ray.Origin.x + ray.Direction.x * ray.Distance, ray.Origin.y + ray.Direction.y * ray.Distance };
+	b2Ray.maxFraction = 1.0f;
+
+	b2QueryFilter filter{b2DefaultQueryFilter()};
+
+	b2RayResult out = b2World_CastRayClosest(m_PhysicsWorldId, b2Ray.origin, b2Ray.translation, filter);
+	if (out.hit)
+	{
+		result.point = { out.point.x, out.point.y };
+		result.normal = { out.normal.x, out.normal.y };
+
+		b2BodyId body = b2Shape_GetBody(out.shapeId);
+		result.gameObject = static_cast<GameObjectID>(reinterpret_cast<uintptr_t>(b2Body_GetUserData(body)));
+	}
+
+	return out.hit;
+}
+
+void Boon::PhysicsWorld2D::HandleEvents(Scene* pScene)
+{
+	b2SensorEvents sensorEvents = b2World_GetSensorEvents(m_PhysicsWorldId);
+
+	// Begin overlaps
+	for (int i = 0; i < sensorEvents.beginCount; ++i)
+	{
+		b2SensorBeginTouchEvent ev = sensorEvents.beginEvents[i];
+
+		b2BodyId bodyA = b2Shape_GetBody(ev.sensorShapeId);
+		b2BodyId bodyB = b2Shape_GetBody(ev.visitorShapeId);
+
+		GameObject objA = GameObject(static_cast<GameObjectID>(reinterpret_cast<uintptr_t>(b2Body_GetUserData(bodyA))), pScene);
+		GameObject objB = GameObject(static_cast<GameObjectID>(reinterpret_cast<uintptr_t>(b2Body_GetUserData(bodyB))), pScene);
+
+		if (objA && objB)
+		{
+			pScene->OnBeginOverlap(objA, objB);
+		}
+	}
+
+	// End overlaps
+	for (int i = 0; i < sensorEvents.endCount; ++i)
+	{
+		b2SensorEndTouchEvent ev = sensorEvents.endEvents[i];
+
+		b2BodyId bodyA = b2Shape_GetBody(ev.sensorShapeId);
+		b2BodyId bodyB = b2Shape_GetBody(ev.visitorShapeId);
+
+		GameObject objA = GameObject(static_cast<GameObjectID>(reinterpret_cast<uintptr_t>(b2Body_GetUserData(bodyA))), pScene);
+		GameObject objB = GameObject(static_cast<GameObjectID>(reinterpret_cast<uintptr_t>(b2Body_GetUserData(bodyB))), pScene);
+
+		if (objA && objB)
+		{
+			pScene->OnEndOverlap(objA, objB);
 		}
 	}
 }

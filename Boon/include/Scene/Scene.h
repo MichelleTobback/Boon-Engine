@@ -35,6 +35,8 @@ namespace Boon
 		void Update();
 		void FixedUpdate();
 
+		bool Raycast2D(const Ray2D& ray, HitResult2D& result) const;
+
 		GameObject GetGameObject(UUID uuid);
 		void ForeachGameObject(const std::function<void(GameObject)>& fn);
 
@@ -50,12 +52,16 @@ namespace Boon
 		inline SceneID GetID() const { return m_ID; }
 
 	private:
+		friend class PhysicsWorld2D;
 		friend class GameObject;
 		friend class SceneManager;
 		explicit Scene(const std::string& name);
 
 		void OnUpdate();
 		void LateUpdate();
+
+		void OnBeginOverlap(GameObject overlapped, GameObject other);
+		void OnEndOverlap(GameObject overlapped, GameObject other);
 
 		std::unordered_map<UUID, GameObjectID> m_EntityMap;
 		std::queue<UUID> m_ObjectsPendingDestroy{};

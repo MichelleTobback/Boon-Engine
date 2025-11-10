@@ -29,6 +29,8 @@ namespace BoonEditor
 
 		inline ViewportToolbar* GetToolbar() const { return m_pToolbar.get(); }
 
+		inline EditorCamera& GetCamera() { return m_Camera; }
+
 	protected:
 		virtual void OnRenderUI() override;
 

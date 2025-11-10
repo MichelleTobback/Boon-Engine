@@ -91,6 +91,20 @@ namespace Boon
 			return m_pScene->m_Registry.any_of<T>(m_Handle);
 		}
 
+		template <typename T>
+		const T* TryGetComponentInParent() const
+		{
+			if (HasComponent<T>())
+				return &GetComponent<T>();
+
+			GameObject parent = GetParent();
+
+			if (!parent.IsValid())
+				return nullptr;
+
+			return parent.TryGetComponentInParent<T>();
+		}
+
 		void Destroy();
 
 		operator bool() const { return m_Handle != NullGameObject; }

@@ -20,6 +20,9 @@ BoonEditor::EditorCamera::~EditorCamera(){}
 
 void BoonEditor::EditorCamera::Update()
 {
+    if (!m_Active)
+        return;
+
     switch (m_Mode)
     {
     case Boon::Camera::ProjectionType::Orthographic:

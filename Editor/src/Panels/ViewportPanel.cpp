@@ -29,6 +29,7 @@ BoonEditor::ViewportPanel::ViewportPanel(const std::string& name, SceneContext* 
 
 BoonEditor::ViewportPanel::~ViewportPanel()
 {
+    
 }
 
 void BoonEditor::ViewportPanel::Update()
@@ -61,8 +62,10 @@ void BoonEditor::ViewportPanel::Update()
         }
 	}
 
-	//m_pRenderer->Render();
-	m_pRenderer->Render(&m_Camera.GetCamera(), &m_Camera.GetTransform());
+    if (m_Camera.GetActive())
+	    m_pRenderer->Render(&m_Camera.GetCamera(), &m_Camera.GetTransform());
+    else
+        m_pRenderer->Render();
 }
 
 void BoonEditor::ViewportPanel::OnRenderUI()

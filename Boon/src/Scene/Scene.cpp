@@ -76,6 +76,7 @@ void Boon::Scene::FixedUpdate()
 
 void Boon::Scene::OnUpdate()
 {
+	m_Physics2D.Update(this);
 	m_pECSlifecycle->UpdateAll();
 }
 
@@ -95,6 +96,21 @@ void Boon::Scene::LateUpdate()
 		}
 		m_ObjectsPendingDestroy.pop();
 	}
+}
+
+bool Boon::Scene::Raycast2D(const Ray2D& ray, HitResult2D& result) const
+{
+	return m_Physics2D.Raycast(ray, result);
+}
+
+void Boon::Scene::OnBeginOverlap(GameObject overlapped, GameObject other)
+{
+	m_pECSlifecycle->BeginOverlap(overlapped, other);
+}
+
+void Boon::Scene::OnEndOverlap(GameObject overlapped, GameObject other)
+{
+	m_pECSlifecycle->EndOverlap(overlapped, other);
 }
 
 GameObject Boon::Scene::GetGameObject(UUID uuid)

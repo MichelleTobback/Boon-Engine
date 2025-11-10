@@ -36,4 +36,20 @@ namespace Boon
     template<typename T>
     struct has_lateupdate<T, std::void_t<decltype(std::declval<T>().LateUpdate(std::declval<GameObject&>()))>>
         : std::true_type {};
+
+    // OnBeginOverlap(GameObject&, GameObject&)
+    template<typename T, typename = void>
+    struct has_onbeginoverlap : std::false_type {};
+
+    template<typename T>
+    struct has_onbeginoverlap<T, std::void_t<decltype(std::declval<T>().OnBeginOverlap(std::declval<GameObject&>(), std::declval<GameObject&>()))>>
+        : std::true_type {};
+
+    // OnEndOverlap(GameObject&, GameObject&)
+    template<typename T, typename = void>
+    struct has_onendoverlap : std::false_type {};
+
+    template<typename T>
+    struct has_onendoverlap<T, std::void_t<decltype(std::declval<T>().OnEndOverlap(std::declval<GameObject&>(), std::declval<GameObject&>()))>>
+        : std::true_type {};
 }

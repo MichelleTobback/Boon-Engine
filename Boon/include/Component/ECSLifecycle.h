@@ -13,6 +13,8 @@ namespace Boon
         static std::function<void(Scene&)> update;
         static std::function<void(Scene&)> fixedUpdate;
         static std::function<void(Scene&)> lateUpdate;
+        static std::function<void(GameObject&, GameObject&)> onBeginOverlap;
+        static std::function<void(GameObject&, GameObject&)> onEndOverlap;
 
         static void Init()
         {
@@ -51,6 +53,18 @@ namespace Boon
                         comp.LateUpdate(GameObject(entity, &scene));
                     }
                 };
+
+            if constexpr (has_onbeginoverlap<T>::value)
+                onBeginOverlap = [](GameObject& overlapped, GameObject& other)
+                {
+                    overlapped.GetComponent<T>().OnBeginOverlap(overlapped, other);
+                };
+
+            if constexpr (has_onendoverlap<T>::value)
+                onEndOverlap = [](GameObject& overlapped, GameObject& other)
+                {
+                    overlapped.GetComponent<T>().OnEndOverlap(overlapped, other);
+                };
         }
     };
 
@@ -58,6 +72,8 @@ namespace Boon
     template<typename T> std::function<void(Scene&)> ECSLifecycleCallbacks<T>::update;
     template<typename T> std::function<void(Scene&)> ECSLifecycleCallbacks<T>::fixedUpdate;
     template<typename T> std::function<void(Scene&)> ECSLifecycleCallbacks<T>::lateUpdate;
+    template<typename T> std::function<void(GameObject&, GameObject&)> ECSLifecycleCallbacks<T>::onBeginOverlap;
+    template<typename T> std::function<void(GameObject&, GameObject&)> ECSLifecycleCallbacks<T>::onEndOverlap;
 
 
     struct ECSLifecycleSystem
@@ -70,6 +86,8 @@ namespace Boon
             std::function<void(Scene&)> update;
             std::function<void(Scene&)> fixedUpdate;
             std::function<void(Scene&)> lateUpdate;
+            std::function<void(GameObject&, GameObject&)> onBeginOverlap;
+            std::function<void(GameObject&, GameObject&)> onEndOverlap;
         };
 
         std::unordered_map<std::type_index, Callbacks> map;
@@ -102,6 +120,8 @@ namespace Boon
             cb.update = ECSLifecycleCallbacks<T>::update;
             cb.fixedUpdate = ECSLifecycleCallbacks<T>::fixedUpdate;
             cb.lateUpdate = ECSLifecycleCallbacks<T>::lateUpdate;
+            cb.onBeginOverlap = ECSLifecycleCallbacks<T>::onBeginOverlap;
+            cb.onEndOverlap = ECSLifecycleCallbacks<T>::onEndOverlap;
 
             map.emplace(typeid(T), cb);
 
@@ -121,5 +141,15 @@ namespace Boon
         void UpdateAll() { for (auto& [_, cb] : map) if (cb.update)      cb.update(scene); }
         void FixedUpdateAll() { for (auto& [_, cb] : map) if (cb.fixedUpdate) cb.fixedUpdate(scene); }
         void LateUpdateAll() { for (auto& [_, cb] : map) if (cb.lateUpdate)  cb.lateUpdate(scene); }
+        void BeginOverlap(GameObject overlapped, GameObject other) 
+        { 
+            for (auto& [_, cb] : map) if (cb.onBeginOverlap) 
+                cb.onBeginOverlap(overlapped, other); 
+        }
+        void EndOverlap(GameObject overlapped, GameObject other)
+        {
+            for (auto& [_, cb] : map) if (cb.onEndOverlap) 
+                cb.onEndOverlap(overlapped, other);
+        }
     };
 }
