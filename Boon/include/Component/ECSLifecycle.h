@@ -57,13 +57,15 @@ namespace Boon
             if constexpr (has_onbeginoverlap<T>::value)
                 onBeginOverlap = [](GameObject& overlapped, GameObject& other)
                 {
-                    overlapped.GetComponent<T>().OnBeginOverlap(overlapped, other);
+                    if (overlapped.HasComponent<T>())
+                        overlapped.GetComponent<T>().OnBeginOverlap(overlapped, other);
                 };
 
             if constexpr (has_onendoverlap<T>::value)
                 onEndOverlap = [](GameObject& overlapped, GameObject& other)
                 {
-                    overlapped.GetComponent<T>().OnEndOverlap(overlapped, other);
+                    if (overlapped.HasComponent<T>())
+                        overlapped.GetComponent<T>().OnEndOverlap(overlapped, other);
                 };
         }
     };

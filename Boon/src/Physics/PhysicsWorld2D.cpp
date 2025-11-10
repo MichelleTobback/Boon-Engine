@@ -8,6 +8,8 @@
 
 #include "Core/Time.h"
 
+#include <iostream>
+
 using namespace Boon;
 
 Boon::PhysicsWorld2D::~PhysicsWorld2D()
@@ -50,6 +52,7 @@ void Boon::PhysicsWorld2D::Begin(Scene* pScene)
 			b2ShapeDef shapeDef = b2DefaultShapeDef();
 			shapeDef.density = bc2d.Density;
 			shapeDef.isSensor = bc2d.IsTrigger;
+			shapeDef.enableSensorEvents = true;
 
 			// Set surface material properties
 			shapeDef.material.friction = bc2d.Friction;
@@ -117,28 +120,6 @@ void Boon::PhysicsWorld2D::Step(Scene* pScene)
 	b2World_Step(m_PhysicsWorldId, timeStep, iterations);
 
 	HandleEvents(pScene);
-
-	float alpha = Time::Get().GetInterpolationAlpha();
-	alpha = glm::clamp(alpha, 0.0f, 1.0f);
-
-	auto view2 = pScene->GetAllGameObjectsWith<Rigidbody2D, TransformComponent>();
-	for (auto e : view)
-	{
-		auto& rb = view2.get<Rigidbody2D>(e);
-		auto& transform = view2.get<TransformComponent>(e);
-
-		b2Transform t = b2Body_GetTransform(rb.RuntimeBody);
-
-		glm::vec2 interpPos = glm::mix(rb.PrevPosition, { t.p.x,t.p.y }, alpha);
-		float interpRot = glm::degrees(glm::mix(rb.PrevRotation, b2Rot_GetAngle(t.q), alpha));
-
-		glm::vec3 pos3 = transform.GetWorldPosition();
-		pos3.x = interpPos.x;
-		pos3.y = interpPos.y;
-
-		transform.SetLocalPosition(pos3);
-		transform.SetLocalRotation({ 0.f, 0.f, interpRot });
-	}
 }
 
 void Boon::PhysicsWorld2D::Update(Scene* pScene)
@@ -209,6 +190,7 @@ void Boon::PhysicsWorld2D::HandleEvents(Scene* pScene)
 		if (objA && objB)
 		{
 			pScene->OnBeginOverlap(objA, objB);
+			pScene->OnBeginOverlap(objB, objA);
 		}
 	}
 
@@ -226,6 +208,7 @@ void Boon::PhysicsWorld2D::HandleEvents(Scene* pScene)
 		if (objA && objB)
 		{
 			pScene->OnEndOverlap(objA, objB);
+			pScene->OnEndOverlap(objB, objA);
 		}
 	}
 }

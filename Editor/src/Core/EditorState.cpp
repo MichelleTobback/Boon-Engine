@@ -92,6 +92,18 @@ void EditorState::OnEnter()
 		floorRb.Type = Boon::Rigidbody2D::BodyType::Static;
 	}
 
+	//trigger
+	{
+		GameObject trigger = scene.Instantiate({ -1.f, 0.f, 0.f });
+
+		BoxCollider2D& floorCol = trigger.AddComponent<BoxCollider2D>();
+		floorCol.Size = { 1.f, 1.f };
+		floorCol.IsTrigger = true;
+
+		Rigidbody2D& floorRb = trigger.AddComponent<Rigidbody2D>();
+		floorRb.Type = Boon::Rigidbody2D::BodyType::Static;
+	}
+
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	m_SceneChangedEvent = eventBus.Subscribe<SceneChangedEvent>([this](const SceneChangedEvent& e)
 		{

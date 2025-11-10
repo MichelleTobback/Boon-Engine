@@ -33,14 +33,8 @@ void PlayerController::Update(GameObject gameObject)
         gameObject.GetTransform().SetLocalScale(1.f, 1.f, 1.f);
     }
 
-    // Optional: vertical (top-down)
-    //if (input.IsKeyHeld(Key::W))
-    //    m_MoveInput.y = 1.0f;
-    //else if (input.IsKeyHeld(Key::S))
-    //    m_MoveInput.y = -1.0f;
-
     Rigidbody2D& rb = gameObject.GetComponent<Rigidbody2D>();
-    if (input.IsKeyPressed(Key::Space))
+    if (m_IsGrounded && input.IsKeyPressed(Key::Space))
     {
         rb.AddForce({ 0.0f, rb.GetMass() * 4.f }, Rigidbody2D::ForceMode::Impulse);
     }
@@ -48,8 +42,6 @@ void PlayerController::Update(GameObject gameObject)
     // Normalize
     if (glm::length(m_MoveInput) > 1.0f)
         m_MoveInput = glm::normalize(m_MoveInput);
-
-    // --- Animation switch (still fine to do here)
 
     SpriteAnimatorComponent& anim = gameObject.GetComponent<SpriteAnimatorComponent>();
     anim.SetClip((std::abs(rb.GetVelocity().x) > 0.001f || rb.GetVelocity().y >= 0.01f) ? 2 : 1);
@@ -83,6 +75,16 @@ void PlayerController::FixedUpdate(GameObject gameObject)
     }
 }
 
+void PlayerController::OnBeginOverlap(GameObject gameObject, GameObject other)
+{
+    std::cout << "Begin overlap\n";
+}
+
+void PlayerController::OnEndOverlap(GameObject gameObject, GameObject other)
+{
+    std::cout << "End overlap\n";
+}
+
 void PlayerController::CheckGrounded(GameObject gameObject)
 {
     Ray2D ray{};
@@ -92,5 +94,4 @@ void PlayerController::CheckGrounded(GameObject gameObject)
 
     HitResult2D result{};
     m_IsGrounded = gameObject.GetScene()->Raycast2D(ray, result);
-    std::cout << "IsGrounded " << m_IsGrounded << "\n";
 }

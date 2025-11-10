@@ -12,6 +12,9 @@ namespace Boon
         void Update(GameObject gameObject);
         void FixedUpdate(GameObject gameObject);
 
+        void OnBeginOverlap(GameObject gameObject, GameObject other);
+        void OnEndOverlap(GameObject gameObject, GameObject other);
+
         enum class Direction
         {
             Left, Right
