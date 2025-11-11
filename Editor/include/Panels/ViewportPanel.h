@@ -5,6 +5,8 @@
 
 #include "Core/EditorCamera.h"
 
+#include "DebugRenderer/EditorViewportSettings.h"
+
 #include <Scene/GameObject.h>
 
 #include <memory>
@@ -19,6 +21,7 @@ namespace Boon
 
 namespace BoonEditor
 {
+	class DebugRenderer;
 	class ViewportPanel final : public EditorPanel
 	{
 	public:
@@ -31,11 +34,15 @@ namespace BoonEditor
 
 		inline EditorCamera& GetCamera() { return m_Camera; }
 
+		inline EditorViewportSettings& GetSettings() { return m_Settings; }
+		inline const EditorViewportSettings& GetSettings() const { return m_Settings; }
+
 	protected:
 		virtual void OnRenderUI() override;
 
 	private:
 		void CameraSettings(float posX, float posY, float maxWidth);
+		void VisibilitySettings(float posX, float posY, float maxWidth);
 
 		std::unique_ptr<SceneRenderer> m_pRenderer;
 		EditorCamera m_Camera{0.f, 0.f};
@@ -48,5 +55,8 @@ namespace BoonEditor
 		SceneContext* m_pContext;
 		GameObjectContext* m_pSelectionContext{};
 		std::unique_ptr<ViewportToolbar> m_pToolbar{};
+		std::unique_ptr<DebugRenderer> m_pDebugRenderer{};
+
+		EditorViewportSettings m_Settings{};
 	};
 }

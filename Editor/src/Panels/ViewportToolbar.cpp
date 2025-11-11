@@ -20,6 +20,9 @@ BoonEditor::ViewportToolbar::ViewportToolbar(const std::string& name)
 
     handle = assetLib.Load<Texture2DAssetLoader>("Icons/CameraSettingIcon.png");
     m_pCameraIcon = assetLib.GetAsset<Texture2DAsset>(handle);
+
+    handle = assetLib.Load<Texture2DAssetLoader>("Icons/VisibilityButton.png");
+    m_pVisibilityIcon = assetLib.GetAsset<Texture2DAsset>(handle);
 }
 
 void BoonEditor::ViewportToolbar::OnRender(const glm::vec2& boundsMin, const glm::vec2& boundsMax)
@@ -75,7 +78,7 @@ void BoonEditor::ViewportToolbar::OnRender(const glm::vec2& boundsMin, const glm
     // RIGHT TOOLBAR (Camera Settings)
     //--------------------------------------------------------------
     {
-        const float numberOfButtons{ 1.f };
+        const float numberOfButtons{ 2.f };
         const float backgroundWidth{ spacing * (numberOfButtons + 2.f) + buttonSize * numberOfButtons + spacing * (numberOfButtons - 1.f) * 2.0f };
         const float toolbarX = boundsMax.x - backgroundWidth - edgeOffset * 2.f;
 
@@ -92,24 +95,30 @@ void BoonEditor::ViewportToolbar::OnRender(const glm::vec2& boundsMin, const glm
             ImGuiWindowFlags_NoScrollbar |
             ImGuiWindowFlags_NoScrollWithMouse);
 
-        bool cameraSetting = m_ActiveSetting == ViewportToolbarSetting::Camera;
-        if (cameraSetting)
-        {
-            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.3f, 0.5f, 1.0f, 1.0f)); // active color
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.4f, 0.6f, 1.0f, 1.0f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.2f, 0.4f, 0.9f, 1.0f));
-        }
+        auto drawSettingsButton = [this, buttonSize](const std::string& name, ViewportToolbarSetting toolbarSetting, Texture2D* pTexture)
+            {
+                bool buttonEnabled = m_ActiveSetting == toolbarSetting;
+                if (buttonEnabled)
+                {
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.3f, 0.5f, 1.0f, 1.0f)); // active color
+                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.4f, 0.6f, 1.0f, 1.0f));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.2f, 0.4f, 0.9f, 1.0f));
+                }
 
-        if (ImGui::ImageButton("##cambutton", (ImTextureID)(uint64_t)m_pCameraIcon->GetRendererID(), ImVec2(buttonSize, buttonSize)))
-        {
-            m_ActiveSetting = cameraSetting
-                ? ViewportToolbarSetting::None
-                : ViewportToolbarSetting::Camera;
-        }
+                if (ImGui::ImageButton(name.c_str(), (ImTextureID)(uint64_t)pTexture->GetRendererID(), ImVec2(buttonSize, buttonSize)))
+                {
+                    m_ActiveSetting = buttonEnabled
+                        ? ViewportToolbarSetting::None
+                        : toolbarSetting;
+                }
 
+                if (buttonEnabled)
+                    ImGui::PopStyleColor(3);
+            };
 
-        if (cameraSetting)
-            ImGui::PopStyleColor(3);
+        drawSettingsButton("##visibilitybutton", ViewportToolbarSetting::Visibility, m_pVisibilityIcon.get());
+        ImGui::SameLine();
+        drawSettingsButton("##camerabutton", ViewportToolbarSetting::Camera, m_pCameraIcon.get());
 
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Camera Settings");

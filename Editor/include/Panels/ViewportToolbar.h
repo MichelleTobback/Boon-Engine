@@ -15,7 +15,8 @@ namespace BoonEditor
 	enum class ViewportToolbarSetting
 	{
 		None = 0,
-		Camera = 1
+		Camera = 1,
+		Visibility
 	};
 
 	class ViewportToolbar final : public EditorPanel
@@ -55,5 +56,6 @@ namespace BoonEditor
 		std::shared_ptr<Texture2D> m_pPlayIcon;
 		std::shared_ptr<Texture2D> m_pStopIcon;
 		std::shared_ptr<Texture2D> m_pCameraIcon;
+		std::shared_ptr<Texture2D> m_pVisibilityIcon;
 	};
 }

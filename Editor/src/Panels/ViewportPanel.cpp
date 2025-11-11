@@ -1,6 +1,8 @@
 ﻿#include "Panels/ViewportPanel.h"
 #include "UI/UI.h"
 
+#include "DebugRenderer/DebugRenderer.h"
+
 #include <Renderer/SceneRenderer.h>
 #include <Renderer/Framebuffer.h>
 
@@ -19,12 +21,17 @@ BoonEditor::ViewportPanel::ViewportPanel(const std::string& name, SceneContext* 
 {
 	m_Camera.SetActive(true);
 	m_pRenderer = std::make_unique<SceneRenderer>(pContext->Get());
+    m_pDebugRenderer = std::make_unique<DebugRenderer>(pContext->Get(), m_pRenderer->GetOutputTarget());
+
     m_pToolbar = std::make_unique<ViewportToolbar>(std::string(name).append("toolbar"));
 
     pContext->AddOnContextChangedCallback([this](Scene* pScene)
         {
             m_pRenderer->SetContext(pScene);
+            m_pDebugRenderer->SetContext(pScene);
         });
+
+    m_Settings.DebugRenderLayers |= DebugRenderLayer::Disabled;
 }
 
 BoonEditor::ViewportPanel::~ViewportPanel()
@@ -66,6 +73,8 @@ void BoonEditor::ViewportPanel::Update()
 	    m_pRenderer->Render(&m_Camera.GetCamera(), &m_Camera.GetTransform());
     else
         m_pRenderer->Render();
+
+    m_pDebugRenderer->Render(m_Settings);
 }
 
 void BoonEditor::ViewportPanel::OnRenderUI()
@@ -120,6 +129,18 @@ void BoonEditor::ViewportPanel::OnRenderUI()
         float panelY = m_ViewportBounds[0].y + topMargin + toolbarHeight + panelGap;
 
         CameraSettings(panelX, panelY, panelWidth);
+    }
+    else if (m_pToolbar->GetActiveSetting() == ViewportToolbarSetting::Visibility)
+    {
+        const float panelWidth = 260.0f;
+        const float panelGap = 6.0f;
+        const float topMargin = 20.0f;
+        const float toolbarHeight = 36.0f;
+    
+        float panelX = maxBound.x - panelWidth - panelGap;
+        float panelY = m_ViewportBounds[0].y + topMargin + toolbarHeight + panelGap;
+    
+        VisibilitySettings(panelX, panelY, panelWidth);
     }
 
     ImGui::End();
@@ -185,6 +206,65 @@ void BoonEditor::ViewportPanel::CameraSettings(float posX, float posY, float max
     if (UI::DragFloat("far", value))
     {
         camera.SetFar(value);
+    }
+
+    ImGui::End();
+}
+
+void BoonEditor::ViewportPanel::VisibilitySettings(float posX, float posY, float maxWidth)
+{
+    ImVec2 panelPos = ImVec2(posX, posY);
+
+    ImGui::SetNextWindowPos(panelPos);
+    ImGui::SetNextWindowSizeConstraints(ImVec2(maxWidth, 0), ImVec2(maxWidth, FLT_MAX));
+    ImGui::SetNextWindowBgAlpha(0.55f);
+
+    ImGui::Begin("Visibility Toolbar", nullptr,
+        ImGuiWindowFlags_NoDecoration |
+        ImGuiWindowFlags_AlwaysAutoResize |
+        ImGuiWindowFlags_NoSavedSettings |
+        ImGuiWindowFlags_NoMove |
+        ImGuiWindowFlags_NoFocusOnAppearing |
+        ImGuiWindowFlags_NoNav);
+
+    ImGui::TextUnformatted("Visibility Settings");
+    ImGui::Separator();
+    ImGui::TextUnformatted("Layers");
+
+    bool isSet = !(m_Settings.DebugRenderLayers & DebugRenderLayer::Disabled);
+    if (UI::Checkbox("Enabled", isSet))
+    {
+        if (isSet)
+            m_Settings.DebugRenderLayers &= ~DebugRenderLayer::Disabled;
+        else
+            m_Settings.DebugRenderLayers |= DebugRenderLayer::Disabled;
+    }
+
+    isSet = m_Settings.DebugRenderLayers & DebugRenderLayer::Default;
+    if (UI::Checkbox("Default", isSet))
+    {
+        if (isSet)
+            m_Settings.DebugRenderLayers |= DebugRenderLayer::Default;
+        else
+            m_Settings.DebugRenderLayers &= ~DebugRenderLayer::Default;
+    }
+
+    isSet = m_Settings.DebugRenderLayers & DebugRenderLayer::Collision;
+    if (UI::Checkbox("Collision", isSet))
+    {
+        if (isSet)
+            m_Settings.DebugRenderLayers |= DebugRenderLayer::Collision;
+        else
+            m_Settings.DebugRenderLayers &= ~DebugRenderLayer::Collision;
+    }
+
+    isSet = m_Settings.DebugRenderLayers & DebugRenderLayer::Gizmos;
+    if (UI::Checkbox("Gizmos", isSet))
+    {
+        if (isSet)
+            m_Settings.DebugRenderLayers |= DebugRenderLayer::Gizmos;
+        else
+            m_Settings.DebugRenderLayers &= ~DebugRenderLayer::Gizmos;
     }
 
     ImGui::End();

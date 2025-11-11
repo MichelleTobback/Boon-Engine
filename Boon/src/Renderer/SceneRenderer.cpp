@@ -83,21 +83,6 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 		}
 	}
 
-#ifdef BOON_WITH_EDITOR
-	{
-		auto group = m_pScene->GetAllGameObjectsWith<TransformComponent, BoxCollider2D>();
-		for (auto gameObject : group)
-		{
-			auto [transform, collider] = group.get<TransformComponent, BoxCollider2D>(gameObject);
-			{
-				//if (!collider.DrawDebug)
-				//	continue;
-				m_pRenderer2D->SubmitRect(transform.GetWorld(), collider.Size, glm::vec4(1.f, 1.f, 1.f, 1.f));
-			}
-		}
-	}
-#endif // BOON_WITH_EDITOR
-
 	EndScene();
 }
 
