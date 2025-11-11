@@ -54,6 +54,13 @@ void Boon::OpenGLApi::DrawIndexed(const std::shared_ptr<VertexInput>& vertexInpu
     glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
 }
 
+void Boon::OpenGLApi::DrawArrays(const std::shared_ptr<VertexInput>& vertexInput, uint32_t indexCount)
+{
+    vertexInput->Bind();
+    uint32_t count = indexCount ? indexCount : vertexInput->GetIndexBuffer() ? vertexInput->GetIndexBuffer()->GetCount() : 0;
+    glDrawArrays(GL_TRIANGLES, 0, count);
+}
+
 void Boon::OpenGLApi::DrawLines(const std::shared_ptr<VertexInput>& vertexInput, uint32_t lineCount)
 {
     vertexInput->Bind();

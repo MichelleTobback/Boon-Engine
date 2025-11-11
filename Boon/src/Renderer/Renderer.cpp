@@ -49,3 +49,8 @@ void Boon::Renderer::DrawIndexed(const std::shared_ptr<VertexInput>& vertexInput
 { 
 	s_pApi->DrawIndexed(vertexInput, indexCount); 
 }
+
+void Boon::Renderer::DrawArrays(const std::shared_ptr<VertexInput>& vertexInput, uint32_t indexCount)
+{
+	s_pApi->DrawArrays(vertexInput, indexCount);
+}

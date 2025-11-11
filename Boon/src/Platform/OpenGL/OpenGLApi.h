@@ -26,5 +26,6 @@ namespace Boon
 
 		virtual void DrawIndexed(const std::shared_ptr<VertexInput>& vertexInput, uint32_t indexCount = 0) override;
 		virtual void DrawLines(const std::shared_ptr<VertexInput>& vertexInput, uint32_t lineCount) override;
+		virtual void DrawArrays(const std::shared_ptr<VertexInput>& vertexInput, uint32_t indexCount) override;
 	};
 }

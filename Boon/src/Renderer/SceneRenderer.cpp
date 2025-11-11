@@ -7,6 +7,7 @@
 #include "Renderer/Camera.h"
 #include "Renderer/Framebuffer.h"
 #include "Renderer/Texture.h"
+#include "Renderer/Renderer2D.h"
 
 #include "Scene/Scene.h"
 
@@ -35,79 +36,13 @@
 
 using namespace Boon;
 
-namespace Boon
-{
-	static const uint32_t s_MaxQuads = 20000;
-	static const uint32_t s_MaxLines = s_MaxQuads / 2;
-	static const uint32_t s_MaxVertices = s_MaxQuads * 4;
-	static const uint32_t s_MaxIndices = s_MaxQuads * 6;
-	static const uint32_t s_MaxTextureSlots = 32;
-}
-
 Boon::SceneRenderer::SceneRenderer(Scene* pScene, bool isSwapchainTarget)
 	: SceneRenderer{pScene, 1080, 720, isSwapchainTarget} {}
 
 Boon::SceneRenderer::SceneRenderer(Scene* pScene, int viewportWidth, int viewportHeight, bool isSwapchainTarget)
 	: m_pScene{pScene}, m_ViewportWidth{viewportWidth}, m_ViewportHeight{viewportHeight}
 {
-	m_QuadVertexPositions[0] = { -0.5f, -0.5f, 0.f, 1.f, };
-	m_QuadVertexPositions[1] = {  0.5f, -0.5f, 0.f, 1.f, };
-	m_QuadVertexPositions[2] = {  0.5f,  0.5f, 0.f, 1.f, };
-	m_QuadVertexPositions[3] = { -0.5f,  0.5f, 0.f, 1.f  };
-
-	m_QuadVertexBufferBase = new QuadVertex[s_MaxVertices];
-
-
-	uint32_t* quadIndices = new uint32_t[s_MaxIndices];
-
-	uint32_t offset = 0;
-	for (uint32_t i = 0; i < s_MaxIndices; i += 6)
-	{
-		quadIndices[i + 0] = offset + 0;
-		quadIndices[i + 1] = offset + 1;
-		quadIndices[i + 2] = offset + 2;
-
-		quadIndices[i + 3] = offset + 2;
-		quadIndices[i + 4] = offset + 3;
-		quadIndices[i + 5] = offset + 0;
-
-		offset += 4;
-	}
-
-	m_pQuadVertexInput = VertexInput::Create();
-
-	m_pQuadVertexBuffer = VertexBuffer::Create(s_MaxVertices * sizeof(QuadVertex));
-	m_pQuadVertexBuffer->SetLayout({
-		{ ShaderDataType::Float3, "a_Position"	   },
-		{ ShaderDataType::Float4, "a_Color"		   },
-		{ ShaderDataType::Float2, "a_TexCoord"     },
-		{ ShaderDataType::Float,  "a_TexIndex"     },
-		{ ShaderDataType::Float,  "a_TilingFactor" },
-		{ ShaderDataType::Int,	  "a_ID"		   }
-	});
-	m_pQuadVertexInput->AddVertexBuffer(m_pQuadVertexBuffer);
-	m_pQuadVertexInput->SetIndexBuffer(IndexBuffer::Create(quadIndices, s_MaxIndices));
-	delete[] quadIndices;
-
-	//shaders
-	AssetLibrary& assets{ ServiceLocator::Get<AssetLibrary>()};
-
-	AssetHandle lineShaderHandle = assets.Load<ShaderAssetLoader>("shaders/Line.glsl");
-	m_pLinesShader = assets.GetAsset<ShaderAsset>(lineShaderHandle);
-
-	AssetHandle quadHandle = assets.Load<ShaderAssetLoader>("shaders/Quad.glsl");
-	m_pSpriteShader = assets.GetAsset<ShaderAsset>(quadHandle);
-
-	//lines
-	m_LineVertexInput = VertexInput::Create();
-	m_LineVertexBuffer = VertexBuffer::Create(s_MaxVertices * sizeof(LineVertex));
-	m_LineVertexBuffer->SetLayout({
-		{ ShaderDataType::Float3, "a_Position"	},
-		{ ShaderDataType::Float4, "a_Color"		}
-	});
-	m_LineVertexInput->AddVertexBuffer(m_LineVertexBuffer);
-	m_LineVertexBufferBase = new LineVertex[s_MaxVertices];
-
+	
 	//scene
 	m_pCameraUniformBuffer = UniformBuffer::Create<UBData::Camera>(0);
 
@@ -118,17 +53,11 @@ Boon::SceneRenderer::SceneRenderer(Scene* pScene, int viewportWidth, int viewpor
 	fbDesc.SwapChainTarget = isSwapchainTarget;
 	m_pOutputFB = Framebuffer::Create(fbDesc);
 
-	m_TextureSlots[0] = Texture2D::Create(TextureDescriptor());
-	uint32_t whiteTextureData = 0xffffffff;
-	m_TextureSlots[0]->SetData(&whiteTextureData, sizeof(uint32_t));
+	m_pRenderer2D = std::make_unique<Renderer2D>();
 }
 Boon::SceneRenderer::~SceneRenderer()
 {
-	delete[] m_QuadVertexBufferBase;
-	m_QuadVertexBufferBase = nullptr;
-
-	delete[] m_LineVertexBufferBase;
-	m_LineVertexBufferBase = nullptr;
+	
 }
 
 void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTransform)
@@ -147,10 +76,10 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 			{
 				auto atlas = assetLib.GetAsset<SpriteAtlasAsset>(sprite.SpriteAtlasHandle);
 				const SpriteFrame& spriteUv = atlas->GetSpriteFrame(sprite.Sprite);
-				RenderQuad(transform.GetWorld(), atlas->GetTexture(), sprite.Tiling, sprite.Color, (int)gameObject, spriteUv.UV, spriteUv.Size);
+				m_pRenderer2D->SubmitQuad(transform.GetWorld(), atlas->GetTexture(), sprite.Tiling, sprite.Color, (int)gameObject, spriteUv.UV, spriteUv.Size);
 			}
 			else
-				RenderQuad(transform.GetWorld(), sprite.Color, (int)gameObject);
+				m_pRenderer2D->SubmitQuad(transform.GetWorld(), sprite.Color, (int)gameObject);
 		}
 	}
 
@@ -163,161 +92,13 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 			{
 				//if (!collider.DrawDebug)
 				//	continue;
-				RenderRect(transform.GetWorld(), collider.Size, glm::vec4(1.f, 1.f, 1.f, 1.f));
+				m_pRenderer2D->SubmitRect(transform.GetWorld(), collider.Size, glm::vec4(1.f, 1.f, 1.f, 1.f));
 			}
 		}
 	}
 #endif // BOON_WITH_EDITOR
 
 	EndScene();
-}
-
-void Boon::SceneRenderer::RenderQuad(const glm::mat4& transform, const glm::vec4& color, int gameObjectHandle)
-{
-	constexpr size_t quadVertexCount = 4;
-	const float textureIndex = 0.0f;
-	constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
-	const float tilingFactor = 1.0f;
-
-	if (m_QuadIndexCount >= s_MaxIndices)
-		NextBatch();
-
-	for (size_t i = 0; i < quadVertexCount; i++)
-	{
-		m_QuadVertexBufferPtr->Position = transform * m_QuadVertexPositions[i];
-		m_QuadVertexBufferPtr->Color = color;
-		m_QuadVertexBufferPtr->TexCoord = textureCoords[i];
-		m_QuadVertexBufferPtr->TexIndex = textureIndex;
-		m_QuadVertexBufferPtr->TilingFactor = tilingFactor;
-		m_QuadVertexBufferPtr->GameObjectID = gameObjectHandle;
-		m_QuadVertexBufferPtr++;
-	}
-
-	m_QuadIndexCount += 6;
-}
-
-void Boon::SceneRenderer::RenderQuad(const glm::mat4& transform, const std::shared_ptr<Texture2D>& texture, float tilingFactor, const glm::vec4& color, int gameObjectHandle)
-{
-	RenderQuad(transform, texture, tilingFactor, color, gameObjectHandle, { 0.f, 0.f }, { 1.f, 1.f });
-}
-
-void Boon::SceneRenderer::RenderQuad(const glm::mat4& transform, const std::shared_ptr<Texture2D>& texture, float tilingFactor, 
-	const glm::vec4& color, int gameObjectHandle, const glm::vec2& spriteTexCoord, const glm::vec2& spriteTexSize)
-{
-	constexpr size_t quadVertexCount = 4;
-
-	glm::vec2 texCoords[quadVertexCount] = {
-		{ spriteTexCoord.x,                    spriteTexCoord.y },                     // bottom-left
-		{ spriteTexCoord.x + spriteTexSize.x,  spriteTexCoord.y },                     // bottom-right
-		{ spriteTexCoord.x + spriteTexSize.x,  spriteTexCoord.y + spriteTexSize.y },   // top-right
-		{ spriteTexCoord.x,                    spriteTexCoord.y + spriteTexSize.y }    // top-left
-	};
-
-	if (m_QuadIndexCount >= s_MaxIndices)
-		NextBatch();
-
-	float textureIndex = 0.0f;
-	bool found = false;
-	for (uint32_t i = 1; i < m_TextureSlotIndex; i++)
-	{
-		if (m_TextureSlots[i]->GetRendererID() == texture->GetRendererID())
-		{
-			textureIndex = (float)i;
-			found = true;
-			break;
-		}
-	}
-	if (!found)
-	{
-		if (m_TextureSlotIndex >= s_MaxTextureSlots)
-			NextBatch();
-
-		textureIndex = (float)m_TextureSlotIndex;
-		m_TextureSlots[m_TextureSlotIndex] = texture;
-		m_TextureSlotIndex++;
-	}
-
-	float ppu = 32.0f;
-	glm::vec2 pixelSize = spriteTexSize * glm::vec2(texture->GetWidth(), texture->GetHeight());
-	glm::vec2 worldSize = pixelSize / ppu;
-
-	glm::mat4 scaledTransform = glm::scale(transform, glm::vec3(worldSize.x, worldSize.y, 1.0f));
-
-	for (size_t i = 0; i < quadVertexCount; i++)
-	{
-		m_QuadVertexBufferPtr->Position = scaledTransform * m_QuadVertexPositions[i];
-		m_QuadVertexBufferPtr->Color = color;
-		m_QuadVertexBufferPtr->TexCoord = texCoords[i];
-		m_QuadVertexBufferPtr->TexIndex = textureIndex;
-		m_QuadVertexBufferPtr->TilingFactor = tilingFactor;
-		m_QuadVertexBufferPtr->GameObjectID = gameObjectHandle;
-		m_QuadVertexBufferPtr++;
-	}
-
-	m_QuadIndexCount += 6;
-}
-
-void Boon::SceneRenderer::RenderLine(const glm::vec3& p0, const glm::vec3& p1, const glm::vec4& color)
-{
-	if (m_LineCount >= s_MaxLines)
-		FlushLines();
-
-	m_LineVertexBufferPtr->Position = p0;
-	m_LineVertexBufferPtr->Color = color;
-	m_LineVertexBufferPtr++;
-
-	m_LineVertexBufferPtr->Position = p1;
-	m_LineVertexBufferPtr->Color = color;
-	m_LineVertexBufferPtr++;
-
-	m_LineCount++;
-}
-
-void Boon::SceneRenderer::RenderRect(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
-{
-	glm::vec3 p0 = position + glm::vec3(m_QuadVertexPositions[0]) * glm::vec3(size.x, size.y, 1.f);
-	glm::vec3 p1 = position + glm::vec3(m_QuadVertexPositions[1]) * glm::vec3(size.x, size.y, 1.f);
-	glm::vec3 p2 = position + glm::vec3(m_QuadVertexPositions[2]) * glm::vec3(size.x, size.y, 1.f);
-	glm::vec3 p3 = position + glm::vec3(m_QuadVertexPositions[3]) * glm::vec3(size.x, size.y, 1.f);
-
-	RenderLine(p0, p1, color);
-	RenderLine(p1, p2, color);
-	RenderLine(p2, p3, color);
-	RenderLine(p3, p0, color);
-}
-
-void Boon::SceneRenderer::RenderRect(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
-{
-	glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-		* glm::rotate(glm::mat4(1.0f), rotation, glm::vec3(0.0f, 0.0f, 1.0f));
-
-	RenderRect(transform, size, color);
-}
-
-void Boon::SceneRenderer::RenderRect(const glm::mat4& transform, const glm::vec2& size, const glm::vec4& color)
-{
-	glm::vec3 p0 = glm::vec3(transform * (m_QuadVertexPositions[0] * glm::vec4(size.x, size.y, 1.0f, 1.0f)));
-	glm::vec3 p1 = glm::vec3(transform * (m_QuadVertexPositions[1] * glm::vec4(size.x, size.y, 1.0f, 1.0f)));
-	glm::vec3 p2 = glm::vec3(transform * (m_QuadVertexPositions[2] * glm::vec4(size.x, size.y, 1.0f, 1.0f)));
-	glm::vec3 p3 = glm::vec3(transform * (m_QuadVertexPositions[3] * glm::vec4(size.x, size.y, 1.0f, 1.0f)));
-
-	RenderLine(p0, p1, color);
-	RenderLine(p1, p2, color);
-	RenderLine(p2, p3, color);
-	RenderLine(p3, p0, color);
-}
-
-void Boon::SceneRenderer::RenderPolygon(const std::vector<glm::vec3>& positions, const glm::vec4& color)
-{
-	if (positions.size() < 2)
-		return;
-
-	for (size_t i = 0; i < positions.size() - 1; ++i)
-	{
-		RenderLine(positions[i], positions[i + 1], color);
-	}
-
-	RenderLine(positions.back(), positions.front(), color);
 }
 
 void Boon::SceneRenderer::BeginScene(Camera* camera, TransformComponent* cameraTransform)
@@ -354,14 +135,12 @@ void Boon::SceneRenderer::BeginScene(Camera* camera, TransformComponent* cameraT
 	// Clear our entity ID attachment to -1
 	m_pOutputFB->ClearAttachment(1, -1);
 
-	StartBatch();
-	StartLineBatch();
+	m_pRenderer2D->Begin();
 }
 
 void Boon::SceneRenderer::EndScene()
 {
-	Flush();
-	FlushLines();
+	m_pRenderer2D->End();
 
 	m_pOutputFB->Unbind();
 
@@ -379,58 +158,6 @@ void Boon::SceneRenderer::EndScene()
 
 		m_ViewportDirty = false;
 	}
-}
-
-void Boon::SceneRenderer::StartLineBatch()
-{
-	m_LineCount = 0;
-	m_LineVertexBufferPtr = m_LineVertexBufferBase;
-}
-
-void Boon::SceneRenderer::NextLineBatch()
-{
-	FlushLines();
-	StartLineBatch();
-}
-
-void Boon::SceneRenderer::FlushLines()
-{
-	if (!m_LineCount)
-		return;
-
-	uint32_t dataSize = (uint32_t)((uint8_t*)m_LineVertexBufferPtr - (uint8_t*)m_LineVertexBufferBase);
-	m_LineVertexBuffer->SetData(m_LineVertexBufferBase, dataSize);
-
-	m_pLinesShader->Bind();
-	Renderer::DrawLines(m_LineVertexInput, m_LineCount);
-}
-
-void Boon::SceneRenderer::StartBatch()
-{
-	m_QuadIndexCount = 0;
-	m_QuadVertexBufferPtr = m_QuadVertexBufferBase;
-	m_TextureSlotIndex = 1;
-}
-
-void Boon::SceneRenderer::NextBatch()
-{
-	Flush();
-	StartBatch();
-}
-
-void Boon::SceneRenderer::Flush()
-{
-	if (!m_QuadIndexCount)
-		return;
-
-	uint32_t dataSize = (uint32_t)((uint8_t*)m_QuadVertexBufferPtr - (uint8_t*)m_QuadVertexBufferBase);
-	m_pQuadVertexBuffer->SetData(m_QuadVertexBufferBase, dataSize);
-
-	for (uint32_t i = 0; i < m_TextureSlotIndex; i++)
-		m_TextureSlots[i]->Bind(i);
-
-	m_pSpriteShader->Bind();
-	Renderer::DrawIndexed(m_pQuadVertexInput, m_QuadIndexCount);
 }
 
 void Boon::SceneRenderer::SetViewport(int width, int height)
