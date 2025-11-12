@@ -5,17 +5,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # ---------------------------
-# 1) Add the Engine first
-# ---------------------------
-add_subdirectory(Boon)
-
-# ---------------------------
-# 2) Build the Generator
+# 1) Build the Generator
 # ---------------------------
 add_subdirectory(Boon/tools/BClassGenerator)
 
 # ---------------------------
-# 3) Reflection Code Generation
+# 2) Reflection Code Generation
 # ---------------------------
 
 # Directory to scan for components
@@ -44,6 +39,11 @@ add_custom_command(
 add_custom_target(GenerateReflection
     DEPENDS ${GENERATED_EDITOR} ${GENERATED_SANDBOX}
 )
+
+# ---------------------------
+# 3) Add the Engine
+# ---------------------------
+add_subdirectory(Boon)
 
 # ---------------------------
 # 4) Add Editor + Sandbox

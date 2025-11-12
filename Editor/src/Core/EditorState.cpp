@@ -134,7 +134,7 @@ void EditorState::OnEnter()
 			}
 		});
 
-	sceneManager.SetActiveScene(scene.GetID());
+	sceneManager.SetActiveScene(scene.GetID(), false);
 }
 
 void EditorState::OnUpdate()
@@ -150,10 +150,10 @@ void EditorState::OnUpdate()
 			{
 				sceneManager.FixedUpdate();
 			}
-
-			sceneManager.Update();
 		}
 	}
+
+	sceneManager.Update();
 
 	for (auto& pObject : m_Objects)
 	{
@@ -192,8 +192,6 @@ void EditorState::OnBeginPlay()
 	serializer.Copy(*m_pSelectedScene);
 	sceneManager.SetActiveScene(m_SceneContext.Get()->GetID());
 
-	sceneManager.GetActiveScene().Awake();
-
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	eventBus.Post(EditorPlayStateChangeEvent(m_PlayState));
 }
@@ -202,11 +200,10 @@ void EditorState::OnStopPlay()
 {
 	m_PlayState = EditorPlayState::Edit;
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
-	sceneManager.GetActiveScene().Sleep();
 
 	sceneManager.UnloadScene(m_SceneContext.Get()->GetID());
 	m_SceneContext.Set(m_pSelectedScene);
-	sceneManager.SetActiveScene(m_SceneContext.Get()->GetID());
+	sceneManager.SetActiveScene(m_SceneContext.Get()->GetID(), false);
 
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	eventBus.Post(EditorPlayStateChangeEvent(m_PlayState));

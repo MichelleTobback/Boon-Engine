@@ -48,9 +48,9 @@ namespace Boon
             SetActiveScene(scene.GetID());
     }
 
-    void SceneManager::SetActiveScene(SceneID id)
+    void SceneManager::SetActiveScene(SceneID id, bool setActive)
     {
-        if (HasActiveScene())
+        if (HasActiveScene() && GetActiveScene().m_Running)
             GetActiveScene().Sleep();
 
         m_ActiveScene = id;
@@ -58,7 +58,7 @@ namespace Boon
         EventBus& eventBus = ServiceLocator::Get<EventBus>();
         eventBus.Post(SceneChangedEvent(id));
 
-        if (HasActiveScene())
+        if (setActive && HasActiveScene())
             GetActiveScene().Awake();
     }
 
@@ -77,10 +77,8 @@ namespace Boon
 
     void SceneManager::Update()
     {
-        GetActiveScene().Update();
-
-        //for (auto& [id, scene] : m_Scenes)
-        //    scene->Update();
+        for (auto& [id, scene] : m_Scenes)
+            scene->Update();
     }
 
     void SceneManager::FixedUpdate()

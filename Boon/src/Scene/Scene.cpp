@@ -81,8 +81,12 @@ void Boon::Scene::Sleep()
 
 void Boon::Scene::Update()
 {
-	OnUpdate();
-	LateUpdate();
+	if (m_Running)
+	{
+		OnUpdate();
+		LateUpdate();
+	}
+	EndUpdate();
 }
 
 void Boon::Scene::FixedUpdate()
@@ -100,7 +104,10 @@ void Boon::Scene::OnUpdate()
 void Boon::Scene::LateUpdate()
 {
 	m_pECSlifecycle->LateUpdateAll();
+}
 
+void Boon::Scene::EndUpdate()
+{
 	while (!m_ObjectsPendingDestroy.empty())
 	{
 		UUID uuid = m_ObjectsPendingDestroy.front();

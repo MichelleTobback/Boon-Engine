@@ -63,6 +63,7 @@ namespace Boon
 
 		void OnUpdate();
 		void LateUpdate();
+		void EndUpdate();
 
 		void OnBeginOverlap(GameObject overlapped, GameObject other);
 		void OnEndOverlap(GameObject overlapped, GameObject other);

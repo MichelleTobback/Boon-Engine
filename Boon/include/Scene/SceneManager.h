@@ -18,7 +18,7 @@ namespace Boon
         void UnloadScene(SceneID id);
         void ReloadScene(SceneID id);
 
-        void SetActiveScene(SceneID id);
+        void SetActiveScene(SceneID id, bool setActive = true);
         Scene& GetActiveScene();
 
         std::vector<Scene*> GetLoadedScenes();
