@@ -5,18 +5,43 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 
 namespace fs = std::filesystem;
+
+static bool g_BoonMinimal = false;
 
 // ============================================================================
 // Reflection data
 // ============================================================================
-struct MetaKV { std::string key; std::string value; };
+struct MetaKV { 
+    std::string key; 
+    std::string value; 
+};
 
 struct Property {
     std::string type;                // textual C++ type as written
     std::string name;                // identifier
     std::vector<MetaKV> meta;        // property metadata
+
+    static bool ValidMeta(const std::string& meta)
+    {
+        static const std::unordered_set<std::string> minimalMeta{ 
+            "Replicated" 
+        };
+        static const std::unordered_set<std::string> fullMeta{ 
+            "Replicated", 
+            "RangeMin", 
+            "RangeMax", 
+            "Range", 
+            "Slider", 
+            "Name", 
+            "Category", 
+            "HideInInspector" 
+        };
+        const auto& active = g_BoonMinimal ? minimalMeta : fullMeta;
+        return active.find(meta) != active.end();
+    }
 };
 
 struct ReflectedClass {
@@ -25,6 +50,19 @@ struct ReflectedClass {
     std::string headerPath;          // normalized include path
     std::vector<MetaKV> classMeta;   // class-level metadata from BCLASS(...)
     std::vector<Property> properties;
+
+    static bool ValidMeta(const std::string& meta)
+    {
+        static const std::unordered_set<std::string> minimalMeta{ 
+        };
+        static const std::unordered_set<std::string> fullMeta{ 
+            "Name", 
+            "Category", 
+            "HideInInspector" 
+        };
+        const auto& active = g_BoonMinimal ? minimalMeta : fullMeta;
+        return active.find(meta) != active.end();
+    }
 };
 
 // ============================================================================
@@ -63,16 +101,21 @@ static std::string inferBTypeId(const std::string& rawType) {
     t.erase(std::remove_if(t.begin(), t.end(), [](unsigned char c) { return std::isspace(c); }), t.end());
 
     static const std::unordered_map<std::string, std::string> lut = {
-        {"int", "BTypeId::Int"},
-        {"float", "BTypeId::Float"},
-        {"double", "BTypeId::Double"},
-        {"bool", "BTypeId::Bool"},
-        {"char", "BTypeId::Char"},
+        {"int",         "BTypeId::Int"},
+        {"glm::ivec2",  "BTypeId::Int2"},
+        {"glm::ivec3",  "BTypeId::Int3"},
+        {"glm::ivec4",  "BTypeId::Int4"},
+
+        {"float",       "BTypeId::Float"},
+        {"glm::vec2",   "BTypeId::Float2"},
+        {"glm::vec3",   "BTypeId::Float3"},
+        {"glm::vec4",   "BTypeId::Float4"},
+
+        {"double",      "BTypeId::Double"},
+        {"bool",        "BTypeId::Bool"},
+        {"char",        "BTypeId::Char"},
         {"std::string", "BTypeId::String"},
-        {"glm::vec2", "BTypeId::Vec2"},
-        {"glm::vec3", "BTypeId::Vec3"},
-        {"glm::vec4", "BTypeId::Vec4"},
-        {"UUID", "BTypeId::UUID"}
+        {"UUID",        "BTypeId::UUID"}
     };
     auto it = lut.find(t);
     if (it != lut.end()) return it->second;
@@ -84,6 +127,7 @@ static std::string inferBTypeId(const std::string& rawType) {
 }
 
 // Parse metadata list inside (...) → key/value pairs
+template <typename T>
 static std::vector<MetaKV> parseMetadataList(const std::string& inside)
 {
     std::vector<MetaKV> out;
@@ -102,6 +146,7 @@ static std::vector<MetaKV> parseMetadataList(const std::string& inside)
             std::string key = (*it)[1].str();
             std::string value;
             if ((*it)[2].matched) value = (*it)[2].str();
+            if (!T::ValidMeta(key)) continue;
             if (key == "Range") continue; // handled
             out.push_back({ key, value });
         }
@@ -139,7 +184,7 @@ static std::vector<ReflectedClass> parseSourceFiles(const std::vector<std::strin
             while (std::regex_search(begin, end, m, classRe)) {
                 ReflectedClass cls;
                 cls.name = m[2].str();
-                cls.classMeta = parseMetadataList(m[1].str());
+                cls.classMeta = parseMetadataList<ReflectedClass>(m[1].str());
                 cls.headerPath = normalizePath(e.path());
                 cls.nsQualifiedName = detectNamespaceQualifiedName(content,
                     static_cast<size_t>(std::distance(content.cbegin(), m[0].first)),
@@ -150,7 +195,8 @@ static std::vector<ReflectedClass> parseSourceFiles(const std::vector<std::strin
                     Property p;
                     p.type = (*pit)[2].str();
                     p.name = (*pit)[3].str();
-                    p.meta = parseMetadataList((*pit)[1].str());
+                    p.meta = parseMetadataList<Property>((*pit)[1].str());
+
                     cls.properties.push_back(std::move(p));
                 }
 
@@ -240,21 +286,37 @@ static void emitGeneratedFile(const std::string& output, const std::vector<Refle
 // ============================================================================
 int main(int argc, char** argv)
 {
+    bool verbose = false;
+    const std::string usage =
+        "Usage: BClassGenerator [--minimal] <output.cpp> <includeDir1> [includeDir2 ...] [--verbose]\n";
+
     if (argc < 3) {
-        std::cout << "Usage: BClassGenerator <output.cpp> <includeDir1> [includeDir2 ...] [--verbose]\n";
+        std::cout << usage;
         return 1;
     }
 
-    bool verbose = false;
-    const std::string output = argv[1];
-    std::vector<std::string> includeDirs;
-    for (int i = 2; i < argc; ++i) {
-        std::string arg = argv[i];
-        if (arg == "--verbose") verbose = true;
-        else includeDirs.push_back(arg);
+    const std::string firstArg = argv[1];
+    int startIndex = 1;
+
+    if (firstArg == "--minimal") {
+        g_BoonMinimal = true;
+        startIndex++;
+        std::cout << "[BClassGenerator] Running in minimal mode\n";
     }
 
-    auto classes = parseSourceFiles(includeDirs, /*verbose*/verbose);
-    emitGeneratedFile(output, classes, /*verbose*/verbose);
+    std::vector<std::string> includeDirs;
+    bool verboseFlag = false;
+
+    const std::string output = argv[startIndex];
+    for (int i = startIndex + 1; i < argc; ++i) {
+        std::string arg = argv[i];
+        if (arg == "--verbose")
+            verboseFlag = true;
+        else
+            includeDirs.push_back(arg);
+    }
+
+    auto classes = parseSourceFiles(includeDirs, verboseFlag);
+    emitGeneratedFile(output, classes, verboseFlag);
     return 0;
 }

@@ -57,23 +57,6 @@ namespace Boon
 
         void SetFlag(FunctionFlags f) { flags |= f; }
 
-        inline void AddPropertyOffset(const char* propName,
-            const char* typeName,
-            std::size_t offset,
-            std::size_t size,
-            BTypeId typeId,
-            std::initializer_list<BPropertyMeta> metas = {})
-        {
-            BProperty p;
-            p.name = propName;
-            p.typeName = typeName;
-            p.offset = offset;
-            p.size = size;
-            p.typeId = typeId;
-            p.meta.assign(metas.begin(), metas.end());
-            properties.push_back(std::move(p));
-        }
-
         // quick helpers
         inline const BProperty* FindProperty(const char* propName) const {
             for (auto& p : properties) if (std::string_view(p.name) == propName) return &p;
@@ -114,13 +97,7 @@ namespace Boon
 
         inline const std::vector<BProperty>& GetProperties() const { return properties; }
         inline size_t GetPropertiesCount() const { return properties.size(); }
-
-        // metadata API
-        void AddMeta(const std::string& key, const std::string& value = "")
-        {
-            meta.push_back({ key, value });
-        }
-
+        
         bool HasMeta(const std::string& key) const
         {
             for (auto& m : meta)
@@ -138,6 +115,31 @@ namespace Boon
         }
 
     private:
+        friend struct _AutoRegisterAllClasses;
+
+        inline void AddPropertyOffset(const char* propName,
+            const char* typeName,
+            std::size_t offset,
+            std::size_t size,
+            BTypeId typeId,
+            std::initializer_list<BPropertyMeta> metas = {})
+        {
+            BProperty p;
+            p.name = propName;
+            p.typeName = typeName;
+            p.offset = offset;
+            p.size = size;
+            p.typeId = typeId;
+            p.meta.assign(metas.begin(), metas.end());
+            properties.push_back(std::move(p));
+        }
+
+        void AddMeta(const std::string& key, const std::string& value = "")
+        {
+            meta.push_back({ key, value });
+        }
+
+
         std::vector<BProperty> properties;
     };
 

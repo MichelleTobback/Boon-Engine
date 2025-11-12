@@ -3,7 +3,7 @@
 
 namespace Boon 
 {
-    BCLASS()
+    BCLASS(Name="Player controller", Category="Components")
     struct PlayerController
     {
     public:
@@ -23,10 +23,10 @@ namespace Boon
     private:
         void CheckGrounded(GameObject gameObject);
 
-        BPROPERTY(RangeMin = 0.1, RangeMax = 20.f)
+        BPROPERTY(Name="speed", Category = "movement", RangeMin = 0.1, RangeMax = 20.f)
         float m_MovementSpeed{ 10.f };
 
-        BPROPERTY(RangeMin = 0.1, RangeMax = 20.f)
+        BPROPERTY(Name = "jump force", Category="movement", RangeMin = 0.1, RangeMax = 20.f)
         float m_JumpForce{5.f};
 
         glm::vec3 m_PrevPosition{};

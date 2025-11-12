@@ -15,9 +15,13 @@ namespace Boon {
         Float,
         Bool,
         String,
-        Vec2,
-        Vec3,
-        Vec4,
+        Float2,
+        Float3,
+        Float4,
+        Mat4,
+        Int2,
+        Int3,
+        Int4,
         AssetRef,
         UserDefined
     };

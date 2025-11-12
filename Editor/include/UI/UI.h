@@ -11,61 +11,294 @@ namespace BoonEditor
 	public:
         static bool Property(const BProperty& property, void* pInstance)
         {
-            uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
+            bool result = false;
             switch (property.typeId)
             {
+            case BTypeId::Bool:
+                result = BoolProperty(property, pInstance);
+                break;
+
             case BTypeId::Float:
-            {
-                float& field = *reinterpret_cast<float*>(base + property.offset);
-                float temp = field;
+                result = FloatProperty(property, pInstance);
+                break;
+            case BTypeId::Float2:
+                result = Float2Property(property, pInstance);
+                break;
+            case BTypeId::Float3:
+                result = Float3Property(property, pInstance);
+                break;
+            case BTypeId::Float4:
+                result = Float4Property(property, pInstance);
+                break;
 
-                float min = property.HasMeta("RangeMin") ? std::stof(property.GetMeta("RangeMin").value()) : 0;
-                float max = property.HasMeta("RangeMax") ? std::stof(property.GetMeta("RangeMax").value()) : 100;
-
-                if (property.HasMeta("Slider"))
-                {
-                    if (UI::SliderFloat(property.name, temp, min, max))
-                    {
-                        field = temp;
-                        return true;
-                    }
-                }
-                else
-                {
-                    if (UI::DragFloat(property.name, temp, min, max))
-                    {
-                        field = temp;
-                        return true;
-                    }
-                }
-            }
-            break;
             case BTypeId::Int:
+                result = IntProperty(property, pInstance);
+                break;
+            case BTypeId::Int2:
+                result = Int2Property(property, pInstance);
+                break;
+            case BTypeId::Int3:
+                result = Int3Property(property, pInstance);
+                break;
+            case BTypeId::Int4:
+                result = Int4Property(property, pInstance);
+                break;
+            }
+            return result;
+        }
+
+        static bool BoolProperty(const BProperty& property, void* pInstance)
+        {
+            std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
+            uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
+
+            bool& field = *reinterpret_cast<bool*>(base + property.offset);
+            bool temp = field;
+
+            if (UI::Checkbox(name, temp))
             {
-                int& field = *reinterpret_cast<int*>(base + property.offset);
-                int temp = field;
+                field = temp;
+                return true;
+            }
+            return false;
+        }
 
-                int min = property.HasMeta("RangeMin") ? std::stoi(property.GetMeta("RangeMin").value()) : 0;
-                int max = property.HasMeta("RangeMax") ? std::stoi(property.GetMeta("RangeMax").value()) : 100;
+        static bool FloatProperty(const BProperty& property, void* pInstance)
+        {
+            std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
+            uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
 
-                if (property.HasMeta("Slider"))
+            float& field = *reinterpret_cast<float*>(base + property.offset);
+            float temp = field;
+
+            float min = property.HasMeta("RangeMin") ? std::stof(property.GetMeta("RangeMin").value()) : 0;
+            float max = property.HasMeta("RangeMax") ? std::stof(property.GetMeta("RangeMax").value()) : 100;
+
+            if (property.HasMeta("Slider"))
+            {
+                if (UI::SliderFloat(name, temp, min, max))
                 {
-                    if (UI::SliderInt(property.name, temp, min, max))
-                    {
-                        field = temp;
-                        return true;
-                    }
-                }
-                else
-                {
-                    if (UI::DragInt(property.name, temp, min, max))
-                    {
-                        field = temp;
-                        return true;
-                    }
+                    field = temp;
+                    return true;
                 }
             }
-            break;
+            else
+            {
+                if (UI::DragFloat(name, temp, min, max))
+                {
+                    field = temp;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        static bool Float2Property(const BProperty& property, void* pInstance)
+        {
+            std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
+            uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
+
+            glm::vec2& field = *reinterpret_cast<glm::vec2*>(base + property.offset);
+            glm::vec2 temp = field;
+
+            float min = property.HasMeta("RangeMin") ? std::stof(property.GetMeta("RangeMin").value()) : 0;
+            float max = property.HasMeta("RangeMax") ? std::stof(property.GetMeta("RangeMax").value()) : 100;
+
+            if (property.HasMeta("Slider"))
+            {
+                if (UI::SliderFloat2(name, temp, min, max))
+                {
+                    field = temp;
+                    return true;
+                }
+            }
+            else
+            {
+                if (UI::DragFloat2(name, temp, min, max))
+                {
+                    field = temp;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        static bool Float3Property(const BProperty& property, void* pInstance)
+        {
+            std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
+            uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
+
+            glm::vec3& field = *reinterpret_cast<glm::vec3*>(base + property.offset);
+            glm::vec3 temp = field;
+
+            float min = property.HasMeta("RangeMin") ? std::stof(property.GetMeta("RangeMin").value()) : 0;
+            float max = property.HasMeta("RangeMax") ? std::stof(property.GetMeta("RangeMax").value()) : 100;
+
+            if (property.HasMeta("Slider"))
+            {
+                if (UI::SliderFloat3(name, temp, min, max))
+                {
+                    field = temp;
+                    return true;
+                }
+            }
+            else
+            {
+                if (UI::DragFloat3(name, temp, min, max))
+                {
+                    field = temp;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        static bool Float4Property(const BProperty& property, void* pInstance)
+        {
+            std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
+            uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
+
+            glm::vec4& field = *reinterpret_cast<glm::vec4*>(base + property.offset);
+            glm::vec4 temp = field;
+
+            float min = property.HasMeta("RangeMin") ? std::stof(property.GetMeta("RangeMin").value()) : 0;
+            float max = property.HasMeta("RangeMax") ? std::stof(property.GetMeta("RangeMax").value()) : 100;
+
+            if (property.HasMeta("Slider"))
+            {
+                if (UI::SliderFloat4(name, temp, min, max))
+                {
+                    field = temp;
+                    return true;
+                }
+            }
+            else
+            {
+                if (UI::DragFloat4(name, temp, min, max))
+                {
+                    field = temp;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        static bool IntProperty(const BProperty& property, void* pInstance)
+        {
+            std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
+            uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
+
+            int& field = *reinterpret_cast<int*>(base + property.offset);
+            int temp = field;
+
+            int min = property.HasMeta("RangeMin") ? std::stoi(property.GetMeta("RangeMin").value()) : 0;
+            int max = property.HasMeta("RangeMax") ? std::stoi(property.GetMeta("RangeMax").value()) : 100;
+
+            if (property.HasMeta("Slider"))
+            {
+                if (UI::SliderInt(name, temp, min, max))
+                {
+                    field = temp;
+                    return true;
+                }
+            }
+            else
+            {
+                if (UI::DragInt(name, temp, min, max))
+                {
+                    field = temp;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        static bool Int2Property(const BProperty& property, void* pInstance)
+        {
+            std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
+            uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
+
+            glm::ivec2& field = *reinterpret_cast<glm::ivec2*>(base + property.offset);
+            glm::ivec2 temp = field;
+
+            int min = property.HasMeta("RangeMin") ? std::stoi(property.GetMeta("RangeMin").value()) : 0;
+            int max = property.HasMeta("RangeMax") ? std::stoi(property.GetMeta("RangeMax").value()) : 100;
+
+            if (property.HasMeta("Slider"))
+            {
+                if (UI::SliderInt2(name, temp, min, max))
+                {
+                    field = temp;
+                    return true;
+                }
+            }
+            else
+            {
+                if (UI::DragInt2(name, temp, min, max))
+                {
+                    field = temp;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        static bool Int3Property(const BProperty& property, void* pInstance)
+        {
+            std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
+            uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
+
+            glm::ivec3& field = *reinterpret_cast<glm::ivec3*>(base + property.offset);
+            glm::ivec3 temp = field;
+
+            int min = property.HasMeta("RangeMin") ? std::stoi(property.GetMeta("RangeMin").value()) : 0;
+            int max = property.HasMeta("RangeMax") ? std::stoi(property.GetMeta("RangeMax").value()) : 100;
+
+            if (property.HasMeta("Slider"))
+            {
+                if (UI::SliderInt3(name, temp, min, max))
+                {
+                    field = temp;
+                    return true;
+                }
+            }
+            else
+            {
+                if (UI::DragInt3(name, temp, min, max))
+                {
+                    field = temp;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        static bool Int4Property(const BProperty& property, void* pInstance)
+        {
+            std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
+            uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
+
+            glm::ivec4& field = *reinterpret_cast<glm::ivec4*>(base + property.offset);
+            glm::ivec4 temp = field;
+
+            int min = property.HasMeta("RangeMin") ? std::stoi(property.GetMeta("RangeMin").value()) : 0;
+            int max = property.HasMeta("RangeMax") ? std::stoi(property.GetMeta("RangeMax").value()) : 100;
+
+            if (property.HasMeta("Slider"))
+            {
+                if (UI::SliderInt4(name, temp, min, max))
+                {
+                    field = temp;
+                    return true;
+                }
+            }
+            else
+            {
+                if (UI::DragInt4(name, temp, min, max))
+                {
+                    field = temp;
+                    return true;
+                }
             }
             return false;
         }

@@ -1,6 +1,6 @@
 # Sandbox/CMakeLists.txt
 
-file(GLOB_RECURSE SANDBOX_SOURCES CONFIGURE_DEPENDS src/*.cpp)
+file(GLOB_RECURSE SANDBOX_SOURCES CONFIGURE_DEPENDS src/*.cpp generated/*.cpp)
 
 add_executable(Sandbox ${SANDBOX_SOURCES})
 
@@ -31,4 +31,4 @@ add_custom_command(TARGET Sandbox POST_BUILD
 
 add_dependencies(Sandbox GenerateReflection)
 
-target_sources(Sandbox PRIVATE ${CMAKE_SOURCE_DIR}/Sandbox/generated/Generated_Components.cpp)
+#target_sources(Sandbox PRIVATE ${CMAKE_SOURCE_DIR}/Sandbox/generated/Generated_Components.cpp)

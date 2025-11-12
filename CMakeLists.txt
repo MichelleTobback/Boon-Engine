@@ -37,7 +37,7 @@ add_custom_command(
 add_custom_command(
     OUTPUT ${GENERATED_SANDBOX}
     DEPENDS BClassGenerator ${BOON_INCLUDE_DIR} ${SANDBOX_INCLUDE_DIR}
-    COMMAND BClassGenerator ${GENERATED_SANDBOX} ${BOON_INCLUDE_DIR} ${SANDBOX_INCLUDE_DIR}
+    COMMAND $<TARGET_FILE:BClassGenerator> "--minimal" ${GENERATED_SANDBOX} ${BOON_INCLUDE_DIR} ${SANDBOX_INCLUDE_DIR}
     COMMENT "Generating BClass reflection for Sandbox ..."
 )
 

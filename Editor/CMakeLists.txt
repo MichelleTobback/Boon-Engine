@@ -2,7 +2,7 @@
 # === Editor/CMakeLists.txt
 # ============================
 
-file(GLOB_RECURSE EDITOR_SOURCES CONFIGURE_DEPENDS src/*.cpp)
+file(GLOB_RECURSE EDITOR_SOURCES CONFIGURE_DEPENDS src/*.cpp generated/*.cpp)
 
 # ============================
 # === Editor Executable
@@ -76,4 +76,4 @@ target_include_directories(Editor PRIVATE
 )
 
 add_dependencies(Editor GenerateReflection)
-target_sources(Editor PRIVATE ${CMAKE_SOURCE_DIR}/Editor/generated/Generated_Components.cpp)
+#target_sources(Editor PRIVATE ${CMAKE_SOURCE_DIR}/Editor/generated/Generated_Components.cpp)
