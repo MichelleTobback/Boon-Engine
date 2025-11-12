@@ -8,7 +8,12 @@
 
 using namespace Boon;
 
-void Boon::SpriteAnimatorComponent::Update(GameObject)
+void Boon::SpriteAnimatorComponent::Awake(GameObject obj)
+{
+	pRenderer = &obj.GetComponent<SpriteRendererComponent>();
+}
+
+void Boon::SpriteAnimatorComponent::Update(GameObject obj)
 {
 	if (Atlas->GetClips().size() <= Clip)
 		return;
@@ -23,8 +28,6 @@ void Boon::SpriteAnimatorComponent::Update(GameObject)
 
 	float maxTime = Atlas->GetSpriteFrame(clip.Frames[m_Current]).FrameTime;
 
-	pRenderer->Sprite = clip.Frames[m_Current];
-
 	m_Timer += Time::Get().GetDeltaTime() * clip.Speed;
 	if (m_Timer >= maxTime)
 	{
@@ -32,6 +35,8 @@ void Boon::SpriteAnimatorComponent::Update(GameObject)
 
 		if (++m_Current == clip.Frames.size())
 			m_Current = 0;
+
+		pRenderer->Sprite = clip.Frames[m_Current];
 	}
 }
 

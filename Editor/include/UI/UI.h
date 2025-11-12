@@ -164,7 +164,15 @@ namespace BoonEditor
             float min = property.HasMeta("RangeMin") ? std::stof(property.GetMeta("RangeMin").value()) : 0;
             float max = property.HasMeta("RangeMax") ? std::stof(property.GetMeta("RangeMax").value()) : 100;
 
-            if (property.HasMeta("Slider"))
+            if (property.HasMeta("ColorPicker"))
+            {
+                if (UI::ColorPicker(name, temp))
+                {
+                    field = temp;
+                    return true;
+                }
+            }
+            else if (property.HasMeta("Slider"))
             {
                 if (UI::SliderFloat4(name, temp, min, max))
                 {

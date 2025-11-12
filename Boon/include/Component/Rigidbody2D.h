@@ -1,9 +1,11 @@
 #pragma once
+#include "Core/Boon.h"
 #include <box2d/id.h>
 #include <glm/glm.hpp>
 
 namespace Boon
 {
+    BCLASS()
 	struct Rigidbody2D final
 	{
         enum class BodyType

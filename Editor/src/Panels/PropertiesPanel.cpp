@@ -104,51 +104,6 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
             }
         });
 
-    RenderComponentNode<SpriteRendererComponent>("Sprite renderer", [this](SpriteRendererComponent& spriteComponent)
-        {
-            auto atlas = ServiceLocator::Get<AssetLibrary>().GetAsset<SpriteAtlasAsset>(spriteComponent.SpriteAtlasHandle);
-
-            glm::vec4 value4 = spriteComponent.Color;
-            if (UI::ColorPicker("Tint", value4))
-            {
-                spriteComponent.Color = value4;
-            }
-
-            float value = spriteComponent.Tiling;
-            if (UI::DragFloat("Tiling", value, 0.1f, 10.f, 0.1f))
-            {
-                spriteComponent.Tiling = value;
-            }
-
-            auto tex = atlas->GetTexture();
-            ImGui::ImageButton("Atlas", tex->GetRendererID(), {25.f, 25.f});
-        });
-
-    //RenderComponentNode<SpriteAnimatorComponent>("Sprite animator", [this](SpriteAnimatorComponent& spriteComponent)
-    //    {
-    //        auto& pAtlas = spriteComponent.Atlas;
-    //        int clip = spriteComponent.Clip;
-    //        if (UI::SliderInt("Clip", clip, 0, pAtlas->GetClips().size() - 1))
-    //        {
-    //            spriteComponent.Clip = clip;
-    //        }
-    //
-    //        float value = spriteComponent.GetClip().Speed;
-    //        if (UI::DragFloat("Speed", value, 0.1f, 10.f, 0.1f))
-    //        {
-    //            spriteComponent.GetClip().Speed = value;
-    //        }
-    //    });
-
-    RenderComponentNode<BoxCollider2D>("Box collider 2D", [this](BoxCollider2D& collider)
-        {
-            glm::vec2 size = collider.Size;
-            if (UI::DragFloat2("Size", size, 0.1f, 100.f))
-            {
-                collider.Size = size;
-            }
-        });
-
     BClassRegistry& reg = BClassRegistry::Get();
     reg.ForEach([this](BClass& cls)
         {

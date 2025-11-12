@@ -37,7 +37,8 @@ struct Property {
             "Slider", 
             "Name", 
             "Category", 
-            "HideInInspector" 
+            "HideInInspector",
+            "ColorPicker"
         };
         const auto& active = g_BoonMinimal ? minimalMeta : fullMeta;
         return active.find(meta) != active.end();

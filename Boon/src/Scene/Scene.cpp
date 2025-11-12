@@ -19,6 +19,20 @@ Boon::Scene::Scene(const std::string& name)
 	m_pECSlifecycle = std::make_unique<ECSLifecycleSystem>(*this);
 }
 
+GameObject Boon::Scene::Instantiate(UUID uuid, GameObjectID id)
+{
+	GameObjectID handle{ m_Registry.create(id) };
+	GameObject instance{ handle, this };
+
+	SceneComponent& sceneComp = instance.AddComponent<SceneComponent>(instance);
+	instance.AddComponent<UUIDComponent>(uuid);
+	instance.AddComponent<TransformComponent>(&sceneComp).SetLocalPosition({});
+	instance.AddComponent<NameComponent>("GameObject");
+	m_EntityMap[uuid] = handle;
+
+	return instance;
+}
+
 Boon::Scene::~Scene()
 {
 	
@@ -53,6 +67,9 @@ GameObject Boon::Scene::Instantiate(UUID uuid, const glm::vec3& pos)
 void Boon::Scene::Awake()
 {
 	m_Running = true;
+
+	m_pECSlifecycle->AwakeAll();
+
 	m_Physics2D.Begin(this);
 }
 

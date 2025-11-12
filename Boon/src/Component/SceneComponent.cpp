@@ -9,32 +9,43 @@
 using namespace Boon;
 
 SceneComponent::SceneComponent(GameObject owner, GameObject parent)
-    : m_Owner{ owner }, m_Parent{ parent }
+    : m_Owner{ owner }, m_Parent{ parent }, m_pScene{ owner.GetScene() }
 {
+}
+
+SceneComponent& Boon::SceneComponent::operator=(const SceneComponent& other)
+{
+    m_Owner = other.m_Owner;
+    m_Parent = other.m_Parent;
+    m_Children = other.m_Children;
+    return *this;
 }
 
 // -----------------------------------------------------------------------------
 // AttachTo
 // -----------------------------------------------------------------------------
-void SceneComponent::AttachTo(SceneComponent& parent, bool keepWorld)
+void SceneComponent::AttachTo(SceneComponent& p, bool keepWorld)
 {
-    TransformComponent& transform = m_Owner.GetTransform();
+    GameObject owner = GetOwner();
+    GameObject parent = GetParent();
+
+    TransformComponent& transform = owner.GetTransform();
 
     // Detach from previous parent (if any)
-    if (m_Parent.IsValid())
+    if (parent.IsValid())
     {
-        auto& oldParentScene = m_Parent.GetComponent<SceneComponent>();
-        oldParentScene.RemoveChild(m_Owner);
+        auto& oldParentScene = parent.GetComponent<SceneComponent>();
+        oldParentScene.RemoveChild(owner);
     }
 
     // Reassign parent
-    m_Parent = parent.GetOwner();
-    parent.AddChild(m_Owner);
+    m_Parent = p.GetOwner();
+    p.AddChild(GetOwner());
 
     // Keep world transform if requested
     if (keepWorld)
     {
-        TransformComponent& parentTransform = m_Parent.GetTransform();
+        TransformComponent& parentTransform = GetParent().GetTransform();
 
         // Convert world-space position to local-space position
         const glm::mat4 parentWorldInv = glm::inverse(parentTransform.GetWorld());
@@ -98,6 +109,12 @@ void SceneComponent::RemoveChild(GameObject child)
         m_Children.erase(it);
 }
 
+void Boon::SceneComponent::SetScene(Scene* pScene)
+{
+    m_pScene = pScene;
+    GetOwner().GetTransform().SetDirty(TransformComponent::TransformFlag::All, true);
+}
+
 bool SceneComponent::HasChildren() const
 {
     return !m_Children.empty();
@@ -141,5 +158,5 @@ SceneComponent SceneComponent::GetRoot() const
 // -----------------------------------------------------------------------------
 bool SceneComponent::IsRoot() const
 {
-    return !m_Parent.IsValid();
+    return !GetParent().IsValid();
 }

@@ -25,6 +25,13 @@ namespace Boon
                 return new T();
             };
         cls.destroyInstance = +[](void* p) { delete (T*)p; };
+        cls.copyInstance = [](void* pSrc, void* pDst) -> void
+            {
+                T& src = *static_cast<T*>(pSrc);
+                T& dst = *static_cast<T*>(pDst);
+                dst = src;
+            };
+
         cls.addComponent = [](GameObject& go) -> void*
             {
                 T& comp = go.template AddComponent<T>();

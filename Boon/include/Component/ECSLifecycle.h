@@ -9,7 +9,7 @@ namespace Boon
     template<typename T>
     struct ECSLifecycleCallbacks
     {
-        static std::function<void(GameObject&)> awake;
+        static std::function<void(Scene&)> awake;
         static std::function<void(Scene&)> update;
         static std::function<void(Scene&)> fixedUpdate;
         static std::function<void(Scene&)> lateUpdate;
@@ -19,7 +19,15 @@ namespace Boon
         static void Init()
         {
             if constexpr (has_awake<T>::value)
-                awake = [](GameObject& obj) { obj.GetComponent<T>().Awake(obj); };
+                awake = [](Scene& scene)
+                {
+                    auto view = scene.GetRegistry().view<T>();
+                    for (auto entity : view)
+                    {
+                        auto& comp = scene.GetRegistry().get<T>(entity);
+                        comp.Awake(GameObject(entity, &scene));
+                    }
+                };
 
             if constexpr (has_update<T>::value)
                 update = [](Scene& scene)
@@ -70,7 +78,7 @@ namespace Boon
         }
     };
 
-    template<typename T> std::function<void(GameObject&)> ECSLifecycleCallbacks<T>::awake;
+    template<typename T> std::function<void(Scene&)> ECSLifecycleCallbacks<T>::awake;
     template<typename T> std::function<void(Scene&)> ECSLifecycleCallbacks<T>::update;
     template<typename T> std::function<void(Scene&)> ECSLifecycleCallbacks<T>::fixedUpdate;
     template<typename T> std::function<void(Scene&)> ECSLifecycleCallbacks<T>::lateUpdate;
@@ -84,7 +92,7 @@ namespace Boon
 
         struct Callbacks
         {
-            std::function<void(GameObject&)> awake;
+            std::function<void(Scene&)> awake;
             std::function<void(Scene&)> update;
             std::function<void(Scene&)> fixedUpdate;
             std::function<void(Scene&)> lateUpdate;
@@ -126,20 +134,9 @@ namespace Boon
             cb.onEndOverlap = ECSLifecycleCallbacks<T>::onEndOverlap;
 
             map.emplace(typeid(T), cb);
-
-            if constexpr (has_awake<T>::value)
-            {
-                scene.GetRegistry().on_construct<T>().connect(
-                    [this](entt::registry& reg, entt::entity e)
-                    {
-                        auto it = map.find(typeid(T));
-                        if (it != map.end() && it->second.awake)
-                            it->second.awake(GameObject(e, &scene));
-                    }
-                );
-            }
         }
 
+        void AwakeAll() { for (auto& [_, cb] : map) if (cb.awake)      cb.awake(scene); }
         void UpdateAll() { for (auto& [_, cb] : map) if (cb.update)      cb.update(scene); }
         void FixedUpdateAll() { for (auto& [_, cb] : map) if (cb.fixedUpdate) cb.fixedUpdate(scene); }
         void LateUpdateAll() { for (auto& [_, cb] : map) if (cb.lateUpdate)  cb.lateUpdate(scene); }

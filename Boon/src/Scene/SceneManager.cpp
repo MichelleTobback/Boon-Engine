@@ -77,13 +77,17 @@ namespace Boon
 
     void SceneManager::Update()
     {
-        for (auto& [id, scene] : m_Scenes)
-            scene->Update();
+        GetActiveScene().Update();
+
+        //for (auto& [id, scene] : m_Scenes)
+        //    scene->Update();
     }
 
     void SceneManager::FixedUpdate()
     {
-        for (auto& [id, scene] : m_Scenes)
-            scene->FixedUpdate();
+        GetActiveScene().FixedUpdate();
+
+        //for (auto& [id, scene] : m_Scenes)
+        //    scene->FixedUpdate();
     }
 }

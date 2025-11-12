@@ -21,6 +21,7 @@
 
 #include <Scene/SceneManager.h>
 #include <Scene/GameObject.h>
+#include <Scene/SceneSerializer.h>
 
 #include <Component/NameComponent.h>
 #include <Component/CameraComponent.h>
@@ -60,6 +61,7 @@ void EditorState::OnEnter()
 	camera.GetComponent<NameComponent>().Name = "Camera";
 	m_SelectionContext.Set(camera);
 	m_SceneContext.Set(&scene);
+	m_pSelectedScene = &scene;
 
 	//player
 	{
@@ -184,6 +186,12 @@ void EditorState::OnBeginPlay()
 {
 	m_PlayState = EditorPlayState::Play;
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
+
+	m_SceneContext.Set(&sceneManager.CreateScene("PlayScene"));
+	SceneSerializer serializer(*m_SceneContext.Get());
+	serializer.Copy(*m_pSelectedScene);
+	sceneManager.SetActiveScene(m_SceneContext.Get()->GetID());
+
 	sceneManager.GetActiveScene().Awake();
 
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
@@ -195,6 +203,10 @@ void EditorState::OnStopPlay()
 	m_PlayState = EditorPlayState::Edit;
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 	sceneManager.GetActiveScene().Sleep();
+
+	sceneManager.UnloadScene(m_SceneContext.Get()->GetID());
+	m_SceneContext.Set(m_pSelectedScene);
+	sceneManager.SetActiveScene(m_SceneContext.Get()->GetID());
 
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	eventBus.Post(EditorPlayStateChangeEvent(m_PlayState));

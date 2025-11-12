@@ -60,6 +60,8 @@ namespace Boon
 		void SetLocalRotation(const glm::vec3& rotation);
 		void SetLocalScale(float x, float y, float z);
 		void SetLocalScale(const glm::vec3& scale);
+		void SetLocalTransform(const glm::vec3& position, const glm::vec3& euler, const glm::vec3& scale);
+		void SetLocalTransform(const glm::vec3& position, const glm::quat& rotation, const glm::vec3& scale);
 
 		void Translate(float x, float y, float z);
 		void Translate(const glm::vec3& translation);
@@ -109,6 +111,7 @@ namespace Boon
 
 		friend class GameObject;
 		friend class SceneComponent;
+		friend class SceneSerializer;
 		SceneComponent* m_Owner;
 	};
 }

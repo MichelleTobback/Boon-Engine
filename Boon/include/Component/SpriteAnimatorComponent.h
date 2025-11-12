@@ -7,13 +7,14 @@
 namespace Boon
 {
 	struct SpriteRendererComponent;
-	BCLASS(Category="Components", Name="Sprite renderer")
+	BCLASS(Category="Components", Name="Sprite animator")
 	struct SpriteAnimatorComponent
 	{
 		SpriteAnimatorComponent() = default;
 
 		inline SpriteAnimClip& GetClip() const { return Atlas->GetClip(Clip); }
 
+		void Awake(GameObject);
 		void Update(GameObject);
 
 		void SetClip(int clip, bool restart = true);

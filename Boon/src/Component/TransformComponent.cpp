@@ -126,6 +126,20 @@ void TransformComponent::SetLocalScale(const glm::vec3& scale)
     }
 }
 
+void Boon::TransformComponent::SetLocalTransform(const glm::vec3& position, const glm::vec3& euler, const glm::vec3& scale)
+{
+    SetLocalPosition(position);
+    SetLocalRotation(euler);
+    SetLocalScale(scale);
+}
+
+void Boon::TransformComponent::SetLocalTransform(const glm::vec3& position, const glm::quat& rotation, const glm::vec3& scale)
+{
+    SetLocalPosition(position);
+    SetLocalRotation(rotation);
+    SetLocalScale(scale);
+}
+
 // -----------------------------------------------------------------------------
 // Modifiers
 // -----------------------------------------------------------------------------
@@ -292,7 +306,7 @@ void TransformComponent::SetChildrenDirty(TransformFlag flag)
     if (!m_Owner)
         return;
 
-    for (auto child : m_Owner->GetChildren())
+    for (auto child : *m_Owner)
     {
         if (child.IsValid())
             child.GetTransform().SetDirty(flag, true);

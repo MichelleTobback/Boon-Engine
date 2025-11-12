@@ -88,7 +88,10 @@ GameObject Boon::GameObject::GetParent() const
 
 const std::vector<GameObject> Boon::GameObject::GetChildren() const
 {
-	return GetComponent<SceneComponent>().GetChildren();
+	std::vector<GameObject> children;
+	for (GameObjectID id : GetComponent<SceneComponent>().GetChildren())
+		children.push_back(GameObject(id, m_pScene));
+	return children;
 }
 
 void Boon::GameObject::AttachTo(GameObject parent, bool keepWorld)

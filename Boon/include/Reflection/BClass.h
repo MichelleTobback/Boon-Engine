@@ -31,6 +31,8 @@ namespace Boon
         using RegisterFunc = void(*)(ECSLifecycleSystem&);
         using CreateInstanceFn = void* (*)();
         using DestroyInstanceFn = void(*)(void*);
+        using CopyInstanceFn = void (*)(void*, void*);
+
         using AddComponentFn = void* (*)(GameObject&);
         using GetComponentFn = void* (*)(GameObject&);
         using HasComponentFn = bool (*)(GameObject&);
@@ -39,6 +41,8 @@ namespace Boon
         RegisterFunc registerLifecycle = nullptr;
         CreateInstanceFn createInstance = nullptr;
         DestroyInstanceFn destroyInstance = nullptr;
+        CopyInstanceFn copyInstance = nullptr;
+
         AddComponentFn addComponent = nullptr;
         GetComponentFn getComponent = nullptr;
         HasComponentFn hasComponent = nullptr;

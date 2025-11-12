@@ -39,6 +39,7 @@ namespace Boon
 
 		GameObject GetGameObject(UUID uuid);
 		void ForeachGameObject(const std::function<void(GameObject)>& fn);
+		void ForeachGameObject(const std::function<void(GameObject)>& fn) const;
 
 		template<typename... Components>
 		auto GetAllGameObjectsWith()
@@ -55,7 +56,10 @@ namespace Boon
 		friend class PhysicsWorld2D;
 		friend class GameObject;
 		friend class SceneManager;
+		friend class SceneSerializer;
 		explicit Scene(const std::string& name);
+
+		GameObject Instantiate(UUID uuid, GameObjectID id);
 
 		void OnUpdate();
 		void LateUpdate();
