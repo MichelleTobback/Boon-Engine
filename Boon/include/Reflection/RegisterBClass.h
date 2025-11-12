@@ -6,9 +6,9 @@
 namespace Boon
 {
     template<typename T>
-    BClass* RegisterBClass()
+    BClass* RegisterBClass(std::string name)
     {
-        static BClass cls(typeid(T).name(), typeid(T));
+        static BClass cls(name, typeid(T));
 
         if constexpr (has_awake<T>::value)       cls.SetFlag(BClass::Awake);
         if constexpr (has_update<T>::value)      cls.SetFlag(BClass::Update);
@@ -28,8 +28,20 @@ namespace Boon
         cls.addComponent = [](GameObject& go) -> void*
             {
                 T& comp = go.template AddComponent<T>();
-
                 return static_cast<void*>(&comp);
+            };
+        cls.getComponent = [](GameObject& go) -> void*
+            {
+                T& comp = go.template GetComponent<T>();
+                return static_cast<void*>(&comp);
+            };
+        cls.hasComponent = [](GameObject& go) -> bool
+            {
+                return go.template HasComponent<T>();
+            };
+        cls.removeComponent = [](GameObject& go) -> void
+            {
+                go.template RemoveComponent<T>();
             };
 
         BClassRegistry::Get().Register(&cls);

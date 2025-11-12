@@ -1,3 +1,5 @@
 #pragma once
 
-#define BCLASS()
+#define BCLASS(...)
+
+#define BPROPERTY(...)

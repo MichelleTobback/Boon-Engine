@@ -14,8 +14,8 @@
 namespace Boon
 {
 	class SceneComponent;
-	BCLASS()
-	class TransformComponent final
+	BCLASS(HideInInspector)
+	class TransformComponent
 	{
 	public:
 		enum class TransformFlag : uint32_t

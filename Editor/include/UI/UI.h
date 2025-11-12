@@ -1,3 +1,6 @@
+#pragma once
+#include "Reflection/BProperty.h"
+
 #include <imgui.h>
 #include <string>
 
@@ -6,6 +9,66 @@ namespace BoonEditor
 	class UI
 	{
 	public:
+        static bool Property(const BProperty& property, void* pInstance)
+        {
+            uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
+            switch (property.typeId)
+            {
+            case BTypeId::Float:
+            {
+                float& field = *reinterpret_cast<float*>(base + property.offset);
+                float temp = field;
+
+                float min = property.HasMeta("RangeMin") ? std::stof(property.GetMeta("RangeMin").value()) : 0;
+                float max = property.HasMeta("RangeMax") ? std::stof(property.GetMeta("RangeMax").value()) : 100;
+
+                if (property.HasMeta("Slider"))
+                {
+                    if (UI::SliderFloat(property.name, temp, min, max))
+                    {
+                        field = temp;
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (UI::DragFloat(property.name, temp, min, max))
+                    {
+                        field = temp;
+                        return true;
+                    }
+                }
+            }
+            break;
+            case BTypeId::Int:
+            {
+                int& field = *reinterpret_cast<int*>(base + property.offset);
+                int temp = field;
+
+                int min = property.HasMeta("RangeMin") ? std::stoi(property.GetMeta("RangeMin").value()) : 0;
+                int max = property.HasMeta("RangeMax") ? std::stoi(property.GetMeta("RangeMax").value()) : 100;
+
+                if (property.HasMeta("Slider"))
+                {
+                    if (UI::SliderInt(property.name, temp, min, max))
+                    {
+                        field = temp;
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (UI::DragInt(property.name, temp, min, max))
+                    {
+                        field = temp;
+                        return true;
+                    }
+                }
+            }
+            break;
+            }
+            return false;
+        }
 
         static bool Checkbox(const std::string& label, bool& value)
         {
@@ -128,7 +191,7 @@ namespace BoonEditor
             ImGui::Text("%s", label.c_str());
             ImGui::NextColumn();
 
-            if (ImGui::DragInt("##val", &value, speed, min, max, "%.2f"))
+            if (ImGui::DragInt("##val", &value, speed, min, max))
             {
                 result = true;
             }
@@ -150,7 +213,7 @@ namespace BoonEditor
             ImGui::Text("%s", label.c_str());
             ImGui::NextColumn();
 
-            if (ImGui::DragInt2("##val", &value.x, speed, min, max, "%.2f"))
+            if (ImGui::DragInt2("##val", &value.x, speed, min, max))
             {
                 result = true;
             }
@@ -172,7 +235,7 @@ namespace BoonEditor
             ImGui::Text("%s", label.c_str());
             ImGui::NextColumn();
 
-            if (ImGui::DragInt3("##val", &value.x, speed, min, max, "%.2f"))
+            if (ImGui::DragInt3("##val", &value.x, speed, min, max))
             {
                 result = true;
             }
@@ -194,7 +257,7 @@ namespace BoonEditor
             ImGui::Text("%s", label.c_str());
             ImGui::NextColumn();
 
-            if (ImGui::DragInt4("##val", &value.x, speed, min, max, "%.2f"))
+            if (ImGui::DragInt4("##val", &value.x, speed, min, max))
             {
                 result = true;
             }
@@ -305,7 +368,7 @@ namespace BoonEditor
             ImGui::Text("%s", label.c_str());
             ImGui::NextColumn();
 
-            if (ImGui::SliderInt("##val", &value, min, max, "%.2f"))
+            if (ImGui::SliderInt("##val", &value, min, max))
             {
                 result = true;
             }
@@ -327,7 +390,7 @@ namespace BoonEditor
             ImGui::Text("%s", label.c_str());
             ImGui::NextColumn();
 
-            if (ImGui::SliderInt2("##val", &value.x, min, max, "%.2f"))
+            if (ImGui::SliderInt2("##val", &value.x, min, max))
             {
                 result = true;
             }
@@ -349,7 +412,7 @@ namespace BoonEditor
             ImGui::Text("%s", label.c_str());
             ImGui::NextColumn();
 
-            if (ImGui::SliderInt3("##val", &value.x, min, max, "%.2f"))
+            if (ImGui::SliderInt3("##val", &value.x, min, max))
             {
                 result = true;
             }
@@ -371,7 +434,7 @@ namespace BoonEditor
             ImGui::Text("%s", label.c_str());
             ImGui::NextColumn();
 
-            if (ImGui::SliderInt4("##val", &value.x, min, max, "%.2f"))
+            if (ImGui::SliderInt4("##val", &value.x, min, max))
             {
                 result = true;
             }

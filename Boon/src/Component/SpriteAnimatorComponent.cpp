@@ -10,6 +10,9 @@ using namespace Boon;
 
 void Boon::SpriteAnimatorComponent::Update(GameObject)
 {
+	if (Atlas->GetClips().size() <= Clip)
+		return;
+
 	SpriteAnimClip& clip = GetClip();
 
 	if (clip.Frames.empty())

@@ -61,6 +61,21 @@ void* GameObject::AddComponentFromClass(BClass* pClass)
 	return pClass->addComponent(*this);
 }
 
+void* Boon::GameObject::GetComponentByClass(BClass* pClass)
+{
+	return pClass->getComponent(*this);
+}
+
+bool Boon::GameObject::HasComponentByClass(BClass* pClass)
+{
+	return pClass->hasComponent(*this);
+}
+
+void Boon::GameObject::RemoveComponentByClass(BClass* pClass)
+{
+	pClass->removeComponent(*this);
+}
+
 void Boon::GameObject::Destroy()
 {
 	m_pScene->DestroyGameObject(*this);

@@ -7,8 +7,8 @@
 namespace Boon
 {
 	struct SpriteRendererComponent;
-	BCLASS()
-	struct SpriteAnimatorComponent final
+	BCLASS(Category="Components", Name="Sprite renderer")
+	struct SpriteAnimatorComponent
 	{
 		SpriteAnimatorComponent() = default;
 
@@ -18,6 +18,7 @@ namespace Boon
 
 		void SetClip(int clip, bool restart = true);
 
+		BPROPERTY(RangeMin="0", RangeMax="10", Slider)
 		int Clip;
 		std::shared_ptr<SpriteAtlas> Atlas;
 		SpriteRendererComponent* pRenderer;

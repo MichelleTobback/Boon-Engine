@@ -1,6 +1,10 @@
 #pragma once
 #include "EditorPanel.h"
 #include "Core/BoonEditor.h"
+#include "UI/UI.h"
+
+#include <Reflection/BClass.h>
+
 #include <memory>
 
 #include <imgui.h>
@@ -21,6 +25,7 @@ namespace BoonEditor
 	private:
 		template <typename T>
 		void RenderComponentNode(const std::string& name, const std::function<void(T&)>& fn);
+        void RenderComponentNode(BClass* cls, const std::function<void()>& fn = nullptr);
 
 		GameObjectContext* m_pContext;
 	};
@@ -77,6 +82,15 @@ namespace BoonEditor
 
             if (open)
             {
+                BClass* cls = BClassRegistry::Get().Find<T>();
+                if (cls)
+                {
+                    cls->ForEachProperty([&pComponent](const BProperty& prop)
+                        {
+                            UI::Property(prop, &pComponent);
+                        });
+                }
+
                 fn(pComponent);
                 ImGui::TreePop();
             }

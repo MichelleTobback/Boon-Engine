@@ -36,7 +36,7 @@ void PlayerController::Update(GameObject gameObject)
     Rigidbody2D& rb = gameObject.GetComponent<Rigidbody2D>();
     if (m_IsGrounded && input.IsKeyPressed(Key::Space))
     {
-        rb.AddForce({ 0.0f, rb.GetMass() * 4.f }, Rigidbody2D::ForceMode::Impulse);
+        rb.AddForce({ 0.0f, rb.GetMass() * m_JumpForce }, Rigidbody2D::ForceMode::Impulse);
     }
 
     // Normalize

@@ -3,8 +3,8 @@
 
 namespace Boon 
 {
-    BCLASS()
-    struct PlayerController final
+    BCLASS(Category = "Components", Name = "Player controller")
+    struct PlayerController
     {
     public:
         PlayerController() = default;

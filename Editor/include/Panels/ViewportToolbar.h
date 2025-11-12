@@ -16,7 +16,7 @@ namespace BoonEditor
 	{
 		None = 0,
 		Camera = 1,
-		Visibility
+		Visibility = 2
 	};
 
 	class ViewportToolbar final : public EditorPanel

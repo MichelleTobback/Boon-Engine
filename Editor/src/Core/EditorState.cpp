@@ -22,6 +22,7 @@
 #include <Scene/SceneManager.h>
 #include <Scene/GameObject.h>
 
+#include <Component/NameComponent.h>
 #include <Component/CameraComponent.h>
 #include <Component/SpriteRendererComponent.h>
 #include <Component/SpriteAnimatorComponent.h>
@@ -56,6 +57,7 @@ void EditorState::OnEnter()
 
 	GameObject camera = scene.Instantiate({ 0.f, 0.f, 1.f });
 	camera.AddComponent<CameraComponent>(Camera(4.f, 2.f, 0.1f, 1.f), false).Active = true;
+	camera.GetComponent<NameComponent>().Name = "Camera";
 	m_SelectionContext.Set(camera);
 	m_SceneContext.Set(&scene);
 
@@ -79,6 +81,7 @@ void EditorState::OnEnter()
 		rb.Type = Boon::Rigidbody2D::BodyType::Dynamic;
 
 		quad.AddComponent<PlayerController>();
+		quad.GetComponent<NameComponent>().Name = "Player";
 	}
 
 	//floor
@@ -90,6 +93,8 @@ void EditorState::OnEnter()
 	
 		Rigidbody2D& floorRb = floor.AddComponent<Rigidbody2D>();
 		floorRb.Type = Boon::Rigidbody2D::BodyType::Static;
+
+		floor.GetComponent<NameComponent>().Name = "Floor";
 	}
 
 	//trigger
@@ -102,6 +107,8 @@ void EditorState::OnEnter()
 
 		Rigidbody2D& floorRb = trigger.AddComponent<Rigidbody2D>();
 		floorRb.Type = Boon::Rigidbody2D::BodyType::Static;
+
+		trigger.GetComponent<NameComponent>().Name = "Trigger";
 	}
 
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();

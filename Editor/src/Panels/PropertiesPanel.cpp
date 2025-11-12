@@ -124,21 +124,21 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
             ImGui::ImageButton("Atlas", tex->GetRendererID(), {25.f, 25.f});
         });
 
-    RenderComponentNode<SpriteAnimatorComponent>("Sprite animator", [this](SpriteAnimatorComponent& spriteComponent)
-        {
-            auto& pAtlas = spriteComponent.Atlas;
-            int clip = spriteComponent.Clip;
-            if (UI::SliderInt("Clip", clip, 0, pAtlas->GetClips().size() - 1))
-            {
-                spriteComponent.Clip = clip;
-            }
-
-            float value = spriteComponent.GetClip().Speed;
-            if (UI::DragFloat("Speed", value, 0.1f, 10.f, 0.1f))
-            {
-                spriteComponent.GetClip().Speed = value;
-            }
-        });
+    //RenderComponentNode<SpriteAnimatorComponent>("Sprite animator", [this](SpriteAnimatorComponent& spriteComponent)
+    //    {
+    //        auto& pAtlas = spriteComponent.Atlas;
+    //        int clip = spriteComponent.Clip;
+    //        if (UI::SliderInt("Clip", clip, 0, pAtlas->GetClips().size() - 1))
+    //        {
+    //            spriteComponent.Clip = clip;
+    //        }
+    //
+    //        float value = spriteComponent.GetClip().Speed;
+    //        if (UI::DragFloat("Speed", value, 0.1f, 10.f, 0.1f))
+    //        {
+    //            spriteComponent.GetClip().Speed = value;
+    //        }
+    //    });
 
     RenderComponentNode<BoxCollider2D>("Box collider 2D", [this](BoxCollider2D& collider)
         {
@@ -148,4 +148,84 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
                 collider.Size = size;
             }
         });
+
+    BClassRegistry& reg = BClassRegistry::Get();
+    reg.ForEach([this](BClass& cls)
+        {
+            if (m_pContext->Get().HasComponentByClass(&cls))
+                RenderComponentNode(&cls);
+        });
+
+}
+
+inline void PropertiesPanel::RenderComponentNode(BClass* cls, const std::function<void()>& fn)
+{
+    GameObject& owner = m_pContext->Get();
+    if (!owner.HasComponentByClass(cls))
+        return;
+
+    if (!cls->GetPropertiesCount())
+        return;
+
+    if (cls->HasMeta("HideInInspector"))
+        return;
+
+    // Compatibility fallback for older Dear ImGui versions
+#ifndef ImGuiTreeNodeFlags_AllowItemOverlap
+#define ImGuiTreeNodeFlags_AllowItemOverlap (1 << 20)
+#endif
+
+    const ImGuiTreeNodeFlags treeNodeFlags =
+        ImGuiTreeNodeFlags_DefaultOpen |
+        ImGuiTreeNodeFlags_Framed |
+        ImGuiTreeNodeFlags_SpanAvailWidth |
+        ImGuiTreeNodeFlags_FramePadding |
+        ImGuiTreeNodeFlags_AllowItemOverlap;
+
+    ImVec2 contentRegionAvailable = ImGui::GetContentRegionAvail();
+
+    ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{ 4, 4 });
+
+    // Use version-safe way to get line height
+    float lineHeight = ImGui::GetTextLineHeight();
+
+    ImGui::Separator();
+
+    // Use the owner UUID correctly
+    std::string id = cls->name + std::to_string(owner.GetUUID());
+    std::string name = cls->HasMeta("Name") ? cls->GetMeta("Name").value() : cls->name;
+    bool open = ImGui::TreeNodeEx(id.c_str(), treeNodeFlags, "%s", name.c_str());
+
+    ImGui::PopStyleVar();
+
+    // Position the "+" button on the far right
+    ImGui::SameLine(contentRegionAvailable.x - lineHeight * 0.5f);
+    if (ImGui::Button("+", ImVec2{ lineHeight, lineHeight }))
+    {
+        ImGui::OpenPopup("ComponentSettings");
+    }
+
+    bool removeComponent = false;
+    if (ImGui::BeginPopup("ComponentSettings"))
+    {
+        if (ImGui::MenuItem("Remove component"))
+            removeComponent = true;
+
+        ImGui::EndPopup();
+    }
+
+    if (open)
+    {
+        void* pInstance = owner.GetComponentByClass(cls);
+        cls->ForEachProperty([pInstance](const BProperty& prop)
+            {
+                UI::Property(prop, pInstance);
+            });
+
+        if (fn) fn();
+        ImGui::TreePop();
+    }
+
+    if (removeComponent)
+        owner.RemoveComponentByClass(cls);
 }
