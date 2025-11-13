@@ -1,0 +1,151 @@
+#pragma once
+#include <cstdint>
+#include "Core/Memory/Buffer.h"
+#include "Serialization/BinarySerializer.h"
+
+namespace Boon
+{
+    // -------------------------------------------------------------
+    // All packet types used by the networking system
+    // -------------------------------------------------------------
+    enum class ENetPacketType : uint8_t
+    {
+        None = 0,
+
+        // Scene / Object Management
+        Spawn = 1,
+        Despawn = 2,
+
+        // Data Flow
+        Replication = 3,
+        RPC = 4,
+
+        // Connection / Handshake
+        Handshake = 5,
+        Ping = 6,
+        Pong = 7
+    };
+
+    // -------------------------------------------------------------
+    // Standard packet header (8 bytes total)
+    // -------------------------------------------------------------
+    struct NetPacketHeader
+    {
+        ENetPacketType Type = ENetPacketType::None;
+        uint32_t PayloadSize = 0;
+        uint32_t Reserved = 0; // alignment or future use
+
+        static constexpr size_t Size()
+        {
+            return sizeof(ENetPacketType) + sizeof(uint32_t) + sizeof(uint32_t);
+        }
+    };
+
+    // -------------------------------------------------------------
+    // NetPacket combines:
+    // - header (type + size)
+    // - BinarySerializer
+    // - Buffer
+    // -------------------------------------------------------------
+    class NetPacket
+    {
+    public:
+        // Writing new packet
+        NetPacket(ENetPacketType type)
+            : m_Header{ type, 0, 0 }, m_Serializer()
+        {}
+
+        // Reading received packet
+        NetPacket(const uint8_t* data, size_t size)
+        {
+            // Header first
+            std::memcpy(&m_Header, data, NetPacketHeader::Size());
+
+            // Remaining buffer for serializer
+            size_t payloadSize = size - NetPacketHeader::Size();
+            m_Serializer = BinarySerializer(data + NetPacketHeader::Size(), payloadSize);
+        }
+
+        // ---------------------------------------------------------
+        // Write API
+        // ---------------------------------------------------------
+        template<typename T>
+        void Write(const T& value)
+        {
+            m_Serializer.Write(value);
+        }
+
+        void WriteString(const std::string& str)
+        {
+            m_Serializer.WriteString(str);
+        }
+
+        void WriteBytes(const void* data, size_t size)
+        {
+            m_Serializer.WriteBytes(data, size);
+        }
+
+        // ---------------------------------------------------------
+        // Read API
+        // ---------------------------------------------------------
+        template<typename T>
+        T Read() { return m_Serializer.Read<T>(); }
+
+        std::string ReadString()
+        {
+            return m_Serializer.ReadString();
+        }
+
+        void ReadBytes(void* out, size_t size)
+        {
+            m_Serializer.ReadBytes(out, size);
+        }
+
+        // ---------------------------------------------------------
+        // Finalize packet into raw byte stream
+        // ---------------------------------------------------------
+        Buffer BuildBuffer()
+        {
+            Buffer output;
+            const Buffer& payload = m_Serializer.GetBuffer();
+
+            m_Header.PayloadSize = static_cast<uint32_t>(payload.Size());
+
+            output.Reserve(NetPacketHeader::Size() + payload.Size());
+
+            output.Append(&m_Header.Type, sizeof(ENetPacketType));
+            output.Append(&m_Header.PayloadSize, sizeof(uint32_t));
+            output.Append(&m_Header.Reserved, sizeof(uint32_t));
+            output.Append(payload.Data(), payload.Size());
+
+            return output;
+        }
+
+        // Direct data for sending
+        const uint8_t* RawData()
+        {
+            if (m_BuiltCache.Empty())
+                m_BuiltCache = BuildBuffer();
+            return m_BuiltCache.Data();
+        }
+
+        size_t RawSize()
+        {
+            if (m_BuiltCache.Empty())
+                m_BuiltCache = BuildBuffer();
+            return m_BuiltCache.Size();
+        }
+
+        ENetPacketType GetType() const { return m_Header.Type; }
+
+        BinarySerializer& GetSerializer() { return m_Serializer; }
+        const BinarySerializer& GetSerializer() const { return m_Serializer; }
+
+    private:
+        NetPacketHeader m_Header{};
+        BinarySerializer m_Serializer;
+
+        // built packet for sending (only built once)
+        Buffer m_BuiltCache;
+    };
+}

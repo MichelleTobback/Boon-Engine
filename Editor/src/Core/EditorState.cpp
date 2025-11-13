@@ -30,9 +30,14 @@
 #include <Component/BoxCollider2D.h>
 #include <Component/Rigidbody2D.h>
 
+#include <Networking/NetDriver.h>
+#include <Platform/Steam/SteamNetDriver.h>
+
 #include "Game/PlayerController.h"
 
 #include <Reflection/BClass.h>
+
+#include <iostream>
 
 using namespace BoonEditor;
 
@@ -48,6 +53,59 @@ void EditorState::OnEnter()
 
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 	Scene& scene = sceneManager.CreateScene("Game");
+
+	std::shared_ptr<NetDriver> network = std::make_shared<SteamNetDriver>();
+	ServiceLocator::Register<NetDriver>(network);
+	network->Initialize(Application::Get().GetDescriptor().netDriverMode);
+
+	if (network->GetMode() == ENetDriverMode::Client)
+	{
+		network->Connect("127.0.0.1", 27020);
+
+		network->BindOnConnectedCallback([](NetConnection* pConnection)
+			{
+				NetPacket packet{ ENetPacketType::Ping };
+				packet.WriteString("hello server");
+				pConnection->GetDriver()->Send(pConnection, packet);
+			});
+
+		network->BindOnPacketCallback([](NetConnection* pConnection, NetPacket& packet)
+			{
+				if (packet.GetType() == ENetPacketType::Pong)
+				{
+					std::string result = packet.ReadString();
+					std::cout << result << '\n';
+				}
+			});
+	}
+	else
+	{
+		network->BindOnPacketCallback([](NetConnection* pConnection, NetPacket& packet)
+			{
+				if (packet.GetType() == ENetPacketType::Ping)
+				{
+					std::string result = packet.ReadString();
+					std::cout << result << '\n';
+
+					NetPacket reply{ ENetPacketType::Pong };
+					reply.WriteString("hello client");
+					pConnection->GetDriver()->Send(pConnection, reply);
+				}
+
+				if (packet.GetType() == ENetPacketType::Pong)
+				{
+					std::string result = packet.ReadString();
+					std::cout << result << '\n';
+				}
+			});
+
+		network->BindOnConnectedCallback([](NetConnection* pConnection)
+			{
+				NetPacket packet{ ENetPacketType::Pong };
+				packet.WriteString("this is a broadcast message");
+				pConnection->GetDriver()->Broadcast(packet);
+			});
+	}
 
 	ViewportPanel& viewport = CreatePanel<ViewportPanel>("Viewport", &m_SceneContext, &m_SelectionContext);
 	viewport.GetToolbar()->BindOnPlayCallback(std::bind(&EditorState::OnBeginPlay, this));
@@ -135,10 +193,13 @@ void EditorState::OnEnter()
 		});
 
 	sceneManager.SetActiveScene(scene.GetID(), false);
+
 }
 
 void EditorState::OnUpdate()
 {
+	ServiceLocator::Get<NetDriver>().Update();
+
 	Time& time = Boon::Time::Get();
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 

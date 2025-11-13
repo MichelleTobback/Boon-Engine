@@ -1,5 +1,6 @@
 #pragma once
 #include "Core/Window.h"
+#include "Networking/NetAuthority.h"
 
 #include <string>
 #include <memory>
@@ -16,6 +17,7 @@ namespace Boon
 			Window::WindowDesc windowDesc{};
 			std::string name{};
 			std::string contentDir{};
+			ENetDriverMode netDriverMode{};
 		};
 		Application(const AppDesc& desc);
 		~Application();
@@ -32,6 +34,8 @@ namespace Boon
 		inline uint32_t GetCurrentFrameIndex() const { return m_CurrentFrameIndex; }
 
 		static Application& Get() { return *s_pInstance; }
+
+		inline const AppDesc& GetDescriptor() const { return m_Desc; }
 
 	private:
 		AppDesc m_Desc;

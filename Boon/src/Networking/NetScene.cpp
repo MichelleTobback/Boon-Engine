@@ -1,0 +1,161 @@
+#include "Networking/NetScene.h"
+#include "Networking/NetDriver.h"
+#include "Networking/NetIdentity.h"
+#include "Networking/NetConnection.h"
+
+#include "Scene/Scene.h"
+#include "Component/UUIDComponent.h"
+
+namespace Boon
+{
+    NetScene::NetScene(Scene* scene, NetDriver* driver)
+        : m_Scene(scene), m_Driver(driver)
+    {
+    }
+
+    // -------------------------------------------------------------------------
+    // Registration of static objects (level-placed)
+    // -------------------------------------------------------------------------
+    void NetScene::RegisterStaticGameObject(GameObject gameObject)
+    {
+        auto& id = gameObject.GetComponent<UUIDComponent>().Uuid;
+
+        if (!gameObject.HasComponent<NetIdentity>())
+            gameObject.AddComponent<NetIdentity>();
+
+        NetIdentity& ni = gameObject.GetComponent<NetIdentity>();
+        ni.NetId = id;
+        ni.Role = ENetRole::Authority;
+        ni.OwnerConnectionId = 0;
+
+        // Static objects are not added to dynamic map
+    }
+
+    // -------------------------------------------------------------------------
+    // Server: spawn dynamic object
+    // -------------------------------------------------------------------------
+    GameObject NetScene::RegisterDynamicGameObject(GameObject gameObject, uint64_t ownerConnection)
+    {
+        if (m_Driver->GetMode() == ENetDriverMode::Client)
+        {
+            // client never registers dynamic objects
+            return gameObject;
+        }
+
+        auto& id = gameObject.GetComponent<UUIDComponent>().Uuid;
+
+        if (!gameObject.HasComponent<NetIdentity>())
+            gameObject.AddComponent<NetIdentity>();
+
+        NetIdentity& ni = gameObject.GetComponent<NetIdentity>();
+        ni.NetId = id;
+        ni.Role = ENetRole::Authority;
+        ni.OwnerConnectionId = ownerConnection;
+
+        m_DynamicOwnership[id] = ownerConnection;
+
+        // Broadcast spawn packet
+        NetPacket pkt(ENetPacketType::Spawn);
+        pkt.Write(id);
+        pkt.Write(ownerConnection);
+        m_Driver->Broadcast(pkt, true);
+
+        return gameObject;
+    }
+
+    // -------------------------------------------------------------------------
+    // Client: replicate object spawned by server
+    // -------------------------------------------------------------------------
+    GameObject NetScene::CreateReplicatedGameObject(const UUID& uuid, uint64_t ownerConnection)
+    {
+        GameObject obj = m_Scene->Instantiate();
+        obj.GetComponent<UUIDComponent>().Uuid = uuid;
+
+        if (!obj.HasComponent<NetIdentity>())
+            obj.AddComponent<NetIdentity>();
+
+        NetIdentity& ni = obj.GetComponent<NetIdentity>();
+        ni.NetId = uuid;
+        ni.Role = ENetRole::SimulatedProxy;
+        ni.OwnerConnectionId = ownerConnection;
+
+        return obj;
+    }
+
+    // -------------------------------------------------------------------------
+    GameObject NetScene::GetGameObjectByUUID(const UUID& uuid)
+    {
+        return m_Scene->GetGameObject(uuid);
+    }
+
+    // -------------------------------------------------------------------------
+    // Packet Routing
+    // -------------------------------------------------------------------------
+    void NetScene::ProcessPacket(NetConnection* sender, NetPacket& pkt)
+    {
+        switch (pkt.GetType())
+        {
+        case ENetPacketType::Spawn:    
+            HandleSpawnPacket(sender, pkt); break;
+        case ENetPacketType::Despawn:  
+            HandleDespawnPacket(sender, pkt); break;
+        default:
+            break;
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Handle Server->Client Spawn
+    // -------------------------------------------------------------------------
+    void NetScene::HandleSpawnPacket(NetConnection* sender, NetPacket& pkt)
+    {
+        auto& s = pkt.GetSerializer();
+
+        UUID netId = s.Read<UUID>();
+        uint64_t owner = s.Read<uint64_t>();
+
+        GameObject obj = CreateReplicatedGameObject(netId, owner);
+
+        // Additional replicated fields can follow later
+    }
+
+    // -------------------------------------------------------------------------
+    // Handle Server->Client Despawn
+    // -------------------------------------------------------------------------
+    void NetScene::HandleDespawnPacket(NetConnection* sender, NetPacket& pkt)
+    {
+        auto& s = pkt.GetSerializer();
+        UUID netId = s.Read<UUID>();
+
+        GameObject obj = m_Scene->GetGameObject(netId);
+        if (obj.IsValid())
+            m_Scene->DestroyGameObject(obj);
+    }
+
+    // -------------------------------------------------------------------------
+    // Create spawn packet and send
+    // -------------------------------------------------------------------------
+    void NetScene::SendSpawnTo(NetConnection* conn, const GameObject& obj)
+    {
+        const UUID& uuid = obj.GetComponent<UUIDComponent>().Uuid;
+        uint64_t owner = 0;
+
+        if (obj.HasComponent<NetIdentity>())
+            owner = obj.GetComponent<NetIdentity>().OwnerConnectionId;
+
+        NetPacket pkt(ENetPacketType::Spawn);
+        pkt.Write(uuid);
+        pkt.Write(owner);
+
+        m_Driver->Send(conn, pkt, true);
+    }
+
+    // -------------------------------------------------------------------------
+    void NetScene::SendDespawnTo(NetConnection* conn, const UUID& uuid)
+    {
+        NetPacket pkt(ENetPacketType::Despawn);
+        pkt.Write(uuid);
+
+        m_Driver->Send(conn, pkt, true);
+    }
+}
