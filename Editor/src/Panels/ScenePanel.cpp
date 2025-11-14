@@ -10,8 +10,8 @@
 
 using namespace BoonEditor;
 
-BoonEditor::ScenePanel::ScenePanel(SceneContext* pScene, GameObjectContext* pSelectedGameObject)
-	: EditorPanel("Scene"), m_pSceneContext{pScene}, m_pSelectionContext{pSelectedGameObject}
+BoonEditor::ScenePanel::ScenePanel(const std::string& name, SceneContext* pScene, GameObjectContext* pSelectedGameObject)
+	: EditorPanel(name), m_pSceneContext{pScene}, m_pSelectionContext{pSelectedGameObject}
 {
 }
 

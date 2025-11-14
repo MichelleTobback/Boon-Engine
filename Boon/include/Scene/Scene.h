@@ -1,6 +1,7 @@
 #pragma once
 #include <entt/entt.hpp>
 #include "Core/UUID.h"
+#include "Core/Delegate.h"
 #include "GameObjectID.h"
 #include "Physics/PhysicsWorld2D.h"
 
@@ -42,6 +43,17 @@ namespace Boon
 		void ForeachGameObject(const std::function<void(GameObject)>& fn) const;
 
 		template<typename... Components>
+		void ForeachGameObjectWith(const std::function<void(GameObject)>& fn)
+		{
+			auto view = m_Registry.view<Components...>();
+			for (auto ent : view)
+			{
+				GameObject obj{ ent, this };
+				fn(obj);
+			}
+		}
+
+		template<typename... Components>
 		auto GetAllGameObjectsWith()
 		{
 			return m_Registry.view<Components...>();
@@ -51,6 +63,9 @@ namespace Boon
 
 		inline SceneRegistry& GetRegistry() { return m_Registry; }
 		inline SceneID GetID() const { return m_ID; }
+
+		inline Delegate<void(GameObject)>& GetOnGameObjectSpawned() { return m_OnGameObjectSpawned; }
+		inline Delegate<void(GameObject)>& GetOnGameObjectDestroyed() { return m_OnGameObjectDestroyed; }
 
 	private:
 		friend class PhysicsWorld2D;
@@ -73,6 +88,9 @@ namespace Boon
 		SceneRegistry m_Registry;
 		std::unique_ptr<ECSLifecycleSystem> m_pECSlifecycle;
 		PhysicsWorld2D m_Physics2D;
+
+		Delegate<void(GameObject)> m_OnGameObjectSpawned;
+		Delegate<void(GameObject)> m_OnGameObjectDestroyed;
 
 		SceneID m_ID;
 		std::string m_Name;

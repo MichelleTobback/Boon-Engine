@@ -7,6 +7,8 @@ namespace Boon
     struct PlayerController
     {
     public:
+        BCLASS_BODY()
+
         PlayerController() = default;
 
         void Update(GameObject gameObject);

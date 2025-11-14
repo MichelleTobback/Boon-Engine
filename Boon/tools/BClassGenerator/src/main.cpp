@@ -116,7 +116,7 @@ static std::string inferBTypeId(const std::string& rawType) {
         {"bool",        "BTypeId::Bool"},
         {"char",        "BTypeId::Char"},
         {"std::string", "BTypeId::String"},
-        {"UUID",        "BTypeId::UUID"}
+        {"UUID",        "BTypeId::Int64"}
     };
     auto it = lut.find(t);
     if (it != lut.end()) return it->second;
@@ -226,13 +226,8 @@ static void emitGeneratedFile(const std::string& output, const std::vector<Refle
     out << "// Automatically generated. Do not modify.\n";
     out << "#include \"Reflection/RegisterBClass.h\"\n\n";
 
-    // Make private/protected public during includes so offsetof(Type, Member) compiles
-    out << "#define private   public\n";
-    out << "#define protected public\n";
     for (auto& c : classes)
         out << "#include \"" << c.headerPath << "\"\n";
-    out << "#undef protected\n";
-    out << "#undef private\n\n";
 
     out << "namespace Boon {\n";
     out << "static struct _AutoRegisterAllClasses {\n";

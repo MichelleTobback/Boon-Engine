@@ -4,6 +4,7 @@
 #include "Panels/ScenePanel.h"
 #include "Panels/PropertiesPanel.h"
 #include "Panels/ViewportPanel.h"
+#include "Panels/NetworkPanel.h"
 
 #include "UI/EditorRenderer.h"
 
@@ -30,7 +31,9 @@
 #include <Component/BoxCollider2D.h>
 #include <Component/Rigidbody2D.h>
 
+#include <Networking/NetIdentity.h>
 #include <Networking/NetDriver.h>
+#include <Networking/NetScene.h>
 #include <Platform/Steam/SteamNetDriver.h>
 
 #include "Game/PlayerController.h"
@@ -49,70 +52,24 @@ void EditorState::OnEnter()
 	Window& window{ Application::Get().GetWindow() };
 	AssetLibrary& assetLib{ Assets::Get() };
 
+	m_NetworkSettings.NetMode = Application::Get().GetDescriptor().netDriverMode;
+
 	m_PRenderer = std::make_unique<EditorRenderer>();
 
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 	Scene& scene = sceneManager.CreateScene("Game");
 
-	std::shared_ptr<NetDriver> network = std::make_shared<SteamNetDriver>();
-	ServiceLocator::Register<NetDriver>(network);
-	network->Initialize(Application::Get().GetDescriptor().netDriverMode);
-
-	if (network->GetMode() == ENetDriverMode::Client)
-	{
-		network->Connect("127.0.0.1", 27020);
-
-		network->BindOnConnectedCallback([](NetConnection* pConnection)
-			{
-				NetPacket packet{ ENetPacketType::Ping };
-				packet.WriteString("hello server");
-				pConnection->GetDriver()->Send(pConnection, packet);
-			});
-
-		network->BindOnPacketCallback([](NetConnection* pConnection, NetPacket& packet)
-			{
-				if (packet.GetType() == ENetPacketType::Pong)
-				{
-					std::string result = packet.ReadString();
-					std::cout << result << '\n';
-				}
-			});
-	}
-	else
-	{
-		network->BindOnPacketCallback([](NetConnection* pConnection, NetPacket& packet)
-			{
-				if (packet.GetType() == ENetPacketType::Ping)
-				{
-					std::string result = packet.ReadString();
-					std::cout << result << '\n';
-
-					NetPacket reply{ ENetPacketType::Pong };
-					reply.WriteString("hello client");
-					pConnection->GetDriver()->Send(pConnection, reply);
-				}
-
-				if (packet.GetType() == ENetPacketType::Pong)
-				{
-					std::string result = packet.ReadString();
-					std::cout << result << '\n';
-				}
-			});
-
-		network->BindOnConnectedCallback([](NetConnection* pConnection)
-			{
-				NetPacket packet{ ENetPacketType::Pong };
-				packet.WriteString("this is a broadcast message");
-				pConnection->GetDriver()->Broadcast(packet);
-			});
-	}
-
 	ViewportPanel& viewport = CreatePanel<ViewportPanel>("Viewport", &m_SceneContext, &m_SelectionContext);
 	viewport.GetToolbar()->BindOnPlayCallback(std::bind(&EditorState::OnBeginPlay, this));
 	viewport.GetToolbar()->BindOnStopCallback(std::bind(&EditorState::OnStopPlay, this));
 
-	CreatePanel<PropertiesPanel>(&m_SelectionContext);
-	CreatePanel<ScenePanel>(&m_SceneContext, &m_SelectionContext);
+	CreatePanel<PropertiesPanel>("properties", &m_SelectionContext);
+	CreatePanel<ScenePanel>("scene", &m_SceneContext, &m_SelectionContext);
+	CreatePanel<NetworkPanel>("network", m_NetworkSettings);
+
+	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	std::shared_ptr<NetDriver> network = std::make_shared<SteamNetDriver>();
+	ServiceLocator::Register<NetDriver>(network);
 
 	GameObject camera = scene.Instantiate({ 0.f, 0.f, 1.f });
 	camera.AddComponent<CameraComponent>(Camera(4.f, 2.f, 0.1f, 1.f), false).Active = true;
@@ -142,6 +99,8 @@ void EditorState::OnEnter()
 
 		quad.AddComponent<PlayerController>();
 		quad.GetComponent<NameComponent>().Name = "Player";
+
+		quad.AddComponent<NetIdentity>();
 	}
 
 	//floor
@@ -171,7 +130,6 @@ void EditorState::OnEnter()
 		trigger.GetComponent<NameComponent>().Name = "Trigger";
 	}
 
-	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	m_SceneChangedEvent = eventBus.Subscribe<SceneChangedEvent>([this](const SceneChangedEvent& e)
 		{
 			SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
@@ -235,7 +193,7 @@ void EditorState::OnRender()
 {
 	m_PRenderer->BeginFrame();
 	
-	for (auto& pPanel : m_Panels)
+	for (auto& [name, pPanel] : m_Panels)
 	{
 		pPanel->RenderUI();
 	}
@@ -245,6 +203,8 @@ void EditorState::OnRender()
 
 void EditorState::OnBeginPlay()
 {
+	StartNetwork();
+
 	m_PlayState = EditorPlayState::Play;
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 
@@ -259,6 +219,8 @@ void EditorState::OnBeginPlay()
 
 void EditorState::OnStopPlay()
 {
+	StopNetwork();
+
 	m_PlayState = EditorPlayState::Edit;
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 
@@ -268,4 +230,60 @@ void EditorState::OnStopPlay()
 
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	eventBus.Post(EditorPlayStateChangeEvent(m_PlayState));
+}
+
+void EditorState::StartNetwork()
+{
+	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	NetDriver& network = ServiceLocator::Get<NetDriver>();
+
+	network.Initialize(m_NetworkSettings);
+	if (!network.IsStandalone())
+	{
+		network.BindOnConnectedCallback([this](NetConnection* pConnection) {OnConnected(pConnection); });
+		network.BindOnDisconnectedCallback([this](NetConnection* pConnection) {OnDisconnected(pConnection); });
+		network.BindOnPacketCallback([this](NetConnection* pConnection, NetPacket& packet) { OnPacketReceived(pConnection, packet); });
+
+		m_BindNetSceneEvent = eventBus.Subscribe<SceneChangedEvent>([](const SceneChangedEvent& e)
+			{
+				Scene& scene = ServiceLocator::Get<SceneManager>().GetActiveScene();
+				auto& network = ServiceLocator::Get<NetDriver>();
+				auto pScene{ std::make_shared<NetScene>(&scene, &network) };
+				network.BindScene(pScene);
+			});
+
+		if (network.IsClient())
+		{
+			network.Connect(m_NetworkSettings.Ip.c_str(), m_NetworkSettings.Port);
+		}
+
+		NetworkPanel& net = GetPanel<NetworkPanel>("network");
+		net.SetDriver(&network);
+	}
+}
+
+void EditorState::StopNetwork()
+{
+	NetworkPanel& net = GetPanel<NetworkPanel>("network");
+	net.SetDriver(nullptr);
+
+	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	eventBus.Unsubscribe<SceneChangedEvent>(m_BindNetSceneEvent);
+	NetDriver& network = ServiceLocator::Get<NetDriver>();
+	network.Shutdown();
+}
+
+void EditorState::OnConnected(NetConnection* pConnection)
+{
+	
+}
+
+void EditorState::OnDisconnected(NetConnection* pConnection)
+{
+
+}
+
+void EditorState::OnPacketReceived(NetConnection* pConnection, NetPacket& packet)
+{
+
 }

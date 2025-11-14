@@ -30,8 +30,10 @@ namespace Boon
     // Initialization
     // -------------------------------------------------------------------------
 
-    bool SteamNetDriver::Initialize(ENetDriverMode mode)
+    bool SteamNetDriver::Initialize(const NetworkSettings& settings)
     {
+        m_Settings = settings;
+
         SteamDatagramErrMsg err;
         if (!GameNetworkingSockets_Init(nullptr, err))
         {
@@ -40,8 +42,6 @@ namespace Boon
 
         m_Interface = SteamNetworkingSockets();
 
-        m_Mode = mode;
-
         // Create poll group
         m_PollGroup = m_Interface->CreatePollGroup();
         if (m_PollGroup == k_HSteamNetPollGroup_Invalid)
@@ -49,13 +49,14 @@ namespace Boon
             std::cerr << "Failed to create poll group\n";
             return false;
         }
+        ENetDriverMode mode = m_Settings.NetMode;
 
         // Start server
         if (mode == ENetDriverMode::DedicatedServer || mode == ENetDriverMode::ListenServer)
         {
             SteamNetworkingIPAddr addr;
             addr.Clear();
-            addr.m_port = 27020;
+            addr.m_port = m_Settings.Port;
 
             SteamNetworkingConfigValue_t opt;
             opt.SetPtr(k_ESteamNetworkingConfig_Callback_ConnectionStatusChanged, (void*)SteamNetDriver::StaticOnConnectionStatusChanged);
@@ -72,6 +73,8 @@ namespace Boon
 
         s_Instance = this;
 
+        if (m_OnStartup) m_OnStartup(this);
+
         return true;
     }
 
@@ -80,6 +83,8 @@ namespace Boon
     {
         if (!m_Interface)
             return;
+
+        if (m_OnShutdown) m_OnShutdown(this);
 
         for (auto& [id, dc] : m_Connections)
         {
@@ -102,15 +107,22 @@ namespace Boon
 
         GameNetworkingSockets_Kill();
 
+        m_LocalConnectionId = 0;
         s_Instance = nullptr;
     }
 
     // -------------------------------------------------------------------------
     void SteamNetDriver::Update()
     {
+        if (!s_Instance)
+            return;
+
         m_Interface->RunCallbacks();
         ProcessIncomingMessages();
         UpdateConnections();
+
+        if (m_Scene)
+            m_Scene->Update();
     }
 
     // -------------------------------------------------------------------------
@@ -120,9 +132,9 @@ namespace Boon
     bool SteamNetDriver::Connect(const char* host, uint16_t port)
     {
         SteamNetworkingIPAddr addr;
-        addr.Clear();
-        addr.ParseString((std::string(host) + ":" + std::to_string(port)).c_str());
-        addr.m_port = port;
+        std::string ip = std::string(host);
+        if (ip == "localhost") ip = "127.0.0.1";
+        addr.ParseString((ip + ":" + std::to_string(port)).c_str());
 
         SteamNetworkingConfigValue_t opt;
         opt.SetPtr(k_ESteamNetworkingConfig_Callback_ConnectionStatusChanged, (void*)SteamNetDriver::StaticOnConnectionStatusChanged);
@@ -177,6 +189,9 @@ namespace Boon
 
                 // Wrap in NetPacket
                 NetPacket pkt((uint8_t*)msg->m_pData, msg->m_cbSize);
+
+                if (m_Scene)
+                    m_Scene->ProcessPacket(conn, pkt);
 
                 if (m_OnPacket)
                     m_OnPacket(conn, pkt);
@@ -262,7 +277,7 @@ namespace Boon
         switch (info->m_info.m_eState)
         {
         case k_ESteamNetworkingConnectionState_Connecting:
-            if (m_Mode != ENetDriverMode::Client)
+            if (!IsClient())
                 AcceptConnection(hConn);
             break;
 
@@ -328,6 +343,19 @@ namespace Boon
         if (it == m_Connections.end())
             return nullptr;
         return it->second.conn.get();
+    }
+
+    void SteamNetDriver::ForeachConnection(const std::function<void(NetConnection*)>& fn)
+    {
+        for (auto& c : m_Connections)
+        {
+            fn(c.second.conn.get());
+        }
+    }
+
+    uint32_t SteamNetDriver::GetConnectionCount() const
+    {
+        return m_Connections.size();
     }
 
     void SteamNetDriver::UpdateConnections()

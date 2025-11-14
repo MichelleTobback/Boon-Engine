@@ -3,6 +3,9 @@
 
 #include <imgui.h>
 #include <string>
+#include <algorithm>
+
+using namespace Boon;
 
 namespace BoonEditor
 {
@@ -315,20 +318,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::Checkbox("##val", &value))
             {
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -337,20 +334,14 @@ namespace BoonEditor
 		{
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::DragFloat("##val", &value, step, min, max, "%.2f"))
             {
                 result = true;
             }
 
-            ImGui::Columns(1); 
-            ImGui::PopID();
+            EndProperty();
 
             return result;
 		}
@@ -359,20 +350,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::DragFloat2("##val", &value.x, step, min, max, "%.2f"))
             {
                 result = true;
             }
 
-            ImGui::Columns(1); 
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -381,20 +366,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::DragFloat3("##val", &value.x, step, min, max, "%.2f"))
             {
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -403,20 +382,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::DragFloat4("##val", &value.x, step, min, max, "%.2f"))
             {
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -425,20 +398,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::DragInt("##val", &value, speed, min, max))
             {
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -447,20 +414,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::DragInt2("##val", &value.x, speed, min, max))
             {
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -469,20 +430,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::DragInt3("##val", &value.x, speed, min, max))
             {
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -491,20 +446,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::DragInt4("##val", &value.x, speed, min, max))
             {
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -514,20 +463,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::SliderFloat("##val", &value, min, max, "%.2f"))
             {
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -536,20 +479,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::SliderFloat2("##val", &value.x, min, max, "%.2f"))
             {
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -558,20 +495,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::SliderFloat3("##val", &value.x, min, max, "%.2f"))
             {
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -580,20 +511,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::SliderFloat4("##val", &value.x, min, max, "%.2f"))
             {
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -602,20 +527,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::SliderInt("##val", &value, min, max))
             {
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -624,20 +543,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::SliderInt2("##val", &value.x, min, max))
             {
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -646,20 +559,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::SliderInt3("##val", &value.x, min, max))
             {
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -668,20 +575,14 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             if (ImGui::SliderInt4("##val", &value.x, min, max))
             {
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -690,12 +591,7 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             ImGuiColorEditFlags flags =
                 ImGuiColorEditFlags_DisplayRGB |
@@ -707,8 +603,7 @@ namespace BoonEditor
                 result = true;
             }
 
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -717,12 +612,7 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
+            BeginProperty(label);
 
             ImGuiColorEditFlags flags =
                 ImGuiColorEditFlags_DisplayRGB |
@@ -733,9 +623,7 @@ namespace BoonEditor
             {
                 result = true;
             }
-
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
@@ -744,22 +632,157 @@ namespace BoonEditor
         {
             bool result = false;
 
-            ImGui::PushID(label.c_str());
-
-            ImGui::Columns(2);
-            ImGui::SetColumnWidth(0, 100.f);
-            ImGui::Text("%s", label.c_str());
-            ImGui::NextColumn();
-
+            BeginProperty(label);
             if (ImGui::Combo("##val", &currentItem, items, count))
             {
                 result = true;
             }
-
-            ImGui::Columns(1);
-            ImGui::PopID();
+            EndProperty();
 
             return result;
         }
+
+        static bool Field(const std::string& label, std::string& value)
+        {
+            bool result = false;
+
+            BeginProperty(label);
+            char buffer[256];
+            strncpy(buffer, value.c_str(), sizeof(buffer));
+            buffer[sizeof(buffer) - 1] = '\0';
+
+            if (ImGui::InputText("##val", buffer, sizeof(buffer)))
+            {
+                value = buffer;
+                result = true;
+            }
+            EndProperty();
+
+            return result;
+        }
+
+        static bool Input(const std::string& label, int& value)
+        {
+            bool result = false;
+
+            BeginProperty(label);
+            if (ImGui::InputInt("##val", &value))
+            {
+                result = true;
+            }
+            EndProperty();
+
+            return result;
+        }
+
+        static bool InputDigits(const std::string& label, int& value, int digits)
+        {
+            bool changed = false;
+
+            BeginProperty(label);
+
+            digits = std::clamp(digits, 1, 10);
+
+            ImGui::PushID(label.c_str());
+
+            // Layout calc
+            float fullWidth = ImGui::GetContentRegionMax().x * 0.65f;
+            float spacing = ImGui::GetStyle().ItemInnerSpacing.x;
+            float digitWidth = (fullWidth - spacing * (digits - 1)) / digits;
+
+            // --- Persistent digit storage ---
+            ImGuiStorage* storage = ImGui::GetStateStorage();
+            ImGuiID base = ImGui::GetID("digits");
+
+            // Whether any digit is currently being edited
+            bool anyActive = false;
+
+            // Load stored digits, but only if not active
+            std::vector<int> digitVals(digits);
+            bool stored = storage->GetBool(base + 99999, false);
+
+            if (!stored) {
+                // initialize digit storage
+                int temp = abs(value);
+                for (int i = digits - 1; i >= 0; --i) {
+                    digitVals[i] = temp % 10;
+                    temp /= 10;
+                    storage->SetInt(base + i, digitVals[i]);
+                }
+                storage->SetBool(base + 99999, true);
+            }
+            else {
+                // load current stored digits
+                for (int i = 0; i < digits; ++i)
+                    digitVals[i] = storage->GetInt(base + i, 0);
+            }
+
+            // --- Draw digits ---
+            ImGui::BeginGroup();
+            for (int i = 0; i < digits; ++i)
+            {
+                ImGui::PushID(i);
+
+                ImGui::SetNextItemWidth(digitWidth);
+                int v = digitVals[i];
+                if (ImGui::DragInt("##val", &v, 0.6, 0, 9))
+                {
+                    v = std::clamp(v, 0, 9);
+                    digitVals[i] = v;
+                    storage->SetInt(base + i, v);
+                    changed = true;
+                }
+
+                if (ImGui::IsItemActive())
+                    anyActive = true;
+
+                ImGui::PopID();
+                if (i < digits - 1)
+                    ImGui::SameLine(0.0f, spacing);
+            }
+            ImGui::EndGroup();
+
+            // --- Only recompute value when NONE are active ---
+            if (!anyActive)
+            {
+                int newValue = 0;
+                for (int i = 0; i < digits; ++i)
+                    newValue = newValue * 10 + digitVals[i];
+
+                if (newValue != value)
+                {
+                    value = newValue;
+                    changed = true;
+                }
+            }
+
+            ImGui::PopID();
+            EndProperty();
+
+            return changed;
+        }
+
+
+
+        private:
+            static void BeginProperty(const std::string& label)
+            {
+                ImGui::PushID(label.c_str());
+
+                float panelWidth = ImGui::GetContentRegionAvail().x;
+
+                ImGui::Columns(2);
+                ImGui::SetColumnWidth(0, panelWidth * 0.3f);
+                ImGui::Text("%s", label.c_str());
+                ImGui::NextColumn();
+
+                ImGui::PushItemWidth(panelWidth * 0.65f);
+            }
+            static void EndProperty()
+            {
+                ImGui::PopItemWidth();
+                ImGui::Columns(1);
+                ImGui::PopID();
+            }
 	};
 }

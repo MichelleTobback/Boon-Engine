@@ -10,7 +10,7 @@
 namespace Boon
 {
     // Optional logging hook if you want printed output:
-    inline void BnAssertFail(const char* expr, const char* msg, const char* file, int line)
+    inline void BnAssertFail(const char* /*expr*/, const char* /*msg*/, const char* /*file*/, int /*line*/)
     {
         // You can replace this with your logger:
         // printf("ASSERT FAILED: %s | %s | %s:%d\n", expr, msg, file, line);

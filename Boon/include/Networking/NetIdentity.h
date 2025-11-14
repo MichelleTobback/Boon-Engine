@@ -1,6 +1,7 @@
 #pragma once
 #include "Core/UUID.h"
 #include "NetAuthority.h"
+#include "Core/Boon.h"
 
 namespace Boon
 {
@@ -13,9 +14,13 @@ namespace Boon
     //  - OwnerConnection  = Which client owns this object
     //  - Role             = How this GameObject behaves on this machine
     // ----------------------------------------------------------------------------------------
+    BCLASS()
     struct NetIdentity
     {
+        BPROPERTY()
         UUID NetId;
+
+        BPROPERTY()
         uint64_t OwnerConnectionId = 0;
 
         ENetRole Role = ENetRole::None;

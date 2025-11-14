@@ -6,12 +6,14 @@
 #include <optional>
 #include <utility>
 
-namespace Boon {
+namespace Boon 
+{
 
     enum class BTypeId : uint8_t
     {
         Unknown,
         Int,
+        Int64,
         Float,
         Bool,
         String,

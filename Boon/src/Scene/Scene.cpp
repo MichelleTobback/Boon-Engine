@@ -30,6 +30,8 @@ GameObject Boon::Scene::Instantiate(UUID uuid, GameObjectID id)
 	instance.AddComponent<NameComponent>("GameObject");
 	m_EntityMap[uuid] = handle;
 
+	m_OnGameObjectSpawned.Invoke(instance);
+
 	return instance;
 }
 
@@ -48,6 +50,9 @@ GameObject Boon::Scene::Instantiate(const glm::vec3& pos)
 
 	instance.AddComponent<TransformComponent>(&sceneComp).SetLocalPosition(pos);
 	instance.AddComponent<NameComponent>("GameObject");
+
+	m_OnGameObjectSpawned.Invoke(instance);
+
 	return instance;
 }
 
@@ -60,6 +65,8 @@ GameObject Boon::Scene::Instantiate(UUID uuid, const glm::vec3& pos)
 	instance.AddComponent<TransformComponent>(&sceneComp).SetLocalPosition(pos);
 	instance.AddComponent<NameComponent>("GameObject");
 	m_EntityMap[uuid] = handle;
+
+	m_OnGameObjectSpawned.Invoke(instance);
 
 	return instance;
 }
@@ -159,4 +166,5 @@ void Boon::Scene::ForeachGameObject(const std::function<void(GameObject)>& fn)
 void Boon::Scene::DestroyGameObject(GameObject object)
 {
 	m_ObjectsPendingDestroy.push(object.GetUUID());
+	m_OnGameObjectDestroyed.Invoke(object);
 }

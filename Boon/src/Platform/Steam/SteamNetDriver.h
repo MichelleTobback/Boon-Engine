@@ -3,13 +3,13 @@
 #include "Networking/NetDriver.h"
 #include "Networking/NetPacket.h"
 #include "Networking/NetConnection.h"
+#include "Networking/NetworkSettings.h"
 
 #include <steam/isteamnetworkingsockets.h>
 #include <steam/isteamnetworkingutils.h>
 
 #include <unordered_map>
 #include <functional>
-#include <memory>
 
 namespace Boon
 {
@@ -24,7 +24,7 @@ namespace Boon
         // ---------------------------------------------------------
         // Interface Implementation
         // ---------------------------------------------------------
-        bool Initialize(ENetDriverMode mode) override;
+        bool Initialize(const NetworkSettings& settings) override;
         void Shutdown() override;
 
         void Update() override;
@@ -32,20 +32,26 @@ namespace Boon
         void Send(NetConnection* conn, NetPacket& pkt, bool reliable = true) override;
         void Broadcast(NetPacket& pkt, bool reliable = true) override;
 
-        void BindOnPacketCallback(const PacketCallback& fn) override { m_OnPacket = fn; }
-        void BindOnConnectedCallback(const ConnectionCallback& fn) override { m_OnConnected = fn; }
-        void BindOnDisconnectedCallback(const ConnectionCallback& fn) override { m_OnDisconnected = fn; }
+        virtual void BindOnStartupCallback(const NetDriverCallback& fn) override { m_OnStartup = fn; }
+        virtual void BindOnShutdownCallback(const NetDriverCallback& fn) override { m_OnShutdown = fn; }
+        virtual void BindOnPacketCallback(const PacketCallback& fn) override { m_OnPacket = fn; }
+        virtual void BindOnConnectedCallback(const ConnectionCallback& fn) override { m_OnConnected = fn; }
+        virtual void BindOnDisconnectedCallback(const ConnectionCallback& fn) override { m_OnDisconnected = fn; }
 
-        bool IsServer() const { return m_Mode == ENetDriverMode::DedicatedServer || m_Mode == ENetDriverMode::ListenServer; }
-        bool IsClient() const { return m_Mode == ENetDriverMode::Client; }
-        bool IsListenServer() const { return m_Mode == ENetDriverMode::ListenServer; }
-
-        void BindScene(NetScene* scene) override { m_Scene = scene; }
+        void BindScene(const std::shared_ptr<NetScene>& scene) override { m_Scene = scene; }
 
         NetConnection* GetConnection(uint64_t id) override;
+        virtual void ForeachConnection(const std::function<void(NetConnection*)>& fn) override;
+        virtual uint32_t GetConnectionCount() const override;
 
-        ENetDriverMode GetMode() const override { return m_Mode; }
+        inline virtual bool IsStandalone() const override { return m_Settings.NetMode == ENetDriverMode::Standalone; }
+        inline virtual bool IsClient() const override { return m_Settings.NetMode == ENetDriverMode::Client; }
+        inline virtual bool IsServer() const override { return m_Settings.NetMode == ENetDriverMode::DedicatedServer || m_Settings.NetMode == ENetDriverMode::ListenServer; }
+
+        ENetDriverMode GetMode() const override { return m_Settings.NetMode; }
         uint64_t GetLocalConnectionId() const override { return m_LocalConnectionId; }
+
+        const NetworkSettings& GetSettings() const { return m_Settings; }
 
         // Client connect
         virtual bool Connect(const char* host, uint16_t port) override;
@@ -57,6 +63,8 @@ namespace Boon
         void HandleConnectionStatusChanged(const SteamNetConnectionStatusChangedCallback_t* info);
 
     private:
+        NetworkSettings m_Settings{};
+
         // ---------------------------------------------------------
         // Steam Networking Handles
         // ---------------------------------------------------------
@@ -68,8 +76,7 @@ namespace Boon
         // ---------------------------------------------------------
         // Driver state
         // ---------------------------------------------------------
-        ENetDriverMode m_Mode = ENetDriverMode::Standalone;
-        NetScene* m_Scene = nullptr;
+        std::shared_ptr<NetScene> m_Scene = nullptr;
 
         uint64_t m_LocalConnectionId = 0;
 
@@ -91,6 +98,8 @@ namespace Boon
         PacketCallback m_OnPacket;
         ConnectionCallback m_OnConnected;
         ConnectionCallback m_OnDisconnected;
+        NetDriverCallback m_OnStartup;
+        NetDriverCallback m_OnShutdown;
 
         // ---------------------------------------------------------
         // Helpers

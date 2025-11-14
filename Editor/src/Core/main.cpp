@@ -7,7 +7,7 @@ using namespace BoonEditor;
 Boon::ENetDriverMode ParseDriverModeFromArgs(int argc, char** argv)
 {
     // Default
-    Boon::ENetDriverMode mode = Boon::ENetDriverMode::ListenServer;
+    Boon::ENetDriverMode mode = Boon::ENetDriverMode::DedicatedServer;
 
     if (argc <= 1)
         return mode;

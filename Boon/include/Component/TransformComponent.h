@@ -18,6 +18,8 @@ namespace Boon
 	class TransformComponent
 	{
 	public:
+		BCLASS_BODY()
+
 		enum class TransformFlag : uint32_t
 		{
 			None = 0,
@@ -94,6 +96,8 @@ namespace Boon
 		void RecalculateRight();
 
 		glm::mat4 m_WorldTransform{};
+
+		BPROPERTY(Replicated)
 		glm::vec3 m_LocalPosition{};
 		glm::vec3 m_WorldPosition{};
 		glm::quat m_LocalRotQ{};

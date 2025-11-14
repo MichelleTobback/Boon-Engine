@@ -6,6 +6,7 @@
 #include <functional>
 #include <vector>
 #include <optional>
+#include <xhash>
 #include "BProperty.h"
 
 namespace Boon
@@ -22,8 +23,13 @@ namespace Boon
     struct BClass
     {
         BClass(std::string _name, std::type_index _type)
-            : name(_name), type(_type) {}
+            : name(_name), type(_type)
+        {
+            std::hash<std::string> hasher;
+            hash = (uint32_t)hasher(_name);
+        }
 
+        uint32_t hash;
         std::string name;
         std::type_index type;
         std::vector<BClassMeta> meta;

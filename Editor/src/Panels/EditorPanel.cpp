@@ -39,8 +39,10 @@ bool BoonEditor::EditorPanel::RenderFloat3Control(const std::string& label, glm:
 
 	ImGui::PushID(label.c_str());
 
+	float panelWidth = ImGui::GetContentRegionAvail().x;
+
 	ImGui::Columns(2);
-	ImGui::SetColumnWidth(0, columnWidth);
+	ImGui::SetColumnWidth(0, panelWidth * 0.3f);
 	ImGui::Text(label.c_str());
 	ImGui::NextColumn();
 
