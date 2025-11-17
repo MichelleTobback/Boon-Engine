@@ -14,6 +14,8 @@ namespace Boon
     //  - OwnerConnection  = Which client owns this object
     //  - Role             = How this GameObject behaves on this machine
     // ----------------------------------------------------------------------------------------
+    class NetScene;
+
     BCLASS()
     struct NetIdentity
     {
@@ -27,6 +29,8 @@ namespace Boon
 
         bool bReplicates = true;
         bool bSpawned = false;
+
+        NetScene* pScene;
 
         bool IsAuthority() const { return Role == ENetRole::Authority; }
         bool IsAutonomousProxy() const { return Role == ENetRole::AutonomousProxy; }

@@ -13,6 +13,7 @@ namespace Boon
     class NetDriver;
     class NetConnection;
     class NetRepCore;
+    class NetRPC;
 
     class NetScene
     {
@@ -45,6 +46,7 @@ namespace Boon
 
         inline Scene& GetScene() { return *m_Scene; }
         inline NetDriver* GetDriver() { return m_Driver; }
+        inline NetRPC* GetRPC() { return m_RPC.get(); }
 
     private:
         void HandleSpawnPacket(NetConnection* sender, NetPacket& pkt);
@@ -57,6 +59,7 @@ namespace Boon
     private:
         Scene* m_Scene = nullptr;
         NetDriver* m_Driver = nullptr;
+        std::unique_ptr<NetRPC> m_RPC = nullptr;
         std::unique_ptr<NetRepCore> m_Replication = nullptr;
 
         // Objects that server spawned at runtime

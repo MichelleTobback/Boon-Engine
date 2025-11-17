@@ -1,4 +1,5 @@
-﻿#include "Reflection/BClass.h"
+﻿#pragma once
+#include "Reflection/BClass.h"
 #include "Core/Memory/Buffer.h"
 #include "Networking/IRepSerializer.h"
 
@@ -18,23 +19,31 @@ namespace Boon
 
     struct ReplicatedClass
     {
-        ~ReplicatedClass()
-        {
-            //if (serializer)
-            //    delete serializer;
-        }
+        ~ReplicatedClass() {}
 
         const BClass* cls;
         std::shared_ptr<IRepSerializer> serializer = nullptr;
 
         size_t size = 0;
 
-        // Static: flag -> reflected replicated fields
+        // Replication sets (31 flags per set)
         std::vector<std::unordered_map<uint32_t, ReplicatedField>> fields;
 
-        const ReplicatedField& GetField(uint32_t index, uint16_t set = 0)
+        // -----------------------------
+        // RPC SUPPORT
+        // -----------------------------
+        std::unordered_map<uint32_t, const BFunction*> serverRPCs;
+        std::unordered_map<uint32_t, const BFunction*> clientRPCs;
+
+        inline const BFunction* FindServerRPC(uint32_t id) const
         {
-            return fields[set][index];
+            auto it = serverRPCs.find(id);
+            return it == serverRPCs.end() ? nullptr : it->second;
+        }
+        inline const BFunction* FindClientRPC(uint32_t id) const
+        {
+            auto it = clientRPCs.find(id);
+            return it == clientRPCs.end() ? nullptr : it->second;
         }
     };
 
@@ -53,44 +62,58 @@ namespace Boon
             obj.serializer = std::shared_ptr<IRepSerializer>(std::move(pSerializer));
             obj.size = 0;
 
-            // A "property set" contains up to 31 properties → 31 bits of dirtyFlags
+            // A "property set" contains up to 31 properties
             std::unordered_map<uint32_t, ReplicatedField> currentSet;
             currentSet.reserve(31);
 
             uint32_t nextFlagBit = 1;
 
+            // Build replication layout
             cls->ForEachProperty([&](const BProperty& prop)
                 {
                     if (!prop.HasMeta("Replicated"))
                         return;
 
-                    // Start a new set if current one is full
                     if (currentSet.size() >= 31)
                     {
                         obj.fields.push_back(std::move(currentSet));
-                        currentSet = {};
+                        currentSet.clear();
                         currentSet.reserve(31);
                         nextFlagBit = 1;
                     }
 
-                    // Build replicated field descriptor
                     ReplicatedField rf{};
                     rf.pProp = &prop;
                     rf.Packedoffset = (uint32_t)obj.size;
 
-                    // Insert into current set
                     currentSet[nextFlagBit] = rf;
 
-                    // Advance running offset (snapshot layout)
                     obj.size += prop.size;
-
-                    nextFlagBit <<= 1; // next bit flag
+                    nextFlagBit <<= 1;
                 });
 
-            // Push final set if any
             if (!currentSet.empty())
                 obj.fields.push_back(std::move(currentSet));
 
+            // ------------------------------------------
+            // RPC DETECTION
+            // ------------------------------------------
+            for (auto& fn : cls->functions)
+            {
+                for (auto& meta : fn.meta)
+                {
+                    if (meta.key == "RPC")
+                    {
+                        if (meta.value == "Server")
+                            obj.serverRPCs[fn.id] = &fn;
+
+                        else if (meta.value == "Client")
+                            obj.clientRPCs[fn.id] = &fn;
+                    }
+                }
+            }
+
+            // Register
             m_ReplicatedClasses[cls->hash] = std::move(obj);
         }
 

@@ -10,6 +10,8 @@
 #include <Component/SpriteAnimatorComponent.h>
 
 #include <Networking/NetIdentity.h>
+#include <Networking/NetScene.h>
+#include <Networking/NetRPC.h>
 
 #include "Reflection/BClass.h"
 
@@ -26,18 +28,18 @@ void PlayerController::Update(GameObject gameObject)
 {
     // Input only
     Input& input = ServiceLocator::Get<Input>();
-    m_MoveInput = { 0.0f, 0.0f };
+    glm::vec2 movement{};
 
     // Horizontal movement
     if (input.IsKeyHeld(Key::A))
     {
-        m_MoveInput.x = -1.0f;
+        movement.x = -1.0f;
         m_Direction = Direction::Left;
         gameObject.GetTransform().SetLocalScale(-1.f, 1.f, 1.f);
     }
     else if (input.IsKeyHeld(Key::D))
     {
-        m_MoveInput.x = 1.0f;
+        movement.x = 1.0f;
         m_Direction = Direction::Right;
         gameObject.GetTransform().SetLocalScale(1.f, 1.f, 1.f);
     }
@@ -45,12 +47,14 @@ void PlayerController::Update(GameObject gameObject)
     Rigidbody2D& rb = gameObject.GetComponent<Rigidbody2D>();
     if (m_IsGrounded && input.IsKeyPressed(Key::Space))
     {
-        BClassRegistry::Get().Find<PlayerController>()->InvokeByName(this, "Jump");
+        BClassRegistry::Get().Find<Boon::PlayerController>()->InvokeByName(this, "Jump");
     }
 
     // Normalize
-    if (glm::length(m_MoveInput) > 1.0f)
-        m_MoveInput = glm::normalize(m_MoveInput);
+    if (glm::length(movement) >= 1.0f)
+        Move(glm::normalize(movement));
+    else if (glm::length(m_MoveInput) >= 1.0f)
+        Move({});
 
     SpriteAnimatorComponent& anim = gameObject.GetComponent<SpriteAnimatorComponent>();
     anim.SetClip((std::abs(rb.GetVelocity().x) > 0.001f || rb.GetVelocity().y >= 0.01f) ? 2 : 1);
@@ -97,10 +101,44 @@ void PlayerController::OnEndOverlap(GameObject gameObject, GameObject other)
     std::cout << "End overlap\n";
 }
 
-void PlayerController::Jump()
+void PlayerController::Jump_Server()
 {
     Rigidbody2D& rb = m_Owner.GetComponent<Rigidbody2D>();
     rb.AddForce({ 0.0f, rb.GetMass() * m_JumpForce }, Rigidbody2D::ForceMode::Impulse);
+}
+
+void PlayerController::Jump()
+{
+    NetIdentity& ni = m_Owner.GetComponent<NetIdentity>();
+    if (ni.IsAutonomousProxy() || ni.IsSimulatedProxy())
+    {
+        BClassID clsId = BClassRegistry::Get().Find<PlayerController>()->hash;
+        ni.pScene->GetRPC()->CallServer(clsId, FNV1a32("Jump_Server"), m_Owner.GetUUID(), {});
+        return;
+    }
+
+    Rigidbody2D& rb = m_Owner.GetComponent<Rigidbody2D>();
+    rb.AddForce({ 0.0f, rb.GetMass() * m_JumpForce }, Rigidbody2D::ForceMode::Impulse);
+}
+
+void PlayerController::Move_Server(glm::vec2 dir)
+{
+    m_MoveInput = dir;
+}
+
+void PlayerController::Move(const glm::vec2& dir)
+{
+    NetIdentity& ni = m_Owner.GetComponent<NetIdentity>();
+    if (ni.IsAutonomousProxy() || ni.IsSimulatedProxy())
+    {
+        BClassID clsId = BClassRegistry::Get().Find<PlayerController>()->hash;
+        Variant var{};
+        var.Set<glm::vec2>(dir);
+        ni.pScene->GetRPC()->CallServer(clsId, FNV1a32("Move_Server"), m_Owner.GetUUID(), { var });
+        return;
+    }
+
+    m_MoveInput = dir;
 }
 
 void PlayerController::CheckGrounded(GameObject gameObject)

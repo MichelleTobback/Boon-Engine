@@ -38,6 +38,7 @@ namespace Boon
         // -----------------------------------------------------------------
         virtual void Send(NetConnection* conn, NetPacket& pkt, bool reliable = true) = 0;
         virtual void Broadcast(NetPacket& pkt, bool reliable = true) = 0;
+        virtual void SendToServer(NetPacket& pkt, bool reliable = true) = 0;
 
         // -----------------------------------------------------------------
         // Callback binding

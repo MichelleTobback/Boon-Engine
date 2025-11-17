@@ -66,6 +66,18 @@ struct ReflectedFunction
     std::string name;                       // function name
     std::vector<ReflectedFunctionMeta> meta;
     std::vector<ReflectedFunctionParam> params;
+
+    static bool ValidMeta(const std::string& meta)
+    {
+        static const std::unordered_set<std::string> minimalMeta{
+            "RPC"
+        };
+        static const std::unordered_set<std::string> fullMeta{
+            "RPC"
+        };
+        const auto& active = g_BoonMinimal ? minimalMeta : fullMeta;
+        return active.find(meta) != active.end();
+    }
 };
 
 struct ReflectedClass 
@@ -339,9 +351,12 @@ static std::vector<ReflectedClass> parseSourceFiles(const std::vector<std::strin
                 {
                     ReflectedFunction f;
                     f.name = (*fit)[3].str();   // function name
-                    auto metaVec = parseMetadataList<Property>((*fit)[1].str());
+                    auto metaVec = parseMetadataList<ReflectedFunction>((*fit)[1].str());
                     for (auto& kv : metaVec)
                     {
+                        if (kv.key == "RPC")
+                            replicates = true;
+
                         f.meta.push_back({ kv.key, kv.value });
                     }
                     f.params = parseFunctionParams((*fit)[4].str());
@@ -410,21 +425,6 @@ static void emitGeneratedFile(const std::string& output, const std::vector<Refle
         out << "        // " << c.nsQualifiedName << "\n";
         out << "        {\n";
         out << "            BClass* cls = RegisterBClass<" << c.nsQualifiedName << ">(\"" << c.name <<"\");\n";
-
-        // class metadata
-        for (auto& cm : c.classMeta) {
-            if (cm.key == "Replicated")
-            {
-                if (cm.value.empty())
-                    out << "            NetRepRegistry::Get().Register(cls);\n";
-                else
-                    out << "            NetRepRegistry::Get().Register(cls, new "<< cm.value << "());\n";
-            }
-            else if (cm.value.empty())
-                out << "            cls->AddMeta(\"" << cm.key << "\");\n";
-            else
-                out << "            cls->AddMeta(\"" << cm.key << "\", \"" << cm.value << "\");\n";
-        }
 
         for (auto& p : c.properties) {
             const std::string typeId = inferBTypeId(p.type);
@@ -519,6 +519,21 @@ static void emitGeneratedFile(const std::string& output, const std::vector<Refle
                 out << "                {}\n";
 
             out << "            );\n";
+        }
+
+        // class metadata
+        for (auto& cm : c.classMeta) {
+            if (cm.key == "Replicated")
+            {
+                if (cm.value.empty())
+                    out << "            NetRepRegistry::Get().Register(cls);\n";
+                else
+                    out << "            NetRepRegistry::Get().Register(cls, new " << cm.value << "());\n";
+            }
+            else if (cm.value.empty())
+                out << "            cls->AddMeta(\"" << cm.key << "\");\n";
+            else
+                out << "            cls->AddMeta(\"" << cm.key << "\", \"" << cm.value << "\");\n";
         }
 
         out << "        }\n";

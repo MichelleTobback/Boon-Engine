@@ -31,6 +31,7 @@ namespace Boon
 
         void Send(NetConnection* conn, NetPacket& pkt, bool reliable = true) override;
         void Broadcast(NetPacket& pkt, bool reliable = true) override;
+        virtual void SendToServer(NetPacket& pkt, bool reliable = true) override;
 
         virtual void BindOnStartupCallback(const NetDriverCallback& fn) override { m_OnStartup = fn; }
         virtual void BindOnShutdownCallback(const NetDriverCallback& fn) override { m_OnShutdown = fn; }

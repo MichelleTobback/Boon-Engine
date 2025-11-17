@@ -333,6 +333,24 @@ namespace Boon
         }
     }
 
+    void SteamNetDriver::SendToServer(NetPacket& pkt, bool reliable)
+    {
+        if (!IsClient())
+            return;
+
+        auto it = m_Connections.find(1);
+        if (it == m_Connections.end())
+            return;
+
+        m_Interface->SendMessageToConnection(
+            it->second.hConn,
+            pkt.RawData(),
+            pkt.RawSize(),
+            reliable ? k_nSteamNetworkingSend_Reliable : k_nSteamNetworkingSend_Unreliable,
+            nullptr
+        );
+    }
+
     // -------------------------------------------------------------------------
     // Lookup
     // -------------------------------------------------------------------------

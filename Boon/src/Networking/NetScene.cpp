@@ -3,6 +3,7 @@
 #include "Networking/NetIdentity.h"
 #include "Networking/NetConnection.h"
 #include "Networking/NetRepCore.h"
+#include "Networking/NetRPC.h"
 
 #include "Scene/Scene.h"
 #include "Component/UUIDComponent.h"
@@ -10,7 +11,7 @@
 namespace Boon
 {
     NetScene::NetScene(Scene* scene, NetDriver* driver)
-        : m_Scene(scene), m_Driver(driver), m_Replication(std::make_unique<NetRepCore>())
+        : m_Scene(scene), m_Driver(driver), m_Replication(std::make_unique<NetRepCore>()), m_RPC(std::make_unique<NetRPC>(this))
     {
         scene->ForeachGameObjectWith<NetIdentity>([this](GameObject obj){RegisterStaticGameObject(obj); });
 
@@ -46,6 +47,7 @@ namespace Boon
         ni.NetId = id;
         ni.Role = m_Driver->IsServer() ? ENetRole::Authority : ENetRole::SimulatedProxy;
         ni.OwnerConnectionId = 0;
+        ni.pScene = this;
 
         // Static objects are not added to dynamic map
     }
@@ -70,6 +72,7 @@ namespace Boon
         ni.NetId = id;
         ni.Role = ENetRole::Authority;
         ni.OwnerConnectionId = ownerConnection;
+        ni.pScene = this;
 
         m_DynamicOwnership[id] = ownerConnection;
 
@@ -97,6 +100,7 @@ namespace Boon
         ni.NetId = uuid;
         ni.Role = ENetRole::SimulatedProxy;
         ni.OwnerConnectionId = ownerConnection;
+        ni.pScene = this;
 
         m_DynamicOwnership[uuid] = ownerConnection;
 
@@ -122,6 +126,8 @@ namespace Boon
             HandleDespawnPacket(sender, pkt); break;
         case ENetPacketType::Replication:
             m_Replication->ProcessPacket(*this, pkt, sender); break;
+        case ENetPacketType::RPC:
+            m_RPC->Process(pkt, m_Driver->IsServer()); break;
         default:
             break;
         }
