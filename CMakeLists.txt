@@ -25,7 +25,7 @@ set(GENERATED_SANDBOX  ${CMAKE_SOURCE_DIR}/Sandbox/generated/Generated_Component
 add_custom_command(
     OUTPUT ${GENERATED_EDITOR}
     DEPENDS BClassGenerator ${BOON_INCLUDE_DIR} ${EDITOR_INCLUDE_DIR}
-    COMMAND BClassGenerator ${GENERATED_EDITOR} ${BOON_INCLUDE_DIR} ${EDITOR_INCLUDE_DIR}
+    COMMAND BClassGenerator ${GENERATED_EDITOR} ${BOON_INCLUDE_DIR} ${EDITOR_INCLUDE_DIR} "--verbose"
     COMMENT "Generating BClass reflection for Editor ..."
 )
 

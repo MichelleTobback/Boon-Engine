@@ -13,6 +13,8 @@ namespace Boon
 
         void Update(GameObject gameObject);
 
+        BFUNCTION() void Jump();
+
         enum class Direction
         {
             Left, Right

@@ -122,7 +122,7 @@ namespace Boon
                         if (comp.serializer && comp.serializer->IsDirty(obj))
                         {
                             BinarySerializer serializer{};
-                            comp.serializer->Serializer(serializer, obj);
+                            comp.serializer->Serialize(serializer, obj);
                             dirtyComps.push_back({ comp.cls->hash, 0, serializer.GetBuffer() });
                             return;
                         }

@@ -18,6 +18,9 @@ namespace Boon
         void OnBeginOverlap(GameObject gameObject, GameObject other);
         void OnEndOverlap(GameObject gameObject, GameObject other);
 
+        BFUNCTION()
+        void Jump();
+
         enum class Direction
         {
             Left, Right
@@ -36,5 +39,7 @@ namespace Boon
         glm::vec2 m_MoveInput{ 0.0f };
         Direction m_Direction{ Direction::Left };
         bool m_IsGrounded{ false };
+
+        GameObject m_Owner;
     };
 }

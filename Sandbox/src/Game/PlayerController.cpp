@@ -52,3 +52,8 @@ void Boon::PlayerController::Update(GameObject gameObject)
 
     m_PrevPosition = gameObject.GetTransform().GetWorldPosition();
 }
+
+void Boon::PlayerController::Jump()
+{
+
+}

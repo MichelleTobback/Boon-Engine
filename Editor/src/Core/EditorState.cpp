@@ -31,8 +31,8 @@
 #include <Component/BoxCollider2D.h>
 #include <Component/Rigidbody2D.h>
 
-#include <Networking/NetRigidbody2D.h>
-#include <Networking/NetTransform.h>
+#include <Networking/Components/NetRigidbody2D.h>
+#include <Networking/Components/NetTransform.h>
 #include <Networking/NetIdentity.h>
 #include <Networking/NetDriver.h>
 #include <Networking/NetScene.h>

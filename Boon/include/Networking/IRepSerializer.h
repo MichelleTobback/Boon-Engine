@@ -8,7 +8,7 @@ namespace Boon
     {
     public:
         virtual bool IsDirty(GameObject obj) = 0;
-        virtual void Serializer(BinarySerializer& ser, GameObject obj) = 0;
+        virtual void Serialize(BinarySerializer& ser, GameObject obj) = 0;
         virtual void Deserialize(BinarySerializer& ser, GameObject obj) = 0;
     };
 }

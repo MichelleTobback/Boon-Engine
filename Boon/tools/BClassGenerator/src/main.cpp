@@ -7,6 +7,7 @@
 #include <set>
 #include <unordered_map>
 #include <unordered_set>
+#include <sstream>
 
 namespace fs = std::filesystem;
 
@@ -15,12 +16,14 @@ static bool g_BoonMinimal = false;
 // ============================================================================
 // Reflection data
 // ============================================================================
-struct MetaKV { 
+struct MetaKV 
+{ 
     std::string key; 
     std::string value; 
 };
 
-struct Property {
+struct Property 
+{
     std::string type;                // textual C++ type as written
     std::string name;                // identifier
     std::vector<MetaKV> meta;        // property metadata
@@ -46,13 +49,34 @@ struct Property {
     }
 };
 
-struct ReflectedClass {
+struct ReflectedFunctionMeta
+{
+    std::string key;
+    std::string value;
+};
+
+struct ReflectedFunctionParam
+{
+    std::string type;
+    std::string name;
+};
+
+struct ReflectedFunction
+{
+    std::string name;                       // function name
+    std::vector<ReflectedFunctionMeta> meta;
+    std::vector<ReflectedFunctionParam> params;
+};
+
+struct ReflectedClass 
+{
     std::string name;                // unqualified type name
     std::string nsQualifiedName;     // e.g. Boon::PlayerController
     std::string headerPath;          // normalized include path
     std::string netSerializerPath;   // normalized net serializer include path
     std::vector<MetaKV> classMeta;   // class-level metadata from BCLASS(...)
     std::vector<Property> properties;
+    std::vector<ReflectedFunction> functions;
 
     static bool ValidMeta(const std::string& meta)
     {
@@ -84,6 +108,19 @@ std::string ReplaceFilename(const std::string& pathStr, const std::string& newFi
     fs::path p(pathStr);
     p.replace_filename(newFilename);
     return p.string();
+}
+
+static uint32_t FNV1a32Runtime(const std::string& s)
+{
+    const uint32_t OFFSET = 0x811C9DC5u;
+    const uint32_t PRIME = 0x01000193u;
+    uint32_t hash = OFFSET;
+    for (unsigned char c : s)
+    {
+        hash ^= c;
+        hash *= PRIME;
+    }
+    return hash;
 }
 
 // Rough namespace detector: finds "namespace Foo { ... }" blocks.
@@ -214,6 +251,51 @@ static std::vector<MetaKV> parseMetadataList(const std::string& inside)
     return out;
 }
 
+static std::vector<ReflectedFunctionParam> parseFunctionParams(const std::string& paramsStr)
+{
+    std::vector<ReflectedFunctionParam> params;
+
+    std::string s = paramsStr;
+    size_t start = 0;
+    while (start < s.size())
+    {
+        size_t comma = s.find(',', start);
+        std::string param = (comma == std::string::npos)
+            ? s.substr(start)
+            : s.substr(start, comma - start);
+
+        // trim
+        auto trim = [](std::string& str) {
+            auto isSpace = [](unsigned char c) { return std::isspace(c); };
+            while (!str.empty() && isSpace(str.front())) str.erase(str.begin());
+            while (!str.empty() && isSpace(str.back()))  str.pop_back();
+            };
+        trim(param);
+        if (!param.empty())
+        {
+            // split type and name: assume last token is name
+            size_t lastSpace = param.find_last_of(" \t");
+            if (lastSpace != std::string::npos)
+            {
+                std::string type = param.substr(0, lastSpace);
+                std::string name = param.substr(lastSpace + 1);
+                trim(type);
+                trim(name);
+                if (!type.empty() && !name.empty())
+                {
+                    params.push_back({ type, name });
+                }
+            }
+        }
+
+        if (comma == std::string::npos)
+            break;
+        start = comma + 1;
+    }
+
+    return params;
+}
+
 // Scan include trees for BCLASS/ BPROPERTY
 static std::vector<ReflectedClass> parseSourceFiles(const std::vector<std::string>& includeDirs, bool verbose)
 {
@@ -223,6 +305,9 @@ static std::vector<ReflectedClass> parseSourceFiles(const std::vector<std::strin
     std::regex classRe(R"(BCLASS\s*\(([^)]*)\)\s*(?:class|struct)\s+([A-Za-z_]\w*))");
     // BPROPERTY(<meta>) <type> <name>
     std::regex propRe(R"(BPROPERTY\s*\(([^)]*)\)\s*([\w:<> ,]+)\s+([A-Za-z_]\w*))");
+    // BFUNCTION(<meta>) <return-type> <name>(<params>);
+    std::regex funcRe(
+        R"(BFUNCTION\s*\(([^)]*)\)\s*(?:(?:inline|static|virtual|constexpr|const)\s+)*([A-Za-z_][\w:<>\s*&]*)\s+([A-Za-z_]\w*)\s*\(([^)]*)\)\s*;?)");
 
     for (const auto& dir : includeDirs) {
         for (auto& e : fs::recursive_directory_iterator(dir)) {
@@ -249,6 +334,20 @@ static std::vector<ReflectedClass> parseSourceFiles(const std::vector<std::strin
 
                 bool replicates = false;
 
+                // collect functions in this file
+                for (std::sregex_iterator fit(content.begin(), content.end(), funcRe), fend; fit != fend; ++fit)
+                {
+                    ReflectedFunction f;
+                    f.name = (*fit)[3].str();   // function name
+                    auto metaVec = parseMetadataList<Property>((*fit)[1].str());
+                    for (auto& kv : metaVec)
+                    {
+                        f.meta.push_back({ kv.key, kv.value });
+                    }
+                    f.params = parseFunctionParams((*fit)[4].str());
+                    cls.functions.push_back(std::move(f));
+                }
+
                 // collect properties in this file (simple: scan whole file)
                 for (std::sregex_iterator pit(content.begin(), content.end(), propRe), pend; pit != pend; ++pit) {
                     Property p;
@@ -265,9 +364,11 @@ static std::vector<ReflectedClass> parseSourceFiles(const std::vector<std::strin
                 if (replicates)
                     cls.classMeta.push_back({ "Replicated", "" });
 
+                
+
                 if (verbose) {
                     std::cout << "[BClassGenerator] " << cls.nsQualifiedName
-                        << " -> " << cls.properties.size() << " properties\n";
+                        << " -> " << cls.properties.size() << " properties -> " << cls.functions.size() << " functions\n";
                 }
 
                 classes.push_back(std::move(cls));
@@ -341,6 +442,83 @@ static void emitGeneratedFile(const std::string& output, const std::vector<Refle
                 out << " }";
             }
             out << ");\n";
+        }
+
+        for (auto& f : c.functions)
+        {
+            uint32_t id = FNV1a32Runtime(f.name);
+            std::stringstream paramsInit;
+
+            // Build params initializer: { { "type", "name", BTypeId::X }, ... }
+            if (!f.params.empty())
+            {
+                paramsInit << "{ ";
+                for (size_t i = 0; i < f.params.size(); ++i)
+                {
+                    const auto& p = f.params[i];
+                    std::string typeId = inferBTypeId(p.type); // reuse property usage
+                    paramsInit << "BFunctionParam{ \"" << p.type << "\", \"" << p.name << "\", " << typeId << " }";
+                    if (i + 1 < f.params.size())
+                        paramsInit << ", ";
+                }
+                paramsInit << " }";
+            }
+
+            // Build meta initializer: { { "key", "value" }, ... }
+            std::stringstream metaInit;
+            if (!f.meta.empty())
+            {
+                metaInit << "{ ";
+                for (size_t i = 0; i < f.meta.size(); ++i)
+                {
+                    const auto& m = f.meta[i];
+                    metaInit << "BFunctionMeta{ \"" << m.key << "\", \"" << m.value << "\" }";
+                    if (i + 1 < f.meta.size())
+                        metaInit << ", ";
+                }
+                metaInit << " }";
+            }
+
+            // Emit thunk
+            std::string thunkName = c.name + "_" + f.name + "_Thunk";
+            out << "            auto " << thunkName << " = +[](void* obj, Variant* args, size_t argCount) {\n";
+            out << "                " << c.nsQualifiedName << "* self = static_cast<" << c.nsQualifiedName << "*>(obj);\n";
+
+            // generate parameter unpack
+            for (size_t i = 0; i < f.params.size(); ++i)
+            {
+                const auto& p = f.params[i];
+                std::string typeId = inferBTypeId(p.type);
+                out << "                " << p.type << " " << p.name << " = args[" << i << "].As<" << p.type << ">();\n";
+            }
+
+            // call function
+            out << "                self->" << f.name << "(";
+            for (size_t i = 0; i < f.params.size(); ++i)
+            {
+                out << f.params[i].name;
+                if (i + 1 < f.params.size())
+                    out << ", ";
+            }
+            out << ");\n";
+            out << "            };\n";
+
+            // Emit AddFunction call
+            out << "            cls->AddFunction(\n";
+            out << "                0x" << std::hex << id << "u,\n" << std::dec;
+            out << "                " << thunkName << ",\n";
+
+            if (!f.meta.empty())
+                out << "                " << metaInit.str() << ",\n";
+            else
+                out << "                {},\n";
+
+            if (!f.params.empty())
+                out << "                " << paramsInit.str() << "\n";
+            else
+                out << "                {}\n";
+
+            out << "            );\n";
         }
 
         out << "        }\n";

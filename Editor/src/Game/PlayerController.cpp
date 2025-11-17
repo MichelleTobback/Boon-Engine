@@ -11,13 +11,15 @@
 
 #include <Networking/NetIdentity.h>
 
+#include "Reflection/BClass.h"
+
 #include <iostream>
 
 using namespace Boon;
 
 void PlayerController::Awake(GameObject gameObject)
 {
-    
+    m_Owner = gameObject;
 }
 
 void PlayerController::Update(GameObject gameObject)
@@ -43,7 +45,7 @@ void PlayerController::Update(GameObject gameObject)
     Rigidbody2D& rb = gameObject.GetComponent<Rigidbody2D>();
     if (m_IsGrounded && input.IsKeyPressed(Key::Space))
     {
-        rb.AddForce({ 0.0f, rb.GetMass() * m_JumpForce }, Rigidbody2D::ForceMode::Impulse);
+        BClassRegistry::Get().Find<PlayerController>()->InvokeByName(this, "Jump");
     }
 
     // Normalize
@@ -93,6 +95,12 @@ void PlayerController::OnBeginOverlap(GameObject gameObject, GameObject other)
 void PlayerController::OnEndOverlap(GameObject gameObject, GameObject other)
 {
     std::cout << "End overlap\n";
+}
+
+void PlayerController::Jump()
+{
+    Rigidbody2D& rb = m_Owner.GetComponent<Rigidbody2D>();
+    rb.AddForce({ 0.0f, rb.GetMass() * m_JumpForce }, Rigidbody2D::ForceMode::Impulse);
 }
 
 void PlayerController::CheckGrounded(GameObject gameObject)

@@ -8,6 +8,7 @@
 #include <optional>
 #include <xhash>
 #include "BProperty.h"
+#include "BFunction.h"
 
 namespace Boon
 {
@@ -34,6 +35,7 @@ namespace Boon
         BClassID hash;
         std::string name;
         std::type_index type;
+        std::vector<BFunction> functions;
         std::vector<BClassMeta> meta;
 
         using RegisterFunc = void(*)(ECSLifecycleSystem&);
@@ -125,6 +127,70 @@ namespace Boon
                     return m.value;
             return std::nullopt;
         }
+
+        // -----------------------------------------------------------------
+// Function reflection API
+// -----------------------------------------------------------------
+
+// Register a function with a known ID (hash of its name)
+        inline void AddFunction(
+            uint32_t id,
+            BFunction::ThunkFn thunk,
+            std::initializer_list<BFunctionMeta> metaList = {},
+            std::initializer_list<BFunctionParam> paramsList = {})
+        {
+            BFunction fn;
+            fn.id = id;
+            fn.thunk = thunk;
+            fn.meta.assign(metaList.begin(), metaList.end());
+            fn.params.assign(paramsList.begin(), paramsList.end());
+            functions.push_back(std::move(fn));
+        }
+
+        // Find function by ID
+        inline BFunction* FindFunction(uint32_t id)
+        {
+            for (auto& fn : functions)
+                if (fn.id == id)
+                    return &fn;
+            return nullptr;
+        }
+
+        inline const BFunction* FindFunction(uint32_t id) const
+        {
+            for (auto& fn : functions)
+                if (fn.id == id)
+                    return &fn;
+            return nullptr;
+        }
+
+        // Invoke by ID
+        inline bool InvokeById(void* instance, uint32_t id, Variant* args = nullptr, size_t argCount = 0)
+        {
+            BFunction* fn = FindFunction(id);
+            if (!fn || !fn->thunk)
+                return false;
+
+            fn->thunk(instance, args, argCount);
+            return true;
+        }
+
+        // Convenience: invoke by function name (hashed at runtime)
+        inline bool InvokeByName(void* instance, const std::string& name, Variant* args = nullptr, size_t argCount = 0) const
+        {
+            uint32_t id = FNV1a32(name);
+            const BFunction* fn = FindFunction(id);
+            if (!fn || !fn->thunk)
+                return false;
+
+            fn->thunk(const_cast<void*>(instance), args, argCount);
+            return true;
+        }
+
+        // Quick access
+        inline const std::vector<BFunction>& GetFunctions() const { return functions; }
+        inline size_t GetFunctionCount() const { return functions.size(); }
+
 
     private:
         friend struct _AutoRegisterAllClasses;

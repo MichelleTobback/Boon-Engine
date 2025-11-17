@@ -1,6 +1,6 @@
 #pragma once
 #include "Networking/IRepSerializer.h"
-#include "Networking/NetRigidbody2D.h"
+#include "Networking/Components/NetRigidbody2D.h"
 
 namespace Boon
 {
@@ -16,11 +16,9 @@ namespace Boon
             return rb.DirtyMask != 0;
         }
         
-        virtual void Serializer(BinarySerializer& ser, GameObject obj) override
+        virtual void Serialize(BinarySerializer& ser, GameObject obj) override
         {
             auto& rb = obj.GetComponent<NetRigidbody2D>();
-
-            // position X, Y, Z as 16-bit each
 
             ser.Write<uint8_t>(rb.DirtyMask);
 
