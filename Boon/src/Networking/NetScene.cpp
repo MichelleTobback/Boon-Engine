@@ -28,7 +28,8 @@ namespace Boon
 
     void NetScene::Update()
     {
-        m_Replication->Update(*this);
+        if (m_Driver->IsServer())
+            m_Replication->Update(*this);
     }
 
     // -------------------------------------------------------------------------
@@ -43,7 +44,7 @@ namespace Boon
 
         NetIdentity& ni = gameObject.GetComponent<NetIdentity>();
         ni.NetId = id;
-        ni.Role = ENetRole::Authority;
+        ni.Role = m_Driver->IsServer() ? ENetRole::Authority : ENetRole::SimulatedProxy;
         ni.OwnerConnectionId = 0;
 
         // Static objects are not added to dynamic map
@@ -119,6 +120,8 @@ namespace Boon
             HandleSpawnPacket(sender, pkt); break;
         case ENetPacketType::Despawn:  
             HandleDespawnPacket(sender, pkt); break;
+        case ENetPacketType::Replication:
+            m_Replication->ProcessPacket(*this, pkt, sender); break;
         default:
             break;
         }

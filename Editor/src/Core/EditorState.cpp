@@ -31,6 +31,8 @@
 #include <Component/BoxCollider2D.h>
 #include <Component/Rigidbody2D.h>
 
+#include <Networking/NetRigidbody2D.h>
+#include <Networking/NetTransform.h>
 #include <Networking/NetIdentity.h>
 #include <Networking/NetDriver.h>
 #include <Networking/NetScene.h>
@@ -80,7 +82,7 @@ void EditorState::OnEnter()
 
 	//player
 	{
-		GameObject quad = scene.Instantiate();
+		GameObject quad = scene.Instantiate(UUID(12345u));
 		SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
 		sprite.SpriteAtlasHandle = assetLib.Load<SpriteAtlasAssetLoader>("game/Blue_witch/B_witch_atlas_compact.bsa");
 		sprite.Sprite = 0;
@@ -101,6 +103,7 @@ void EditorState::OnEnter()
 		quad.GetComponent<NameComponent>().Name = "Player";
 
 		quad.AddComponent<NetIdentity>();
+		quad.AddComponent<NetRigidbody2D>();
 	}
 
 	//floor

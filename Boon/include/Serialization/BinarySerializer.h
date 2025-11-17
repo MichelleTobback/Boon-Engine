@@ -9,108 +9,166 @@ namespace Boon
     class BinarySerializer
     {
     public:
-        enum class Mode
-        {
-            Writing,
-            Reading
-        };
+        enum class Mode { Writing, Reading };
 
-        // -------- Constructors --------
+        // ---------------- Constructors ----------------
         BinarySerializer()
             : m_Mode(Mode::Writing)
-        {}
+        {
+        }
 
-        // Load from raw data for reading
         BinarySerializer(const uint8_t* data, size_t size)
-            : m_Mode(Mode::Reading), m_Buffer(data, size), m_ReadPos(0)
-        {}
+            : m_Mode(Mode::Reading),
+            m_Buffer(data, size),
+            m_ReadBitPos(0)
+        {
+        }
 
-        // Load from existing buffer
         BinarySerializer(const Buffer& buffer)
-            : m_Mode(Mode::Reading), m_Buffer(buffer), m_ReadPos(0)
-        {}
-
-        // -------- Writing API --------
-        template<typename T>
-        void Write(const T& value)
+            : m_Mode(Mode::Reading),
+            m_Buffer(buffer),
+            m_ReadBitPos(0)
         {
-            EnsureWriting();
-            m_Buffer.Write(value);
         }
 
-        void WriteString(const std::string& str)
+        // =====================================================
+        //                   BITPACK WRITING
+        // =====================================================
+        inline void WriteBits(uint32_t value, int bitCount)
         {
             EnsureWriting();
-            uint32_t len = (uint32_t)str.size();
+
+            for (int i = 0; i < bitCount; i++)
+            {
+                uint32_t bit = (value >> i) & 1;
+
+                // Ensure the target byte exists
+                if ((m_WriteBitPos >> 3) >= m_Buffer.Size())
+                    m_Buffer.Vector().push_back(0);
+
+                uint8_t& byte = m_Buffer.Vector()[m_WriteBitPos >> 3];
+                byte |= (bit << (m_WriteBitPos & 7));
+
+                m_WriteBitPos++;
+            }
+        }
+
+        inline void AlignWrite()
+        {
+            while (m_WriteBitPos & 7)
+                WriteBits(0, 1);
+        }
+
+        inline void WriteBytes(const void* data, size_t size)
+        {
+            EnsureWriting();
+            AlignWrite();
+
+            size_t bytePos = m_WriteBitPos >> 3;
+            size_t needed = bytePos + size;
+
+            if (needed > m_Buffer.Size())
+                m_Buffer.Vector().resize(needed);
+
+            memcpy(m_Buffer.Data() + bytePos, data, size);
+            m_WriteBitPos += size * 8;
+        }
+
+        template<typename T>
+        inline void Write(const T& value)
+        {
+            WriteBytes(&value, sizeof(T));
+        }
+
+        inline void WriteString(const std::string& s)
+        {
+            uint32_t len = (uint32_t)s.size();
             Write(len);
-            m_Buffer.WriteRaw(str.data(), len);
+            WriteBytes(s.data(), len);
         }
 
-        void WriteBytes(const void* data, size_t size)
+        // =====================================================
+        //                   BITPACK READING
+        // =====================================================
+        inline uint32_t ReadBits(int bitCount)
         {
-            EnsureWriting();
-            m_Buffer.WriteRaw(data, size);
+            EnsureReading();
+
+            uint32_t v = 0;
+            for (int i = 0; i < bitCount; i++)
+            {
+                assert((m_ReadBitPos >> 3) < m_Buffer.Size());
+                uint8_t byte = m_Buffer.Data()[m_ReadBitPos >> 3];
+                uint32_t bit = (byte >> (m_ReadBitPos & 7)) & 1;
+                v |= (bit << i);
+                m_ReadBitPos++;
+            }
+            return v;
         }
 
-        // -------- Reading API --------
+        inline void AlignRead()
+        {
+            while (m_ReadBitPos & 7)
+                ReadBits(1);
+        }
+
+        inline void ReadBytes(void* out, size_t size)
+        {
+            EnsureReading();
+            AlignRead();
+
+            size_t bytePos = m_ReadBitPos >> 3;
+            assert(bytePos + size <= m_Buffer.Size());
+
+            memcpy(out, m_Buffer.Data() + bytePos, size);
+            m_ReadBitPos += size * 8;
+        }
+
         template<typename T>
-        T Read()
+        inline T Read()
         {
-            EnsureReading();
-            assert(m_ReadPos + sizeof(T) <= m_Buffer.Size());
-
-            T value{};
-            std::memcpy(&value, m_Buffer.Data() + m_ReadPos, sizeof(T));
-            m_ReadPos += sizeof(T);
-            return value;
+            T v{};
+            ReadBytes(&v, sizeof(T));
+            return v;
         }
 
-        std::string ReadString()
+        inline std::string ReadString()
         {
-            EnsureReading();
             uint32_t len = Read<uint32_t>();
-            assert(m_ReadPos + len <= m_Buffer.Size());
-
-            std::string str(len, '\0');
-            std::memcpy(str.data(), m_Buffer.Data() + m_ReadPos, len);
-            m_ReadPos += len;
-            return str;
+            std::string s(len, 0);
+            ReadBytes(s.data(), len);
+            return s;
         }
 
-        void ReadBytes(void* out, size_t size)
-        {
-            EnsureReading();
-            assert(m_ReadPos + size <= m_Buffer.Size());
-            std::memcpy(out, m_Buffer.Data() + m_ReadPos, size);
-            m_ReadPos += size;
-        }
+        // =====================================================
+        // Utilities
+        // =====================================================
+        inline const uint8_t* Data() const { return m_Buffer.Data(); }
+        inline size_t Size() const { return m_Buffer.Size(); }
+        inline bool HasRemaining() const { return (m_ReadBitPos >> 3) < m_Buffer.Size(); }
 
-        bool HasRemaining() const
-        {
-            return m_ReadPos < m_Buffer.Size();
-        }
+        inline size_t GetWriteBitPos() const { return m_WriteBitPos; }
+        inline size_t GetReadBitPos()  const { return m_ReadBitPos; }
 
-        const uint8_t* Data() const { return m_Buffer.Data(); }
-        size_t Size() const { return m_Buffer.Size(); }
+        inline Buffer& GetBuffer() { return m_Buffer; }
+        inline const Buffer& GetBuffer() const { return m_Buffer; }
 
-        Buffer& GetBuffer() { return m_Buffer; }
-        const Buffer& GetBuffer() const { return m_Buffer; }
-
-        Mode GetMode() const { return m_Mode; }
+        inline Mode GetMode() const { return m_Mode; }
 
     private:
-        Mode m_Mode = Mode::Writing;
+        Mode m_Mode;
         Buffer m_Buffer;
-        size_t m_ReadPos = 0;
+        size_t m_WriteBitPos = 0;
+        size_t m_ReadBitPos = 0;
 
-        void EnsureWriting() const
+        inline void EnsureWriting() const
         {
-            assert(m_Mode == Mode::Writing && "Attempted to write in reading mode!");
+            assert(m_Mode == Mode::Writing && "Write in read mode!");
         }
 
-        void EnsureReading() const
+        inline void EnsureReading() const
         {
-            assert(m_Mode == Mode::Reading && "Attempted to read in writing mode!");
+            assert(m_Mode == Mode::Reading && "Read in write mode!");
         }
     };
 }

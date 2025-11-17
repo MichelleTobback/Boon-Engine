@@ -9,9 +9,16 @@
 #include <Component/Rigidbody2D.h>
 #include <Component/SpriteAnimatorComponent.h>
 
+#include <Networking/NetIdentity.h>
+
 #include <iostream>
 
 using namespace Boon;
+
+void PlayerController::Awake(GameObject gameObject)
+{
+    
+}
 
 void PlayerController::Update(GameObject gameObject)
 {
@@ -51,6 +58,9 @@ void PlayerController::Update(GameObject gameObject)
 
 void PlayerController::FixedUpdate(GameObject gameObject)
 {
+    if (!gameObject.HasComponent<Rigidbody2D>())
+        return;
+
     Rigidbody2D& rb = gameObject.GetComponent<Rigidbody2D>();
 
     const float dt = Time::Get().GetFixedTimeStep();

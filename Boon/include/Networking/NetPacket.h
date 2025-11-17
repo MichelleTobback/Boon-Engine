@@ -27,17 +27,25 @@ namespace Boon
     };
 
     // -------------------------------------------------------------
-    // Standard packet header (8 bytes total)
+    // Standard packet header (16 bytes total)
     // -------------------------------------------------------------
     struct NetPacketHeader
     {
+        NetPacketHeader() = default;
+        NetPacketHeader(ENetPacketType type)
+            : Type(type) {}
+
+        uint16_t ProtocolVersion = 1;
         ENetPacketType Type = ENetPacketType::None;
+        uint8_t Reserved0 = 0;    // alignment
+
         uint32_t PayloadSize = 0;
-        uint32_t Reserved = 0; // alignment or future use
+        uint32_t Flags = 0;       // compressed, reliable, fragmented, etc.
+        uint32_t ServerTick = 0;  // for time sync, lagcomp
 
         static constexpr size_t Size()
         {
-            return sizeof(ENetPacketType) + sizeof(uint32_t) + sizeof(uint32_t);
+            return sizeof(NetPacketHeader);
         }
     };
 
@@ -52,7 +60,7 @@ namespace Boon
     public:
         // Writing new packet
         NetPacket(ENetPacketType type)
-            : m_Header{ type, 0, 0 }, m_Serializer()
+            : m_Header{ type }, m_Serializer()
         {}
 
         // Reading received packet
@@ -104,35 +112,30 @@ namespace Boon
         // ---------------------------------------------------------
         // Finalize packet into raw byte stream
         // ---------------------------------------------------------
-        Buffer BuildBuffer()
+        void BuildBuffer(Buffer& output)
         {
-            Buffer output;
             const Buffer& payload = m_Serializer.GetBuffer();
 
             m_Header.PayloadSize = static_cast<uint32_t>(payload.Size());
 
             output.Reserve(NetPacketHeader::Size() + payload.Size());
 
-            output.Append(&m_Header.Type, sizeof(ENetPacketType));
-            output.Append(&m_Header.PayloadSize, sizeof(uint32_t));
-            output.Append(&m_Header.Reserved, sizeof(uint32_t));
-            output.Append(payload.Data(), payload.Size());
-
-            return output;
+            output.Append(&m_Header, NetPacketHeader::Size());
+            output.Append(payload);
         }
 
         // Direct data for sending
         const uint8_t* RawData()
         {
             if (m_BuiltCache.Empty())
-                m_BuiltCache = BuildBuffer();
+                BuildBuffer(m_BuiltCache);
             return m_BuiltCache.Data();
         }
 
         size_t RawSize()
         {
             if (m_BuiltCache.Empty())
-                m_BuiltCache = BuildBuffer();
+                BuildBuffer(m_BuiltCache);
             return m_BuiltCache.Size();
         }
 

@@ -85,34 +85,33 @@ void Boon::PhysicsWorld2D::Step(Scene* pScene)
 	if (!b2World_IsValid(m_PhysicsWorldId))
 		return;
 
-	auto view = pScene->GetAllGameObjectsWith<Rigidbody2D, TransformComponent>();
-	for (auto e : view)
-	{
-		Rigidbody2D& rb = view.get<Rigidbody2D>(e);
-		auto& transform = view.get<TransformComponent>(e);
-		if (!b2Body_IsValid(rb.RuntimeBody))
-			continue;
-
-		if (rb.Type == Rigidbody2D::BodyType::Kinematic)
+	pScene->ForeachGameObjectWith<Rigidbody2D, TransformComponent>([](GameObject e)
 		{
-			// For kinematic: push Transform -> Box2D
-			glm::vec3 pos = transform.GetWorldPosition();
-			glm::vec3 rot = transform.GetWorldEulerRotation();
+			Rigidbody2D& rb = e.GetComponent<Rigidbody2D>();
+			auto& transform = e.GetTransform();
+			if (!b2Body_IsValid(rb.RuntimeBody))
+				return;
 
-			b2Body_SetTransform(rb.RuntimeBody, { pos.x, pos.y }, b2MakeRot(glm::radians(rot.z)));
+			if (rb.Type == Rigidbody2D::BodyType::Kinematic)
+			{
+				// For kinematic: push Transform -> Box2D
+				glm::vec3 pos = transform.GetWorldPosition();
+				glm::vec3 rot = transform.GetWorldEulerRotation();
 
-			// Cache for interpolation
-			rb.PrevPosition = { pos.x, pos.y };
-			rb.PrevRotation = glm::radians(rot.z);
-		}
-		else
-		{
-			// For dynamic/static: pull from Box2D
-			b2Transform t = b2Body_GetTransform(rb.RuntimeBody);
-			rb.PrevPosition = { t.p.x, t.p.y };
-			rb.PrevRotation = b2Rot_GetAngle(t.q);
-		}
-	}
+				b2Body_SetTransform(rb.RuntimeBody, { pos.x, pos.y }, b2MakeRot(glm::radians(rot.z)));
+
+				// Cache for interpolation
+				rb.PrevPosition = { pos.x, pos.y };
+				rb.PrevRotation = glm::radians(rot.z);
+			}
+			else
+			{
+				// For dynamic/static: pull from Box2D
+				b2Transform t = b2Body_GetTransform(rb.RuntimeBody);
+				rb.PrevPosition = { t.p.x, t.p.y };
+				rb.PrevRotation = b2Rot_GetAngle(t.q);
+			}
+		});
 
 	const float timeStep = Time::Get().GetFixedTimeStep();
 	const int32_t iterations = 1;
@@ -130,24 +129,26 @@ void Boon::PhysicsWorld2D::Update(Scene* pScene)
 	float alpha = Time::Get().GetInterpolationAlpha();
 	alpha = glm::clamp(alpha, 0.0f, 1.0f);
 
-	auto view = pScene->GetAllGameObjectsWith<Rigidbody2D, TransformComponent>();
-	for (auto e : view)
-	{
-		auto& rb = view.get<Rigidbody2D>(e);
-		auto& transform = view.get<TransformComponent>(e);
+	pScene->ForeachGameObjectWith<Rigidbody2D, TransformComponent>([alpha](GameObject e)
+		{
+			Rigidbody2D& rb = e.GetComponent<Rigidbody2D>();
+			auto& transform = e.GetTransform();
 
-		b2Transform t = b2Body_GetTransform(rb.RuntimeBody);
+			if (rb.Type != Rigidbody2D::BodyType::Dynamic)
+				return;
 
-		glm::vec2 interpPos = glm::mix(rb.PrevPosition, { t.p.x,t.p.y }, alpha);
-		float interpRot = glm::degrees(glm::mix(rb.PrevRotation, b2Rot_GetAngle(t.q), alpha));
+			b2Transform t = b2Body_GetTransform(rb.RuntimeBody);
 
-		glm::vec3 pos3 = transform.GetWorldPosition();
-		pos3.x = interpPos.x;
-		pos3.y = interpPos.y;
+			glm::vec2 interpPos = glm::mix(rb.PrevPosition, { t.p.x,t.p.y }, alpha);
+			float interpRot = glm::degrees(glm::mix(rb.PrevRotation, b2Rot_GetAngle(t.q), alpha));
 
-		transform.SetLocalPosition(pos3);
-		transform.SetLocalRotation({ 0.f, 0.f, interpRot });
-	}
+			glm::vec3 pos3 = transform.GetWorldPosition();
+			pos3.x = interpPos.x;
+			pos3.y = interpPos.y;
+
+			transform.SetLocalPosition(pos3);
+			transform.SetLocalRotation({ 0.f, 0.f, interpRot });
+		});
 }
 
 bool Boon::PhysicsWorld2D::Raycast(const Ray2D& ray, HitResult2D& result) const

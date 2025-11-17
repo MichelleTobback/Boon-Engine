@@ -20,16 +20,18 @@ namespace Boon
         std::string value;
     };
 
+    using BClassID = uint32_t;
+
     struct BClass
     {
         BClass(std::string _name, std::type_index _type)
             : name(_name), type(_type)
         {
             std::hash<std::string> hasher;
-            hash = (uint32_t)hasher(_name);
+            hash = (BClassID)hasher(_name);
         }
 
-        uint32_t hash;
+        BClassID hash;
         std::string name;
         std::type_index type;
         std::vector<BClassMeta> meta;
@@ -171,6 +173,15 @@ namespace Boon
         void AddListener(std::function<void(BClass&)> fn)
         {
             m_Listeners.push_back(std::move(fn));
+        }
+
+        BClass* Find(BClassID id)
+        {
+            auto it = std::find_if(m_Classes.begin(), m_Classes.end(), [id](std::pair<std::type_index, BClass*> pair)
+                {
+                    return pair.second->hash == id;
+                });
+            return (it != m_Classes.end()) ? it->second : nullptr;
         }
 
         BClass* Find(std::type_index t)

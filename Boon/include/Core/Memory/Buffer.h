@@ -31,6 +31,13 @@ namespace Boon
             std::memcpy(m_Data.data() + start, data, size);
         }
 
+        void Append(const Buffer& other)
+        {
+            size_t start = m_Data.size();
+            m_Data.resize(start + other.Size());
+            std::memcpy(m_Data.data() + start, other.Data(), other.Size());
+        }
+
         template<typename T>
         void Write(const T& value)
         {
@@ -64,9 +71,17 @@ namespace Boon
             offset += size;
         }
 
+        void ReadRaw(void* out, size_t size, size_t offset) const
+        {
+            std::memcpy(out, m_Data.data() + offset, size);
+        }
+
         // ---------- Utility ----------
         uint8_t* Data() { return m_Data.data(); }
         const uint8_t* Data() const { return m_Data.data(); }
+
+        uint8_t* DataAt(uint32_t pos) { return m_Data.data() + pos; }
+        const uint8_t* DataAt(uint32_t pos) const { return m_Data.data() + pos; }
 
         size_t Size() const { return m_Data.size(); }
         bool Empty() const { return m_Data.empty(); }

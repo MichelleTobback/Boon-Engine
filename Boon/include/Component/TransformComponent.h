@@ -97,7 +97,6 @@ namespace Boon
 
 		glm::mat4 m_WorldTransform{};
 
-		BPROPERTY(Replicated)
 		glm::vec3 m_LocalPosition{};
 		glm::vec3 m_WorldPosition{};
 		glm::quat m_LocalRotQ{};

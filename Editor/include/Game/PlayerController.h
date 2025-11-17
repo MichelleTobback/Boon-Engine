@@ -11,6 +11,7 @@ namespace Boon
 
         PlayerController() = default;
 
+        void Awake(GameObject gameObject);
         void Update(GameObject gameObject);
         void FixedUpdate(GameObject gameObject);
 

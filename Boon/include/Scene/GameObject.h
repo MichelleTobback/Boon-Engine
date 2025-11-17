@@ -48,10 +48,10 @@ namespace Boon
 		bool IsValid() const;
 		bool IsRoot() const;
 
-		void* AddComponentFromClass(BClass* pClass);
-		void* GetComponentByClass(BClass* pClass);
-		bool HasComponentByClass(BClass* pClass);
-		void RemoveComponentByClass(BClass* pClass);
+		void* AddComponentFromClass(const BClass* pClass);
+		void* GetComponentByClass(const BClass* pClass);
+		bool HasComponentByClass(const BClass* pClass);
+		void RemoveComponentByClass(const BClass* pClass);
 
 		template <typename T, typename ... TArgs>
 		T& AddComponent(TArgs&& ... args)

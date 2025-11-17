@@ -4,6 +4,7 @@
 #include <regex>
 #include <string>
 #include <vector>
+#include <set>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -49,17 +50,20 @@ struct ReflectedClass {
     std::string name;                // unqualified type name
     std::string nsQualifiedName;     // e.g. Boon::PlayerController
     std::string headerPath;          // normalized include path
+    std::string netSerializerPath;   // normalized net serializer include path
     std::vector<MetaKV> classMeta;   // class-level metadata from BCLASS(...)
     std::vector<Property> properties;
 
     static bool ValidMeta(const std::string& meta)
     {
         static const std::unordered_set<std::string> minimalMeta{ 
+            "Replicated"
         };
         static const std::unordered_set<std::string> fullMeta{ 
             "Name", 
             "Category", 
-            "HideInInspector" 
+            "HideInInspector",
+            "Replicated"
         };
         const auto& active = g_BoonMinimal ? minimalMeta : fullMeta;
         return active.find(meta) != active.end();
@@ -75,25 +79,77 @@ static std::string normalizePath(const fs::path& p) {
     return s;
 }
 
-// Rough namespace detector (good enough for single named `namespace Foo {}` blocks)
-static std::string detectNamespaceQualifiedName(const std::string& content,
+std::string ReplaceFilename(const std::string& pathStr, const std::string& newFilename)
+{
+    fs::path p(pathStr);
+    p.replace_filename(newFilename);
+    return p.string();
+}
+
+// Rough namespace detector: finds "namespace Foo { ... }" blocks.
+// Skips "using namespace Foo;" statements completely.
+
+static std::string detectNamespaceQualifiedName(
+    const std::string& content,
     size_t pos,
     const std::string& className)
 {
     std::string ns = "Boon";
+
     size_t last = content.rfind("namespace", pos);
-    if (last != std::string::npos) {
-        size_t start = content.find_first_not_of(" \t\r\n", last + 9);
-        if (start != std::string::npos && std::isalpha(static_cast<unsigned char>(content[start]))) {
-            size_t end = start;
-            while (end < content.size() &&
-                (std::isalnum(static_cast<unsigned char>(content[end])) || content[end] == '_' || content[end] == ':'))
-                ++end;
-            ns = content.substr(start, end - start);
+    while (last != std::string::npos)
+    {
+        size_t after = last + 9; // length of "namespace"
+
+        // Skip whitespace
+        size_t start = content.find_first_not_of(" \t\r\n", after);
+        if (start == std::string::npos)
+            break;
+
+        // Expecting the namespace name here (unless it's anonymous)
+        if (!(std::isalpha(static_cast<unsigned char>(content[start])) || content[start] == '_'))
+        {
+            // Could be anonymous namespace → skip
+            last = content.rfind("namespace", last - 1);
+            continue;
         }
+
+        // Capture namespace identifier
+        size_t end = start;
+        while (end < content.size() &&
+            (std::isalnum(static_cast<unsigned char>(content[end])) || content[end] == '_'))
+        {
+            end++;
+        }
+
+        // Now determine what comes after the namespace name
+        size_t next = content.find_first_not_of(" \t\r\n", end);
+        if (next == std::string::npos)
+            break;
+
+        // *** This is the critical fix ***
+        if (content[next] == ';')
+        {
+            // This is "using namespace Foo;" → skip
+            last = content.rfind("namespace", last - 1);
+            continue;
+        }
+
+        if (content[next] == '{')
+        {
+            // This is a proper namespace block
+            ns = content.substr(start, end - start);
+            break;
+        }
+
+        // Any other character = invalid → keep searching
+        last = content.rfind("namespace", last - 1);
     }
+
     return ns + "::" + className;
 }
+
+
 
 // Basic type inference → BTypeId
 static std::string inferBTypeId(const std::string& rawType) {
@@ -191,15 +247,23 @@ static std::vector<ReflectedClass> parseSourceFiles(const std::vector<std::strin
                     static_cast<size_t>(std::distance(content.cbegin(), m[0].first)),
                     cls.name);
 
+                bool replicates = false;
+
                 // collect properties in this file (simple: scan whole file)
                 for (std::sregex_iterator pit(content.begin(), content.end(), propRe), pend; pit != pend; ++pit) {
                     Property p;
                     p.type = (*pit)[2].str();
                     p.name = (*pit)[3].str();
                     p.meta = parseMetadataList<Property>((*pit)[1].str());
+                    if (std::find_if(p.meta.begin(), p.meta.end(), [](const MetaKV& prop)->bool { return prop.key == "Replicated"; }) != p.meta.end())
+                    {
+                        replicates = true;
+                    }
 
                     cls.properties.push_back(std::move(p));
                 }
+                if (replicates)
+                    cls.classMeta.push_back({ "Replicated", "" });
 
                 if (verbose) {
                     std::cout << "[BClassGenerator] " << cls.nsQualifiedName
@@ -225,9 +289,17 @@ static void emitGeneratedFile(const std::string& output, const std::vector<Refle
 
     out << "// Automatically generated. Do not modify.\n";
     out << "#include \"Reflection/RegisterBClass.h\"\n\n";
+    out << "#include \"Networking/NetRepRegistry.h\"\n\n";
 
     for (auto& c : classes)
+    {
         out << "#include \"" << c.headerPath << "\"\n";
+        auto it = std::find_if(c.classMeta.begin(), c.classMeta.end(), [](const MetaKV& kv) {return kv.key == "Replicated" && !kv.value.empty(); });
+        if (it != c.classMeta.end())
+        {
+            out << "#include \"" << ReplaceFilename(c.headerPath, it->value + ".h") << "\"\n";
+        }
+    }
 
     out << "namespace Boon {\n";
     out << "static struct _AutoRegisterAllClasses {\n";
@@ -240,7 +312,14 @@ static void emitGeneratedFile(const std::string& output, const std::vector<Refle
 
         // class metadata
         for (auto& cm : c.classMeta) {
-            if (cm.value.empty())
+            if (cm.key == "Replicated")
+            {
+                if (cm.value.empty())
+                    out << "            NetRepRegistry::Get().Register(cls);\n";
+                else
+                    out << "            NetRepRegistry::Get().Register(cls, new "<< cm.value << "());\n";
+            }
+            else if (cm.value.empty())
                 out << "            cls->AddMeta(\"" << cm.key << "\");\n";
             else
                 out << "            cls->AddMeta(\"" << cm.key << "\", \"" << cm.value << "\");\n";

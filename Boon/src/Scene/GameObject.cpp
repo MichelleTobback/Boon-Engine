@@ -53,7 +53,7 @@ bool Boon::GameObject::IsRoot() const
 	return !GetParent().IsValid();
 }
 
-void* GameObject::AddComponentFromClass(BClass* pClass)
+void* GameObject::AddComponentFromClass(const BClass* pClass)
 {
 	if (!pClass || !pClass->addComponent)
 		return nullptr;
@@ -61,17 +61,17 @@ void* GameObject::AddComponentFromClass(BClass* pClass)
 	return pClass->addComponent(*this);
 }
 
-void* Boon::GameObject::GetComponentByClass(BClass* pClass)
+void* Boon::GameObject::GetComponentByClass(const BClass* pClass)
 {
 	return pClass->getComponent(*this);
 }
 
-bool Boon::GameObject::HasComponentByClass(BClass* pClass)
+bool Boon::GameObject::HasComponentByClass(const BClass* pClass)
 {
 	return pClass->hasComponent(*this);
 }
 
-void Boon::GameObject::RemoveComponentByClass(BClass* pClass)
+void Boon::GameObject::RemoveComponentByClass(const BClass* pClass)
 {
 	pClass->removeComponent(*this);
 }

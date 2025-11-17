@@ -1,7 +1,6 @@
-#include "Networking/NetRepCore.h"
+﻿#include "Networking/NetRepCore.h"
 #include "Networking/NetScene.h"
 #include "Networking/NetDriver.h"
-#include "Reflection/BClass.h"
 
 #include "Scene/Scene.h"
 #include "Scene/GameObject.h"
@@ -11,50 +10,71 @@ namespace Boon
 {
     NetRepCore::NetRepCore()
     {
-        BClassRegistry::Get().ForEach([this](BClass& cls)
-            {
-                if (cls.HasMeta("Replicated"))
-                    m_ReplicatedClasses.push_back(&cls);
-            });
+        
     }
 
-    void NetRepCore::ProcessPacket(NetScene& scene, NetPacket& pkt)
+    void NetRepCore::ProcessPacket(NetScene& scene, NetPacket& pkt, NetConnection* sender)
     {
-        auto& s = pkt.GetSerializer();
+        auto& ser = pkt.GetSerializer();
 
-        // ---------------------------------------------------------
-        // Basic structure:
-        //
-        //  UUID netId
-        //  uint32_t numFields
-        //  For each field:
-        //      uint16_t fieldNameLen
-        //      char[fieldNameLen]
-        //      uint16_t fieldSize
-        //      uint8_t[fieldSize]
-        // ---------------------------------------------------------
+        uint16_t objectCount = ser.Read<uint16_t>();
 
-        UUID netId = s.Read<UUID>();
-        uint32_t fieldCount = s.Read<uint32_t>();
+        NetRepRegistry& reg = NetRepRegistry::Get();
 
-        GameObject obj = scene.GetGameObjectByUUID(netId);
-        if (!obj.IsValid())
-            return;
-
-        for (uint32_t i = 0; i < fieldCount; i++)
+        for (int i = 0; i < objectCount; i++)
         {
-            uint16_t nameLen = s.Read<uint16_t>();
-            std::string fieldName(nameLen, '\0');
-            s.ReadBytes(fieldName.data(), nameLen);
+            UUID uuid = ser.Read<UUID>();
 
-            uint16_t fieldSize = s.Read<uint16_t>();
+            GameObject obj = scene.GetGameObjectByUUID(uuid);
+            if (!obj.IsValid())
+                continue;
 
-            std::vector<uint8_t> value(fieldSize);
-            s.ReadBytes(value.data(), fieldSize);
+            uint8_t compCount = ser.Read<uint8_t>();
 
-            
+            for (int c = 0; c < compCount; c++)
+            {
+                BClassID compId = ser.Read<BClassID>();
+                uint32_t dirtyMask = ser.ReadBits(32);
+                uint32_t blobSize = ser.Read<uint32_t>();
+
+                // Raw byte blob of modified properties
+                Buffer temp(blobSize);
+                ser.ReadBytes(temp.Data(), blobSize);
+
+                ReplicatedClass& comp = reg.GetClass(compId);
+
+                if (!comp.cls->hasComponent(obj))
+                {
+                    comp.cls->addComponent(obj);
+                }
+
+                if (comp.serializer)
+                {
+                    BinarySerializer compSerializer{ temp };
+                    comp.serializer->Deserialize(compSerializer, obj);
+                    continue;
+                }
+
+                void* pInstance = comp.cls->getComponent(obj);
+
+                uint8_t* cursor = temp.Data();
+
+                for (auto& propSet : comp.fields)
+                {
+                    for (auto& [flag, repField] : propSet)
+                    {
+                        if (dirtyMask & flag)
+                        {
+                            uint8_t* dst = (uint8_t*)pInstance + repField.Offset();
+                            std::memcpy(dst, cursor, repField.Size());
+                            cursor += repField.Size();
+                        }
+                    }
+                }
+            }
         }
     }
+
 
     // ---------------------------------------------------------------------
     // Server-side: gather changes & send replication packets
@@ -63,137 +83,118 @@ namespace Boon
     {
         Scene& s = scene.GetScene();
 
-        static Buffer tempSnapshot;
+        BinarySerializer ser;
 
-        s.ForeachGameObjectWith<NetIdentity>([&](GameObject obj)
+        uint16_t objectCount = 0;
+        ser.Write<uint16_t>(0); // placeholder, patch later
+
+        size_t objectCountByteOffset = 0; // always 0 since write pos starts at 0
+
+        NetRepRegistry& reg = NetRepRegistry::Get();
+
+        s.ForeachGameObjectWith<NetIdentity>([&, this](GameObject obj)
             {
                 auto& id = obj.GetComponent<NetIdentity>();
                 if (!id.bReplicates || !id.IsAuthority())
                     return;
 
-                for (BClass* pClass : m_ReplicatedClasses)
+                ReplicationState state = m_StateCache[id.NetId];
+                state.uuid = id.NetId;
+
+                // -------------------------------------
+                // Check all components first
+                // -------------------------------------
+                struct ComponentDelta
                 {
-                    RegisterReplicatedObject(obj, pClass);
+                    BClassID clsId;
+                    uint32_t dirtyMask;
+                    Buffer   blob;
+                };
 
-                    ReplicationState& st = m_StateCache[id.NetId];
+                std::vector<ComponentDelta> dirtyComps;
+                dirtyComps.reserve(4);
 
-                    for (auto& [cls, comp] : st.components)
+                reg.ForEach([&](ReplicatedClass& comp)
                     {
-                        if (IsComponentDirty(comp, obj, tempSnapshot))
+                        if (!obj.HasComponentByClass(comp.cls))
+                            return;
+
+                        if (comp.serializer && comp.serializer->IsDirty(obj))
                         {
-                            SendComponentReplication(scene, st, comp, tempSnapshot);
-                            CommitComponentSnapshot(comp, tempSnapshot);
+                            BinarySerializer serializer{};
+                            comp.serializer->Serializer(serializer, obj);
+                            dirtyComps.push_back({ comp.cls->hash, 0, serializer.GetBuffer() });
+                            return;
                         }
-                    }
+
+                        void* inst = comp.cls->getComponent(obj);
+                        ReplicatedInstance& repInst = state.components[comp.cls];
+                        if (!repInst.pObject)
+                        {
+                            repInst.pObject = &comp;
+                            repInst.snapshot = Buffer(comp.size);
+                        }
+
+                        uint32_t dirtyMask = 0;
+                        Buffer blob;
+                        Buffer newSnapshot;
+                        newSnapshot.Reserve(comp.size);
+
+                        for (auto& propSet : comp.fields)
+                        {
+                            for (auto& [flag, rf] : propSet)
+                            {
+                                uint8_t* cur = (uint8_t*)inst + rf.Offset();
+                                uint8_t* old = repInst.snapshot.DataAt(rf.Packedoffset);
+
+                                newSnapshot.WriteRaw(cur, rf.Size());
+
+                                if (memcmp(cur, old, rf.Size()) != 0)
+                                {
+                                    dirtyMask |= flag;
+                                    blob.WriteRaw(cur, rf.Size());
+                                }
+                            }
+                        }
+
+                        if (dirtyMask != 0)
+                        {
+                            dirtyComps.push_back({ comp.cls->hash, dirtyMask, blob });
+                            repInst.snapshot = newSnapshot;
+                        }
+                    });
+
+                if (dirtyComps.empty())
+                    return;  // do NOT write this object
+
+                // -------------------------------------
+                // Write object to stream
+                // -------------------------------------
+                ser.Write(id.NetId);
+
+                uint8_t numComps = (uint8_t)dirtyComps.size();
+                ser.Write<uint8_t>(numComps);
+
+                for (auto& dc : dirtyComps)
+                {
+                    ser.Write<BClassID>(dc.clsId);
+                    ser.WriteBits(dc.dirtyMask, 32);
+                    uint32_t sz = dc.blob.Size();
+                    ser.Write<uint32_t>(sz);
+                    ser.WriteBytes(dc.blob.Data(), sz);
                 }
+
+                objectCount++;
             });
-    }
 
-    void NetRepCore::RegisterReplicatedObject(GameObject obj, BClass* cls)
-    {
-        NetIdentity& id = obj.GetComponent<NetIdentity>();
-        UUID uuid = id.NetId;
+        // Patch objectCount
+        *(uint16_t*)(ser.GetBuffer().Data() + objectCountByteOffset) = objectCount;
 
-        if (m_StateCache.find(uuid) != m_StateCache.end())
+        if (objectCount == 0)
             return;
 
-        ReplicationState st;
-        st.uuid = uuid;
-        st.gameObject = obj;
-
-        ReplicatedObject comp = BuildComponentLayout(obj, cls);
-        st.components[cls] = std::move(comp);
-
-        // Build initial snapshots
-        for (auto& [clsKey, compObj] : st.components)
-            PackComponentSnapshot(compObj, obj, compObj.snapshot);
-
-        m_StateCache[uuid] = std::move(st);
-    }
-
-
-    NetRepCore::ReplicatedObject NetRepCore::BuildComponentLayout(GameObject obj, const BClass* cls)
-    {
-        ReplicatedObject comp;
-        comp.cls = cls;
-
-        size_t totalSize = 0;
-
-        for (auto& prop : cls->GetProperties())
-        {
-            if (!prop.HasMeta("Replicated"))
-                continue;
-
-            comp.fields.push_back({ (BProperty*)&prop });
-            totalSize += prop.size;
-        }
-
-        // Allocate snapshot buffer
-        comp.snapshot = Buffer(totalSize);
-
-        return comp;
-    }
-
-    void NetRepCore::PackComponentSnapshot(const ReplicatedObject& comp, GameObject obj, Buffer& outSnapshot)
-    {
-        uint8_t* basePtr = (uint8_t*)comp.cls->getComponent(obj);
-
-        outSnapshot = Buffer(comp.snapshot.Size());
-
-        uint8_t* dst = outSnapshot.Data();
-
-        size_t writeHead = 0;
-
-        for (auto& f : comp.fields)
-        {
-            size_t offset = f.Offset();
-            size_t size = f.Size();
-
-            std::memcpy(dst + writeHead, basePtr + offset, size);
-            writeHead += size;
-        }
-    }
-
-    void NetRepCore::BuildInitialSnapshots(ReplicationState& state)
-    {
-        for (auto& pair : state.components)
-        {
-            Buffer buffer = pair.second.snapshot;
-            PackComponentSnapshot(pair.second, state.gameObject, buffer);
-        }
-    }
-
-    bool NetRepCore::IsComponentDirty(const ReplicatedObject& comp, GameObject obj, Buffer& tempBuffer)
-    {
-        PackComponentSnapshot(comp, obj, tempBuffer);
-
-        return std::memcmp(comp.snapshot.Data(), tempBuffer.Data(), comp.snapshot.Size()) != 0;
-    }
-
-    void NetRepCore::CommitComponentSnapshot(ReplicatedObject& comp, Buffer& temp)
-    {
-        std::memcpy(comp.snapshot.Data(), temp.Data(), comp.snapshot.Size());
-    }
-
-    void NetRepCore::SendComponentReplication(NetScene& scene, ReplicationState& state, ReplicatedObject& comp, Buffer& tempSnapshot)
-    {
         NetPacket pkt(ENetPacketType::Replication);
-
-        // GAME OBJECT UUID
-        pkt.Write(state.uuid);
-
-        // COMPONENT TYPE (reflective BClass* turned into a stable ID)
-        uint32_t compId = comp.cls->hash;
-        pkt.Write<uint32_t>(compId);
-
-        // SNAPSHOT SIZE
-        uint32_t size = (uint32_t)tempSnapshot.Size();
-        pkt.Write<uint32_t>(size);
-
-        // RAW DATA
-        pkt.WriteBytes(tempSnapshot.Data(), size);
-
-        // Send to all clients
+        pkt.WriteBytes(ser.Data(), ser.Size());
         scene.GetDriver()->Broadcast(pkt, false);
     }
 }
