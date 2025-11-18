@@ -14,6 +14,8 @@ namespace Boon
         Unknown,
         Int,
         Int64,
+        Uint,
+        Uint64,
         Float,
         Bool,
         String,

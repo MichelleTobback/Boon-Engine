@@ -9,7 +9,7 @@
 #include <glm/vec4.hpp>
 #include <glm/gtc/type_precision.hpp>
 
-#include "Core/UUID.h"    // <-- must define UUID = uint64_t or struct wrapping uint64
+#include "Core/UUID.h"
 
 namespace Boon
 {

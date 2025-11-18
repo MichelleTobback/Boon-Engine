@@ -19,10 +19,8 @@ namespace Boon
     BCLASS()
     struct NetIdentity
     {
-        BPROPERTY()
         UUID NetId;
 
-        BPROPERTY()
         uint64_t OwnerConnectionId = 0;
 
         ENetRole Role = ENetRole::None;

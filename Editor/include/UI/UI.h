@@ -35,6 +35,9 @@ namespace BoonEditor
                 break;
 
             case BTypeId::Int:
+            case BTypeId::Uint:
+            case BTypeId::Int64:
+            case BTypeId::Uint64:
                 result = IntProperty(property, pInstance);
                 break;
             case BTypeId::Int2:

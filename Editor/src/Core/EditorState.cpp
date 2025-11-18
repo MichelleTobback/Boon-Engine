@@ -155,6 +155,8 @@ void EditorState::OnEnter()
 
 	sceneManager.SetActiveScene(scene.GetID(), false);
 
+	SceneSerializer serializer(scene);
+	serializer.Serialize("Assets/scenes/Test.scene");
 }
 
 void EditorState::OnUpdate()
