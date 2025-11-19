@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/Boon.h"
 #include "Asset/Asset.h"
-#include "Renderer/SpriteAtlas.h"
+#include "Asset/SpriteAtlasAsset.h"
 
 #include <glm/glm.hpp>
 
@@ -18,7 +18,8 @@ namespace Boon
 		BPROPERTY()
 		float Tiling{ 1.f };
 
-		AssetHandle SpriteAtlasHandle;
+		BPROPERTY()
+		AssetRef<SpriteAtlasAsset> SpriteAtlasHandle;
 
 		BPROPERTY(Slider, RangeMin=0, RangeMax=10)
 		int Sprite;

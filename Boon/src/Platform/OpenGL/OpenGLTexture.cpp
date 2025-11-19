@@ -56,6 +56,12 @@ void Boon::OpenGLTexture2D::SetData(void* data, uint32_t size)
 	glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Descriptor.Width, m_Descriptor.Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 }
 
+void Boon::OpenGLTexture2D::SetData(Buffer& buffer)
+{
+	uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
+	glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Descriptor.Width, m_Descriptor.Height, m_DataFormat, GL_UNSIGNED_BYTE, buffer.Data());
+}
+
 void Boon::OpenGLTexture2D::Bind(uint32_t slot) const
 {
 	glBindTextureUnit(slot, m_RendererID);

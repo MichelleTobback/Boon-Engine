@@ -50,6 +50,7 @@ namespace Boon
 
 		void* AddComponentFromClass(const BClass* pClass);
 		void* GetComponentByClass(const BClass* pClass);
+		void* GetOrAddComponentByClass(const BClass* pClass);
 		bool HasComponentByClass(const BClass* pClass);
 		void RemoveComponentByClass(const BClass* pClass);
 
@@ -65,6 +66,15 @@ namespace Boon
 			entt::registry& reg = m_pScene->GetRegistry();
 
 			return reg.emplace<T>(m_Handle, std::forward<TArgs>(args)...);
+		}
+
+		template <typename T, typename ... TArgs>
+		T& GetOrAddComponent(TArgs&& ... args)
+		{
+			if (HasComponent<T>())
+				return GetComponent<T>();
+
+			return AddComponent<T>();
 		}
 
 		template<typename T>

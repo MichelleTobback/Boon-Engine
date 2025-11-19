@@ -1,54 +1,75 @@
 #pragma once
-#include "Asset.h"
-#include "AssetLoader.h"
+#include "Asset/Asset.h"
+#include "Asset/AssetTraits.h"
+#include "Asset/AssetMeta.h"
+#include "Core/Memory/Buffer.h"
 #include "Renderer/Shader.h"
+
+#include <memory>
 
 namespace Boon
 {
-	class ShaderAsset final : public Asset
-	{
-	public:
-		using Type = Shader;
+    class ShaderAsset : public Asset
+    {
+    public:
+        using Type = Shader;
+        ShaderAsset(AssetHandle handle)
+            : Asset(handle) {
+        }
 
-		ShaderAsset(const ShaderAsset& other) = delete;
-		ShaderAsset(ShaderAsset&& other) = default;
-		ShaderAsset& operator=(const ShaderAsset& other) = delete;
-		ShaderAsset& operator=(ShaderAsset&& other) = delete;
+        std::shared_ptr<Shader> GetInstance()
+        {
+            if (!m_RuntimeShader)
+            {
+                m_RuntimeShader = Shader::Create(m_VertexSource, m_FragmentSource);
+            }
+            return m_RuntimeShader;
+        }
 
-		virtual ~ShaderAsset() = default;
+        const std::string& GetVertexSource() const { return m_VertexSource; }
+        const std::string& GetFragmentSource() const { return m_FragmentSource; }
 
-		std::shared_ptr<Shader> GetInstance() const;
+    private:
+        friend class ShaderImporter;
+        friend struct AssetTraits<ShaderAsset>;
 
-	protected:
-		static std::unique_ptr<ShaderAsset> Create(AssetHandle handle, const std::shared_ptr<Shader>& pShader);
+        std::string m_VertexSource;
+        std::string m_FragmentSource;
 
-	private:
-		friend class ShaderAssetLoader;
-		ShaderAsset(AssetHandle handle, const std::shared_ptr<Shader>& pShader);
+        mutable std::shared_ptr<Shader> m_RuntimeShader = nullptr;
+    };
 
-		std::shared_ptr<Shader> m_pShader{ nullptr };
-	};
 
-	class ShaderAssetLoader final : public AssetLoader
-	{
-	public:
-		virtual ~ShaderAssetLoader() = default;
+    template<>
+    struct AssetTraits<ShaderAsset>
+    {
+        static constexpr AssetType Type = AssetType::Shader;
 
-		ShaderAssetLoader(const ShaderAssetLoader& other) = default;
-		ShaderAssetLoader(ShaderAssetLoader&& other) = default;
-		ShaderAssetLoader& operator=(const ShaderAssetLoader& other) = delete;
-		ShaderAssetLoader& operator=(ShaderAssetLoader&& other) = delete;
+        static ShaderAsset* Load(Buffer& buffer, const AssetMeta& meta)
+        {
+            size_t cursor = 0;
 
-		virtual std::unique_ptr<Asset> Load(const std::string& path) override;
+            // Read vertex shader
+            std::string vert = buffer.ReadString(cursor);
 
-	protected:
-		static std::unique_ptr<ShaderAssetLoader> Create();
+            // Read fragment shader
+            std::string frag = buffer.ReadString(cursor);
 
-	private:
-		friend class AssetLibrary;
-		ShaderAssetLoader()
-			: AssetLoader({ "vert", "frag", "glsl", "hlsl" }) {}
+            ShaderAsset* asset = new ShaderAsset(meta.uuid);
+            asset->m_VertexSource = vert;
+            asset->m_FragmentSource = frag;
 
-		bool ReadShaderFile(const std::string& filepath, std::string& vert, std::string& frag);
-	};
+            return asset;
+        }
+
+        static Buffer Serialize(ShaderAsset* asset)
+        {
+            Buffer out;
+
+            out.WriteString(asset->GetVertexSource());
+            out.WriteString(asset->GetFragmentSource());
+
+            return out;
+        }
+    };
 }

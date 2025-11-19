@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <cstring>
 #include <type_traits>
+#include <string>
 
 namespace Boon
 {
@@ -52,6 +53,13 @@ namespace Boon
             Append(data, size);
         }
 
+        void WriteString(const std::string& str)
+        {
+            uint32_t len = (uint32_t)str.size();
+            Write<uint32_t>(len);
+            WriteRaw(str.data(), len);
+        }
+
         // ---------- Read ----------
         template<typename T>
         T Read(size_t& offset) const
@@ -71,9 +79,15 @@ namespace Boon
             offset += size;
         }
 
-        void ReadRaw(void* out, size_t size, size_t offset) const
+        std::string ReadString(size_t& offset) const
         {
-            std::memcpy(out, m_Data.data() + offset, size);
+            uint32_t len = Read<uint32_t>(offset);
+
+            std::string str;
+            str.resize(len);
+
+            ReadRaw(str.data(), len, offset);
+            return str;
         }
 
         // ---------- Utility ----------

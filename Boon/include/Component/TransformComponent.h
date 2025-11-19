@@ -97,12 +97,18 @@ namespace Boon
 
 		glm::mat4 m_WorldTransform{};
 
+		BPROPERTY(HideInInspector)
 		glm::vec3 m_LocalPosition{};
 		glm::vec3 m_WorldPosition{};
+
 		glm::quat m_LocalRotQ{};
 		glm::quat m_WorldRotQ{};
+
+		BPROPERTY(HideInInspector)
 		glm::vec3 m_LocalEuler{};
 		glm::vec3 m_WorldEuler{};
+
+		BPROPERTY(HideInInspector)
 		glm::vec3 m_LocalScale{ 1.f, 1.f, 1.f };
 		glm::vec3 m_WorldScale{};
 

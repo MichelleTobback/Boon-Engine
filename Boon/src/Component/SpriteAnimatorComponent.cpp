@@ -15,6 +15,13 @@ void Boon::SpriteAnimatorComponent::Awake(GameObject obj)
 
 void Boon::SpriteAnimatorComponent::Update(GameObject obj)
 {
+	if (!pRenderer)
+		return;
+
+	Atlas = pRenderer->SpriteAtlasHandle.Instance();
+	if (!Atlas)
+		return;
+
 	if (Atlas->GetClips().size() <= Clip)
 		return;
 

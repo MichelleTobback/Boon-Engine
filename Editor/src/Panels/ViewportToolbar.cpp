@@ -12,17 +12,25 @@ BoonEditor::ViewportToolbar::ViewportToolbar(const std::string& name)
 {
     AssetLibrary& assetLib = ServiceLocator::Get<AssetLibrary>();
 
-    AssetHandle handle = assetLib.Load<Texture2DAssetLoader>("Icons/PlayButton.png");
-    m_pPlayIcon = assetLib.GetAsset<Texture2DAsset>(handle);
+    {
+        auto handle = assetLib.Import<Texture2DAsset>("Icons/PlayButton.png");
+        m_pPlayIcon = handle->GetInstance();
+    }
 
-    handle = assetLib.Load<Texture2DAssetLoader>("Icons/StopButton.png");
-    m_pStopIcon = assetLib.GetAsset<Texture2DAsset>(handle);
+    {
+        auto handle = assetLib.Import<Texture2DAsset>("Icons/StopButton.png");
+        m_pStopIcon = handle->GetInstance();
+    }
 
-    handle = assetLib.Load<Texture2DAssetLoader>("Icons/CameraSettingIcon.png");
-    m_pCameraIcon = assetLib.GetAsset<Texture2DAsset>(handle);
+    {
+        auto handle = assetLib.Import<Texture2DAsset>("Icons/CameraSettingIcon.png");
+        m_pCameraIcon = handle->GetInstance();
+    }
 
-    handle = assetLib.Load<Texture2DAssetLoader>("Icons/VisibilityButton.png");
-    m_pVisibilityIcon = assetLib.GetAsset<Texture2DAsset>(handle);
+    {
+        auto handle = assetLib.Import<Texture2DAsset>("Icons/VisibilityButton.png");
+        m_pVisibilityIcon = handle->GetInstance();
+    }
 }
 
 void BoonEditor::ViewportToolbar::OnRender(const glm::vec2& boundsMin, const glm::vec2& boundsMax)

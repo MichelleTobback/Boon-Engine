@@ -4,7 +4,6 @@
 
 namespace Boon
 {
-	BCLASS(HideInInspector)
 	class SceneComponent final
 	{
 	public:

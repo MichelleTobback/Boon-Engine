@@ -1,52 +1,122 @@
 #pragma once
-#include "Asset.h"
-#include "AssetLoader.h"
+#include "Asset/Asset.h"
+#include "Core/Memory/Buffer.h"
+#include "Asset/AssetMeta.h"
 #include "Renderer/SpriteAtlas.h"
+
+#include <memory>
 
 namespace Boon
 {
-	class SpriteAtlasAsset final : public Asset
-	{
-	public:
-		using Type = SpriteAtlas;
+    class SpriteAtlasAsset : public Asset
+    {
+    public:
+        using Type = SpriteAtlas;
+        SpriteAtlasAsset(AssetHandle handle, const std::shared_ptr<SpriteAtlas>& pAtlas)
+            : Asset(handle), m_pAtlas(pAtlas) { }
+        virtual ~SpriteAtlasAsset() = default;
 
-		SpriteAtlasAsset(const SpriteAtlasAsset& other) = delete;
-		SpriteAtlasAsset(SpriteAtlasAsset&& other) = default;
-		SpriteAtlasAsset& operator=(const SpriteAtlasAsset& other) = delete;
-		SpriteAtlasAsset& operator=(SpriteAtlasAsset&& other) = delete;
+        inline std::shared_ptr<SpriteAtlas> GetInstance() const { return m_pAtlas; }
 
-		virtual ~SpriteAtlasAsset() = default;
+    private:
+        friend class SpriteAtlasImporter;
+        std::shared_ptr<SpriteAtlas> m_pAtlas{ nullptr };
+    };
 
-		std::shared_ptr<SpriteAtlas> GetInstance() const;
+    template<>
+    struct AssetTraits<SpriteAtlasAsset>
+    {
+        static constexpr AssetType Type = AssetType::SpriteAtlas;
 
-	protected:
-		static std::unique_ptr<SpriteAtlasAsset> Create(AssetHandle handle, const std::shared_ptr<SpriteAtlas>& pAtlas);
+        // ------------------------------------------------------
+        //  LOAD from AssetPack (runtime)
+        // ------------------------------------------------------
+        static SpriteAtlasAsset* Load(Buffer& buffer, const AssetMeta& meta)
+        {
+            size_t cursor = 0;
 
-	private:
-		friend class SpriteAtlasAssetLoader;
-		SpriteAtlasAsset(AssetHandle handle, const std::shared_ptr<SpriteAtlas>& pAtlas);
+            // Read texture UUID
+            uint32_t textureUUID = buffer.Read<uint32_t>(cursor);
 
-		std::shared_ptr<SpriteAtlas> m_pAtlas{ nullptr };
-	};
+            // Create atlas
+            std::shared_ptr<SpriteAtlas> atlas = std::make_shared<SpriteAtlas>();
 
-	class SpriteAtlasAssetLoader final : public AssetLoader
-	{
-	public:
-		virtual ~SpriteAtlasAssetLoader() = default;
+            // Lazy texture reference
+            atlas->SetTexture(AssetRef<Texture2DAsset>(textureUUID));
 
-		SpriteAtlasAssetLoader(const SpriteAtlasAssetLoader& other) = default;
-		SpriteAtlasAssetLoader(SpriteAtlasAssetLoader&& other) = default;
-		SpriteAtlasAssetLoader& operator=(const SpriteAtlasAssetLoader& other) = delete;
-		SpriteAtlasAssetLoader& operator=(SpriteAtlasAssetLoader&& other) = delete;
+            // -------------------------
+            // Load animation clips
+            // -------------------------
+            uint32_t clipCount = buffer.Read<uint32_t>(cursor);
 
-		virtual std::unique_ptr<Asset> Load(const std::string& path) override;
+            for (uint32_t i = 0; i < clipCount; i++)
+            {
+                SpriteAnimClip clip;
 
-	protected:
-		static std::unique_ptr<SpriteAtlasAssetLoader> Create();
+                clip.Speed = buffer.Read<float>(cursor);
 
-	private:
-		friend class AssetLibrary;
-		SpriteAtlasAssetLoader()
-			: AssetLoader({ "bsa" }) {}
-	};
+                uint32_t frameCount = buffer.Read<uint32_t>(cursor);
+                clip.Frames.resize(frameCount);
+
+                for (uint32_t f = 0; f < frameCount; f++)
+                {
+                    SpriteFrame frame;
+
+                    int id = buffer.Read<uint32_t>(cursor);
+                    frame.UV.x = buffer.Read<float>(cursor);
+                    frame.UV.y = buffer.Read<float>(cursor);
+                    frame.Size.x = buffer.Read<float>(cursor);
+                    frame.Size.y = buffer.Read<float>(cursor);
+                    frame.FrameTime = buffer.Read<float>(cursor);
+
+                    // Store full frame in clip
+                    clip.Frames[f] = id;
+                    atlas->SetSpriteFrame(frame, id);
+                }
+
+                clip.pAtlas = atlas.get();
+                atlas->AddClip(clip);
+            }
+
+            return new SpriteAtlasAsset(meta.uuid, atlas);
+        }
+
+        // ------------------------------------------------------
+        //  SERIALIZE into AssetPack (editor build)
+        // ------------------------------------------------------
+        static Buffer Serialize(SpriteAtlasAsset* asset)
+        {
+            Buffer out;
+
+            SpriteAtlas* atlas = asset->GetInstance().get();
+
+            // 1. Texture
+            out.Write<uint32_t>(atlas->GetTexture().Handle());
+
+            // 2. Clips
+            const auto& clips = atlas->GetClips();
+            out.Write<uint32_t>((uint32_t)clips.size());
+
+            for (const auto& clip : clips)
+            {
+                out.Write<float>(clip.Speed);
+                out.Write<uint32_t>((uint32_t)clip.Frames.size());
+
+                for (uint32_t id : clip.Frames)
+                {
+                    const SpriteFrame& frame = atlas->GetSpriteFrame(id);
+
+                    out.Write<uint32_t>(id);
+                    out.Write<float>(frame.UV.x);
+                    out.Write<float>(frame.UV.y);
+                    out.Write<float>(frame.Size.x);
+                    out.Write<float>(frame.Size.y);
+                    out.Write<float>(frame.FrameTime);
+                }
+            }
+
+            return out;
+        }
+    };
+
 }

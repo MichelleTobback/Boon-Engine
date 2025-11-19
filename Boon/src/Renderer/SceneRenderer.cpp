@@ -74,9 +74,9 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 
 			if (assetLib.IsValidAsset(sprite.SpriteAtlasHandle))
 			{
-				auto atlas = assetLib.GetAsset<SpriteAtlasAsset>(sprite.SpriteAtlasHandle);
-				const SpriteFrame& spriteUv = atlas->GetSpriteFrame(sprite.Sprite);
-				m_pRenderer2D->SubmitQuad(transform.GetWorld(), atlas->GetTexture(), sprite.Tiling, sprite.Color, (int)gameObject, spriteUv.UV, spriteUv.Size);
+				auto atlas = assetLib.Load<SpriteAtlasAsset>(sprite.SpriteAtlasHandle);
+				const SpriteFrame& spriteUv = atlas->GetInstance()->GetSpriteFrame(sprite.Sprite);
+				m_pRenderer2D->SubmitQuad(transform.GetWorld(), atlas->GetInstance()->GetTexture().Instance(), sprite.Tiling, sprite.Color, (int)gameObject, spriteUv.UV, spriteUv.Size);
 			}
 			else
 				m_pRenderer2D->SubmitQuad(transform.GetWorld(), sprite.Color, (int)gameObject);

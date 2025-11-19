@@ -221,11 +221,12 @@ static std::string inferBTypeId(const std::string& rawType) {
         {"bool",        "BTypeId::Bool"},
         {"char",        "BTypeId::Char"},
         {"std::string", "BTypeId::String"},
-        {"UUID",        "BTypeId::Int64"}
+        {"UUID",        "BTypeId::Int64"},
     };
     auto it = lut.find(t);
     if (it != lut.end()) return it->second;
 
+    if (t.find("std::AssetRef<") != std::string::npos) return "BTypeId::AssetRef";
     if (t.find("std::shared_ptr<") != std::string::npos) return "BTypeId::SharedPtr";
     if (t.find("std::vector<") != std::string::npos) return "BTypeId::Array";
 

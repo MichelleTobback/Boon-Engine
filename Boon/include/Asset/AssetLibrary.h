@@ -1,95 +1,71 @@
 #pragma once
-#include "AssetLoader.h"
-#include "Core/Assert.h"
+#include <memory>
 
-#include <vector>
-#include <unordered_map>
-#include <filesystem>
+#include "AssetPack/AssetCache.h"
+#include "AssetPack/AssetPackReader.h"
+#include "Asset/Loader/AssetLoader.h"
+#include "Asset/AssetRef.h"
+
+#include "Asset/Importer/AssetImporterRegistry.h"
 
 namespace Boon
 {
-	class AssetLibrary final
-	{
-	public:
-		AssetLibrary(const std::string& assetDirectory);
-		~AssetLibrary();
+    class AssetLibrary
+    {
+    public:
+        AssetLibrary(const std::string& root)
+            : m_Root(root) { AssetImporterRegistry::Get().m_pCache = &m_Cache; }
+        bool LoadPack(const std::string& packFile);
 
-		AssetLibrary(const AssetLibrary& other) = delete;
-		AssetLibrary(AssetLibrary&& other) = delete;
-		AssetLibrary& operator=(const AssetLibrary& other) = delete;
-		AssetLibrary& operator=(AssetLibrary&& other) = delete;
+        template<typename T>
+        T* Resolve(AssetHandle handle)
+        {
+            if (auto cached = m_Cache.Find<T>(handle))
+                return cached;
 
-		template <typename T>
-		AssetHandle Load(const std::string& path, uint32_t location = 0);
-		template <typename T, typename TType = T::Type>
-		std::shared_ptr<TType> GetAsset(AssetHandle handle);
+            T* loaded = m_Loader->Load<T>(handle);
+            if (!loaded)
+                return nullptr;
 
-		void AddDirectory(const std::string& directory);
+            m_Cache.Store(loaded);
+            return loaded;
+        }
 
-		template <typename T>
-		void RegisterLoader();
+        template<typename T>
+        AssetRef<T> Load(AssetHandle handle)
+        {
+            if (auto cached = m_Cache.Find<T>(handle))
+                return AssetRef<T>(cached->GetHandle());
 
-		bool IsValidAsset(AssetHandle handle) const;
+            T* result = m_Loader->Load<T>(handle);
+            if (!result)
+                return AssetRef<T>();
 
-	private:
-		std::vector<std::unique_ptr<AssetLoader>> m_AssetLoaders;
-		std::unordered_map<std::string, AssetLoader*> m_ExtensionsToLoaders;
+            m_Cache.Store(result);
+            return AssetRef<T>(result->GetHandle());
+        }
 
-		std::unordered_map<AssetHandle, std::unique_ptr<Asset>> m_Assets;
-		std::unordered_map<AssetTypeID, std::vector<AssetHandle>> m_TypesToHandles;
-		std::unordered_map<std::string, AssetHandle> m_Paths;
+        void ClearCache() { m_Cache.Clear(); }
 
-		std::vector<std::string> m_Dirs{};
-	};
+        bool IsValidAsset(AssetHandle handle) const
+        {
+            return m_Registry.Get(handle);
+        }
 
-	template<typename T>
-	inline AssetHandle AssetLibrary::Load(const std::string& path, uint32_t location)
-	{
-		std::filesystem::path fullPath = std::filesystem::path(m_Dirs[location]) / path;
+        template<typename T>
+        AssetRef<T> Import(const std::string& filepath)
+        {
+            AssetImporterRegistry::Imported<T> result = AssetImporterRegistry::Get().Import<T>(m_Root + filepath);
+            m_Cache.Store(result.asset);
+            m_Registry.Add(result.meta);
+            return AssetRef<T>(result.meta.uuid);
+        }
 
-		auto it{ m_Paths.find(fullPath.string()) };
-		if (it != m_Paths.end())
-			return it->second;
-
-		std::string extension{ fullPath.extension().string() };
-		if (!extension.empty() && extension[0] == '.')
-			extension = extension.substr(1);
-
-		auto extIt = m_ExtensionsToLoaders.find(extension);
-		if (extIt == m_ExtensionsToLoaders.end())
-			return 0u;
-		AssetLoader* pLoader = extIt->second;
-
-		if (pLoader)
-		{
-			auto pAsset{ pLoader->Load(fullPath.string()) };
-			AssetHandle handle{ pAsset->GetHandle() };
-			m_Assets[handle] = std::move(pAsset);
-			m_TypesToHandles[typeid(T).hash_code()].push_back(handle);
-			m_Paths[fullPath.string()] = handle;
-			return handle;
-		}
-		return 0u;
-	}
-
-	template<typename T, typename TType>
-	inline std::shared_ptr<TType> AssetLibrary::GetAsset(AssetHandle handle)
-	{
-		BN_ASSERT(m_Assets.find(handle) != m_Assets.end(), "asset does not exist");
-		T* pAsset{ dynamic_cast<T*>(m_Assets[handle].get()) };
-		BN_ASSERT(pAsset, "asset is not valid");
-
-		return pAsset->GetInstance();
-	}
-
-	template<typename T>
-	inline void AssetLibrary::RegisterLoader()
-	{
-		auto& pLoader{ m_AssetLoaders.emplace_back(std::move(T::Create())) };
-		const std::vector<std::string>& extensions{ pLoader->GetExtensions() };
-		for (const std::string& ext : extensions)
-		{
-			m_ExtensionsToLoaders[ext] = pLoader.get();
-		}
-	}
+    private:
+        AssetCache m_Cache;
+        AssetRegistry m_Registry;
+        std::unique_ptr<AssetPackReader> m_Reader;
+        std::unique_ptr<AssetLoader> m_Loader;
+        std::string m_Root;
+    };
 }

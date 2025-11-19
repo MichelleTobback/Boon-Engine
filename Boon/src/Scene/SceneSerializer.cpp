@@ -2,6 +2,7 @@
 #include "Component/NameComponent.h"
 #include "Component/SceneComponent.h"
 #include "Asset/Asset.h"
+#include "Asset/AssetRef.h"
 
 #include "Scene/GameObject.h"
 #include "Reflection/BClass.h"
@@ -29,6 +30,15 @@ void Boon::SceneSerializer::Serialize(const std::string& dst)
             json jObj;
             jObj["uuid"] = static_cast<uint64_t>(gameObject.GetUUID());
             jObj["components"] = json::object();
+
+            json& scene = jObj["components"]["scene component"];
+            scene["id"] = 0;
+            scene["parent"] = gameObject.GetParent().IsValid() ? (uint64_t)gameObject.GetParent().GetUUID() : 0u;
+            scene["children"] = json::array();
+            for (auto child : gameObject.GetChildren())
+            {
+                scene["children"].push_back((uint64_t)child.GetUUID());
+            }
 
             // Iterate over all registered component classes
             BClassRegistry::Get().ForEach([&](const BClass& cls)
@@ -113,8 +123,8 @@ void Boon::SceneSerializer::Serialize(const std::string& dst)
                             }
                             case BTypeId::AssetRef:
                             {
-                                Asset* pAsset = reinterpret_cast<Asset*>(base + prop.offset);
-                                jValue = static_cast<uint64_t>(pAsset->GetHandle());
+                                AssetHandle* pAsset = reinterpret_cast<AssetHandle*>(base + prop.offset);
+                                jValue = static_cast<uint64_t>(*pAsset);
                                 break;
                             }
                             default:
@@ -159,12 +169,24 @@ void Boon::SceneSerializer::Deserialize(const std::string& src)
         // 1. Create or fetch game object
         GameObject gameObject = m_Context.Instantiate(uuid);
 
-        // 2. Deserialize components
+        // 2. Deserialize manual components
+        if (jObj["components"].contains("scene component"))
+        {
+            const json& sceneCmp = jObj["components"]["scene component"];
+
+            SceneComponent& scene = gameObject.GetOrAddComponent<SceneComponent>();
+
+            scene.m_Parent = (GameObjectID)sceneCmp["parent"].get<uint64_t>();
+            for (auto& childUUID : sceneCmp["children"])
+                scene.m_Children.push_back((GameObjectID)childUUID.get<uint64_t>());
+        }
+
+        // 3. Deserialize reflected components
         for (auto& [clsName, jComponent] : jObj["components"].items())
         {
 
             // Look up reflected component class
-            const BClass* cls = BClassRegistry::Get().Find(jComponent["id"]);
+            const BClass* cls = BClassRegistry::Get().Find(jComponent["id"].get<uint32_t>());
             if (!cls)
             {
                 //BOON_WARN("Unknown component class '{}' while deserializing.", clsName);
@@ -172,13 +194,11 @@ void Boon::SceneSerializer::Deserialize(const std::string& src)
             }
 
             // Ensure the GameObject has the component
-            void* component = gameObject.GetComponentByClass(cls);
-            if (!component)
-                component = gameObject.AddComponentFromClass(cls);
+            void* component = gameObject.GetOrAddComponentByClass(cls);
 
             uint8_t* base = reinterpret_cast<uint8_t*>(component);
 
-            // 3. Deserialize properties
+            // 4. Deserialize properties
             cls->ForEachProperty([&](const BProperty& prop)
                 {
                     if (!jComponent.contains(prop.name))
@@ -278,7 +298,7 @@ void Boon::SceneSerializer::Deserialize(const std::string& src)
 
                     case BTypeId::AssetRef:
                     {
-                        uint64_t handle = jValue.get<uint64_t>();
+                        *reinterpret_cast<AssetHandle*>(base + prop.offset) = jValue.get<uint64_t>();
                         break;
                     }
 
@@ -294,6 +314,7 @@ void Boon::SceneSerializer::Deserialize(const std::string& src)
 void Boon::SceneSerializer::Clear()
 {
 	m_Context.GetRegistry().clear();
+    m_Context.m_EntityMap.clear();
 }
 
 void Boon::SceneSerializer::Copy(Scene& from)

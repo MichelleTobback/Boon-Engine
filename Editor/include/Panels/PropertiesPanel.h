@@ -82,14 +82,14 @@ namespace BoonEditor
 
             if (open)
             {
-                BClass* cls = BClassRegistry::Get().Find<T>();
-                if (cls)
-                {
-                    cls->ForEachProperty([&pComponent](const BProperty& prop)
-                        {
-                            UI::Property(prop, &pComponent);
-                        });
-                }
+                //BClass* cls = BClassRegistry::Get().Find<T>();
+                //if (cls)
+                //{
+                //    cls->ForEachProperty([&pComponent](const BProperty& prop)
+                //        {
+                //            UI::Property(prop, &pComponent);
+                //        });
+                //}
 
                 fn(pComponent);
                 ImGui::TreePop();

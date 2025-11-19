@@ -9,6 +9,12 @@
 #include "UI/EditorRenderer.h"
 
 #include <Asset/Assets.h>
+#include <Asset/AssetRef.h>
+#include <Asset/Importer/TextureImporter.h>
+#include <Asset/Importer/ShaderImporter.h>
+#include <Asset/Importer/SpriteAtlasImporter.h>
+
+#include "Assets/AssetDirectoryScanner.h"
 
 #include <Core/Application.h>
 #include <Core/ServiceLocator.h>
@@ -53,6 +59,10 @@ void EditorState::OnEnter()
 {
 	Window& window{ Application::Get().GetWindow() };
 	AssetLibrary& assetLib{ Assets::Get() };
+	AssetImporterRegistry& importer = AssetImporterRegistry::Get();
+	importer.RegisterImporter<Texture2DImporter>();
+	importer.RegisterImporter<ShaderImporter>();
+	importer.RegisterImporter<SpriteAtlasImporter>();
 
 	m_NetworkSettings.NetMode = Application::Get().GetDescriptor().netDriverMode;
 
@@ -69,6 +79,8 @@ void EditorState::OnEnter()
 	CreatePanel<ScenePanel>("scene", &m_SceneContext, &m_SelectionContext);
 	CreatePanel<NetworkPanel>("network", m_NetworkSettings);
 
+	CreateObject<AssetDirectoryScanner>("Assets/", 1.f);
+
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	std::shared_ptr<NetDriver> network = std::make_shared<SteamNetDriver>();
 	ServiceLocator::Register<NetDriver>(network);
@@ -84,13 +96,13 @@ void EditorState::OnEnter()
 	{
 		GameObject quad = scene.Instantiate(UUID(12345u));
 		SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
-		sprite.SpriteAtlasHandle = assetLib.Load<SpriteAtlasAssetLoader>("game/Blue_witch/B_witch_atlas_compact.bsa");
+		AssetRef<SpriteAtlasAsset> atlas = assetLib.Import<SpriteAtlasAsset>("game/Blue_witch/B_witch_atlas_compact.bsa");
+		sprite.SpriteAtlasHandle = atlas->GetHandle();
 		sprite.Sprite = 0;
 
 		SpriteAnimatorComponent& animator = quad.AddComponent<SpriteAnimatorComponent>();
-		auto atlas = assetLib.GetAsset<SpriteAtlasAsset>(sprite.SpriteAtlasHandle);
 		animator.Clip = 0;
-		animator.Atlas = atlas;
+		animator.Atlas = atlas->GetInstance();
 		animator.pRenderer = &sprite;
 
 		BoxCollider2D& col = quad.AddComponent<BoxCollider2D>();
@@ -157,6 +169,9 @@ void EditorState::OnEnter()
 
 	SceneSerializer serializer(scene);
 	serializer.Serialize("Assets/scenes/Test.scene");
+
+	serializer.Clear();
+	serializer.Deserialize("Assets/scenes/Test.scene");
 }
 
 void EditorState::OnUpdate()

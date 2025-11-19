@@ -1,5 +1,6 @@
 #pragma once
-
+#include "Asset/AssetRef.h"
+#include "Asset/TextureAsset.h"
 #include <glm/glm.hpp>
 #include <memory>
 #include <unordered_map>
@@ -35,8 +36,8 @@ namespace Boon
 		SpriteAtlas& operator=(const SpriteAtlas& other) = delete;
 		SpriteAtlas& operator=(SpriteAtlas&& other) = delete;
 
-		inline void SetTexture(const std::shared_ptr<Texture2D>& pTexture) { m_pTexture = pTexture; }
-		inline const std::shared_ptr<Texture2D>& GetTexture() const { return m_pTexture; }
+		inline void SetTexture(const AssetRef<Texture2DAsset>& pTexture) { m_pTexture = pTexture; }
+		inline const AssetRef<Texture2DAsset>& GetTexture() const { return m_pTexture; }
 
 		inline void AddSpriteFrame(const SpriteFrame& uv)
 		{
@@ -59,7 +60,7 @@ namespace Boon
 		inline SpriteAnimClip& GetClip(int index) { return m_Clips[index]; }
 
 	private:
-		std::shared_ptr<Texture2D> m_pTexture;
+		AssetRef<Texture2DAsset> m_pTexture;
 		std::unordered_map<int, SpriteFrame> m_Sprites;
 		std::queue<int> m_FreeIds;
 

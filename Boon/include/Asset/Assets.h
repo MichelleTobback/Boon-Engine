@@ -15,19 +15,19 @@ namespace Boon
 			return ServiceLocator::Get<AssetLibrary>();
 		}
 
-		static std::shared_ptr<Texture2D> GetTexture2D(AssetHandle handle)
+		static AssetRef<Texture2DAsset> GetTexture2D(AssetHandle handle)
 		{
-			return ServiceLocator::Get<AssetLibrary>().GetAsset<Texture2DAsset>(handle);
+			return ServiceLocator::Get<AssetLibrary>().Load<Texture2DAsset>(handle);
 		}
 
-		static std::shared_ptr<Shader> GetShader(AssetHandle handle)
+		static AssetRef<ShaderAsset> GetShader(AssetHandle handle)
 		{
-			return ServiceLocator::Get<AssetLibrary>().GetAsset<ShaderAsset>(handle);
+			return ServiceLocator::Get<AssetLibrary>().Load<ShaderAsset>(handle);
 		}
 
-		static std::shared_ptr<SpriteAtlas> GetSpriteAtlas(AssetHandle handle)
+		static AssetRef<SpriteAtlasAsset> GetSpriteAtlas(AssetHandle handle)
 		{
-			return ServiceLocator::Get<AssetLibrary>().GetAsset<SpriteAtlasAsset>(handle);
+			return ServiceLocator::Get<AssetLibrary>().Load<SpriteAtlasAsset>(handle);
 		}
 	}
 }

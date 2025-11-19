@@ -1,25 +1,34 @@
 #pragma once
+#include <string>
+#include <cstdint>
+#include <memory>
+#include <vector>
+#include <typeindex>
+
 #include "Core/UUID.h"
+#include "Asset/AssetType.h"
+#include "Asset/AssetTraits.h"
 
 namespace Boon
 {
-	typedef UUID AssetHandle;
-	typedef size_t AssetTypeID;
-	class Asset
-	{
-	public:
-		Asset() : m_Handle() {}
-		Asset(AssetHandle handle) : m_Handle(handle) {}
-		virtual ~Asset() = default;
+    using AssetHandle = UUID;
+    // Base class for all assets.
+    class Asset
+    {
+    public:
+        Asset(AssetHandle handle)
+            : m_Handle(handle){ }
+        virtual ~Asset() = default;
 
-		inline AssetHandle GetHandle() const { return m_Handle; }
-		inline bool IsValid() const { return m_Handle.IsValid(); }
-		inline bool operator()() const { return m_Handle.IsValid(); }
+        AssetHandle GetHandle() const { return m_Handle; }
 
-	protected:
-		inline void SetHandle(AssetHandle handle) { m_Handle = handle; }
+        template <typename T>
+        static AssetType GetType()
+        {
+            return AssetTraits<T>::Type;
+        }
 
-	private:
-		AssetHandle m_Handle;
-	};
+    private:
+        AssetHandle m_Handle{};
+    };
 }

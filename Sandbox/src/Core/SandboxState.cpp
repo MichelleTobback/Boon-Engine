@@ -54,11 +54,11 @@ Scene& CreateScene(const std::string& name, float playPosX, float playerPosY)
 
 	GameObject player = scene.Instantiate({ playPosX, playerPosY, 0.f });
 	SpriteRendererComponent& sprite = player.AddComponent<SpriteRendererComponent>();
-	sprite.SpriteAtlasHandle = Assets::Get().Load<SpriteAtlasAssetLoader>("game/Blue_witch/B_witch_atlas_compact.bsa");
+	sprite.SpriteAtlasHandle = Assets::Get().Import<SpriteAtlasAsset>("game/Blue_witch/B_witch_atlas_compact.bsa")->GetHandle();
 	sprite.Sprite = 0;
 	SpriteAnimatorComponent& animator = player.AddComponent<SpriteAnimatorComponent>();
 	animator.Clip = 1;
-	animator.Atlas = Assets::GetSpriteAtlas(sprite.SpriteAtlasHandle);
+	animator.Atlas = Assets::GetSpriteAtlas(sprite.SpriteAtlasHandle).Instance();
 	animator.pRenderer = &sprite;
 	player.AddComponent<PlayerController>();
 	BoxCollider2D& col = player.AddComponent<BoxCollider2D>();

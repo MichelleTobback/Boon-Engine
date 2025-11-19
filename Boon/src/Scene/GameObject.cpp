@@ -66,6 +66,14 @@ void* Boon::GameObject::GetComponentByClass(const BClass* pClass)
 	return pClass->getComponent(*this);
 }
 
+void* Boon::GameObject::GetOrAddComponentByClass(const BClass* pClass)
+{
+	if (pClass->hasComponent(*this))
+		return pClass->getComponent(*this);
+
+	return pClass->addComponent(*this);
+}
+
 bool Boon::GameObject::HasComponentByClass(const BClass* pClass)
 {
 	return pClass->hasComponent(*this);
