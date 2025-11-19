@@ -72,8 +72,8 @@ namespace Boon
 		friend class TransformComponent;
 		friend class SceneSerializer;
 
-		GameObjectID m_Owner{};
-		GameObjectID m_Parent{};
+		GameObjectID m_Owner{NullGameObject};
+		GameObjectID m_Parent{ NullGameObject };
 		std::vector<GameObjectID> m_Children{};
 		Scene* m_pScene{};
 	};

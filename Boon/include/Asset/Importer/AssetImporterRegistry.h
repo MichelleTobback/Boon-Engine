@@ -1,6 +1,8 @@
 #pragma once
 #include "AssetImporter.h"
 #include "Asset/AssetTraits.h"
+#include "Asset/AssetPack/AssetCache.h"
+#include "Asset/AssetRegistry.h"
 
 #include <unordered_map>
 #include <memory>
@@ -53,20 +55,24 @@ namespace Boon
         }
 
         template<typename T>
-        Imported<T> Import(const std::string& filepath)
+        Imported<T> ImportAndLoad(const std::string& filepath)
         {
             AssetMeta meta = MetaFromFile(filepath);
             if (!meta.IsValid())
                 return {};
+
+            m_pRegistry->Add(meta);
 
             return Imported<T>( dynamic_cast<T*>(m_Importers[meta.type]->ImportFromFile(filepath, meta)), meta );
         }
 
-        Imported<Asset> Import(const std::string& filepath)
+        Imported<Asset> ImportAndLoad(const std::string& filepath)
         {
             AssetMeta meta = MetaFromFile(filepath);
             if (!meta.IsValid())
                 return {};
+
+            m_pRegistry->Add(meta);
 
             Asset* pAsset = m_pCache->Find<Asset>(meta.uuid);
             if (!pAsset)
@@ -146,7 +152,7 @@ namespace Boon
                 nlohmann::json j;
                 inputFile >> j;
 
-                meta.uuid = j["uuid"].get<uint32_t>();
+                meta.uuid = j["uuid"].get<uint64_t>();
                 meta.type = (AssetType)j["type"].get<uint32_t>();
             }
             return meta;
@@ -155,5 +161,6 @@ namespace Boon
         std::unordered_map<AssetType, std::unique_ptr<AssetImporter>> m_Importers;
         std::unordered_map<std::string, AssetType> m_ExtentionsToType;
         AssetCache* m_pCache;
+        AssetRegistry* m_pRegistry;
     };
 }

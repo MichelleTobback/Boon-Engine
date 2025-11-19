@@ -27,6 +27,8 @@ namespace Boon
         Int3,
         Int4,
         AssetRef,
+        BRef,
+        Enum,
         UserDefined
     };
 

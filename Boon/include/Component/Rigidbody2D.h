@@ -21,7 +21,9 @@ namespace Boon
             Impulse   // Instantaneous (change in velocity)
         };
 
-        BodyType Type = BodyType::Static;
+        BPROPERTY()
+        int Type = (int)BodyType::Static;
+        //BodyType Type = BodyType::Static;
         bool FixedRotation = false;
 
         b2BodyId RuntimeBody = b2_nullBodyId;

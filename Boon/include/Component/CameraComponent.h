@@ -6,15 +6,19 @@
 
 namespace Boon
 {
-	BCLASS(Name="Camera")
+	BCLASS(Name="Camera", HideInInspector)
 	struct CameraComponent final
 	{
 		CameraComponent(bool viewportSize = true);
 		CameraComponent(const Camera& camera, bool viewportSize = true);
 		~CameraComponent();
 
+		BPROPERTY()
 		Camera Camera;
+
+		BPROPERTY()
 		bool Active;
+
 		bool ViewportSize;
 	};
 }

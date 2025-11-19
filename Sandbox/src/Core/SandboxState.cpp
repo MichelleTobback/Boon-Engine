@@ -59,7 +59,7 @@ Scene& CreateScene(const std::string& name, float playPosX, float playerPosY)
 	SpriteAnimatorComponent& animator = player.AddComponent<SpriteAnimatorComponent>();
 	animator.Clip = 1;
 	animator.Atlas = Assets::GetSpriteAtlas(sprite.SpriteAtlasHandle).Instance();
-	animator.pRenderer = &sprite;
+	animator.pRenderer = player;
 	player.AddComponent<PlayerController>();
 	BoxCollider2D& col = player.AddComponent<BoxCollider2D>();
 	col.Size = { 0.8f, 1.f };

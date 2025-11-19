@@ -91,59 +91,59 @@ void EditorState::OnEnter()
 	m_SelectionContext.Set(camera);
 	m_SceneContext.Set(&scene);
 	m_pSelectedScene = &scene;
-
+	
 	//player
-	{
-		GameObject quad = scene.Instantiate(UUID(12345u));
-		SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
-		AssetRef<SpriteAtlasAsset> atlas = assetLib.Import<SpriteAtlasAsset>("game/Blue_witch/B_witch_atlas_compact.bsa");
-		sprite.SpriteAtlasHandle = atlas->GetHandle();
-		sprite.Sprite = 0;
-
-		SpriteAnimatorComponent& animator = quad.AddComponent<SpriteAnimatorComponent>();
-		animator.Clip = 0;
-		animator.Atlas = atlas->GetInstance();
-		animator.pRenderer = &sprite;
-
-		BoxCollider2D& col = quad.AddComponent<BoxCollider2D>();
-		col.Size = { 0.8f, 1.f };
-
-		Rigidbody2D& rb = quad.AddComponent<Rigidbody2D>();
-		rb.Type = Boon::Rigidbody2D::BodyType::Dynamic;
-
-		quad.AddComponent<PlayerController>();
-		quad.GetComponent<NameComponent>().Name = "Player";
-
-		quad.AddComponent<NetIdentity>();
-		quad.AddComponent<NetRigidbody2D>();
-	}
-
-	//floor
-	{
-		GameObject floor = scene.Instantiate({ 0.f, -1.f, 0.f });
-	
-		BoxCollider2D& floorCol = floor.AddComponent<BoxCollider2D>();
-		floorCol.Size = { 10.f, 0.2f };
-	
-		Rigidbody2D& floorRb = floor.AddComponent<Rigidbody2D>();
-		floorRb.Type = Boon::Rigidbody2D::BodyType::Static;
-
-		floor.GetComponent<NameComponent>().Name = "Floor";
-	}
-
-	//trigger
-	{
-		GameObject trigger = scene.Instantiate({ -1.f, 0.f, 0.f });
-
-		BoxCollider2D& floorCol = trigger.AddComponent<BoxCollider2D>();
-		floorCol.Size = { 1.f, 1.f };
-		floorCol.IsTrigger = true;
-
-		Rigidbody2D& floorRb = trigger.AddComponent<Rigidbody2D>();
-		floorRb.Type = Boon::Rigidbody2D::BodyType::Static;
-
-		trigger.GetComponent<NameComponent>().Name = "Trigger";
-	}
+	//{
+	//	GameObject quad = scene.Instantiate(UUID(12345u));
+	//	SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
+	//	AssetRef<SpriteAtlasAsset> atlas = assetLib.Import<SpriteAtlasAsset>("game/Blue_witch/B_witch_atlas_compact.bsa");
+	//	sprite.SpriteAtlasHandle = atlas->GetHandle();
+	//	sprite.Sprite = 0;
+	//
+	//	SpriteAnimatorComponent& animator = quad.AddComponent<SpriteAnimatorComponent>();
+	//	animator.Clip = 0;
+	//	animator.Atlas = atlas->GetInstance();
+	//	animator.pRenderer = quad;
+	//
+	//	BoxCollider2D& col = quad.AddComponent<BoxCollider2D>();
+	//	col.Size = { 0.8f, 1.f };
+	//
+	//	Rigidbody2D& rb = quad.AddComponent<Rigidbody2D>();
+	//	rb.Type = (int)Boon::Rigidbody2D::BodyType::Dynamic;
+	//
+	//	quad.AddComponent<PlayerController>();
+	//	quad.GetComponent<NameComponent>().Name = "Player";
+	//
+	//	quad.AddComponent<NetIdentity>();
+	//	quad.AddComponent<NetRigidbody2D>();
+	//}
+	//
+	////floor
+	//{
+	//	GameObject floor = scene.Instantiate({ 0.f, -1.f, 0.f });
+	//
+	//	BoxCollider2D& floorCol = floor.AddComponent<BoxCollider2D>();
+	//	floorCol.Size = { 10.f, 0.2f };
+	//
+	//	Rigidbody2D& floorRb = floor.AddComponent<Rigidbody2D>();
+	//	floorRb.Type = (int)Boon::Rigidbody2D::BodyType::Static;
+	//
+	//	floor.GetComponent<NameComponent>().Name = "Floor";
+	//}
+	//
+	////trigger
+	//{
+	//	GameObject trigger = scene.Instantiate({ -1.f, 0.f, 0.f });
+	//
+	//	BoxCollider2D& floorCol = trigger.AddComponent<BoxCollider2D>();
+	//	floorCol.Size = { 1.f, 1.f };
+	//	floorCol.IsTrigger = true;
+	//
+	//	Rigidbody2D& floorRb = trigger.AddComponent<Rigidbody2D>();
+	//	floorRb.Type = (int)Boon::Rigidbody2D::BodyType::Static;
+	//
+	//	trigger.GetComponent<NameComponent>().Name = "Trigger";
+	//}
 
 	m_SceneChangedEvent = eventBus.Subscribe<SceneChangedEvent>([this](const SceneChangedEvent& e)
 		{
@@ -168,8 +168,7 @@ void EditorState::OnEnter()
 	sceneManager.SetActiveScene(scene.GetID(), false);
 
 	SceneSerializer serializer(scene);
-	serializer.Serialize("Assets/scenes/Test.scene");
-
+	//serializer.Serialize("Assets/scenes/Test.scene");
 	serializer.Clear();
 	serializer.Deserialize("Assets/scenes/Test.scene");
 }
@@ -232,7 +231,7 @@ void EditorState::OnBeginPlay()
 	SceneSerializer serializer(*m_SceneContext.Get());
 	serializer.Copy(*m_pSelectedScene);
 	sceneManager.SetActiveScene(m_SceneContext.Get()->GetID());
-
+	
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	eventBus.Post(EditorPlayStateChangeEvent(m_PlayState));
 }

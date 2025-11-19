@@ -64,7 +64,7 @@ namespace Boon
 			else
 			{
 				Rigidbody2D& rb = gameObject.GetComponent<Rigidbody2D>();
-				rb.Type = Rigidbody2D::BodyType::Kinematic;
+				rb.Type = (int)Rigidbody2D::BodyType::Kinematic;
 				glm::vec3 pos = { DequantizePos(QPosX), DequantizePos(QPosY), DequantizePos(QPosZ) };
 				float rot = DequantizeAngleDeg(QRotDeg);
 				glm::vec3 scale = { DequantizePos(QScaleX), DequantizePos(QScaleY), 1.f };

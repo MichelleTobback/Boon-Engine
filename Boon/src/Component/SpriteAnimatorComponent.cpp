@@ -10,12 +10,12 @@ using namespace Boon;
 
 void Boon::SpriteAnimatorComponent::Awake(GameObject obj)
 {
-	pRenderer = &obj.GetComponent<SpriteRendererComponent>();
+	pRenderer = obj;
 }
 
 void Boon::SpriteAnimatorComponent::Update(GameObject obj)
 {
-	if (!pRenderer)
+	if (!pRenderer.IsValid())
 		return;
 
 	Atlas = pRenderer->SpriteAtlasHandle.Instance();

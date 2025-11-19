@@ -1,6 +1,7 @@
 #pragma once
 #include "Core/Boon.h"
 #include "Asset/SpriteAtlasAsset.h"
+#include "Component/SpriteRendererComponent.h"
 
 #include <vector>
 
@@ -22,7 +23,9 @@ namespace Boon
 		BPROPERTY(RangeMin="0", RangeMax="10", Slider)
 		int Clip;
 		std::shared_ptr<SpriteAtlas> Atlas;
-		SpriteRendererComponent* pRenderer;
+
+		BPROPERTY()
+		BRef<SpriteRendererComponent> pRenderer;
 		
 	private:
 		int m_Current = 0;

@@ -39,7 +39,7 @@ void Boon::PhysicsWorld2D::Begin(Scene* pScene)
 		auto& rb2d = gameObject.GetComponent<Rigidbody2D>();
 
 		b2BodyDef bodyDef = b2DefaultBodyDef();
-		bodyDef.type = Rigidbody2DTypeToBox2DBody(rb2d.Type);
+		bodyDef.type = Rigidbody2DTypeToBox2DBody((Rigidbody2D::BodyType)rb2d.Type);
 		bodyDef.position = { transform.GetLocalPosition().x, transform.GetLocalPosition().y };
 		bodyDef.rotation = b2MakeRot(glm::radians(transform.GetWorldRotation().z));
 		bodyDef.userData = reinterpret_cast<void*>(static_cast<uintptr_t>(e));
@@ -92,7 +92,7 @@ void Boon::PhysicsWorld2D::Step(Scene* pScene)
 			if (!b2Body_IsValid(rb.RuntimeBody))
 				return;
 
-			if (rb.Type == Rigidbody2D::BodyType::Kinematic)
+			if ((Rigidbody2D::BodyType)rb.Type == Rigidbody2D::BodyType::Kinematic)
 			{
 				// For kinematic: push Transform -> Box2D
 				glm::vec3 pos = transform.GetWorldPosition();
@@ -134,7 +134,7 @@ void Boon::PhysicsWorld2D::Update(Scene* pScene)
 			Rigidbody2D& rb = e.GetComponent<Rigidbody2D>();
 			auto& transform = e.GetTransform();
 
-			if (rb.Type != Rigidbody2D::BodyType::Dynamic)
+			if ((Rigidbody2D::BodyType)rb.Type != Rigidbody2D::BodyType::Dynamic)
 				return;
 
 			b2Transform t = b2Body_GetTransform(rb.RuntimeBody);

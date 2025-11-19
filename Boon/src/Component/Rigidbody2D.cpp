@@ -69,7 +69,7 @@ void Rigidbody2D::MovePosition(const glm::vec2& targetPosition)
         return;
 
     // For kinematic bodies: teleport directly each frame
-    if (Type == BodyType::Kinematic)
+    if ((Rigidbody2D::BodyType)Type == BodyType::Kinematic)
     {
         b2Rot rot = b2Body_GetRotation(RuntimeBody);
         b2Body_SetTransform(RuntimeBody, { targetPosition.x, targetPosition.y }, rot);
@@ -90,7 +90,7 @@ void Rigidbody2D::MoveRotation(float targetDegrees)
     if (!IsValid()) 
         return;
 
-    if (Type == BodyType::Kinematic)
+    if ((Rigidbody2D::BodyType)Type == BodyType::Kinematic)
     {
         b2Vec2 pos = b2Body_GetPosition(RuntimeBody);
         b2Rot rot = b2MakeRot(glm::radians(targetDegrees));

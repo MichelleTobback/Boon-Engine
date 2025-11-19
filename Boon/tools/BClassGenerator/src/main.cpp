@@ -42,7 +42,7 @@ struct Property
             "Name", 
             "Category", 
             "HideInInspector",
-            "ColorPicker"
+            "ColorPicker",
         };
         const auto& active = g_BoonMinimal ? minimalMeta : fullMeta;
         return active.find(meta) != active.end();
@@ -226,7 +226,8 @@ static std::string inferBTypeId(const std::string& rawType) {
     auto it = lut.find(t);
     if (it != lut.end()) return it->second;
 
-    if (t.find("std::AssetRef<") != std::string::npos) return "BTypeId::AssetRef";
+    if (t.find("BRef<") != std::string::npos) return "BTypeId::BRef";
+    if (t.find("AssetRef<") != std::string::npos) return "BTypeId::AssetRef";
     if (t.find("std::shared_ptr<") != std::string::npos) return "BTypeId::SharedPtr";
     if (t.find("std::vector<") != std::string::npos) return "BTypeId::Array";
 

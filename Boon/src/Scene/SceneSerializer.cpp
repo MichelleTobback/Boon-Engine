@@ -29,15 +29,16 @@ void Boon::SceneSerializer::Serialize(const std::string& dst)
         {
             json jObj;
             jObj["uuid"] = static_cast<uint64_t>(gameObject.GetUUID());
+            jObj["id"] = static_cast<uint64_t>((GameObjectID)gameObject);
             jObj["components"] = json::object();
 
             json& scene = jObj["components"]["scene component"];
             scene["id"] = 0;
-            scene["parent"] = gameObject.GetParent().IsValid() ? (uint64_t)gameObject.GetParent().GetUUID() : 0u;
+            scene["parent"] = static_cast<uint32_t>((GameObjectID)gameObject.GetParent());
             scene["children"] = json::array();
             for (auto child : gameObject.GetChildren())
             {
-                scene["children"].push_back((uint64_t)child.GetUUID());
+                scene["children"].push_back((uint32_t)(GameObjectID)child);
             }
 
             // Iterate over all registered component classes
@@ -127,6 +128,25 @@ void Boon::SceneSerializer::Serialize(const std::string& dst)
                                 jValue = static_cast<uint64_t>(*pAsset);
                                 break;
                             }
+                            case BTypeId::BRef:
+                            {
+                                auto ref = *reinterpret_cast<BRefBase*>(base + prop.offset);
+                                jValue["object"] = (GameObjectID)ref.Owner();
+                                break;
+                            }
+
+                            case BTypeId::UserDefined:
+                            {
+                                size_t size = prop.size;
+                                const uint8_t* ptr = base + prop.offset;
+
+                                json byteArray = json::array();
+                                for (size_t i = 0; i < size; i++)
+                                    byteArray.push_back(ptr[i]);
+
+                                jValue = byteArray;
+                                break;
+                            }
                             default:
                                 jValue = nullptr;
                                 break;
@@ -165,17 +185,18 @@ void Boon::SceneSerializer::Deserialize(const std::string& src)
     for (auto& jObj : j["objects"])
     {
         uint64_t uuid = jObj["uuid"].get<uint64_t>();
+        GameObjectID id = jObj["id"].get<GameObjectID>();
 
         // 1. Create or fetch game object
-        GameObject gameObject = m_Context.Instantiate(uuid);
+        GameObject gameObject = m_Context.Instantiate(uuid, id);
 
         // 2. Deserialize manual components
         if (jObj["components"].contains("scene component"))
         {
             const json& sceneCmp = jObj["components"]["scene component"];
-
+        
             SceneComponent& scene = gameObject.GetOrAddComponent<SceneComponent>();
-
+        
             scene.m_Parent = (GameObjectID)sceneCmp["parent"].get<uint64_t>();
             for (auto& childUUID : sceneCmp["children"])
                 scene.m_Children.push_back((GameObjectID)childUUID.get<uint64_t>());
@@ -299,6 +320,26 @@ void Boon::SceneSerializer::Deserialize(const std::string& src)
                     case BTypeId::AssetRef:
                     {
                         *reinterpret_cast<AssetHandle*>(base + prop.offset) = jValue.get<uint64_t>();
+                        break;
+                    }
+
+                    case BTypeId::BRef:
+                    {
+                        auto& ref = *reinterpret_cast<BRefBase*>(base + prop.offset);
+                        ref.Set(GameObject(jValue["object"].get<GameObjectID>(), &m_Context));
+                        break;
+                    }
+
+                    case BTypeId::UserDefined:
+                    {
+                        size_t size = prop.size;
+                        uint8_t* ptr = base + prop.offset;
+
+                        const json& byteArray = jValue;
+
+                        for (size_t i = 0; i < size; i++)
+                            ptr[i] = byteArray[i].get<uint8_t>();
+
                         break;
                     }
 

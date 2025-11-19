@@ -3,6 +3,7 @@
 #include <Core/ServiceLocator.h>
 #include <Asset/AssetLibrary.h>
 #include <Asset/TextureAsset.h>
+#include <Assets/AssetDatabase.h>
 
 #include <math.h>
 #include <imgui.h>
@@ -11,7 +12,6 @@ BoonEditor::ViewportToolbar::ViewportToolbar(const std::string& name)
 	: EditorPanel(name)
 {
     AssetLibrary& assetLib = ServiceLocator::Get<AssetLibrary>();
-
     {
         auto handle = assetLib.Import<Texture2DAsset>("Icons/PlayButton.png");
         m_pPlayIcon = handle->GetInstance();

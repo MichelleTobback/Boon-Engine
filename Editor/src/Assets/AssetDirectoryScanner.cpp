@@ -48,7 +48,7 @@ namespace BoonEditor
         if (!registry.HasExtension(ext))
             return;
 
-        auto imported = registry.Import(path.string());
+        auto imported = registry.ImportAndLoad(path.string());
         database.RegisterAsset(path.string(), imported.meta.uuid);
     }
 }

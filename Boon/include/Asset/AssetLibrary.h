@@ -14,7 +14,12 @@ namespace Boon
     {
     public:
         AssetLibrary(const std::string& root)
-            : m_Root(root) { AssetImporterRegistry::Get().m_pCache = &m_Cache; }
+            : m_Root(root) 
+        {
+            auto& reg = AssetImporterRegistry::Get(); 
+            reg.m_pCache = &m_Cache;
+            reg.m_pRegistry = &m_Registry;
+        }
         bool LoadPack(const std::string& packFile);
 
         template<typename T>
@@ -55,7 +60,7 @@ namespace Boon
         template<typename T>
         AssetRef<T> Import(const std::string& filepath)
         {
-            AssetImporterRegistry::Imported<T> result = AssetImporterRegistry::Get().Import<T>(m_Root + filepath);
+            AssetImporterRegistry::Imported<T> result = AssetImporterRegistry::Get().ImportAndLoad<T>(m_Root + filepath);
             m_Cache.Store(result.asset);
             m_Registry.Add(result.meta);
             return AssetRef<T>(result.meta.uuid);

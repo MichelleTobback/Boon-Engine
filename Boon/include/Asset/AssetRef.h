@@ -10,6 +10,15 @@ namespace Boon
         AssetRef() = default;
         AssetRef(AssetHandle h) : m_Handle(h) {}
 
+        AssetRef<T>& operator=(const AssetRef<T>& other)
+        {
+            if (this == &other)
+                return *this;
+
+            m_Handle = other.m_Handle;
+            return *this;
+        }
+
         T* Get() const;
 
         T* operator->() const { return Get(); }
