@@ -120,6 +120,8 @@ namespace Boon
             }
         }
 
+        AssetRegistry* GetRegistry() const { return m_pRegistry; }
+
     private:
         friend class AssetLibrary;
         AssetMeta MetaFromFile(const std::string& filepath)

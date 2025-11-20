@@ -1,6 +1,6 @@
-#pragma once
+﻿#pragma once
 #include "Reflection/BProperty.h"
-
+#include "Assets/AssetDatabase.h"
 #include <imgui.h>
 #include <string>
 #include <algorithm>
@@ -48,6 +48,10 @@ namespace BoonEditor
                 break;
             case BTypeId::Int4:
                 result = Int4Property(property, pInstance);
+                break;
+
+            case BTypeId::AssetRef:
+                result = AssetRefProperty(property, pInstance);
                 break;
             }
             return result;
@@ -765,7 +769,171 @@ namespace BoonEditor
             return changed;
         }
 
+        static bool AssetRefProperty(const BProperty& property, void* pInstance)
+        {
+            std::string label = property.HasMeta("Name")
+                ? property.GetMeta("Name").value()
+                : property.name;
 
+            uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
+            AssetHandle* handlePtr = reinterpret_cast<AssetHandle*>(base + property.offset);
+
+            AssetHandle current = *handlePtr;
+            bool changed = false;
+
+            BeginProperty(label);
+
+            //
+            // Resolve current label (filename only)
+            //
+            std::string currentLabel;
+            if (current != 0 && AssetDatabase::Get().Exists(current))
+            {
+                std::string fullPath = AssetDatabase::Get().GetPath(current);
+                currentLabel = std::filesystem::path(fullPath).filename().string();
+            }
+            else
+            {
+                currentLabel = "<None>";
+            }
+
+            float clearButtonWidth = 30.0f;
+            ImVec2 buttonSize(ImGui::GetContentRegionAvail().x - clearButtonWidth, 0);
+
+            //
+            // MAIN BUTTON (display asset)
+            //
+            bool pressed = ImGui::Button(currentLabel.c_str(), buttonSize);
+
+            if (pressed)
+                ImGui::OpenPopup("AssetPicker");
+
+            //
+            // DRAG & DROP TARGET — must be attached *right here*
+            //
+            if (ImGui::BeginDragDropTarget())
+            {
+                const ImGuiPayload* payload = ImGui::GetDragDropPayload();
+                bool compatible = false;
+
+                if (payload && payload->IsDataType("ASSET_HANDLE"))
+                {
+                    AssetHandle hovered = *(const AssetHandle*)payload->Data;
+
+                    const AssetMeta* meta =
+                        AssetImporterRegistry::Get().GetRegistry()->Get(hovered);
+
+                    if (meta && AssetMatchesPropertyType(property, meta->type))
+                        compatible = true;
+                }
+
+                // ✔ Accept the payload if compatible
+                if (compatible)
+                {
+                    if (const ImGuiPayload* accepted =
+                        ImGui::AcceptDragDropPayload("ASSET_HANDLE"))
+                    {
+                        AssetHandle dropped = *(const AssetHandle*)accepted->Data;
+                        *handlePtr = dropped;
+                        changed = true;
+                    }
+                }
+
+                ImGui::EndDragDropTarget();
+            }
+
+            //
+            // HIGHLIGHT DURING DRAG HOVER
+            //
+            if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem))
+            {
+                const ImGuiPayload* payload = ImGui::GetDragDropPayload();
+
+                if (payload && payload->IsDataType("ASSET_HANDLE"))
+                {
+                    AssetHandle hovered = *(const AssetHandle*)payload->Data;
+                    const AssetMeta* meta =
+                        AssetImporterRegistry::Get().GetRegistry()->Get(hovered);
+
+                    bool compatible = (meta && AssetMatchesPropertyType(property, meta->type));
+
+                    if (compatible)
+                    {
+                        ImGui::GetWindowDrawList()->AddRectFilled(
+                            ImGui::GetItemRectMin(),
+                            ImGui::GetItemRectMax(),
+                            IM_COL32(60, 180, 80, 80)); // Soft green
+                    }
+                    else
+                    {
+                        ImGui::GetWindowDrawList()->AddRectFilled(
+                            ImGui::GetItemRectMin(),
+                            ImGui::GetItemRectMax(),
+                            IM_COL32(180, 60, 60, 80)); // Soft red
+                    }
+                }
+            }
+
+            //
+            // CLEAR BUTTON
+            //
+            ImGui::SameLine();
+            if (ImGui::Button("X", ImVec2(clearButtonWidth, 0)))
+            {
+                *handlePtr = 0;
+                changed = true;
+            }
+
+            //
+            // ASSET PICKER POPUP
+            //
+            if (ImGui::BeginPopup("AssetPicker"))
+            {
+                static char filter[128] = { 0 };
+                ImGui::InputText("Search", filter, sizeof(filter));
+                ImGui::Separator();
+
+                const auto& all = AssetImporterRegistry::Get().GetRegistry()->GetAll();
+
+                for (auto& it : all)
+                {
+                    const UUID& uuid = it.first;
+                    const AssetMeta& meta = it.second;
+
+                    if (!AssetMatchesPropertyType(property, meta.type))
+                        continue;
+
+                    std::string path = AssetDatabase::Get().GetPath(meta.uuid);
+
+                    if (!ContainsCaseInsensitive(path, filter))
+                        continue;
+
+                    std::string filename = std::filesystem::path(path).filename().string();
+                    bool selected = (uuid == current);
+
+                    if (ImGui::Selectable(filename.c_str(), selected))
+                    {
+                        *handlePtr = uuid;
+                        changed = true;
+                        ImGui::CloseCurrentPopup();
+                    }
+                }
+
+                ImGui::Separator();
+
+                if (ImGui::Selectable("<None>"))
+                {
+                    *handlePtr = 0;
+                    changed = true;
+                    ImGui::CloseCurrentPopup();
+                }
+
+                ImGui::EndPopup();
+            }
+
+            EndProperty();
+            return changed;
+        }
 
         private:
             static void BeginProperty(const std::string& label)
@@ -786,6 +954,53 @@ namespace BoonEditor
                 ImGui::PopItemWidth();
                 ImGui::Columns(1);
                 ImGui::PopID();
+            }
+
+            static bool AssetMatchesPropertyType(const BProperty& prop, AssetType assetType)
+            {
+                // Extract C++ type name from "AssetRef<Texture2DAsset>"
+                std::string type = prop.typeName;
+
+                auto start = type.find('<');
+                auto end = type.find('>');
+
+                if (start == std::string::npos || end == std::string::npos)
+                    return true; // fallback no filtering
+
+                std::string assetClass = type.substr(start + 1, end - start - 1);
+
+                // Look up asset traits
+                // You may need a map: "Texture2DAsset" -> AssetType::Texture
+                AssetType expected = AssetTypeFromClassName(assetClass);
+
+                return expected == assetType;
+            }
+
+            static AssetType AssetTypeFromClassName(const std::string& name)
+            {
+                if (name == "Texture2DAsset") return AssetType::Texture;
+                if (name == "ShaderAsset") return AssetType::Shader;
+                if (name == "SpriteAtlasAsset") return AssetType::SpriteAtlas;
+                // ...
+
+                return AssetType::None;
+            }
+
+            static std::string ToLower(const std::string& s)
+            {
+                std::string out = s;
+                for (auto& c : out) c = (char)std::tolower(c);
+                return out;
+            }
+
+            static bool ContainsCaseInsensitive(const std::string& str, const std::string& filter)
+            {
+                if (filter.empty()) return true;
+
+                std::string lowerStr = ToLower(str);
+                std::string lowerFilter = ToLower(filter);
+
+                return lowerStr.find(lowerFilter) != std::string::npos;
             }
 	};
 }

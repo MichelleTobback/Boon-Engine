@@ -16,7 +16,7 @@ namespace BoonEditor
 	class ScenePanel final : public EditorPanel
 	{
 	public:
-		ScenePanel(const std::string& name, SceneContext* pScene, GameObjectContext* pSelectedGameObject);
+		ScenePanel(const std::string& name, DragDropRouter* pRouter, SceneContext* pScene, GameObjectContext* pSelectedGameObject);
 		virtual ~ScenePanel() = default;
 
 		virtual void Update() override {}

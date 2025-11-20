@@ -8,8 +8,8 @@
 using namespace Boon;
 using namespace BoonEditor;
 
-BoonEditor::EditorPanel::EditorPanel(const std::string& name)
-	: m_Name{ name }
+BoonEditor::EditorPanel::EditorPanel(const std::string& name, DragDropRouter* pRouter)
+	: m_Name{ name }, m_pRouter(pRouter)
 {
 
 }

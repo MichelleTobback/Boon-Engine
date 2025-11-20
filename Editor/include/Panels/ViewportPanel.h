@@ -25,7 +25,7 @@ namespace BoonEditor
 	class ViewportPanel final : public EditorPanel
 	{
 	public:
-		ViewportPanel(const std::string& name, SceneContext* pContext, GameObjectContext* pSelectionContext);
+		ViewportPanel(const std::string& name, DragDropRouter* pRouter, SceneContext* pContext, GameObjectContext* pSelectionContext);
 		virtual ~ViewportPanel();
 
 		virtual void Update() override;

@@ -16,8 +16,8 @@
 
 using namespace BoonEditor;
 
-BoonEditor::PropertiesPanel::PropertiesPanel(const std::string& name, GameObjectContext* pContext)
-	: EditorPanel(name), m_pContext{pContext}
+BoonEditor::PropertiesPanel::PropertiesPanel(const std::string& name, DragDropRouter* pRouter, GameObjectContext* pContext)
+	: EditorPanel(name, pRouter), m_pContext{pContext}
 {
 	
 }

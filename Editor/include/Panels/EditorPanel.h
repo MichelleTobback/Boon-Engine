@@ -1,5 +1,6 @@
 #pragma once
 #include "Core/EditorObject.h"
+#include "UI/DragDropRouter.h"
 
 #include <string>
 #include <glm/glm.hpp>
@@ -16,7 +17,7 @@ namespace BoonEditor
 	class EditorPanel : public EditorObject
 	{
 	public:
-		EditorPanel(const std::string& name);
+		EditorPanel(const std::string& name, DragDropRouter* pRouter);
 		virtual ~EditorPanel() = default;
 
 		EditorPanel(const EditorPanel& other) = delete;
@@ -40,8 +41,8 @@ namespace BoonEditor
 
 		inline const std::string& GetName() const { return  m_Name; }
 
-	private:
 		std::string m_Name;
 		EditorPanelFlag m_Flags;
+		DragDropRouter* m_pRouter;
 	};
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "Asset/Importer/AssetImporterRegistry.h"
 #include "Asset/AssetRef.h"
+#include <functional>
 
 using namespace Boon;
 
@@ -28,8 +29,16 @@ namespace BoonEditor
 
 		void Clear();
 
+		void ForEachEntry(const std::function<void(AssetHandle, const std::string&)>& fn);
+		const std::string& GetAssetRoot() const { return m_AssetRoot; }
+
+		bool IsDirty() const { return m_Dirty; }
+		void ClearDirty() { m_Dirty = false; }
+
 	private:
 		std::unordered_map<AssetHandle, std::string> m_HandleToPath;
 		std::unordered_map<std::string, AssetHandle> m_PathToHandle;
+		std::string m_AssetRoot{"Assets/"};
+		bool m_Dirty = false;
 	};
 }

@@ -5,6 +5,7 @@
 #include "Panels/PropertiesPanel.h"
 #include "Panels/ViewportPanel.h"
 #include "Panels/NetworkPanel.h"
+#include "Panels/ContentBrowser.h"
 
 #include "UI/EditorRenderer.h"
 
@@ -49,6 +50,7 @@
 #include <Reflection/BClass.h>
 
 #include <iostream>
+#include <imgui.h>
 
 using namespace BoonEditor;
 
@@ -71,13 +73,14 @@ void EditorState::OnEnter()
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 	Scene& scene = sceneManager.CreateScene("Game");
 
-	ViewportPanel& viewport = CreatePanel<ViewportPanel>("Viewport", &m_SceneContext, &m_SelectionContext);
+	ViewportPanel& viewport = CreatePanel<ViewportPanel>("Viewport", &m_DragDrop, &m_SceneContext, &m_SelectionContext);
 	viewport.GetToolbar()->BindOnPlayCallback(std::bind(&EditorState::OnBeginPlay, this));
 	viewport.GetToolbar()->BindOnStopCallback(std::bind(&EditorState::OnStopPlay, this));
 
-	CreatePanel<PropertiesPanel>("properties", &m_SelectionContext);
-	CreatePanel<ScenePanel>("scene", &m_SceneContext, &m_SelectionContext);
-	CreatePanel<NetworkPanel>("network", m_NetworkSettings);
+	CreatePanel<ContentBrowser>("content", &m_DragDrop);
+	CreatePanel<PropertiesPanel>("properties", &m_DragDrop, &m_SelectionContext);
+	CreatePanel<ScenePanel>("scene", &m_DragDrop,  &m_SceneContext, &m_SelectionContext);
+	CreatePanel<NetworkPanel>("network", &m_DragDrop, m_NetworkSettings);
 
 	CreateObject<AssetDirectoryScanner>("Assets/", 1.f);
 
@@ -93,57 +96,57 @@ void EditorState::OnEnter()
 	m_pSelectedScene = &scene;
 	
 	//player
-	//{
-	//	GameObject quad = scene.Instantiate(UUID(12345u));
-	//	SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
-	//	AssetRef<SpriteAtlasAsset> atlas = assetLib.Import<SpriteAtlasAsset>("game/Blue_witch/B_witch_atlas_compact.bsa");
-	//	sprite.SpriteAtlasHandle = atlas->GetHandle();
-	//	sprite.Sprite = 0;
-	//
-	//	SpriteAnimatorComponent& animator = quad.AddComponent<SpriteAnimatorComponent>();
-	//	animator.Clip = 0;
-	//	animator.Atlas = atlas->GetInstance();
-	//	animator.pRenderer = quad;
-	//
-	//	BoxCollider2D& col = quad.AddComponent<BoxCollider2D>();
-	//	col.Size = { 0.8f, 1.f };
-	//
-	//	Rigidbody2D& rb = quad.AddComponent<Rigidbody2D>();
-	//	rb.Type = (int)Boon::Rigidbody2D::BodyType::Dynamic;
-	//
-	//	quad.AddComponent<PlayerController>();
-	//	quad.GetComponent<NameComponent>().Name = "Player";
-	//
-	//	quad.AddComponent<NetIdentity>();
-	//	quad.AddComponent<NetRigidbody2D>();
-	//}
-	//
-	////floor
-	//{
-	//	GameObject floor = scene.Instantiate({ 0.f, -1.f, 0.f });
-	//
-	//	BoxCollider2D& floorCol = floor.AddComponent<BoxCollider2D>();
-	//	floorCol.Size = { 10.f, 0.2f };
-	//
-	//	Rigidbody2D& floorRb = floor.AddComponent<Rigidbody2D>();
-	//	floorRb.Type = (int)Boon::Rigidbody2D::BodyType::Static;
-	//
-	//	floor.GetComponent<NameComponent>().Name = "Floor";
-	//}
-	//
-	////trigger
-	//{
-	//	GameObject trigger = scene.Instantiate({ -1.f, 0.f, 0.f });
-	//
-	//	BoxCollider2D& floorCol = trigger.AddComponent<BoxCollider2D>();
-	//	floorCol.Size = { 1.f, 1.f };
-	//	floorCol.IsTrigger = true;
-	//
-	//	Rigidbody2D& floorRb = trigger.AddComponent<Rigidbody2D>();
-	//	floorRb.Type = (int)Boon::Rigidbody2D::BodyType::Static;
-	//
-	//	trigger.GetComponent<NameComponent>().Name = "Trigger";
-	//}
+	{
+		GameObject quad = scene.Instantiate(UUID(12345u));
+		SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
+		AssetRef<SpriteAtlasAsset> atlas = assetLib.Import<SpriteAtlasAsset>("game/Blue_witch/B_witch_atlas_compact.bsa");
+		sprite.SpriteAtlasHandle = atlas->GetHandle();
+		sprite.Sprite = 0;
+	
+		SpriteAnimatorComponent& animator = quad.AddComponent<SpriteAnimatorComponent>();
+		animator.Clip = 0;
+		animator.Atlas = atlas->GetInstance();
+		animator.pRenderer = quad;
+	
+		BoxCollider2D& col = quad.AddComponent<BoxCollider2D>();
+		col.Size = { 0.8f, 1.f };
+	
+		Rigidbody2D& rb = quad.AddComponent<Rigidbody2D>();
+		rb.Type = (int)Boon::Rigidbody2D::BodyType::Dynamic;
+	
+		quad.AddComponent<PlayerController>();
+		quad.GetComponent<NameComponent>().Name = "Player";
+	
+		quad.AddComponent<NetIdentity>();
+		quad.AddComponent<NetRigidbody2D>();
+	}
+	
+	//floor
+	{
+		GameObject floor = scene.Instantiate({ 0.f, -1.f, 0.f });
+	
+		BoxCollider2D& floorCol = floor.AddComponent<BoxCollider2D>();
+		floorCol.Size = { 10.f, 0.2f };
+	
+		Rigidbody2D& floorRb = floor.AddComponent<Rigidbody2D>();
+		floorRb.Type = (int)Boon::Rigidbody2D::BodyType::Static;
+	
+		floor.GetComponent<NameComponent>().Name = "Floor";
+	}
+	
+	//trigger
+	{
+		GameObject trigger = scene.Instantiate({ -1.f, 0.f, 0.f });
+	
+		BoxCollider2D& floorCol = trigger.AddComponent<BoxCollider2D>();
+		floorCol.Size = { 1.f, 1.f };
+		floorCol.IsTrigger = true;
+	
+		Rigidbody2D& floorRb = trigger.AddComponent<Rigidbody2D>();
+		floorRb.Type = (int)Boon::Rigidbody2D::BodyType::Static;
+	
+		trigger.GetComponent<NameComponent>().Name = "Trigger";
+	}
 
 	m_SceneChangedEvent = eventBus.Subscribe<SceneChangedEvent>([this](const SceneChangedEvent& e)
 		{
@@ -211,12 +214,55 @@ void EditorState::OnExit()
 void EditorState::OnRender()
 {
 	m_PRenderer->BeginFrame();
+
+	m_DragDrop.Clear();
+
+	ImGui::BeginMainMenuBar();
+	if (ImGui::BeginMenu("File"))
+	{
+		if (ImGui::MenuItem("New scene"))
+		{
+			if (m_PlayState != EditorPlayState::Play)
+			{
+				SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
+				m_SceneContext.Set(&sceneManager.CreateScene("New Scene"));
+				m_pSelectedScene = m_SceneContext.Get();
+
+				sceneManager.SetActiveScene(m_SceneContext.Get()->GetID());
+			}
+		}
+		if (ImGui::MenuItem("Save scene"))
+		{
+			if (m_PlayState != EditorPlayState::Play)
+			{
+				SceneSerializer serializer(*m_pSelectedScene);
+				serializer.Serialize("Assets/scenes/Test.scene");
+			}
+		}
+		if (ImGui::MenuItem("Open scene"))
+		{
+			if (m_PlayState != EditorPlayState::Play)
+			{
+				SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
+				m_SceneContext.Set(&sceneManager.CreateScene("New Scene"));
+				m_pSelectedScene = m_SceneContext.Get();
+
+				SceneSerializer serializer(*m_SceneContext.Get());
+				serializer.Deserialize("Assets/scenes/Test.scene");
+
+				sceneManager.SetActiveScene(m_SceneContext.Get()->GetID(), false);
+			}
+		}
+		ImGui::EndMenu();
+	}
+	ImGui::EndMainMenuBar();
 	
 	for (auto& [name, pPanel] : m_Panels)
 	{
 		pPanel->RenderUI();
 	}
 	
+	m_DragDrop.Process();
 	m_PRenderer->EndFrame();
 }
 

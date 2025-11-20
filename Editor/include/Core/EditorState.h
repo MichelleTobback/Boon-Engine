@@ -2,6 +2,7 @@
 #include "Core/BoonEditor.h"
 #include "Core/EditorContext.h"
 #include "Panels/EditorPanel.h"
+#include "UI/DragDropRouter.h"
 
 #include "Networking/NetworkSettings.h"
 #include <Networking/NetPacket.h>
@@ -98,5 +99,7 @@ namespace BoonEditor
 		EventListenerID m_SceneChangedEvent;
 		EventListenerID m_StateChangedEvent;
 		EventListenerID m_BindNetSceneEvent;
+
+		DragDropRouter m_DragDrop{};
 	};
 }

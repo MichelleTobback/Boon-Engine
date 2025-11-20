@@ -8,8 +8,8 @@ using namespace BoonEditor;
 
 using namespace Boon;
 
-NetworkPanel::NetworkPanel(const std::string& name, Boon::NetworkSettings& settings)
-	: EditorPanel(name), m_Settings(settings){}
+NetworkPanel::NetworkPanel(const std::string& name, DragDropRouter* pRouter, Boon::NetworkSettings& settings)
+	: EditorPanel(name, pRouter), m_Settings(settings){}
 
 void NetworkPanel::SetDriver(NetDriver* pDriver)
 {

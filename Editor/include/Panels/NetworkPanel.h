@@ -15,7 +15,7 @@ namespace BoonEditor
 	class NetworkPanel final : public EditorPanel
 	{
 	public:
-		NetworkPanel(const std::string& name, Boon::NetworkSettings& settings);
+		NetworkPanel(const std::string& name, DragDropRouter* pRouter, Boon::NetworkSettings& settings);
 
 		void SetDriver(NetDriver* pDriver);
 

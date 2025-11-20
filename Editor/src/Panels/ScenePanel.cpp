@@ -10,8 +10,8 @@
 
 using namespace BoonEditor;
 
-BoonEditor::ScenePanel::ScenePanel(const std::string& name, SceneContext* pScene, GameObjectContext* pSelectedGameObject)
-	: EditorPanel(name), m_pSceneContext{pScene}, m_pSelectionContext{pSelectedGameObject}
+BoonEditor::ScenePanel::ScenePanel(const std::string& name, DragDropRouter* pRouter, SceneContext* pScene, GameObjectContext* pSelectedGameObject)
+	: EditorPanel(name, pRouter), m_pSceneContext{pScene}, m_pSelectionContext{pSelectedGameObject}
 {
 }
 

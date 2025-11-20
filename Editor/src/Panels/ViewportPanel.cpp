@@ -16,14 +16,14 @@
 
 using namespace BoonEditor;
 
-BoonEditor::ViewportPanel::ViewportPanel(const std::string& name, SceneContext* pContext, GameObjectContext* pSelection)
-	: EditorPanel(name), m_pContext{ pContext }, m_pSelectionContext{pSelection}
+BoonEditor::ViewportPanel::ViewportPanel(const std::string& name, DragDropRouter* pRouter, SceneContext* pContext, GameObjectContext* pSelection)
+	: EditorPanel(name, pRouter), m_pContext{ pContext }, m_pSelectionContext{pSelection}
 {
 	m_Camera.SetActive(true);
 	m_pRenderer = std::make_unique<SceneRenderer>(pContext->Get());
     m_pDebugRenderer = std::make_unique<DebugRenderer>(pContext->Get(), m_pRenderer->GetOutputTarget());
 
-    m_pToolbar = std::make_unique<ViewportToolbar>(std::string(name).append("toolbar"));
+    m_pToolbar = std::make_unique<ViewportToolbar>(std::string(name).append("toolbar"), m_pRouter);
 
     pContext->AddOnContextChangedCallback([this](Scene* pScene)
         {
