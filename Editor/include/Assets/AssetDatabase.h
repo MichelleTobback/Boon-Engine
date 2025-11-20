@@ -2,6 +2,7 @@
 #include "Asset/Importer/AssetImporterRegistry.h"
 #include "Asset/AssetRef.h"
 #include <functional>
+#include "Asset/TextureAsset.h"
 
 using namespace Boon;
 
@@ -35,10 +36,17 @@ namespace BoonEditor
 		bool IsDirty() const { return m_Dirty; }
 		void ClearDirty() { m_Dirty = false; }
 
+		AssetRef<Texture2DAsset> GetThumbnail(AssetHandle handle) const;
+
 	private:
+		AssetDatabase();
+		void Init();
+
 		std::unordered_map<AssetHandle, std::string> m_HandleToPath;
 		std::unordered_map<std::string, AssetHandle> m_PathToHandle;
 		std::string m_AssetRoot{"Assets/"};
 		bool m_Dirty = false;
+
+		std::unordered_map<AssetType, AssetRef<Texture2DAsset>> m_DefaultTextures;
 	};
 }

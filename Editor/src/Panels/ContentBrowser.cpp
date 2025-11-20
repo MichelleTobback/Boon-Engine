@@ -375,12 +375,28 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
             float iconX = (cellWidth - iconSize) * 0.5f;
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + iconX);
 
-            ImGui::Button("##thumb", ImVec2(iconSize, iconSize));
+            ImVec4 bg = ImVec4(0, 0, 0, 0);
+            ImVec4 bgHovered = ImVec4(0.15f, 0.25f, 0.35f, 0.35f);
+            ImVec4 bgActive = ImVec4(0.15f, 0.25f, 0.35f, 0.50f);
+
+            ImGui::PushStyleColor(ImGuiCol_Button, bg);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, bgHovered);
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, bgActive);
+
+            bool pressed = false;
+
+            AssetHandle h = AssetDatabase::Get().GetHandle("Assets/" + assetPath);
+            AssetRef<Texture2DAsset> thumbnail = AssetDatabase::Get().GetThumbnail(h);
+            if (thumbnail.IsValid())
+                ImGui::ImageButton("##thumb", thumbnail->GetInstance()->GetRendererID(), ImVec2(iconSize, iconSize));
+            else
+                ImGui::Button("##thumb", ImVec2(iconSize, iconSize));
+
+            ImGui::PopStyleColor(3);
 
             // Drag & drop
             if (ImGui::BeginDragDropSource())
             {
-                AssetHandle h = AssetDatabase::Get().GetHandle("Assets/" + assetPath);
                 ImGui::SetDragDropPayload("ASSET_HANDLE", &h, sizeof(AssetHandle));
                 ImGui::Text("%s", filename.c_str());
                 ImGui::EndDragDropSource();

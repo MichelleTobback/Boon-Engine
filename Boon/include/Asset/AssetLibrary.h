@@ -66,6 +66,11 @@ namespace Boon
             return AssetRef<T>(result.meta.uuid);
         }
 
+        const AssetMeta* GetMeta(AssetHandle handle) const
+        {
+            return m_Registry.Get(handle);
+        }
+
     private:
         AssetCache m_Cache;
         AssetRegistry m_Registry;

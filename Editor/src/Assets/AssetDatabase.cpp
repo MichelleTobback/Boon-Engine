@@ -1,5 +1,5 @@
 #include "Assets/AssetDatabase.h"
-
+#include "Asset/Assets.h"
 #include <algorithm>
 
 namespace BoonEditor
@@ -27,6 +27,18 @@ namespace BoonEditor
     {
         static AssetDatabase instance;
         return instance;
+    }
+
+    AssetDatabase::AssetDatabase()
+    {
+        Init();
+    }
+
+    void AssetDatabase::Init()
+    {
+        m_DefaultTextures[AssetType::Texture] = Assets::Get().Import<Texture2DAsset>("Icons/Assets/texture_icon.png");
+        m_DefaultTextures[AssetType::SpriteAtlas] = Assets::Get().Import<Texture2DAsset>("Icons/Assets/sprite_atlas_icon.png");
+        m_DefaultTextures[AssetType::Shader] = Assets::Get().Import<Texture2DAsset>("Icons/Assets/shader_icon.png");
     }
 
     void AssetDatabase::RegisterAsset(const std::string& path, AssetHandle handle)
@@ -74,5 +86,21 @@ namespace BoonEditor
         {
             fn(handle, path);
         }
+    }
+
+    AssetRef<Texture2DAsset> AssetDatabase::GetThumbnail(AssetHandle handle) const
+    {
+        const AssetMeta* meta = Assets::Get().GetMeta(handle);
+        if (!meta)
+            return AssetRef<Texture2DAsset>();
+
+        if (meta->type == AssetType::Texture)
+            return Assets::Get().Load<Texture2DAsset>(handle);
+
+        auto it = m_DefaultTextures.find(meta->type);
+        if (it == m_DefaultTextures.end())
+            return AssetRef<Texture2DAsset>();
+
+        return it->second;
     }
 }
