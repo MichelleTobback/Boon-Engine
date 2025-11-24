@@ -38,7 +38,9 @@ namespace BoonEditor
     {
         m_DefaultTextures[AssetType::Texture] = Assets::Get().Import<Texture2DAsset>("Icons/Assets/texture_icon.png");
         m_DefaultTextures[AssetType::SpriteAtlas] = Assets::Get().Import<Texture2DAsset>("Icons/Assets/sprite_atlas_icon.png");
+        m_DefaultTextures[AssetType::Tilemap] = Assets::Get().Import<Texture2DAsset>("Icons/Assets/sprite_atlas_icon.png");
         m_DefaultTextures[AssetType::Shader] = Assets::Get().Import<Texture2DAsset>("Icons/Assets/shader_icon.png");
+        m_DefaultTextures[AssetType::Scene] = Assets::Get().Import<Texture2DAsset>("Icons/Assets/scene_icon.png");
     }
 
     void AssetDatabase::RegisterAsset(const std::string& path, AssetHandle handle)

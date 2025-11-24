@@ -3,6 +3,8 @@
 #include "Asset/AssetTraits.h"
 #include "Asset/AssetRegistry.h"
 
+#include "Asset/TilemapAsset.h"
+#include "Asset/SceneAsset.h"
 #include "Asset/TextureAsset.h"
 #include "Asset/SpriteAtlasAsset.h"
 #include "Asset/ShaderAsset.h"
@@ -51,4 +53,6 @@ namespace Boon
     template Texture2DAsset* AssetLoader::Load<Texture2DAsset>(UUID id);
     template ShaderAsset* AssetLoader::Load<ShaderAsset>(UUID id);
     template SpriteAtlasAsset* AssetLoader::Load<SpriteAtlasAsset>(UUID id);
+    template SceneAsset* AssetLoader::Load<SceneAsset>(UUID id);
+    template TilemapAsset* AssetLoader::Load<TilemapAsset>(UUID id);
 }

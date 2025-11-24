@@ -97,31 +97,39 @@ void BoonEditor::EditorCamera::UpdateOrthographicController()
         glm::vec3 forwardVector = m_OrthoTransform.GetForward();
         glm::vec3 rightVector = m_OrthoTransform.GetRight();
         glm::vec3 upVector = m_OrthoTransform.GetUp();
-        const float moveSpeed = input.IsKeyHeld(Key::LeftShift) ? 5.f : 1.6f;
+        const float moveSpeed = input.IsKeyHeld(Key::LeftShift) ? 0.9f : 0.4f;
         const float rotateSpeed = 15.0f;
         const float dt = Time::Get().GetDeltaTime();
 
+        float size = m_OrthoCamera.GetSize();
+
         // Movement
         if (input.IsKeyHeld(Key::W))
-            m_OrthoTransform.Translate(dt * moveSpeed * upVector);
+            m_OrthoTransform.Translate(dt * moveSpeed * size * upVector);
         if (input.IsKeyHeld(Key::S))
-            m_OrthoTransform.Translate(-dt * moveSpeed * upVector);
+            m_OrthoTransform.Translate(-dt * moveSpeed * size * upVector);
         if (input.IsKeyHeld(Key::A))
-            m_OrthoTransform.Translate(-dt * moveSpeed * rightVector);
+            m_OrthoTransform.Translate(-dt * moveSpeed * size * rightVector);
         if (input.IsKeyHeld(Key::D))
-            m_OrthoTransform.Translate(dt * moveSpeed * rightVector);
+            m_OrthoTransform.Translate(dt * moveSpeed * size * rightVector);
 
         // Mouse rotation handling
         glm::vec2 deltaMouse = mousePos - prevMousePos;
-        if (input.IsMouseHeld(Mouse::ButtonLeft))
+        if (input.IsMouseHeld(Mouse::ButtonMiddle))
         {
             m_OrthoTransform.Translate({ dt * -deltaMouse.x, dt * deltaMouse.y, 0.f }); // Elevate the camera
         }
         else if (input.IsMouseHeld(Mouse::ButtonRight))
         {
-            float size{ m_OrthoCamera.GetSize() };
-            float speed{ 2.f };
-            m_OrthoCamera.SetSize( size + dt * deltaMouse.y * speed );
+            float zoomFactor = 0.24f; // feel free to tweak
+
+            // Exponential zoom: scales with current zoom level
+            size += deltaMouse.y * dt * zoomFactor * size;
+
+            // clamp so we never hit zero or negative zoom
+            size = glm::clamp(size, 0.05f, 500.0f);
+
+            m_OrthoCamera.SetSize(size);
         }
     }
 

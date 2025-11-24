@@ -89,6 +89,7 @@ namespace BoonEditor
 		std::unique_ptr<EditorRenderer> m_PRenderer;
 		GameObjectContext m_SelectionContext{};
 		SceneContext m_SceneContext{};
+		SceneContext m_AssetSceneContext{};
 		Scene* m_pSelectedScene;
 
 		std::vector<std::unique_ptr<EditorObject>> m_Objects;

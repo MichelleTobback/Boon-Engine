@@ -83,6 +83,17 @@ namespace Boon
             return Imported<Asset>(pAsset, meta);
         }
 
+        template <typename T>
+        bool Export(const std::string& filepath, AssetHandle asset)
+        {
+            Asset* pAsset = m_pCache->Find<Asset>(asset);
+            if (!pAsset)
+            {
+                return false;
+            }
+            return m_Importers[AssetTraits<T>::Type]->ExportToFile(filepath, pAsset);
+        }
+
         bool HasExtension(const std::string& extension) const
         {
             return m_ExtentionsToType.find(extension) != m_ExtentionsToType.end();

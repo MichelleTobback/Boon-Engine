@@ -53,6 +53,7 @@ namespace Boon
 		inline void RemoveSpriteFrame(int index) { m_Sprites.erase(index); m_FreeIds.push(index); }
 		inline void SetSpriteFrame(const SpriteFrame& uv, int index = 0) { m_Sprites[index] = uv; }
 		inline const SpriteFrame& GetSpriteFrame(int index) const { return m_Sprites.at(index); }
+		inline const std::unordered_map<int, SpriteFrame>& GetFrames() const { return m_Sprites; }
 
 		inline void AddClip(const SpriteAnimClip& clip) { m_Clips.push_back(clip); }
 		inline void RemoveClip(int index) { m_Clips.erase(m_Clips.begin() + index); }

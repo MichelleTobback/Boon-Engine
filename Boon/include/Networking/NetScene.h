@@ -4,6 +4,7 @@
 #include "Scene/GameObject.h"
 #include "Networking/NetPacket.h"
 #include "Networking/NetAuthority.h"
+#include "Reflection/BClass.h"
 
 #include <memory>
 
@@ -51,10 +52,16 @@ namespace Boon
     private:
         void HandleSpawnPacket(NetConnection* sender, NetPacket& pkt);
         void HandleDespawnPacket(NetConnection* sender, NetPacket& pkt);
+        void HandleComponentPacket(NetConnection* sender, NetPacket& pkt);
+        void HandleLoadScenePacket(NetConnection* sender, NetPacket& pkt);
 
         void SendSpawnTo(NetConnection* conn, const GameObject& obj);
         void SendDespawnTo(NetConnection* conn, const UUID& uuid);
+        void SendComponentTo(NetConnection* conn, const UUID& uuid, const BClassID& component, bool add);
+        void SendLoadSceneTo(NetConnection* conn, const SceneID& sceneId);
         void BroadcastDespawn(const UUID& uuid);
+        void BroadcastComponent(const UUID& uuid, const BClassID& component, bool add);
+        void BroadcastLoadScene(const SceneID& sceneId);
 
     private:
         Scene* m_Scene = nullptr;

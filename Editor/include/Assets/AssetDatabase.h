@@ -25,6 +25,13 @@ namespace BoonEditor
 			return AssetRef<TAsset>(result.meta.uuid);
 		}
 
+		template<typename TAsset>
+		bool Export(AssetHandle handle)
+		{
+			const std::string& path = m_HandleToPath.at(handle);
+			return AssetImporterRegistry::Get().Export<TAsset>(path, handle);
+		}
+
 		bool Exists(AssetHandle handle) const;
 		bool Exists(const std::string& path) const;
 

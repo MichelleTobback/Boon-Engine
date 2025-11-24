@@ -21,4 +21,11 @@ namespace Boon
 		glm::vec4 Color{1.f, 1.f, 1.f, 1.f};
 
 	};
+
+	struct TileVertex
+	{
+		glm::vec3 Position;
+		glm::vec4 Color;
+		glm::vec2 TexCoord;
+	};
 }

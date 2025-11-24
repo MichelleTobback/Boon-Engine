@@ -37,6 +37,13 @@ namespace BoonEditor
 		inline EditorViewportSettings& GetSettings() { return m_Settings; }
 		inline const EditorViewportSettings& GetSettings() const { return m_Settings; }
 
+		void SetContext(SceneContext* pContext);
+
+		inline const glm::vec2& GetSize() const { return m_ViewportSize; }
+		inline const glm::vec2& GetMousePosition() const { return m_MousePosition; }
+
+		inline SceneRenderer* GetRenderer() const { return m_pRenderer.get(); }
+
 	protected:
 		virtual void OnRenderUI() override;
 
@@ -50,6 +57,8 @@ namespace BoonEditor
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 		glm::vec2 m_ViewportBounds[2];
+		glm::vec2 m_MousePosition{};
+		glm::vec2 m_ViewportImagePosition{};
 
 		GameObject m_HoveredGameObject{};
 		SceneContext* m_pContext;

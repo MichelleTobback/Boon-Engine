@@ -7,6 +7,7 @@
 #include "Asset/TextureAsset.h"
 #include "Asset/ShaderAsset.h"
 #include "Asset/SpriteAtlasAsset.h"
+#include "Asset/TilemapAsset.h"
 
 namespace Boon 
 {
@@ -21,5 +22,5 @@ namespace Boon
     template class AssetRef<Texture2DAsset>;
     template class AssetRef<ShaderAsset>;
     template class AssetRef<SpriteAtlasAsset>;
-
+    template class AssetRef<TilemapAsset>;
 }

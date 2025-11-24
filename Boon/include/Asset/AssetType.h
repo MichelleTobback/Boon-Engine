@@ -10,6 +10,7 @@ namespace Boon
         Texture,
         Shader,
         SpriteAtlas,
+        Tilemap,
         Scene,
         Prefab,
         Audio,

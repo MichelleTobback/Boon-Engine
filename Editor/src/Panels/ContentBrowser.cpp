@@ -398,7 +398,12 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
             if (ImGui::BeginDragDropSource())
             {
                 ImGui::SetDragDropPayload("ASSET_HANDLE", &h, sizeof(AssetHandle));
-                ImGui::Text("%s", filename.c_str());
+
+                if (thumbnail.IsValid())
+                    ImGui::Image(thumbnail->GetInstance()->GetRendererID(), ImVec2(iconSize * 0.5f, iconSize * 0.5f));
+                else
+                    ImGui::Text("%s", filename.c_str());
+
                 ImGui::EndDragDropSource();
             }
 
@@ -430,7 +435,6 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
             ImGui::PopTextWrapPos();
 
             ImGui::EndChild();
-
 
             ImGui::PopID();
         }

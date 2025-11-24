@@ -65,7 +65,13 @@ namespace Boon
 
 			entt::registry& reg = m_pScene->GetRegistry();
 
-			return reg.emplace<T>(m_Handle, std::forward<TArgs>(args)...);
+			T& comp = reg.emplace<T>(m_Handle, std::forward<TArgs>(args)...);
+
+			//const BClass* cls = BClassRegistry::Get().Find<T>();
+			//if (cls)
+			//	m_pScene->m_OnComponentAdded.Invoke(*this, cls);
+
+			return comp;
 		}
 
 		template <typename T, typename ... TArgs>
@@ -82,6 +88,10 @@ namespace Boon
 		{
 			BN_ASSERT(HasComponent<T>(), "GameObject does not have component!");
 			m_pScene->m_Registry.remove<T>(m_Handle);
+
+			const BClass* cls = BClassRegistry::Get().Find<T>();
+			if (cls)
+				m_pScene->m_OnComponentRemoved.Invoke(*this, cls);
 		}
 
 		template <typename T>

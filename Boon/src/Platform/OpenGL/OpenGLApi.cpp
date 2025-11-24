@@ -49,9 +49,13 @@ void Boon::OpenGLApi::Clear()
 
 void Boon::OpenGLApi::DrawIndexed(const std::shared_ptr<VertexInput>& vertexInput, uint32_t indexCount)
 {
-    vertexInput->Bind();
     uint32_t count = indexCount ? indexCount : vertexInput->GetIndexBuffer()->GetCount();
-    glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
+
+    if (count > 0)
+    {
+        vertexInput->Bind();
+        glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
+    }
 }
 
 void Boon::OpenGLApi::DrawArrays(const std::shared_ptr<VertexInput>& vertexInput, uint32_t indexCount)

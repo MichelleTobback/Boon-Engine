@@ -5,6 +5,8 @@
 #include "Networking/NetRepCore.h"
 #include "Networking/NetRPC.h"
 
+#include "Core/ServiceLocator.h"
+#include "Scene/SceneManager.h"
 #include "Scene/Scene.h"
 #include "Component/UUIDComponent.h"
 
@@ -19,6 +21,8 @@ namespace Boon
         {
             m_Scene->GetOnGameObjectSpawned() += [this](GameObject obj) { RegisterDynamicGameObject(obj, 1); };
             m_Scene->GetOnGameObjectDestroyed() += [this](GameObject obj) { BroadcastDespawn(obj.GetUUID()); };
+            m_Scene->GetOnComponentAdded() += [this](GameObject  obj, const BClass* cls) {BroadcastComponent(obj.GetUUID(), cls->hash, true); };
+            m_Scene->GetOnComponentRemoved() += [this](GameObject  obj, const BClass* cls) {BroadcastComponent(obj.GetUUID(), cls->hash, false); };
         }
     }
 
@@ -124,6 +128,10 @@ namespace Boon
             HandleSpawnPacket(sender, pkt); break;
         case ENetPacketType::Despawn:  
             HandleDespawnPacket(sender, pkt); break;
+        case ENetPacketType::Component:
+            HandleComponentPacket(sender, pkt); break;
+        case ENetPacketType::LoadScene:
+            HandleLoadScenePacket(sender, pkt); break;
         case ENetPacketType::Replication:
             m_Replication->ProcessPacket(*this, pkt, sender); break;
         case ENetPacketType::RPC:
@@ -143,9 +151,7 @@ namespace Boon
         UUID netId = s.Read<UUID>();
         uint64_t owner = s.Read<uint64_t>();
 
-        GameObject obj = CreateReplicatedGameObject(netId, owner);
-
-        // Additional replicated fields can follow later
+        GameObject obj = CreateReplicatedGameObject(netId, owner);       
     }
 
     // -------------------------------------------------------------------------
@@ -163,6 +169,49 @@ namespace Boon
         GameObject obj = m_Scene->GetGameObject(netId);
         if (obj.IsValid())
             m_Scene->DestroyGameObject(obj);
+    }
+
+    // -------------------------------------------------------------------------
+    // Handle Server->Client Component add/remove
+    // -------------------------------------------------------------------------
+    void NetScene::HandleComponentPacket(NetConnection* sender, NetPacket& pkt)
+    {
+        auto& s = pkt.GetSerializer();
+        UUID netId = s.Read<UUID>();
+        BClassID compId = s.Read<uint32_t>();
+        bool add = s.Read<bool>();
+
+        GameObject obj = m_Scene->GetGameObject(netId);
+        if (!obj.IsValid())
+            return;
+
+        BClass* cls = BClassRegistry::Get().Find(compId);
+        if (!cls)
+            return;
+
+        if (add && !obj.HasComponentByClass(cls))
+        {
+            obj.AddComponentFromClass(cls);
+        }
+        else if (obj.HasComponentByClass(cls))
+        {
+            obj.RemoveComponentByClass(cls);
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Handle Server->Client Load scene
+    // -------------------------------------------------------------------------
+    void NetScene::HandleLoadScenePacket(NetConnection* sender, NetPacket& pkt)
+    {
+        auto& s = pkt.GetSerializer();
+        SceneID sceneId = s.Read<SceneID>();
+
+        SceneManager& scenes = ServiceLocator::Get<SceneManager>();
+        if (!scenes.IsLoaded(sceneId))
+            return;
+
+        scenes.SetActiveScene(sceneId);
     }
 
     // -------------------------------------------------------------------------
@@ -192,6 +241,24 @@ namespace Boon
         m_Driver->Send(conn, pkt, true);
     }
 
+    void NetScene::SendComponentTo(NetConnection* conn, const UUID& uuid, const BClassID& component, bool add)
+    {
+        NetPacket pkt(ENetPacketType::Component);
+        pkt.Write(uuid);
+        pkt.Write(component);
+        pkt.Write(add);
+
+        m_Driver->Send(conn, pkt, true);
+    }
+
+    void NetScene::SendLoadSceneTo(NetConnection* conn, const SceneID& sceneId)
+    {
+        NetPacket pkt(ENetPacketType::LoadScene);
+        pkt.Write(sceneId);
+
+        m_Driver->Send(conn, pkt, true);
+    }
+
     void NetScene::BroadcastDespawn(const UUID& uuid)
     {
         if (m_DynamicOwnership.find(uuid) == m_DynamicOwnership.end())
@@ -203,5 +270,23 @@ namespace Boon
         m_Driver->Broadcast(pkt, true);
 
         m_DynamicOwnership.erase(uuid);
+    }
+
+    void NetScene::BroadcastComponent(const UUID& uuid, const BClassID& component, bool add)
+    {
+        NetPacket pkt(ENetPacketType::Component);
+        pkt.Write(uuid);
+        pkt.Write(component);
+        pkt.Write(add);
+
+        m_Driver->Broadcast(pkt, true);
+    }
+
+    void NetScene::BroadcastLoadScene(const SceneID& sceneId)
+    {
+        NetPacket pkt(ENetPacketType::LoadScene);
+        pkt.Write(sceneId);
+
+        m_Driver->Broadcast(pkt, true);
     }
 }

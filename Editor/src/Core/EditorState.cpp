@@ -6,6 +6,7 @@
 #include "Panels/ViewportPanel.h"
 #include "Panels/NetworkPanel.h"
 #include "Panels/ContentBrowser.h"
+#include "Panels/TilemapEditorPanel.h"
 
 #include "UI/EditorRenderer.h"
 
@@ -14,6 +15,8 @@
 #include <Asset/Importer/TextureImporter.h>
 #include <Asset/Importer/ShaderImporter.h>
 #include <Asset/Importer/SpriteAtlasImporter.h>
+#include <Asset/Importer/SceneImporter.h>
+#include <Asset/Importer/TilemapImporter.h>
 
 #include "Assets/AssetDirectoryScanner.h"
 
@@ -49,6 +52,8 @@
 
 #include <Reflection/BClass.h>
 
+#include <BoonDebug/DebugRenderer.h>
+
 #include <iostream>
 #include <imgui.h>
 
@@ -65,6 +70,8 @@ void EditorState::OnEnter()
 	importer.RegisterImporter<Texture2DImporter>();
 	importer.RegisterImporter<ShaderImporter>();
 	importer.RegisterImporter<SpriteAtlasImporter>();
+	importer.RegisterImporter<SceneImporter>();
+	importer.RegisterImporter<TilemapImporter>();
 
 	m_NetworkSettings.NetMode = Application::Get().GetDescriptor().netDriverMode;
 
@@ -81,6 +88,8 @@ void EditorState::OnEnter()
 	CreatePanel<PropertiesPanel>("properties", &m_DragDrop, &m_SelectionContext);
 	CreatePanel<ScenePanel>("scene", &m_DragDrop,  &m_SceneContext, &m_SelectionContext);
 	CreatePanel<NetworkPanel>("network", &m_DragDrop, m_NetworkSettings);
+	TilemapEditorPanel & tilemap = CreatePanel<TilemapEditorPanel>("tilemap", &m_DragDrop, assetLib.Import<TilemapAsset>("game/Tilemap.btm"));
+	tilemap.SetViewport(&viewport);
 
 	CreateObject<AssetDirectoryScanner>("Assets/", 1.f);
 
@@ -95,11 +104,12 @@ void EditorState::OnEnter()
 	m_SceneContext.Set(&scene);
 	m_pSelectedScene = &scene;
 	
+	AssetRef<SpriteAtlasAsset> atlas = assetLib.Import<SpriteAtlasAsset>("game/Blue_witch/B_witch_atlas_compact.bsa");
 	//player
+	for (int i = 2; i < 3; ++i)
 	{
-		GameObject quad = scene.Instantiate(UUID(12345u));
+		GameObject quad = scene.Instantiate(UUID(i));
 		SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
-		AssetRef<SpriteAtlasAsset> atlas = assetLib.Import<SpriteAtlasAsset>("game/Blue_witch/B_witch_atlas_compact.bsa");
 		sprite.SpriteAtlasHandle = atlas->GetHandle();
 		sprite.Sprite = 0;
 	
@@ -174,10 +184,15 @@ void EditorState::OnEnter()
 	//serializer.Serialize("Assets/scenes/Test.scene");
 	serializer.Clear();
 	serializer.Deserialize("Assets/scenes/Test.scene");
+
+	viewport.SetContext(&m_AssetSceneContext);
+	m_AssetSceneContext.Set(tilemap.GetScene());
 }
 
 void EditorState::OnUpdate()
 {
+	Boon::DebugRenderer::Get().BeginFrame();
+
 	ServiceLocator::Get<NetDriver>().Update();
 
 	Time& time = Boon::Time::Get();

@@ -111,15 +111,29 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
                 RenderComponentNode(&cls);
         });
 
+    // Detect right click on the window
+    if (ImGui::BeginPopupContextWindow("add component"))
+    {
+        
+        BClassRegistry::Get().ForEach([this](const BClass& cls)
+            {
+                if (m_pContext->Get().HasComponentByClass(&cls))
+                    return;
+
+                if (ImGui::MenuItem(cls.name.c_str()))
+                {
+                    m_pContext->Get().AddComponentFromClass(&cls);
+                }
+            });
+
+        ImGui::EndPopup();
+    }
 }
 
 inline void PropertiesPanel::RenderComponentNode(BClass* cls, const std::function<void()>& fn)
 {
     GameObject& owner = m_pContext->Get();
     if (!owner.HasComponentByClass(cls))
-        return;
-
-    if (!cls->GetPropertiesCount())
         return;
 
     if (cls->HasMeta("HideInInspector"))
@@ -154,7 +168,7 @@ inline void PropertiesPanel::RenderComponentNode(BClass* cls, const std::functio
     ImGui::PopStyleVar();
 
     // Position the "+" button on the far right
-    ImGui::SameLine(contentRegionAvailable.x - lineHeight * 0.5f);
+    ImGui::SameLine(contentRegionAvailable.x - lineHeight);
     if (ImGui::Button("+", ImVec2{ lineHeight, lineHeight }))
     {
         ImGui::OpenPopup("ComponentSettings");

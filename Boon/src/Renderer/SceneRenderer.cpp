@@ -11,6 +11,7 @@
 
 #include "Scene/Scene.h"
 
+#include "Component/TilemapRendererComponent.h"
 #include "Component/SpriteRendererComponent.h"
 #include "Component/TransformComponent.h"
 #include "Component/CameraComponent.h"
@@ -45,6 +46,7 @@ Boon::SceneRenderer::SceneRenderer(Scene* pScene, int viewportWidth, int viewpor
 	
 	//scene
 	m_pCameraUniformBuffer = UniformBuffer::Create<UBData::Camera>(0);
+	m_pObjectUniformBuffer = UniformBuffer::Create<UBData::Object>(1);
 
 	FramebufferDescriptor fbDesc;
 	fbDesc.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::RED_INTEGER, FramebufferTextureFormat::Depth };
@@ -54,6 +56,10 @@ Boon::SceneRenderer::SceneRenderer(Scene* pScene, int viewportWidth, int viewpor
 	m_pOutputFB = Framebuffer::Create(fbDesc);
 
 	m_pRenderer2D = std::make_unique<Renderer2D>();
+
+	AssetLibrary& assets = ServiceLocator::Get<AssetLibrary>();
+	AssetRef<ShaderAsset> tilemapShader = assets.Import<ShaderAsset>("shaders/tilemap.glsl");
+	m_pTilemapShader = tilemapShader.Instance();
 }
 Boon::SceneRenderer::~SceneRenderer()
 {
@@ -80,6 +86,36 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 			}
 			else
 				m_pRenderer2D->SubmitQuad(transform.GetWorld(), sprite.Color, (int)gameObject);
+		}
+	}
+
+	{
+		auto group = m_pScene->GetAllGameObjectsWith<TransformComponent, TilemapRendererComponent>();
+		for (auto gameObject : group)
+		{
+			auto [transform, tilemap] = group.get<TransformComponent, TilemapRendererComponent>(gameObject);
+
+			if (!tilemap.tilemap.IsValid())
+				continue;
+
+			if (!tilemap.tilemap.Instance()->GetAtlas().IsValid())
+				continue;
+
+			tilemap.tilemap.Instance()->RebuildDirtyChunks();
+
+			m_ObjectData.World = transform.GetWorld();
+			m_ObjectData.ID = (int)(GameObjectID)gameObject;
+			m_pObjectUniformBuffer->SetValue(m_ObjectData);
+
+			tilemap.tilemap.Instance()->GetAtlas()->GetInstance()->GetTexture()->GetInstance()->Bind();
+			m_pTilemapShader->Bind();
+
+			for (auto chunk : tilemap.tilemap.Instance()->GetChunks())
+			{
+				Renderer::DrawIndexed(chunk.VertexInput);
+			}
+
+			m_pTilemapShader->Unbind();
 		}
 	}
 
@@ -151,3 +187,5 @@ void Boon::SceneRenderer::SetViewport(int width, int height)
 	m_ViewportHeight = height;
 	m_ViewportDirty = true;
 }
+
+Renderer2D* Boon::SceneRenderer::GetRenderer2D() const { return m_pRenderer2D.get(); }

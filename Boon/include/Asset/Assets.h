@@ -3,6 +3,7 @@
 #include "TextureAsset.h"
 #include "ShaderAsset.h"
 #include "SpriteAtlasAsset.h"
+#include "SceneAsset.h"
 
 #include "Core/ServiceLocator.h"
 

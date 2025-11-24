@@ -17,6 +17,7 @@ namespace Boon
 	using SceneRegistry = entt::registry;
 	using SceneID = UUID;
 
+	class BClass;
 	struct ECSLifecycleSystem;
 	class GameObject;
 	class Scene final
@@ -66,6 +67,8 @@ namespace Boon
 
 		inline Delegate<void(GameObject)>& GetOnGameObjectSpawned() { return m_OnGameObjectSpawned; }
 		inline Delegate<void(GameObject)>& GetOnGameObjectDestroyed() { return m_OnGameObjectDestroyed; }
+		inline Delegate<void(GameObject, const BClass*)>& GetOnComponentAdded() { return m_OnComponentAdded; }
+		inline Delegate<void(GameObject, const BClass*)>& GetOnComponentRemoved() { return m_OnComponentRemoved; }
 
 	private:
 		friend class PhysicsWorld2D;
@@ -91,6 +94,8 @@ namespace Boon
 
 		Delegate<void(GameObject)> m_OnGameObjectSpawned;
 		Delegate<void(GameObject)> m_OnGameObjectDestroyed;
+		Delegate<void(GameObject, const BClass*)> m_OnComponentAdded;
+		Delegate<void(GameObject, const BClass*)> m_OnComponentRemoved;
 
 		SceneID m_ID;
 		std::string m_Name;

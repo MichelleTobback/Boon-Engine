@@ -49,19 +49,20 @@ void BoonEditor::ViewportPanel::Update()
     float mx = ImGui::GetMousePos().x;
     float my = ImGui::GetMousePos().y;
 	
-    mx -= m_ViewportBounds[0].x;
-    my -= m_ViewportBounds[0].y;
+    mx -= m_ViewportImagePosition.x;
+    my -= m_ViewportImagePosition.y;
     glm::vec2 viewportSize = m_ViewportBounds[1] - m_ViewportBounds[0];
-    my = viewportSize.y - my;
+    my = m_ViewportSize.y - my;
     int mouseX = (int)mx;
     int mouseY = (int)my;
 
-	if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
+    m_MousePosition.x = mouseX;
+    m_MousePosition.y = mouseY;
+
+	if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)m_ViewportSize.x && mouseY < (int)m_ViewportSize.y)
 	{
 		int pixelData = m_pRenderer->GetOutputTarget()->ReadPixel(1, mouseX, mouseY);
 		m_HoveredGameObject = pixelData < 0 ? GameObject() : GameObject((GameObjectID)pixelData, m_pContext->Get());
-
-        //std::cout << "mouse : x " << mouseX << ", y " << mouseY << " Object " << pixelData << "\n";
 
         if (input.IsMousePressed(Mouse::ButtonLeft))
         {
@@ -75,6 +76,16 @@ void BoonEditor::ViewportPanel::Update()
         m_pRenderer->Render();
 
     m_pDebugRenderer->Render(m_Settings);
+}
+
+void BoonEditor::ViewportPanel::SetContext(SceneContext* pContext)
+{
+    m_pContext = pContext;
+    pContext->AddOnContextChangedCallback([this](Scene* pScene)
+        {
+            m_pRenderer->SetContext(pScene);
+            m_pDebugRenderer->SetContext(pScene);
+        });
 }
 
 void BoonEditor::ViewportPanel::OnRenderUI()
@@ -112,6 +123,9 @@ void BoonEditor::ViewportPanel::OnRenderUI()
         m_Camera.Resize(bounds.x, bounds.y);
         m_ViewportSize = { bounds.x, bounds.y };
     }
+
+    ImVec2 imagePos = ImGui::GetCursorScreenPos();
+    m_ViewportImagePosition = { imagePos.x, imagePos.y };
 
     // === Render the viewport image ===
     uint64_t textureID = m_pRenderer->GetOutputTarget()->GetColorAttachmentRendererID();

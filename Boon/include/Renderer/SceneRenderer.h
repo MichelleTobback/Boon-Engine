@@ -6,6 +6,7 @@
 
 namespace Boon
 {
+	class Shader;
 	class Renderer2D;
 	class Scene;
 	class UniformBuffer;
@@ -32,14 +33,19 @@ namespace Boon
 
 		inline void SetContext(Scene* pScene) { m_pScene = pScene; m_ViewportDirty = true; }
 
+		Renderer2D* GetRenderer2D() const;
+
 	private:
 		void BeginScene(Camera* camera = nullptr, TransformComponent* cameraTransform = nullptr);
 		void EndScene();
 
 		std::unique_ptr<Renderer2D> m_pRenderer2D;
 		std::shared_ptr<UniformBuffer> m_pCameraUniformBuffer{};
+		std::shared_ptr<UniformBuffer> m_pObjectUniformBuffer{};
 		std::shared_ptr<Framebuffer> m_pOutputFB;
+		std::shared_ptr<Shader> m_pTilemapShader;
 		UBData::Camera m_CameraData{};
+		UBData::Object m_ObjectData{};
 
 		Scene* m_pScene;
 

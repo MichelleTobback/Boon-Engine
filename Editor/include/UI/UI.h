@@ -981,6 +981,7 @@ namespace BoonEditor
                 if (name == "Texture2DAsset") return AssetType::Texture;
                 if (name == "ShaderAsset") return AssetType::Shader;
                 if (name == "SpriteAtlasAsset") return AssetType::SpriteAtlas;
+                if (name == "TilemapAsset") return AssetType::Tilemap;
                 // ...
 
                 return AssetType::None;

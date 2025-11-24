@@ -53,5 +53,8 @@ namespace BoonEditor
 		TransformComponent m_OrthoTransform{nullptr}, m_PerspTransform{nullptr};
 		bool m_Active{ false };
 		Camera::ProjectionType m_Mode{ Camera::ProjectionType::Orthographic };
+
+		float m_TargetZoom = 5.0f;
+		float m_ZoomVelocity = 0.0f;
 	};
 }

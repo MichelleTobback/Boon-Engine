@@ -10,5 +10,11 @@ namespace Boon
 		{
 			glm::mat4 ViewProjection;
 		};
+
+		struct Object
+		{
+			glm::mat4 World;
+			int ID;
+		};
 	}
 }
