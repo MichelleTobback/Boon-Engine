@@ -5,8 +5,8 @@
 using namespace BoonEditor;
 namespace fs = std::filesystem;
 
-ContentBrowser::ContentBrowser(const std::string& name, DragDropRouter* pRouter)
-    : EditorPanel(name, pRouter), m_RootFolder("Content", "")
+ContentBrowser::ContentBrowser(const std::string& name, DragDropRouter* pRouter, AssetContext* pContext)
+    : EditorPanel(name, pRouter), m_RootFolder("Content", ""), m_pSelectedAsset(pContext)
 {
     memset(m_SearchBuffer, 0, sizeof(m_SearchBuffer));
     m_CurrentFolder = &m_RootFolder;
@@ -375,24 +375,30 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
             float iconX = (cellWidth - iconSize) * 0.5f;
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + iconX);
 
-            ImVec4 bg = ImVec4(0, 0, 0, 0);
+            AssetHandle h = AssetDatabase::Get().GetHandle("Assets/" + assetPath);
+            bool selected = m_pSelectedAsset->Get() == h;
+
             ImVec4 bgHovered = ImVec4(0.15f, 0.25f, 0.35f, 0.35f);
             ImVec4 bgActive = ImVec4(0.15f, 0.25f, 0.35f, 0.50f);
+            ImVec4 bg = selected ? bgActive : ImVec4(0, 0, 0, 0);
 
             ImGui::PushStyleColor(ImGuiCol_Button, bg);
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, bgHovered);
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, bgActive);
 
             bool pressed = false;
-
-            AssetHandle h = AssetDatabase::Get().GetHandle("Assets/" + assetPath);
             AssetRef<Texture2DAsset> thumbnail = AssetDatabase::Get().GetThumbnail(h);
             if (thumbnail.IsValid())
-                ImGui::ImageButton("##thumb", thumbnail->GetInstance()->GetRendererID(), ImVec2(iconSize, iconSize));
+                pressed = ImGui::ImageButton("##thumb", thumbnail->GetInstance()->GetRendererID(), ImVec2(iconSize, iconSize));
             else
-                ImGui::Button("##thumb", ImVec2(iconSize, iconSize));
+                pressed = ImGui::Button("##thumb", ImVec2(iconSize, iconSize));
 
             ImGui::PopStyleColor(3);
+
+            if (pressed)
+            {
+                m_pSelectedAsset->Set(h);
+            }
 
             // Drag & drop
             if (ImGui::BeginDragDropSource())
@@ -440,6 +446,11 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
         }
 
         ImGui::EndTable();
+
+        if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+        {
+            m_pSelectedAsset->Set(0u);
+        }
     }
 
     ImGui::EndChild();

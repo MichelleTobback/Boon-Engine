@@ -43,6 +43,14 @@ void PlayerController::Update(GameObject gameObject)
         m_Direction = Direction::Right;
         gameObject.GetTransform().SetLocalScale(1.f, 1.f, 1.f);
     }
+    if (input.IsKeyHeld(Key::W))
+    {
+        movement.y = 1.0f;
+    }
+    else if (input.IsKeyHeld(Key::S))
+    {
+        movement.y = -1.0f;
+    }
 
     Rigidbody2D& rb = gameObject.GetComponent<Rigidbody2D>();
     if (m_IsGrounded && input.IsKeyPressed(Key::Space))
@@ -56,8 +64,10 @@ void PlayerController::Update(GameObject gameObject)
     else if (glm::length(m_MoveInput) >= 1.0f)
         Move({});
 
+    bool move = (glm::length2(rb.GetVelocity()) > 0);
+
     SpriteAnimatorComponent& anim = gameObject.GetComponent<SpriteAnimatorComponent>();
-    anim.SetClip((std::abs(rb.GetVelocity().x) > 0.001f || rb.GetVelocity().y >= 0.01f) ? 2 : 1);
+    anim.SetClip(move ? 2 : 1);
 
     CheckGrounded(gameObject);
 }
@@ -67,6 +77,7 @@ void PlayerController::FixedUpdate(GameObject gameObject)
     if (!gameObject.HasComponent<Rigidbody2D>())
         return;
 
+    TransformComponent& tc = gameObject.GetTransform();
     Rigidbody2D& rb = gameObject.GetComponent<Rigidbody2D>();
 
     const float dt = Time::Get().GetFixedTimeStep();
@@ -75,30 +86,24 @@ void PlayerController::FixedUpdate(GameObject gameObject)
     if (m_MoveInput != glm::vec2(0.0f))
     {
         glm::vec2 targetVel = m_MoveInput * m_MovementSpeed;
-        glm::vec2 velocityChange = targetVel - currentVel;
+        glm::vec2 force = targetVel * dt;
 
-        const float accel = 25.0f;
-        glm::vec2 force = velocityChange * rb.GetMass() * accel * dt;
-        rb.AddForce(force);
+        rb.SetVelocity(targetVel);
     }
     else
     {
-        // Instant stop for responsive feel
-        glm::vec2 stopVel = currentVel * 0.15f;
-        if (glm::length(stopVel) < 0.05f)
-            stopVel = { 0.0f, 0.0f };
-        rb.SetVelocity({ stopVel.x, rb.GetVelocity().y});
+        rb.SetVelocity({});
     }
 }
 
 void PlayerController::OnBeginOverlap(GameObject gameObject, GameObject other)
 {
-    std::cout << "Begin overlap\n";
+    
 }
 
 void PlayerController::OnEndOverlap(GameObject gameObject, GameObject other)
 {
-    std::cout << "End overlap\n";
+    
 }
 
 void PlayerController::Jump_Server()

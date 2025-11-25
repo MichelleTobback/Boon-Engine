@@ -254,6 +254,9 @@ public:
 		colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.12f, 0.10f, 0.18f, 0.85f);
 		colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0.12f, 0.10f, 0.18f, 0.60f);
 		colors[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00f, 0.75f, 1.00f, 0.70f);
+
+		// === DragDrop ===
+		colors[ImGuiCol_DragDropTarget] = ImVec4(0.90f, 0.60f, 1.00f, 1.00f);
 	}
 };
 

@@ -23,7 +23,12 @@ namespace Boon
 
         BPROPERTY()
         int Type = (int)BodyType::Static;
+
+        BPROPERTY()
+        float GravityScale = 1.f;
+
         //BodyType Type = BodyType::Static;
+        BPROPERTY()
         bool FixedRotation = false;
 
         b2BodyId RuntimeBody = b2_nullBodyId;

@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Core/BoonEditor.h"
 #include "EditorPanel.h"
 #include "Assets/AssetDatabase.h"
 
@@ -12,7 +13,7 @@ namespace BoonEditor
     class ContentBrowser : public EditorPanel
     {
     public:
-        ContentBrowser(const std::string& name, DragDropRouter* pRouter);
+        ContentBrowser(const std::string& name, DragDropRouter* pRouter, AssetContext* pContext);
 
         virtual void Update() override;
 
@@ -37,6 +38,8 @@ namespace BoonEditor
         float m_HierarchyWidth = 250.f;
 
         char m_SearchBuffer[256];
+
+        AssetContext* m_pSelectedAsset;
 
         void BuildFolderTree();
         void BuildFoldersFromDisk(const std::string& path, FolderNode* parent);

@@ -15,6 +15,7 @@
 #include "Component/SpriteRendererComponent.h"
 #include "Component/TransformComponent.h"
 #include "Component/CameraComponent.h"
+#include "Component/TextureRendererComponent.h"
 
 #include "Core/ServiceLocator.h"
 
@@ -86,6 +87,19 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 			}
 			else
 				m_pRenderer2D->SubmitQuad(transform.GetWorld(), sprite.Color, (int)gameObject);
+		}
+	}
+
+	{
+		auto group = m_pScene->GetAllGameObjectsWith<TransformComponent, TextureRendererComponent>();
+		for (auto gameObject : group)
+		{
+			auto [transform, tc] = group.get<TransformComponent, TextureRendererComponent>(gameObject);
+
+			if (assetLib.IsValidAsset(tc.Texture))
+			{
+				m_pRenderer2D->SubmitQuad(transform.GetWorld(), tc.Texture.Instance(), tc.Tiling, tc.Color, (int)gameObject, {}, {1.f, 1.f});
+			}
 		}
 	}
 

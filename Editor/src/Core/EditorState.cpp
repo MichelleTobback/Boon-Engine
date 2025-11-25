@@ -7,6 +7,7 @@
 #include "Panels/NetworkPanel.h"
 #include "Panels/ContentBrowser.h"
 #include "Panels/TilemapEditorPanel.h"
+#include "Panels/SpriteAtlasEditorPanel.h"
 
 #include "UI/EditorRenderer.h"
 
@@ -84,12 +85,15 @@ void EditorState::OnEnter()
 	viewport.GetToolbar()->BindOnPlayCallback(std::bind(&EditorState::OnBeginPlay, this));
 	viewport.GetToolbar()->BindOnStopCallback(std::bind(&EditorState::OnStopPlay, this));
 
-	CreatePanel<ContentBrowser>("content", &m_DragDrop);
+	CreatePanel<ContentBrowser>("content", &m_DragDrop, &m_SelectedAsset);
 	CreatePanel<PropertiesPanel>("properties", &m_DragDrop, &m_SelectionContext);
 	CreatePanel<ScenePanel>("scene", &m_DragDrop,  &m_SceneContext, &m_SelectionContext);
 	CreatePanel<NetworkPanel>("network", &m_DragDrop, m_NetworkSettings);
-	TilemapEditorPanel & tilemap = CreatePanel<TilemapEditorPanel>("tilemap", &m_DragDrop, assetLib.Import<TilemapAsset>("game/Tilemap.btm"));
+	AssetRef<TilemapAsset> tilemapAsset = assetLib.Import<TilemapAsset>("game/Tilemap.btm");
+	TilemapEditorPanel& tilemap = CreatePanel<TilemapEditorPanel>("tilemap", &m_DragDrop, tilemapAsset);
 	tilemap.SetViewport(&viewport);
+	SpriteAtlasEditorPanel& spriteAtlasPanel = CreatePanel<SpriteAtlasEditorPanel>("sprite atlas", &m_DragDrop, tilemapAsset->GetInstance()->GetAtlas());
+	spriteAtlasPanel.SetViewport(&viewport);
 
 	CreateObject<AssetDirectoryScanner>("Assets/", 1.f);
 
@@ -98,7 +102,7 @@ void EditorState::OnEnter()
 	ServiceLocator::Register<NetDriver>(network);
 
 	GameObject camera = scene.Instantiate({ 0.f, 0.f, 1.f });
-	camera.AddComponent<CameraComponent>(Camera(4.f, 2.f, 0.1f, 1.f), false).Active = true;
+	camera.AddComponent<CameraComponent>(Camera(10.f, 2.f, 0.1f, 1.f), false).Active = true;
 	camera.GetComponent<NameComponent>().Name = "Camera";
 	m_SelectionContext.Set(camera);
 	m_SceneContext.Set(&scene);
@@ -123,12 +127,14 @@ void EditorState::OnEnter()
 	
 		Rigidbody2D& rb = quad.AddComponent<Rigidbody2D>();
 		rb.Type = (int)Boon::Rigidbody2D::BodyType::Dynamic;
-	
+		rb.GravityScale = 0.f;
+		rb.FixedRotation = true;
+
 		quad.AddComponent<PlayerController>();
 		quad.GetComponent<NameComponent>().Name = "Player";
 	
 		quad.AddComponent<NetIdentity>();
-		quad.AddComponent<NetRigidbody2D>();
+		//quad.AddComponent<NetTransform>();
 	}
 	
 	//floor
@@ -182,11 +188,48 @@ void EditorState::OnEnter()
 
 	SceneSerializer serializer(scene);
 	//serializer.Serialize("Assets/scenes/Test.scene");
-	serializer.Clear();
-	serializer.Deserialize("Assets/scenes/Test.scene");
+	//serializer.Clear();
+	//serializer.Deserialize("Assets/scenes/Test.scene");
 
-	viewport.SetContext(&m_AssetSceneContext);
-	m_AssetSceneContext.Set(tilemap.GetScene());
+	//viewport.SetContext(&m_AssetSceneContext);
+	//m_AssetSceneContext.Set(tilemap.GetScene());
+
+	m_SelectedAsset.AddOnContextChangedCallback([this](AssetHandle& handle)
+		{
+			if (!Assets::Get().IsValidAsset(handle))
+				return;
+
+			bool changed = false;
+
+			if (Assets::Get().GetMeta(handle)->type == AssetType::Tilemap)
+			{
+				GetPanel<TilemapEditorPanel>("tilemap").SetAsset(AssetRef<TilemapAsset>(handle));
+				m_SceneContext.Set(GetPanel<TilemapEditorPanel>("tilemap").GetScene());
+				changed = true;
+			}
+			else
+			{
+				GetPanel<TilemapEditorPanel>("tilemap").SetAsset(AssetRef<TilemapAsset>());
+			}
+
+			if (Assets::Get().GetMeta(handle)->type == AssetType::SpriteAtlas)
+			{
+				auto& panel = GetPanel<SpriteAtlasEditorPanel>("sprite atlas");
+				panel.SetAsset(AssetRef<SpriteAtlasAsset>(handle));
+				m_SceneContext.Set(panel.GetScene());
+				changed = true;
+			}
+			else
+			{
+				auto& panel = GetPanel<SpriteAtlasEditorPanel>("sprite atlas");
+				panel.SetAsset(AssetRef<SpriteAtlasAsset>());
+			}
+
+			if (!changed)
+			{
+				m_SceneContext.Set(m_pSelectedScene);
+			}
+		});
 }
 
 void EditorState::OnUpdate()

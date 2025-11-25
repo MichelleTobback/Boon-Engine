@@ -71,7 +71,7 @@ namespace Boon
 
                     // Store full frame in clip
                     clip.Frames[f] = id;
-                    atlas->SetSpriteFrame(frame, id);
+                    atlas->SetSpriteFrame(id, frame);
                 }
 
                 clip.pAtlas = atlas.get();

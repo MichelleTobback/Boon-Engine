@@ -28,7 +28,6 @@ void Boon::PhysicsWorld2D::Begin(Scene* pScene)
 
 	b2WorldDef worldDef = b2DefaultWorldDef();
 	worldDef.gravity = { 0.0f, -9.8f };
-	//worldDef.gravity = {};
 	m_PhysicsWorldId = b2CreateWorld(&worldDef);
 
 	auto view = pScene->GetAllGameObjectsWith<Rigidbody2D>();
@@ -43,6 +42,7 @@ void Boon::PhysicsWorld2D::Begin(Scene* pScene)
 		bodyDef.position = { transform.GetLocalPosition().x, transform.GetLocalPosition().y };
 		bodyDef.rotation = b2MakeRot(glm::radians(transform.GetWorldRotation().z));
 		bodyDef.userData = reinterpret_cast<void*>(static_cast<uintptr_t>(e));
+		bodyDef.gravityScale = rb2d.GravityScale;
 		rb2d.RuntimeBody = b2CreateBody(m_PhysicsWorldId, &bodyDef);
 
 		if (gameObject.HasComponent<BoxCollider2D>())
@@ -99,37 +99,25 @@ void Boon::PhysicsWorld2D::Step(Scene* pScene)
 				glm::vec3 rot = transform.GetWorldEulerRotation();
 
 				b2Body_SetTransform(rb.RuntimeBody, { pos.x, pos.y }, b2MakeRot(glm::radians(rot.z)));
-
-				// Cache for interpolation
-				rb.PrevPosition = { pos.x, pos.y };
-				rb.PrevRotation = glm::radians(rot.z);
 			}
 			else
 			{
 				// For dynamic/static: pull from Box2D
-				b2Transform t = b2Body_GetTransform(rb.RuntimeBody);
-				rb.PrevPosition = { t.p.x, t.p.y };
-				rb.PrevRotation = b2Rot_GetAngle(t.q);
+				if (rb.FixedRotation)
+				{
+					b2Transform t = b2Body_GetTransform(rb.RuntimeBody);
+					float rot = glm::radians(transform.GetWorldRotation().z);
+					b2Body_SetTransform(rb.RuntimeBody, t.p, b2MakeRot(rot));
+				}
 			}
 		});
 
 	const float timeStep = Time::Get().GetFixedTimeStep();
-	const int32_t iterations = 1;
+	const int32_t iterations = 3;
 
 	b2World_Step(m_PhysicsWorldId, timeStep, iterations);
 
-	HandleEvents(pScene);
-}
-
-void Boon::PhysicsWorld2D::Update(Scene* pScene)
-{
-	if (!b2World_IsValid(m_PhysicsWorldId))
-		return;
-
-	float alpha = Time::Get().GetInterpolationAlpha();
-	alpha = glm::clamp(alpha, 0.0f, 1.0f);
-
-	pScene->ForeachGameObjectWith<Rigidbody2D, TransformComponent>([alpha](GameObject e)
+	pScene->ForeachGameObjectWith<Rigidbody2D, TransformComponent>([](GameObject e)
 		{
 			Rigidbody2D& rb = e.GetComponent<Rigidbody2D>();
 			auto& transform = e.GetTransform();
@@ -139,16 +127,22 @@ void Boon::PhysicsWorld2D::Update(Scene* pScene)
 
 			b2Transform t = b2Body_GetTransform(rb.RuntimeBody);
 
-			glm::vec2 interpPos = glm::mix(rb.PrevPosition, { t.p.x,t.p.y }, alpha);
-			float interpRot = glm::degrees(glm::mix(rb.PrevRotation, b2Rot_GetAngle(t.q), alpha));
-
 			glm::vec3 pos3 = transform.GetWorldPosition();
-			pos3.x = interpPos.x;
-			pos3.y = interpPos.y;
+			pos3.x = t.p.x;
+			pos3.y = t.p.y;
 
 			transform.SetLocalPosition(pos3);
-			transform.SetLocalRotation({ 0.f, 0.f, interpRot });
+			if (!rb.FixedRotation)
+				transform.SetLocalRotation({ 0.f, 0.f, glm::degrees(b2Rot_GetAngle(t.q)) });
 		});
+
+	HandleEvents(pScene);
+}
+
+void Boon::PhysicsWorld2D::Update(Scene* pScene)
+{
+	if (!b2World_IsValid(m_PhysicsWorldId))
+		return;
 }
 
 bool Boon::PhysicsWorld2D::Raycast(const Ray2D& ray, HitResult2D& result) const

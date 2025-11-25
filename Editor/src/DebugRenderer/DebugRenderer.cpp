@@ -47,6 +47,9 @@ void BoonEditor::DebugRenderer::Render(EditorViewportSettings settings, Camera* 
 		{
 			auto [transform, tilemap] = group.get<TransformComponent, TilemapRendererComponent>(gameObject);
 			{
+				if (!tilemap.tilemap.IsValid())
+					continue;
+
 				auto map = tilemap.tilemap->GetInstance();
 				auto atlas = map->GetAtlas()->GetInstance();
 				auto texture = atlas->GetTexture().Instance();

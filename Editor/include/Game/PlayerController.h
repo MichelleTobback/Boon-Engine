@@ -36,7 +36,7 @@ namespace Boon
         void CheckGrounded(GameObject gameObject);
 
         BPROPERTY(Name="speed", Category = "movement", RangeMin = 0.1, RangeMax = 20.f)
-        float m_MovementSpeed{ 10.f };
+        float m_MovementSpeed{ 2.f };
 
         BPROPERTY(Name = "jump force", Category="movement", RangeMin = 0.1, RangeMax = 20.f)
         float m_JumpForce{5.f};

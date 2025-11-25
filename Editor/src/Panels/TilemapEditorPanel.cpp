@@ -97,8 +97,9 @@ void TilemapEditorPanel::RenderToolbar()
         auto tex = atlas->GetTexture().Instance();
 
         ImGui::Text("Random brush tiles:");
-        for (auto& [i, frame] : atlas->GetFrames())
+        for (int i : atlas->GetAllFrameIDs())
         {
+            auto& frame = atlas->GetSpriteFrame(i);
             ImGui::PushID(i);
             bool selected =
                 std::find(m_RandomBrushTiles.begin(), m_RandomBrushTiles.end(), i)
@@ -168,8 +169,10 @@ void TilemapEditorPanel::RenderPalette(const ImVec2& size)
     int columns = (int)(size.x / 52.f);
     int index = 0;
 
-    for (auto& [i, f] : atlas->GetFrames())
+    for (auto& fId : atlas->GetAllFrameIDs())
     {
+        auto& f = atlas->GetSpriteFrame(fId);
+
         if (index % columns != 0) ImGui::SameLine();
 
         ImGui::PushID(index);
@@ -178,7 +181,7 @@ void TilemapEditorPanel::RenderPalette(const ImVec2& size)
             ImVec2(f.UV.x, f.UV.y + f.Size.y),
             ImVec2(f.UV.x + f.Size.x, f.UV.y)))
         {
-            m_SelectedTile = i;
+            m_SelectedTile = fId;
         }
         ImGui::PopID();
         ++index;
