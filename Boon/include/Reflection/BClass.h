@@ -43,6 +43,7 @@ namespace Boon
         using DestroyInstanceFn = void(*)(void*);
         using CopyInstanceFn = void (*)(void*, void*);
 
+        using AwakeFn = void (*)(GameObject&);
         using AddComponentFn = void* (*)(GameObject&);
         using GetComponentFn = void* (*)(GameObject&);
         using HasComponentFn = bool (*)(GameObject&);
@@ -53,6 +54,7 @@ namespace Boon
         DestroyInstanceFn destroyInstance = nullptr;
         CopyInstanceFn copyInstance = nullptr;
 
+        AwakeFn awake = nullptr;
         AddComponentFn addComponent = nullptr;
         GetComponentFn getComponent = nullptr;
         HasComponentFn hasComponent = nullptr;

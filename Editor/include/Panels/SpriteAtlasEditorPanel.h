@@ -1,5 +1,5 @@
 #pragma once
-#include "Panels/EditorPanel.h"
+#include "Panels/AssetEditor.h"
 
 #include <Asset/SpriteAtlasAsset.h>
 #include <Scene/Scene.h>
@@ -25,35 +25,21 @@ namespace BoonEditor
         Cellsize, RowCols
     };
 
-    class SpriteAtlasEditorPanel : public EditorPanel
+    class SpriteAtlasEditorPanel : public AssetEditor<SpriteAtlasAsset>
     {
     public:
-        SpriteAtlasEditorPanel(const std::string& name,
-            DragDropRouter* pRouter,
-            AssetRef<SpriteAtlasAsset> asset);
+        SpriteAtlasEditorPanel(const std::string& name, DragDropRouter* pRouter);
 
         virtual void Update() override;
-        virtual void OnRenderUI() override;
 
-        inline Scene* GetScene() const { return m_pScene; }
-        inline void SetViewport(ViewportPanel* pViewport) { m_pViewport = pViewport; }
+    protected:
+        virtual void BuildPreviewScene(Scene& scene) override;
+        virtual void RenderToolbar() override;
+        virtual void RenderMainArea() override;
 
-        inline AssetRef<SpriteAtlasAsset> GetAsset() const { return m_Asset; }
-        inline void SetAsset(AssetRef<SpriteAtlasAsset> asset) { m_Asset = asset; }
-
-    private:
-        void RenderToolbar();
-        void RenderMainArea();
-
-        glm::vec3 ScreenToWorld(const glm::vec2& mousePos);
         glm::vec2 CameraWorldToAtlas(const glm::vec3& world);
 
     private:
-        AssetRef<SpriteAtlasAsset> m_Asset;
-
-        Scene* m_pScene{ nullptr };
-        ViewportPanel* m_pViewport = nullptr;
-
         int m_SelectedSprite = -1;
 
         AtlasEditorMode m_Mode{ AtlasEditorMode::Select };

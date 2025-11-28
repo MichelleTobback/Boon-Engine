@@ -3,6 +3,8 @@
 #include "NetAuthority.h"
 #include "Core/Boon.h"
 
+#include <functional>
+
 namespace Boon
 {
     // ----------------------------------------------------------------------------------------
@@ -30,10 +32,20 @@ namespace Boon
 
         NetScene* pScene;
 
+        std::function<void(GameObject, NetIdentity*)> onNetAwake;
+
         bool IsAuthority() const { return Role == ENetRole::Authority; }
         bool IsAutonomousProxy() const { return Role == ENetRole::AutonomousProxy; }
         bool IsSimulatedProxy() const { return Role == ENetRole::SimulatedProxy; }
 
         bool IsOwnedBy(uint64_t conn) const { return OwnerConnectionId == conn; }
+        bool IsOwner() const 
+        { 
+            return m_bOwner; 
+        }
+
+    private:
+        friend class NetScene;
+        bool m_bOwner;
     };
 }

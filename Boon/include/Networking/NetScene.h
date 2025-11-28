@@ -45,9 +45,14 @@ namespace Boon
         // ---------------------------------------------------------------------
         void ProcessPacket(NetConnection* sender, NetPacket& pkt);
 
+
+        uint64_t GetLocalConnectionID() const;
         inline Scene& GetScene() { return *m_Scene; }
         inline NetDriver* GetDriver() { return m_Driver; }
         inline NetRPC* GetRPC() { return m_RPC.get(); }
+
+        // Spawn gameobject with owner
+        GameObject InstantiateGameObject(uint64_t connectionId, UUID uuid = UUID());
 
     private:
         void HandleSpawnPacket(NetConnection* sender, NetPacket& pkt);
@@ -71,5 +76,6 @@ namespace Boon
 
         // Objects that server spawned at runtime
         std::unordered_map<UUID, uint64_t> m_DynamicOwnership;
+        bool m_bRegisterDynamicObject{ true };
     };
 }

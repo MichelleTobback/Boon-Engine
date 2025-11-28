@@ -87,10 +87,6 @@ namespace Boon
         bool Export(const std::string& filepath, AssetHandle asset)
         {
             Asset* pAsset = m_pCache->Find<Asset>(asset);
-            if (!pAsset)
-            {
-                return false;
-            }
             return m_Importers[AssetTraits<T>::Type]->ExportToFile(filepath, pAsset);
         }
 

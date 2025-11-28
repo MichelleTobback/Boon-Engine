@@ -778,7 +778,14 @@ namespace BoonEditor
             uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
             AssetHandle* handlePtr = reinterpret_cast<AssetHandle*>(base + property.offset);
 
-            AssetHandle current = *handlePtr;
+            AssetHandle& current = *handlePtr;
+
+            return AssetRef(label, current, AssetPropertyType(property));
+        }
+
+        static bool AssetRef(const std::string& label, AssetHandle& handle, AssetType assetType)
+        {
+            
             bool changed = false;
 
             BeginProperty(label);
@@ -787,9 +794,9 @@ namespace BoonEditor
             // Resolve current label (filename only)
             //
             std::string currentLabel;
-            if (current != 0 && AssetDatabase::Get().Exists(current))
+            if (handle != 0 && AssetDatabase::Get().Exists(handle))
             {
-                std::string fullPath = AssetDatabase::Get().GetPath(current);
+                std::string fullPath = AssetDatabase::Get().GetPath(handle);
                 currentLabel = std::filesystem::path(fullPath).filename().string();
             }
             else
@@ -823,7 +830,7 @@ namespace BoonEditor
                     const AssetMeta* meta =
                         AssetImporterRegistry::Get().GetRegistry()->Get(hovered);
 
-                    if (meta && AssetMatchesPropertyType(property, meta->type))
+                    if (meta && assetType == meta->type)
                         compatible = true;
                 }
 
@@ -834,7 +841,7 @@ namespace BoonEditor
                         ImGui::AcceptDragDropPayload("ASSET_HANDLE"))
                     {
                         AssetHandle dropped = *(const AssetHandle*)accepted->Data;
-                        *handlePtr = dropped;
+                        handle = dropped;
                         changed = true;
                     }
                 }
@@ -855,7 +862,7 @@ namespace BoonEditor
                     const AssetMeta* meta =
                         AssetImporterRegistry::Get().GetRegistry()->Get(hovered);
 
-                    bool compatible = (meta && AssetMatchesPropertyType(property, meta->type));
+                    bool compatible = (meta && assetType == meta->type);
 
                     if (compatible)
                     {
@@ -880,7 +887,7 @@ namespace BoonEditor
             ImGui::SameLine();
             if (ImGui::Button("X", ImVec2(clearButtonWidth, 0)))
             {
-                *handlePtr = 0;
+                handle = 0;
                 changed = true;
             }
 
@@ -900,7 +907,7 @@ namespace BoonEditor
                     const UUID& uuid = it.first;
                     const AssetMeta& meta = it.second;
 
-                    if (!AssetMatchesPropertyType(property, meta.type))
+                    if (assetType != meta.type)
                         continue;
 
                     std::string path = AssetDatabase::Get().GetPath(meta.uuid);
@@ -909,11 +916,11 @@ namespace BoonEditor
                         continue;
 
                     std::string filename = std::filesystem::path(path).filename().string();
-                    bool selected = (uuid == current);
+                    bool selected = (uuid == handle);
 
                     if (ImGui::Selectable(filename.c_str(), selected))
                     {
-                        *handlePtr = uuid;
+                        handle = uuid;
                         changed = true;
                         ImGui::CloseCurrentPopup();
                     }
@@ -923,7 +930,7 @@ namespace BoonEditor
 
                 if (ImGui::Selectable("<None>"))
                 {
-                    *handlePtr = 0;
+                    handle = 0;
                     changed = true;
                     ImGui::CloseCurrentPopup();
                 }
@@ -1218,23 +1225,24 @@ namespace BoonEditor
                 ImGui::PopID();
             }
 
-            static bool AssetMatchesPropertyType(const BProperty& prop, AssetType assetType)
+            static AssetType AssetPropertyType(const BProperty& prop)
             {
-                // Extract C++ type name from "AssetRef<Texture2DAsset>"
                 std::string type = prop.typeName;
 
                 auto start = type.find('<');
                 auto end = type.find('>');
 
                 if (start == std::string::npos || end == std::string::npos)
-                    return true; // fallback no filtering
+                    return AssetType::None;
 
                 std::string assetClass = type.substr(start + 1, end - start - 1);
 
-                // Look up asset traits
-                // You may need a map: "Texture2DAsset" -> AssetType::Texture
-                AssetType expected = AssetTypeFromClassName(assetClass);
+                return AssetTypeFromClassName(assetClass);
+            }
 
+            static bool AssetMatchesPropertyType(const BProperty& prop, AssetType assetType)
+            {
+                AssetType expected = AssetPropertyType(prop);
                 return expected == assetType;
             }
 

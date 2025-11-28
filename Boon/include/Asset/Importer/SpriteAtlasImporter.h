@@ -33,8 +33,12 @@ namespace Boon
             AssetHandle handle{ meta.uuid };
 
             AssetLibrary& assets = ServiceLocator::Get<AssetLibrary>();
-            AssetRef<Texture2DAsset> tex = assets.Import<Texture2DAsset>(j["texture"].get<std::string>());
-            pInstance->SetTexture(tex);
+            std::string texPath = j["texture"].get<std::string>();
+            if (!texPath.empty())
+            {
+                AssetRef<Texture2DAsset> tex = assets.Import<Texture2DAsset>(texPath);
+                pInstance->SetTexture(tex);
+            }
 
             // ---------------------------------------
             // FRAME IMPORT (backward compatible)
@@ -114,25 +118,24 @@ namespace Boon
         // --------------------------------------------------------------------
         bool ExportToFile(const std::string& filePath, Asset* asset) override
         {
-            if (!asset)
-                return false;
+            std::string texPath = "";
 
             SpriteAtlasAsset* atlasAsset = dynamic_cast<SpriteAtlasAsset*>(asset);
-            if (!atlasAsset)
-                return false;
-
-            std::shared_ptr<SpriteAtlas> atlas = atlasAsset->GetInstance();
-            if (!atlas)
-                return false;
-
-            std::string texPath = "";
+            SpriteAtlas* atlas = nullptr;
+            if (atlasAsset)
             {
+                atlas = atlasAsset->GetInstance().get();
+
                 std::ifstream in(filePath);
 
                 nlohmann::json j;
                 in >> j;
 
                 texPath = j["texture"].get<std::string>();
+            }
+            else
+            {
+                atlas = new SpriteAtlas();
             }
 
             nlohmann::json j;
@@ -183,6 +186,9 @@ namespace Boon
 
             j["clips"] = clipsJson;
 
+            if (!atlasAsset)
+                delete atlas;
+
             // ---------------------------------------
             // WRITE FILE
             // ---------------------------------------
@@ -191,6 +197,7 @@ namespace Boon
                 return false;
 
             file << std::setw(4) << j;
+
             return true;
         }
 

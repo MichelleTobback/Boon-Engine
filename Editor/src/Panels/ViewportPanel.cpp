@@ -25,13 +25,13 @@ BoonEditor::ViewportPanel::ViewportPanel(const std::string& name, DragDropRouter
 
     m_pToolbar = std::make_unique<ViewportToolbar>(std::string(name).append("toolbar"), m_pRouter);
 
+    m_Settings.DebugRenderLayers |= DebugRenderLayer::Disabled;
+
     pContext->AddOnContextChangedCallback([this](Scene* pScene)
         {
             m_pRenderer->SetContext(pScene);
             m_pDebugRenderer->SetContext(pScene);
         });
-
-    m_Settings.DebugRenderLayers |= DebugRenderLayer::Disabled;
 }
 
 BoonEditor::ViewportPanel::~ViewportPanel()
@@ -81,11 +81,8 @@ void BoonEditor::ViewportPanel::Update()
 void BoonEditor::ViewportPanel::SetContext(SceneContext* pContext)
 {
     m_pContext = pContext;
-    pContext->AddOnContextChangedCallback([this](Scene* pScene)
-        {
-            m_pRenderer->SetContext(pScene);
-            m_pDebugRenderer->SetContext(pScene);
-        });
+    m_pRenderer->SetContext(pContext->Get());
+    m_pDebugRenderer->SetContext(pContext->Get());
 }
 
 void BoonEditor::ViewportPanel::OnRenderUI()

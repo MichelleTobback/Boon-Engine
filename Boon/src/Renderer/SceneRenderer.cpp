@@ -115,6 +115,9 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 			if (!tilemap.tilemap.Instance()->GetAtlas().IsValid())
 				continue;
 
+			if (!tilemap.tilemap.Instance()->GetAtlas()->GetInstance()->GetTexture().IsValid())
+				continue;
+
 			tilemap.tilemap.Instance()->RebuildDirtyChunks();
 
 			m_ObjectData.World = transform.GetWorld();
@@ -164,7 +167,7 @@ void Boon::SceneRenderer::BeginScene(Camera* camera, TransformComponent* cameraT
 
 	m_pOutputFB->Bind();
 
-	Renderer::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+	Renderer::SetClearColor({ 0.f, 0.f, 0.f, 1 });
 	Renderer::Clear();
 
 	// Clear our entity ID attachment to -1

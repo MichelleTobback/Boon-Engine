@@ -31,7 +31,12 @@ namespace Boon
 
 		void SetViewport(int width, int height);
 
-		inline void SetContext(Scene* pScene) { m_pScene = pScene; m_ViewportDirty = true; }
+		inline void SetContext(Scene* pScene) 
+		{ 
+			if (pScene != m_pScene)
+				m_ViewportDirty = true;
+			m_pScene = pScene; 
+		}
 
 		Renderer2D* GetRenderer2D() const;
 

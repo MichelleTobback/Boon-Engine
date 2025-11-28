@@ -46,6 +46,12 @@ namespace Boon
 
 		void LateUpdate(GameObject gameObject)
 		{
+			if (!gameObject.HasComponent<NetIdentity>())
+				return;
+
+			if (!gameObject.HasComponent<Rigidbody2D>())
+				return;
+
 			NetIdentity& netId = gameObject.GetComponent<NetIdentity>();
 			TransformComponent& transform = gameObject.GetTransform();
 			if (netId.IsAuthority())

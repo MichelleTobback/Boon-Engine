@@ -10,7 +10,11 @@ namespace Boon
     {
         static BClass cls(name, typeid(T));
 
-        if constexpr (has_awake<T>::value)       cls.SetFlag(BClass::Awake);
+        if constexpr (has_awake<T>::value) 
+        { 
+            cls.SetFlag(BClass::Awake); 
+            cls.awake = [](GameObject& owner) { owner.GetComponent<T>().Awake(owner); };
+        }
         if constexpr (has_update<T>::value)      cls.SetFlag(BClass::Update);
         if constexpr (has_fixedupdate<T>::value) cls.SetFlag(BClass::FixedUpdate);
         if constexpr (has_lateupdate<T>::value)  cls.SetFlag(BClass::LateUpdate);

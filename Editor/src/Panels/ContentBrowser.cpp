@@ -2,6 +2,9 @@
 #include <imgui.h>
 #include <imgui_internal.h>
 
+#include <Asset/TilemapAsset.h>
+#include <Asset/SpriteAtlasAsset.h>
+
 using namespace BoonEditor;
 namespace fs = std::filesystem;
 
@@ -447,10 +450,27 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
 
         ImGui::EndTable();
 
-        if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+        if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) && ImGui::IsWindowHovered())
         {
             m_pSelectedAsset->Set(0u);
         }
+    }
+
+    if (ImGui::BeginPopupContextItem("addasset"))
+    {
+        if (ImGui::MenuItem("New folder"))
+        {
+            std::filesystem::create_directory(folder->fullPath + "/new_folder");
+        }
+        if (ImGui::MenuItem("New sprite atlas"))
+        {
+            AssetImporterRegistry::Get().Export<SpriteAtlasAsset>(folder->fullPath + "/new_sprite.bsa", 0u);
+        }
+        if (ImGui::MenuItem("New tilemap"))
+        {
+            AssetImporterRegistry::Get().Export<TilemapAsset>(folder->fullPath + "/new_tilemap.btm", 0u);
+        }
+        ImGui::EndPopup();
     }
 
     ImGui::EndChild();

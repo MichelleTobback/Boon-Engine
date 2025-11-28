@@ -1,6 +1,10 @@
 #pragma once
 #include <Core/AppState.h>
+
 #include <Event/Event.h>
+
+#include <Networking/NetworkSettings.h>
+#include <Networking/NetPacket.h>
 
 #include <memory>
 
@@ -10,6 +14,7 @@ namespace Boon
 
 	class Camera;
 	class TransformComponent;
+	class NetConnection;
 }
 
 using namespace Boon;
@@ -32,6 +37,12 @@ namespace Sandbox
 		virtual void OnExit() override;
 
 	private:
+		void StartNetwork();
+		void StopNetwork();
+		void OnConnected(NetConnection* pConnection);
+		void OnDisconnected(NetConnection* pConnection);
+		void OnPacketReceived(NetConnection* pConnection, NetPacket& packet);
+
 		void OnRender();
 		std::unique_ptr<SceneRenderer> m_pRenderer;
 
@@ -40,5 +51,8 @@ namespace Sandbox
 
 		EventListenerID m_WindowResizeEvent;
 		EventListenerID m_SceneChangedEvent;
+		EventListenerID m_BindNetSceneEvent;
+
+		Boon::NetworkSettings m_NetworkSettings;
 	};
 }

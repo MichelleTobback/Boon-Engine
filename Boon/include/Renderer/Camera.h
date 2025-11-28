@@ -23,7 +23,7 @@ namespace Boon
 
 		void SetProjectionType(ProjectionType type);
 		void SetPerspective(float fov = 90.f, float near = 0.1f, float far = 10.0f);
-		void SetOrthographic(float size, float aspectRatio, float near = 0.1, float far = 1.f);
+		void SetOrthographic(float size, float aspectRatio, float near = 0.1, float far = 10.f);
 		void SetAspectRatio(float aspectRatio);
 		void SetAspectRatio(float width, float height);
 		void SetSize(float size);

@@ -1,6 +1,7 @@
 ﻿#include "Renderer/Tilemap.h"
 #include "Renderer/Renderer.h"
 #include "Renderer/VertexData.h"
+#include "Core/Random.h"
 #include <glm/glm.hpp>
 
 namespace Boon
@@ -223,12 +224,6 @@ namespace Boon
 
                 const SpriteFrame& f = atlas->GetSpriteFrame(tileId);
 
-                // Convert UV size → pixel size → world size
-                //float tilePixelW = f.Size.x * texture->GetWidth();
-                //float tilePixelH = f.Size.y * texture->GetHeight();
-                //float width = tilePixelW / ppu * m_UnitSize;
-                //float height = tilePixelH / ppu * m_UnitSize;
-
                 float width = m_UnitSize;
                 float height = m_UnitSize;
 
@@ -240,15 +235,28 @@ namespace Boon
                 float cx = worldX + width * 0.5f;
                 float cy = worldY + height * 0.5f;
 
-                glm::vec3 p0 = { cx - width * 0.5f, cy - height * 0.5f, 0 };
-                glm::vec3 p1 = { cx + width * 0.5f, cy - height * 0.5f, 0 };
-                glm::vec3 p2 = { cx + width * 0.5f, cy + height * 0.5f, 0 };
-                glm::vec3 p3 = { cx - width * 0.5f, cy + height * 0.5f, 0 };
+                float depth = -0.01f;
+                glm::vec3 p0 = { cx - width * 0.5f, cy - height * 0.5f, depth };
+                glm::vec3 p1 = { cx + width * 0.5f, cy - height * 0.5f, depth };
+                glm::vec3 p2 = { cx + width * 0.5f, cy + height * 0.5f, depth };
+                glm::vec3 p3 = { cx - width * 0.5f, cy + height * 0.5f, depth };
 
-                glm::vec2 uv0 = f.UV;
-                glm::vec2 uv1 = { f.UV.x + f.Size.x, f.UV.y };
-                glm::vec2 uv2 = { f.UV.x + f.Size.x, f.UV.y + f.Size.y };
-                glm::vec2 uv3 = { f.UV.x,            f.UV.y + f.Size.y };
+                // Half-texel padding
+                float epsilon = 0.0005f;
+                float texelX = epsilon;
+                float texelY = epsilon;
+                //float texelX = 1.f / texture->GetWidth();
+                //float texelY = 1.f / texture->GetHeight();
+                
+                glm::vec2 uv0 = f.UV + glm::vec2(texelX, texelY);
+                glm::vec2 uv1 = f.UV + glm::vec2(f.Size.x - texelX, texelY);
+                glm::vec2 uv2 = f.UV + glm::vec2(f.Size.x - texelX, f.Size.y - texelY);
+                glm::vec2 uv3 = f.UV + glm::vec2(texelX, f.Size.y - texelY);
+
+                //glm::vec2 uv0 = f.UV;
+                //glm::vec2 uv1 = { f.UV.x + f.Size.x, f.UV.y };
+                //glm::vec2 uv2 = { f.UV.x + f.Size.x, f.UV.y + f.Size.y };
+                //glm::vec2 uv3 = { f.UV.x,            f.UV.y + f.Size.y };
 
                 glm::vec4 color = { 1,1,1,1 };
 

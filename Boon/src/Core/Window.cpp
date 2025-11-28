@@ -51,6 +51,8 @@ namespace Boon
 			m_pWindow = glfwCreateWindow(static_cast<int>(m_Desc.width), static_cast<int>(m_Desc.height), m_Desc.name.c_str(), nullptr, nullptr);
 			glfwMakeContextCurrent(m_pWindow);
 
+			glfwSwapInterval(1);
+
 			glfwSetWindowUserPointer(m_pWindow, this);
 
 			glfwSetFramebufferSizeCallback(m_pWindow, [](GLFWwindow* win, int w, int h)

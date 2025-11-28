@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+#include "Core/Delegate.h"
 
 #include <unordered_map>
 #include <memory>
@@ -29,9 +30,12 @@ namespace Boon
         void Update();
         void FixedUpdate();
 
+        inline void BindOnSceneChanged(const std::function<void(Scene&)>& fn) { m_OnSceneChanged += fn; }
+
     private:
 
         SceneID m_ActiveScene = UUID::Null;
         std::unordered_map<SceneID, std::unique_ptr<Scene>> m_Scenes;
+        Delegate<void(Scene&)> m_OnSceneChanged{};
     };
 }

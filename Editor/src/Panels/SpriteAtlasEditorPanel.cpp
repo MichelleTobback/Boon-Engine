@@ -14,15 +14,21 @@
 
 namespace BoonEditor
 {
-	SpriteAtlasEditorPanel::SpriteAtlasEditorPanel(const std::string& name, DragDropRouter* pRouter, AssetRef<SpriteAtlasAsset> asset)
-		: EditorPanel(name, pRouter), m_Asset(asset)
+	SpriteAtlasEditorPanel::SpriteAtlasEditorPanel(const std::string& name, DragDropRouter* pRouter)
+		: AssetEditor(name, pRouter){ }
+
+	void SpriteAtlasEditorPanel::BuildPreviewScene(Scene& scene)
 	{
-		m_pScene = &ServiceLocator::Get<SceneManager>().CreateScene(name);
-		m_pScene->Instantiate().AddComponent<TextureRendererComponent>().Texture = m_Asset->GetInstance()->GetTexture();
+		scene.Instantiate().AddComponent<TextureRendererComponent>().Texture = m_Asset->GetInstance()->GetTexture();
 	}
+
+
 	void SpriteAtlasEditorPanel::Update()
 	{
 		if (!m_Asset.IsValid())
+			return;
+
+		if (!m_Asset->GetInstance()->GetTexture().IsValid())
 			return;
 
 		Input& input = ServiceLocator::Get<Input>();
@@ -35,8 +41,8 @@ namespace BoonEditor
 		// ------------------------------------------------------------
 		// Mouse inside viewport?
 		// ------------------------------------------------------------
-		glm::vec2 mp = m_pViewport->GetMousePosition();
-		glm::vec2 vp = m_pViewport->GetSize();
+		glm::vec2 mp = GetViewport()->GetMousePosition();
+		glm::vec2 vp = GetViewport()->GetSize();
 
 		//if (mp.x < 0 || mp.y < 0 || mp.x > vp.x || mp.y > vp.y)
 		//	return;
@@ -202,14 +208,7 @@ namespace BoonEditor
 			fn();
 		}
 	}
-	void SpriteAtlasEditorPanel::OnRenderUI()
-	{
-		if (!m_Asset.IsValid())
-			return;
 
-		RenderToolbar();
-		RenderMainArea();
-	}
 	void SpriteAtlasEditorPanel::RenderToolbar()
 	{
         std::shared_ptr<SpriteAtlas> atlas = m_Asset->GetInstance();
@@ -229,6 +228,15 @@ namespace BoonEditor
     {
         std::shared_ptr<SpriteAtlas> atlas = m_Asset->GetInstance();
 
+		AssetHandle tex = atlas->GetTexture();
+		if (UI::AssetRef("texture", tex, AssetType::Texture))
+		{
+			atlas->SetTexture(AssetRef<Texture2DAsset>(tex));
+		}
+
+		if (!atlas->GetTexture().IsValid())
+			return;
+
         // Original data (from atlas)
         auto& entries = atlas->GetFrameEntries();
 
@@ -238,11 +246,15 @@ namespace BoonEditor
         std::vector<FrameEntry> shadow = entries;
 
         bool uiChanged = UI::List<FrameEntry>("Frames", shadow, m_SelectedSprite,
-            [&](const std::string& label, FrameEntry& entry) -> bool
-            {
-                bool localChanged = false;
+			[&](const std::string& label, FrameEntry& entry) -> bool
+			{
+				bool localChanged = false;
 
-                ImGui::Text("Stable ID: %d", entry.stableId);
+				ImGui::Image(atlas->GetTexture()->GetInstance()->GetRendererID(), ImVec2(20.f, 20.f), { entry.frame.UV.x, entry.frame.UV.y }, {entry.frame.Size.x, entry.frame.Size.y});
+
+				ImGui::SameLine();
+
+				ImGui::Text("Stable ID: %d", entry.stableId);
 
                 return localChanged;
             }
@@ -362,33 +374,9 @@ namespace BoonEditor
 		}
     }
 
-	//
-// ──────────────────────────────────────────
-//   SCREEN → WORLD
-// ──────────────────────────────────────────
-//
-	glm::vec3 SpriteAtlasEditorPanel::ScreenToWorld(const glm::vec2& mousePos)
-	{
-		float vw = m_pViewport->GetSize().x;
-		float vh = m_pViewport->GetSize().y;
-
-		glm::vec2 ndc;
-		ndc.x = (mousePos.x / vw) * 2.0f - 1.f;
-		ndc.y = (mousePos.y / vh) * 2.0f - 1.f;
-
-		glm::vec4 clip = glm::vec4(ndc, 0.0f, 1.0f);
-
-		glm::mat4 view = glm::inverse(m_pViewport->GetCamera().GetTransform().GetWorld());
-		glm::mat4 proj = m_pViewport->GetCamera().GetCamera().GetProjection();
-
-		glm::mat4 invVP = glm::inverse(proj * view);
-		glm::vec4 world = invVP * clip;
-		return glm::vec3(world) / world.w;
-	}
-
 	glm::vec2 SpriteAtlasEditorPanel::CameraWorldToAtlas(const glm::vec3& world)
 	{
-		glm::mat4 cam = m_pViewport->GetCamera().GetTransform().GetWorld();
+		glm::mat4 cam = GetViewport()->GetCamera().GetTransform().GetWorld();
 		glm::mat4 invCam = glm::inverse(cam);
 
 		glm::vec4 local = invCam * glm::vec4(world, 1.0f);

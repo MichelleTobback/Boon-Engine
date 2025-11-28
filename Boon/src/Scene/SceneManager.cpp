@@ -58,6 +58,8 @@ namespace Boon
         EventBus& eventBus = ServiceLocator::Get<EventBus>();
         eventBus.Post(SceneChangedEvent(id));
 
+        m_OnSceneChanged.Invoke(GetActiveScene());
+
         if (setActive && HasActiveScene())
             GetActiveScene().Awake();
     }

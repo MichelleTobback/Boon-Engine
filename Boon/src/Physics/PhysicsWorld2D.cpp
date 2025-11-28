@@ -34,40 +34,7 @@ void Boon::PhysicsWorld2D::Begin(Scene* pScene)
 	for (auto e : view)
 	{
 		GameObject gameObject( e, pScene);
-		auto& transform = gameObject.GetComponent<TransformComponent>();
-		auto& rb2d = gameObject.GetComponent<Rigidbody2D>();
-
-		b2BodyDef bodyDef = b2DefaultBodyDef();
-		bodyDef.type = Rigidbody2DTypeToBox2DBody((Rigidbody2D::BodyType)rb2d.Type);
-		bodyDef.position = { transform.GetLocalPosition().x, transform.GetLocalPosition().y };
-		bodyDef.rotation = b2MakeRot(glm::radians(transform.GetWorldRotation().z));
-		bodyDef.userData = reinterpret_cast<void*>(static_cast<uintptr_t>(e));
-		bodyDef.gravityScale = rb2d.GravityScale;
-		rb2d.RuntimeBody = b2CreateBody(m_PhysicsWorldId, &bodyDef);
-
-		if (gameObject.HasComponent<BoxCollider2D>())
-		{
-			auto& bc2d = gameObject.GetComponent<BoxCollider2D>();
-
-			b2ShapeDef shapeDef = b2DefaultShapeDef();
-			shapeDef.density = bc2d.Density;
-			shapeDef.isSensor = bc2d.IsTrigger;
-			shapeDef.enableSensorEvents = true;
-
-			// Set surface material properties
-			shapeDef.material.friction = bc2d.Friction;
-			shapeDef.material.restitution = bc2d.Restitution;
-
-			// --- Create the polygon (Box2D uses half extents)
-			glm::vec3 scale = transform.GetWorldScale();
-			b2Polygon box = b2MakeBox(
-				bc2d.Size.x * scale.x * 0.5f,
-				bc2d.Size.y * scale.y * 0.5f
-			);
-
-			// --- Attach the shape
-			b2CreatePolygonShape(rb2d.RuntimeBody, &shapeDef, &box);
-		}
+		SpawnRigidbody(&gameObject);
 	}
 }
 
@@ -85,12 +52,14 @@ void Boon::PhysicsWorld2D::Step(Scene* pScene)
 	if (!b2World_IsValid(m_PhysicsWorldId))
 		return;
 
-	pScene->ForeachGameObjectWith<Rigidbody2D, TransformComponent>([](GameObject e)
+	pScene->ForeachGameObjectWith<Rigidbody2D, TransformComponent>([this](GameObject e)
 		{
 			Rigidbody2D& rb = e.GetComponent<Rigidbody2D>();
 			auto& transform = e.GetTransform();
 			if (!b2Body_IsValid(rb.RuntimeBody))
-				return;
+			{
+				SpawnRigidbody(&e);
+			}
 
 			if ((Rigidbody2D::BodyType)rb.Type == Rigidbody2D::BodyType::Kinematic)
 			{
@@ -121,6 +90,9 @@ void Boon::PhysicsWorld2D::Step(Scene* pScene)
 		{
 			Rigidbody2D& rb = e.GetComponent<Rigidbody2D>();
 			auto& transform = e.GetTransform();
+
+			if (!b2Body_IsValid(rb.RuntimeBody))
+				return;
 
 			if ((Rigidbody2D::BodyType)rb.Type != Rigidbody2D::BodyType::Dynamic)
 				return;
@@ -205,5 +177,43 @@ void Boon::PhysicsWorld2D::HandleEvents(Scene* pScene)
 			pScene->OnEndOverlap(objA, objB);
 			pScene->OnEndOverlap(objB, objA);
 		}
+	}
+}
+
+void Boon::PhysicsWorld2D::SpawnRigidbody(GameObject* obj)
+{
+	auto& transform = obj->GetComponent<TransformComponent>();
+	auto& rb2d = obj->GetComponent<Rigidbody2D>();
+
+	b2BodyDef bodyDef = b2DefaultBodyDef();
+	bodyDef.type = Rigidbody2DTypeToBox2DBody((Rigidbody2D::BodyType)rb2d.Type);
+	bodyDef.position = { transform.GetLocalPosition().x, transform.GetLocalPosition().y };
+	bodyDef.rotation = b2MakeRot(glm::radians(transform.GetWorldRotation().z));
+	bodyDef.userData = reinterpret_cast<void*>(static_cast<uintptr_t>((GameObjectID)*obj));
+	bodyDef.gravityScale = rb2d.GravityScale;
+	rb2d.RuntimeBody = b2CreateBody(m_PhysicsWorldId, &bodyDef);
+
+	if (obj->HasComponent<BoxCollider2D>())
+	{
+		auto& bc2d = obj->GetComponent<BoxCollider2D>();
+
+		b2ShapeDef shapeDef = b2DefaultShapeDef();
+		shapeDef.density = bc2d.Density;
+		shapeDef.isSensor = bc2d.IsTrigger;
+		shapeDef.enableSensorEvents = true;
+
+		// Set surface material properties
+		shapeDef.material.friction = bc2d.Friction;
+		shapeDef.material.restitution = bc2d.Restitution;
+
+		// --- Create the polygon (Box2D uses half extents)
+		glm::vec3 scale = transform.GetWorldScale();
+		b2Polygon box = b2MakeBox(
+			bc2d.Size.x * scale.x * 0.5f,
+			bc2d.Size.y * scale.y * 0.5f
+		);
+
+		// --- Attach the shape
+		b2CreatePolygonShape(rb2d.RuntimeBody, &shapeDef, &box);
 	}
 }

@@ -1,0 +1,361 @@
+{
+    "objects": [
+        {
+            "components": {
+                "NameComponent": {
+                    "Name": "GameObject",
+                    "id": 3574370709
+                },
+                "TilemapRendererComponent": {
+                    "id": 3821741613,
+                    "tilemap": 7187817507785714785
+                },
+                "TransformComponent": {
+                    "id": 4084754326,
+                    "m_LocalEuler": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "m_LocalPosition": [
+                        -120.0,
+                        -50.0,
+                        0.0
+                    ],
+                    "m_LocalScale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                },
+                "scene component": {
+                    "children": [],
+                    "id": 0,
+                    "parent": 4294967295
+                }
+            },
+            "id": 4,
+            "uuid": 16664073017632794174
+        },
+        {
+            "components": {
+                "BoxCollider2D": {
+                    "Density": 1.0,
+                    "Friction": 0.0,
+                    "IsTrigger": true,
+                    "Restitution": 0.0,
+                    "Size": [
+                        1.0,
+                        1.0
+                    ],
+                    "id": 3798560676
+                },
+                "NameComponent": {
+                    "Name": "Trigger",
+                    "id": 3574370709
+                },
+                "Rigidbody2D": {
+                    "FixedRotation": false,
+                    "GravityScale": 1.0,
+                    "Type": 0,
+                    "id": 3976706142
+                },
+                "TransformComponent": {
+                    "id": 4084754326,
+                    "m_LocalEuler": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "m_LocalPosition": [
+                        -1.0,
+                        0.0,
+                        0.0
+                    ],
+                    "m_LocalScale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                },
+                "scene component": {
+                    "children": [],
+                    "id": 0,
+                    "parent": 4294967295
+                }
+            },
+            "id": 3,
+            "uuid": 12765693397677876134
+        },
+        {
+            "components": {
+                "BoxCollider2D": {
+                    "Density": 1.0,
+                    "Friction": 0.0,
+                    "IsTrigger": false,
+                    "Restitution": 0.0,
+                    "Size": [
+                        10.0,
+                        0.20000000298023224
+                    ],
+                    "id": 3798560676
+                },
+                "NameComponent": {
+                    "Name": "Floor",
+                    "id": 3574370709
+                },
+                "Rigidbody2D": {
+                    "FixedRotation": false,
+                    "GravityScale": 1.0,
+                    "Type": 0,
+                    "id": 3976706142
+                },
+                "TransformComponent": {
+                    "id": 4084754326,
+                    "m_LocalEuler": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "m_LocalPosition": [
+                        0.0,
+                        -1.0,
+                        0.0
+                    ],
+                    "m_LocalScale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                },
+                "scene component": {
+                    "children": [],
+                    "id": 0,
+                    "parent": 4294967295
+                }
+            },
+            "id": 2,
+            "uuid": 6801515935491839544
+        },
+        {
+            "components": {
+                "BoxCollider2D": {
+                    "Density": 1.0,
+                    "Friction": 0.0,
+                    "IsTrigger": false,
+                    "Restitution": 0.0,
+                    "Size": [
+                        0.800000011920929,
+                        1.0
+                    ],
+                    "id": 3798560676
+                },
+                "NameComponent": {
+                    "Name": "Player",
+                    "id": 3574370709
+                },
+                "NetIdentity": {
+                    "id": 3110678554
+                },
+                "PlayerController": {
+                    "id": 2703934440,
+                    "m_JumpForce": 5.0,
+                    "m_MovementSpeed": 2.0
+                },
+                "Rigidbody2D": {
+                    "FixedRotation": true,
+                    "GravityScale": 0.0,
+                    "Type": 1,
+                    "id": 3976706142
+                },
+                "SpriteAnimatorComponent": {
+                    "Clip": 0,
+                    "id": 2068403180,
+                    "pRenderer": {
+                        "object": 1
+                    }
+                },
+                "SpriteRendererComponent": {
+                    "Color": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "Sprite": 0,
+                    "SpriteAtlasHandle": 7604942096318224108,
+                    "Tiling": 1.0,
+                    "id": 823339222
+                },
+                "TransformComponent": {
+                    "id": 4084754326,
+                    "m_LocalEuler": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "m_LocalPosition": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "m_LocalScale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                },
+                "scene component": {
+                    "children": [],
+                    "id": 0,
+                    "parent": 4294967295
+                }
+            },
+            "id": 1,
+            "uuid": 2
+        },
+        {
+            "components": {
+                "CameraComponent": {
+                    "Active": true,
+                    "Camera": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        32,
+                        65,
+                        139,
+                        243,
+                        202,
+                        63,
+                        204,
+                        204,
+                        204,
+                        204,
+                        205,
+                        204,
+                        204,
+                        61,
+                        0,
+                        0,
+                        32,
+                        65,
+                        1,
+                        0,
+                        0,
+                        0
+                    ],
+                    "id": 1587011005
+                },
+                "CameraController": {
+                    "id": 3925027918,
+                    "m_Deadzone": [
+                        2.0,
+                        1.0
+                    ],
+                    "m_FollowSpeed": 1.2000000476837158,
+                    "m_Target": {
+                        "object": 1
+                    }
+                },
+                "NameComponent": {
+                    "Name": "Camera",
+                    "id": 3574370709
+                },
+                "TransformComponent": {
+                    "id": 4084754326,
+                    "m_LocalEuler": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "m_LocalPosition": [
+                        0.0,
+                        0.0,
+                        1.0
+                    ],
+                    "m_LocalScale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                },
+                "scene component": {
+                    "children": [],
+                    "id": 0,
+                    "parent": 4294967295
+                }
+            },
+            "id": 0,
+            "uuid": 798232218181183753
+        }
+    ],
+    "scene": "Game"
+}

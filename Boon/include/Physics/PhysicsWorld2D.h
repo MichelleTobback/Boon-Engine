@@ -28,6 +28,7 @@ namespace Boon
 		bool Raycast(const Ray2D& ray, HitResult2D& result) const;
 
 	private:
+		void SpawnRigidbody(class GameObject* obj);
 		void HandleEvents(Scene* pScene);
 
 		b2WorldId m_PhysicsWorldId = b2_nullWorldId;

@@ -19,15 +19,17 @@ namespace Boon
         static void Init()
         {
             if constexpr (has_awake<T>::value)
+            {
                 awake = [](Scene& scene)
-                {
-                    auto view = scene.GetRegistry().view<T>();
-                    for (auto entity : view)
                     {
-                        auto& comp = scene.GetRegistry().get<T>(entity);
-                        comp.Awake(GameObject(entity, &scene));
-                    }
-                };
+                        auto view = scene.GetRegistry().view<T>();
+                        for (auto entity : view)
+                        {
+                            auto& comp = scene.GetRegistry().get<T>(entity);
+                            comp.Awake(GameObject(entity, &scene));
+                        }
+                    };
+            }
 
             if constexpr (has_update<T>::value)
                 update = [](Scene& scene)
@@ -134,6 +136,16 @@ namespace Boon
             cb.onEndOverlap = ECSLifecycleCallbacks<T>::onEndOverlap;
 
             map.emplace(typeid(T), cb);
+        }
+
+        template<typename T>
+        void AwakeComponent(GameObject owner)
+        {
+            auto it = map.find(typeid(T));
+            if (it == map.end())
+                return;
+
+            it->second.awakeComponent(owner);
         }
 
         void AwakeAll() { for (auto& [_, cb] : map) if (cb.awake)      cb.awake(scene); }

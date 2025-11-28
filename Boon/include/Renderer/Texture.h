@@ -15,12 +15,20 @@ namespace Boon
 		RGBA32F
 	};
 
+	enum class ImageFilter
+	{
+		Nearest,
+		Linear
+	};
+
 	struct TextureDescriptor
 	{
 		uint32_t Width = 1;
 		uint32_t Height = 1;
 		ImageFormat Format = ImageFormat::RGBA8;
-		bool GenerateMips = true;
+		ImageFilter MinFilter = ImageFilter::Nearest;
+		ImageFilter MagFilter = ImageFilter::Nearest;
+		bool GenerateMips = false;
 	};
 
 	class Texture

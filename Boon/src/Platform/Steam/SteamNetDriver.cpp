@@ -54,6 +54,8 @@ namespace Boon
         // Start server
         if (mode == ENetDriverMode::DedicatedServer || mode == ENetDriverMode::ListenServer)
         {
+            m_LocalConnectionId = 1;
+
             SteamNetworkingIPAddr addr;
             addr.Clear();
             addr.m_port = m_Settings.Port;
@@ -148,7 +150,7 @@ namespace Boon
             return false;
         }
 
-        std::cout << "Connecting to server...\n";
+        std::cout << "Connecting to server at port" << m_Settings.Port << " ...\n";
         return true;
     }
 
@@ -177,24 +179,46 @@ namespace Boon
                 ISteamNetworkingMessage* msg = msgs[i];
                 HSteamNetConnection hConn = msg->m_conn;
 
-                if (!m_ReverseLookup.count(hConn))
-                {
-                    std::cerr << "Message from unknown connection!\n";
-                    msg->Release();
-                    continue;
-                }
-
-                uint64_t connId = m_ReverseLookup[hConn];
-                NetConnection* conn = m_Connections[connId].conn.get();
-
                 // Wrap in NetPacket
                 NetPacket pkt((uint8_t*)msg->m_pData, msg->m_cbSize);
 
-                if (m_Scene)
-                    m_Scene->ProcessPacket(conn, pkt);
+                if (pkt.GetType() == ENetPacketType::AssignID)
+                {
+                    uint64_t connId = pkt.Read<uint64_t>();
 
-                if (m_OnPacket)
-                    m_OnPacket(conn, pkt);
+                    DriverConnection dc;
+                    dc.hConn = hConn;
+                    dc.conn = std::make_unique<NetConnection>(connId, this);
+                    dc.conn->SetState(ENetConnectionState::Connected);
+
+                    m_LocalConnectionId = connId;
+
+                    m_Connections[connId] = std::move(dc);
+                    m_ReverseLookup[hConn] = connId;
+
+                    std::cout << "Client " << connId << " Connected to server\n";
+
+                    if (m_OnConnected)
+                        m_OnConnected(m_Connections[connId].conn.get());
+                }
+                else
+                {
+                    if (!m_ReverseLookup.count(hConn))
+                    {
+                        std::cerr << "Message from unknown connection!\n";
+                        msg->Release();
+                        continue;
+                    }
+
+                    uint64_t connId = m_ReverseLookup[hConn];
+                    NetConnection* conn = m_Connections[connId].conn.get();
+
+                    if (m_Scene)
+                        m_Scene->ProcessPacket(conn, pkt);
+
+                    if (m_OnPacket)
+                        m_OnPacket(conn, pkt);
+                }
 
                 msg->Release();
             }
@@ -216,6 +240,9 @@ namespace Boon
         // Ensure messages go through the poll group (clients need this!)
         m_Interface->SetConnectionPollGroup(hConn, m_PollGroup);
 
+        if (!IsServer())
+            return;
+
         uint64_t connId = ++m_LocalConnectionId;
 
         DriverConnection dc;
@@ -226,10 +253,11 @@ namespace Boon
         m_Connections[connId] = std::move(dc);
         m_ReverseLookup[hConn] = connId;
 
-        if (IsServer())
-            std::cout << "Client connected: " << connId << "\n";
-        else
-            std::cout << "Connected to server\n";
+        std::cout << "Client connected: " << connId << "\n";
+
+        NetPacket assignIdPkt{ ENetPacketType::AssignID };
+        assignIdPkt.Write(connId);
+        Send(hConn, assignIdPkt);
 
         if (m_OnConnected)
             m_OnConnected(m_Connections[connId].conn.get());
@@ -255,6 +283,17 @@ namespace Boon
             std::cout << "Disconnected from server " << "\n";
 
         m_Interface->CloseConnection(hConn, 0, nullptr, false);
+    }
+
+    void SteamNetDriver::Send(HSteamNetConnection hConn, NetPacket& pkt, bool reliable)
+    {
+        m_Interface->SendMessageToConnection(
+            hConn,
+            pkt.RawData(),
+            pkt.RawSize(),
+            reliable ? k_nSteamNetworkingSend_Reliable : k_nSteamNetworkingSend_Unreliable,
+            nullptr
+        );
     }
 
     // -------------------------------------------------------------------------
@@ -310,13 +349,7 @@ namespace Boon
         if (it == m_Connections.end())
             return;
 
-        m_Interface->SendMessageToConnection(
-            it->second.hConn,
-            pkt.RawData(),
-            pkt.RawSize(),
-            reliable ? k_nSteamNetworkingSend_Reliable : k_nSteamNetworkingSend_Unreliable,
-            nullptr
-        );
+        Send(it->second.hConn, pkt, reliable);
     }
 
     void SteamNetDriver::Broadcast(NetPacket& pkt, bool reliable)
@@ -338,7 +371,7 @@ namespace Boon
         if (!IsClient())
             return;
 
-        auto it = m_Connections.find(1);
+        auto it = m_Connections.find(m_LocalConnectionId);
         if (it == m_Connections.end())
             return;
 

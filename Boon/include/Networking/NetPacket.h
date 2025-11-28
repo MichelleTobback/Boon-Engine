@@ -13,19 +13,20 @@ namespace Boon
         None = 0,
 
         // Scene / Object Management
-        Spawn = 1,
-        Despawn = 2,
-        Component = 3,
-        LoadScene = 4,
+        Spawn,
+        Despawn,
+        Component,
+        LoadScene,
 
         // Data Flow
-        Replication = 5,
-        RPC = 6,
+        Replication,
+        RPC,
 
         // Connection / Handshake
-        Handshake = 7,
-        Ping = 8,
-        Pong = 9
+        Handshake,
+        Ping,
+        Pong,
+        AssignID
     };
 
     // -------------------------------------------------------------

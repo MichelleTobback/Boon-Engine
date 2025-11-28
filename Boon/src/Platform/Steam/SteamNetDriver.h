@@ -50,7 +50,7 @@ namespace Boon
         inline virtual bool IsServer() const override { return m_Settings.NetMode == ENetDriverMode::DedicatedServer || m_Settings.NetMode == ENetDriverMode::ListenServer; }
 
         ENetDriverMode GetMode() const override { return m_Settings.NetMode; }
-        uint64_t GetLocalConnectionId() const override { return m_LocalConnectionId; }
+        uint64_t GetLocalConnectionId() const override { return IsServer() ? 1 : m_LocalConnectionId; }
 
         const NetworkSettings& GetSettings() const { return m_Settings; }
 
@@ -110,6 +110,7 @@ namespace Boon
         void OnConnected(HSteamNetConnection hConn);
         void OnDisconnected(HSteamNetConnection hConn);
 
+        void Send(HSteamNetConnection hConn, NetPacket& pkt, bool reliable = true);
         void UpdateConnections();
     };
 }

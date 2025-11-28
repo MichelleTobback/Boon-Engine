@@ -7,7 +7,7 @@ using namespace BoonEditor;
 using namespace Boon;
 
 BoonEditor::EditorCamera::EditorCamera(float width, float height)
-    : EditorCamera(2.f, width / height, 0.1f, 1.f){}
+    : EditorCamera(2.f, width / height, 0.1f, 10.f){}
 
 BoonEditor::EditorCamera::EditorCamera(float size, float aspectRatio, float near, float far)
     : m_OrthoCamera{ size, aspectRatio, near, far }, m_PerspCamera{}

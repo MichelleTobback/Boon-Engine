@@ -4,6 +4,7 @@
 #include "Core/Assert.h"
 #include "Component/UUIDComponent.h"
 #include "Component/TransformComponent.h"
+#include "Reflection/BClass.h"
 
 #include <memory>
 
@@ -67,9 +68,14 @@ namespace Boon
 
 			T& comp = reg.emplace<T>(m_Handle, std::forward<TArgs>(args)...);
 
-			//const BClass* cls = BClassRegistry::Get().Find<T>();
-			//if (cls)
-			//	m_pScene->m_OnComponentAdded.Invoke(*this, cls);
+			const BClass* cls = BClassRegistry::Get().Find<T>();
+			if (cls)
+			{
+				if (m_pScene->m_Running && cls->awake)
+					cls->awake(*this);
+
+				m_pScene->m_OnComponentAdded.Invoke(*this, cls);
+			}
 
 			return comp;
 		}
@@ -126,6 +132,20 @@ namespace Boon
 				return nullptr;
 
 			return parent.TryGetComponentInParent<T>();
+		}
+
+		template <typename T>
+		GameObject TryGetParentWithComponent() const
+		{
+			if (HasComponent<T>())
+				return *this;
+
+			GameObject parent = GetParent();
+
+			if (!parent.IsValid())
+				return GameObject();
+
+			return parent.TryGetParentWithComponent<T>();
 		}
 
 		void Destroy();

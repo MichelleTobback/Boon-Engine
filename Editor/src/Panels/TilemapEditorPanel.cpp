@@ -17,24 +17,14 @@
 using namespace BoonEditor;
 using namespace Boon;
 
-TilemapEditorPanel::TilemapEditorPanel(const std::string& name,
-    DragDropRouter* pRouter, AssetRef<TilemapAsset> asset)
-    : EditorPanel(name, pRouter), m_Asset(asset)
-{
-    m_pScene = &ServiceLocator::Get<SceneManager>().CreateScene(name);
-    m_pScene->Instantiate().AddComponent<TilemapRendererComponent>().tilemap = m_Asset;
-}
+TilemapEditorPanel::TilemapEditorPanel(const std::string& name, DragDropRouter* pRouter)
+    : AssetEditor<TilemapAsset>(name, pRouter) {}
 
 void TilemapEditorPanel::Update() {}
 
-void TilemapEditorPanel::OnRenderUI()
+void TilemapEditorPanel::BuildPreviewScene(Scene& scene)
 {
-    if (!m_Asset.IsValid()) { ImGui::Text("Invalid TilemapAsset"); return; }
-
-    ImGui::Begin(m_Name.c_str());
-    RenderToolbar();
-    RenderMainArea();
-    ImGui::End();
+    scene.Instantiate().AddComponent<TilemapRendererComponent>().tilemap = m_Asset;
 }
 
 //
@@ -64,6 +54,13 @@ void TilemapEditorPanel::RenderToolbar()
     if (ImGui::Button("Random")) m_Mode = TileBrushMode::Random;
 
     ImGui::Separator();
+
+    auto atlasAsset = m_Asset->GetInstance()->GetAtlas();
+    AssetHandle handle = atlasAsset;
+    if (UI::AssetRef("sprite atlas", handle, AssetType::SpriteAtlas))
+    {
+        m_Asset->GetInstance()->SetAtlas(AssetRef<SpriteAtlasAsset>(handle));
+    }
 
     // Brush shape
     const char* shapes[] = { "Square", "Circle" };
@@ -152,6 +149,9 @@ void TilemapEditorPanel::RenderMainArea()
     ImVec2 panelSize = ImGui::GetContentRegionAvail();
 
     float paletteWidth = panelSize.x;
+
+    if (!m_Asset->GetInstance()->GetAtlas().IsValid() || !m_Asset->GetInstance()->GetAtlas()->GetInstance()->GetTexture().IsValid())
+        return;
 
     //ImGui::SameLine();
     ImGui::BeginChild("Palette", ImVec2(paletteWidth, panelSize.y), true);
@@ -254,8 +254,8 @@ void TilemapEditorPanel::HandlePainting()
     // ------------------------------------------------------------
     // Mouse inside viewport?
     // ------------------------------------------------------------
-    glm::vec2 mp = m_pViewport->GetMousePosition();
-    glm::vec2 vp = m_pViewport->GetSize();
+    glm::vec2 mp = GetViewport()->GetMousePosition();
+    glm::vec2 vp = GetViewport()->GetSize();
 
     if (mp.x < 0 || mp.y < 0 || mp.x > vp.x || mp.y > vp.y)
         return;
@@ -424,29 +424,4 @@ void TilemapEditorPanel::HandlePainting()
             }
         }
     }
-}
-
-
-//
-// ──────────────────────────────────────────
-//   SCREEN → WORLD
-// ──────────────────────────────────────────
-//
-glm::vec3 TilemapEditorPanel::ScreenToWorld(const glm::vec2& mousePos)
-{
-    float vw = m_pViewport->GetSize().x;
-    float vh = m_pViewport->GetSize().y;
-
-    glm::vec2 ndc;
-    ndc.x = (mousePos.x / vw) * 2.0f - 1.f;
-    ndc.y = (mousePos.y / vh) * 2.0f - 1.f;
-
-    glm::vec4 clip = glm::vec4(ndc, 0.0f, 1.0f);
-
-    glm::mat4 view = glm::inverse(m_pViewport->GetCamera().GetTransform().GetWorld());
-    glm::mat4 proj = m_pViewport->GetCamera().GetCamera().GetProjection();
-
-    glm::mat4 invVP = glm::inverse(proj * view);
-    glm::vec4 world = invVP * clip;
-    return glm::vec3(world) / world.w;
 }

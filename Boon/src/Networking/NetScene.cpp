@@ -10,6 +10,9 @@
 #include "Scene/Scene.h"
 #include "Component/UUIDComponent.h"
 
+#include "Event/EventBus.h"
+#include "Networking/Events/NetConnectionEvent.h"
+
 namespace Boon
 {
     NetScene::NetScene(Scene* scene, NetDriver* driver)
@@ -23,6 +26,15 @@ namespace Boon
             m_Scene->GetOnGameObjectDestroyed() += [this](GameObject obj) { BroadcastDespawn(obj.GetUUID()); };
             m_Scene->GetOnComponentAdded() += [this](GameObject  obj, const BClass* cls) {BroadcastComponent(obj.GetUUID(), cls->hash, true); };
             m_Scene->GetOnComponentRemoved() += [this](GameObject  obj, const BClass* cls) {BroadcastComponent(obj.GetUUID(), cls->hash, false); };
+
+            ServiceLocator::Get<EventBus>().Subscribe<NetConnectionEvent>([this](const NetConnectionEvent& e)
+                {
+                    for (auto& [obj, id] : m_DynamicOwnership)
+                    {
+                        GameObject instance = m_Scene->GetGameObject(obj);
+                        SendSpawnTo(m_Driver->GetConnection(e.ConnectionId), instance);
+                    }
+                });
         }
     }
 
@@ -44,14 +56,15 @@ namespace Boon
     {
         auto& id = gameObject.GetComponent<UUIDComponent>().Uuid;
 
-        if (!gameObject.HasComponent<NetIdentity>())
-            gameObject.AddComponent<NetIdentity>();
-
-        NetIdentity& ni = gameObject.GetComponent<NetIdentity>();
+        NetIdentity& ni = gameObject.GetOrAddComponent<NetIdentity>();
         ni.NetId = id;
         ni.Role = m_Driver->IsServer() ? ENetRole::Authority : ENetRole::SimulatedProxy;
-        ni.OwnerConnectionId = 0;
+        ni.OwnerConnectionId = m_Driver->GetLocalConnectionId();
         ni.pScene = this;
+        ni.bSpawned = true;
+        ni.m_bOwner = true;
+
+        if (ni.onNetAwake) ni.onNetAwake(gameObject, &ni);
 
         // Static objects are not added to dynamic map
     }
@@ -61,6 +74,9 @@ namespace Boon
     // -------------------------------------------------------------------------
     GameObject NetScene::RegisterDynamicGameObject(GameObject gameObject, uint64_t ownerConnection)
     {
+        if (!m_bRegisterDynamicObject)
+            return GameObject();
+
         if (m_Driver->GetMode() == ENetDriverMode::Client)
         {
             // client never registers dynamic objects
@@ -69,14 +85,13 @@ namespace Boon
 
         auto& id = gameObject.GetComponent<UUIDComponent>().Uuid;
 
-        if (!gameObject.HasComponent<NetIdentity>())
-            gameObject.AddComponent<NetIdentity>();
-
-        NetIdentity& ni = gameObject.GetComponent<NetIdentity>();
+        NetIdentity& ni = gameObject.GetOrAddComponent<NetIdentity>();
         ni.NetId = id;
-        ni.Role = ENetRole::Authority;
         ni.OwnerConnectionId = ownerConnection;
+        ni.m_bOwner = ni.OwnerConnectionId == m_Driver->GetLocalConnectionId();
+        ni.Role = ENetRole::Authority;
         ni.pScene = this;
+        if (ni.onNetAwake) ni.onNetAwake(gameObject, &ni);
 
         m_DynamicOwnership[id] = ownerConnection;
 
@@ -97,14 +112,13 @@ namespace Boon
         GameObject obj = m_Scene->Instantiate(uuid);
         obj.GetComponent<UUIDComponent>().Uuid = uuid;
 
-        if (!obj.HasComponent<NetIdentity>())
-            obj.AddComponent<NetIdentity>();
-
-        NetIdentity& ni = obj.GetComponent<NetIdentity>();
+        NetIdentity& ni = obj.GetOrAddComponent<NetIdentity>();
         ni.NetId = uuid;
-        ni.Role = ENetRole::SimulatedProxy;
         ni.OwnerConnectionId = ownerConnection;
+        ni.m_bOwner = ni.OwnerConnectionId == m_Driver->GetLocalConnectionId();
+        ni.Role = ni.m_bOwner ? ENetRole::AutonomousProxy : ENetRole::SimulatedProxy;
         ni.pScene = this;
+        if (ni.onNetAwake) ni.onNetAwake(obj, &ni);
 
         m_DynamicOwnership[uuid] = ownerConnection;
 
@@ -139,6 +153,23 @@ namespace Boon
         default:
             break;
         }
+    }
+
+    uint64_t NetScene::GetLocalConnectionID() const
+    {
+        return m_Driver->GetLocalConnectionId();
+    }
+
+
+    GameObject NetScene::InstantiateGameObject(uint64_t connectionId, UUID uuid)
+    {
+        m_bRegisterDynamicObject = false;
+        GameObject instance = m_Scene->Instantiate(uuid);
+        m_bRegisterDynamicObject = true;
+        
+        RegisterDynamicGameObject(instance, connectionId);
+
+        return instance;
     }
 
     // -------------------------------------------------------------------------
@@ -219,15 +250,21 @@ namespace Boon
     // -------------------------------------------------------------------------
     void NetScene::SendSpawnTo(NetConnection* conn, const GameObject& obj)
     {
-        const UUID& uuid = obj.GetComponent<UUIDComponent>().Uuid;
-        uint64_t owner = 0;
+        if (!m_bRegisterDynamicObject)
+            return;
 
-        if (obj.HasComponent<NetIdentity>())
-            owner = obj.GetComponent<NetIdentity>().OwnerConnectionId;
+        if (m_Driver->GetMode() == ENetDriverMode::Client)
+        {
+            return;
+        }
+
+        auto& id = obj.GetComponent<UUIDComponent>().Uuid;
+
+        const NetIdentity& ni = obj.GetComponent<NetIdentity>();
 
         NetPacket pkt(ENetPacketType::Spawn);
-        pkt.Write(uuid);
-        pkt.Write(owner);
+        pkt.Write(id);
+        pkt.Write(ni.OwnerConnectionId);
 
         m_Driver->Send(conn, pkt, true);
     }

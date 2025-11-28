@@ -2,6 +2,7 @@
 
 #include <Scene/GameObject.h>
 #include <Scene/SceneManager.h>
+#include <Scene/SceneSerializer.h>
 
 #include <Asset/Assets.h>
 
@@ -25,10 +26,21 @@
 #include <Event/WindowEvents.h>
 #include <Event/SceneEvents.h>
 
+#include <Platform/Steam/SteamNetDriver.h>
+#include <Networking/NetScene.h>
+#include <Networking/Events/NetConnectionEvent.h>
+
 #include "Reflection/BClass.h"
 #include <iostream>
 
 #include "Game/PlayerController.h"
+#include "Game/PlayerSpawn.h"
+
+#include <Asset/Importer/SceneImporter.h>
+#include <Asset/Importer/TilemapImporter.h>
+#include <Asset/Importer/SpriteAtlasImporter.h>
+#include <Asset/Importer/TextureImporter.h>
+#include <Asset/Importer/ShaderImporter.h>
 
 using namespace Boon;
 
@@ -73,6 +85,22 @@ void Sandbox::SandboxState::OnEnter()
 {
 	Window& window{ Application::Get().GetWindow() };
 
+	m_NetworkSettings.NetMode = Application::Get().GetDescriptor().netDriverMode;
+	std::shared_ptr<NetDriver> network = std::make_shared<SteamNetDriver>();
+	ServiceLocator::Register<NetDriver>(network);
+	StartNetwork();
+
+	AssetImporterRegistry& importer = AssetImporterRegistry::Get();
+	importer.RegisterImporter<Texture2DImporter>();
+	importer.RegisterImporter<ShaderImporter>();
+	importer.RegisterImporter<SpriteAtlasImporter>();
+	importer.RegisterImporter<SceneImporter>();
+	importer.RegisterImporter<TilemapImporter>();
+
+	AssetLibrary& assets = Assets::Get();
+	assets.Import<TilemapAsset>("game/Tilemap.btm");
+	assets.Import<SpriteAtlasAsset>("game/Blue_witch/B_witch_atlas_compact.bsa");
+
 	m_pRenderer = std::make_unique<SceneRenderer>(nullptr, window.GetWidth(), window.GetHeight(), true);
 
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
@@ -88,12 +116,24 @@ void Sandbox::SandboxState::OnEnter()
 			m_pRenderer->SetContext(&scene);
 		});
 
-	m_pRenderer->SetContext(&CreateScene("Scene1", 3.f, 0.f));
-	//CreateScene("Scene2", -3.f, 0.f);
+	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
+	Scene& scene = sceneManager.CreateScene("scene");
+	SceneSerializer serializer(scene);
+	serializer.Deserialize("Assets/scenes/Test.scene");
+	m_pRenderer->SetContext(&scene);
+
+	GameObject spawnerObj = scene.Instantiate();
+	spawnerObj.AddComponent<PlayerSpawn>();
+	spawnerObj.AddComponent<NetIdentity>();
+	sceneManager.SetActiveScene(scene.GetID(), true);
+
+	//m_pRenderer->SetContext(&CreateScene("Scene1", 3.f, 0.f));
 }
 
 void Sandbox::SandboxState::OnUpdate()
 {
+	ServiceLocator::Get<NetDriver>().Update();
+
 	Time& time = Boon::Time::Get();
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 
@@ -127,9 +167,66 @@ void Sandbox::SandboxState::OnUpdate()
 
 void Sandbox::SandboxState::OnExit()
 {
+	StopNetwork();
+
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	eventBus.Unsubscribe<WindowResizeEvent>(m_WindowResizeEvent);
 	eventBus.Unsubscribe<SceneChangedEvent>(m_SceneChangedEvent);
+}
+
+void Sandbox::SandboxState::StartNetwork()
+{
+	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	NetDriver& network = ServiceLocator::Get<NetDriver>();
+
+	network.Initialize(m_NetworkSettings);
+	if (!network.IsStandalone())
+	{
+		network.BindOnConnectedCallback([this](NetConnection* pConnection) {OnConnected(pConnection); });
+		network.BindOnDisconnectedCallback([this](NetConnection* pConnection) {OnDisconnected(pConnection); });
+		network.BindOnPacketCallback([this](NetConnection* pConnection, NetPacket& packet) { OnPacketReceived(pConnection, packet); });
+
+		ServiceLocator::Get<SceneManager>().BindOnSceneChanged([](Scene& scene)
+			{
+				auto& network = ServiceLocator::Get<NetDriver>();
+				auto pScene{ std::make_shared<NetScene>(&scene, &network) };
+				network.BindScene(pScene);
+			});
+
+		if (network.IsClient())
+		{
+			network.Connect(m_NetworkSettings.Ip.c_str(), m_NetworkSettings.Port);
+		}
+	}
+}
+
+void Sandbox::SandboxState::StopNetwork()
+{
+	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	eventBus.Unsubscribe<SceneChangedEvent>(m_BindNetSceneEvent);
+	NetDriver& network = ServiceLocator::Get<NetDriver>();
+	network.Shutdown();
+}
+
+void Sandbox::SandboxState::OnConnected(NetConnection* pConnection)
+{
+	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	eventBus.Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Connected));
+
+	std::cout << "Connected\n";
+}
+
+void Sandbox::SandboxState::OnDisconnected(NetConnection* pConnection)
+{
+	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	eventBus.Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Disconnected));
+
+	std::cout << "Disconnected\n";
+}
+
+void Sandbox::SandboxState::OnPacketReceived(NetConnection* pConnection, NetPacket& packet)
+{
+
 }
 
 void Sandbox::SandboxState::OnRender()
