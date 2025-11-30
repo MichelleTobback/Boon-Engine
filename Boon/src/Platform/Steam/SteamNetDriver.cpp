@@ -1,12 +1,13 @@
 ﻿#include "Platform/Steam/SteamNetDriver.h"
 #include "Networking/NetScene.h"
 
+#include "BoonDebug/Logger.h"
+
 #include <steam/steamnetworkingsockets.h>
 #include <steam/isteamnetworkingsockets.h>
 #include <steam/steamnetworkingtypes.h>
 
 #include <cstring>
-#include <iostream>
 
 namespace Boon
 {
@@ -37,7 +38,7 @@ namespace Boon
         SteamDatagramErrMsg err;
         if (!GameNetworkingSockets_Init(nullptr, err))
         {
-            std::cerr << "Failed to initialize GameNetworkingSockets: " << err << "\n";
+            BOON_LOG_ERROR("Failed to initialize GameNetworkingSockets: " + std::string(err));
         }
 
         m_Interface = SteamNetworkingSockets();
@@ -46,7 +47,7 @@ namespace Boon
         m_PollGroup = m_Interface->CreatePollGroup();
         if (m_PollGroup == k_HSteamNetPollGroup_Invalid)
         {
-            std::cerr << "Failed to create poll group\n";
+            BOON_LOG_ERROR("Failed to create poll group");
             return false;
         }
         ENetDriverMode mode = m_Settings.NetMode;
@@ -66,11 +67,11 @@ namespace Boon
             m_ListenSocket = m_Interface->CreateListenSocketIP(addr, 1, &opt);
             if (m_ListenSocket == k_HSteamListenSocket_Invalid)
             {
-                std::cerr << "Failed to create listen socket\n";
+                BOON_LOG_ERROR("Failed to create listen socket");
                 return false;
             }
 
-            std::cout << "Server listening on port " << addr.m_port << "\n";
+            BOON_LOG("Server listening on port " + std::to_string(addr.m_port));
         }
 
         s_Instance = this;
@@ -146,11 +147,11 @@ namespace Boon
 
         if (hConn == k_HSteamNetConnection_Invalid)
         {
-            std::cerr << "Failed to connect to server\n";
+            BOON_LOG_ERROR("Failed to connect to server");
             return false;
         }
 
-        std::cout << "Connecting to server at port" << m_Settings.Port << " ...\n";
+        BOON_LOG("Connecting to server at port " + std::to_string(m_Settings.Port) + " ...");
         return true;
     }
 
@@ -170,7 +171,7 @@ namespace Boon
 
             if (msgCount < 0)
             {
-                std::cerr << "Error in ReceiveMessagesOnPollGroup\n";
+                BOON_LOG_ERROR("Error in ReceiveMessagesOnPollGroup");
                 break;
             }
 
@@ -196,7 +197,7 @@ namespace Boon
                     m_Connections[connId] = std::move(dc);
                     m_ReverseLookup[hConn] = connId;
 
-                    std::cout << "Client " << connId << " Connected to server\n";
+                    BOON_LOG("Client " + std::to_string(connId) + " Connected to server");
 
                     if (m_OnConnected)
                         m_OnConnected(m_Connections[connId].conn.get());
@@ -205,7 +206,7 @@ namespace Boon
                 {
                     if (!m_ReverseLookup.count(hConn))
                     {
-                        std::cerr << "Message from unknown connection!\n";
+                        BOON_LOG_ERROR("Message from unknown connection!");
                         msg->Release();
                         continue;
                     }
@@ -253,7 +254,7 @@ namespace Boon
         m_Connections[connId] = std::move(dc);
         m_ReverseLookup[hConn] = connId;
 
-        std::cout << "Client connected: " << connId << "\n";
+        BOON_LOG("Client connected: " + std::to_string(connId));
 
         NetPacket assignIdPkt{ ENetPacketType::AssignID };
         assignIdPkt.Write(connId);
@@ -277,10 +278,10 @@ namespace Boon
             m_ReverseLookup.erase(hConn);
 
             if (IsServer())
-                std::cout << "Client " << id << " disconnected" << "\n";
+                BOON_LOG("Client " + std::to_string(id) + " disconnected");
         }
         if (IsClient())
-            std::cout << "Disconnected from server " << "\n";
+            BOON_LOG("Disconnected from server");
 
         m_Interface->CloseConnection(hConn, 0, nullptr, false);
     }

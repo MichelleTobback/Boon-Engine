@@ -17,6 +17,7 @@ namespace Boon
         Despawn,
         Component,
         LoadScene,
+        InitScene,
 
         // Data Flow
         Replication,

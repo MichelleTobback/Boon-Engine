@@ -13,6 +13,8 @@
 
 #include "Scene/SceneManager.h"
 
+#include "BoonDebug/Logger.h"
+
 Boon::Application* Boon::Application::s_pInstance{ nullptr };
 
 Boon::Application::Application(const AppDesc& desc)
@@ -36,6 +38,8 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 	ServiceLocator::Register(std::make_shared<EventBus>());
 	ServiceLocator::Register(std::make_shared<Input>());
 	ServiceLocator::Register(std::make_shared<SceneManager>());
+
+	BOON_INIT_LOGGER();
 
 	m_pStateMachine->PushState(std::move(pState));
 	pState = nullptr;

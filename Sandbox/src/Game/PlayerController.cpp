@@ -16,6 +16,8 @@
 #include "Reflection/BClass.h"
 #include "Game/CameraController.h"
 
+#include <Asset/Assets.h>
+
 #include <iostream>
 
 using namespace Boon;
@@ -23,6 +25,10 @@ using namespace Boon;
 void PlayerController::Awake(GameObject gameObject)
 {
     m_Owner = gameObject;
+
+    AssetLibrary& assetLib = Assets::Get();
+    AssetRef<SpriteAtlasAsset> atlas = assetLib.Import<SpriteAtlasAsset>("game/Blue_witch/B_witch_atlas_compact.bsa");
+    gameObject.GetOrAddComponent<SpriteRendererComponent>().SpriteAtlasHandle = atlas;
 
     if (gameObject.HasComponent<NetIdentity>() && !gameObject.GetComponent<NetIdentity>().IsOwner())
         return;

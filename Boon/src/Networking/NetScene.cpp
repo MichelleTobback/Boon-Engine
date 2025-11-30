@@ -13,6 +13,8 @@
 #include "Event/EventBus.h"
 #include "Networking/Events/NetConnectionEvent.h"
 
+#include "BoonDebug/Logger.h"
+
 namespace Boon
 {
     NetScene::NetScene(Scene* scene, NetDriver* driver)
@@ -29,11 +31,8 @@ namespace Boon
 
             ServiceLocator::Get<EventBus>().Subscribe<NetConnectionEvent>([this](const NetConnectionEvent& e)
                 {
-                    for (auto& [obj, id] : m_DynamicOwnership)
-                    {
-                        GameObject instance = m_Scene->GetGameObject(obj);
-                        SendSpawnTo(m_Driver->GetConnection(e.ConnectionId), instance);
-                    }
+                    NetConnection con{ e.ConnectionId, GetDriver() };
+                    InitClientScene(&con);
                 });
         }
     }
@@ -146,6 +145,8 @@ namespace Boon
             HandleComponentPacket(sender, pkt); break;
         case ENetPacketType::LoadScene:
             HandleLoadScenePacket(sender, pkt); break;
+        case ENetPacketType::InitScene:
+            HandleClientSceneInitPacket(sender, pkt); break;
         case ENetPacketType::Replication:
             m_Replication->ProcessPacket(*this, pkt, sender); break;
         case ENetPacketType::RPC:
@@ -250,9 +251,6 @@ namespace Boon
     // -------------------------------------------------------------------------
     void NetScene::SendSpawnTo(NetConnection* conn, const GameObject& obj)
     {
-        if (!m_bRegisterDynamicObject)
-            return;
-
         if (m_Driver->GetMode() == ENetDriverMode::Client)
         {
             return;
@@ -325,5 +323,51 @@ namespace Boon
         pkt.Write(sceneId);
 
         m_Driver->Broadcast(pkt, true);
+    }
+
+    void NetScene::InitClientScene(NetConnection* conn)
+    {
+        if (m_DynamicOwnership.empty())
+            return;
+
+        NetPacket pkt(ENetPacketType::InitScene);
+        pkt.Write<uint32_t>(m_DynamicOwnership.size());
+        for (auto& [obj, owner] : m_DynamicOwnership)
+        {
+            GameObject instance = m_Scene->GetGameObject(obj);
+            pkt.Write(obj);
+            pkt.Write(owner);
+
+            std::vector<BClassID> comps;
+
+            BClassRegistry::Get().ForEach([&comps, &instance](const BClass& cls)
+                {
+                    if (instance.HasComponentByClass(&cls))
+                        comps.push_back(cls.hash);
+                });
+            pkt.Write<uint32_t>(comps.size());
+            pkt.WriteBytes(comps.data(), comps.size() * sizeof(BClassID));
+        }
+
+        m_Driver->Send(conn, pkt);
+    }
+
+    void NetScene::HandleClientSceneInitPacket(NetConnection* sender, NetPacket& pkt)
+    {
+        const uint32_t count = pkt.Read<uint32_t>();
+        for (uint32_t i = 0; i < count; ++i)
+        {
+            const uint64_t obj = pkt.Read<uint64_t>();
+            const uint64_t owner = pkt.Read<uint64_t>();
+            GameObject instance = CreateReplicatedGameObject(obj, owner);
+
+            const uint32_t compCount = pkt.Read<uint32_t>();
+            for (uint32_t comp = 0; comp < compCount; ++comp)
+            {
+                BClassID compId = pkt.Read<BClassID>();
+                const BClass* cls = BClassRegistry::Get().Find(compId);
+                instance.GetOrAddComponentByClass(cls);
+            }
+        }
     }
 }

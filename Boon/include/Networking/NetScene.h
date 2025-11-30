@@ -59,6 +59,7 @@ namespace Boon
         void HandleDespawnPacket(NetConnection* sender, NetPacket& pkt);
         void HandleComponentPacket(NetConnection* sender, NetPacket& pkt);
         void HandleLoadScenePacket(NetConnection* sender, NetPacket& pkt);
+        void HandleClientSceneInitPacket(NetConnection* sender, NetPacket& pkt);
 
         void SendSpawnTo(NetConnection* conn, const GameObject& obj);
         void SendDespawnTo(NetConnection* conn, const UUID& uuid);
@@ -67,6 +68,8 @@ namespace Boon
         void BroadcastDespawn(const UUID& uuid);
         void BroadcastComponent(const UUID& uuid, const BClassID& component, bool add);
         void BroadcastLoadScene(const SceneID& sceneId);
+
+        void InitClientScene(NetConnection* conn);
 
     private:
         Scene* m_Scene = nullptr;
