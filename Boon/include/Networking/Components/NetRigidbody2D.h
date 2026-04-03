@@ -56,10 +56,6 @@ namespace Boon
 			TransformComponent& transform = gameObject.GetTransform();
 			if (netId.IsAuthority())
 			{
-				auto& id = gameObject.GetComponent<NetIdentity>();
-				if (!id.IsAuthority())
-					return;
-
 				glm::vec3 pos = transform.GetLocalPosition();
 				Velocity = gameObject.GetComponent<Rigidbody2D>().GetVelocity();
 				// quantize current transform

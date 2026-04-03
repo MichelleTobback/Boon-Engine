@@ -30,5 +30,6 @@ namespace Boon
 	private:
 		int m_Current = 0;
 		float m_Timer = 0.f;
+		bool m_Dirty = true;
 	};
 }

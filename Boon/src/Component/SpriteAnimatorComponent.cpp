@@ -43,17 +43,26 @@ void Boon::SpriteAnimatorComponent::Update(GameObject obj)
 		if (++m_Current == clip.Frames.size())
 			m_Current = 0;
 
+		m_Dirty = true;
+	}
+	if (m_Dirty)
+	{
 		pRenderer->Sprite = clip.Frames[m_Current];
+		m_Dirty = false;
 	}
 }
 
 void Boon::SpriteAnimatorComponent::SetClip(int clip, bool restart)
 {
-	if (Clip != clip && restart)
+	if (Clip == clip)
+		return;
+
+	Clip = clip;
+	m_Dirty = true;
+
+	if (restart)
 	{
 		m_Timer = 0.f;
 		m_Current = 0;
 	}
-
-	Clip = clip;
 }

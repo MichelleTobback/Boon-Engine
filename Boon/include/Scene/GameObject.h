@@ -64,20 +64,7 @@ namespace Boon
 
 			BN_ASSERT(!HasComponent<T>(), "GameObject already has component!");
 
-			entt::registry& reg = m_pScene->GetRegistry();
-
-			T& comp = reg.emplace<T>(m_Handle, std::forward<TArgs>(args)...);
-
-			const BClass* cls = BClassRegistry::Get().Find<T>();
-			if (cls)
-			{
-				if (m_pScene->m_Running && cls->awake)
-					cls->awake(*this);
-
-				m_pScene->m_OnComponentAdded.Invoke(*this, cls);
-			}
-
-			return comp;
+			return m_pScene->AddComponent<T>(m_Handle, std::forward<TArgs>(args)...);
 		}
 
 		template <typename T, typename ... TArgs>

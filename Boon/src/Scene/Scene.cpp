@@ -116,6 +116,8 @@ void Boon::Scene::LateUpdate()
 
 void Boon::Scene::EndUpdate()
 {
+	ProcessCommands();
+
 	while (!m_ObjectsPendingDestroy.empty())
 	{
 		UUID uuid = m_ObjectsPendingDestroy.front();
@@ -143,6 +145,44 @@ void Boon::Scene::OnBeginOverlap(GameObject overlapped, GameObject other)
 void Boon::Scene::OnEndOverlap(GameObject overlapped, GameObject other)
 {
 	m_pECSlifecycle->EndOverlap(overlapped, other);
+}
+
+void Boon::Scene::AwakeComponent(GameObjectID handle, const BClass* pClass)
+{
+	if (!pClass)
+		return;
+
+	if (!pClass->awake)
+		return;
+
+	if (!m_Registry.valid(handle))
+		return;
+
+	GameObject obj{ handle, this };
+	pClass->awake(obj);
+}
+
+void Boon::Scene::PushCommand(const SceneCommand& cmd)
+{
+	m_Commands.push(cmd);
+}
+
+void Boon::Scene::ProcessCommands()
+{
+	while (!m_Commands.empty())
+	{
+		SceneCommand cmd = m_Commands.front();
+		m_Commands.pop();
+
+		switch (cmd.Type)
+		{
+		case SceneCommand::Type::AwakeComponent:
+			AwakeComponent(cmd.GameObjectId, cmd.pClass);
+			break;
+		case SceneCommand::Type::RemoveComponent:
+			break;
+		}
+	}
 }
 
 GameObject Boon::Scene::GetGameObject(UUID uuid)

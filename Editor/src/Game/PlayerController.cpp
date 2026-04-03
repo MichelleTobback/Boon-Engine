@@ -12,8 +12,12 @@
 #include <Networking/NetIdentity.h>
 #include <Networking/NetScene.h>
 #include <Networking/NetRPC.h>
+#include <Networking/Components/NetRigidbody2D.h>
 
 #include "Reflection/BClass.h"
+#include "Game/CameraController.h"
+
+#include <Asset/Assets.h>
 
 #include <iostream>
 
@@ -22,10 +26,72 @@ using namespace Boon;
 void PlayerController::Awake(GameObject gameObject)
 {
     m_Owner = gameObject;
+
+    AssetLibrary& assetLib = Assets::Get();
+    AssetRef<SpriteAtlasAsset> atlas = assetLib.Import<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa");
+    gameObject.GetOrAddComponent<SpriteRendererComponent>().SpriteAtlasHandle = atlas;
+
+    if (gameObject.HasComponent<NetIdentity>() && !gameObject.GetComponent<NetIdentity>().IsOwner())
+        return;
+
+    gameObject.GetScene()->ForeachGameObjectWith<CameraController>([gameObject](GameObject obj)
+        {
+            obj.GetComponent<CameraController>().SetTarget(gameObject);
+        });
+}
+
+PlayerController::Direction ClosestDirection(const glm::vec2& v)
+{
+    glm::vec2 n = glm::normalize(v);
+
+    float up = glm::dot(n, glm::vec2(0, 1));
+    float down = glm::dot(n, glm::vec2(0, -1));
+    float right = glm::dot(n, glm::vec2(1, 0));
+    float left = glm::dot(n, glm::vec2(-1, 0));
+
+    float maxDot = up;
+    PlayerController::Direction dir = PlayerController::Direction::Up;
+
+    if (down > maxDot) { maxDot = down;  dir = PlayerController::Direction::Down; }
+    if (right > maxDot) { maxDot = right; dir = PlayerController::Direction::Right; }
+    if (left > maxDot) { maxDot = left;  dir = PlayerController::Direction::Left; }
+
+    return dir;
 }
 
 void PlayerController::Update(GameObject gameObject)
 {
+    if (!gameObject.HasComponent<NetRigidbody2D>())
+        return;
+
+    NetRigidbody2D& rb = gameObject.GetComponent<NetRigidbody2D>();
+    bool move = (glm::length2(rb.Velocity) > 0);
+    SpriteAnimatorComponent& anim = gameObject.GetComponent<SpriteAnimatorComponent>();
+
+    if (glm::length2(rb.Velocity) > 0.f)
+        m_Direction = ClosestDirection(rb.Velocity);
+
+    switch (m_Direction)
+    {
+    case Direction::Left:
+        anim.SetClip(move ? 7 : 3);
+        break;
+    case Direction::Right:
+        anim.SetClip(move ? 5 : 1);
+        break;
+    case Direction::Up:
+        anim.SetClip(move ? 6 : 2);
+        break;
+    case Direction::Down:
+        anim.SetClip(move ? 4 : 0);
+        break;
+    }
+
+    CheckGrounded(gameObject);
+
+    if (gameObject.HasComponent<NetIdentity>() && !gameObject.GetComponent<NetIdentity>().IsOwner())
+        return;
+
     // Input only
     Input& input = ServiceLocator::Get<Input>();
     glm::vec2 movement{};
@@ -35,41 +101,36 @@ void PlayerController::Update(GameObject gameObject)
     {
         movement.x = -1.0f;
         m_Direction = Direction::Left;
-        gameObject.GetTransform().SetLocalScale(-1.f, 1.f, 1.f);
     }
     else if (input.IsKeyHeld(Key::D))
     {
         movement.x = 1.0f;
         m_Direction = Direction::Right;
-        gameObject.GetTransform().SetLocalScale(1.f, 1.f, 1.f);
     }
     if (input.IsKeyHeld(Key::W))
     {
         movement.y = 1.0f;
+        m_Direction = Direction::Up;
     }
     else if (input.IsKeyHeld(Key::S))
     {
         movement.y = -1.0f;
+        m_Direction = Direction::Down;
     }
 
-    Rigidbody2D& rb = gameObject.GetComponent<Rigidbody2D>();
     if (m_IsGrounded && input.IsKeyPressed(Key::Space))
     {
         BClassRegistry::Get().Find<Boon::PlayerController>()->InvokeByName(this, "Jump");
     }
 
+    if (!gameObject.HasComponent<NetIdentity>())
+        return;
+
     // Normalize
     if (glm::length(movement) >= 1.0f)
         Move(glm::normalize(movement));
-    else if (glm::length(m_MoveInput) >= 1.0f)
+    else
         Move({});
-
-    bool move = (glm::length2(rb.GetVelocity()) > 0);
-
-    SpriteAnimatorComponent& anim = gameObject.GetComponent<SpriteAnimatorComponent>();
-    anim.SetClip(move ? 2 : 1);
-
-    CheckGrounded(gameObject);
 }
 
 void PlayerController::FixedUpdate(GameObject gameObject)
@@ -98,12 +159,12 @@ void PlayerController::FixedUpdate(GameObject gameObject)
 
 void PlayerController::OnBeginOverlap(GameObject gameObject, GameObject other)
 {
-    
+
 }
 
 void PlayerController::OnEndOverlap(GameObject gameObject, GameObject other)
 {
-    
+
 }
 
 void PlayerController::Jump_Server()
@@ -133,6 +194,9 @@ void PlayerController::Move_Server(glm::vec2 dir)
 
 void PlayerController::Move(const glm::vec2& dir)
 {
+    if (!m_Owner.IsValid())
+        return;
+
     NetIdentity& ni = m_Owner.GetComponent<NetIdentity>();
     if (ni.IsAutonomousProxy() || ni.IsSimulatedProxy())
     {

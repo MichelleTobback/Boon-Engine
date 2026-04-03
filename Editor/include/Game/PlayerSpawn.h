@@ -69,6 +69,11 @@ namespace Boon
 			if (!m_pScene)
 				return GameObject();
 
+			if (m_Instances.find(connectionId) != m_Instances.end())
+			{
+				return GameObject();
+			}
+
 			GameObject player = m_pScene->InstantiateGameObject(connectionId);
 
 			AssetLibrary& assetLib = Assets::Get();

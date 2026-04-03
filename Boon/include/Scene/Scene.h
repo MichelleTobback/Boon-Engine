@@ -86,6 +86,10 @@ namespace Boon
 		void OnBeginOverlap(GameObject overlapped, GameObject other);
 		void OnEndOverlap(GameObject overlapped, GameObject other);
 
+		template <typename T, typename ... TArgs>
+		T& AddComponent(GameObjectID handle, TArgs&& ... args);
+		void AwakeComponent(GameObjectID handle, const BClass* pClass);
+
 		std::unordered_map<UUID, GameObjectID> m_EntityMap;
 		std::queue<UUID> m_ObjectsPendingDestroy{};
 		SceneRegistry m_Registry;
@@ -97,8 +101,40 @@ namespace Boon
 		Delegate<void(GameObject, const BClass*)> m_OnComponentAdded;
 		Delegate<void(GameObject, const BClass*)> m_OnComponentRemoved;
 
+		struct SceneCommand
+		{
+			enum class Type
+			{
+				AwakeComponent,
+				RemoveComponent
+			} Type;
+
+			GameObjectID GameObjectId;
+			const BClass* pClass;
+		};
+
+		std::queue<SceneCommand> m_Commands;
+
+		void PushCommand(const SceneCommand& cmd);
+		void ProcessCommands();
+
 		SceneID m_ID;
 		std::string m_Name;
 		bool m_Running{ false };
 	};
+
+	template <typename T, typename ... TArgs>
+	T& Scene::AddComponent(GameObjectID handle, TArgs&& ... args)
+	{
+		T& comp = m_Registry.emplace<T>(handle, std::forward<TArgs>(args)...);
+
+		const BClass* cls = BClassRegistry::Get().Find<T>();
+		if (cls)
+		{
+			PushCommand({ SceneCommand::Type::AwakeComponent, handle, cls });
+			m_OnComponentAdded.Invoke({handle, this}, cls);
+		}
+
+		return comp;
+	}
 }

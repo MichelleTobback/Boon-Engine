@@ -20,7 +20,7 @@ namespace Boon
         {
             auto& rb = obj.GetComponent<NetRigidbody2D>();
 
-            ser.Write<uint8_t>(rb.DirtyMask);
+            ser.Write<uint8_t>((uint8_t)rb.DirtyMask);
 
             if (rb.DirtyMask & (uint32_t)NetRigidbody2D::DirtyFlags::PosX)
                 ser.WriteBits(rb.QPosX, 16);
@@ -35,15 +35,17 @@ namespace Boon
                 ser.WriteBits(rb.QRotDeg, 16);
 
             if (rb.DirtyMask & (uint32_t)NetRigidbody2D::DirtyFlags::VelX)
-                ser.WriteBits(rb.Velocity.x, 16);
+                ser.WriteBits(rb.QVelX, 16);
 
             if (rb.DirtyMask & (uint32_t)NetRigidbody2D::DirtyFlags::VelY)
-                ser.WriteBits(rb.Velocity.y, 16);
+                ser.WriteBits(rb.QVelY, 16);
 
             rb.LastQPosX = rb.QPosX;
             rb.LastQPosY = rb.QPosY;
             rb.LastQPosZ = rb.QPosZ;
             rb.LastQRotDeg = rb.QRotDeg;
+            rb.LastQVelX = rb.QVelX;
+            rb.LastQVelY = rb.QVelY;
         }
 
         virtual void Deserialize(BinarySerializer& ser, GameObject obj) override
@@ -65,10 +67,10 @@ namespace Boon
                 rb.QRotDeg = (uint16_t)ser.ReadBits(16);
 
             if (rb.DirtyMask & (uint32_t)NetRigidbody2D::DirtyFlags::VelX)
-                rb.Velocity.x = (int16_t)ser.ReadBits(16);
+                rb.QVelX = (int16_t)ser.ReadBits(16);
 
             if (rb.DirtyMask & (uint32_t)NetRigidbody2D::DirtyFlags::VelY)
-                rb.Velocity.y = (int16_t)ser.ReadBits(16);
+                rb.QVelY = (int16_t)ser.ReadBits(16);
         }
     };
 }
