@@ -13,6 +13,15 @@ namespace Boon
     struct has_awake<T, std::void_t<decltype(std::declval<T>().Awake(std::declval<GameObject&>()))>>
         : std::true_type {};
 
+    // OnEndPlay(GameObject&)
+    template<typename T, typename = void>
+    struct has_onendplay : std::false_type {};
+
+    template<typename T>
+    struct has_onendplay<T, std::void_t<decltype(std::declval<T>().OnEndPlay(std::declval<GameObject&>()))>>
+        : std::true_type {
+    };
+
     // Update(GameObject&)
     template<typename T, typename = void>
     struct has_update : std::false_type {};

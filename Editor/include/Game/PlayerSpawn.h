@@ -22,6 +22,7 @@ namespace Boon
 		BCLASS_BODY()
 
 	public:
+
 		void Awake(GameObject obj)
 		{
 			NetIdentity& netId = obj.GetComponent<NetIdentity>();
@@ -36,21 +37,23 @@ namespace Boon
 				SpawnPlayerServer(netId.OwnerConnectionId);
 
 			EventBus& bus = ServiceLocator::Get<EventBus>();
-			m_ConnectionEvent = bus.Subscribe<NetConnectionEvent>([this](const NetConnectionEvent& e)
-				{
-					if (e.State == ENetConnectionState::Connected)
-						SpawnPlayerServer(e.ConnectionId);
-					else if (e.State == ENetConnectionState::Disconnected)
+			if (m_ConnectionEvent == 0u)
+				m_ConnectionEvent = bus.Subscribe<NetConnectionEvent>([this](const NetConnectionEvent& e)
 					{
-						m_Instances[e.ConnectionId].Destroy();
-						m_Instances.erase(e.ConnectionId);
-					}
-				});
+						if (e.State == ENetConnectionState::Connected)
+							SpawnPlayerServer(e.ConnectionId);
+						else if (e.State == ENetConnectionState::Disconnected)
+						{
+							m_Instances[e.ConnectionId].Destroy();
+							m_Instances.erase(e.ConnectionId);
+						}
+					});
 		}
 
 		void OnEndPlay(GameObject obj)
 		{
 			ServiceLocator::Get<EventBus>().Unsubscribe<NetConnectionEvent>(m_ConnectionEvent);
+			m_ConnectionEvent = 0u;
 		}
 
 		void SpawnPlayer()
@@ -102,6 +105,6 @@ namespace Boon
 	private:
 		NetScene* m_pScene{nullptr};
 		std::unordered_map<uint64_t, GameObject> m_Instances;
-		EventListenerID m_ConnectionEvent{};
+		EventListenerID m_ConnectionEvent{0u};
 	};
 }

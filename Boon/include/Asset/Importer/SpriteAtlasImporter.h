@@ -85,11 +85,17 @@ namespace Boon
             if (j.contains("clips"))
             {
                 const nlohmann::json& clipsJson = j["clips"];
-                for (size_t i = 0; i < clipsJson.size(); i++)
-                {
-                    const nlohmann::json& entry = clipsJson[i];
 
-                    SpriteAnimClip clip;
+                for (int i = 0; i < clipsJson.size(); ++i)
+                {
+                    pInstance->AddClip(SpriteAnimClip());
+                }
+
+                int current = 0;
+                for (const nlohmann::json& entry : clipsJson)
+                {
+                    int frameId = entry.contains("idx") ? entry["idx"] : current;
+                    SpriteAnimClip& clip = pInstance->GetClip(frameId);
                     clip.Speed = entry.contains("speed") ? entry["speed"].get<float>() : 1.0f;
                     clip.pAtlas = pInstance.get();
 
@@ -99,13 +105,12 @@ namespace Boon
                     for (size_t f = 0; f < frames.size(); f++)
                     {
                         int oldId = frames[f];
-                        if (oldToNew.count(oldId))
-                            clip.Frames.push_back(oldToNew[oldId]);
-                        else
+                        //if (oldToNew.count(oldId))
+                        //    clip.Frames.push_back(oldToNew[oldId]);
+                        //else
                             clip.Frames.push_back(oldId);
                     }
-
-                    pInstance->AddClip(clip);
+                    current++;
                 }
             }
 

@@ -84,6 +84,9 @@ namespace Boon
     // -------------------------------------------------------------------------
     void SteamNetDriver::Shutdown()
     {
+        if (!s_Instance)
+            return;
+
         if (!m_Interface)
             return;
 
@@ -112,6 +115,7 @@ namespace Boon
 
         m_LocalConnectionId = 0;
         s_Instance = nullptr;
+        m_Scene = nullptr;
     }
 
     // -------------------------------------------------------------------------

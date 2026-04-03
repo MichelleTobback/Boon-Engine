@@ -9,6 +9,7 @@
 
 #include <Core/AppState.h>
 #include <Renderer/SceneRenderer.h>
+#include <Scene/SceneManager.h>
 
 #include <Event/Event.h>
 
@@ -100,6 +101,7 @@ namespace BoonEditor
 		EventListenerID m_SceneChangedEvent;
 		EventListenerID m_StateChangedEvent;
 		EventListenerID m_BindNetSceneEvent;
+		Delegate<void(Scene&)>::Handle m_BindNetSceneHandle;
 
 		DragDropRouter m_DragDrop{};
 	};

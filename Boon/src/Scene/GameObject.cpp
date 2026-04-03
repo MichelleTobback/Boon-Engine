@@ -3,11 +3,16 @@
 #include "Component/SceneComponent.h"
 #include "Reflection/BClass.h"
 
+#include "Scene/SceneManager.h"
+#include "Core/ServiceLocator.h"
+
 using namespace Boon;
 
 Boon::GameObject::GameObject(GameObjectID handle, Scene* pScene)
 	: m_Handle{ handle }, m_pScene{ pScene }
 {
+	if (pScene)
+		m_SceneID = pScene->GetID();
 }
 
 Boon::GameObject::~GameObject()
@@ -45,7 +50,13 @@ GameObject Boon::GameObject::GetRoot() const
 
 bool Boon::GameObject::IsValid() const
 {
-	return m_pScene && m_pScene->GetRegistry().valid(m_Handle);
+	if (!m_pScene)
+		return false;
+
+	if (!ServiceLocator::Get<SceneManager>().IsLoaded(m_SceneID))
+		return false;
+
+	return m_pScene->GetRegistry().valid(m_Handle);
 }
 
 bool Boon::GameObject::IsRoot() const
@@ -87,6 +98,7 @@ void Boon::GameObject::RemoveComponentByClass(const BClass* pClass)
 void Boon::GameObject::Destroy()
 {
 	m_pScene->DestroyGameObject(*this);
+	m_Handle = entt::null;
 }
 
 GameObject Boon::GameObject::GetParent() const

@@ -10,6 +10,7 @@ namespace Boon
     struct ECSLifecycleCallbacks
     {
         static std::function<void(Scene&)> awake;
+        static std::function<void(Scene&)> onEndPlay;
         static std::function<void(Scene&)> update;
         static std::function<void(Scene&)> fixedUpdate;
         static std::function<void(Scene&)> lateUpdate;
@@ -27,6 +28,19 @@ namespace Boon
                         {
                             auto& comp = scene.GetRegistry().get<T>(entity);
                             comp.Awake(GameObject(entity, &scene));
+                        }
+                    };
+            }
+
+            if constexpr (has_onendplay<T>::value)
+            {
+                onEndPlay = [](Scene& scene)
+                    {
+                        auto view = scene.GetRegistry().view<T>();
+                        for (auto entity : view)
+                        {
+                            auto& comp = scene.GetRegistry().get<T>(entity);
+                            comp.OnEndPlay(GameObject(entity, &scene));
                         }
                     };
             }
@@ -81,6 +95,7 @@ namespace Boon
     };
 
     template<typename T> std::function<void(Scene&)> ECSLifecycleCallbacks<T>::awake;
+    template<typename T> std::function<void(Scene&)> ECSLifecycleCallbacks<T>::onEndPlay;
     template<typename T> std::function<void(Scene&)> ECSLifecycleCallbacks<T>::update;
     template<typename T> std::function<void(Scene&)> ECSLifecycleCallbacks<T>::fixedUpdate;
     template<typename T> std::function<void(Scene&)> ECSLifecycleCallbacks<T>::lateUpdate;
@@ -95,6 +110,7 @@ namespace Boon
         struct Callbacks
         {
             std::function<void(Scene&)> awake;
+            std::function<void(Scene&)> onEndPlay;
             std::function<void(Scene&)> update;
             std::function<void(Scene&)> fixedUpdate;
             std::function<void(Scene&)> lateUpdate;
@@ -129,6 +145,7 @@ namespace Boon
 
             Callbacks cb;
             cb.awake = ECSLifecycleCallbacks<T>::awake;
+            cb.onEndPlay = ECSLifecycleCallbacks<T>::onEndPlay;
             cb.update = ECSLifecycleCallbacks<T>::update;
             cb.fixedUpdate = ECSLifecycleCallbacks<T>::fixedUpdate;
             cb.lateUpdate = ECSLifecycleCallbacks<T>::lateUpdate;
@@ -149,6 +166,7 @@ namespace Boon
         }
 
         void AwakeAll() { for (auto& [_, cb] : map) if (cb.awake)      cb.awake(scene); }
+        void OnEndPlayAll() { for (auto& [_, cb] : map) if (cb.onEndPlay)      cb.onEndPlay(scene); }
         void UpdateAll() { for (auto& [_, cb] : map) if (cb.update)      cb.update(scene); }
         void FixedUpdateAll() { for (auto& [_, cb] : map) if (cb.fixedUpdate) cb.fixedUpdate(scene); }
         void LateUpdateAll() { for (auto& [_, cb] : map) if (cb.lateUpdate)  cb.lateUpdate(scene); }

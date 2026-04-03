@@ -178,6 +178,7 @@ namespace Boon
 	private:
 		GameObjectID m_Handle{ NullGameObject };
 		Scene* m_pScene{};
+		SceneID m_SceneID{0u};
 	};
 
 

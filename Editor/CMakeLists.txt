@@ -9,7 +9,7 @@ file(GLOB_RECURSE EDITOR_SOURCES CONFIGURE_DEPENDS src/*.cpp generated/*.cpp)
 # ============================
 add_executable(Editor
     ${EDITOR_SOURCES}
-)
+ "include/Game/PlayerSpawn.h")
 
 target_link_libraries(Editor PRIVATE BoonEngine)
 
@@ -58,7 +58,7 @@ set(IMGUI_SOURCES
     ${IMGUI_DIR}/backends/imgui_impl_opengl3.cpp
 )
 
-add_library(imgui STATIC ${IMGUI_SOURCES})
+add_library(imgui STATIC ${IMGUI_SOURCES} "include/Game/PlayerSpawn.h")
 
 target_include_directories(imgui PUBLIC
     ${IMGUI_DIR}

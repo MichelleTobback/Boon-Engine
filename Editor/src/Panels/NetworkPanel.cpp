@@ -68,7 +68,7 @@ void BoonEditor::NetworkPanel::OnRenderUI()
 			ImGui::PopStyleColor();
 
 			std::ostringstream ss;
-			ss << "ping : " << (int)m_pDriver->GetConnection(1)->GetPing();
+			ss << "ping : " << (int)m_pDriver->GetConnection(m_pDriver->GetLocalConnectionId())->GetPing();
 			ImGui::Text(ss.str().c_str());
 		}
 	}

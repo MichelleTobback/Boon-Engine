@@ -32,7 +32,6 @@
 
 #include <Renderer/Renderer.h>
 
-#include <Scene/SceneManager.h>
 #include <Scene/GameObject.h>
 #include <Scene/SceneSerializer.h>
 
@@ -52,6 +51,7 @@
 
 #include "Game/PlayerController.h"
 #include <Game/CameraController.h>
+#include <Game/PlayerSpawn.h>
 
 #include <Reflection/BClass.h>
 
@@ -112,35 +112,43 @@ void EditorState::OnEnter()
 	m_pSelectedScene = &scene;
 	
 	AssetRef<SpriteAtlasAsset> atlas = assetLib.Import<SpriteAtlasAsset>("game/Blue_witch/B_witch_atlas_compact.bsa");
+	assetLib.Import<TilemapAsset>("game/Arena/Arena-tilemap.btm");
+	assetLib.Import<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa");
 	//player
-	for (int i = 2; i < 3; ++i)
+	//for (int i = 2; i < 3; ++i)
+	//{
+	//	GameObject quad = scene.Instantiate(UUID(i));
+	//	SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
+	//	sprite.SpriteAtlasHandle = atlas->GetHandle();
+	//	sprite.Sprite = 0;
+	//
+	//	SpriteAnimatorComponent& animator = quad.AddComponent<SpriteAnimatorComponent>();
+	//	animator.Clip = 0;
+	//	animator.Atlas = atlas->GetInstance();
+	//	animator.pRenderer = quad;
+	//
+	//	BoxCollider2D& col = quad.AddComponent<BoxCollider2D>();
+	//	col.Size = { 0.8f, 1.f };
+	//
+	//	Rigidbody2D& rb = quad.AddComponent<Rigidbody2D>();
+	//	rb.Type = (int)Boon::Rigidbody2D::BodyType::Dynamic;
+	//	rb.GravityScale = 0.f;
+	//	rb.FixedRotation = true;
+	//
+	//	quad.AddComponent<PlayerController>();
+	//	quad.GetComponent<NameComponent>().Name = "Player";
+	//
+	//	quad.AddComponent<NetIdentity>();
+	//	//quad.AddComponent<NetTransform>();
+	//
+	//	camera.AddComponent<CameraController>().SetTarget(quad);
+	//}
 	{
-		GameObject quad = scene.Instantiate(UUID(i));
-		SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
-		sprite.SpriteAtlasHandle = atlas->GetHandle();
-		sprite.Sprite = 0;
-	
-		SpriteAnimatorComponent& animator = quad.AddComponent<SpriteAnimatorComponent>();
-		animator.Clip = 0;
-		animator.Atlas = atlas->GetInstance();
-		animator.pRenderer = quad;
-	
-		BoxCollider2D& col = quad.AddComponent<BoxCollider2D>();
-		col.Size = { 0.8f, 1.f };
-	
-		Rigidbody2D& rb = quad.AddComponent<Rigidbody2D>();
-		rb.Type = (int)Boon::Rigidbody2D::BodyType::Dynamic;
-		rb.GravityScale = 0.f;
-		rb.FixedRotation = true;
-
-		quad.AddComponent<PlayerController>();
-		quad.GetComponent<NameComponent>().Name = "Player";
-	
-		quad.AddComponent<NetIdentity>();
-		//quad.AddComponent<NetTransform>();
-
-		camera.AddComponent<CameraController>().SetTarget(quad);
+		GameObject playerSpawner = scene.Instantiate();
+		playerSpawner.AddComponent<NetIdentity>();
+		playerSpawner.AddComponent<PlayerSpawn>();
 	}
+
 	
 	//floor
 	{
@@ -189,15 +197,12 @@ void EditorState::OnEnter()
 			}
 		});
 
-	sceneManager.SetActiveScene(scene.GetID(), false);
-
 	SceneSerializer serializer(scene);
 	//serializer.Serialize("Assets/scenes/Test.scene");
-	//serializer.Clear();
-	//serializer.Deserialize("Assets/scenes/Test.scene");
+	serializer.Clear();
+	serializer.Deserialize("Assets/scenes/Test.scene");
 
-	//viewport.SetContext(&m_AssetSceneContext);
-	//m_AssetSceneContext.Set(tilemap.GetScene());
+	sceneManager.SetActiveScene(scene.GetID(), false);
 
 	m_SelectionContext.AddOnContextChangedCallback([this](GameObject obj)
 		{
@@ -241,6 +246,8 @@ void EditorState::OnExit()
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	eventBus.Unsubscribe<SceneChangedEvent>(m_SceneChangedEvent);
 	eventBus.Unsubscribe<EditorPlayStateChangeEvent>(m_StateChangedEvent);
+
+	ServiceLocator::Get<NetDriver>().Shutdown();
 }
 
 void EditorState::OnRender()
@@ -323,9 +330,10 @@ void EditorState::OnStopPlay()
 	m_PlayState = EditorPlayState::Edit;
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 
-	sceneManager.UnloadScene(m_SceneContext.Get()->GetID());
+	SceneID sceneId = m_SceneContext.Get()->GetID();
 	m_SceneContext.Set(m_pSelectedScene);
 	sceneManager.SetActiveScene(m_SceneContext.Get()->GetID(), false);
+	sceneManager.UnloadScene(sceneId);
 
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	eventBus.Post(EditorPlayStateChangeEvent(m_PlayState));
@@ -343,13 +351,21 @@ void EditorState::StartNetwork()
 		network.BindOnDisconnectedCallback([this](NetConnection* pConnection) {OnDisconnected(pConnection); });
 		network.BindOnPacketCallback([this](NetConnection* pConnection, NetPacket& packet) { OnPacketReceived(pConnection, packet); });
 
-		m_BindNetSceneEvent = eventBus.Subscribe<SceneChangedEvent>([](const SceneChangedEvent& e)
+		m_BindNetSceneHandle = ServiceLocator::Get<SceneManager>().BindOnSceneChanged([](Scene& e)
 			{
 				Scene& scene = ServiceLocator::Get<SceneManager>().GetActiveScene();
 				auto& network = ServiceLocator::Get<NetDriver>();
 				auto pScene{ std::make_shared<NetScene>(&scene, &network) };
 				network.BindScene(pScene);
 			});
+
+		//m_BindNetSceneEvent = eventBus.Subscribe<SceneChangedEvent>([](Scene& e)
+		//	{
+		//		Scene& scene = ServiceLocator::Get<SceneManager>().GetActiveScene();
+		//		auto& network = ServiceLocator::Get<NetDriver>();
+		//		auto pScene{ std::make_shared<NetScene>(&scene, &network) };
+		//		network.BindScene(pScene);
+		//	});
 
 		if (network.IsClient())
 		{
@@ -366,20 +382,22 @@ void EditorState::StopNetwork()
 	NetworkPanel& net = GetPanel<NetworkPanel>("network");
 	net.SetDriver(nullptr);
 
-	EventBus& eventBus = ServiceLocator::Get<EventBus>();
-	eventBus.Unsubscribe<SceneChangedEvent>(m_BindNetSceneEvent);
+	ServiceLocator::Get<SceneManager>().UnbindOnSceneChanged(m_BindNetSceneHandle);
+	
 	NetDriver& network = ServiceLocator::Get<NetDriver>();
 	network.Shutdown();
 }
 
 void EditorState::OnConnected(NetConnection* pConnection)
 {
-	
+	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	eventBus.Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Connected));
 }
 
 void EditorState::OnDisconnected(NetConnection* pConnection)
 {
-
+	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	eventBus.Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Disconnected));
 }
 
 void EditorState::OnPacketReceived(NetConnection* pConnection, NetPacket& packet)

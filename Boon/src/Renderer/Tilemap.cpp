@@ -130,6 +130,9 @@ namespace Boon
         int ly = y % m_ChunkSize;
 
         int idx = cy * m_ChunksX + cx;
+        if (idx >= m_Chunks.size())
+            return;
+
         TilemapChunk& chunk = m_Chunks[idx];
 
         chunk.Tiles[ly * m_ChunkSize + lx] = tileId;

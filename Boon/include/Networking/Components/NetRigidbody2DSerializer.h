@@ -34,6 +34,12 @@ namespace Boon
             if (rb.DirtyMask & (uint32_t)NetRigidbody2D::DirtyFlags::Rot)
                 ser.WriteBits(rb.QRotDeg, 16);
 
+            if (rb.DirtyMask & (uint32_t)NetRigidbody2D::DirtyFlags::VelX)
+                ser.WriteBits(rb.Velocity.x, 16);
+
+            if (rb.DirtyMask & (uint32_t)NetRigidbody2D::DirtyFlags::VelY)
+                ser.WriteBits(rb.Velocity.y, 16);
+
             rb.LastQPosX = rb.QPosX;
             rb.LastQPosY = rb.QPosY;
             rb.LastQPosZ = rb.QPosZ;
@@ -57,6 +63,12 @@ namespace Boon
 
             if (rb.DirtyMask & (uint32_t)NetRigidbody2D::DirtyFlags::Rot)
                 rb.QRotDeg = (uint16_t)ser.ReadBits(16);
+
+            if (rb.DirtyMask & (uint32_t)NetRigidbody2D::DirtyFlags::VelX)
+                rb.Velocity.x = (int16_t)ser.ReadBits(16);
+
+            if (rb.DirtyMask & (uint32_t)NetRigidbody2D::DirtyFlags::VelY)
+                rb.Velocity.y = (int16_t)ser.ReadBits(16);
         }
     };
 }

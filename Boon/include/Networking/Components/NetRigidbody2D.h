@@ -90,6 +90,7 @@ namespace Boon
 				transform.SetLocalPosition(glm::mix(transform.GetLocalPosition(), pos, 0.4f));
 				transform.SetLocalRotation(0.f, 0.f, LerpAngleDegrees(transform.GetLocalRotation().z, rot, 0.4f));
 				Velocity = glm::mix(Velocity, vel, 0.4f);
+				//rb.SetVelocity(Velocity);
 			}
 		}
 	};

@@ -5,6 +5,7 @@
 #include "Networking/NetPacket.h"
 #include "Networking/NetAuthority.h"
 #include "Reflection/BClass.h"
+#include "Event/Event.h"
 
 #include <memory>
 
@@ -80,5 +81,7 @@ namespace Boon
         // Objects that server spawned at runtime
         std::unordered_map<UUID, uint64_t> m_DynamicOwnership;
         bool m_bRegisterDynamicObject{ true };
+
+        EventListenerID m_ClientConnectedEvent;
     };
 }

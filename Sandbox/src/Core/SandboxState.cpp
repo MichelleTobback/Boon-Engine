@@ -66,7 +66,7 @@ Scene& CreateScene(const std::string& name, float playPosX, float playerPosY)
 
 	GameObject player = scene.Instantiate({ playPosX, playerPosY, 0.f });
 	SpriteRendererComponent& sprite = player.AddComponent<SpriteRendererComponent>();
-	sprite.SpriteAtlasHandle = Assets::Get().Import<SpriteAtlasAsset>("game/Blue_witch/B_witch_atlas_compact.bsa")->GetHandle();
+	sprite.SpriteAtlasHandle = Assets::Get().Import<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa")->GetHandle();
 	sprite.Sprite = 0;
 	SpriteAnimatorComponent& animator = player.AddComponent<SpriteAnimatorComponent>();
 	animator.Clip = 1;
@@ -98,8 +98,8 @@ void Sandbox::SandboxState::OnEnter()
 	importer.RegisterImporter<TilemapImporter>();
 
 	AssetLibrary& assets = Assets::Get();
-	assets.Import<TilemapAsset>("game/Tilemap.btm");
-	assets.Import<SpriteAtlasAsset>("game/Blue_witch/B_witch_atlas_compact.bsa");
+	assets.Import<TilemapAsset>("game/Arena/Arena-tilemap.btm");
+	assets.Import<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa");
 
 	m_pRenderer = std::make_unique<SceneRenderer>(nullptr, window.GetWidth(), window.GetHeight(), true);
 

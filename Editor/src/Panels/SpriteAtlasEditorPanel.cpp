@@ -19,7 +19,7 @@ namespace BoonEditor
 
 	void SpriteAtlasEditorPanel::BuildPreviewScene(Scene& scene)
 	{
-		scene.Instantiate().AddComponent<TextureRendererComponent>().Texture = m_Asset->GetInstance()->GetTexture();
+		scene.Instantiate({0.f, 0.f, -0.01f}).AddComponent<TextureRendererComponent>().Texture = m_Asset->GetInstance()->GetTexture();
 	}
 
 
@@ -250,7 +250,9 @@ namespace BoonEditor
 			{
 				bool localChanged = false;
 
-				ImGui::Image(atlas->GetTexture()->GetInstance()->GetRendererID(), ImVec2(20.f, 20.f), { entry.frame.UV.x, entry.frame.UV.y }, {entry.frame.Size.x, entry.frame.Size.y});
+				ImGui::Image(atlas->GetTexture()->GetInstance()->GetRendererID(), ImVec2(20.f, 20.f), 
+					{ entry.frame.UV.x, entry.frame.UV.y + entry.frame.Size.y },
+					{ entry.frame.UV.x + entry.frame.Size.x, entry.frame.UV.y});
 
 				ImGui::SameLine();
 

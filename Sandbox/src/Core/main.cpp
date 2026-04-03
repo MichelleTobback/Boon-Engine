@@ -7,7 +7,7 @@ using namespace Sandbox;
 Boon::ENetDriverMode ParseDriverModeFromArgs(int argc, char** argv)
 {
     // Default
-    Boon::ENetDriverMode mode = Boon::ENetDriverMode::Client;
+    Boon::ENetDriverMode mode = Boon::ENetDriverMode::ListenServer;
 
     if (argc <= 1)
         return mode;

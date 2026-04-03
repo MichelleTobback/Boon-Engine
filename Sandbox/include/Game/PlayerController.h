@@ -29,7 +29,7 @@ namespace Boon
 
         enum class Direction
         {
-            Left, Right
+            Left, Right, Up, Down
         };
 
     private:
@@ -43,7 +43,7 @@ namespace Boon
 
         glm::vec3 m_PrevPosition{};
         glm::vec2 m_MoveInput{ 0.0f };
-        Direction m_Direction{ Direction::Left };
+        Direction m_Direction{ Direction::Down };
         bool m_IsGrounded{ false };
 
         GameObject m_Owner;

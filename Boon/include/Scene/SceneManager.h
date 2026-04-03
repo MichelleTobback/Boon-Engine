@@ -8,6 +8,8 @@
 
 namespace Boon
 {
+    using SceneChangedDelegate = Delegate<void(Scene&)>;
+
     class Scene;
     class SceneManager final
     {
@@ -30,12 +32,13 @@ namespace Boon
         void Update();
         void FixedUpdate();
 
-        inline void BindOnSceneChanged(const std::function<void(Scene&)>& fn) { m_OnSceneChanged += fn; }
+        inline SceneChangedDelegate::Handle BindOnSceneChanged(const SceneChangedDelegate::FunctionType& fn) { return m_OnSceneChanged.Bind(fn); }
+        inline void UnbindOnSceneChanged(const SceneChangedDelegate::Handle& handle) { return m_OnSceneChanged.Unbind(handle); }
 
     private:
 
         SceneID m_ActiveScene = UUID::Null;
         std::unordered_map<SceneID, std::unique_ptr<Scene>> m_Scenes;
-        Delegate<void(Scene&)> m_OnSceneChanged{};
+        SceneChangedDelegate m_OnSceneChanged{};
     };
 }

@@ -57,7 +57,7 @@ namespace Boon
         void BuildChunk(TilemapChunk& chunk);
 
     private:
-        float m_UnitSize = 1.0f;
+        float m_UnitSize = 0.5f;
         int m_MapWidth = 0;
         int m_MapHeight = 0;
         int m_ChunkSize = 16;

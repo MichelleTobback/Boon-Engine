@@ -29,7 +29,7 @@ namespace Boon
             m_Scene->GetOnComponentAdded() += [this](GameObject  obj, const BClass* cls) {BroadcastComponent(obj.GetUUID(), cls->hash, true); };
             m_Scene->GetOnComponentRemoved() += [this](GameObject  obj, const BClass* cls) {BroadcastComponent(obj.GetUUID(), cls->hash, false); };
 
-            ServiceLocator::Get<EventBus>().Subscribe<NetConnectionEvent>([this](const NetConnectionEvent& e)
+            m_ClientConnectedEvent = ServiceLocator::Get<EventBus>().Subscribe<NetConnectionEvent>([this](const NetConnectionEvent& e)
                 {
                     NetConnection con{ e.ConnectionId, GetDriver() };
                     InitClientScene(&con);
@@ -39,7 +39,8 @@ namespace Boon
 
     NetScene::~NetScene()
     {
-
+        m_DynamicOwnership = {};
+        ServiceLocator::Get<EventBus>().Unsubscribe<NetConnectionEvent>(m_ClientConnectedEvent);
     }
 
     void NetScene::Update()

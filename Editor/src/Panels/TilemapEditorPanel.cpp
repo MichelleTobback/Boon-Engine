@@ -24,7 +24,7 @@ void TilemapEditorPanel::Update() {}
 
 void TilemapEditorPanel::BuildPreviewScene(Scene& scene)
 {
-    scene.Instantiate().AddComponent<TilemapRendererComponent>().tilemap = m_Asset;
+    scene.Instantiate({ 0.f, 0.f, -0.01f }).AddComponent<TilemapRendererComponent>().tilemap = m_Asset;
 }
 
 //

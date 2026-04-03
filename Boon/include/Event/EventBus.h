@@ -103,7 +103,7 @@ namespace Boon
         std::condition_variable m_Condition;
         std::thread m_WorkerThread;
         std::atomic<bool> m_Stop;
-        std::atomic<EventListenerID> m_NextListenerID{ 0 };
+        std::atomic<EventListenerID> m_NextListenerID{ 1 };
 
         void ProcessQueueThread() 
         {

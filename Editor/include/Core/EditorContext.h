@@ -21,6 +21,8 @@ namespace BoonEditor
 		void Set(const T& context);
 		void AddOnContextChangedCallback(const Callback& fn);
 
+		bool IsValid() const;
+
 		T& overator();
 		const T& overator() const;
 
@@ -62,6 +64,12 @@ namespace BoonEditor
 	}
 	template<typename T>
 	inline const T& EditorContext<T>::overator() const
+	{
+		return m_pContext;
+	}
+
+	template<typename T>
+	bool EditorContext<T>::IsValid() const
 	{
 		return m_pContext;
 	}

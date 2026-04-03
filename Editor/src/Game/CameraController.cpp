@@ -5,7 +5,7 @@
 
 void Boon::CameraController::Awake(GameObject gameObject)
 {
-	
+    int i{};
 }
 
 inline glm::vec3 SnapCameraToPixelGrid(const glm::vec3& pos, float ppu)

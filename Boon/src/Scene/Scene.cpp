@@ -82,6 +82,7 @@ void Boon::Scene::Awake()
 
 void Boon::Scene::Sleep()
 {
+	m_pECSlifecycle->OnEndPlayAll();
 	m_Physics2D.End(this);
 	m_Running = false;
 }
@@ -92,8 +93,8 @@ void Boon::Scene::Update()
 	{
 		OnUpdate();
 		LateUpdate();
+		EndUpdate();
 	}
-	EndUpdate();
 }
 
 void Boon::Scene::FixedUpdate()

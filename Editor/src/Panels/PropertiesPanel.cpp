@@ -24,7 +24,7 @@ BoonEditor::PropertiesPanel::PropertiesPanel(const std::string& name, DragDropRo
 
 void BoonEditor::PropertiesPanel::OnRenderUI()
 {
-	if (!m_pContext || !m_pContext->Get().IsValid())
+	if (!m_pContext || !m_pContext->IsValid() || !m_pContext->Get().IsValid())
 		return;
 
     if (!m_pContext->Get().HasComponent<NameComponent>())
