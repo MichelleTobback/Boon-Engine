@@ -11,7 +11,7 @@
 #include <Networking/NetDriver.h>
 #include <Event/EventBus.h>
 #include <Core/ServiceLocator.h>
-#include "Game/PlayerController.h"
+#include "PlayerController.h"
 #include <Asset/Assets.h>
 
 namespace Boon

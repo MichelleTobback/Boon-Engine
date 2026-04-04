@@ -30,7 +30,7 @@ namespace Boon
             size_t fragPos = content.find("#frag");
 
             if (vertPos == std::string::npos || fragPos == std::string::npos)
-                return false;
+                return nullptr;
 
             std::string vert = content.substr(vertPos + 5, fragPos - (vertPos + 5));
             std::string frag = content.substr(fragPos + 5);

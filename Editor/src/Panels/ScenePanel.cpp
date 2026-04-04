@@ -116,7 +116,7 @@ void BoonEditor::ScenePanel::DrawGameObjectNode(GameObject gameObject)
 	{
 		auto sceneComponent{ gameObject.GetComponent<SceneComponent>() };
 
-		for (auto& child : sceneComponent)
+		for (const auto& child : sceneComponent)
 		{
 			if (child.IsValid())
 				DrawGameObjectNode(child);

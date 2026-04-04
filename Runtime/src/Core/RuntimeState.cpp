@@ -1,4 +1,4 @@
-#include "Core/SandboxState.h"
+#include "Core/RuntimeState.h"
 
 #include <Scene/GameObject.h>
 #include <Scene/SceneManager.h>
@@ -33,9 +33,6 @@
 #include "Reflection/BClass.h"
 #include <iostream>
 
-#include "Game/PlayerController.h"
-#include "Game/PlayerSpawn.h"
-
 #include <Asset/Importer/SceneImporter.h>
 #include <Asset/Importer/TilemapImporter.h>
 #include <Asset/Importer/SpriteAtlasImporter.h>
@@ -44,44 +41,16 @@
 
 using namespace Boon;
 
-Sandbox::SandboxState::SandboxState()
+Runtime::RuntimeState::RuntimeState()
 {
 	
 }
 
-Sandbox::SandboxState::~SandboxState()
+Runtime::RuntimeState::~RuntimeState()
 {
 }
 
-Scene& CreateScene(const std::string& name, float playPosX, float playerPosY)
-{
-	Window& window{ Application::Get().GetWindow() };
-	float aspect{ (float)window.GetWidth() / (float)window.GetHeight() };
-
-	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
-	Scene& scene = sceneManager.CreateScene(name);
-
-	GameObject camera = scene.Instantiate({ 0.f, 0.f, 1.f });
-	camera.AddComponent<CameraComponent>(Camera(8.f, aspect, 0.1f, 1.f)).Active = true;
-
-	GameObject player = scene.Instantiate({ playPosX, playerPosY, 0.f });
-	SpriteRendererComponent& sprite = player.AddComponent<SpriteRendererComponent>();
-	sprite.SpriteAtlasHandle = Assets::Get().Import<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa")->GetHandle();
-	sprite.Sprite = 0;
-	SpriteAnimatorComponent& animator = player.AddComponent<SpriteAnimatorComponent>();
-	animator.Clip = 1;
-	animator.Atlas = Assets::GetSpriteAtlas(sprite.SpriteAtlasHandle).Instance();
-	animator.pRenderer = player;
-	player.AddComponent<PlayerController>();
-	BoxCollider2D& col = player.AddComponent<BoxCollider2D>();
-	col.Size = { 0.8f, 1.f };
-
-	sceneManager.SetActiveScene(scene.GetID());
-
-	return scene;
-}
-
-void Sandbox::SandboxState::OnEnter()
+void Runtime::RuntimeState::OnEnter()
 {
 	Window& window{ Application::Get().GetWindow() };
 
@@ -122,15 +91,12 @@ void Sandbox::SandboxState::OnEnter()
 	serializer.Deserialize("Assets/scenes/Test.scene");
 	m_pRenderer->SetContext(&scene);
 
-	GameObject spawnerObj = scene.Instantiate();
-	spawnerObj.AddComponent<PlayerSpawn>();
-	spawnerObj.AddComponent<NetIdentity>();
 	sceneManager.SetActiveScene(scene.GetID(), true);
 
 	//m_pRenderer->SetContext(&CreateScene("Scene1", 3.f, 0.f));
 }
 
-void Sandbox::SandboxState::OnUpdate()
+void Runtime::RuntimeState::OnUpdate()
 {
 	ServiceLocator::Get<NetDriver>().Update();
 
@@ -165,7 +131,7 @@ void Sandbox::SandboxState::OnUpdate()
 	OnRender();
 }
 
-void Sandbox::SandboxState::OnExit()
+void Runtime::RuntimeState::OnExit()
 {
 	StopNetwork();
 
@@ -174,7 +140,7 @@ void Sandbox::SandboxState::OnExit()
 	eventBus.Unsubscribe<SceneChangedEvent>(m_SceneChangedEvent);
 }
 
-void Sandbox::SandboxState::StartNetwork()
+void Runtime::RuntimeState::StartNetwork()
 {
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	NetDriver& network = ServiceLocator::Get<NetDriver>();
@@ -200,7 +166,7 @@ void Sandbox::SandboxState::StartNetwork()
 	}
 }
 
-void Sandbox::SandboxState::StopNetwork()
+void Runtime::RuntimeState::StopNetwork()
 {
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	eventBus.Unsubscribe<SceneChangedEvent>(m_BindNetSceneEvent);
@@ -208,7 +174,7 @@ void Sandbox::SandboxState::StopNetwork()
 	network.Shutdown();
 }
 
-void Sandbox::SandboxState::OnConnected(NetConnection* pConnection)
+void Runtime::RuntimeState::OnConnected(NetConnection* pConnection)
 {
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	eventBus.Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Connected));
@@ -216,7 +182,7 @@ void Sandbox::SandboxState::OnConnected(NetConnection* pConnection)
 	std::cout << "Connected\n";
 }
 
-void Sandbox::SandboxState::OnDisconnected(NetConnection* pConnection)
+void Runtime::RuntimeState::OnDisconnected(NetConnection* pConnection)
 {
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	eventBus.Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Disconnected));
@@ -224,12 +190,12 @@ void Sandbox::SandboxState::OnDisconnected(NetConnection* pConnection)
 	std::cout << "Disconnected\n";
 }
 
-void Sandbox::SandboxState::OnPacketReceived(NetConnection* pConnection, NetPacket& packet)
+void Runtime::RuntimeState::OnPacketReceived(NetConnection* pConnection, NetPacket& packet)
 {
 
 }
 
-void Sandbox::SandboxState::OnRender()
+void Runtime::RuntimeState::OnRender()
 {
 	m_pRenderer->Render();
 }

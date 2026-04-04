@@ -7,6 +7,7 @@
 #include <vector>
 #include <optional>
 #include <xhash>
+#include <stdexcept>
 #include "BProperty.h"
 #include "BFunction.h"
 

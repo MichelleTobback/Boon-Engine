@@ -1,20 +1,11 @@
-#include "game/CameraController.h"
+#include "CameraController.h"
 #include <Core/Time.h>
 
 #include <BoonDebug/DebugRenderer.h>
 
 void Boon::CameraController::Awake(GameObject gameObject)
 {
-    int i{};
-}
-
-inline glm::vec3 SnapCameraToPixelGrid(const glm::vec3& pos, float ppu)
-{
-    return {
-        floor(pos.x * ppu) / ppu,
-        floor(pos.y * ppu) / ppu,
-        pos.z
-    };
+	
 }
 
 void Boon::CameraController::Update(GameObject gameObject)

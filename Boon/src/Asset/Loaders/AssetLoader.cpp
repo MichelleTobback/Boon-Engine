@@ -42,7 +42,7 @@ namespace Boon
         Buffer buffer{};
         AssetMeta meta{};
         if (!m_Reader->ReadAsset(handle, buffer, meta))
-            return false;
+            return nullptr;
 
         return AssetTraits<T>::Load(buffer, meta);
     }

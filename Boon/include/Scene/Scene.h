@@ -4,6 +4,7 @@
 #include "Core/Delegate.h"
 #include "GameObjectID.h"
 #include "Physics/PhysicsWorld2D.h"
+#include "Reflection/BClass.h"
 
 #include <queue>
 #include <glm/glm.hpp>
@@ -41,7 +42,6 @@ namespace Boon
 
 		GameObject GetGameObject(UUID uuid);
 		void ForeachGameObject(const std::function<void(GameObject)>& fn);
-		void ForeachGameObject(const std::function<void(GameObject)>& fn) const;
 
 		template<typename... Components>
 		void ForeachGameObjectWith(const std::function<void(GameObject)>& fn)

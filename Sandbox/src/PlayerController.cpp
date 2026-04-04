@@ -1,4 +1,4 @@
-﻿#include "Game/PlayerController.h"
+﻿#include "PlayerController.h"
 
 #include <Scene/SceneManager.h>
 
@@ -15,7 +15,7 @@
 #include <Networking/Components/NetRigidbody2D.h>
 
 #include "Reflection/BClass.h"
-#include "Game/CameraController.h"
+#include "CameraController.h"
 
 #include <Asset/Assets.h>
 
@@ -123,9 +123,6 @@ void PlayerController::Update(GameObject gameObject)
         BClassRegistry::Get().Find<Boon::PlayerController>()->InvokeByName(this, "Jump");
     }
 
-    if (!gameObject.HasComponent<NetIdentity>())
-        return;
-
     // Normalize
     if (glm::length(movement) >= 1.0f)
         Move(glm::normalize(movement));
@@ -159,12 +156,12 @@ void PlayerController::FixedUpdate(GameObject gameObject)
 
 void PlayerController::OnBeginOverlap(GameObject gameObject, GameObject other)
 {
-
+    
 }
 
 void PlayerController::OnEndOverlap(GameObject gameObject, GameObject other)
 {
-
+    
 }
 
 void PlayerController::Jump_Server()
@@ -194,9 +191,6 @@ void PlayerController::Move_Server(glm::vec2 dir)
 
 void PlayerController::Move(const glm::vec2& dir)
 {
-    if (!m_Owner.IsValid())
-        return;
-
     NetIdentity& ni = m_Owner.GetComponent<NetIdentity>();
     if (ni.IsAutonomousProxy() || ni.IsSimulatedProxy())
     {

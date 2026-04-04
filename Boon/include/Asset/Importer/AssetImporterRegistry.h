@@ -35,10 +35,10 @@ namespace Boon
         template<typename TImporter>
         void RegisterImporter()
         {
-            static_assert(std::is_base_of_v<Asset, TImporter::AssetType>);
+            static_assert(std::is_base_of_v<Asset, typename TImporter::AssetType>);
             static_assert(std::is_base_of_v<AssetImporter, TImporter>);
 
-            AssetType type = AssetTraits<TImporter::AssetType>::Type;
+            AssetType type = AssetTraits<typename TImporter::AssetType>::Type;
             m_Importers[type] = std::make_unique<TImporter>();
 
             std::vector<std::string> extensions = m_Importers[type]->GetExtensions();

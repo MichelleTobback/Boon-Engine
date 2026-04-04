@@ -1,8 +1,8 @@
-#include "Core/SandboxState.h"
+#include "Core/RuntimeState.h"
 
 #include <Core/Application.h>
 
-using namespace Sandbox;
+using namespace Runtime;
 
 Boon::ENetDriverMode ParseDriverModeFromArgs(int argc, char** argv)
 {
@@ -52,6 +52,6 @@ int main(int argc, char** argv)
 	desc.windowDesc.width = 800;
 	desc.windowDesc.height = 600;
 	Boon::Application app{ desc };
-	app.Run(std::make_shared<SandboxState>());
+	app.Run(std::make_shared<RuntimeState>());
 	return 0;
 }

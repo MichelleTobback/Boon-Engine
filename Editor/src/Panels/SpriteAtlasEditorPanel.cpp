@@ -33,7 +33,7 @@ namespace BoonEditor
 
 		Input& input = ServiceLocator::Get<Input>();
 
-		auto& tex = m_Asset->GetInstance()->GetTexture().Instance();
+		const auto& tex = m_Asset->GetInstance()->GetTexture().Instance();
 		float ppu = 32.0f;
 		glm::vec2 pixelSize = glm::vec2(tex->GetWidth(), tex->GetHeight());
 		glm::vec2 worldSize = pixelSize / ppu;
@@ -98,7 +98,7 @@ namespace BoonEditor
 			if (m_Cols == 0) m_Cols = 1;
 			if (m_Rows == 0) m_Rows = 1;
 
-			auto& tex = m_Asset->GetInstance()->GetTexture().Instance();
+			const auto& tex = m_Asset->GetInstance()->GetTexture().Instance();
 			float texW = (float)tex->GetWidth();
 			float texH = (float)tex->GetHeight();
 
@@ -353,7 +353,7 @@ namespace BoonEditor
 
 			if (ImGui::Button("create from grid"))
 			{
-				auto& tex = m_Asset->GetInstance()->GetTexture().Instance();
+				const auto& tex = m_Asset->GetInstance()->GetTexture().Instance();
 				bool useSize = m_GridMode == GridMode::Cellsize;
 				int x = useSize ? tex->GetWidth() / m_GridTileSize.x : m_Cols;
 				int y = useSize ? tex->GetHeight() / m_GridTileSize.y : m_Rows;

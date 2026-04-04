@@ -44,14 +44,11 @@
 
 #include <Networking/Components/NetRigidbody2D.h>
 #include <Networking/Components/NetTransform.h>
+#include <Networking/Events/NetConnectionEvent.h>
 #include <Networking/NetIdentity.h>
 #include <Networking/NetDriver.h>
 #include <Networking/NetScene.h>
 #include <Platform/Steam/SteamNetDriver.h>
-
-#include "Game/PlayerController.h"
-#include <Game/CameraController.h>
-#include <Game/PlayerSpawn.h>
 
 #include <Reflection/BClass.h>
 
@@ -103,79 +100,12 @@ void EditorState::OnEnter()
 	std::shared_ptr<NetDriver> network = std::make_shared<SteamNetDriver>();
 	ServiceLocator::Register<NetDriver>(network);
 
-	GameObject camera = scene.Instantiate({ 0.f, 0.f, 1.f });
-	camera.AddComponent<CameraComponent>(Camera(10.f, 2.f, 0.1f, 1.f), false).Active = true;
-	camera.GetComponent<NameComponent>().Name = "Camera";
-	m_SelectionContext.Set(camera);
-
 	m_SceneContext.Set(&scene);
 	m_pSelectedScene = &scene;
 	
 	AssetRef<SpriteAtlasAsset> atlas = assetLib.Import<SpriteAtlasAsset>("game/Blue_witch/B_witch_atlas_compact.bsa");
 	assetLib.Import<TilemapAsset>("game/Arena/Arena-tilemap.btm");
 	assetLib.Import<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa");
-	//player
-	//for (int i = 2; i < 3; ++i)
-	//{
-	//	GameObject quad = scene.Instantiate(UUID(i));
-	//	SpriteRendererComponent& sprite = quad.AddComponent<SpriteRendererComponent>();
-	//	sprite.SpriteAtlasHandle = atlas->GetHandle();
-	//	sprite.Sprite = 0;
-	//
-	//	SpriteAnimatorComponent& animator = quad.AddComponent<SpriteAnimatorComponent>();
-	//	animator.Clip = 0;
-	//	animator.Atlas = atlas->GetInstance();
-	//	animator.pRenderer = quad;
-	//
-	//	BoxCollider2D& col = quad.AddComponent<BoxCollider2D>();
-	//	col.Size = { 0.8f, 1.f };
-	//
-	//	Rigidbody2D& rb = quad.AddComponent<Rigidbody2D>();
-	//	rb.Type = (int)Boon::Rigidbody2D::BodyType::Dynamic;
-	//	rb.GravityScale = 0.f;
-	//	rb.FixedRotation = true;
-	//
-	//	quad.AddComponent<PlayerController>();
-	//	quad.GetComponent<NameComponent>().Name = "Player";
-	//
-	//	quad.AddComponent<NetIdentity>();
-	//	//quad.AddComponent<NetTransform>();
-	//
-	//	camera.AddComponent<CameraController>().SetTarget(quad);
-	//}
-	{
-		GameObject playerSpawner = scene.Instantiate();
-		playerSpawner.AddComponent<NetIdentity>();
-		playerSpawner.AddComponent<PlayerSpawn>();
-	}
-
-	
-	//floor
-	{
-		GameObject floor = scene.Instantiate({ 0.f, -1.f, 0.f });
-	
-		BoxCollider2D& floorCol = floor.AddComponent<BoxCollider2D>();
-		floorCol.Size = { 10.f, 0.2f };
-	
-		Rigidbody2D& floorRb = floor.AddComponent<Rigidbody2D>();
-		floorRb.Type = (int)Boon::Rigidbody2D::BodyType::Static;
-	
-		floor.GetComponent<NameComponent>().Name = "Floor";
-	}
-	
-	//trigger
-	{
-		GameObject trigger = scene.Instantiate({ -1.f, 0.f, 0.f });
-	
-		BoxCollider2D& floorCol = trigger.AddComponent<BoxCollider2D>();
-		floorCol.Size = { 1.f, 1.f };
-		floorCol.IsTrigger = true;
-	
-		Rigidbody2D& floorRb = trigger.AddComponent<Rigidbody2D>();
-		floorRb.Type = (int)Boon::Rigidbody2D::BodyType::Static;
-	
-		trigger.GetComponent<NameComponent>().Name = "Trigger";
-	}
 
 	m_SceneChangedEvent = eventBus.Subscribe<SceneChangedEvent>([this](const SceneChangedEvent& e)
 		{

@@ -556,34 +556,46 @@ static void emitGeneratedFile(const std::string& output, const std::vector<Refle
 // ============================================================================
 int main(int argc, char** argv)
 {
-    bool verbose = false;
     const std::string usage =
-        "Usage: BClassGenerator [--minimal] <output.cpp> <includeDir1> [includeDir2 ...] [--verbose]\n";
+        "Usage: BClassGenerator [--minimal] [--verbose] <output.cpp> <includeDir1> [includeDir2 ...]\n";
 
     if (argc < 3) {
         std::cout << usage;
         return 1;
     }
 
-    const std::string firstArg = argv[1];
-    int startIndex = 1;
+    bool verboseFlag = false;
+    bool minimalFlag = false;
 
-    if (firstArg == "--minimal") {
-        g_BoonMinimal = true;
-        startIndex++;
-        std::cout << "[BClassGenerator] Running in minimal mode\n";
+    std::string output;
+    std::vector<std::string> includeDirs;
+
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+
+        if (arg == "--minimal") {
+            minimalFlag = true;
+        }
+        else if (arg == "--verbose") {
+            verboseFlag = true;
+        }
+        else if (output.empty()) {
+            output = arg;
+        }
+        else {
+            includeDirs.push_back(arg);
+        }
     }
 
-    std::vector<std::string> includeDirs;
-    bool verboseFlag = false;
+    if (output.empty() || includeDirs.empty()) {
+        std::cout << usage;
+        return 1;
+    }
 
-    const std::string output = argv[startIndex];
-    for (int i = startIndex + 1; i < argc; ++i) {
-        std::string arg = argv[i];
-        if (arg == "--verbose")
-            verboseFlag = true;
-        else
-            includeDirs.push_back(arg);
+    g_BoonMinimal = minimalFlag;
+
+    if (minimalFlag) {
+        std::cout << "[BClassGenerator] Running in minimal mode\n";
     }
 
     auto classes = parseSourceFiles(includeDirs, verboseFlag);

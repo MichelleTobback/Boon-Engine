@@ -19,18 +19,18 @@ namespace Boon
 
 using namespace Boon;
 
-namespace Sandbox
+namespace Runtime
 {
-	class SandboxState final : public AppState
+	class RuntimeState final : public AppState
 	{
 	public:
-		SandboxState();
-		~SandboxState();
+		RuntimeState();
+		~RuntimeState();
 
-		SandboxState(const SandboxState& other) = default;
-		SandboxState(SandboxState&& other) = default;
-		SandboxState& operator=(const SandboxState& other) = default;
-		SandboxState& operator=(SandboxState&& other) = default;
+		RuntimeState(const RuntimeState& other) = default;
+		RuntimeState(RuntimeState&& other) = default;
+		RuntimeState& operator=(const RuntimeState& other) = default;
+		RuntimeState& operator=(RuntimeState&& other) = default;
 
 		virtual void OnEnter() override;
 		virtual void OnUpdate() override;
