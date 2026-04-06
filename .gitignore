@@ -78,5 +78,6 @@ out/
 generated/
 
 # --- Exception: allow GameNetworkingSockets binaries ---
-!Boon/external/GameNetworkingSockets/bin/Release
-!Boon/external/GameNetworkingSockets/bin/Debug
+!Boon/external/**/bin
+!Boon/external/**/Debug
+!Boon/external/**/Release
