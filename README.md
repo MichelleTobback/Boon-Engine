@@ -66,6 +66,40 @@ build/bin/Release/Editor/Editor.exe
 ## Examples
 Small snippets that demonstrate the usage of the engine
 
+Reflected Component / Class / Script
+```cpp
+BCLASS(Name="Player controller", Category="Components")
+struct PlayerController
+{
+public:
+    BCLASS_BODY()
+
+    PlayerController() = default;
+
+    // optional functions
+    void Awake(GameObject gameObject);
+    void OnEndPlay(GameObject gameObject);
+    void Update(GameObject gameObject);
+    void FixedUpdate(GameObject gameObject);
+    void OnBeginOverlap(GameObject gameObject, GameObject other);
+    void OnEndOverlap(GameObject gameObject, GameObject other);
+
+    // reflected functions
+    BFUNCTION(RPC="Server")
+    void Jump_Server();
+    BFUNCTION()
+    void Jump();
+
+    BFUNCTION(RPC = "Server")
+    void Move_Server(glm::vec2 dir);
+    void Move(const glm::vec2& dir);
+
+private:
+    BPROPERTY(Name="speed", Category = "movement", RangeMin = 0.1, RangeMax = 20.f)
+    float m_MovementSpeed{ 2.f };
+};
+```
+
 Create and load a `Scene`
 ```cpp
 SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
