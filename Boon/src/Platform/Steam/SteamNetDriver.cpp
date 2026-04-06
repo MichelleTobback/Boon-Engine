@@ -71,7 +71,13 @@ namespace Boon
                 return false;
             }
 
-            BOON_LOG("Server listening on port " + std::to_string(addr.m_port));
+            SteamNetworkingIPAddr boundAddr;
+            if (m_Interface->GetListenSocketAddress(m_ListenSocket, &boundAddr))
+            {
+                char buf[SteamNetworkingIPAddr::k_cchMaxString];
+                boundAddr.ToString(buf, sizeof(buf), true);
+                BOON_LOG("Listen socket bound as " + std::string(buf));
+            }
         }
 
         s_Instance = this;
@@ -139,23 +145,29 @@ namespace Boon
     bool SteamNetDriver::Connect(const char* host, uint16_t port)
     {
         SteamNetworkingIPAddr addr;
-        std::string ip = std::string(host);
+        std::string ip = host;
         if (ip == "localhost") ip = "127.0.0.1";
-        addr.ParseString((ip + ":" + std::to_string(port)).c_str());
+
+        if (!addr.ParseString((ip + ":" + std::to_string(port)).c_str()))
+        {
+            BOON_LOG_ERROR("Invalid server address: " + ip + ":" + std::to_string(port));
+            return false;
+        }
 
         SteamNetworkingConfigValue_t opt;
-        opt.SetPtr(k_ESteamNetworkingConfig_Callback_ConnectionStatusChanged, (void*)SteamNetDriver::StaticOnConnectionStatusChanged);
+        opt.SetPtr(
+            k_ESteamNetworkingConfig_Callback_ConnectionStatusChanged,
+            (void*)SteamNetDriver::StaticOnConnectionStatusChanged
+        );
 
-        HSteamNetConnection hConn =
-            m_Interface->ConnectByIPAddress(addr, 1, &opt);
-
+        HSteamNetConnection hConn = m_Interface->ConnectByIPAddress(addr, 1, &opt);
         if (hConn == k_HSteamNetConnection_Invalid)
         {
             BOON_LOG_ERROR("Failed to connect to server");
             return false;
         }
 
-        BOON_LOG("Connecting to server at port " + std::to_string(m_Settings.Port) + " ...");
+        BOON_LOG("Connecting to server at " + ip + ":" + std::to_string(port) + " ...");
         return true;
     }
 
@@ -321,23 +333,37 @@ namespace Boon
         switch (info->m_info.m_eState)
         {
         case k_ESteamNetworkingConnectionState_Connecting:
-            if (!IsClient())
-                AcceptConnection(hConn);
-            break;
-
-        case k_ESteamNetworkingConnectionState_Connected:
         {
-            OnConnected(hConn);
+            // Accept only inbound connections that arrived on our listen socket
+            if (info->m_info.m_hListenSocket != k_HSteamListenSocket_Invalid)
+            {
+                EResult r = m_Interface->AcceptConnection(hConn);
+                if (r != k_EResultOK)
+                {
+                    BOON_LOG_ERROR("AcceptConnection failed");
+                    m_Interface->CloseConnection(hConn, 0, "Accept failed", false);
+                    return;
+                }
+
+                if (!m_Interface->SetConnectionPollGroup(hConn, m_PollGroup))
+                {
+                    BOON_LOG_ERROR("SetConnectionPollGroup failed");
+                    m_Interface->CloseConnection(hConn, 0, "Poll group failed", false);
+                    return;
+                }
+            }
             break;
         }
+
+        case k_ESteamNetworkingConnectionState_Connected:
+            OnConnected(hConn);
+            break;
 
         case k_ESteamNetworkingConnectionState_ClosedByPeer:
         case k_ESteamNetworkingConnectionState_ProblemDetectedLocally:
         case k_ESteamNetworkingConnectionState_Dead:
-        {
             OnDisconnected(hConn);
             break;
-        }
 
         default:
             break;
