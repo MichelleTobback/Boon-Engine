@@ -1,11 +1,5 @@
 # Boon Engine
 
-Lightweight, modular C++ game engine with multiplayer networking, ECS, asset management and editor tooling.
-
----
-
-## What this project does
-
 `Boon Engine` is a cross-platform C++ game engine designed for rapid iteration and multiplayer development. It provides:
 
 - An entity-component-system (ECS) foundation (using `entt`).
@@ -20,6 +14,10 @@ See the `Boon` folder for the engine core and `Editor`, `Sandbox`, `Runtime` mod
 
 
 ---
+
+## Documentation
+
+- API reference (Doxygen): `docs/doxygen/html/index.html`
 
 ## Quick start
 
@@ -67,8 +65,4 @@ build\\bin\\Release\\Editor\\Editor.exe
 <img width="1618" height="779" alt="Screenshot_2025-11-20_120335" src="https://github.com/user-attachments/assets/0292dbd2-dcb3-4edd-9a3d-ef6e21cb40e5" />
 
 ---
-
-## Documentation
-
-- API reference (Doxygen): `docs/html/index.html` — the generated Doxygen HTML output. If you publish the docs (for example to GitHub Pages), replace this link with your hosted URL.
 
