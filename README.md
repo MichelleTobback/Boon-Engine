@@ -1,6 +1,6 @@
 # Boon Engine
 
-[![Build: GitHub Actions](https://img.shields.io/github/actions/workflow/status/MichelleTobback/Boon-Engine/ci.yml?branch=main&label=build&logo=github)](https://github.com/MichelleTobback/Boon-Engine/actions)
+[![Docs CI: GitHub Actions](https://img.shields.io/github/actions/workflow/status/MichelleTobback/Boon-Engine/doxygen-pages.yml?branch=main&label=docs%20ci&logo=github)](https://github.com/MichelleTobback/Boon-Engine/actions/workflows/doxygen-pages.yml)
 [![License](https://img.shields.io/github/license/MichelleTobback/Boon-Engine.svg)](LICENSE)
 [![C++ Standard](https://img.shields.io/badge/C%2B%2B-20-brightgreen.svg)](https://isocpp.org/std/the-standard)
 [![Docs (Doxygen)](https://img.shields.io/badge/docs-Doxygen-blue.svg)](https://michelletobback.github.io/Boon-Engine/)
