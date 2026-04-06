@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_module_a_p_i_8h" kind="file" language="C++">
+    <compoundname>ModuleAPI.h</compoundname>
+    <includes local="no">string</includes>
+    <includedby refid="_module_library_8h" local="yes">Module/ModuleLibrary.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>Module/ModuleAPI.h</label>
+        <link refid="_module_a_p_i_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>string</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>Module/ModuleAPI.h</label>
+        <link refid="_module_a_p_i_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Module/ModuleLibrary.h</label>
+        <link refid="_module_library_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_boon_1_1_module_context" prot="public">Boon::ModuleContext</innerclass>
+    <innerclass refid="struct_boon_1_1_module_info" prot="public">Boon::ModuleInfo</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="6"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_b_class_registry" kindref="compound">BClassRegistry</ref>;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_net_rep_registry" kindref="compound">NetRepRegistry</ref>;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_asset_importer_registry" kindref="compound">AssetImporterRegistry</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_service_registry" kindref="compound">ServiceRegistry</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="struct_boon_1_1_module_context" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_module_context" kindref="compound">ModuleContext</ref></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="14" refid="struct_boon_1_1_module_context_1ae30fe5f706b8d470f217a62f1b2e6ed0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_registry" kindref="compound">BClassRegistry</ref>*<sp/><ref refid="struct_boon_1_1_module_context_1ae30fe5f706b8d470f217a62f1b2e6ed0" kindref="member">BClasses</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="15" refid="struct_boon_1_1_module_context_1a085267aacab16c84f4e0720be9a04b35" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_rep_registry" kindref="compound">NetRepRegistry</ref>*<sp/><ref refid="struct_boon_1_1_module_context_1a085267aacab16c84f4e0720be9a04b35" kindref="member">NetReps</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="16" refid="struct_boon_1_1_module_context_1aa5659a58d847a0c1029c7923863515cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_module_context_1aa5659a58d847a0c1029c7923863515cb" kindref="member">ServiceRegistry</ref>*<sp/><ref refid="struct_boon_1_1_module_context_1aa5659a58d847a0c1029c7923863515cb" kindref="member">ServiceRegistry</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="struct_boon_1_1_module_info" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_module_info" kindref="compound">ModuleInfo</ref></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="21" refid="struct_boon_1_1_module_info_1a17f605c6b39ada74b20f040aab78755c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="struct_boon_1_1_module_info_1a17f605c6b39ada74b20f040aab78755c" kindref="member">Name</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="22" refid="struct_boon_1_1_module_info_1a81254fac27b84da5a337f8bda422f2c1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_module_info_1a81254fac27b84da5a337f8bda422f2c1" kindref="member">VersionMajor</ref><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="23" refid="struct_boon_1_1_module_info_1ad984f376d84714cca27a2ff3b09b1a0d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_module_info_1ad984f376d84714cca27a2ff3b09b1a0d" kindref="member">VersionMinor</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="namespace_boon_1a03f32bedd25a1eb3c43d393a918028f9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_boon_1a03f32bedd25a1eb3c43d393a918028f9" kindref="member">GetModuleInfoFn</ref><sp/>=<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_module_info" kindref="compound">ModuleInfo</ref>*<sp/>(*)();</highlight></codeline>
+<codeline lineno="27" refid="namespace_boon_1aa5e9df2efa85c6e830618f01f228ee6c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_boon_1aa5e9df2efa85c6e830618f01f228ee6c" kindref="member">RegisterModuleFn</ref><sp/>=<sp/>bool<sp/>(*)(<ref refid="struct_boon_1_1_module_context" kindref="compound">ModuleContext</ref>*);</highlight></codeline>
+<codeline lineno="28" refid="namespace_boon_1a74887f765fb34d3a508d15754afaacb9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_boon_1a74887f765fb34d3a508d15754afaacb9" kindref="member">UnregisterModuleFn</ref><sp/>=<sp/>void<sp/>(*)(<ref refid="struct_boon_1_1_module_context" kindref="compound">ModuleContext</ref>*);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Module/ModuleAPI.h"/>
+  </compounddef>
+</doxygen>

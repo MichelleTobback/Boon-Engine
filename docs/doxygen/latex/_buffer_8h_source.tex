@@ -1,0 +1,118 @@
+\doxysection{Buffer.\+h}
+\hypertarget{_buffer_8h_source}{}\label{_buffer_8h_source}\index{Buffer.h@{Buffer.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <type\_traits>}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00008}00008\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00010}\doxymbox{\hyperlink{class_boon_1_1_buffer}{00010}}\ \ \ \ \ \textcolor{keyword}{class\ }Buffer}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00011}00011\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00012}00012\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00013}00013\ \ \ \ \ \ \ \ \ Buffer()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00015}00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ Buffer(\textcolor{keywordtype}{size\_t}\ size)}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ :\ m\_Data(size)}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ \{\}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ Buffer(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ data)}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ :\ m\_Data(data)}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00021}00021\ \ \ \ \ \ \ \ \ \{\}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00023}00023\ \ \ \ \ \ \ \ \ Buffer(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ data,\ \textcolor{keywordtype}{size\_t}\ size)}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ :\ m\_Data((uint8\_t*)data,\ (uint8\_t*)data\ +\ size)}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00025}00025\ \ \ \ \ \ \ \ \ \{\}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Write\ /\ Append\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Append(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ data,\ \textcolor{keywordtype}{size\_t}\ size)}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00029}00029\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ start\ =\ m\_Data.size();}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Data.resize(start\ +\ size);}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ std::memcpy(m\_Data.data()\ +\ start,\ data,\ size);}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00033}00033\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Append(\textcolor{keyword}{const}\ Buffer\&\ other)}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ start\ =\ m\_Data.size();}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Data.resize(start\ +\ other.Size());}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ std::memcpy(m\_Data.data()\ +\ start,\ other.Data(),\ other.Size());}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00040}00040\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Write(\textcolor{keyword}{const}\ T\&\ value)}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_trivially\_copyable<T>::value,}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Buffer::Write\ requires\ trivially\ copyable\ type"{}});}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ Append(\&value,\ \textcolor{keyword}{sizeof}(T));}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00049}00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ WriteRaw(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ data,\ \textcolor{keywordtype}{size\_t}\ size)}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00052}00052\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ Append(data,\ size);}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ WriteString(\textcolor{keyword}{const}\ std::string\&\ str)}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00057}00057\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ len\ =\ (uint32\_t)str.size();}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ Write<uint32\_t>(len);}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ WriteRaw(str.data(),\ len);}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00061}00061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Read\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00065}00065\ \ \ \ \ \ \ \ \ T\ Read(\textcolor{keywordtype}{size\_t}\&\ offset)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00066}00066\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_trivially\_copyable<T>::value,}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Buffer::Read\ requires\ trivially\ copyable\ type"{}});}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ T\ val\{\};}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ std::memcpy(\&val,\ m\_Data.data()\ +\ offset,\ \textcolor{keyword}{sizeof}(T));}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ offset\ +=\ \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ val;}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00074}00074\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ ReadRaw(\textcolor{keywordtype}{void}*\ out,\ \textcolor{keywordtype}{size\_t}\ size,\ \textcolor{keywordtype}{size\_t}\&\ offset)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00077}00077\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ std::memcpy(out,\ m\_Data.data()\ +\ offset,\ size);}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ offset\ +=\ size;}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00080}00080\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00082}00082\ \ \ \ \ \ \ \ \ std::string\ ReadString(\textcolor{keywordtype}{size\_t}\&\ offset)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00083}00083\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ len\ =\ Read<uint32\_t>(offset);}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ str;}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ str.resize(len);}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ ReadRaw(str.data(),\ len,\ offset);}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ str;}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00091}00091\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Utility\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00094}00094\ \ \ \ \ \ \ \ \ uint8\_t*\ Data()\ \{\ \textcolor{keywordflow}{return}\ m\_Data.data();\ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ Data()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Data.data();\ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00097}00097\ \ \ \ \ \ \ \ \ uint8\_t*\ DataAt(uint32\_t\ pos)\ \{\ \textcolor{keywordflow}{return}\ m\_Data.data()\ +\ pos;\ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ DataAt(uint32\_t\ pos)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Data.data()\ +\ pos;\ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ Size()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Data.size();\ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ Empty()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Data.empty();\ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00103}00103\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Clear()\ \{\ m\_Data.clear();\ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Reserve(\textcolor{keywordtype}{size\_t}\ cap)\ \{\ m\_Data.reserve(cap);\ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00106}00106\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\&\ Vector()\ \{\ \textcolor{keywordflow}{return}\ m\_Data;\ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ Vector()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Data;\ \}}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00109}00109\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00110}00110\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ m\_Data;}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00111}00111\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_buffer_8h_source_l00112}00112\ \}}
+
+\end{DoxyCode}

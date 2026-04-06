@@ -1,0 +1,100 @@
+\doxysection{Boon::\+Renderer Class Reference}
+\hypertarget{class_boon_1_1_renderer}{}\label{class_boon_1_1_renderer}\index{Boon::Renderer@{Boon::Renderer}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_boon_1_1_renderer_a7bd9ae221566bdf95753e0ff32cace04}\label{class_boon_1_1_renderer_a7bd9ae221566bdf95753e0ff32cace04} 
+static void {\bfseries Init} ()
+\begin{DoxyCompactList}\small\item\em Initialize the rendering subsystem. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_renderer_acf146208e61f0a2bee4b390bcf6e0799}\label{class_boon_1_1_renderer_acf146208e61f0a2bee4b390bcf6e0799} 
+static void {\bfseries Shutdown} ()
+\begin{DoxyCompactList}\small\item\em Shutdown the rendering subsystem and release resources. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_renderer_a70384ee16fab054ac79e17b8cbaeeb08}\label{class_boon_1_1_renderer_a70384ee16fab054ac79e17b8cbaeeb08} 
+static void {\bfseries Begin\+Frame} ()
+\begin{DoxyCompactList}\small\item\em Begin a new frame for rendering. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_renderer_ae3f8ab120777fd5299c5cc90f6fed9e0}\label{class_boon_1_1_renderer_ae3f8ab120777fd5299c5cc90f6fed9e0} 
+static void {\bfseries End\+Frame} ()
+\begin{DoxyCompactList}\small\item\em End the current frame and submit commands. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_renderer_a12c8e1f096a8c08e627e79d20342840b}\label{class_boon_1_1_renderer_a12c8e1f096a8c08e627e79d20342840b} 
+static void {\bfseries Set\+Viewport} (uint32\+\_\+t x, uint32\+\_\+t y, uint32\+\_\+t width, uint32\+\_\+t height)
+\begin{DoxyCompactList}\small\item\em Set the rendering viewport rectangle. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_renderer_aa4716e55eaa77ad9557e5f9b2de6d21d}\label{class_boon_1_1_renderer_aa4716e55eaa77ad9557e5f9b2de6d21d} 
+static void {\bfseries Set\+Clear\+Color} (const glm::\+vec4 \&color)
+\begin{DoxyCompactList}\small\item\em Set the clear color used when clearing the framebuffer. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_renderer_a96a770e3764ba19efd2d6edfd28979ab}\label{class_boon_1_1_renderer_a96a770e3764ba19efd2d6edfd28979ab} 
+static void {\bfseries Clear} ()
+\begin{DoxyCompactList}\small\item\em Clear the current framebuffer using the configured clear color. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{class_boon_1_1_renderer_a561c7283061878ac1f0d410dd8c9e380}{Draw\+Indexed}} (const std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_vertex_input}{Vertex\+Input}} $>$ \&vertex\+Input, uint32\+\_\+t index\+Count=0)
+\begin{DoxyCompactList}\small\item\em Draw geometry using indexed primitives. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{class_boon_1_1_renderer_a3e2f17fd76179ab4ab5ff55b6505882e}{Draw\+Arrays}} (const std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_vertex_input}{Vertex\+Input}} $>$ \&vertex\+Input, uint32\+\_\+t index\+Count=0)
+\begin{DoxyCompactList}\small\item\em Draw arrays (non-\/indexed) geometry. \end{DoxyCompactList}\item 
+static void \doxymbox{\hyperlink{class_boon_1_1_renderer_a69df4da6b7c124ec4394d1948c9aeab7}{Draw\+Lines}} (const std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_vertex_input}{Vertex\+Input}} $>$ \&vertex\+Input, uint32\+\_\+t line\+Count=0)
+\begin{DoxyCompactList}\small\item\em Draw line primitives. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_renderer_8h_source_l00010}{10}} of file \doxymbox{\hyperlink{_renderer_8h_source}{Renderer.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_renderer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_renderer_a3e2f17fd76179ab4ab5ff55b6505882e}\index{Boon::Renderer@{Boon::Renderer}!DrawArrays@{DrawArrays}}
+\index{DrawArrays@{DrawArrays}!Boon::Renderer@{Boon::Renderer}}
+\doxysubsubsection{\texorpdfstring{DrawArrays()}{DrawArrays()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_renderer_a3e2f17fd76179ab4ab5ff55b6505882e} 
+void Boon::\+\+Renderer::\+\+Draw\+Arrays (\begin{DoxyParamCaption}\item[{const std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_vertex_input}{Vertex\+Input}} $>$ \&}]{vertex\+Input}{, }\item[{uint32\+\_\+t}]{index\+Count}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Draw arrays (non-\/indexed) geometry. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex\+Input} & Vertex input describing buffers and layout. \\
+\hline
+{\em index\+Count} & Number of vertices to draw. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_renderer_a561c7283061878ac1f0d410dd8c9e380}\index{Boon::Renderer@{Boon::Renderer}!DrawIndexed@{DrawIndexed}}
+\index{DrawIndexed@{DrawIndexed}!Boon::Renderer@{Boon::Renderer}}
+\doxysubsubsection{\texorpdfstring{DrawIndexed()}{DrawIndexed()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_renderer_a561c7283061878ac1f0d410dd8c9e380} 
+void Boon::\+\+Renderer::\+\+Draw\+Indexed (\begin{DoxyParamCaption}\item[{const std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_vertex_input}{Vertex\+Input}} $>$ \&}]{vertex\+Input}{, }\item[{uint32\+\_\+t}]{index\+Count}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Draw geometry using indexed primitives. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex\+Input} & Vertex input describing vertex/\+index buffers and layout. \\
+\hline
+{\em index\+Count} & Number of indices to draw. If zero, the vertex\+Input may provide a default. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_renderer_a69df4da6b7c124ec4394d1948c9aeab7}\index{Boon::Renderer@{Boon::Renderer}!DrawLines@{DrawLines}}
+\index{DrawLines@{DrawLines}!Boon::Renderer@{Boon::Renderer}}
+\doxysubsubsection{\texorpdfstring{DrawLines()}{DrawLines()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_renderer_a69df4da6b7c124ec4394d1948c9aeab7} 
+void Boon::\+\+Renderer::\+\+Draw\+Lines (\begin{DoxyParamCaption}\item[{const std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_vertex_input}{Vertex\+Input}} $>$ \&}]{vertex\+Input}{, }\item[{uint32\+\_\+t}]{line\+Count}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Draw line primitives. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex\+Input} & Vertex input describing buffers and layout. \\
+\hline
+{\em line\+Count} & Number of lines to draw. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Renderer.\+h\end{DoxyCompactItemize}

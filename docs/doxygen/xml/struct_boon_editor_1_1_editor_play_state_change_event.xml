@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_editor_1_1_editor_play_state_change_event" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>BoonEditor::EditorPlayStateChangeEvent</compoundname>
+    <basecompoundref refid="struct_boon_1_1_i_event" prot="public" virt="non-virtual">Boon::IEvent</basecompoundref>
+    <includes refid="_editor_event_8h" local="no">Event/EditorEvent.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_editor_1_1_editor_play_state_change_event_1ae2df8e8747291d6ceed77f1a15ce2cad" prot="public" static="no" mutable="no">
+        <type><ref refid="namespace_boon_editor_1af46b44d156534852eaff07a015ed8215" kindref="member">EditorPlayState</ref></type>
+        <definition>EditorPlayState BoonEditor::EditorPlayStateChangeEvent::State</definition>
+        <argsstring></argsstring>
+        <name>State</name>
+        <qualifiedname>BoonEditor::EditorPlayStateChangeEvent::State</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Event/EditorEvent.h" line="19" column="17" bodyfile="Event/EditorEvent.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_boon_editor_1_1_editor_play_state_change_event_1ab4d50bf7e9e4a03e2f273c3996d63a1d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::EditorPlayStateChangeEvent::EditorPlayStateChangeEvent</definition>
+        <argsstring>(EditorPlayState state)</argsstring>
+        <name>EditorPlayStateChangeEvent</name>
+        <qualifiedname>BoonEditor::EditorPlayStateChangeEvent::EditorPlayStateChangeEvent</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_editor_1af46b44d156534852eaff07a015ed8215" kindref="member">EditorPlayState</ref></type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Event/EditorEvent.h" line="13" column="1" bodyfile="Event/EditorEvent.h" bodystart="13" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_editor_1_1_editor_play_state_change_event_1af17da4ea1cecdd30788b7b8b55843a54" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual BoonEditor::EditorPlayStateChangeEvent::~EditorPlayStateChangeEvent</definition>
+        <argsstring>()=default</argsstring>
+        <name>~EditorPlayStateChangeEvent</name>
+        <qualifiedname>BoonEditor::EditorPlayStateChangeEvent::~EditorPlayStateChangeEvent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Event/EditorEvent.h" line="15" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_editor_1_1_editor_play_state_change_event_1a50e9093d029623e780cec1420e2d4f7a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="namespace_boon_1aee82d7ef047ab4695310ded9fa96793d" kindref="member">EventCategory</ref></type>
+        <definition>virtual EventCategory BoonEditor::EditorPlayStateChangeEvent::GetCategory</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetCategory</name>
+        <qualifiedname>BoonEditor::EditorPlayStateChangeEvent::GetCategory</qualifiedname>
+        <reimplements refid="struct_boon_1_1_i_event_1a93df703c63c898d542cea03d6df35ee2">GetCategory</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Event/EditorEvent.h" line="17" column="23" bodyfile="Event/EditorEvent.h" bodystart="17" bodyend="17"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Boon::IEvent</label>
+        <link refid="struct_boon_1_1_i_event"/>
+      </node>
+      <node id="1">
+        <label>BoonEditor::EditorPlayStateChangeEvent</label>
+        <link refid="struct_boon_editor_1_1_editor_play_state_change_event"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::IEvent</label>
+        <link refid="struct_boon_1_1_i_event"/>
+      </node>
+      <node id="1">
+        <label>BoonEditor::EditorPlayStateChangeEvent</label>
+        <link refid="struct_boon_editor_1_1_editor_play_state_change_event"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Event/EditorEvent.h" line="11" column="1" bodyfile="Event/EditorEvent.h" bodystart="12" bodyend="20"/>
+    <listofallmembers>
+      <member refid="struct_boon_editor_1_1_editor_play_state_change_event_1ab4d50bf7e9e4a03e2f273c3996d63a1d" prot="public" virt="non-virtual"><scope>BoonEditor::EditorPlayStateChangeEvent</scope><name>EditorPlayStateChangeEvent</name></member>
+      <member refid="struct_boon_editor_1_1_editor_play_state_change_event_1a50e9093d029623e780cec1420e2d4f7a" prot="public" virt="virtual"><scope>BoonEditor::EditorPlayStateChangeEvent</scope><name>GetCategory</name></member>
+      <member refid="struct_boon_editor_1_1_editor_play_state_change_event_1ae2df8e8747291d6ceed77f1a15ce2cad" prot="public" virt="non-virtual"><scope>BoonEditor::EditorPlayStateChangeEvent</scope><name>State</name></member>
+      <member refid="struct_boon_editor_1_1_editor_play_state_change_event_1af17da4ea1cecdd30788b7b8b55843a54" prot="public" virt="virtual"><scope>BoonEditor::EditorPlayStateChangeEvent</scope><name>~EditorPlayStateChangeEvent</name></member>
+      <member refid="struct_boon_1_1_i_event_1adb996e7f27838e0e7cb33c0d94d1cd16" prot="public" virt="virtual"><scope>BoonEditor::EditorPlayStateChangeEvent</scope><name>~IEvent</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

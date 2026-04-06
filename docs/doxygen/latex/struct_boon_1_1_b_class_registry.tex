@@ -1,0 +1,195 @@
+\doxysection{Boon::\+BClass\+Registry Struct Reference}
+\hypertarget{struct_boon_1_1_b_class_registry}{}\label{struct_boon_1_1_b_class_registry}\index{Boon::BClassRegistry@{Boon::BClassRegistry}}
+
+
+Registry holding \doxylink{struct_boon_1_1_b_class}{BClass} instances for reflected types.  
+
+
+
+
+{\ttfamily \+\#include $<$BClass.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{struct_boon_1_1_b_class_registry_a127d147f92842d2afba9ddaad38acc7e}{Register}} (\doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \texorpdfstring{$\ast$}{*}cls)
+\begin{DoxyCompactList}\small\item\em Register a \doxylink{struct_boon_1_1_b_class}{BClass} instance with the registry. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\void \doxymbox{\hyperlink{struct_boon_1_1_b_class_registry_ad1d0984d0ca036b17e4ac25af1c837d7}{Unregister}} ()
+\begin{DoxyCompactList}\small\item\em Unregister the type T from the registry. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_boon_1_1_b_class_registry_a40491169e4a4125d86afcda3562aa4fb}{Find}} (BClass\+ID id)
+\begin{DoxyCompactList}\small\item\em Find a \doxylink{struct_boon_1_1_b_class}{BClass} by its hashed id. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_boon_1_1_b_class_registry_a7e22ef6105a58282b821b8afdaab5d15}{Find}} (std::\+type\+\_\+index t)
+\begin{DoxyCompactList}\small\item\em Find a \doxylink{struct_boon_1_1_b_class}{BClass} by its std::\+type\+\_\+index. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\\doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_boon_1_1_b_class_registry_ae8200923a80236a3461b7a9cc2fb4602}{Find}} ()
+\begin{DoxyCompactList}\small\item\em Template convenience to find a \doxylink{struct_boon_1_1_b_class}{BClass} for type T. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Fn$>$ }\\void \doxymbox{\hyperlink{struct_boon_1_1_b_class_registry_a0c6746126c7bd8208e111a94ace06292}{For\+Each}} (Fn \&\&fn)
+\begin{DoxyCompactList}\small\item\em Iterate over all registered \doxylink{struct_boon_1_1_b_class}{BClass} instances. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_boon_1_1_b_class_registry_a81bb364f87ee631638bebcc6023f10dd}{Instantiate}} ()
+\begin{DoxyCompactList}\small\item\em Instantiate an object of type T using the registered create\+Instance callback. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_boon_1_1_delegate}{Delegate}}$<$ void(\doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \&)$>$ \& \doxymbox{\hyperlink{struct_boon_1_1_b_class_registry_ae892fdd009906b0250a8d117677aec91}{Get\+Listeners}} ()
+\begin{DoxyCompactList}\small\item\em Access the delegate invoked when classes are registered. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \doxymbox{\hyperlink{struct_boon_1_1_b_class_registry}{BClass\+Registry}} \& \doxymbox{\hyperlink{struct_boon_1_1_b_class_registry_aaf98573a809387088cf9ba5cd30cb30d}{Get}} ()
+\item 
+static void \doxymbox{\hyperlink{struct_boon_1_1_b_class_registry_a710cb04ac17db3987b7d8bc0368847eb}{Set\+Registry}} (\doxymbox{\hyperlink{struct_boon_1_1_b_class_registry}{BClass\+Registry}} \texorpdfstring{$\ast$}{*}p\+Registry)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Registry holding \doxylink{struct_boon_1_1_b_class}{BClass} instances for reflected types. 
+
+Provides lookup and iteration utilities and notifies listeners when classes are registered. 
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00329}{329}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{struct_boon_1_1_b_class_registry_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_boon_1_1_b_class_registry_ae8200923a80236a3461b7a9cc2fb4602}\index{Boon::BClassRegistry@{Boon::BClassRegistry}!Find@{Find}}
+\index{Find@{Find}!Boon::BClassRegistry@{Boon::BClassRegistry}}
+\doxysubsubsection{\texorpdfstring{Find()}{Find()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_registry_ae8200923a80236a3461b7a9cc2fb4602} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \texorpdfstring{$\ast$}{*} Boon::\+\+BClass\+Registry::\+\+Find (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Template convenience to find a \doxylink{struct_boon_1_1_b_class}{BClass} for type T. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00392}{392}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_registry_a40491169e4a4125d86afcda3562aa4fb}\index{Boon::BClassRegistry@{Boon::BClassRegistry}!Find@{Find}}
+\index{Find@{Find}!Boon::BClassRegistry@{Boon::BClassRegistry}}
+\doxysubsubsection{\texorpdfstring{Find()}{Find()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_registry_a40491169e4a4125d86afcda3562aa4fb} 
+\doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \texorpdfstring{$\ast$}{*} Boon::\+\+BClass\+Registry::\+\+Find (\begin{DoxyParamCaption}\item[{BClass\+ID}]{id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Find a \doxylink{struct_boon_1_1_b_class}{BClass} by its hashed id. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00370}{370}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_registry_a7e22ef6105a58282b821b8afdaab5d15}\index{Boon::BClassRegistry@{Boon::BClassRegistry}!Find@{Find}}
+\index{Find@{Find}!Boon::BClassRegistry@{Boon::BClassRegistry}}
+\doxysubsubsection{\texorpdfstring{Find()}{Find()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_registry_a7e22ef6105a58282b821b8afdaab5d15} 
+\doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \texorpdfstring{$\ast$}{*} Boon::\+\+BClass\+Registry::\+\+Find (\begin{DoxyParamCaption}\item[{std::\+type\+\_\+index}]{t}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Find a \doxylink{struct_boon_1_1_b_class}{BClass} by its std::\+type\+\_\+index. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00382}{382}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_registry_a0c6746126c7bd8208e111a94ace06292}\index{Boon::BClassRegistry@{Boon::BClassRegistry}!ForEach@{ForEach}}
+\index{ForEach@{ForEach}!Boon::BClassRegistry@{Boon::BClassRegistry}}
+\doxysubsubsection{\texorpdfstring{ForEach()}{ForEach()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_registry_a0c6746126c7bd8208e111a94ace06292} 
+template$<$typename Fn$>$ \\
+void Boon::\+\+BClass\+Registry::\+\+For\+Each (\begin{DoxyParamCaption}\item[{Fn \&\&}]{fn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Iterate over all registered \doxylink{struct_boon_1_1_b_class}{BClass} instances. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00401}{401}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_registry_aaf98573a809387088cf9ba5cd30cb30d}\index{Boon::BClassRegistry@{Boon::BClassRegistry}!Get@{Get}}
+\index{Get@{Get}!Boon::BClassRegistry@{Boon::BClassRegistry}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_registry_aaf98573a809387088cf9ba5cd30cb30d} 
+\doxymbox{\hyperlink{struct_boon_1_1_b_class_registry}{BClass\+Registry}} \& Boon::\+\+BClass\+Registry::\+\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00331}{331}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_registry_ae892fdd009906b0250a8d117677aec91}\index{Boon::BClassRegistry@{Boon::BClassRegistry}!GetListeners@{GetListeners}}
+\index{GetListeners@{GetListeners}!Boon::BClassRegistry@{Boon::BClassRegistry}}
+\doxysubsubsection{\texorpdfstring{GetListeners()}{GetListeners()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_registry_ae892fdd009906b0250a8d117677aec91} 
+\doxymbox{\hyperlink{class_boon_1_1_delegate}{Delegate}}$<$ void(\doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \&)$>$ \& Boon::\+\+BClass\+Registry::\+\+Get\+Listeners (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access the delegate invoked when classes are registered. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00424}{424}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_registry_a81bb364f87ee631638bebcc6023f10dd}\index{Boon::BClassRegistry@{Boon::BClassRegistry}!Instantiate@{Instantiate}}
+\index{Instantiate@{Instantiate}!Boon::BClassRegistry@{Boon::BClassRegistry}}
+\doxysubsubsection{\texorpdfstring{Instantiate()}{Instantiate()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_registry_a81bb364f87ee631638bebcc6023f10dd} 
+template$<$typename T$>$ \\
+T \texorpdfstring{$\ast$}{*} Boon::\+\+BClass\+Registry::\+\+Instantiate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Instantiate an object of type T using the registered create\+Instance callback. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to the newly created instance or nullptr if not available. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00413}{413}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_registry_a127d147f92842d2afba9ddaad38acc7e}\index{Boon::BClassRegistry@{Boon::BClassRegistry}!Register@{Register}}
+\index{Register@{Register}!Boon::BClassRegistry@{Boon::BClassRegistry}}
+\doxysubsubsection{\texorpdfstring{Register()}{Register()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_registry_a127d147f92842d2afba9ddaad38acc7e} 
+void Boon::\+\+BClass\+Registry::\+\+Register (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \texorpdfstring{$\ast$}{*}}]{cls}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Register a \doxylink{struct_boon_1_1_b_class}{BClass} instance with the registry. 
+
+Invokes any registered listeners after insertion. 
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00346}{346}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_registry_a710cb04ac17db3987b7d8bc0368847eb}\index{Boon::BClassRegistry@{Boon::BClassRegistry}!SetRegistry@{SetRegistry}}
+\index{SetRegistry@{SetRegistry}!Boon::BClassRegistry@{Boon::BClassRegistry}}
+\doxysubsubsection{\texorpdfstring{SetRegistry()}{SetRegistry()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_registry_a710cb04ac17db3987b7d8bc0368847eb} 
+void Boon::\+\+BClass\+Registry::\+\+Set\+Registry (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_boon_1_1_b_class_registry}{BClass\+Registry}} \texorpdfstring{$\ast$}{*}}]{p\+Registry}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00336}{336}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_registry_ad1d0984d0ca036b17e4ac25af1c837d7}\index{Boon::BClassRegistry@{Boon::BClassRegistry}!Unregister@{Unregister}}
+\index{Unregister@{Unregister}!Boon::BClassRegistry@{Boon::BClassRegistry}}
+\doxysubsubsection{\texorpdfstring{Unregister()}{Unregister()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_registry_ad1d0984d0ca036b17e4ac25af1c837d7} 
+template$<$typename T$>$ \\
+void Boon::\+\+BClass\+Registry::\+\+Unregister (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unregister the type T from the registry. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00357}{357}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+BClass.\+h\end{DoxyCompactItemize}

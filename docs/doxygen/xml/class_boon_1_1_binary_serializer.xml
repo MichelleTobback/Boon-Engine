@@ -1,0 +1,514 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_binary_serializer" kind="class" language="C++" prot="public">
+    <compoundname>Boon::BinarySerializer</compoundname>
+    <includes refid="_binary_serializer_8h" local="no">Serialization/BinarySerializer.h</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="class_boon_1_1_binary_serializer_1aa9522ec33608ab601f43f7211886b577" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Mode</name>
+        <qualifiedname>Boon::BinarySerializer::Mode</qualifiedname>
+        <enumvalue id="class_boon_1_1_binary_serializer_1aa9522ec33608ab601f43f7211886b577aaf96ab416602c6852b1ba5201feaacf6" prot="public">
+          <name>Writing</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_boon_1_1_binary_serializer_1aa9522ec33608ab601f43f7211886b577a26fccddf2f94b1685b184267996e10f8" prot="public">
+          <name>Reading</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="12" column="9" bodyfile="Serialization/BinarySerializer.h" bodystart="12" bodyend="12"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_binary_serializer_1a96e7cf2e078c1886acaca4995eba4ee1" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_binary_serializer_1aa9522ec33608ab601f43f7211886b577" kindref="member">Mode</ref></type>
+        <definition>Mode Boon::BinarySerializer::m_Mode</definition>
+        <argsstring></argsstring>
+        <name>m_Mode</name>
+        <qualifiedname>Boon::BinarySerializer::m_Mode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="159" column="14" bodyfile="Serialization/BinarySerializer.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_binary_serializer_1add95637d0f0a87554267ee059d20cc16" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_buffer" kindref="compound">Buffer</ref></type>
+        <definition>Buffer Boon::BinarySerializer::m_Buffer</definition>
+        <argsstring></argsstring>
+        <name>m_Buffer</name>
+        <qualifiedname>Boon::BinarySerializer::m_Buffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="160" column="16" bodyfile="Serialization/BinarySerializer.h" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_binary_serializer_1a72b57e121c3b9e039d2f01a282a8b776" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t Boon::BinarySerializer::m_WriteBitPos</definition>
+        <argsstring></argsstring>
+        <name>m_WriteBitPos</name>
+        <qualifiedname>Boon::BinarySerializer::m_WriteBitPos</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="161" column="16" bodyfile="Serialization/BinarySerializer.h" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_binary_serializer_1a0887dc0f9de42e535775015642963837" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t Boon::BinarySerializer::m_ReadBitPos</definition>
+        <argsstring></argsstring>
+        <name>m_ReadBitPos</name>
+        <qualifiedname>Boon::BinarySerializer::m_ReadBitPos</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="162" column="16" bodyfile="Serialization/BinarySerializer.h" bodystart="162" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1aad3eb1391bd9bfce8ec5d49eb8a46c80" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::BinarySerializer::BinarySerializer</definition>
+        <argsstring>()</argsstring>
+        <name>BinarySerializer</name>
+        <qualifiedname>Boon::BinarySerializer::BinarySerializer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="15" column="9" bodyfile="Serialization/BinarySerializer.h" bodystart="15" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1ad4855a334f6ba84d7bd3bd57360c6e97" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::BinarySerializer::BinarySerializer</definition>
+        <argsstring>(const uint8_t *data, size_t size)</argsstring>
+        <name>BinarySerializer</name>
+        <qualifiedname>Boon::BinarySerializer::BinarySerializer</qualifiedname>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="20" column="9" bodyfile="Serialization/BinarySerializer.h" bodystart="20" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1aa0367867aa72f0341ad81548920e323b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::BinarySerializer::BinarySerializer</definition>
+        <argsstring>(const Buffer &amp;buffer)</argsstring>
+        <name>BinarySerializer</name>
+        <qualifiedname>Boon::BinarySerializer::BinarySerializer</qualifiedname>
+        <param>
+          <type>const <ref refid="class_boon_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="27" column="9" bodyfile="Serialization/BinarySerializer.h" bodystart="27" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1a5c5622de42ff4a32bd428b636386f7eb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::BinarySerializer::WriteBits</definition>
+        <argsstring>(uint32_t value, int bitCount)</argsstring>
+        <name>WriteBits</name>
+        <qualifiedname>Boon::BinarySerializer::WriteBits</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>bitCount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="37" column="21" bodyfile="Serialization/BinarySerializer.h" bodystart="37" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1a325f8d3ee8f48c6118350036168dce30" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::BinarySerializer::AlignWrite</definition>
+        <argsstring>()</argsstring>
+        <name>AlignWrite</name>
+        <qualifiedname>Boon::BinarySerializer::AlignWrite</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="56" column="21" bodyfile="Serialization/BinarySerializer.h" bodystart="56" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1af3f0911af71fbc448d0b7427d739380c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::BinarySerializer::WriteBytes</definition>
+        <argsstring>(const void *data, size_t size)</argsstring>
+        <name>WriteBytes</name>
+        <qualifiedname>Boon::BinarySerializer::WriteBytes</qualifiedname>
+        <param>
+          <type>const void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="62" column="21" bodyfile="Serialization/BinarySerializer.h" bodystart="62" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1a28043940e4ec880385bbe9516988d705" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void Boon::BinarySerializer::Write</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>Write</name>
+        <qualifiedname>Boon::BinarySerializer::Write</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="78" column="21" bodyfile="Serialization/BinarySerializer.h" bodystart="78" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1a45e1106a85b6c24ccfe64b8d308b9b64" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::BinarySerializer::WriteString</definition>
+        <argsstring>(const std::string &amp;s)</argsstring>
+        <name>WriteString</name>
+        <qualifiedname>Boon::BinarySerializer::WriteString</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="83" column="21" bodyfile="Serialization/BinarySerializer.h" bodystart="83" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1aa9a642bc26b84b7e382615b97c631e2d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t Boon::BinarySerializer::ReadBits</definition>
+        <argsstring>(int bitCount)</argsstring>
+        <name>ReadBits</name>
+        <qualifiedname>Boon::BinarySerializer::ReadBits</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>bitCount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="93" column="25" bodyfile="Serialization/BinarySerializer.h" bodystart="93" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1acb6d3c72a5361548fd7bbbd7a9d9366a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::BinarySerializer::AlignRead</definition>
+        <argsstring>()</argsstring>
+        <name>AlignRead</name>
+        <qualifiedname>Boon::BinarySerializer::AlignRead</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="109" column="21" bodyfile="Serialization/BinarySerializer.h" bodystart="109" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1ad87af6a307ffa171b20c873b36274695" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::BinarySerializer::ReadBytes</definition>
+        <argsstring>(void *out, size_t size)</argsstring>
+        <name>ReadBytes</name>
+        <qualifiedname>Boon::BinarySerializer::ReadBytes</qualifiedname>
+        <param>
+          <type>void *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="115" column="21" bodyfile="Serialization/BinarySerializer.h" bodystart="115" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1a8b4dc378dc6d92fffb83d56a2e7e8346" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T Boon::BinarySerializer::Read</definition>
+        <argsstring>()</argsstring>
+        <name>Read</name>
+        <qualifiedname>Boon::BinarySerializer::Read</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="128" column="18" bodyfile="Serialization/BinarySerializer.h" bodystart="128" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1ab20cec2b46900a5549749bd564e0d439" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string Boon::BinarySerializer::ReadString</definition>
+        <argsstring>()</argsstring>
+        <name>ReadString</name>
+        <qualifiedname>Boon::BinarySerializer::ReadString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="135" column="28" bodyfile="Serialization/BinarySerializer.h" bodystart="135" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1a84ef1edb8c79f41f42fe06a06eb010e1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const uint8_t *</type>
+        <definition>const uint8_t * Boon::BinarySerializer::Data</definition>
+        <argsstring>() const</argsstring>
+        <name>Data</name>
+        <qualifiedname>Boon::BinarySerializer::Data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="146" column="30" bodyfile="Serialization/BinarySerializer.h" bodystart="146" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1a79b138d5cd8831d31629c12d6367105a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t Boon::BinarySerializer::Size</definition>
+        <argsstring>() const</argsstring>
+        <name>Size</name>
+        <qualifiedname>Boon::BinarySerializer::Size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="147" column="23" bodyfile="Serialization/BinarySerializer.h" bodystart="147" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1ab223094d853f39612b0a0269fec2868d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::BinarySerializer::HasRemaining</definition>
+        <argsstring>() const</argsstring>
+        <name>HasRemaining</name>
+        <qualifiedname>Boon::BinarySerializer::HasRemaining</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="148" column="21" bodyfile="Serialization/BinarySerializer.h" bodystart="148" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1ad37f935a12a029a9f4f27eefd5246724" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t Boon::BinarySerializer::GetWriteBitPos</definition>
+        <argsstring>() const</argsstring>
+        <name>GetWriteBitPos</name>
+        <qualifiedname>Boon::BinarySerializer::GetWriteBitPos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="150" column="23" bodyfile="Serialization/BinarySerializer.h" bodystart="150" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1afcc9b86338267907e4950bec98dcef0f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t Boon::BinarySerializer::GetReadBitPos</definition>
+        <argsstring>() const</argsstring>
+        <name>GetReadBitPos</name>
+        <qualifiedname>Boon::BinarySerializer::GetReadBitPos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="151" column="23" bodyfile="Serialization/BinarySerializer.h" bodystart="151" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1a9533460f366d34d141ded77d3f008eb6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+        <definition>Buffer &amp; Boon::BinarySerializer::GetBuffer</definition>
+        <argsstring>()</argsstring>
+        <name>GetBuffer</name>
+        <qualifiedname>Boon::BinarySerializer::GetBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="153" column="23" bodyfile="Serialization/BinarySerializer.h" bodystart="153" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1aaaff8101455e40962a349d44b43483d9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="class_boon_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+        <definition>const Buffer &amp; Boon::BinarySerializer::GetBuffer</definition>
+        <argsstring>() const</argsstring>
+        <name>GetBuffer</name>
+        <qualifiedname>Boon::BinarySerializer::GetBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="154" column="29" bodyfile="Serialization/BinarySerializer.h" bodystart="154" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1a7f6d7f073f205c57932f63f4ba6c3ac2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_binary_serializer_1aa9522ec33608ab601f43f7211886b577" kindref="member">Mode</ref></type>
+        <definition>Mode Boon::BinarySerializer::GetMode</definition>
+        <argsstring>() const</argsstring>
+        <name>GetMode</name>
+        <qualifiedname>Boon::BinarySerializer::GetMode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="156" column="21" bodyfile="Serialization/BinarySerializer.h" bodystart="156" bodyend="156"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1a6c19f09ecbd8622c58f07ea7224feaa6" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::BinarySerializer::EnsureWriting</definition>
+        <argsstring>() const</argsstring>
+        <name>EnsureWriting</name>
+        <qualifiedname>Boon::BinarySerializer::EnsureWriting</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="164" column="21" bodyfile="Serialization/BinarySerializer.h" bodystart="164" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_binary_serializer_1acadc88441d58832cfc8961698d0cbd5c" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::BinarySerializer::EnsureReading</definition>
+        <argsstring>() const</argsstring>
+        <name>EnsureReading</name>
+        <qualifiedname>Boon::BinarySerializer::EnsureReading</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Serialization/BinarySerializer.h" line="169" column="21" bodyfile="Serialization/BinarySerializer.h" bodystart="169" bodyend="172"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Serialization/BinarySerializer.h" line="9" column="5" bodyfile="Serialization/BinarySerializer.h" bodystart="10" bodyend="173"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_binary_serializer_1acb6d3c72a5361548fd7bbbd7a9d9366a" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>AlignRead</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1a325f8d3ee8f48c6118350036168dce30" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>AlignWrite</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1aad3eb1391bd9bfce8ec5d49eb8a46c80" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>BinarySerializer</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1ad4855a334f6ba84d7bd3bd57360c6e97" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>BinarySerializer</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1aa0367867aa72f0341ad81548920e323b" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>BinarySerializer</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1a84ef1edb8c79f41f42fe06a06eb010e1" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>Data</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1acadc88441d58832cfc8961698d0cbd5c" prot="private" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>EnsureReading</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1a6c19f09ecbd8622c58f07ea7224feaa6" prot="private" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>EnsureWriting</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1a9533460f366d34d141ded77d3f008eb6" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>GetBuffer</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1aaaff8101455e40962a349d44b43483d9" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>GetBuffer</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1a7f6d7f073f205c57932f63f4ba6c3ac2" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>GetMode</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1afcc9b86338267907e4950bec98dcef0f" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>GetReadBitPos</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1ad37f935a12a029a9f4f27eefd5246724" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>GetWriteBitPos</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1ab223094d853f39612b0a0269fec2868d" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>HasRemaining</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1add95637d0f0a87554267ee059d20cc16" prot="private" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>m_Buffer</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1a96e7cf2e078c1886acaca4995eba4ee1" prot="private" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>m_Mode</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1a0887dc0f9de42e535775015642963837" prot="private" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>m_ReadBitPos</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1a72b57e121c3b9e039d2f01a282a8b776" prot="private" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>m_WriteBitPos</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1aa9522ec33608ab601f43f7211886b577" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>Mode</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1a8b4dc378dc6d92fffb83d56a2e7e8346" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>Read</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1aa9a642bc26b84b7e382615b97c631e2d" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>ReadBits</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1ad87af6a307ffa171b20c873b36274695" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>ReadBytes</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1ab20cec2b46900a5549749bd564e0d439" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>ReadString</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1a79b138d5cd8831d31629c12d6367105a" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>Size</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1a28043940e4ec880385bbe9516988d705" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>Write</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1a5c5622de42ff4a32bd428b636386f7eb" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>WriteBits</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1af3f0911af71fbc448d0b7427d739380c" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>WriteBytes</name></member>
+      <member refid="class_boon_1_1_binary_serializer_1a45e1106a85b6c24ccfe64b8d308b9b64" prot="public" virt="non-virtual"><scope>Boon::BinarySerializer</scope><name>WriteString</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

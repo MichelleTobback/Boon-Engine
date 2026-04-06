@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_delegate" kind="class" language="C++" prot="public">
+    <compoundname>Boon::Delegate</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename Signature</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Core/Delegate.h" line="12" column="5" bodyfile="Core/Delegate.h" bodystart="12" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

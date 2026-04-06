@@ -1,0 +1,121 @@
+\doxysection{Boon::\+BFunction Struct Reference}
+\hypertarget{struct_boon_1_1_b_function}{}\label{struct_boon_1_1_b_function}\index{Boon::BFunction@{Boon::BFunction}}
+
+
+Reflection information for a callable member/\+function.  
+
+
+
+
+{\ttfamily \+\#include $<$BFunction.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \doxymbox{\hyperlink{struct_boon_1_1_b_function_a5a8402d76c1e9e4a4dd488b22bf3c986}{Thunk\+Fn}} = void(\texorpdfstring{$\ast$}{*})(void\texorpdfstring{$\ast$}{*} , \doxymbox{\hyperlink{class_boon_1_1_variant}{Variant}}\texorpdfstring{$\ast$}{*} , size\+\_\+t )
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{struct_boon_1_1_b_function_a1c1297b5c141f8f76ede0c4d167f4c87}{Is\+Valid}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_boon_1_1_b_function_ae8435992510bd1786d840729635e384c}{id}} = 0
+\item 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_boon_1_1_b_function_param}{BFunction\+Param}} $>$ \doxymbox{\hyperlink{struct_boon_1_1_b_function_a1c5f44d36bc1f9b7e0e364b307a6c0db}{params}}
+\item 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_boon_1_1_b_function_meta}{BFunction\+Meta}} $>$ \doxymbox{\hyperlink{struct_boon_1_1_b_function_a68c405c1f6eadce22f67712ab4ab07f4}{meta}}
+\item 
+Thunk\+Fn \doxymbox{\hyperlink{struct_boon_1_1_b_function_a6d13992148a61355f1f96591172e530b}{thunk}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Reflection information for a callable member/\+function. 
+
+Contains a hashed id, parameter and metadata lists and a thunk used to invoke the function on an instance with \doxylink{class_boon_1_1_variant}{Variant} arguments. 
+
+Definition at line \doxymbox{\hyperlink{_b_function_8h_source_l00064}{64}} of file \doxymbox{\hyperlink{_b_function_8h_source}{BFunction.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{struct_boon_1_1_b_function_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{struct_boon_1_1_b_function_a5a8402d76c1e9e4a4dd488b22bf3c986}\index{Boon::BFunction@{Boon::BFunction}!ThunkFn@{ThunkFn}}
+\index{ThunkFn@{ThunkFn}!Boon::BFunction@{Boon::BFunction}}
+\doxysubsubsection{\texorpdfstring{ThunkFn}{ThunkFn}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_function_a5a8402d76c1e9e4a4dd488b22bf3c986} 
+using Boon::\+\+BFunction::\+\+Thunk\+Fn = void(\texorpdfstring{$\ast$}{*})(void\texorpdfstring{$\ast$}{*} , \doxymbox{\hyperlink{class_boon_1_1_variant}{Variant}}\texorpdfstring{$\ast$}{*} , size\+\_\+t )}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_function_8h_source_l00066}{66}} of file \doxymbox{\hyperlink{_b_function_8h_source}{BFunction.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{struct_boon_1_1_b_function_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_boon_1_1_b_function_a1c1297b5c141f8f76ede0c4d167f4c87}\index{Boon::BFunction@{Boon::BFunction}!IsValid@{IsValid}}
+\index{IsValid@{IsValid}!Boon::BFunction@{Boon::BFunction}}
+\doxysubsubsection{\texorpdfstring{IsValid()}{IsValid()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_function_a1c1297b5c141f8f76ede0c4d167f4c87} 
+bool Boon::\+\+BFunction::\+\+Is\+Valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_function_8h_source_l00073}{73}} of file \doxymbox{\hyperlink{_b_function_8h_source}{BFunction.\+h}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{struct_boon_1_1_b_function_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_boon_1_1_b_function_ae8435992510bd1786d840729635e384c}\index{Boon::BFunction@{Boon::BFunction}!id@{id}}
+\index{id@{id}!Boon::BFunction@{Boon::BFunction}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_function_ae8435992510bd1786d840729635e384c} 
+uint32\+\_\+t Boon::\+\+BFunction::\+id = 0}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_function_8h_source_l00068}{68}} of file \doxymbox{\hyperlink{_b_function_8h_source}{BFunction.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_function_a68c405c1f6eadce22f67712ab4ab07f4}\index{Boon::BFunction@{Boon::BFunction}!meta@{meta}}
+\index{meta@{meta}!Boon::BFunction@{Boon::BFunction}}
+\doxysubsubsection{\texorpdfstring{meta}{meta}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_function_a68c405c1f6eadce22f67712ab4ab07f4} 
+std::\+vector$<$\doxymbox{\hyperlink{struct_boon_1_1_b_function_meta}{BFunction\+Meta}}$>$ Boon::\+\+BFunction::\+meta}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_function_8h_source_l00070}{70}} of file \doxymbox{\hyperlink{_b_function_8h_source}{BFunction.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_function_a1c5f44d36bc1f9b7e0e364b307a6c0db}\index{Boon::BFunction@{Boon::BFunction}!params@{params}}
+\index{params@{params}!Boon::BFunction@{Boon::BFunction}}
+\doxysubsubsection{\texorpdfstring{params}{params}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_function_a1c5f44d36bc1f9b7e0e364b307a6c0db} 
+std::\+vector$<$\doxymbox{\hyperlink{struct_boon_1_1_b_function_param}{BFunction\+Param}}$>$ Boon::\+\+BFunction::\+params}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_function_8h_source_l00069}{69}} of file \doxymbox{\hyperlink{_b_function_8h_source}{BFunction.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_function_a6d13992148a61355f1f96591172e530b}\index{Boon::BFunction@{Boon::BFunction}!thunk@{thunk}}
+\index{thunk@{thunk}!Boon::BFunction@{Boon::BFunction}}
+\doxysubsubsection{\texorpdfstring{thunk}{thunk}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_function_a6d13992148a61355f1f96591172e530b} 
+Thunk\+Fn Boon::\+\+BFunction::\+thunk = nullptr}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_function_8h_source_l00071}{71}} of file \doxymbox{\hyperlink{_b_function_8h_source}{BFunction.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+BFunction.\+h\end{DoxyCompactItemize}

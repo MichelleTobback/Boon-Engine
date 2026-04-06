@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_tilemap_renderer_component" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::TilemapRendererComponent</compoundname>
+    <includes refid="_tilemap_renderer_component_8h" local="no">Component/TilemapRendererComponent.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_tilemap_renderer_component_1ab15562c89cb628fd8e5380b19a39bb56" prot="public" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_asset_ref" kindref="compound">AssetRef</ref>&lt; <ref refid="class_boon_1_1_tilemap_asset" kindref="compound">TilemapAsset</ref> &gt;</type>
+        <definition>AssetRef&lt;TilemapAsset&gt; Boon::TilemapRendererComponent::tilemap</definition>
+        <argsstring></argsstring>
+        <name>tilemap</name>
+        <qualifiedname>Boon::TilemapRendererComponent::tilemap</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TilemapRendererComponent.h" line="11" column="10" bodyfile="Component/TilemapRendererComponent.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::AssetRef&lt; Boon::TilemapAsset &gt;</label>
+        <link refid="class_boon_1_1_asset_ref"/>
+      </node>
+      <node id="1">
+        <label>Boon::TilemapRendererComponent</label>
+        <link refid="struct_boon_1_1_tilemap_renderer_component"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>tilemap</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Component/TilemapRendererComponent.h" line="8" column="1" bodyfile="Component/TilemapRendererComponent.h" bodystart="9" bodyend="12"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_tilemap_renderer_component_1ab15562c89cb628fd8e5380b19a39bb56" prot="public" virt="non-virtual"><scope>Boon::TilemapRendererComponent</scope><name>tilemap</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

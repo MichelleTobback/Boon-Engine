@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_editor_1_1_debug_renderer" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>BoonEditor::DebugRenderer</compoundname>
+    <includes refid="_editor_2include_2_debug_renderer_2_debug_renderer_8h" local="no">DebugRenderer/DebugRenderer.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_editor_1_1_debug_renderer_1aab8eff976820ff109b49d5ff34cc3599" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> *</type>
+        <definition>Scene* BoonEditor::DebugRenderer::m_pScene</definition>
+        <argsstring></argsstring>
+        <name>m_pScene</name>
+        <qualifiedname>BoonEditor::DebugRenderer::m_pScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="DebugRenderer/DebugRenderer.h" line="33" column="7" bodyfile="DebugRenderer/DebugRenderer.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_debug_renderer_1a4027f5886528808fe70d321d03f9c407" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_framebuffer" kindref="compound">Framebuffer</ref> *</type>
+        <definition>Framebuffer* BoonEditor::DebugRenderer::m_pFramebuffer</definition>
+        <argsstring></argsstring>
+        <name>m_pFramebuffer</name>
+        <qualifiedname>BoonEditor::DebugRenderer::m_pFramebuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="DebugRenderer/DebugRenderer.h" line="34" column="13" bodyfile="DebugRenderer/DebugRenderer.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_debug_renderer_1acfc23455b07cd08b84712c7f789ddb13" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="class_boon_1_1_renderer2_d" kindref="compound">Renderer2D</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;Renderer2D&gt; BoonEditor::DebugRenderer::m_pRenderer2D</definition>
+        <argsstring></argsstring>
+        <name>m_pRenderer2D</name>
+        <qualifiedname>BoonEditor::DebugRenderer::m_pRenderer2D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="DebugRenderer/DebugRenderer.h" line="35" column="17" bodyfile="DebugRenderer/DebugRenderer.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_debug_renderer_1a22d31f69430ef29df82e819a1d94e98a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::DebugRenderer::DebugRenderer</definition>
+        <argsstring>(Scene *pScene, Framebuffer *pFramebuffer)</argsstring>
+        <name>DebugRenderer</name>
+        <qualifiedname>BoonEditor::DebugRenderer::DebugRenderer</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> *</type>
+          <declname>pScene</declname>
+        </param>
+        <param>
+          <type><ref refid="class_boon_1_1_framebuffer" kindref="compound">Framebuffer</ref> *</type>
+          <declname>pFramebuffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="DebugRenderer/DebugRenderer.h" line="22" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_debug_renderer_1a72be36fe97feb33eb35b8ebde48de0c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::DebugRenderer::~DebugRenderer</definition>
+        <argsstring>()</argsstring>
+        <name>~DebugRenderer</name>
+        <qualifiedname>BoonEditor::DebugRenderer::~DebugRenderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="DebugRenderer/DebugRenderer.h" line="23" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_debug_renderer_1a60ade308c4ef18edb913479d1e0315e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::DebugRenderer::Render</definition>
+        <argsstring>(EditorViewportSettings settings, Camera *camera=nullptr, TransformComponent *cameraTransform=nullptr)</argsstring>
+        <name>Render</name>
+        <qualifiedname>BoonEditor::DebugRenderer::Render</qualifiedname>
+        <param>
+          <type><ref refid="struct_boon_editor_1_1_editor_viewport_settings" kindref="compound">EditorViewportSettings</ref></type>
+          <declname>settings</declname>
+        </param>
+        <param>
+          <type><ref refid="class_boon_1_1_camera" kindref="compound">Camera</ref> *</type>
+          <declname>camera</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type><ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref> *</type>
+          <declname>cameraTransform</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="DebugRenderer/DebugRenderer.h" line="25" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_debug_renderer_1a440afa725cf52fcd2e371d76a3e45c6c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::DebugRenderer::SetContext</definition>
+        <argsstring>(Scene *pScene)</argsstring>
+        <name>SetContext</name>
+        <qualifiedname>BoonEditor::DebugRenderer::SetContext</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> *</type>
+          <declname>pScene</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="DebugRenderer/DebugRenderer.h" line="27" column="13" bodyfile="DebugRenderer/DebugRenderer.h" bodystart="27" bodyend="27"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_debug_renderer_1a4b6d1a4a4d8c2bd4043b4767f8fadcaf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::DebugRenderer::Begin</definition>
+        <argsstring>()</argsstring>
+        <name>Begin</name>
+        <qualifiedname>BoonEditor::DebugRenderer::Begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="DebugRenderer/DebugRenderer.h" line="30" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_debug_renderer_1a916f31f9c037e201a2bc645398288158" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::DebugRenderer::End</definition>
+        <argsstring>()</argsstring>
+        <name>End</name>
+        <qualifiedname>BoonEditor::DebugRenderer::End</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="DebugRenderer/DebugRenderer.h" line="31" column="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="DebugRenderer/DebugRenderer.h" line="19" column="1" bodyfile="DebugRenderer/DebugRenderer.h" bodystart="20" bodyend="36"/>
+    <listofallmembers>
+      <member refid="class_boon_editor_1_1_debug_renderer_1a4b6d1a4a4d8c2bd4043b4767f8fadcaf" prot="private" virt="non-virtual"><scope>BoonEditor::DebugRenderer</scope><name>Begin</name></member>
+      <member refid="class_boon_editor_1_1_debug_renderer_1a22d31f69430ef29df82e819a1d94e98a" prot="public" virt="non-virtual"><scope>BoonEditor::DebugRenderer</scope><name>DebugRenderer</name></member>
+      <member refid="class_boon_editor_1_1_debug_renderer_1a916f31f9c037e201a2bc645398288158" prot="private" virt="non-virtual"><scope>BoonEditor::DebugRenderer</scope><name>End</name></member>
+      <member refid="class_boon_editor_1_1_debug_renderer_1a4027f5886528808fe70d321d03f9c407" prot="private" virt="non-virtual"><scope>BoonEditor::DebugRenderer</scope><name>m_pFramebuffer</name></member>
+      <member refid="class_boon_editor_1_1_debug_renderer_1acfc23455b07cd08b84712c7f789ddb13" prot="private" virt="non-virtual"><scope>BoonEditor::DebugRenderer</scope><name>m_pRenderer2D</name></member>
+      <member refid="class_boon_editor_1_1_debug_renderer_1aab8eff976820ff109b49d5ff34cc3599" prot="private" virt="non-virtual"><scope>BoonEditor::DebugRenderer</scope><name>m_pScene</name></member>
+      <member refid="class_boon_editor_1_1_debug_renderer_1a60ade308c4ef18edb913479d1e0315e3" prot="public" virt="non-virtual"><scope>BoonEditor::DebugRenderer</scope><name>Render</name></member>
+      <member refid="class_boon_editor_1_1_debug_renderer_1a440afa725cf52fcd2e371d76a3e45c6c" prot="public" virt="non-virtual"><scope>BoonEditor::DebugRenderer</scope><name>SetContext</name></member>
+      <member refid="class_boon_editor_1_1_debug_renderer_1a72be36fe97feb33eb35b8ebde48de0c6" prot="public" virt="non-virtual"><scope>BoonEditor::DebugRenderer</scope><name>~DebugRenderer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

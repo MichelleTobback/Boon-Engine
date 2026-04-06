@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_listener_base" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::ListenerBase</compoundname>
+    <derivedcompoundref refid="struct_boon_1_1_listener" prot="public" virt="non-virtual">Boon::Listener&lt; EventType &gt;</derivedcompoundref>
+    <includes refid="_event_bus_8h" local="no">Event/EventBus.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_listener_base_1aeb3f0e992b94972818ca1e1fa4fdaaed" prot="public" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1a4c4e46c42b98f01fdb1ca32a62c805fb" kindref="member">EventListenerID</ref></type>
+        <definition>EventListenerID Boon::ListenerBase::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <qualifiedname>Boon::ListenerBase::id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Event/EventBus.h" line="19" column="25" bodyfile="Event/EventBus.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_boon_1_1_listener_base_1af60f1cf669109e3b54d527ceda099708" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Boon::ListenerBase::~ListenerBase</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ListenerBase</name>
+        <qualifiedname>Boon::ListenerBase::~ListenerBase</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Event/EventBus.h" line="20" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Boon::Listener&lt; EventType &gt;</label>
+        <link refid="struct_boon_1_1_listener"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Boon::ListenerBase</label>
+        <link refid="struct_boon_1_1_listener_base"/>
+      </node>
+    </inheritancegraph>
+    <location file="Event/EventBus.h" line="17" column="5" bodyfile="Event/EventBus.h" bodystart="18" bodyend="21"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_listener_base_1aeb3f0e992b94972818ca1e1fa4fdaaed" prot="public" virt="non-virtual"><scope>Boon::ListenerBase</scope><name>id</name></member>
+      <member refid="struct_boon_1_1_listener_base_1af60f1cf669109e3b54d527ceda099708" prot="public" virt="virtual"><scope>Boon::ListenerBase</scope><name>~ListenerBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

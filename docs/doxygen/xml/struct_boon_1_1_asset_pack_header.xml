@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_asset_pack_header" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::AssetPackHeader</compoundname>
+    <includes refid="_asset_pack_8h" local="no">Asset/AssetPack/AssetPack.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_asset_pack_header_1a5db7e71c157642182330417c703f9bcc" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Boon::AssetPackHeader::magic</definition>
+        <argsstring></argsstring>
+        <name>magic</name>
+        <qualifiedname>Boon::AssetPackHeader::magic</qualifiedname>
+        <initializer>= 0x424F4F4E</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="15" column="18" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_asset_pack_header_1a64f770c24533e32736f0979e971f1966" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t Boon::AssetPackHeader::version</definition>
+        <argsstring></argsstring>
+        <name>version</name>
+        <qualifiedname>Boon::AssetPackHeader::version</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="16" column="18" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_asset_pack_header_1adcfaf6106f5bf2e8557f0eb7bcf6c279" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t Boon::AssetPackHeader::assetCount</definition>
+        <argsstring></argsstring>
+        <name>assetCount</name>
+        <qualifiedname>Boon::AssetPackHeader::assetCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="17" column="18" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_asset_pack_header_1aeace5d4cb72dc47b78a0776b3ca28cf7" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t Boon::AssetPackHeader::registryOffset</definition>
+        <argsstring></argsstring>
+        <name>registryOffset</name>
+        <qualifiedname>Boon::AssetPackHeader::registryOffset</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="18" column="18" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_asset_pack_header_1a697fd9a4ad7c5946f7178f6f9960c8ff" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t Boon::AssetPackHeader::registrySize</definition>
+        <argsstring></argsstring>
+        <name>registrySize</name>
+        <qualifiedname>Boon::AssetPackHeader::registrySize</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="19" column="18" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Asset/AssetPack/AssetPack.h" line="13" column="5" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="14" bodyend="20"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_asset_pack_header_1adcfaf6106f5bf2e8557f0eb7bcf6c279" prot="public" virt="non-virtual"><scope>Boon::AssetPackHeader</scope><name>assetCount</name></member>
+      <member refid="struct_boon_1_1_asset_pack_header_1a5db7e71c157642182330417c703f9bcc" prot="public" virt="non-virtual"><scope>Boon::AssetPackHeader</scope><name>magic</name></member>
+      <member refid="struct_boon_1_1_asset_pack_header_1aeace5d4cb72dc47b78a0776b3ca28cf7" prot="public" virt="non-virtual"><scope>Boon::AssetPackHeader</scope><name>registryOffset</name></member>
+      <member refid="struct_boon_1_1_asset_pack_header_1a697fd9a4ad7c5946f7178f6f9960c8ff" prot="public" virt="non-virtual"><scope>Boon::AssetPackHeader</scope><name>registrySize</name></member>
+      <member refid="struct_boon_1_1_asset_pack_header_1a64f770c24533e32736f0979e971f1966" prot="public" virt="non-virtual"><scope>Boon::AssetPackHeader</scope><name>version</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

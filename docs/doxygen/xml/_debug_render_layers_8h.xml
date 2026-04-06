@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_debug_render_layers_8h" kind="file" language="C++">
+    <compoundname>DebugRenderLayers.h</compoundname>
+    <includes local="no">type_traits</includes>
+    <includedby refid="_editor_viewport_settings_8h" local="yes">DebugRenderer/EditorViewportSettings.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>DebugRenderer/DebugRenderLayers.h</label>
+        <link refid="_debug_render_layers_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>type_traits</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>DebugRenderer/DebugRenderLayers.h</label>
+        <link refid="_debug_render_layers_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>DebugRenderer/DebugRenderer.h</label>
+        <link refid="_editor_2include_2_debug_renderer_2_debug_renderer_8h"/>
+      </node>
+      <node id="2">
+        <label>DebugRenderer/EditorViewportSettings.h</label>
+        <link refid="_editor_viewport_settings_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Panels/AssetEditorPanel.h</label>
+        <link refid="_asset_editor_panel_8h"/>
+      </node>
+      <node id="4">
+        <label>Panels/ViewportPanel.h</label>
+        <link refid="_viewport_panel_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespace_boon_editor">BoonEditor</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;type_traits&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon_editor" kindref="compound">BoonEditor</ref></highlight></codeline>
+<codeline lineno="5"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="6" refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref><sp/>:<sp/>uint32_t</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="8" refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19a4ede429b705fa47b52aaf49894e72032" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19a4ede429b705fa47b52aaf49894e72032" kindref="member">None</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="9" refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19a2f5daf8bd5e1d4bbf762d9b071296ca2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19a2f5daf8bd5e1d4bbf762d9b071296ca2" kindref="member">Default</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>0,</highlight></codeline>
+<codeline lineno="10" refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19aab248f3819d7946573d2b84046d81402" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19aab248f3819d7946573d2b84046d81402" kindref="member">Collision</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>1,</highlight></codeline>
+<codeline lineno="11" refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19ad86b279b63f7940a3f37f2aae07f3394" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19ad86b279b63f7940a3f37f2aae07f3394" kindref="member">Gizmos</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>2,</highlight></codeline>
+<codeline lineno="12" refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19a9d01fb8412f6c04f9a187fd082523e32" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19a9d01fb8412f6c04f9a187fd082523e32" kindref="member">Navigation</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>3,</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19ab7f95bed62f4950cfb617e34a53edbb9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19ab7f95bed62f4950cfb617e34a53edbb9" kindref="member">Disabled</ref><sp/>=<sp/>1u<sp/>&lt;&lt;<sp/>31,</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19aed5845bc4fa6688c9e554f87b65bc86e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19aed5845bc4fa6688c9e554f87b65bc86e" kindref="member">All</ref><sp/>=<sp/>0x7FFFFFFF</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="namespace_boon_editor_1a760e8b5914c47a869186c61cc9edd1c6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref><sp/><ref refid="namespace_boon_editor_1a760e8b5914c47a869186c61cc9edd1c6" kindref="member">operator|</ref>(<ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref><sp/>lhs,<sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref><sp/>rhs)</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">T<sp/>=<sp/>std::underlying_type_t&lt;DebugRenderLayer&gt;;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(lhs)<sp/>|<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(rhs));</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="namespace_boon_editor_1aacff1adf9d956edafb6499daf21a82d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref><sp/><ref refid="namespace_boon_editor_1aacff1adf9d956edafb6499daf21a82d2" kindref="member">operator&amp;</ref>(<ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref><sp/>lhs,<sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref><sp/>rhs)</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">T<sp/>=<sp/>std::underlying_type_t&lt;DebugRenderLayer&gt;;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(lhs)<sp/>&amp;<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(rhs));</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="namespace_boon_editor_1a7879700ca6925e338e6364b83ff728a5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref><sp/><ref refid="namespace_boon_editor_1a7879700ca6925e338e6364b83ff728a5" kindref="member">operator~</ref>(<ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref><sp/>value)</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">T<sp/>=<sp/>std::underlying_type_t&lt;DebugRenderLayer&gt;;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(~static_cast&lt;T&gt;(value));</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="namespace_boon_editor_1a772c14292999706dd2eb88fabb7e7fd9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref>&amp;<sp/><ref refid="namespace_boon_editor_1a772c14292999706dd2eb88fabb7e7fd9" kindref="member">operator|=</ref>(<ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref>&amp;<sp/>lhs,<sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref><sp/>rhs)</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lhs<sp/>=<sp/>lhs<sp/>|<sp/>rhs;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43" refid="namespace_boon_editor_1ae6ae77ed67abea50f4738183462242e3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref>&amp;<sp/><ref refid="namespace_boon_editor_1ae6ae77ed67abea50f4738183462242e3" kindref="member">operator&amp;=</ref>(<ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref>&amp;<sp/>lhs,<sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref><sp/>rhs)</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lhs<sp/>=<sp/>lhs<sp/>&amp;<sp/>rhs;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="DebugRenderer/DebugRenderLayers.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_buffer_view" kind="class" language="C++" prot="public">
+    <compoundname>Boon::BufferView</compoundname>
+    <includes refid="_buffer_view_8h" local="no">Core/Memory/BufferView.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_buffer_view_1ae2852cd4672e5754df2c8894efbcb1f7" prot="private" static="no" mutable="no">
+        <type>const uint8_t *</type>
+        <definition>const uint8_t* Boon::BufferView::m_Data</definition>
+        <argsstring></argsstring>
+        <name>m_Data</name>
+        <qualifiedname>Boon::BufferView::m_Data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Memory/BufferView.h" line="44" column="23" bodyfile="Core/Memory/BufferView.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_buffer_view_1a3509b3765dfea2be5559fcb43cd27926" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t Boon::BufferView::m_Size</definition>
+        <argsstring></argsstring>
+        <name>m_Size</name>
+        <qualifiedname>Boon::BufferView::m_Size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Memory/BufferView.h" line="45" column="16" bodyfile="Core/Memory/BufferView.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_buffer_view_1ae2ae168ddee9c347875682b9232f42c4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::BufferView::BufferView</definition>
+        <argsstring>()</argsstring>
+        <name>BufferView</name>
+        <qualifiedname>Boon::BufferView::BufferView</qualifiedname>
+        <briefdescription>
+<para>Non-owning view over a byte range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Does not manage lifetime of the underlying memory. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Memory/BufferView.h" line="15" column="9" bodyfile="Core/Memory/BufferView.h" bodystart="15" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_buffer_view_1aca00c39302ec93dde7e94212065b09fe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::BufferView::BufferView</definition>
+        <argsstring>(const void *data, size_t size)</argsstring>
+        <name>BufferView</name>
+        <qualifiedname>Boon::BufferView::BufferView</qualifiedname>
+        <param>
+          <type>const void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Construct a view over the provided data pointer and size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the memory to view. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size in bytes of the view. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Memory/BufferView.h" line="24" column="9" bodyfile="Core/Memory/BufferView.h" bodystart="24" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_buffer_view_1a5ce30d252dd4fe7ab38c88d332337ced" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const uint8_t *</type>
+        <definition>const uint8_t * Boon::BufferView::Data</definition>
+        <argsstring>() const</argsstring>
+        <name>Data</name>
+        <qualifiedname>Boon::BufferView::Data</qualifiedname>
+        <briefdescription>
+<para>Pointer to the viewed data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Memory/BufferView.h" line="31" column="23" bodyfile="Core/Memory/BufferView.h" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_buffer_view_1a4f569357b586d57866ddcd06bd336ad7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t Boon::BufferView::Size</definition>
+        <argsstring>() const</argsstring>
+        <name>Size</name>
+        <qualifiedname>Boon::BufferView::Size</qualifiedname>
+        <briefdescription>
+<para>Size of the view in bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Memory/BufferView.h" line="36" column="16" bodyfile="Core/Memory/BufferView.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_buffer_view_1a071c56ef9d22ef38a7e5957d0532b637" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::BufferView::Empty</definition>
+        <argsstring>() const</argsstring>
+        <name>Empty</name>
+        <qualifiedname>Boon::BufferView::Empty</qualifiedname>
+        <briefdescription>
+<para>Check whether the view is empty. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Memory/BufferView.h" line="41" column="14" bodyfile="Core/Memory/BufferView.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Core/Memory/BufferView.h" line="7" column="5" bodyfile="Core/Memory/BufferView.h" bodystart="8" bodyend="46"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_buffer_view_1ae2ae168ddee9c347875682b9232f42c4" prot="public" virt="non-virtual"><scope>Boon::BufferView</scope><name>BufferView</name></member>
+      <member refid="class_boon_1_1_buffer_view_1aca00c39302ec93dde7e94212065b09fe" prot="public" virt="non-virtual"><scope>Boon::BufferView</scope><name>BufferView</name></member>
+      <member refid="class_boon_1_1_buffer_view_1a5ce30d252dd4fe7ab38c88d332337ced" prot="public" virt="non-virtual"><scope>Boon::BufferView</scope><name>Data</name></member>
+      <member refid="class_boon_1_1_buffer_view_1a071c56ef9d22ef38a7e5957d0532b637" prot="public" virt="non-virtual"><scope>Boon::BufferView</scope><name>Empty</name></member>
+      <member refid="class_boon_1_1_buffer_view_1ae2852cd4672e5754df2c8894efbcb1f7" prot="private" virt="non-virtual"><scope>Boon::BufferView</scope><name>m_Data</name></member>
+      <member refid="class_boon_1_1_buffer_view_1a3509b3765dfea2be5559fcb43cd27926" prot="private" virt="non-virtual"><scope>Boon::BufferView</scope><name>m_Size</name></member>
+      <member refid="class_boon_1_1_buffer_view_1a4f569357b586d57866ddcd06bd336ad7" prot="public" virt="non-virtual"><scope>Boon::BufferView</scope><name>Size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

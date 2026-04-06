@@ -1,0 +1,86 @@
+\doxysection{Input.\+h}
+\hypertarget{_input_8h_source}{}\label{_input_8h_source}\index{Input.h@{Input.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}KeyCodes.h"{}}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}MouseCodes.h"{}}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}GamepadCodes.h"{}}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00012}00012\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00013}00013\ \{}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{enum\ class}\ KeyState\ :\ uint8\_t}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00015}00015\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00016}00016\ \ \ \ \ \ \ \ \ Up\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ Pressed,}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00018}00018\ \ \ \ \ \ \ \ \ Held,}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00019}00019\ \ \ \ \ \ \ \ \ Released}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00020}00020\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00022}\doxymbox{\hyperlink{class_boon_1_1_input}{00022}}\ \ \ \ \ \textcolor{keyword}{class\ }Input}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00023}00023\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00025}00025\ \ \ \ \ \ \ \ \ Input();}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ \string~Input();}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Per-\/frame\ update}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Update();}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Keyboard}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsKeyPressed(KeyCode\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsKeyHeld(KeyCode\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsKeyReleased(KeyCode\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Mouse}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsMousePressed(MouseCode\ button)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsMouseHeld(MouseCode\ button)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsMouseReleased(MouseCode\ button)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ GetMouseX()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ GetMouseY()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ GetScrollX()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ GetScrollY()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Actions\ (key\ binding\ system)}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ BindAction(\textcolor{keyword}{const}\ std::string\&\ action,\ \textcolor{keywordtype}{int}\ key);}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsActionPressed(\textcolor{keyword}{const}\ std::string\&\ action)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsActionHeld(\textcolor{keyword}{const}\ std::string\&\ action)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Controller\ (multi-\/device)}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsControllerConnected(\textcolor{keywordtype}{int}\ controller)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsControllerButtonPressed(\textcolor{keywordtype}{int}\ controller,\ GamepadButtonCode\ button)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsControllerButtonHeld(\textcolor{keywordtype}{int}\ controller,\ GamepadButtonCode\ button)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsControllerButtonReleased(\textcolor{keywordtype}{int}\ controller,\ GamepadButtonCode\ button)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ GetControllerAxis(\textcolor{keywordtype}{int}\ controller,\ GamepadAxisCode\ axis)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Controller\ tuning\ (global)}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetDefaultDeadZone(\textcolor{keywordtype}{float}\ deadzone);}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetDefaultAxisSensitivity(\textcolor{keywordtype}{float}\ sensitivity);}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ GetDefaultDeadZone()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ GetDefaultAxisSensitivity()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Controller\ tuning\ (per-\/controller)}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetControllerDeadZone(\textcolor{keywordtype}{int}\ controller,\ \textcolor{keywordtype}{float}\ deadzone);}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetControllerAxisSensitivity(\textcolor{keywordtype}{int}\ controller,\ \textcolor{keywordtype}{float}\ sensitivity);}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ GetControllerDeadZone(\textcolor{keywordtype}{int}\ controller)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ GetControllerAxisSensitivity(\textcolor{keywordtype}{int}\ controller)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ GLFW\ callbacks\ (called\ from\ window)}}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ KeyCallback(\textcolor{keywordtype}{int}\ key,\ \textcolor{keywordtype}{int}\ action);}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ MouseButtonCallback(\textcolor{keywordtype}{int}\ button,\ \textcolor{keywordtype}{int}\ action);}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ CursorPosCallback(\textcolor{keywordtype}{double}\ xpos,\ \textcolor{keywordtype}{double}\ ypos);}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ ScrollCallback(\textcolor{keywordtype}{double}\ xoffset,\ \textcolor{keywordtype}{double}\ yoffset);}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00076}00076\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }Impl;}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00078}00078\ \ \ \ \ \ \ \ \ Impl*\ m\_pImpl;}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00079}00079\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_input_8h_source_l00080}00080\ \}}
+
+\end{DoxyCode}

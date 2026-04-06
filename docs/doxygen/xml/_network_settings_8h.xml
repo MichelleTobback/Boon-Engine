@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_network_settings_8h" kind="file" language="C++">
+    <compoundname>NetworkSettings.h</compoundname>
+    <includes refid="_net_authority_8h" local="yes">NetAuthority.h</includes>
+    <includes local="no">string</includes>
+    <includedby refid="_editor_state_8h" local="yes">Core/EditorState.h</includedby>
+    <includedby refid="_net_driver_8h" local="yes">Networking/NetDriver.h</includedby>
+    <includedby refid="_network_panel_8h" local="no">Panels/NetworkPanel.h</includedby>
+    <includedby refid="_steam_net_driver_8h" local="yes">Platform/Steam/SteamNetDriver.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>NetAuthority.h</label>
+        <link refid="_net_authority_8h"/>
+      </node>
+      <node id="1">
+        <label>Networking/NetworkSettings.h</label>
+        <link refid="_network_settings_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>Networking/NetDriver.h</label>
+        <link refid="_net_driver_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Networking/NetworkSettings.h</label>
+        <link refid="_network_settings_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Platform/Steam/SteamNetDriver.h</label>
+        <link refid="_steam_net_driver_8h"/>
+      </node>
+      <node id="2">
+        <label>Core/EditorState.h</label>
+        <link refid="_editor_state_8h"/>
+      </node>
+      <node id="5">
+        <label>Panels/NetworkPanel.h</label>
+        <link refid="_network_panel_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_boon_1_1_network_settings" prot="public">Boon::NetworkSettings</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_net_authority_8h" kindref="compound">NetAuthority.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="6"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="7" refid="struct_boon_1_1_network_settings" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_network_settings" kindref="compound">NetworkSettings</ref></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="9" refid="struct_boon_1_1_network_settings_1aedb8c1637e6334e45e6989f33d05bd21" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1ae1adfe62e98721adc28eb2b11c48a260" kindref="member">ENetDriverMode</ref><sp/><ref refid="struct_boon_1_1_network_settings_1aedb8c1637e6334e45e6989f33d05bd21" kindref="member">NetMode</ref><sp/>=<sp/><ref refid="namespace_boon_1ae1adfe62e98721adc28eb2b11c48a260a5c80f101108a356211fcb26b3f83eabb" kindref="member">ENetDriverMode::Standalone</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="struct_boon_1_1_network_settings_1a88a60e22d136b0571d024fde49534e7c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="struct_boon_1_1_network_settings_1a88a60e22d136b0571d024fde49534e7c" kindref="member">Ip</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;127.0.0.1&quot;</highlight><highlight class="normal">;<sp/></highlight><highlight class="comment">//<sp/>default<sp/>local<sp/>host</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="struct_boon_1_1_network_settings_1a6bad0bec4a1a1d59a3ad6ccbee60db72" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint16_t<sp/><ref refid="struct_boon_1_1_network_settings_1a6bad0bec4a1a1d59a3ad6ccbee60db72" kindref="member">Port</ref><sp/>=<sp/>27020u;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Networking/NetworkSettings.h"/>
+  </compounddef>
+</doxygen>

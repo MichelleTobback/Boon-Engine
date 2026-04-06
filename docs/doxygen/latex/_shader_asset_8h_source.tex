@@ -1,0 +1,81 @@
+\doxysection{Shader\+Asset.\+h}
+\hypertarget{_shader_asset_8h_source}{}\label{_shader_asset_8h_source}\index{ShaderAsset.h@{ShaderAsset.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}Asset/Asset.h"{}}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}Asset/AssetTraits.h"{}}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}Asset/AssetMeta.h"{}}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}Core/Memory/Buffer.h"{}}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}Renderer/Shader.h"{}}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00010}00010\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00011}00011\ \{}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00012}\doxymbox{\hyperlink{class_boon_1_1_shader_asset}{00012}}\ \ \ \ \ \textcolor{keyword}{class\ }ShaderAsset\ :\ \textcolor{keyword}{public}\ Asset}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00013}00013\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00015}00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }Type\ =\ \doxymbox{\hyperlink{class_boon_1_1_shader}{Shader}};}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00016}00016\ \ \ \ \ \ \ \ \ ShaderAsset(AssetHandle\ handle)}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ :\ Asset(handle)\ \{}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00018}00018\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00020}00020\ \ \ \ \ \ \ \ \ std::shared\_ptr<Shader>\ GetInstance()}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00021}00021\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_RuntimeShader)}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_RuntimeShader\ =\ \doxymbox{\hyperlink{class_boon_1_1_shader_af221e53bbc28e29af632c093d3968008}{Shader::Create}}(m\_VertexSource,\ m\_FragmentSource);}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_RuntimeShader;}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00027}00027\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ GetVertexSource()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_VertexSource;\ \}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ GetFragmentSource()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_FragmentSource;\ \}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }ShaderImporter;}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_boon_1_1_asset_traits}{AssetTraits}}<ShaderAsset>;}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ std::string\ m\_VertexSource;}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ std::string\ m\_FragmentSource;}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{mutable}\ std::shared\_ptr<Shader>\ m\_RuntimeShader\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00040}00040\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00043}00043\ \ \ \ \ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00044}\doxymbox{\hyperlink{struct_boon_1_1_asset_traits_3_01_shader_asset_01_4}{00044}}\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_boon_1_1_asset_traits}{AssetTraits}}<\doxymbox{\hyperlink{class_boon_1_1_shader_asset}{ShaderAsset}}>}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00045}00045\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ AssetType\ Type\ =\ AssetType::Shader;}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{class_boon_1_1_shader_asset}{ShaderAsset}}*\ Load(\doxymbox{\hyperlink{class_boon_1_1_buffer}{Buffer}}\&\ buffer,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_asset_meta}{AssetMeta}}\&\ meta)}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00049}00049\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ cursor\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Read\ vertex\ shader}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ vert\ =\ buffer.ReadString(cursor);}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Read\ fragment\ shader}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ frag\ =\ buffer.ReadString(cursor);}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_shader_asset}{ShaderAsset}}*\ asset\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_boon_1_1_shader_asset}{ShaderAsset}}(meta.uuid);}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ asset-\/>m\_VertexSource\ =\ vert;}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ asset-\/>m\_FragmentSource\ =\ frag;}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ asset;}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00063}00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{class_boon_1_1_buffer}{Buffer}}\ Serialize(\doxymbox{\hyperlink{class_boon_1_1_shader_asset}{ShaderAsset}}*\ asset)}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00066}00066\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_buffer}{Buffer}}\ out;}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ out.WriteString(asset-\/>GetVertexSource());}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ out.WriteString(asset-\/>GetFragmentSource());}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ out;}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00073}00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00074}00074\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_shader_asset_8h_source_l00075}00075\ \}}
+
+\end{DoxyCode}

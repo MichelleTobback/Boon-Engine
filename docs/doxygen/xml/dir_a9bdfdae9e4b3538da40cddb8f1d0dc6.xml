@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_a9bdfdae9e4b3538da40cddb8f1d0dc6" kind="dir">
+    <compoundname>Module</compoundname>
+    <innerfile refid="_module_a_p_i_8h">ModuleAPI.h</innerfile>
+    <innerfile refid="_module_library_8h">ModuleLibrary.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Module/"/>
+  </compounddef>
+</doxygen>

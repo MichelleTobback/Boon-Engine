@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_shader_asset" kind="class" language="C++" prot="public">
+    <compoundname>Boon::ShaderAsset</compoundname>
+    <basecompoundref refid="class_boon_1_1_asset" prot="public" virt="non-virtual">Boon::Asset</basecompoundref>
+    <includes refid="_shader_asset_8h" local="no">Asset/ShaderAsset.h</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="class_boon_1_1_shader_asset_1a2c4fa143406b14f1093548e70f9c3dfc" prot="public" static="no">
+        <type><ref refid="class_boon_1_1_shader" kindref="compound">Shader</ref></type>
+        <definition>using Boon::ShaderAsset::Type = Shader</definition>
+        <argsstring></argsstring>
+        <name>Type</name>
+        <qualifiedname>Boon::ShaderAsset::Type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/ShaderAsset.h" line="15" column="9" bodyfile="Asset/ShaderAsset.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="class_boon_1_1_shader_asset_1af87441c828061d328194caece21f5843" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class ShaderImporter</definition>
+        <argsstring></argsstring>
+        <name>ShaderImporter</name>
+        <qualifiedname>Boon::ShaderAsset::ShaderImporter</qualifiedname>
+        <param>
+          <type>ShaderImporter</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/ShaderAsset.h" line="33" column="22" bodyfile="Asset/ShaderAsset.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="class_boon_1_1_shader_asset_1a8035195106b878e9342d701b20acf524" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct</type>
+        <definition>friend struct AssetTraits&lt; ShaderAsset &gt;</definition>
+        <argsstring></argsstring>
+        <name>AssetTraits&lt; ShaderAsset &gt;</name>
+        <qualifiedname>Boon::ShaderAsset::AssetTraits&lt; ShaderAsset &gt;</qualifiedname>
+        <param>
+          <type><ref refid="struct_boon_1_1_asset_traits" kindref="compound">AssetTraits</ref>&lt; <ref refid="class_boon_1_1_shader_asset_1a0dc9cb26163ffe712f57e8608e127e7e" kindref="member">ShaderAsset</ref> &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/ShaderAsset.h" line="33" column="22" bodyfile="Asset/ShaderAsset.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_shader_asset_1ac5e0b23591fa62ed2be27c006ec4cab1" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string Boon::ShaderAsset::m_VertexSource</definition>
+        <argsstring></argsstring>
+        <name>m_VertexSource</name>
+        <qualifiedname>Boon::ShaderAsset::m_VertexSource</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/ShaderAsset.h" line="36" column="21" bodyfile="Asset/ShaderAsset.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_shader_asset_1adab1a888945950523fd369c9d1cc779a" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string Boon::ShaderAsset::m_FragmentSource</definition>
+        <argsstring></argsstring>
+        <name>m_FragmentSource</name>
+        <qualifiedname>Boon::ShaderAsset::m_FragmentSource</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/ShaderAsset.h" line="37" column="21" bodyfile="Asset/ShaderAsset.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_shader_asset_1ab84acdf0616620a36c2e2c2fefff6a8d" prot="private" static="no" mutable="yes">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_shader" kindref="compound">Shader</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;Shader&gt; Boon::ShaderAsset::m_RuntimeShader</definition>
+        <argsstring></argsstring>
+        <name>m_RuntimeShader</name>
+        <qualifiedname>Boon::ShaderAsset::m_RuntimeShader</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/ShaderAsset.h" line="39" column="33" bodyfile="Asset/ShaderAsset.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_shader_asset_1a0dc9cb26163ffe712f57e8608e127e7e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::ShaderAsset::ShaderAsset</definition>
+        <argsstring>(AssetHandle handle)</argsstring>
+        <name>ShaderAsset</name>
+        <qualifiedname>Boon::ShaderAsset::ShaderAsset</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/ShaderAsset.h" line="16" column="9" bodyfile="Asset/ShaderAsset.h" bodystart="16" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_shader_asset_1ace15e4864012d21f6101cb9f04a62bfd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_shader" kindref="compound">Shader</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; Shader &gt; Boon::ShaderAsset::GetInstance</definition>
+        <argsstring>()</argsstring>
+        <name>GetInstance</name>
+        <qualifiedname>Boon::ShaderAsset::GetInstance</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/ShaderAsset.h" line="20" column="25" bodyfile="Asset/ShaderAsset.h" bodystart="20" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_shader_asset_1a0d42a0f3c437628a68c6147628db72fd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; Boon::ShaderAsset::GetVertexSource</definition>
+        <argsstring>() const</argsstring>
+        <name>GetVertexSource</name>
+        <qualifiedname>Boon::ShaderAsset::GetVertexSource</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/ShaderAsset.h" line="29" column="27" bodyfile="Asset/ShaderAsset.h" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_shader_asset_1ab897c4cf52cb946c4192b4667a1504c6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; Boon::ShaderAsset::GetFragmentSource</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFragmentSource</name>
+        <qualifiedname>Boon::ShaderAsset::GetFragmentSource</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/ShaderAsset.h" line="30" column="27" bodyfile="Asset/ShaderAsset.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Boon::Asset</label>
+        <link refid="class_boon_1_1_asset"/>
+      </node>
+      <node id="1">
+        <label>Boon::ShaderAsset</label>
+        <link refid="class_boon_1_1_shader_asset"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::Asset</label>
+        <link refid="class_boon_1_1_asset"/>
+      </node>
+      <node id="1">
+        <label>Boon::ShaderAsset</label>
+        <link refid="class_boon_1_1_shader_asset"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Asset/ShaderAsset.h" line="12" column="5" bodyfile="Asset/ShaderAsset.h" bodystart="13" bodyend="40"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_asset_1a21f559563c0c9283f2e94620019a2414" prot="public" virt="non-virtual"><scope>Boon::ShaderAsset</scope><name>Asset</name></member>
+      <member refid="class_boon_1_1_shader_asset_1a8035195106b878e9342d701b20acf524" prot="private" virt="non-virtual"><scope>Boon::ShaderAsset</scope><name>AssetTraits&lt; ShaderAsset &gt;</name></member>
+      <member refid="class_boon_1_1_shader_asset_1ab897c4cf52cb946c4192b4667a1504c6" prot="public" virt="non-virtual"><scope>Boon::ShaderAsset</scope><name>GetFragmentSource</name></member>
+      <member refid="class_boon_1_1_asset_1abaddea81c54ce410934ca79b041d1cee" prot="public" virt="non-virtual"><scope>Boon::ShaderAsset</scope><name>GetHandle</name></member>
+      <member refid="class_boon_1_1_shader_asset_1ace15e4864012d21f6101cb9f04a62bfd" prot="public" virt="non-virtual"><scope>Boon::ShaderAsset</scope><name>GetInstance</name></member>
+      <member refid="class_boon_1_1_asset_1a51d2767872ecb7825198ebf72361a7e1" prot="public" virt="non-virtual"><scope>Boon::ShaderAsset</scope><name>GetType</name></member>
+      <member refid="class_boon_1_1_shader_asset_1a0d42a0f3c437628a68c6147628db72fd" prot="public" virt="non-virtual"><scope>Boon::ShaderAsset</scope><name>GetVertexSource</name></member>
+      <member refid="class_boon_1_1_shader_asset_1adab1a888945950523fd369c9d1cc779a" prot="private" virt="non-virtual"><scope>Boon::ShaderAsset</scope><name>m_FragmentSource</name></member>
+      <member refid="class_boon_1_1_shader_asset_1ab84acdf0616620a36c2e2c2fefff6a8d" prot="private" virt="non-virtual"><scope>Boon::ShaderAsset</scope><name>m_RuntimeShader</name></member>
+      <member refid="class_boon_1_1_shader_asset_1ac5e0b23591fa62ed2be27c006ec4cab1" prot="private" virt="non-virtual"><scope>Boon::ShaderAsset</scope><name>m_VertexSource</name></member>
+      <member refid="class_boon_1_1_shader_asset_1a0dc9cb26163ffe712f57e8608e127e7e" prot="public" virt="non-virtual"><scope>Boon::ShaderAsset</scope><name>ShaderAsset</name></member>
+      <member refid="class_boon_1_1_shader_asset_1af87441c828061d328194caece21f5843" prot="private" virt="non-virtual"><scope>Boon::ShaderAsset</scope><name>ShaderImporter</name></member>
+      <member refid="class_boon_1_1_shader_asset_1a2c4fa143406b14f1093548e70f9c3dfc" prot="public" virt="non-virtual"><scope>Boon::ShaderAsset</scope><name>Type</name></member>
+      <member refid="class_boon_1_1_asset_1afbfc42a9b140b06b3c45de99b57779ce" prot="public" virt="virtual"><scope>Boon::ShaderAsset</scope><name>~Asset</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

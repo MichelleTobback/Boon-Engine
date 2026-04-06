@@ -1,0 +1,310 @@
+\doxysection{Boon::\+Tilemap Class Reference}
+\hypertarget{class_boon_1_1_tilemap}{}\label{class_boon_1_1_tilemap}\index{Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_tilemap_a87b7b72edbc50d78057ffe156f76e759}{Tilemap}} (int chunksX, int chunksY, int chunk\+Size)
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{class_boon_1_1_tilemap}{Tilemap} with the given chunk layout. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_tilemap_a4eea274283d29b892582f1c8a34877e8}{Set\+Atlas}} (\doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Asset\+Ref}}$<$ \doxymbox{\hyperlink{class_boon_1_1_sprite_atlas_asset}{Sprite\+Atlas\+Asset}} $>$ atlas)
+\begin{DoxyCompactList}\small\item\em Set the sprite atlas used by the tilemap. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Asset\+Ref}}$<$ \doxymbox{\hyperlink{class_boon_1_1_sprite_atlas_asset}{Sprite\+Atlas\+Asset}} $>$ \doxymbox{\hyperlink{class_boon_1_1_tilemap_ae8ce155623c12f95c6239d1e1c0fd686}{Get\+Atlas}} () const
+\begin{DoxyCompactList}\small\item\em Get the sprite atlas asset reference. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_boon_1_1_tilemap_a9d9ade60adb7b5ae1eceec3841f2de9c}{Get\+Chunk\+Size}} () const
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_tilemap_a5ec43162d208908c951191b2b42c3db3}{Resize}} (int new\+ChunksX, int new\+ChunksY, int new\+Chunk\+Size)
+\begin{DoxyCompactList}\small\item\em Resize the tilemap and its chunk configuration. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_tilemap_a8ca9645bdfd44b3b87a58ed2544750b9}{Set\+Tile}} (int x, int y, int tile\+Id)
+\begin{DoxyCompactList}\small\item\em Set the tile id at world tile coordinates. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_boon_1_1_tilemap_a1886966922e42b5cbbd763e63a29a2cd}{Get\+Tile}} (int x, int y) const
+\begin{DoxyCompactList}\small\item\em Get the tile id at world tile coordinates. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_boon_1_1_tilemap_a6ddf0eebad08ddc4e79a55b671726094}{Is\+Valid\+Tile}} (int x, int y) const
+\begin{DoxyCompactList}\small\item\em Check whether the given tile coordinates are within the map bounds. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_tilemap_a87054f3e53651da3517025fa14572abd}\label{class_boon_1_1_tilemap_a87054f3e53651da3517025fa14572abd} 
+void {\bfseries Set\+Tile} (int chunkX, int chunkY, int x, int y, int tile\+Id)
+\begin{DoxyCompactList}\small\item\em Set a tile within a specific chunk. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_tilemap_a7d5a4108f3ce48b3a7eafc01ebeadfdd}\label{class_boon_1_1_tilemap_a7d5a4108f3ce48b3a7eafc01ebeadfdd} 
+int {\bfseries Get\+Tile} (int chunkX, int chunkY, int x, int y) const
+\begin{DoxyCompactList}\small\item\em Get a tile id from a specific chunk. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_tilemap_a07faa5ce849f703f7d45ca24744e56e2}\label{class_boon_1_1_tilemap_a07faa5ce849f703f7d45ca24744e56e2} 
+void {\bfseries Rebuild\+Dirty\+Chunks} ()
+\begin{DoxyCompactList}\small\item\em Rebuild any chunks marked as dirty. \end{DoxyCompactList}\item 
+const std::\+vector$<$ \doxymbox{\hyperlink{struct_boon_1_1_tilemap_chunk}{Tilemap\+Chunk}} $>$ \& \doxymbox{\hyperlink{class_boon_1_1_tilemap_a1dcebe20e9206085ad88b87294554882}{Get\+Chunks}} () const
+\begin{DoxyCompactList}\small\item\em Access the internal chunk array. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_tilemap_a8bb953012a91ac64d62ffa1052e6d841}{Set\+Unit\+Size}} (float pixels)
+\begin{DoxyCompactList}\small\item\em Set the unit size in pixels used for tile rendering. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_boon_1_1_tilemap_ade7998ab6a20a2dcaf9cee0c4cd6a6fb}{Get\+Unit\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Get the unit size in pixels. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_tilemap_afd41badc764c7033f690503097536254}{Set\+ChunksX}} (float chunks)
+\begin{DoxyCompactList}\small\item\em Set the number of chunks in X direction and mark dirty. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_tilemap_a21d16676a8cee3562fc78410660acde2}{Set\+ChunksY}} (float chunks)
+\begin{DoxyCompactList}\small\item\em Set the number of chunks in Y direction and mark dirty. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_boon_1_1_tilemap_ad7e8eb5a1c4712d7e88f6a02dca3539a}{Get\+ChunksX}} () const
+\begin{DoxyCompactList}\small\item\em Get the number of chunks in X direction. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{class_boon_1_1_tilemap_ad4cf7067a1584a61f75f0fd4097bfa7d}{Get\+ChunksY}} () const
+\begin{DoxyCompactList}\small\item\em Get the number of chunks in Y direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_tilemap_8h_source_l00025}{25}} of file \doxymbox{\hyperlink{_tilemap_8h_source}{Tilemap.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_boon_1_1_tilemap_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_boon_1_1_tilemap_a87b7b72edbc50d78057ffe156f76e759}\index{Boon::Tilemap@{Boon::Tilemap}!Tilemap@{Tilemap}}
+\index{Tilemap@{Tilemap}!Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection{\texorpdfstring{Tilemap()}{Tilemap()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_tilemap_a87b7b72edbc50d78057ffe156f76e759} 
+Boon::\+\+Tilemap::\+\+Tilemap (\begin{DoxyParamCaption}\item[{int}]{chunksX}{, }\item[{int}]{chunksY}{, }\item[{int}]{chunk\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Construct a \doxylink{class_boon_1_1_tilemap}{Tilemap} with the given chunk layout. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chunksX} & Number of chunks in X direction. \\
+\hline
+{\em chunksY} & Number of chunks in Y direction. \\
+\hline
+{\em chunk\+Size} & Size of each chunk (tiles per side). \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_tilemap_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_tilemap_ae8ce155623c12f95c6239d1e1c0fd686}\index{Boon::Tilemap@{Boon::Tilemap}!GetAtlas@{GetAtlas}}
+\index{GetAtlas@{GetAtlas}!Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection{\texorpdfstring{GetAtlas()}{GetAtlas()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_tilemap_ae8ce155623c12f95c6239d1e1c0fd686} 
+\doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Asset\+Ref}}$<$ \doxymbox{\hyperlink{class_boon_1_1_sprite_atlas_asset}{Sprite\+Atlas\+Asset}} $>$ Boon::\+\+Tilemap::\+\+Get\+Atlas (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the sprite atlas asset reference. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{class_boon_1_1_asset_ref}{Asset\+Ref} to the currently set atlas. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_tilemap_8h_source_l00051}{51}} of file \doxymbox{\hyperlink{_tilemap_8h_source}{Tilemap.\+h}}.
+
+\Hypertarget{class_boon_1_1_tilemap_a1dcebe20e9206085ad88b87294554882}\index{Boon::Tilemap@{Boon::Tilemap}!GetChunks@{GetChunks}}
+\index{GetChunks@{GetChunks}!Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection{\texorpdfstring{GetChunks()}{GetChunks()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_tilemap_a1dcebe20e9206085ad88b87294554882} 
+const std::\+vector$<$ \doxymbox{\hyperlink{struct_boon_1_1_tilemap_chunk}{Tilemap\+Chunk}} $>$ \& Boon::\+\+Tilemap::\+\+Get\+Chunks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access the internal chunk array. 
+
+\begin{DoxyReturn}{Returns}
+Const reference to the vector of \doxylink{struct_boon_1_1_tilemap_chunk}{Tilemap\+Chunk}. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_tilemap_8h_source_l00112}{112}} of file \doxymbox{\hyperlink{_tilemap_8h_source}{Tilemap.\+h}}.
+
+\Hypertarget{class_boon_1_1_tilemap_a9d9ade60adb7b5ae1eceec3841f2de9c}\index{Boon::Tilemap@{Boon::Tilemap}!GetChunkSize@{GetChunkSize}}
+\index{GetChunkSize@{GetChunkSize}!Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection{\texorpdfstring{GetChunkSize()}{GetChunkSize()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_tilemap_a9d9ade60adb7b5ae1eceec3841f2de9c} 
+int Boon::\+\+Tilemap::\+\+Get\+Chunk\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_tilemap_8h_source_l00053}{53}} of file \doxymbox{\hyperlink{_tilemap_8h_source}{Tilemap.\+h}}.
+
+\Hypertarget{class_boon_1_1_tilemap_ad7e8eb5a1c4712d7e88f6a02dca3539a}\index{Boon::Tilemap@{Boon::Tilemap}!GetChunksX@{GetChunksX}}
+\index{GetChunksX@{GetChunksX}!Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection{\texorpdfstring{GetChunksX()}{GetChunksX()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_tilemap_ad7e8eb5a1c4712d7e88f6a02dca3539a} 
+float Boon::\+\+Tilemap::\+\+Get\+ChunksX (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the number of chunks in X direction. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_tilemap_8h_source_l00140}{140}} of file \doxymbox{\hyperlink{_tilemap_8h_source}{Tilemap.\+h}}.
+
+\Hypertarget{class_boon_1_1_tilemap_ad4cf7067a1584a61f75f0fd4097bfa7d}\index{Boon::Tilemap@{Boon::Tilemap}!GetChunksY@{GetChunksY}}
+\index{GetChunksY@{GetChunksY}!Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection{\texorpdfstring{GetChunksY()}{GetChunksY()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_tilemap_ad4cf7067a1584a61f75f0fd4097bfa7d} 
+float Boon::\+\+Tilemap::\+\+Get\+ChunksY (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the number of chunks in Y direction. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_tilemap_8h_source_l00145}{145}} of file \doxymbox{\hyperlink{_tilemap_8h_source}{Tilemap.\+h}}.
+
+\Hypertarget{class_boon_1_1_tilemap_a1886966922e42b5cbbd763e63a29a2cd}\index{Boon::Tilemap@{Boon::Tilemap}!GetTile@{GetTile}}
+\index{GetTile@{GetTile}!Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection{\texorpdfstring{GetTile()}{GetTile()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_tilemap_a1886966922e42b5cbbd763e63a29a2cd} 
+int Boon::\+\+Tilemap::\+\+Get\+Tile (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the tile id at world tile coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Tile X coordinate. \\
+\hline
+{\em y} & Tile Y coordinate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tile id at the given location. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_tilemap_ade7998ab6a20a2dcaf9cee0c4cd6a6fb}\index{Boon::Tilemap@{Boon::Tilemap}!GetUnitSize@{GetUnitSize}}
+\index{GetUnitSize@{GetUnitSize}!Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection{\texorpdfstring{GetUnitSize()}{GetUnitSize()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_tilemap_ade7998ab6a20a2dcaf9cee0c4cd6a6fb} 
+float Boon::\+\+Tilemap::\+\+Get\+Unit\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the unit size in pixels. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_tilemap_8h_source_l00125}{125}} of file \doxymbox{\hyperlink{_tilemap_8h_source}{Tilemap.\+h}}.
+
+\Hypertarget{class_boon_1_1_tilemap_a6ddf0eebad08ddc4e79a55b671726094}\index{Boon::Tilemap@{Boon::Tilemap}!IsValidTile@{IsValidTile}}
+\index{IsValidTile@{IsValidTile}!Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection{\texorpdfstring{IsValidTile()}{IsValidTile()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_tilemap_a6ddf0eebad08ddc4e79a55b671726094} 
+bool Boon::\+\+Tilemap::\+\+Is\+Valid\+Tile (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption}) const}
+
+
+
+Check whether the given tile coordinates are within the map bounds. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Tile X coordinate. \\
+\hline
+{\em y} & Tile Y coordinate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the coordinates are valid, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_tilemap_a5ec43162d208908c951191b2b42c3db3}\index{Boon::Tilemap@{Boon::Tilemap}!Resize@{Resize}}
+\index{Resize@{Resize}!Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection{\texorpdfstring{Resize()}{Resize()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_tilemap_a5ec43162d208908c951191b2b42c3db3} 
+void Boon::\+\+Tilemap::\+\+Resize (\begin{DoxyParamCaption}\item[{int}]{new\+ChunksX}{, }\item[{int}]{new\+ChunksY}{, }\item[{int}]{new\+Chunk\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Resize the tilemap and its chunk configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+ChunksX} & New number of chunks in X. \\
+\hline
+{\em new\+ChunksY} & New number of chunks in Y. \\
+\hline
+{\em new\+Chunk\+Size} & New chunk size in tiles. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_tilemap_a4eea274283d29b892582f1c8a34877e8}\index{Boon::Tilemap@{Boon::Tilemap}!SetAtlas@{SetAtlas}}
+\index{SetAtlas@{SetAtlas}!Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection{\texorpdfstring{SetAtlas()}{SetAtlas()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_tilemap_a4eea274283d29b892582f1c8a34877e8} 
+void Boon::\+\+Tilemap::\+\+Set\+Atlas (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Asset\+Ref}}$<$ \doxymbox{\hyperlink{class_boon_1_1_sprite_atlas_asset}{Sprite\+Atlas\+Asset}} $>$}]{atlas}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the sprite atlas used by the tilemap. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em atlas} & \doxylink{class_boon_1_1_asset}{Asset} reference to the sprite atlas. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_tilemap_8h_source_l00044}{44}} of file \doxymbox{\hyperlink{_tilemap_8h_source}{Tilemap.\+h}}.
+
+\Hypertarget{class_boon_1_1_tilemap_afd41badc764c7033f690503097536254}\index{Boon::Tilemap@{Boon::Tilemap}!SetChunksX@{SetChunksX}}
+\index{SetChunksX@{SetChunksX}!Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection{\texorpdfstring{SetChunksX()}{SetChunksX()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_tilemap_afd41badc764c7033f690503097536254} 
+void Boon::\+\+Tilemap::\+\+Set\+ChunksX (\begin{DoxyParamCaption}\item[{float}]{chunks}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the number of chunks in X direction and mark dirty. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_tilemap_8h_source_l00130}{130}} of file \doxymbox{\hyperlink{_tilemap_8h_source}{Tilemap.\+h}}.
+
+\Hypertarget{class_boon_1_1_tilemap_a21d16676a8cee3562fc78410660acde2}\index{Boon::Tilemap@{Boon::Tilemap}!SetChunksY@{SetChunksY}}
+\index{SetChunksY@{SetChunksY}!Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection{\texorpdfstring{SetChunksY()}{SetChunksY()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_tilemap_a21d16676a8cee3562fc78410660acde2} 
+void Boon::\+\+Tilemap::\+\+Set\+ChunksY (\begin{DoxyParamCaption}\item[{float}]{chunks}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the number of chunks in Y direction and mark dirty. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_tilemap_8h_source_l00135}{135}} of file \doxymbox{\hyperlink{_tilemap_8h_source}{Tilemap.\+h}}.
+
+\Hypertarget{class_boon_1_1_tilemap_a8ca9645bdfd44b3b87a58ed2544750b9}\index{Boon::Tilemap@{Boon::Tilemap}!SetTile@{SetTile}}
+\index{SetTile@{SetTile}!Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection{\texorpdfstring{SetTile()}{SetTile()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_tilemap_a8ca9645bdfd44b3b87a58ed2544750b9} 
+void Boon::\+\+Tilemap::\+\+Set\+Tile (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{int}]{tile\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Set the tile id at world tile coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Tile X coordinate. \\
+\hline
+{\em y} & Tile Y coordinate. \\
+\hline
+{\em tile\+Id} & ID of the tile to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_tilemap_a8bb953012a91ac64d62ffa1052e6d841}\index{Boon::Tilemap@{Boon::Tilemap}!SetUnitSize@{SetUnitSize}}
+\index{SetUnitSize@{SetUnitSize}!Boon::Tilemap@{Boon::Tilemap}}
+\doxysubsubsection{\texorpdfstring{SetUnitSize()}{SetUnitSize()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_tilemap_a8bb953012a91ac64d62ffa1052e6d841} 
+void Boon::\+\+Tilemap::\+\+Set\+Unit\+Size (\begin{DoxyParamCaption}\item[{float}]{pixels}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the unit size in pixels used for tile rendering. 
+
+Marks the tilemap as dirty. 
+
+Definition at line \doxymbox{\hyperlink{_tilemap_8h_source_l00120}{120}} of file \doxymbox{\hyperlink{_tilemap_8h_source}{Tilemap.\+h}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Tilemap.\+h\end{DoxyCompactItemize}

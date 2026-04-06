@@ -1,0 +1,473 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_editor_1_1_tilemap_editor_panel" kind="class" language="C++" prot="public">
+    <compoundname>BoonEditor::TilemapEditorPanel</compoundname>
+    <basecompoundref refid="class_boon_editor_1_1_asset_editor" prot="public" virt="non-virtual">BoonEditor::AssetEditor&lt; TilemapAsset &gt;</basecompoundref>
+    <includes refid="_tilemap_editor_panel_8h" local="no">Panels/TilemapEditorPanel.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_editor_1_1_tilemap_editor_panel_1af6b792341a4cbc9bc5d7ecda3adaebee" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int BoonEditor::TilemapEditorPanel::m_SelectedTile</definition>
+        <argsstring></argsstring>
+        <name>m_SelectedTile</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::m_SelectedTile</qualifiedname>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="52" column="13" bodyfile="Panels/TilemapEditorPanel.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_tilemap_editor_panel_1acc3f96f535cb8ea60014c02933fe85ba" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_editor_1afbc22222ee9dbbce5a599e29d98a1fef" kindref="member">TileBrushMode</ref></type>
+        <definition>TileBrushMode BoonEditor::TilemapEditorPanel::m_Mode</definition>
+        <argsstring></argsstring>
+        <name>m_Mode</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::m_Mode</qualifiedname>
+        <initializer>= <ref refid="namespace_boon_editor_1afbc22222ee9dbbce5a599e29d98a1fefa4802a5ac6005a6ab9c68a2fb29e30a3e" kindref="member">TileBrushMode::Paint</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="53" column="23" bodyfile="Panels/TilemapEditorPanel.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_tilemap_editor_panel_1ac9ab048112003e7b86d2981a1eb7fc9e" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_editor_1ab2489a3ff0e9390ea9e53ad710fe6f1b" kindref="member">TileBrushShape</ref></type>
+        <definition>TileBrushShape BoonEditor::TilemapEditorPanel::m_BrushShape</definition>
+        <argsstring></argsstring>
+        <name>m_BrushShape</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::m_BrushShape</qualifiedname>
+        <initializer>= <ref refid="namespace_boon_editor_1ab2489a3ff0e9390ea9e53ad710fe6f1baceb46ca115d05c51aa5a16a8867c3304" kindref="member">TileBrushShape::Square</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="54" column="24" bodyfile="Panels/TilemapEditorPanel.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_tilemap_editor_panel_1ade2383e3b50086aeaa583c9c386ae4e5" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int BoonEditor::TilemapEditorPanel::m_BrushSize</definition>
+        <argsstring></argsstring>
+        <name>m_BrushSize</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::m_BrushSize</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="57" column="13" bodyfile="Panels/TilemapEditorPanel.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_tilemap_editor_panel_1a83c459b4c72f2ece328c266e3daf638e" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; BoonEditor::TilemapEditorPanel::m_RandomBrushTiles</definition>
+        <argsstring></argsstring>
+        <name>m_RandomBrushTiles</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::m_RandomBrushTiles</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="60" column="21" bodyfile="Panels/TilemapEditorPanel.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_tilemap_editor_panel_1a1c323b493b93170dc86e011bb36bdc8d" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; float &gt;</type>
+        <definition>std::vector&lt;float&gt; BoonEditor::TilemapEditorPanel::m_RandomBrushWeights</definition>
+        <argsstring></argsstring>
+        <name>m_RandomBrushWeights</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::m_RandomBrushWeights</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="61" column="21" bodyfile="Panels/TilemapEditorPanel.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_tilemap_editor_panel_1a915d01130af34d9188b16b26e5bb2387" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool BoonEditor::TilemapEditorPanel::m_StampSelecting</definition>
+        <argsstring></argsstring>
+        <name>m_StampSelecting</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::m_StampSelecting</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="64" column="14" bodyfile="Panels/TilemapEditorPanel.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_tilemap_editor_panel_1a350218d1d5b8d41b6f502905de8619bb" prot="private" static="no" mutable="no">
+        <type>glm::ivec2</type>
+        <definition>glm::ivec2 BoonEditor::TilemapEditorPanel::m_StampStart</definition>
+        <argsstring></argsstring>
+        <name>m_StampStart</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::m_StampStart</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="65" column="20" bodyfile="Panels/TilemapEditorPanel.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_tilemap_editor_panel_1a835925c339129bb10447460ad3e16aaa" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; BoonEditor::TilemapEditorPanel::m_StampBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_StampBuffer</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::m_StampBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="66" column="21" bodyfile="Panels/TilemapEditorPanel.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_tilemap_editor_panel_1ae3052507d7d9d43b5471766f9ff1d943" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int BoonEditor::TilemapEditorPanel::m_StampW</definition>
+        <argsstring></argsstring>
+        <name>m_StampW</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::m_StampW</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="67" column="13" bodyfile="Panels/TilemapEditorPanel.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_tilemap_editor_panel_1a17041e570f8f64fd2279f73552074dbf" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int BoonEditor::TilemapEditorPanel::m_StampH</definition>
+        <argsstring></argsstring>
+        <name>m_StampH</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::m_StampH</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="68" column="13" bodyfile="Panels/TilemapEditorPanel.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_tilemap_editor_panel_1ac191f2c1805658890f456fb6a05e052d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::TilemapEditorPanel::TilemapEditorPanel</definition>
+        <argsstring>(const std::string &amp;name, DragDropRouter *pRouter)</argsstring>
+        <name>TilemapEditorPanel</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::TilemapEditorPanel</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="class_drag_drop_router" kindref="compound">DragDropRouter</ref> *</type>
+          <declname>pRouter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="35" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_tilemap_editor_panel_1a9f81c671459dc104b156921d23439a4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void BoonEditor::TilemapEditorPanel::Update</definition>
+        <argsstring>() override</argsstring>
+        <name>Update</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::Update</qualifiedname>
+        <reimplements refid="class_boon_editor_1_1_asset_editor_1a4b4dfac245d095641394f8b6bdbb26e0">Update</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="37" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_tilemap_editor_panel_1ae26ecbc11e9e113161cf1c379c9f2082" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void BoonEditor::TilemapEditorPanel::BuildPreviewScene</definition>
+        <argsstring>(Scene &amp;scene) override</argsstring>
+        <name>BuildPreviewScene</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::BuildPreviewScene</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> &amp;</type>
+          <declname>scene</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="40" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_tilemap_editor_panel_1aa5a7265cb835a07c09c402e199f4112b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void BoonEditor::TilemapEditorPanel::RenderToolbar</definition>
+        <argsstring>() override</argsstring>
+        <name>RenderToolbar</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::RenderToolbar</qualifiedname>
+        <reimplements refid="class_boon_editor_1_1_asset_editor_1a3f96a690f593458375e9b0fac321b544">RenderToolbar</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="41" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_tilemap_editor_panel_1a7a9f3953ae7506331b0b70738e36992c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void BoonEditor::TilemapEditorPanel::RenderMainArea</definition>
+        <argsstring>() override</argsstring>
+        <name>RenderMainArea</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::RenderMainArea</qualifiedname>
+        <reimplements refid="class_boon_editor_1_1_asset_editor_1a6320287cd1b6294bbde9e1a45b48a217">RenderMainArea</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="42" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_tilemap_editor_panel_1a3e82442396f0dbb6035d95228e53c0d7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::TilemapEditorPanel::RenderPalette</definition>
+        <argsstring>(const ImVec2 &amp;size)</argsstring>
+        <name>RenderPalette</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::RenderPalette</qualifiedname>
+        <param>
+          <type>const ImVec2 &amp;</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="45" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_tilemap_editor_panel_1ad9b29e8e257886c6fcfe32bb030861ff" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::TilemapEditorPanel::HandlePainting</definition>
+        <argsstring>()</argsstring>
+        <name>HandlePainting</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::HandlePainting</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="46" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_tilemap_editor_panel_1ab80570f93d81d6a18919ac0329c0dcce" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int BoonEditor::TilemapEditorPanel::SelectRandomTile</definition>
+        <argsstring>() const</argsstring>
+        <name>SelectRandomTile</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::SelectRandomTile</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="48" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_tilemap_editor_panel_1a3db5048a164eab189f8ae74209081f1a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::TilemapEditorPanel::FloodFill</definition>
+        <argsstring>(int x, int y, int newTile)</argsstring>
+        <name>FloodFill</name>
+        <qualifiedname>BoonEditor::TilemapEditorPanel::FloodFill</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>newTile</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/TilemapEditorPanel.h" line="49" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>BoonEditor::AssetEditor&lt; TilemapAsset &gt;</label>
+        <link refid="class_boon_editor_1_1_asset_editor"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>BoonEditor::AssetEditorBase</label>
+        <link refid="class_boon_editor_1_1_asset_editor_base"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>BoonEditor::EditorObject</label>
+        <link refid="class_boon_editor_1_1_editor_object"/>
+      </node>
+      <node id="4">
+        <label>BoonEditor::EditorPanel</label>
+        <link refid="class_boon_editor_1_1_editor_panel"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>BoonEditor::TilemapEditorPanel</label>
+        <link refid="class_boon_editor_1_1_tilemap_editor_panel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="9">
+        <label>Boon::AssetRef&lt; TilemapAsset &gt;</label>
+        <link refid="class_boon_1_1_asset_ref"/>
+      </node>
+      <node id="2">
+        <label>BoonEditor::AssetEditor&lt; TilemapAsset &gt;</label>
+        <link refid="class_boon_editor_1_1_asset_editor"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_Asset</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>BoonEditor::AssetEditorBase</label>
+        <link refid="class_boon_editor_1_1_asset_editor_base"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>BoonEditor::EditorObject</label>
+        <link refid="class_boon_editor_1_1_editor_object"/>
+      </node>
+      <node id="4">
+        <label>BoonEditor::EditorPanel</label>
+        <link refid="class_boon_editor_1_1_editor_panel"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_Name</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_pRouter</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>BoonEditor::TilemapEditorPanel</label>
+        <link refid="class_boon_editor_1_1_tilemap_editor_panel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>DragDropRouter</label>
+        <link refid="class_drag_drop_router"/>
+      </node>
+      <node id="7">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="6">
+        <label>std::string</label>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Panels/TilemapEditorPanel.h" line="32" column="5" bodyfile="Panels/TilemapEditorPanel.h" bodystart="33" bodyend="69"/>
+    <listofallmembers>
+      <member refid="class_boon_editor_1_1_asset_editor_1a661c7b4b4743250c3b78a4cd71bae1c2" prot="public" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>AssetEditor</name></member>
+      <member refid="class_boon_editor_1_1_asset_editor_base_1ad0339e0cb7504025f9a00c2fbd1327fe" prot="public" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>AssetEditorBase</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1ae26ecbc11e9e113161cf1c379c9f2082" prot="protected" virt="virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>BuildPreviewScene</name></member>
+      <member refid="class_boon_editor_1_1_asset_editor_1ae492f5304c3592431dbb8278c82ea611" prot="protected" virt="virtual" ambiguityscope="BoonEditor::AssetEditor&lt; TilemapAsset &gt;::"><scope>BoonEditor::TilemapEditorPanel</scope><name>BuildPreviewScene</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a5f5df2a84dcabc146bf036b0d0a88cfb" prot="public" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a4936722347674cc693fe7629f3a489ff" prot="public" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a4ffa536dd53e7a1d6af8b9b01aba55da" prot="public" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1a3db5048a164eab189f8ae74209081f1a" prot="private" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>FloodFill</name></member>
+      <member refid="class_boon_editor_1_1_asset_editor_1aea0a4c098ebee7817421baf34573eee5" prot="public" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>GetAsset</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1af7c8095284f6932cd3a18bc4a3aaad27" prot="protected" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>GetName</name></member>
+      <member refid="class_boon_editor_1_1_asset_editor_base_1a8131c8c53b23b2514dfe5bac70cf5c0a" prot="public" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>GetScene</name></member>
+      <member refid="class_boon_editor_1_1_asset_editor_base_1a1c0e6e04ec78cb1fb84cb474d8c0793c" prot="public" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>GetViewport</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1ad9b29e8e257886c6fcfe32bb030861ff" prot="private" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>HandlePainting</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a8f01a9b23acc248451ec11f5cbc1c1f8" prot="public" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>IsHovered</name></member>
+      <member refid="class_boon_editor_1_1_asset_editor_1a922bbf7299712beaa686f4a3e3ff5623" prot="protected" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>m_Asset</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1ac9ab048112003e7b86d2981a1eb7fc9e" prot="private" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>m_BrushShape</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1ade2383e3b50086aeaa583c9c386ae4e5" prot="private" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>m_BrushSize</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a7c213f233755bb557917127b7720fb14" prot="protected" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>m_Flags</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1acc3f96f535cb8ea60014c02933fe85ba" prot="private" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>m_Mode</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a10d71879d56dfec644df8a1c3718e49e" prot="protected" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>m_Name</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1adea21029e134f339cbf9679f8d724beb" prot="protected" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>m_pRouter</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1a83c459b4c72f2ece328c266e3daf638e" prot="private" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>m_RandomBrushTiles</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1a1c323b493b93170dc86e011bb36bdc8d" prot="private" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>m_RandomBrushWeights</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1af6b792341a4cbc9bc5d7ecda3adaebee" prot="private" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>m_SelectedTile</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1a835925c339129bb10447460ad3e16aaa" prot="private" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>m_StampBuffer</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1a17041e570f8f64fd2279f73552074dbf" prot="private" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>m_StampH</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1a915d01130af34d9188b16b26e5bb2387" prot="private" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>m_StampSelecting</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1a350218d1d5b8d41b6f502905de8619bb" prot="private" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>m_StampStart</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1ae3052507d7d9d43b5471766f9ff1d943" prot="private" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>m_StampW</name></member>
+      <member refid="class_boon_editor_1_1_asset_editor_base_1abfdac502e798c6429ece70df971c3916" prot="public" virt="virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>OnRender</name></member>
+      <member refid="class_boon_editor_1_1_asset_editor_1af97fcd84c00816500344cb8b3dc9e41f" prot="public" virt="virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>OnRenderUI</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a213dbccbcaf8df25846ecd6c261afa94" prot="public" virt="virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>OnResize</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a1d76135066dcb4287011b5848d50ac57" prot="public" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>operator=</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a44929889a9fc1feb5a00bc38c4a7c329" prot="public" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>operator=</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1ad56510e7633de1175a9f0d310d3cc551" prot="protected" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>RenderFloat3Control</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1a7a9f3953ae7506331b0b70738e36992c" prot="protected" virt="virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>RenderMainArea</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1a3e82442396f0dbb6035d95228e53c0d7" prot="private" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>RenderPalette</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1aa5a7265cb835a07c09c402e199f4112b" prot="protected" virt="virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>RenderToolbar</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a020092d7f515f99b4578b145a9f603d6" prot="public" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>RenderUI</name></member>
+      <member refid="class_boon_editor_1_1_asset_editor_base_1a45962f33192b975c57ca64e0b9c83f06" prot="protected" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>ScreenToWorld</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1ab80570f93d81d6a18919ac0329c0dcce" prot="private" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>SelectRandomTile</name></member>
+      <member refid="class_boon_editor_1_1_asset_editor_1a6061452a04631cf00300d3ba045813ea" prot="public" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>SetAsset</name></member>
+      <member refid="class_boon_editor_1_1_asset_editor_1a7d936d6556e4e6f06e0787306048437f" prot="protected" virt="virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>SetContext</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1ac191f2c1805658890f456fb6a05e052d" prot="public" virt="non-virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>TilemapEditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_tilemap_editor_panel_1a9f81c671459dc104b156921d23439a4d" prot="public" virt="virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>Update</name></member>
+      <member refid="class_boon_editor_1_1_editor_object_1aa2f1343ed311c73939b82ac8207fd788" prot="public" virt="virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>~EditorObject</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a74638d90561c3963e6b1b47dad0f244c" prot="public" virt="virtual"><scope>BoonEditor::TilemapEditorPanel</scope><name>~EditorPanel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

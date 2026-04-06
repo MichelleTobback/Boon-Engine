@@ -9,7 +9,18 @@
 
 namespace Boon
 {
-    // Optional logging hook if you want printed output:
+    /**
+     * @brief Assertion failure hook.
+     *
+     * This function is called when an assertion (BN_ASSERT) fails. The default
+     * implementation triggers a debug break. Consumers may replace or extend
+     * this behavior by providing their own implementation.
+     *
+     * @param expr Textual representation of the failed expression.
+     * @param msg Optional message provided to the assert macro.
+     * @param file Source file where the assertion failed.
+     * @param line Line number of the failure.
+     */
     inline void BnAssertFail(const char* /*expr*/, const char* /*msg*/, const char* /*file*/, int /*line*/)
     {
         // You can replace this with your logger:
@@ -20,6 +31,12 @@ namespace Boon
 
 #ifdef BN_ENABLE_ASSERT
 
+/**
+ * @brief Assertion macro that invokes BnAssertFail on failure in debug builds.
+ *
+ * In release builds the macro is a no-op. The optional variadic parameter can
+ * be used to supply an additional message forwarded to the failure hook.
+ */
 #define BN_ASSERT(condition, ...) \
         do { \
             if(!(condition)) { \

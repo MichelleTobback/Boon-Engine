@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_scene_changed_event" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::SceneChangedEvent</compoundname>
+    <basecompoundref refid="struct_boon_1_1_i_event" prot="public" virt="non-virtual">Boon::IEvent</basecompoundref>
+    <includes refid="_scene_events_8h" local="no">Event/SceneEvents.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_scene_changed_event_1a6f21ec7476c53014ecbe1d12bf01fe9f" prot="public" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1a537f16eb75208956cf8c0a82615412c1" kindref="member">SceneID</ref></type>
+        <definition>SceneID Boon::SceneChangedEvent::ID</definition>
+        <argsstring></argsstring>
+        <name>ID</name>
+        <qualifiedname>Boon::SceneChangedEvent::ID</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Event/SceneEvents.h" line="18" column="9" bodyfile="Event/SceneEvents.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_boon_1_1_scene_changed_event_1a81ef327629a85f12fd0a360d8b989886" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::SceneChangedEvent::SceneChangedEvent</definition>
+        <argsstring>(SceneID id)</argsstring>
+        <name>SceneChangedEvent</name>
+        <qualifiedname>Boon::SceneChangedEvent::SceneChangedEvent</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a537f16eb75208956cf8c0a82615412c1" kindref="member">SceneID</ref></type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Event/SceneEvents.h" line="9" column="1" bodyfile="Event/SceneEvents.h" bodystart="9" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_scene_changed_event_1ad77365e72cdbbcbd9298efe2d57f5245" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Boon::SceneChangedEvent::~SceneChangedEvent</definition>
+        <argsstring>()=default</argsstring>
+        <name>~SceneChangedEvent</name>
+        <qualifiedname>Boon::SceneChangedEvent::~SceneChangedEvent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Event/SceneEvents.h" line="11" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_scene_changed_event_1a15d94573f646030dfc6faefe8bac20ab" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="namespace_boon_1aee82d7ef047ab4695310ded9fa96793d" kindref="member">EventCategory</ref></type>
+        <definition>virtual EventCategory Boon::SceneChangedEvent::GetCategory</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetCategory</name>
+        <qualifiedname>Boon::SceneChangedEvent::GetCategory</qualifiedname>
+        <reimplements refid="struct_boon_1_1_i_event_1a93df703c63c898d542cea03d6df35ee2">GetCategory</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Event/SceneEvents.h" line="13" column="23" bodyfile="Event/SceneEvents.h" bodystart="13" bodyend="16"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Boon::IEvent</label>
+        <link refid="struct_boon_1_1_i_event"/>
+      </node>
+      <node id="1">
+        <label>Boon::SceneChangedEvent</label>
+        <link refid="struct_boon_1_1_scene_changed_event"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::IEvent</label>
+        <link refid="struct_boon_1_1_i_event"/>
+      </node>
+      <node id="1">
+        <label>Boon::SceneChangedEvent</label>
+        <link refid="struct_boon_1_1_scene_changed_event"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>ID</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Boon::UUID</label>
+        <link refid="class_boon_1_1_u_u_i_d"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>Null</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Event/SceneEvents.h" line="7" column="1" bodyfile="Event/SceneEvents.h" bodystart="8" bodyend="19"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_scene_changed_event_1a15d94573f646030dfc6faefe8bac20ab" prot="public" virt="virtual"><scope>Boon::SceneChangedEvent</scope><name>GetCategory</name></member>
+      <member refid="struct_boon_1_1_scene_changed_event_1a6f21ec7476c53014ecbe1d12bf01fe9f" prot="public" virt="non-virtual"><scope>Boon::SceneChangedEvent</scope><name>ID</name></member>
+      <member refid="struct_boon_1_1_scene_changed_event_1a81ef327629a85f12fd0a360d8b989886" prot="public" virt="non-virtual"><scope>Boon::SceneChangedEvent</scope><name>SceneChangedEvent</name></member>
+      <member refid="struct_boon_1_1_i_event_1adb996e7f27838e0e7cb33c0d94d1cd16" prot="public" virt="virtual"><scope>Boon::SceneChangedEvent</scope><name>~IEvent</name></member>
+      <member refid="struct_boon_1_1_scene_changed_event_1ad77365e72cdbbcbd9298efe2d57f5245" prot="public" virt="virtual"><scope>Boon::SceneChangedEvent</scope><name>~SceneChangedEvent</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -16,8 +16,21 @@ namespace Boon
 	class SceneRenderer final
 	{
 	public:
+		/**
+		 * @brief Create a SceneRenderer for the provided scene.
+		 *	@param pScene Pointer to the Scene to render.
+		 * @param isSwapchainTarget If true, the renderer targets the swapchain (default false).
+		 */
 		SceneRenderer(Scene* pScene, bool isSwapchainTarget = false);
+
+		/**
+		 * @brief Create a SceneRenderer with an explicit viewport size.
+		 */
 		SceneRenderer(Scene* pScene, int viewportWidth, int viewportHeight, bool isSwapchainTarget = false);
+
+		/**
+		 * @brief Destroy the SceneRenderer and release rendering resources.
+		 */
 		virtual ~SceneRenderer();
 
 		SceneRenderer(const SceneRenderer& other) = delete;
@@ -25,12 +38,31 @@ namespace Boon
 		SceneRenderer& operator=(const SceneRenderer& other) = delete;
 		SceneRenderer& operator=(SceneRenderer&& other) = delete;
 
+		/**
+		 * @brief Render the current scene using the optional camera.
+		 *
+		 * @param camera Optional camera to use for rendering. If nullptr a default may be used.
+		 * @param cameraTransform Optional transform for the camera.
+		 */
 		void Render(Camera* camera = nullptr, TransformComponent* cameraTransform = nullptr);
 
+		/**
+		 * @brief Get the framebuffer used as the output target by the renderer.
+		 *
+		 * @return Pointer to the output Framebuffer, or nullptr if not set.
+		 */
 		Framebuffer* GetOutputTarget() const { return m_pOutputFB.get(); }
 
+		/**
+		 * @brief Set the viewport size used by the renderer.
+		 */
 		void SetViewport(int width, int height);
 
+		/**
+		 * @brief Set the Scene context for this renderer.
+		 *
+		 * If the context changes the renderer may mark internal state dirty.
+		 */
 		inline void SetContext(Scene* pScene) 
 		{ 
 			if (pScene != m_pScene)
@@ -38,6 +70,10 @@ namespace Boon
 			m_pScene = pScene; 
 		}
 
+		/**
+		 * @brief Access the 2D renderer used internally by the scene renderer.
+		 *	@return Pointer to the Renderer2D instance.
+		 */
 		Renderer2D* GetRenderer2D() const;
 
 	private:

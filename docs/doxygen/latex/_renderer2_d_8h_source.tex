@@ -1,0 +1,47 @@
+\doxysection{Renderer2\+D.\+h}
+\hypertarget{_renderer2_d_8h_source}{}\label{_renderer2_d_8h_source}\index{Renderer2D.h@{Renderer2D.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}Renderer/RenderBatch.h"{}}}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}Renderer/Texture.h"{}}}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <glm/glm.hpp>}}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00009}00009\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00011}\doxymbox{\hyperlink{class_boon_1_1_renderer2_d}{00011}}\ \ \ \ \ \textcolor{keyword}{class\ }Renderer2D\ final}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00012}00012\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00014}00014\ \ \ \ \ \ \ \ \ Renderer2D();}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00015}00015\ \ \ \ \ \ \ \ \ \string~Renderer2D();}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Begin();}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ End();}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00020}00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SubmitQuad(\textcolor{keyword}{const}\ glm::mat4\&\ transform,\ \textcolor{keyword}{const}\ glm::vec4\&\ color,\ \textcolor{keywordtype}{int}\ gameObjectHandle);}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SubmitQuad(\textcolor{keyword}{const}\ glm::mat4\&\ transform,\ \textcolor{keyword}{const}\ std::shared\_ptr<Texture2D>\&\ texture,\ \textcolor{keywordtype}{float}\ tilingFactor,\ \textcolor{keyword}{const}\ glm::vec4\&\ color,\ \textcolor{keywordtype}{int}\ gameObjectHandle);}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SubmitQuad(\textcolor{keyword}{const}\ glm::mat4\&\ transform,\ \textcolor{keyword}{const}\ std::shared\_ptr<Texture2D>\&\ texture,\ \textcolor{keywordtype}{float}\ tilingFactor,}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ glm::vec4\&\ color,\ \textcolor{keywordtype}{int}\ gameObjectHandle,\ \textcolor{keyword}{const}\ glm::vec2\&\ spriteTexCoord,\ \textcolor{keyword}{const}\ glm::vec2\&\ spriteTexSize);}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SubmitLine(\textcolor{keyword}{const}\ glm::vec3\&\ p0,\ \textcolor{keyword}{const}\ glm::vec3\&\ p1,\ \textcolor{keyword}{const}\ glm::vec4\&\ color);}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SubmitRect(\textcolor{keyword}{const}\ glm::vec3\&\ position,\ \textcolor{keyword}{const}\ glm::vec2\&\ size,\ \textcolor{keyword}{const}\ glm::vec4\&\ color);}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SubmitRect(\textcolor{keyword}{const}\ glm::vec3\&\ position,\ \textcolor{keyword}{const}\ glm::vec2\&\ size,\ \textcolor{keywordtype}{float}\ rotation,\ \textcolor{keyword}{const}\ glm::vec4\&\ color);}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SubmitRect(\textcolor{keyword}{const}\ glm::mat4\&\ transform,\ \textcolor{keyword}{const}\ glm::vec2\&\ size,\ \textcolor{keyword}{const}\ glm::vec4\&\ color);}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SubmitPolygon(\textcolor{keyword}{const}\ std::vector<glm::vec3>\&\ positions,\ \textcolor{keyword}{const}\ glm::vec4\&\ color);}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00032}00032\ \ \ \ \ \ \ \ \ glm::vec4\ m\_QuadVertexPositions[4];}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00034}00034\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_render_batch}{RenderBatch}}\ m\_QuadBatch\{\};}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00035}00035\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_render_batch}{RenderBatch}}\ m\_LineBatch\{\};}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ s\_MaxTextureSlots\ =\ 32;}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ std::array<std::shared\_ptr<Texture2D>,\ s\_MaxTextureSlots>\ m\_TextureSlots;}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00039}00039\ \ \ \ \ \ \ \ \ uint32\_t\ m\_TextureSlotIndex\ =\ 1;\ \textcolor{comment}{//\ 0\ =\ white\ texture}}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00040}00040\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_renderer2_d_8h_source_l00041}00041\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,848 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_b_class_8h" kind="file" language="C++">
+    <compoundname>BClass.h</compoundname>
+    <includes local="no">string</includes>
+    <includes local="no">typeindex</includes>
+    <includes local="no">unordered_map</includes>
+    <includes local="no">cstdint</includes>
+    <includes local="no">functional</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">optional</includes>
+    <includes local="no">xhash</includes>
+    <includes local="no">stdexcept</includes>
+    <includes local="no">memory</includes>
+    <includes refid="_b_property_8h" local="yes">BProperty.h</includes>
+    <includes refid="_b_function_8h" local="yes">BFunction.h</includes>
+    <includes refid="_delegate_8h" local="yes">Core/Delegate.h</includes>
+    <includedby refid="_e_c_s_lifecycle_8h" local="yes">Component/ECSLifecycle.h</includedby>
+    <includedby refid="_net_rep_core_8h" local="yes">Networking/NetRepCore.h</includedby>
+    <includedby refid="_net_rep_registry_8h" local="yes">Networking/NetRepRegistry.h</includedby>
+    <includedby refid="_net_scene_8h" local="yes">Networking/NetScene.h</includedby>
+    <includedby refid="_properties_panel_8h" local="no">Panels/PropertiesPanel.h</includedby>
+    <includedby refid="_register_b_class_8h" local="yes">Reflection/RegisterBClass.h</includedby>
+    <includedby refid="_b_ref_8h" local="yes">Scene/BRef.h</includedby>
+    <includedby refid="_game_object_8h" local="yes">Scene/GameObject.h</includedby>
+    <includedby refid="_prefab_8h" local="yes">Scene/Prefab.h</includedby>
+    <includedby refid="_scene_8h" local="yes">Scene/Scene.h</includedby>
+    <incdepgraph>
+      <node id="24">
+        <label>Core/Delegate.h</label>
+        <link refid="_delegate_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>Core/UUID.h</label>
+        <link refid="_u_u_i_d_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>Core/Variant.h</label>
+        <link refid="_variant_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Reflection/BClass.h</label>
+        <link refid="_b_class_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>BFunction.h</label>
+        <link refid="_b_function_8h"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>BProperty.h</label>
+        <link refid="_b_property_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>cstddef</label>
+      </node>
+      <node id="5">
+        <label>cstdint</label>
+      </node>
+      <node id="17">
+        <label>cstring</label>
+      </node>
+      <node id="6">
+        <label>functional</label>
+      </node>
+      <node id="22">
+        <label>glm/gtc/type_precision.hpp</label>
+      </node>
+      <node id="19">
+        <label>glm/vec2.hpp</label>
+      </node>
+      <node id="20">
+        <label>glm/vec3.hpp</label>
+      </node>
+      <node id="21">
+        <label>glm/vec4.hpp</label>
+      </node>
+      <node id="25">
+        <label>limits</label>
+      </node>
+      <node id="11">
+        <label>memory</label>
+      </node>
+      <node id="8">
+        <label>optional</label>
+      </node>
+      <node id="10">
+        <label>stdexcept</label>
+      </node>
+      <node id="2">
+        <label>string</label>
+      </node>
+      <node id="18">
+        <label>type_traits</label>
+      </node>
+      <node id="3">
+        <label>typeindex</label>
+      </node>
+      <node id="4">
+        <label>unordered_map</label>
+      </node>
+      <node id="14">
+        <label>utility</label>
+      </node>
+      <node id="7">
+        <label>vector</label>
+      </node>
+      <node id="9">
+        <label>xhash</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="41">
+        <label>Asset/Assets.h</label>
+        <link refid="_assets_8h"/>
+      </node>
+      <node id="42">
+        <label>Asset/Importer/SceneImporter.h</label>
+        <link refid="_scene_importer_8h"/>
+      </node>
+      <node id="40">
+        <label>Asset/SceneAsset.h</label>
+        <link refid="_scene_asset_8h"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Component/BoxCollider2D.h</label>
+        <link refid="_box_collider2_d_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Component/CameraComponent.h</label>
+        <link refid="_camera_component_8h"/>
+      </node>
+      <node id="2">
+        <label>Component/ECSLifecycle.h</label>
+        <link refid="_e_c_s_lifecycle_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>Component/NameComponent.h</label>
+        <link refid="_name_component_8h"/>
+      </node>
+      <node id="14">
+        <label>Component/Rigidbody2D.h</label>
+        <link refid="_rigidbody2_d_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Component/SceneComponent.h</label>
+        <link refid="_scene_component_8h"/>
+      </node>
+      <node id="18">
+        <label>Component/SpriteAnimatorComponent.h</label>
+        <link refid="_sprite_animator_component_8h"/>
+      </node>
+      <node id="19">
+        <label>Component/SpriteRendererComponent.h</label>
+        <link refid="_sprite_renderer_component_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>Component/TextureRendererComponent.h</label>
+        <link refid="_texture_renderer_component_8h"/>
+      </node>
+      <node id="9">
+        <label>Core/Boon.h</label>
+        <link refid="_boon_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>Event/SceneEvents.h</label>
+        <link refid="_scene_events_8h"/>
+      </node>
+      <node id="15">
+        <label>Networking/Components/NetRigidbody2D.h</label>
+        <link refid="_net_rigidbody2_d_8h"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>Networking/Components/NetRigidbody2DSerializer.h</label>
+        <link refid="_net_rigidbody2_d_serializer_8h"/>
+      </node>
+      <node id="21">
+        <label>Networking/Components/NetTransform.h</label>
+        <link refid="_net_transform_8h"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>Networking/Components/NetTransformSerializer.h</label>
+        <link refid="_net_transform_serializer_8h"/>
+      </node>
+      <node id="36">
+        <label>Networking/IRepSerializer.h</label>
+        <link refid="_i_rep_serializer_8h"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>Networking/NetIdentity.h</label>
+        <link refid="_net_identity_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Networking/NetRepCore.h</label>
+        <link refid="_net_rep_core_8h"/>
+      </node>
+      <node id="5">
+        <label>Networking/NetRepRegistry.h</label>
+        <link refid="_net_rep_registry_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Networking/NetScene.h</label>
+        <link refid="_net_scene_8h"/>
+      </node>
+      <node id="11">
+        <label>Physics/Physics2D.h</label>
+        <link refid="_physics2_d_8h"/>
+      </node>
+      <node id="1">
+        <label>Reflection/BClass.h</label>
+        <link refid="_b_class_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>Reflection/ECSLifecycleDetection.h</label>
+        <link refid="_e_c_s_lifecycle_detection_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Reflection/RegisterBClass.h</label>
+        <link refid="_register_b_class_8h"/>
+      </node>
+      <node id="8">
+        <label>Scene/BRef.h</label>
+        <link refid="_b_ref_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>Scene/GameObject.h</label>
+        <link refid="_game_object_8h"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>Scene/Prefab.h</label>
+        <link refid="_prefab_8h"/>
+      </node>
+      <node id="39">
+        <label>Scene/Scene.h</label>
+        <link refid="_scene_8h"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>Scene/SceneManager.h</label>
+        <link refid="_scene_manager_8h"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>Scene/SceneSerializer.h</label>
+        <link refid="_scene_serializer_8h"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>Core/BoonEditor.h</label>
+        <link refid="_boon_editor_8h"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>Core/EditorState.h</label>
+        <link refid="_editor_state_8h"/>
+      </node>
+      <node id="27">
+        <label>Event/EditorEvent.h</label>
+        <link refid="_editor_event_8h"/>
+      </node>
+      <node id="28">
+        <label>Panels/AssetEditor.h</label>
+        <link refid="_asset_editor_8h"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>Panels/AssetEditorPanel.h</label>
+        <link refid="_asset_editor_panel_8h"/>
+      </node>
+      <node id="32">
+        <label>Panels/ContentBrowser.h</label>
+        <link refid="_content_browser_8h"/>
+      </node>
+      <node id="7">
+        <label>Panels/PropertiesPanel.h</label>
+        <link refid="_properties_panel_8h"/>
+      </node>
+      <node id="33">
+        <label>Panels/ScenePanel.h</label>
+        <link refid="_scene_panel_8h"/>
+      </node>
+      <node id="30">
+        <label>Panels/SpriteAtlasEditorPanel.h</label>
+        <link refid="_sprite_atlas_editor_panel_8h"/>
+      </node>
+      <node id="31">
+        <label>Panels/TilemapEditorPanel.h</label>
+        <link refid="_tilemap_editor_panel_8h"/>
+      </node>
+      <node id="34">
+        <label>Panels/ViewportPanel.h</label>
+        <link refid="_viewport_panel_8h"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>Panels/ViewportToolbar.h</label>
+        <link refid="_viewport_toolbar_8h"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_boon_1_1_b_class_meta" prot="public">Boon::BClassMeta</innerclass>
+    <innerclass refid="struct_boon_1_1_b_class" prot="public">Boon::BClass</innerclass>
+    <innerclass refid="struct_boon_1_1_b_class_registry" prot="public">Boon::BClassRegistry</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;typeindex&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;optional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;xhash&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdexcept&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_b_property_8h" kindref="compound">BProperty.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_b_function_8h" kindref="compound">BFunction.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_delegate_8h" kindref="compound">Core/Delegate.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="17"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_e_c_s_lifecycle_system" kindref="compound">ECSLifecycleSystem</ref>;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_b_class_registry" kindref="compound">BClassRegistry</ref>;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_net_rep_registry" kindref="compound">NetRepRegistry</ref>;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24" refid="struct_boon_1_1_b_class_meta" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_b_class_meta" kindref="compound">BClassMeta</ref></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="26" refid="struct_boon_1_1_b_class_meta_1aa2054e48452c06988d2129c7ef326e14" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="struct_boon_1_1_b_class_meta_1aa2054e48452c06988d2129c7ef326e14" kindref="member">key</ref>;</highlight></codeline>
+<codeline lineno="27" refid="struct_boon_1_1_b_class_meta_1af81f1bd2608d85301ef08be5a8037099" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="struct_boon_1_1_b_class_meta_1af81f1bd2608d85301ef08be5a8037099" kindref="member">value</ref>;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="namespace_boon_1a20738def45829e24908b136189943581" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_boon_1a20738def45829e24908b136189943581" kindref="member">BClassID</ref><sp/>=<sp/>uint32_t;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38" refid="struct_boon_1_1_b_class" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_b_class_1a7977c2915ab40b47217762768bf8bbf8" kindref="member">BClass</ref></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="40" refid="struct_boon_1_1_b_class_1a7977c2915ab40b47217762768bf8bbf8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1a7977c2915ab40b47217762768bf8bbf8" kindref="member">BClass</ref>(std::string<sp/>_name,<sp/>std::type_index<sp/>_type)</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="struct_boon_1_1_b_class_1a9e72af1eafec50a5c5e81ba53396f3a7" kindref="member">name</ref>(_name),<sp/><ref refid="struct_boon_1_1_b_class_1aa29b41374ecd75ca9ace8c6165ef1f61" kindref="member">type</ref>(_type)</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::hash&lt;std::string&gt;<sp/>hasher;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1a0db7b0108e5a2f41f1eb6dc147565232" kindref="member">hash</ref><sp/>=<sp/>(<ref refid="namespace_boon_1a20738def45829e24908b136189943581" kindref="member">BClassID</ref>)hasher(_name);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="struct_boon_1_1_b_class_1a0db7b0108e5a2f41f1eb6dc147565232" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a20738def45829e24908b136189943581" kindref="member">BClassID</ref><sp/><ref refid="struct_boon_1_1_b_class_1a0db7b0108e5a2f41f1eb6dc147565232" kindref="member">hash</ref>;</highlight></codeline>
+<codeline lineno="48" refid="struct_boon_1_1_b_class_1a9e72af1eafec50a5c5e81ba53396f3a7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="struct_boon_1_1_b_class_1a9e72af1eafec50a5c5e81ba53396f3a7" kindref="member">name</ref>;</highlight></codeline>
+<codeline lineno="49" refid="struct_boon_1_1_b_class_1aa29b41374ecd75ca9ace8c6165ef1f61" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::type_index<sp/><ref refid="struct_boon_1_1_b_class_1aa29b41374ecd75ca9ace8c6165ef1f61" kindref="member">type</ref>;</highlight></codeline>
+<codeline lineno="50" refid="struct_boon_1_1_b_class_1a4a4d5a3031001b8c9941204a2239b073" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;BFunction&gt;<sp/><ref refid="struct_boon_1_1_b_class_1a4a4d5a3031001b8c9941204a2239b073" kindref="member">functions</ref>;</highlight></codeline>
+<codeline lineno="51" refid="struct_boon_1_1_b_class_1aee6fafa518c99900e8653ea090627fc7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;BClassMeta&gt;<sp/><ref refid="struct_boon_1_1_b_class_1aee6fafa518c99900e8653ea090627fc7" kindref="member">meta</ref>;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="struct_boon_1_1_b_class_1a5a2f23160186cf5a6c6820cded4f5d1c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_b_class_1a5a2f23160186cf5a6c6820cded4f5d1c" kindref="member">RegisterFunc</ref><sp/>=<sp/>void(*)(<ref refid="struct_boon_1_1_e_c_s_lifecycle_system" kindref="compound">ECSLifecycleSystem</ref>&amp;);</highlight></codeline>
+<codeline lineno="54" refid="struct_boon_1_1_b_class_1a21894146f3b617d950ce506a2b3ddcd8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_b_class_1a21894146f3b617d950ce506a2b3ddcd8" kindref="member">UnregisterFunc</ref><sp/>=<sp/>void(*)();</highlight></codeline>
+<codeline lineno="55" refid="struct_boon_1_1_b_class_1af4c3ad47c1fdcee3844039e32ed459eb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_b_class_1af4c3ad47c1fdcee3844039e32ed459eb" kindref="member">CreateInstanceFn</ref><sp/>=<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>(*)();</highlight></codeline>
+<codeline lineno="56" refid="struct_boon_1_1_b_class_1a5c24b43348c6b4399b758ac387d76cbf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_b_class_1a5c24b43348c6b4399b758ac387d76cbf" kindref="member">DestroyInstanceFn</ref><sp/>=<sp/>void(*)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*);</highlight></codeline>
+<codeline lineno="57" refid="struct_boon_1_1_b_class_1aef5f3e06e761c9d8df62ed6ffb3e732d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_b_class_1aef5f3e06e761c9d8df62ed6ffb3e732d" kindref="member">CopyInstanceFn</ref><sp/>=<sp/>void<sp/>(*)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="struct_boon_1_1_b_class_1a20a231efd627c8bf8d17dd6b00ce402e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_b_class_1a20a231efd627c8bf8d17dd6b00ce402e" kindref="member">AwakeFn</ref><sp/>=<sp/>void<sp/>(*)(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;);</highlight></codeline>
+<codeline lineno="60" refid="struct_boon_1_1_b_class_1a230d93903c834ab40208c1bef90b6663" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_b_class_1a230d93903c834ab40208c1bef90b6663" kindref="member">AddComponentFn</ref><sp/>=<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>(*)(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;);</highlight></codeline>
+<codeline lineno="61" refid="struct_boon_1_1_b_class_1a85e54a38bbc9f5a378d8abaa12ea951d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_b_class_1a85e54a38bbc9f5a378d8abaa12ea951d" kindref="member">GetComponentFn</ref><sp/>=<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>(*)(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;);</highlight></codeline>
+<codeline lineno="62" refid="struct_boon_1_1_b_class_1ad973ba83ff0f9d5c8ce638a05eaf2ef2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_b_class_1ad973ba83ff0f9d5c8ce638a05eaf2ef2" kindref="member">HasComponentFn</ref><sp/>=<sp/>bool<sp/>(*)(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;);</highlight></codeline>
+<codeline lineno="63" refid="struct_boon_1_1_b_class_1a1eff6c99595a6ac2672f1869818686d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_b_class_1a1eff6c99595a6ac2672f1869818686d2" kindref="member">RemoveComponentFn</ref><sp/>=<sp/>void<sp/>(*)(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="struct_boon_1_1_b_class_1ad30070c7b79b1186d8ef040888393f31" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1a5a2f23160186cf5a6c6820cded4f5d1c" kindref="member">RegisterFunc</ref><sp/><ref refid="struct_boon_1_1_b_class_1ad30070c7b79b1186d8ef040888393f31" kindref="member">registerLifecycle</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="66" refid="struct_boon_1_1_b_class_1a5696ed958260e451091c0d08610d8dc6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1a21894146f3b617d950ce506a2b3ddcd8" kindref="member">UnregisterFunc</ref><sp/><ref refid="struct_boon_1_1_b_class_1a5696ed958260e451091c0d08610d8dc6" kindref="member">unregister</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="67" refid="struct_boon_1_1_b_class_1ad43db38256cd0e99a3c9408fc9e9a728" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1af4c3ad47c1fdcee3844039e32ed459eb" kindref="member">CreateInstanceFn</ref><sp/><ref refid="struct_boon_1_1_b_class_1ad43db38256cd0e99a3c9408fc9e9a728" kindref="member">createInstance</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="68" refid="struct_boon_1_1_b_class_1ad8107cd0e0b6fb4228a3743d85601b2f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1a5c24b43348c6b4399b758ac387d76cbf" kindref="member">DestroyInstanceFn</ref><sp/><ref refid="struct_boon_1_1_b_class_1ad8107cd0e0b6fb4228a3743d85601b2f" kindref="member">destroyInstance</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="69" refid="struct_boon_1_1_b_class_1a18a997182b0b99ae9c287b3a169836d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1aef5f3e06e761c9d8df62ed6ffb3e732d" kindref="member">CopyInstanceFn</ref><sp/><ref refid="struct_boon_1_1_b_class_1a18a997182b0b99ae9c287b3a169836d2" kindref="member">copyInstance</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="struct_boon_1_1_b_class_1a13361b250e3610f0f5f6ca2e303d6f07" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1a20a231efd627c8bf8d17dd6b00ce402e" kindref="member">AwakeFn</ref><sp/><ref refid="struct_boon_1_1_b_class_1a13361b250e3610f0f5f6ca2e303d6f07" kindref="member">awake</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="72" refid="struct_boon_1_1_b_class_1a13b140e9ff0b999a67cdcd3b4afa001c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1a230d93903c834ab40208c1bef90b6663" kindref="member">AddComponentFn</ref><sp/><ref refid="struct_boon_1_1_b_class_1a13b140e9ff0b999a67cdcd3b4afa001c" kindref="member">addComponent</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="73" refid="struct_boon_1_1_b_class_1a626a21c96d81dc963da22062162d6618" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1a85e54a38bbc9f5a378d8abaa12ea951d" kindref="member">GetComponentFn</ref><sp/><ref refid="struct_boon_1_1_b_class_1a626a21c96d81dc963da22062162d6618" kindref="member">getComponent</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="74" refid="struct_boon_1_1_b_class_1a3e0cb632323ed8a92e7b7589307ae62e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1ad973ba83ff0f9d5c8ce638a05eaf2ef2" kindref="member">HasComponentFn</ref><sp/><ref refid="struct_boon_1_1_b_class_1a3e0cb632323ed8a92e7b7589307ae62e" kindref="member">hasComponent</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="75" refid="struct_boon_1_1_b_class_1a9224c432746827804964805ec57dd6b7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1a1eff6c99595a6ac2672f1869818686d2" kindref="member">RemoveComponentFn</ref><sp/><ref refid="struct_boon_1_1_b_class_1a9224c432746827804964805ec57dd6b7" kindref="member">removeComponent</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77" refid="struct_boon_1_1_b_class_1adb6cdb672a27a2f4ec20e5b94180492c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="struct_boon_1_1_b_class_1adb6cdb672a27a2f4ec20e5b94180492c" kindref="member">flags</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79" refid="struct_boon_1_1_b_class_1abdb590516e960bb2f5781d8f271bb27f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1abdb590516e960bb2f5781d8f271bb27f" kindref="member">FunctionFlags</ref><sp/>:<sp/>uint8_t</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="81" refid="struct_boon_1_1_b_class_1abdb590516e960bb2f5781d8f271bb27faba4c2f964c9eb6addca40b2dc43a7f96" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1abdb590516e960bb2f5781d8f271bb27faba4c2f964c9eb6addca40b2dc43a7f96" kindref="member">None</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="82" refid="struct_boon_1_1_b_class_1abdb590516e960bb2f5781d8f271bb27faa98ace77456e8446896d68d73880e0f8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1abdb590516e960bb2f5781d8f271bb27faa98ace77456e8446896d68d73880e0f8" kindref="member">Awake</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>0,</highlight></codeline>
+<codeline lineno="83" refid="struct_boon_1_1_b_class_1abdb590516e960bb2f5781d8f271bb27faedbae1022887d11fc2a334d0b6374ed2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1abdb590516e960bb2f5781d8f271bb27faedbae1022887d11fc2a334d0b6374ed2" kindref="member">Update</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>1,</highlight></codeline>
+<codeline lineno="84" refid="struct_boon_1_1_b_class_1abdb590516e960bb2f5781d8f271bb27fa7e744f85b0f02f31dea03527bae4a4c1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1abdb590516e960bb2f5781d8f271bb27fa7e744f85b0f02f31dea03527bae4a4c1" kindref="member">FixedUpdate</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>2,</highlight></codeline>
+<codeline lineno="85" refid="struct_boon_1_1_b_class_1abdb590516e960bb2f5781d8f271bb27fac580ffe84e348e16b2ef4891d61c296c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1abdb590516e960bb2f5781d8f271bb27fac580ffe84e348e16b2ef4891d61c296c" kindref="member">LateUpdate</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>3</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="struct_boon_1_1_b_class_1ada333c17f1fb4c81d94fbf74a7395b72" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1ada333c17f1fb4c81d94fbf74a7395b72" kindref="member">SetFlag</ref>(<ref refid="struct_boon_1_1_b_class_1abdb590516e960bb2f5781d8f271bb27f" kindref="member">FunctionFlags</ref><sp/>f)<sp/>{<sp/><ref refid="struct_boon_1_1_b_class_1adb6cdb672a27a2f4ec20e5b94180492c" kindref="member">flags</ref><sp/>|=<sp/>f;<sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>quick<sp/>helpers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97" refid="struct_boon_1_1_b_class_1a100abff9dfd2880ffce70f49501c025e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_property" kindref="compound">BProperty</ref>*<sp/><ref refid="struct_boon_1_1_b_class_1a100abff9dfd2880ffce70f49501c025e" kindref="member">FindProperty</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>propName)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>p<sp/>:<sp/>properties)<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(std::string_view(p.name)<sp/>==<sp/>propName)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;p;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="struct_boon_1_1_b_class_1a09d94681569f6c19cf78ffb934edf4b2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1a09d94681569f6c19cf78ffb934edf4b2" kindref="member">HasProperty</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>propName)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1a100abff9dfd2880ffce70f49501c025e" kindref="member">FindProperty</ref>(propName)<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>🔹<sp/>Iteration<sp/>utilities</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113" refid="struct_boon_1_1_b_class_1ac71db8386e19d48faa969e85502eec0f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1ac71db8386e19d48faa969e85502eec0f" kindref="member">ForEachProperty</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_property" kindref="compound">BProperty</ref>&amp;)&gt;&amp;<sp/>fn)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>p<sp/>:<sp/>properties)</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fn(p);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121" refid="struct_boon_1_1_b_class_1a3f971bdb6a851d02d07c36f39a2e9322" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1a3f971bdb6a851d02d07c36f39a2e9322" kindref="member">ForEachPropertyMutable</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(<ref refid="struct_boon_1_1_b_property" kindref="compound">BProperty</ref>&amp;)&gt;&amp;<sp/>fn)<sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>p<sp/>:<sp/>properties)</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fn(p);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>🔹<sp/>Generic<sp/>get/set<sp/>on<sp/>instances</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="137" refid="struct_boon_1_1_b_class_1a02dd93cfac5d9a35b9f20b95ba8497d0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>T&amp;<sp/><ref refid="struct_boon_1_1_b_class_1a02dd93cfac5d9a35b9f20b95ba8497d0" kindref="member">GetValueRef</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>instance,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>propName)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_property" kindref="compound">BProperty</ref>*<sp/>prop<sp/>=<sp/><ref refid="struct_boon_1_1_b_class_1a100abff9dfd2880ffce70f49501c025e" kindref="member">FindProperty</ref>(propName);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!prop)</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;Property<sp/>not<sp/>found:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::string(propName));</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">((uint8_t*)instance<sp/>+<sp/>prop-&gt;<ref refid="struct_boon_1_1_b_property_1a82a5885b53b433c25ff34853f9f1d5e8" kindref="member">offset</ref>);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="148" refid="struct_boon_1_1_b_class_1a90a2a82b3ce3b569a4ee04f7a52762a1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/><ref refid="struct_boon_1_1_b_class_1a90a2a82b3ce3b569a4ee04f7a52762a1" kindref="member">GetValueRef</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>instance,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>propName)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_property" kindref="compound">BProperty</ref>*<sp/>prop<sp/>=<sp/><ref refid="struct_boon_1_1_b_class_1a100abff9dfd2880ffce70f49501c025e" kindref="member">FindProperty</ref>(propName);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!prop)</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;Property<sp/>not<sp/>found:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::string(propName));</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">((</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*)instance<sp/>+<sp/>prop-&gt;<ref refid="struct_boon_1_1_b_property_1a82a5885b53b433c25ff34853f9f1d5e8" kindref="member">offset</ref>);</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158" refid="struct_boon_1_1_b_class_1a1d1d255d49bb1d7f5e9d31caaaef3e38" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;BProperty&gt;&amp;<sp/><ref refid="struct_boon_1_1_b_class_1a1d1d255d49bb1d7f5e9d31caaaef3e38" kindref="member">GetProperties</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>properties;<sp/>}</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163" refid="struct_boon_1_1_b_class_1ade79da77e5dade161bce3cb3d63e32a1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1ade79da77e5dade161bce3cb3d63e32a1" kindref="member">GetPropertiesCount</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>properties.size();<sp/>}</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="168" refid="struct_boon_1_1_b_class_1a893245c584c436feda919d5c77843463" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1a893245c584c436feda919d5c77843463" kindref="member">HasMeta</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>key)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="169"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>m<sp/>:<sp/><ref refid="struct_boon_1_1_b_class_1aee6fafa518c99900e8653ea090627fc7" kindref="member">meta</ref>)</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m.key<sp/>==<sp/>key)</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179" refid="struct_boon_1_1_b_class_1afe542a8c340923fd9168254ed4dd16a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::optional&lt;std::string&gt;<sp/><ref refid="struct_boon_1_1_b_class_1afe542a8c340923fd9168254ed4dd16a9" kindref="member">GetMeta</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>key)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="180"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>m<sp/>:<sp/><ref refid="struct_boon_1_1_b_class_1aee6fafa518c99900e8653ea090627fc7" kindref="member">meta</ref>)</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m.key<sp/>==<sp/>key)</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m.value;</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::nullopt;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-----------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Function<sp/>reflection<sp/>API</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight><highlight class="comment">//<sp/>-----------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Register<sp/>a<sp/>function<sp/>with<sp/>a<sp/>known<sp/>ID<sp/>(hash<sp/>of<sp/>its<sp/>name)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="200" refid="struct_boon_1_1_b_class_1a31f45f6663d4b788e6864c515c8bda2c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1a31f45f6663d4b788e6864c515c8bda2c" kindref="member">AddFunction</ref>(</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_function_1a5a8402d76c1e9e4a4dd488b22bf3c986" kindref="member">BFunction::ThunkFn</ref><sp/>thunk,</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::initializer_list&lt;BFunctionMeta&gt;<sp/>metaList<sp/>=<sp/>{},</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::initializer_list&lt;BFunctionParam&gt;<sp/>paramsList<sp/>=<sp/>{})</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BFunction<sp/>fn;</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fn.id<sp/>=<sp/>id;</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fn.thunk<sp/>=<sp/>thunk;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fn.meta.assign(metaList.begin(),<sp/>metaList.end());</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fn.params.assign(paramsList.begin(),<sp/>paramsList.end());</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1a4a4d5a3031001b8c9941204a2239b073" kindref="member">functions</ref>.push_back(std::move(fn));</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Find<sp/>function<sp/>by<sp/>ID</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="218" refid="struct_boon_1_1_b_class_1ac200d9f2caa933ae875f9ada0dced6d8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_function" kindref="compound">BFunction</ref>*<sp/><ref refid="struct_boon_1_1_b_class_1ac200d9f2caa933ae875f9ada0dced6d8" kindref="member">FindFunction</ref>(uint32_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>fn<sp/>:<sp/><ref refid="struct_boon_1_1_b_class_1a4a4d5a3031001b8c9941204a2239b073" kindref="member">functions</ref>)</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(fn.id<sp/>==<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;fn;</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229" refid="struct_boon_1_1_b_class_1a2eee486255fc4b0602f1e9c590bfa154" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_function" kindref="compound">BFunction</ref>*<sp/><ref refid="struct_boon_1_1_b_class_1a2eee486255fc4b0602f1e9c590bfa154" kindref="member">FindFunction</ref>(uint32_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="230"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>fn<sp/>:<sp/><ref refid="struct_boon_1_1_b_class_1a4a4d5a3031001b8c9941204a2239b073" kindref="member">functions</ref>)</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(fn.id<sp/>==<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;fn;</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Invoke<sp/>by<sp/>ID</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="247" refid="struct_boon_1_1_b_class_1aaf0e7fd81c42471041f3d8e43894b58b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1aaf0e7fd81c42471041f3d8e43894b58b" kindref="member">InvokeById</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>instance,<sp/>uint32_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/><ref refid="class_boon_1_1_variant" kindref="compound">Variant</ref>*<sp/>args<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>argCount<sp/>=<sp/>0)</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_function" kindref="compound">BFunction</ref>*<sp/>fn<sp/>=<sp/><ref refid="struct_boon_1_1_b_class_1ac200d9f2caa933ae875f9ada0dced6d8" kindref="member">FindFunction</ref>(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!fn<sp/>||<sp/>!fn-&gt;<ref refid="struct_boon_1_1_b_function_1a6d13992148a61355f1f96591172e530b" kindref="member">thunk</ref>)</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fn-&gt;<ref refid="struct_boon_1_1_b_function_1a6d13992148a61355f1f96591172e530b" kindref="member">thunk</ref>(instance,<sp/>args,<sp/>argCount);</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Convenience:<sp/>invoke<sp/>by<sp/>function<sp/>name<sp/>(hashed<sp/>at<sp/>runtime)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="261" refid="struct_boon_1_1_b_class_1a90ce5e340d7c9ff47bdd06d157a253fa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1a90ce5e340d7c9ff47bdd06d157a253fa" kindref="member">InvokeByName</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>instance,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="struct_boon_1_1_b_class_1a9e72af1eafec50a5c5e81ba53396f3a7" kindref="member">name</ref>,<sp/><ref refid="class_boon_1_1_variant" kindref="compound">Variant</ref>*<sp/>args<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>argCount<sp/>=<sp/>0)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="262"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal"><sp/>=<sp/><ref refid="namespace_boon_1a692be445d04c31a3e7507e0c4575b9ef" kindref="member">FNV1a32</ref>(<ref refid="struct_boon_1_1_b_class_1a9e72af1eafec50a5c5e81ba53396f3a7" kindref="member">name</ref>);</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_function" kindref="compound">BFunction</ref>*<sp/>fn<sp/>=<sp/><ref refid="struct_boon_1_1_b_class_1ac200d9f2caa933ae875f9ada0dced6d8" kindref="member">FindFunction</ref>(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!fn<sp/>||<sp/>!fn-&gt;<ref refid="struct_boon_1_1_b_function_1a6d13992148a61355f1f96591172e530b" kindref="member">thunk</ref>)</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fn-&gt;<ref refid="struct_boon_1_1_b_function_1a6d13992148a61355f1f96591172e530b" kindref="member">thunk</ref>(</highlight><highlight class="keyword">const_cast&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(instance),<sp/>args,<sp/>argCount);</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Quick<sp/>access</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="276" refid="struct_boon_1_1_b_class_1ac6f6ca132e459437b430ac445384662f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;BFunction&gt;&amp;<sp/><ref refid="struct_boon_1_1_b_class_1ac6f6ca132e459437b430ac445384662f" kindref="member">GetFunctions</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1a4a4d5a3031001b8c9941204a2239b073" kindref="member">functions</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"></highlight></codeline>
+<codeline lineno="281" refid="struct_boon_1_1_b_class_1a60c5dea109626cdd5d4d7e42554509d5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1a60c5dea109626cdd5d4d7e42554509d5" kindref="member">GetFunctionCount</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1a4a4d5a3031001b8c9941204a2239b073" kindref="member">functions</ref>.size();<sp/>}</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"></highlight></codeline>
+<codeline lineno="293" refid="struct_boon_1_1_b_class_1a69e1f8f827c52a1df852a148038d74f6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1a69e1f8f827c52a1df852a148038d74f6" kindref="member">AddPropertyOffset</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>propName,</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>typeName,</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t<sp/>offset,</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::size_t<sp/>size,</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1aa8ac0a1443718f6b346b8b08af5c5384" kindref="member">BTypeId</ref><sp/>typeId,</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::initializer_list&lt;BPropertyMeta&gt;<sp/>metas<sp/>=<sp/>{})</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_property" kindref="compound">BProperty</ref><sp/>p;</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>p.<ref refid="struct_boon_1_1_b_property_1a8aa1a6c6ea1cbc4e2032e9580695c0ec" kindref="member">name</ref><sp/>=<sp/>propName;</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>p.<ref refid="struct_boon_1_1_b_property_1ab6167324a77f9277b00a61231f6fbfb2" kindref="member">typeName</ref><sp/>=<sp/>typeName;</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>p.<ref refid="struct_boon_1_1_b_property_1a82a5885b53b433c25ff34853f9f1d5e8" kindref="member">offset</ref><sp/>=<sp/>offset;</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>p.<ref refid="struct_boon_1_1_b_property_1a3a5511ac5fd5dea93d059ce35cfb5ed6" kindref="member">size</ref><sp/>=<sp/>size;</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>p.<ref refid="struct_boon_1_1_b_property_1aad69dc18d7bcf182ad6ab96bbf08ab15" kindref="member">typeId</ref><sp/>=<sp/>typeId;</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>p.<ref refid="struct_boon_1_1_b_property_1a5bf333716a20e3c190a8072e49611d10" kindref="member">meta</ref>.assign(metas.begin(),<sp/>metas.end());</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>properties.push_back(std::move(p));</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"></highlight></codeline>
+<codeline lineno="313" refid="struct_boon_1_1_b_class_1abac58a1a7f64226dfad88e7a9f4521b6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_1abac58a1a7f64226dfad88e7a9f4521b6" kindref="member">AddMeta</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>key,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>value<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_1aee6fafa518c99900e8653ea090627fc7" kindref="member">meta</ref>.push_back({<sp/>key,<sp/>value<sp/>});</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"></highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"></highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;BProperty&gt;<sp/>properties;</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"></highlight></codeline>
+<codeline lineno="329" refid="struct_boon_1_1_b_class_registry" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_b_class_registry" kindref="compound">BClassRegistry</ref></highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="331" refid="struct_boon_1_1_b_class_registry_1aaf98573a809387088cf9ba5cd30cb30d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_registry" kindref="compound">BClassRegistry</ref>&amp;<sp/><ref refid="struct_boon_1_1_b_class_registry_1aaf98573a809387088cf9ba5cd30cb30d" kindref="member">Get</ref>()</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*s_Instance;</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"></highlight></codeline>
+<codeline lineno="336" refid="struct_boon_1_1_b_class_registry_1a710cb04ac17db3987b7d8bc0368847eb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_registry_1a710cb04ac17db3987b7d8bc0368847eb" kindref="member">SetRegistry</ref>(<ref refid="struct_boon_1_1_b_class_registry" kindref="compound">BClassRegistry</ref>*<sp/>pRegistry)</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>s_Instance<sp/>=<sp/>pRegistry;</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"></highlight></codeline>
+<codeline lineno="346" refid="struct_boon_1_1_b_class_registry_1a127d147f92842d2afba9ddaad38acc7e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_registry_1a127d147f92842d2afba9ddaad38acc7e" kindref="member">Register</ref>(<ref refid="struct_boon_1_1_b_class" kindref="compound">BClass</ref>*<sp/>cls)</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_Classes[cls-&gt;<ref refid="struct_boon_1_1_b_class_1aa29b41374ecd75ca9ace8c6165ef1f61" kindref="member">type</ref>]<sp/>=<sp/>cls;</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_Listeners.Invoke(*cls);</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"></highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="357" refid="struct_boon_1_1_b_class_registry_1ad1d0984d0ca036b17e4ac25af1c837d7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_registry_1ad1d0984d0ca036b17e4ac25af1c837d7" kindref="member">Unregister</ref>()</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class" kindref="compound">BClass</ref>*<sp/>cls<sp/>=<sp/><ref refid="struct_boon_1_1_b_class_registry_1ae8200923a80236a3461b7a9cc2fb4602" kindref="member">Find&lt;T&gt;</ref>();</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!cls)</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"></highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cls-&gt;<ref refid="struct_boon_1_1_b_class_1a5696ed958260e451091c0d08610d8dc6" kindref="member">unregister</ref>();</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_Classes.erase(cls-&gt;<ref refid="struct_boon_1_1_b_class_1aa29b41374ecd75ca9ace8c6165ef1f61" kindref="member">type</ref>);</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"></highlight></codeline>
+<codeline lineno="370" refid="struct_boon_1_1_b_class_registry_1a40491169e4a4125d86afcda3562aa4fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class" kindref="compound">BClass</ref>*<sp/><ref refid="struct_boon_1_1_b_class_registry_1a40491169e4a4125d86afcda3562aa4fb" kindref="member">Find</ref>(<ref refid="namespace_boon_1a20738def45829e24908b136189943581" kindref="member">BClassID</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="372"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>it<sp/>=<sp/>std::find_if(m_Classes.begin(),<sp/>m_Classes.end(),<sp/>[</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">](std::pair&lt;std::type_index,<sp/>BClass*&gt;<sp/>pair)</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="374"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>pair.second-&gt;hash<sp/>==<sp/>id;</highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(it<sp/>!=<sp/>m_Classes.end())<sp/>?<sp/>it-&gt;second<sp/>:<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"></highlight></codeline>
+<codeline lineno="382" refid="struct_boon_1_1_b_class_registry_1a7e22ef6105a58282b821b8afdaab5d15" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class" kindref="compound">BClass</ref>*<sp/><ref refid="struct_boon_1_1_b_class_registry_1a7e22ef6105a58282b821b8afdaab5d15" kindref="member">Find</ref>(std::type_index<sp/>t)</highlight></codeline>
+<codeline lineno="383"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="384"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>it<sp/>=<sp/>m_Classes.find(t);</highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(it<sp/>!=<sp/>m_Classes.end())<sp/>?<sp/>it-&gt;second<sp/>:<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="386"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="387"><highlight class="normal"></highlight></codeline>
+<codeline lineno="391"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="392" refid="struct_boon_1_1_b_class_registry_1ae8200923a80236a3461b7a9cc2fb4602" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class" kindref="compound">BClass</ref>*<sp/><ref refid="struct_boon_1_1_b_class_registry_1ae8200923a80236a3461b7a9cc2fb4602" kindref="member">Find</ref>()</highlight></codeline>
+<codeline lineno="393"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_registry_1ae8200923a80236a3461b7a9cc2fb4602" kindref="member">Find</ref>(</highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(T));</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="396"><highlight class="normal"></highlight></codeline>
+<codeline lineno="400"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Fn&gt;</highlight></codeline>
+<codeline lineno="401" refid="struct_boon_1_1_b_class_registry_1a0c6746126c7bd8208e111a94ace06292" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_registry_1a0c6746126c7bd8208e111a94ace06292" kindref="member">ForEach</ref>(Fn&amp;&amp;<sp/>fn)</highlight></codeline>
+<codeline lineno="402"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="403"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>[_,<sp/>cls]<sp/>:<sp/>m_Classes)</highlight></codeline>
+<codeline lineno="404"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fn(*cls);</highlight></codeline>
+<codeline lineno="405"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="406"><highlight class="normal"></highlight></codeline>
+<codeline lineno="412"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="413" refid="struct_boon_1_1_b_class_registry_1a81bb364f87ee631638bebcc6023f10dd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T*<sp/><ref refid="struct_boon_1_1_b_class_registry_1a81bb364f87ee631638bebcc6023f10dd" kindref="member">Instantiate</ref>()</highlight></codeline>
+<codeline lineno="414"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="415"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class" kindref="compound">BClass</ref>*<sp/>cls<sp/>=<sp/><ref refid="struct_boon_1_1_b_class_registry_1ae8200923a80236a3461b7a9cc2fb4602" kindref="member">Find</ref>(</highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(T));</highlight></codeline>
+<codeline lineno="416"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cls<sp/>&amp;&amp;<sp/>cls-&gt;<ref refid="struct_boon_1_1_b_class_1ad43db38256cd0e99a3c9408fc9e9a728" kindref="member">createInstance</ref>)</highlight></codeline>
+<codeline lineno="417"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(cls-&gt;<ref refid="struct_boon_1_1_b_class_1ad43db38256cd0e99a3c9408fc9e9a728" kindref="member">createInstance</ref>());</highlight></codeline>
+<codeline lineno="418"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="419"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="420"><highlight class="normal"></highlight></codeline>
+<codeline lineno="424" refid="struct_boon_1_1_b_class_registry_1ae892fdd009906b0250a8d117677aec91" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_delegate" kindref="compound">Delegate</ref>&lt;void(<ref refid="struct_boon_1_1_b_class" kindref="compound">BClass</ref>&amp;)&gt;&amp;<sp/><ref refid="struct_boon_1_1_b_class_registry_1ae892fdd009906b0250a8d117677aec91" kindref="member">GetListeners</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Listeners;<sp/>}</highlight></codeline>
+<codeline lineno="425"><highlight class="normal"></highlight></codeline>
+<codeline lineno="426"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="427"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;std::type_index,<sp/>BClass*&gt;<sp/>m_Classes;</highlight></codeline>
+<codeline lineno="428"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_delegate" kindref="compound">Delegate</ref>&lt;void(<ref refid="struct_boon_1_1_b_class" kindref="compound">BClass</ref>&amp;)&gt;<sp/>m_Listeners;</highlight></codeline>
+<codeline lineno="429"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_b_class_registry" kindref="compound">BClassRegistry</ref>*<sp/>s_Instance;</highlight></codeline>
+<codeline lineno="430"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="431"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Reflection/BClass.h"/>
+  </compounddef>
+</doxygen>

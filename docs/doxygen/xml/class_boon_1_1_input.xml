@@ -1,0 +1,668 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_input" kind="class" language="C++" prot="public">
+    <compoundname>Boon::Input</compoundname>
+    <includes refid="_input_8h" local="no">Input/Input.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_input_1a8dcfe5ec9130f6c076ae0d08054fd1f5" prot="private" static="no" mutable="no">
+        <type>Impl *</type>
+        <definition>Impl* Boon::Input::m_pImpl</definition>
+        <argsstring></argsstring>
+        <name>m_pImpl</name>
+        <qualifiedname>Boon::Input::m_pImpl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="78" column="14" bodyfile="Input/Input.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_input_1aa130253a5963b23ff2a5ff1eaed805b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::Input::Input</definition>
+        <argsstring>()</argsstring>
+        <name>Input</name>
+        <qualifiedname>Boon::Input::Input</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="25" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a605d487bd2bf821121fb67c235f089b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::Input::~Input</definition>
+        <argsstring>()</argsstring>
+        <name>~Input</name>
+        <qualifiedname>Boon::Input::~Input</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="26" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a789c93a3124b6d0d2bbc30fe60df9b0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::Input::Update</definition>
+        <argsstring>()</argsstring>
+        <name>Update</name>
+        <qualifiedname>Boon::Input::Update</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="29" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1ac91f434ff4ffd08efca31d38e879d3a4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::Input::IsKeyPressed</definition>
+        <argsstring>(KeyCode key) const</argsstring>
+        <name>IsKeyPressed</name>
+        <qualifiedname>Boon::Input::IsKeyPressed</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a37707aefe6eee07344c93a2e7e5c48ea" kindref="member">KeyCode</ref></type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="32" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1add8c6e04765d0878c9477ce2283ca63b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::Input::IsKeyHeld</definition>
+        <argsstring>(KeyCode key) const</argsstring>
+        <name>IsKeyHeld</name>
+        <qualifiedname>Boon::Input::IsKeyHeld</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a37707aefe6eee07344c93a2e7e5c48ea" kindref="member">KeyCode</ref></type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a7620779971a373d358bf0cea1270e350" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::Input::IsKeyReleased</definition>
+        <argsstring>(KeyCode key) const</argsstring>
+        <name>IsKeyReleased</name>
+        <qualifiedname>Boon::Input::IsKeyReleased</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a37707aefe6eee07344c93a2e7e5c48ea" kindref="member">KeyCode</ref></type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="34" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1af29993dd1b894cdadfa822a638a4ad7a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::Input::IsMousePressed</definition>
+        <argsstring>(MouseCode button) const</argsstring>
+        <name>IsMousePressed</name>
+        <qualifiedname>Boon::Input::IsMousePressed</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a7ae4a98934fc6312b46eb1dac7c5d795" kindref="member">MouseCode</ref></type>
+          <declname>button</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="37" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1af29a4c874395c4b04b0fdd79c2cda930" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::Input::IsMouseHeld</definition>
+        <argsstring>(MouseCode button) const</argsstring>
+        <name>IsMouseHeld</name>
+        <qualifiedname>Boon::Input::IsMouseHeld</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a7ae4a98934fc6312b46eb1dac7c5d795" kindref="member">MouseCode</ref></type>
+          <declname>button</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="38" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a58b102ecbdfe8ad407669876a29be92f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::Input::IsMouseReleased</definition>
+        <argsstring>(MouseCode button) const</argsstring>
+        <name>IsMouseReleased</name>
+        <qualifiedname>Boon::Input::IsMouseReleased</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a7ae4a98934fc6312b46eb1dac7c5d795" kindref="member">MouseCode</ref></type>
+          <declname>button</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="39" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a509f994ae5f3173acb81e4e5fadec1f4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Boon::Input::GetMouseX</definition>
+        <argsstring>() const</argsstring>
+        <name>GetMouseX</name>
+        <qualifiedname>Boon::Input::GetMouseX</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="41" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1ae63216787f02286643fe86078fb3482c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Boon::Input::GetMouseY</definition>
+        <argsstring>() const</argsstring>
+        <name>GetMouseY</name>
+        <qualifiedname>Boon::Input::GetMouseY</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="42" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a56dd7855cad5302cb9885b00f0d91682" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Boon::Input::GetScrollX</definition>
+        <argsstring>() const</argsstring>
+        <name>GetScrollX</name>
+        <qualifiedname>Boon::Input::GetScrollX</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="43" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a2860efe4bc97662fc16e8345d32e7526" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double Boon::Input::GetScrollY</definition>
+        <argsstring>() const</argsstring>
+        <name>GetScrollY</name>
+        <qualifiedname>Boon::Input::GetScrollY</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="44" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a7c13600adbf78d6dabd144c3f6254e24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::Input::BindAction</definition>
+        <argsstring>(const std::string &amp;action, int key)</argsstring>
+        <name>BindAction</name>
+        <qualifiedname>Boon::Input::BindAction</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>action</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="47" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1aab738d200138d8ccf0a46459df971279" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::Input::IsActionPressed</definition>
+        <argsstring>(const std::string &amp;action) const</argsstring>
+        <name>IsActionPressed</name>
+        <qualifiedname>Boon::Input::IsActionPressed</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="48" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1ae4ef5d9dcdab286c501200a3213aa7b1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::Input::IsActionHeld</definition>
+        <argsstring>(const std::string &amp;action) const</argsstring>
+        <name>IsActionHeld</name>
+        <qualifiedname>Boon::Input::IsActionHeld</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="49" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a8871d47e6d51d21f8c247304a14c1e41" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::Input::IsControllerConnected</definition>
+        <argsstring>(int controller) const</argsstring>
+        <name>IsControllerConnected</name>
+        <qualifiedname>Boon::Input::IsControllerConnected</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>controller</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="52" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1acaee0b791cf1874839714b9f6c4a6f56" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::Input::IsControllerButtonPressed</definition>
+        <argsstring>(int controller, GamepadButtonCode button) const</argsstring>
+        <name>IsControllerButtonPressed</name>
+        <qualifiedname>Boon::Input::IsControllerButtonPressed</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>controller</declname>
+        </param>
+        <param>
+          <type><ref refid="namespace_boon_1a6470e7c4ad2843e6e00da61f69dfd5bf" kindref="member">GamepadButtonCode</ref></type>
+          <declname>button</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="53" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a91eb50e3ddb8ad964ed9f54405648c10" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::Input::IsControllerButtonHeld</definition>
+        <argsstring>(int controller, GamepadButtonCode button) const</argsstring>
+        <name>IsControllerButtonHeld</name>
+        <qualifiedname>Boon::Input::IsControllerButtonHeld</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>controller</declname>
+        </param>
+        <param>
+          <type><ref refid="namespace_boon_1a6470e7c4ad2843e6e00da61f69dfd5bf" kindref="member">GamepadButtonCode</ref></type>
+          <declname>button</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="54" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a75c591f7ea25b8e39519077f9ce62265" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::Input::IsControllerButtonReleased</definition>
+        <argsstring>(int controller, GamepadButtonCode button) const</argsstring>
+        <name>IsControllerButtonReleased</name>
+        <qualifiedname>Boon::Input::IsControllerButtonReleased</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>controller</declname>
+        </param>
+        <param>
+          <type><ref refid="namespace_boon_1a6470e7c4ad2843e6e00da61f69dfd5bf" kindref="member">GamepadButtonCode</ref></type>
+          <declname>button</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="55" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a18d811387efe6175304af59f7d4f2f33" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float Boon::Input::GetControllerAxis</definition>
+        <argsstring>(int controller, GamepadAxisCode axis) const</argsstring>
+        <name>GetControllerAxis</name>
+        <qualifiedname>Boon::Input::GetControllerAxis</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>controller</declname>
+        </param>
+        <param>
+          <type><ref refid="namespace_boon_1a2f53110ae0cb9dc6080d98772bf453d8" kindref="member">GamepadAxisCode</ref></type>
+          <declname>axis</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="56" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a8925da4e97caf7a350af299370cdf264" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::Input::SetDefaultDeadZone</definition>
+        <argsstring>(float deadzone)</argsstring>
+        <name>SetDefaultDeadZone</name>
+        <qualifiedname>Boon::Input::SetDefaultDeadZone</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>deadzone</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="59" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a01e6f48059d339e36b6bd159bf31cffb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::Input::SetDefaultAxisSensitivity</definition>
+        <argsstring>(float sensitivity)</argsstring>
+        <name>SetDefaultAxisSensitivity</name>
+        <qualifiedname>Boon::Input::SetDefaultAxisSensitivity</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>sensitivity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="60" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a42c246ff7c5aafc191db2faa28a7fca7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float Boon::Input::GetDefaultDeadZone</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDefaultDeadZone</name>
+        <qualifiedname>Boon::Input::GetDefaultDeadZone</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="61" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a67e6b4a4645dd3b33af1bfe3d55876e6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float Boon::Input::GetDefaultAxisSensitivity</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDefaultAxisSensitivity</name>
+        <qualifiedname>Boon::Input::GetDefaultAxisSensitivity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="62" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a92d753eaeac634c97f0925af9f9d30cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::Input::SetControllerDeadZone</definition>
+        <argsstring>(int controller, float deadzone)</argsstring>
+        <name>SetControllerDeadZone</name>
+        <qualifiedname>Boon::Input::SetControllerDeadZone</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>controller</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>deadzone</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="65" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a5300e91e8d0450755f03a0c9b2a5dc17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::Input::SetControllerAxisSensitivity</definition>
+        <argsstring>(int controller, float sensitivity)</argsstring>
+        <name>SetControllerAxisSensitivity</name>
+        <qualifiedname>Boon::Input::SetControllerAxisSensitivity</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>controller</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>sensitivity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="66" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1aab4cff79b16563297a0c60bd9ef93a0b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float Boon::Input::GetControllerDeadZone</definition>
+        <argsstring>(int controller) const</argsstring>
+        <name>GetControllerDeadZone</name>
+        <qualifiedname>Boon::Input::GetControllerDeadZone</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>controller</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="67" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1ad3a056d6d5582885df8905551a530554" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float Boon::Input::GetControllerAxisSensitivity</definition>
+        <argsstring>(int controller) const</argsstring>
+        <name>GetControllerAxisSensitivity</name>
+        <qualifiedname>Boon::Input::GetControllerAxisSensitivity</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>controller</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="68" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a0444f4478c34ab3f2d19e853abbb3f1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::Input::KeyCallback</definition>
+        <argsstring>(int key, int action)</argsstring>
+        <name>KeyCallback</name>
+        <qualifiedname>Boon::Input::KeyCallback</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="71" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1a95e6ee72762ed743fa1ce2420d00b0cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::Input::MouseButtonCallback</definition>
+        <argsstring>(int button, int action)</argsstring>
+        <name>MouseButtonCallback</name>
+        <qualifiedname>Boon::Input::MouseButtonCallback</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>button</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="72" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1ace4fd5808b8bdb268341acbc0af15eec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::Input::CursorPosCallback</definition>
+        <argsstring>(double xpos, double ypos)</argsstring>
+        <name>CursorPosCallback</name>
+        <qualifiedname>Boon::Input::CursorPosCallback</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>xpos</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>ypos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="73" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_input_1af49694c6291f95e931c4e21d035173ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::Input::ScrollCallback</definition>
+        <argsstring>(double xoffset, double yoffset)</argsstring>
+        <name>ScrollCallback</name>
+        <qualifiedname>Boon::Input::ScrollCallback</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>xoffset</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>yoffset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Input/Input.h" line="74" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Input/Input.h" line="22" column="5" bodyfile="Input/Input.h" bodystart="23" bodyend="79"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_input_1a7c13600adbf78d6dabd144c3f6254e24" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>BindAction</name></member>
+      <member refid="class_boon_1_1_input_1ace4fd5808b8bdb268341acbc0af15eec" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>CursorPosCallback</name></member>
+      <member refid="class_boon_1_1_input_1a18d811387efe6175304af59f7d4f2f33" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>GetControllerAxis</name></member>
+      <member refid="class_boon_1_1_input_1ad3a056d6d5582885df8905551a530554" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>GetControllerAxisSensitivity</name></member>
+      <member refid="class_boon_1_1_input_1aab4cff79b16563297a0c60bd9ef93a0b" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>GetControllerDeadZone</name></member>
+      <member refid="class_boon_1_1_input_1a67e6b4a4645dd3b33af1bfe3d55876e6" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>GetDefaultAxisSensitivity</name></member>
+      <member refid="class_boon_1_1_input_1a42c246ff7c5aafc191db2faa28a7fca7" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>GetDefaultDeadZone</name></member>
+      <member refid="class_boon_1_1_input_1a509f994ae5f3173acb81e4e5fadec1f4" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>GetMouseX</name></member>
+      <member refid="class_boon_1_1_input_1ae63216787f02286643fe86078fb3482c" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>GetMouseY</name></member>
+      <member refid="class_boon_1_1_input_1a56dd7855cad5302cb9885b00f0d91682" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>GetScrollX</name></member>
+      <member refid="class_boon_1_1_input_1a2860efe4bc97662fc16e8345d32e7526" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>GetScrollY</name></member>
+      <member refid="class_boon_1_1_input_1aa130253a5963b23ff2a5ff1eaed805b6" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>Input</name></member>
+      <member refid="class_boon_1_1_input_1ae4ef5d9dcdab286c501200a3213aa7b1" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>IsActionHeld</name></member>
+      <member refid="class_boon_1_1_input_1aab738d200138d8ccf0a46459df971279" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>IsActionPressed</name></member>
+      <member refid="class_boon_1_1_input_1a91eb50e3ddb8ad964ed9f54405648c10" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>IsControllerButtonHeld</name></member>
+      <member refid="class_boon_1_1_input_1acaee0b791cf1874839714b9f6c4a6f56" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>IsControllerButtonPressed</name></member>
+      <member refid="class_boon_1_1_input_1a75c591f7ea25b8e39519077f9ce62265" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>IsControllerButtonReleased</name></member>
+      <member refid="class_boon_1_1_input_1a8871d47e6d51d21f8c247304a14c1e41" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>IsControllerConnected</name></member>
+      <member refid="class_boon_1_1_input_1add8c6e04765d0878c9477ce2283ca63b" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>IsKeyHeld</name></member>
+      <member refid="class_boon_1_1_input_1ac91f434ff4ffd08efca31d38e879d3a4" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>IsKeyPressed</name></member>
+      <member refid="class_boon_1_1_input_1a7620779971a373d358bf0cea1270e350" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>IsKeyReleased</name></member>
+      <member refid="class_boon_1_1_input_1af29a4c874395c4b04b0fdd79c2cda930" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>IsMouseHeld</name></member>
+      <member refid="class_boon_1_1_input_1af29993dd1b894cdadfa822a638a4ad7a" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>IsMousePressed</name></member>
+      <member refid="class_boon_1_1_input_1a58b102ecbdfe8ad407669876a29be92f" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>IsMouseReleased</name></member>
+      <member refid="class_boon_1_1_input_1a0444f4478c34ab3f2d19e853abbb3f1c" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>KeyCallback</name></member>
+      <member refid="class_boon_1_1_input_1a8dcfe5ec9130f6c076ae0d08054fd1f5" prot="private" virt="non-virtual"><scope>Boon::Input</scope><name>m_pImpl</name></member>
+      <member refid="class_boon_1_1_input_1a95e6ee72762ed743fa1ce2420d00b0cf" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>MouseButtonCallback</name></member>
+      <member refid="class_boon_1_1_input_1af49694c6291f95e931c4e21d035173ff" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>ScrollCallback</name></member>
+      <member refid="class_boon_1_1_input_1a5300e91e8d0450755f03a0c9b2a5dc17" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>SetControllerAxisSensitivity</name></member>
+      <member refid="class_boon_1_1_input_1a92d753eaeac634c97f0925af9f9d30cd" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>SetControllerDeadZone</name></member>
+      <member refid="class_boon_1_1_input_1a01e6f48059d339e36b6bd159bf31cffb" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>SetDefaultAxisSensitivity</name></member>
+      <member refid="class_boon_1_1_input_1a8925da4e97caf7a350af299370cdf264" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>SetDefaultDeadZone</name></member>
+      <member refid="class_boon_1_1_input_1a789c93a3124b6d0d2bbc30fe60df9b0e" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>Update</name></member>
+      <member refid="class_boon_1_1_input_1a605d487bd2bf821121fb67c235f089b4" prot="public" virt="non-virtual"><scope>Boon::Input</scope><name>~Input</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

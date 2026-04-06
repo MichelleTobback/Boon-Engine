@@ -12,6 +12,12 @@ namespace Boon
     public:
         using AssetType = ShaderAsset;
 
+        /**
+         * @brief Import a shader asset from a combined shader source file.
+         *
+         * Parses sections marked with `#vert` and `#frag` and populates a ShaderAsset.
+         */
+
         Asset* ImportFromFile(const std::string& filepath, const AssetMeta& meta) override
         {
             ShaderAsset* asset{nullptr};

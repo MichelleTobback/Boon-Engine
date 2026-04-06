@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_net_packet_header" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::NetPacketHeader</compoundname>
+    <includes refid="_net_packet_8h" local="no">Networking/NetPacket.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_net_packet_header_1afecccb61bc38ed6d371d0db1dc098cb0" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t Boon::NetPacketHeader::ProtocolVersion</definition>
+        <argsstring></argsstring>
+        <name>ProtocolVersion</name>
+        <qualifiedname>Boon::NetPacketHeader::ProtocolVersion</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetPacket.h" line="42" column="18" bodyfile="Networking/NetPacket.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_packet_header_1aff074eec8933f64d3f3d89437f6520d3" prot="public" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31" kindref="member">ENetPacketType</ref></type>
+        <definition>ENetPacketType Boon::NetPacketHeader::Type</definition>
+        <argsstring></argsstring>
+        <name>Type</name>
+        <qualifiedname>Boon::NetPacketHeader::Type</qualifiedname>
+        <initializer>= <ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a6adf97f83acf6453d4a6a4b1070f3754" kindref="member">ENetPacketType::None</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetPacket.h" line="43" column="24" bodyfile="Networking/NetPacket.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_packet_header_1afdc6fb83630ec7f903ad374d354dfbc9" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t Boon::NetPacketHeader::Reserved0</definition>
+        <argsstring></argsstring>
+        <name>Reserved0</name>
+        <qualifiedname>Boon::NetPacketHeader::Reserved0</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetPacket.h" line="44" column="17" bodyfile="Networking/NetPacket.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_packet_header_1a8bebcaefa46be61027f0970aeb80f87f" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Boon::NetPacketHeader::PayloadSize</definition>
+        <argsstring></argsstring>
+        <name>PayloadSize</name>
+        <qualifiedname>Boon::NetPacketHeader::PayloadSize</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetPacket.h" line="46" column="18" bodyfile="Networking/NetPacket.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_packet_header_1a3aba026f4e35fd378f9352908124faa5" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Boon::NetPacketHeader::Flags</definition>
+        <argsstring></argsstring>
+        <name>Flags</name>
+        <qualifiedname>Boon::NetPacketHeader::Flags</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetPacket.h" line="47" column="18" bodyfile="Networking/NetPacket.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_packet_header_1a6683b65bde34a8618286fea7c91710d9" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Boon::NetPacketHeader::ServerTick</definition>
+        <argsstring></argsstring>
+        <name>ServerTick</name>
+        <qualifiedname>Boon::NetPacketHeader::ServerTick</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetPacket.h" line="48" column="18" bodyfile="Networking/NetPacket.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_boon_1_1_net_packet_header_1ae870316ebb4e1db9169a1de62990e959" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::NetPacketHeader::NetPacketHeader</definition>
+        <argsstring>()=default</argsstring>
+        <name>NetPacketHeader</name>
+        <qualifiedname>Boon::NetPacketHeader::NetPacketHeader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetPacket.h" line="38" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_net_packet_header_1aaab371bea77c231b901fa29be72f15cb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::NetPacketHeader::NetPacketHeader</definition>
+        <argsstring>(ENetPacketType type)</argsstring>
+        <name>NetPacketHeader</name>
+        <qualifiedname>Boon::NetPacketHeader::NetPacketHeader</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31" kindref="member">ENetPacketType</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetPacket.h" line="39" column="9" bodyfile="Networking/NetPacket.h" bodystart="39" bodyend="40"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="struct_boon_1_1_net_packet_header_1a731dfc58c832507376638be44f8d9f32" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>static constexpr size_t Boon::NetPacketHeader::Size</definition>
+        <argsstring>()</argsstring>
+        <name>Size</name>
+        <qualifiedname>Boon::NetPacketHeader::Size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetPacket.h" line="50" column="33" bodyfile="Networking/NetPacket.h" bodystart="50" bodyend="53"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Networking/NetPacket.h" line="36" column="5" bodyfile="Networking/NetPacket.h" bodystart="37" bodyend="54"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_net_packet_header_1a3aba026f4e35fd378f9352908124faa5" prot="public" virt="non-virtual"><scope>Boon::NetPacketHeader</scope><name>Flags</name></member>
+      <member refid="struct_boon_1_1_net_packet_header_1ae870316ebb4e1db9169a1de62990e959" prot="public" virt="non-virtual"><scope>Boon::NetPacketHeader</scope><name>NetPacketHeader</name></member>
+      <member refid="struct_boon_1_1_net_packet_header_1aaab371bea77c231b901fa29be72f15cb" prot="public" virt="non-virtual"><scope>Boon::NetPacketHeader</scope><name>NetPacketHeader</name></member>
+      <member refid="struct_boon_1_1_net_packet_header_1a8bebcaefa46be61027f0970aeb80f87f" prot="public" virt="non-virtual"><scope>Boon::NetPacketHeader</scope><name>PayloadSize</name></member>
+      <member refid="struct_boon_1_1_net_packet_header_1afecccb61bc38ed6d371d0db1dc098cb0" prot="public" virt="non-virtual"><scope>Boon::NetPacketHeader</scope><name>ProtocolVersion</name></member>
+      <member refid="struct_boon_1_1_net_packet_header_1afdc6fb83630ec7f903ad374d354dfbc9" prot="public" virt="non-virtual"><scope>Boon::NetPacketHeader</scope><name>Reserved0</name></member>
+      <member refid="struct_boon_1_1_net_packet_header_1a6683b65bde34a8618286fea7c91710d9" prot="public" virt="non-virtual"><scope>Boon::NetPacketHeader</scope><name>ServerTick</name></member>
+      <member refid="struct_boon_1_1_net_packet_header_1a731dfc58c832507376638be44f8d9f32" prot="public" virt="non-virtual"><scope>Boon::NetPacketHeader</scope><name>Size</name></member>
+      <member refid="struct_boon_1_1_net_packet_header_1aff074eec8933f64d3f3d89437f6520d3" prot="public" virt="non-virtual"><scope>Boon::NetPacketHeader</scope><name>Type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

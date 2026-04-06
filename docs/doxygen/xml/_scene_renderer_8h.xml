@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_scene_renderer_8h" kind="file" language="C++">
+    <compoundname>SceneRenderer.h</compoundname>
+    <includes refid="_u_b_data_8h" local="yes">UBData.h</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">array</includes>
+    <includedby refid="_editor_state_8h" local="no">Core/EditorState.h</includedby>
+    <includedby refid="_asset_editor_8h" local="yes">Panels/AssetEditor.h</includedby>
+    <includedby refid="_tilemap_editor_panel_8h" local="yes">Panels/TilemapEditorPanel.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>Renderer/SceneRenderer.h</label>
+        <link refid="_scene_renderer_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>UBData.h</label>
+        <link refid="_u_b_data_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>array</label>
+      </node>
+      <node id="3">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="4">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>Renderer/SceneRenderer.h</label>
+        <link refid="_scene_renderer_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Core/EditorState.h</label>
+        <link refid="_editor_state_8h"/>
+      </node>
+      <node id="3">
+        <label>Panels/AssetEditor.h</label>
+        <link refid="_asset_editor_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Panels/AssetEditorPanel.h</label>
+        <link refid="_asset_editor_panel_8h"/>
+      </node>
+      <node id="5">
+        <label>Panels/SpriteAtlasEditorPanel.h</label>
+        <link refid="_sprite_atlas_editor_panel_8h"/>
+      </node>
+      <node id="6">
+        <label>Panels/TilemapEditorPanel.h</label>
+        <link refid="_tilemap_editor_panel_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_boon_1_1_scene_renderer" prot="public">Boon::SceneRenderer</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_u_b_data_8h" kindref="compound">UBData.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;array&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="8"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_shader" kindref="compound">Shader</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_renderer2_d" kindref="compound">Renderer2D</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_uniform_buffer" kindref="compound">UniformBuffer</ref>;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_camera" kindref="compound">Camera</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_framebuffer" kindref="compound">Framebuffer</ref>;</highlight></codeline>
+<codeline lineno="16" refid="class_boon_1_1_scene_renderer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_scene_renderer_1a3053236aed8d05ee4a4242e37ddc2992" kindref="member">SceneRenderer</ref><sp/>final</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="24" refid="class_boon_1_1_scene_renderer_1a3053236aed8d05ee4a4242e37ddc2992" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_scene_renderer_1a3053236aed8d05ee4a4242e37ddc2992" kindref="member">SceneRenderer</ref>(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>*<sp/>pScene,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isSwapchainTarget<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="class_boon_1_1_scene_renderer_1a658d989cfa9a02aac9315cd68dd6534e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_scene_renderer_1a658d989cfa9a02aac9315cd68dd6534e" kindref="member">SceneRenderer</ref>(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>*<sp/>pScene,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>viewportWidth,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>viewportHeight,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isSwapchainTarget<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="class_boon_1_1_scene_renderer_1a670c5882e998265a8ab418809d9535f0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_scene_renderer_1a670c5882e998265a8ab418809d9535f0" kindref="member">~SceneRenderer</ref>();</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="class_boon_1_1_scene_renderer_1a5fd51b54915286fe03d7bfe63f6a617a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_scene_renderer_1a5fd51b54915286fe03d7bfe63f6a617a" kindref="member">SceneRenderer</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_scene_renderer_1a3053236aed8d05ee4a4242e37ddc2992" kindref="member">SceneRenderer</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37" refid="class_boon_1_1_scene_renderer_1acba8b8609818410f315d1221dbda20ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_scene_renderer_1acba8b8609818410f315d1221dbda20ea" kindref="member">SceneRenderer</ref>(<ref refid="class_boon_1_1_scene_renderer_1a3053236aed8d05ee4a4242e37ddc2992" kindref="member">SceneRenderer</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="38" refid="class_boon_1_1_scene_renderer_1a12fd19fc88c3556cb3d1f17dbccef14d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_scene_renderer_1a3053236aed8d05ee4a4242e37ddc2992" kindref="member">SceneRenderer</ref>&amp;<sp/><ref refid="class_boon_1_1_scene_renderer_1a12fd19fc88c3556cb3d1f17dbccef14d" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_scene_renderer_1a3053236aed8d05ee4a4242e37ddc2992" kindref="member">SceneRenderer</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="39" refid="class_boon_1_1_scene_renderer_1ae15f3ae4ce5c76800d93df3bdb46541a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_scene_renderer_1a3053236aed8d05ee4a4242e37ddc2992" kindref="member">SceneRenderer</ref>&amp;<sp/><ref refid="class_boon_1_1_scene_renderer_1ae15f3ae4ce5c76800d93df3bdb46541a" kindref="member">operator=</ref>(<ref refid="class_boon_1_1_scene_renderer_1a3053236aed8d05ee4a4242e37ddc2992" kindref="member">SceneRenderer</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="class_boon_1_1_scene_renderer_1a282ca35d13b80b90c158f161520ce121" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_scene_renderer_1a282ca35d13b80b90c158f161520ce121" kindref="member">Render</ref>(<ref refid="class_boon_1_1_camera" kindref="compound">Camera</ref>*<sp/>camera<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/><ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref>*<sp/>cameraTransform<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="class_boon_1_1_scene_renderer_1a8f95670bd40878d2eab531912c18f840" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_framebuffer" kindref="compound">Framebuffer</ref>*<sp/><ref refid="class_boon_1_1_scene_renderer_1a8f95670bd40878d2eab531912c18f840" kindref="member">GetOutputTarget</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_pOutputFB.get();<sp/>}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="class_boon_1_1_scene_renderer_1a2e3003432b91afeafb12ff2949dce3d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_scene_renderer_1a2e3003432b91afeafb12ff2949dce3d2" kindref="member">SetViewport</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>width,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>height);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="class_boon_1_1_scene_renderer_1adc594d49b33eb725ee11c889537a6fee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_scene_renderer_1adc594d49b33eb725ee11c889537a6fee" kindref="member">SetContext</ref>(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>*<sp/>pScene)<sp/></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pScene<sp/>!=<sp/>m_pScene)</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_ViewportDirty<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_pScene<sp/>=<sp/>pScene;<sp/></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77" refid="class_boon_1_1_scene_renderer_1a3036fbc1b3d9f59f7c0a9c39e3a56e1e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_renderer2_d" kindref="compound">Renderer2D</ref>*<sp/><ref refid="class_boon_1_1_scene_renderer_1a3036fbc1b3d9f59f7c0a9c39e3a56e1e" kindref="member">GetRenderer2D</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BeginScene(<ref refid="class_boon_1_1_camera" kindref="compound">Camera</ref>*<sp/>camera<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/><ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref>*<sp/>cameraTransform<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>EndScene();</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;Renderer2D&gt;<sp/>m_pRenderer2D;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;UniformBuffer&gt;<sp/>m_pCameraUniformBuffer{};</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;UniformBuffer&gt;<sp/>m_pObjectUniformBuffer{};</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;Framebuffer&gt;<sp/>m_pOutputFB;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;Shader&gt;<sp/>m_pTilemapShader;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>UBData::Camera<sp/>m_CameraData{};</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>UBData::Object<sp/>m_ObjectData{};</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a6867a346204e7bbed8bfe91d8dc2e807a9ead0d38e06ec253ca0ecbf6ea56e59b" kindref="member">Scene</ref>*<sp/>m_pScene;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>m_ViewportWidth,<sp/>m_ViewportHeight;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_ViewportDirty{<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>};</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Renderer/SceneRenderer.h"/>
+  </compounddef>
+</doxygen>

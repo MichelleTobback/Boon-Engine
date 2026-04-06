@@ -1,0 +1,348 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_editor_1_1_content_browser" kind="class" language="C++" prot="public">
+    <compoundname>BoonEditor::ContentBrowser</compoundname>
+    <basecompoundref refid="class_boon_editor_1_1_editor_panel" prot="public" virt="non-virtual">BoonEditor::EditorPanel</basecompoundref>
+    <includes refid="_content_browser_8h" local="no">Panels/ContentBrowser.h</includes>
+    <innerclass refid="struct_boon_editor_1_1_content_browser_1_1_folder_node" prot="private">BoonEditor::ContentBrowser::FolderNode</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_editor_1_1_content_browser_1af55bd9e9a60bc042687659c2481a55a2" prot="private" static="no" mutable="no">
+        <type>FolderNode</type>
+        <definition>FolderNode BoonEditor::ContentBrowser::m_RootFolder</definition>
+        <argsstring></argsstring>
+        <name>m_RootFolder</name>
+        <qualifiedname>BoonEditor::ContentBrowser::m_RootFolder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="36" column="20" bodyfile="Panels/ContentBrowser.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_content_browser_1acf1cb48c4f8247032133fd7414499732" prot="private" static="no" mutable="no">
+        <type>FolderNode *</type>
+        <definition>FolderNode* BoonEditor::ContentBrowser::m_CurrentFolder</definition>
+        <argsstring></argsstring>
+        <name>m_CurrentFolder</name>
+        <qualifiedname>BoonEditor::ContentBrowser::m_CurrentFolder</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="37" column="20" bodyfile="Panels/ContentBrowser.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_content_browser_1a5799078bda45d05161c243af6c7c6cc0" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float BoonEditor::ContentBrowser::m_HierarchyWidth</definition>
+        <argsstring></argsstring>
+        <name>m_HierarchyWidth</name>
+        <qualifiedname>BoonEditor::ContentBrowser::m_HierarchyWidth</qualifiedname>
+        <initializer>= 250.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="38" column="15" bodyfile="Panels/ContentBrowser.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_content_browser_1afe1aafb5c6bab00374e339a2182214b2" prot="private" static="no" mutable="no">
+        <type>char</type>
+        <definition>char BoonEditor::ContentBrowser::m_SearchBuffer[256]</definition>
+        <argsstring>[256]</argsstring>
+        <name>m_SearchBuffer</name>
+        <qualifiedname>BoonEditor::ContentBrowser::m_SearchBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="40" column="14" bodyfile="Panels/ContentBrowser.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_content_browser_1afa8bf6c8882c928d41bcf1b53e68bcfc" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_editor_1aeea5d16a98aabc4fc810c6809a7a8a1e" kindref="member">AssetContext</ref> *</type>
+        <definition>AssetContext* BoonEditor::ContentBrowser::m_pSelectedAsset</definition>
+        <argsstring></argsstring>
+        <name>m_pSelectedAsset</name>
+        <qualifiedname>BoonEditor::ContentBrowser::m_pSelectedAsset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="42" column="22" bodyfile="Panels/ContentBrowser.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_content_browser_1a8b40fa0ef4e2a5db1ee10a21f83764ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::ContentBrowser::ContentBrowser</definition>
+        <argsstring>(const std::string &amp;name, DragDropRouter *pRouter, AssetContext *pContext)</argsstring>
+        <name>ContentBrowser</name>
+        <qualifiedname>BoonEditor::ContentBrowser::ContentBrowser</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="class_drag_drop_router" kindref="compound">DragDropRouter</ref> *</type>
+          <declname>pRouter</declname>
+        </param>
+        <param>
+          <type><ref refid="namespace_boon_editor_1aeea5d16a98aabc4fc810c6809a7a8a1e" kindref="member">AssetContext</ref> *</type>
+          <declname>pContext</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="16" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_content_browser_1a172596cd09c62b001c8a041e6780acdf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void BoonEditor::ContentBrowser::Update</definition>
+        <argsstring>() override</argsstring>
+        <name>Update</name>
+        <qualifiedname>BoonEditor::ContentBrowser::Update</qualifiedname>
+        <reimplements refid="class_boon_editor_1_1_editor_panel_1a061bb9f31c7cfe169180d1167c2faac2">Update</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="18" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_content_browser_1a156b99bf485b2994747ffe0af1bdca60" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void BoonEditor::ContentBrowser::OnRenderUI</definition>
+        <argsstring>() override</argsstring>
+        <name>OnRenderUI</name>
+        <qualifiedname>BoonEditor::ContentBrowser::OnRenderUI</qualifiedname>
+        <reimplements refid="class_boon_editor_1_1_editor_panel_1a2348483af8910c64c3e9c6105fc5d884">OnRenderUI</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="21" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_content_browser_1a38f5db8060cd7c10279ca71a880d50e1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::ContentBrowser::BuildFolderTree</definition>
+        <argsstring>()</argsstring>
+        <name>BuildFolderTree</name>
+        <qualifiedname>BoonEditor::ContentBrowser::BuildFolderTree</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="44" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_content_browser_1a0a161fa7c913fe768af1f8b73f8bddd7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::ContentBrowser::BuildFoldersFromDisk</definition>
+        <argsstring>(const std::string &amp;path, FolderNode *parent)</argsstring>
+        <name>BuildFoldersFromDisk</name>
+        <qualifiedname>BoonEditor::ContentBrowser::BuildFoldersFromDisk</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>FolderNode *</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="45" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_content_browser_1a1b8e7fa99310d0b1948f1ea94c7f1c4d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::ContentBrowser::AddAssetToTree</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>AddAssetToTree</name>
+        <qualifiedname>BoonEditor::ContentBrowser::AddAssetToTree</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="46" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_content_browser_1ae6b6196fd390be807566e68a514014f6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::ContentBrowser::CollectAssetsRecursive</definition>
+        <argsstring>(FolderNode *node, std::vector&lt; std::string &gt; &amp;out)</argsstring>
+        <name>CollectAssetsRecursive</name>
+        <qualifiedname>BoonEditor::ContentBrowser::CollectAssetsRecursive</qualifiedname>
+        <param>
+          <type>FolderNode *</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt; &amp;</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="47" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_content_browser_1ac54c74a4d41c78d6176a1bb583773d8f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::ContentBrowser::DrawFolderTree</definition>
+        <argsstring>(FolderNode *node)</argsstring>
+        <name>DrawFolderTree</name>
+        <qualifiedname>BoonEditor::ContentBrowser::DrawFolderTree</qualifiedname>
+        <param>
+          <type>FolderNode *</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="49" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_content_browser_1a52077c546c710dd71dee256db96fb68a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::ContentBrowser::DrawContentArea</definition>
+        <argsstring>(FolderNode *folder)</argsstring>
+        <name>DrawContentArea</name>
+        <qualifiedname>BoonEditor::ContentBrowser::DrawContentArea</qualifiedname>
+        <param>
+          <type>FolderNode *</type>
+          <declname>folder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="50" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>BoonEditor::ContentBrowser</label>
+        <link refid="class_boon_editor_1_1_content_browser"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>BoonEditor::EditorObject</label>
+        <link refid="class_boon_editor_1_1_editor_object"/>
+      </node>
+      <node id="2">
+        <label>BoonEditor::EditorPanel</label>
+        <link refid="class_boon_editor_1_1_editor_panel"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>BoonEditor::ContentBrowser</label>
+        <link refid="class_boon_editor_1_1_content_browser"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>BoonEditor::EditorObject</label>
+        <link refid="class_boon_editor_1_1_editor_object"/>
+      </node>
+      <node id="2">
+        <label>BoonEditor::EditorPanel</label>
+        <link refid="class_boon_editor_1_1_editor_panel"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_Name</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_pRouter</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>DragDropRouter</label>
+        <link refid="class_drag_drop_router"/>
+      </node>
+      <node id="5">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="4">
+        <label>std::string</label>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Panels/ContentBrowser.h" line="13" column="5" bodyfile="Panels/ContentBrowser.h" bodystart="14" bodyend="51"/>
+    <listofallmembers>
+      <member refid="class_boon_editor_1_1_content_browser_1a1b8e7fa99310d0b1948f1ea94c7f1c4d" prot="private" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>AddAssetToTree</name></member>
+      <member refid="class_boon_editor_1_1_content_browser_1a0a161fa7c913fe768af1f8b73f8bddd7" prot="private" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>BuildFoldersFromDisk</name></member>
+      <member refid="class_boon_editor_1_1_content_browser_1a38f5db8060cd7c10279ca71a880d50e1" prot="private" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>BuildFolderTree</name></member>
+      <member refid="class_boon_editor_1_1_content_browser_1ae6b6196fd390be807566e68a514014f6" prot="private" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>CollectAssetsRecursive</name></member>
+      <member refid="class_boon_editor_1_1_content_browser_1a8b40fa0ef4e2a5db1ee10a21f83764ac" prot="public" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>ContentBrowser</name></member>
+      <member refid="class_boon_editor_1_1_content_browser_1a52077c546c710dd71dee256db96fb68a" prot="private" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>DrawContentArea</name></member>
+      <member refid="class_boon_editor_1_1_content_browser_1ac54c74a4d41c78d6176a1bb583773d8f" prot="private" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>DrawFolderTree</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a5f5df2a84dcabc146bf036b0d0a88cfb" prot="public" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a4936722347674cc693fe7629f3a489ff" prot="public" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a4ffa536dd53e7a1d6af8b9b01aba55da" prot="public" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1af7c8095284f6932cd3a18bc4a3aaad27" prot="protected" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>GetName</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a8f01a9b23acc248451ec11f5cbc1c1f8" prot="public" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>IsHovered</name></member>
+      <member refid="class_boon_editor_1_1_content_browser_1acf1cb48c4f8247032133fd7414499732" prot="private" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>m_CurrentFolder</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a7c213f233755bb557917127b7720fb14" prot="protected" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>m_Flags</name></member>
+      <member refid="class_boon_editor_1_1_content_browser_1a5799078bda45d05161c243af6c7c6cc0" prot="private" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>m_HierarchyWidth</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a10d71879d56dfec644df8a1c3718e49e" prot="protected" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>m_Name</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1adea21029e134f339cbf9679f8d724beb" prot="protected" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>m_pRouter</name></member>
+      <member refid="class_boon_editor_1_1_content_browser_1afa8bf6c8882c928d41bcf1b53e68bcfc" prot="private" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>m_pSelectedAsset</name></member>
+      <member refid="class_boon_editor_1_1_content_browser_1af55bd9e9a60bc042687659c2481a55a2" prot="private" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>m_RootFolder</name></member>
+      <member refid="class_boon_editor_1_1_content_browser_1afe1aafb5c6bab00374e339a2182214b2" prot="private" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>m_SearchBuffer</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1af52bce9632c058f5edfc288245c38013" prot="public" virt="virtual"><scope>BoonEditor::ContentBrowser</scope><name>OnRender</name></member>
+      <member refid="class_boon_editor_1_1_content_browser_1a156b99bf485b2994747ffe0af1bdca60" prot="protected" virt="virtual"><scope>BoonEditor::ContentBrowser</scope><name>OnRenderUI</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a213dbccbcaf8df25846ecd6c261afa94" prot="public" virt="virtual"><scope>BoonEditor::ContentBrowser</scope><name>OnResize</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a1d76135066dcb4287011b5848d50ac57" prot="public" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>operator=</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a44929889a9fc1feb5a00bc38c4a7c329" prot="public" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>operator=</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1ad56510e7633de1175a9f0d310d3cc551" prot="protected" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>RenderFloat3Control</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a020092d7f515f99b4578b145a9f603d6" prot="public" virt="non-virtual"><scope>BoonEditor::ContentBrowser</scope><name>RenderUI</name></member>
+      <member refid="class_boon_editor_1_1_content_browser_1a172596cd09c62b001c8a041e6780acdf" prot="public" virt="virtual"><scope>BoonEditor::ContentBrowser</scope><name>Update</name></member>
+      <member refid="class_boon_editor_1_1_editor_object_1aa2f1343ed311c73939b82ac8207fd788" prot="public" virt="virtual"><scope>BoonEditor::ContentBrowser</scope><name>~EditorObject</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a74638d90561c3963e6b1b47dad0f244c" prot="public" virt="virtual"><scope>BoonEditor::ContentBrowser</scope><name>~EditorPanel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

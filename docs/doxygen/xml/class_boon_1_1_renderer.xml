@@ -1,0 +1,311 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_renderer" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>Boon::Renderer</compoundname>
+    <includes refid="_renderer_8h" local="no">Renderer/Renderer.h</includes>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_renderer_1a14815a80df4e8bce9dcf0a1af4565298" prot="private" static="yes" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="class_boon_1_1_base_render_a_p_i" kindref="compound">BaseRenderAPI</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;BaseRenderAPI&gt; Boon::Renderer::s_pApi</definition>
+        <argsstring></argsstring>
+        <name>s_pApi</name>
+        <qualifiedname>Boon::Renderer::s_pApi</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Renderer.h" line="74" column="24" bodyfile="Renderer/Renderer.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_boon_1_1_renderer_1a7bd9ae221566bdf95753e0ff32cace04" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Boon::Renderer::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>Boon::Renderer::Init</qualifiedname>
+        <briefdescription>
+<para>Initialize the rendering subsystem. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Renderer.h" line="16" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_renderer_1acf146208e61f0a2bee4b390bcf6e0799" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Boon::Renderer::Shutdown</definition>
+        <argsstring>()</argsstring>
+        <name>Shutdown</name>
+        <qualifiedname>Boon::Renderer::Shutdown</qualifiedname>
+        <briefdescription>
+<para>Shutdown the rendering subsystem and release resources. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Renderer.h" line="21" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_renderer_1a70384ee16fab054ac79e17b8cbaeeb08" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Boon::Renderer::BeginFrame</definition>
+        <argsstring>()</argsstring>
+        <name>BeginFrame</name>
+        <qualifiedname>Boon::Renderer::BeginFrame</qualifiedname>
+        <briefdescription>
+<para>Begin a new frame for rendering. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Renderer.h" line="26" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_renderer_1ae3f8ab120777fd5299c5cc90f6fed9e0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Boon::Renderer::EndFrame</definition>
+        <argsstring>()</argsstring>
+        <name>EndFrame</name>
+        <qualifiedname>Boon::Renderer::EndFrame</qualifiedname>
+        <briefdescription>
+<para>End the current frame and submit commands. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Renderer.h" line="31" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_renderer_1a12c8e1f096a8c08e627e79d20342840b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Boon::Renderer::SetViewport</definition>
+        <argsstring>(uint32_t x, uint32_t y, uint32_t width, uint32_t height)</argsstring>
+        <name>SetViewport</name>
+        <qualifiedname>Boon::Renderer::SetViewport</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+<para>Set the rendering viewport rectangle. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Renderer.h" line="36" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_renderer_1aa4716e55eaa77ad9557e5f9b2de6d21d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Boon::Renderer::SetClearColor</definition>
+        <argsstring>(const glm::vec4 &amp;color)</argsstring>
+        <name>SetClearColor</name>
+        <qualifiedname>Boon::Renderer::SetClearColor</qualifiedname>
+        <param>
+          <type>const glm::vec4 &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Set the clear color used when clearing the framebuffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Renderer.h" line="41" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_renderer_1a96a770e3764ba19efd2d6edfd28979ab" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Boon::Renderer::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>Boon::Renderer::Clear</qualifiedname>
+        <briefdescription>
+<para>Clear the current framebuffer using the configured clear color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Renderer.h" line="46" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_renderer_1a561c7283061878ac1f0d410dd8c9e380" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Boon::Renderer::DrawIndexed</definition>
+        <argsstring>(const std::shared_ptr&lt; VertexInput &gt; &amp;vertexInput, uint32_t indexCount=0)</argsstring>
+        <name>DrawIndexed</name>
+        <qualifiedname>Boon::Renderer::DrawIndexed</qualifiedname>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="class_boon_1_1_vertex_input" kindref="compound">VertexInput</ref> &gt; &amp;</type>
+          <declname>vertexInput</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>indexCount</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Draw geometry using indexed primitives. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vertexInput</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vertex input describing vertex/index buffers and layout. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>indexCount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of indices to draw. If zero, the vertexInput may provide a default. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Renderer.h" line="54" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_renderer_1a3e2f17fd76179ab4ab5ff55b6505882e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Boon::Renderer::DrawArrays</definition>
+        <argsstring>(const std::shared_ptr&lt; VertexInput &gt; &amp;vertexInput, uint32_t indexCount=0)</argsstring>
+        <name>DrawArrays</name>
+        <qualifiedname>Boon::Renderer::DrawArrays</qualifiedname>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="class_boon_1_1_vertex_input" kindref="compound">VertexInput</ref> &gt; &amp;</type>
+          <declname>vertexInput</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>indexCount</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Draw arrays (non-indexed) geometry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vertexInput</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vertex input describing buffers and layout. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>indexCount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of vertices to draw. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Renderer.h" line="62" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_renderer_1a69df4da6b7c124ec4394d1948c9aeab7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Boon::Renderer::DrawLines</definition>
+        <argsstring>(const std::shared_ptr&lt; VertexInput &gt; &amp;vertexInput, uint32_t lineCount=0)</argsstring>
+        <name>DrawLines</name>
+        <qualifiedname>Boon::Renderer::DrawLines</qualifiedname>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="class_boon_1_1_vertex_input" kindref="compound">VertexInput</ref> &gt; &amp;</type>
+          <declname>vertexInput</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>lineCount</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Draw line primitives. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vertexInput</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vertex input describing buffers and layout. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lineCount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of lines to draw. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Renderer.h" line="70" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_boon_1_1_renderer_1abeb23b766151882974c3d45a6bf7e177" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::Renderer::Renderer</definition>
+        <argsstring>()=delete</argsstring>
+        <name>Renderer</name>
+        <qualifiedname>Boon::Renderer::Renderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Renderer.h" line="73" column="1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Renderer/Renderer.h" line="10" column="1" bodyfile="Renderer/Renderer.h" bodystart="11" bodyend="75"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_renderer_1a70384ee16fab054ac79e17b8cbaeeb08" prot="public" virt="non-virtual"><scope>Boon::Renderer</scope><name>BeginFrame</name></member>
+      <member refid="class_boon_1_1_renderer_1a96a770e3764ba19efd2d6edfd28979ab" prot="public" virt="non-virtual"><scope>Boon::Renderer</scope><name>Clear</name></member>
+      <member refid="class_boon_1_1_renderer_1a3e2f17fd76179ab4ab5ff55b6505882e" prot="public" virt="non-virtual"><scope>Boon::Renderer</scope><name>DrawArrays</name></member>
+      <member refid="class_boon_1_1_renderer_1a561c7283061878ac1f0d410dd8c9e380" prot="public" virt="non-virtual"><scope>Boon::Renderer</scope><name>DrawIndexed</name></member>
+      <member refid="class_boon_1_1_renderer_1a69df4da6b7c124ec4394d1948c9aeab7" prot="public" virt="non-virtual"><scope>Boon::Renderer</scope><name>DrawLines</name></member>
+      <member refid="class_boon_1_1_renderer_1ae3f8ab120777fd5299c5cc90f6fed9e0" prot="public" virt="non-virtual"><scope>Boon::Renderer</scope><name>EndFrame</name></member>
+      <member refid="class_boon_1_1_renderer_1a7bd9ae221566bdf95753e0ff32cace04" prot="public" virt="non-virtual"><scope>Boon::Renderer</scope><name>Init</name></member>
+      <member refid="class_boon_1_1_renderer_1abeb23b766151882974c3d45a6bf7e177" prot="private" virt="non-virtual"><scope>Boon::Renderer</scope><name>Renderer</name></member>
+      <member refid="class_boon_1_1_renderer_1a14815a80df4e8bce9dcf0a1af4565298" prot="private" virt="non-virtual"><scope>Boon::Renderer</scope><name>s_pApi</name></member>
+      <member refid="class_boon_1_1_renderer_1aa4716e55eaa77ad9557e5f9b2de6d21d" prot="public" virt="non-virtual"><scope>Boon::Renderer</scope><name>SetClearColor</name></member>
+      <member refid="class_boon_1_1_renderer_1a12c8e1f096a8c08e627e79d20342840b" prot="public" virt="non-virtual"><scope>Boon::Renderer</scope><name>SetViewport</name></member>
+      <member refid="class_boon_1_1_renderer_1acf146208e61f0a2bee4b390bcf6e0799" prot="public" virt="non-virtual"><scope>Boon::Renderer</scope><name>Shutdown</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

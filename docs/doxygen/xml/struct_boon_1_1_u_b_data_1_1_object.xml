@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_u_b_data_1_1_object" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::UBData::Object</compoundname>
+    <includes refid="_u_b_data_8h" local="no">Renderer/UBData.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_u_b_data_1_1_object_1a1f384f8e8fb7fd94a7ae01baa9d5397a" prot="public" static="no" mutable="no">
+        <type>glm::mat4</type>
+        <definition>glm::mat4 Boon::UBData::Object::World</definition>
+        <argsstring></argsstring>
+        <name>World</name>
+        <qualifiedname>Boon::UBData::Object::World</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/UBData.h" line="16" column="11" bodyfile="Renderer/UBData.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_u_b_data_1_1_object_1a2df769289316c390d455535252f2264d" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Boon::UBData::Object::ID</definition>
+        <argsstring></argsstring>
+        <name>ID</name>
+        <qualifiedname>Boon::UBData::Object::ID</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/UBData.h" line="17" column="5" bodyfile="Renderer/UBData.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Renderer/UBData.h" line="14" column="1" bodyfile="Renderer/UBData.h" bodystart="15" bodyend="18"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_u_b_data_1_1_object_1a2df769289316c390d455535252f2264d" prot="public" virt="non-virtual"><scope>Boon::UBData::Object</scope><name>ID</name></member>
+      <member refid="struct_boon_1_1_u_b_data_1_1_object_1a1f384f8e8fb7fd94a7ae01baa9d5397a" prot="public" virt="non-virtual"><scope>Boon::UBData::Object</scope><name>World</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

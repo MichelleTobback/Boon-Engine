@@ -1,0 +1,499 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_net_transform_8h" kind="file" language="C++">
+    <compoundname>NetTransform.h</compoundname>
+    <includes refid="_net_identity_8h" local="yes">Networking/NetIdentity.h</includes>
+    <includes refid="_boon_8h" local="yes">Core/Boon.h</includes>
+    <includes local="no">glm/glm.hpp</includes>
+    <includedby refid="_net_transform_serializer_8h" local="yes">Networking/Components/NetTransformSerializer.h</includedby>
+    <incdepgraph>
+      <node id="47">
+        <label>Asset/Asset.h</label>
+        <link refid="_asset_8h"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>Asset/AssetRef.h</label>
+        <link refid="_asset_ref_8h"/>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>Asset/AssetTraits.h</label>
+        <link refid="_asset_traits_8h"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>Asset/AssetType.h</label>
+        <link refid="_asset_type_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>Component/TransformComponent.h</label>
+        <link refid="_transform_component_8h"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>Component/UUIDComponent.h</label>
+        <link refid="_u_u_i_d_component_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>Core/Assert.h</label>
+        <link refid="_assert_8h"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Core/Boon.h</label>
+        <link refid="_boon_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Core/Delegate.h</label>
+        <link refid="_delegate_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Core/UUID.h</label>
+        <link refid="_u_u_i_d_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>Core/Variant.h</label>
+        <link refid="_variant_8h"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Networking/Components/NetTransform.h</label>
+        <link refid="_net_transform_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>NetAuthority.h</label>
+        <link refid="_net_authority_8h"/>
+      </node>
+      <node id="2">
+        <label>Networking/NetIdentity.h</label>
+        <link refid="_net_identity_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>Physics2DTypes.h</label>
+        <link refid="_physics2_d_types_8h"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>Physics/PhysicsWorld2D.h</label>
+        <link refid="_physics_world2_d_8h"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>Reflection/BClass.h</label>
+        <link refid="_b_class_8h"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>Reflection/BClassBase.h</label>
+        <link refid="_b_class_base_8h"/>
+      </node>
+      <node id="31">
+        <label>BFunction.h</label>
+        <link refid="_b_function_8h"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>BProperty.h</label>
+        <link refid="_b_property_8h"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>Scene/BRef.h</label>
+        <link refid="_b_ref_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Scene/GameObject.h</label>
+        <link refid="_game_object_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>GameObjectID.h</label>
+        <link refid="_game_object_i_d_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Scene.h</label>
+        <link refid="_scene_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>box2d/id.h</label>
+      </node>
+      <node id="30">
+        <label>cstddef</label>
+      </node>
+      <node id="11">
+        <label>cstdint</label>
+      </node>
+      <node id="40">
+        <label>cstdlib</label>
+      </node>
+      <node id="33">
+        <label>cstring</label>
+      </node>
+      <node id="9">
+        <label>entt/entt.hpp</label>
+      </node>
+      <node id="12">
+        <label>functional</label>
+      </node>
+      <node id="20">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="43">
+        <label>glm/gtc/quaternion.hpp</label>
+      </node>
+      <node id="37">
+        <label>glm/gtc/type_precision.hpp</label>
+      </node>
+      <node id="44">
+        <label>glm/gtx/quaternion.hpp</label>
+      </node>
+      <node id="34">
+        <label>glm/vec2.hpp</label>
+      </node>
+      <node id="35">
+        <label>glm/vec3.hpp</label>
+      </node>
+      <node id="36">
+        <label>glm/vec4.hpp</label>
+      </node>
+      <node id="13">
+        <label>limits</label>
+      </node>
+      <node id="28">
+        <label>memory</label>
+      </node>
+      <node id="26">
+        <label>optional</label>
+      </node>
+      <node id="38">
+        <label>queue</label>
+      </node>
+      <node id="27">
+        <label>stdexcept</label>
+      </node>
+      <node id="23">
+        <label>string</label>
+      </node>
+      <node id="14">
+        <label>type_traits</label>
+      </node>
+      <node id="24">
+        <label>typeindex</label>
+      </node>
+      <node id="25">
+        <label>unordered_map</label>
+      </node>
+      <node id="15">
+        <label>utility</label>
+      </node>
+      <node id="16">
+        <label>vector</label>
+      </node>
+      <node id="4">
+        <label>xhash</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>Networking/Components/NetTransform.h</label>
+        <link refid="_net_transform_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Networking/Components/NetTransformSerializer.h</label>
+        <link refid="_net_transform_serializer_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_boon_1_1_net_transform" prot="public">Boon::NetTransform</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_net_identity_8h" kindref="compound">Networking/NetIdentity.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_boon_8h" kindref="compound">Core/Boon.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;glm/glm.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="7"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_b_class_base_8h_1ac6a33ac42cf2fb39ad7064dd369c1b68" kindref="member">BCLASS</ref>(Replicated<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;NetTransformSerializer&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="9" refid="struct_boon_1_1_net_transform" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/>struct<sp/><ref refid="struct_boon_1_1_net_transform" kindref="compound">NetTransform</ref><sp/>final</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="11" refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3b" kindref="member">DirtyFlags</ref><sp/>:<sp/>uint32_t</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="13" refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba6adf97f83acf6453d4a6a4b1070f3754" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a6867a346204e7bbed8bfe91d8dc2e807a6adf97f83acf6453d4a6a4b1070f3754" kindref="member">None</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba05695693370a026c84acf4d674a62fd5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PosX<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>1,</highlight></codeline>
+<codeline lineno="16" refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba7e75cf965eba430083929d0ec26c12a7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PosY<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>2,</highlight></codeline>
+<codeline lineno="17" refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bafddb9fb1311023128eeb738f978ce061" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PosZ<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>3,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba84248dbe2a954d98c39ec26df4ae1e2d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Rot<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>4,</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bab5e0c179725e7f282ffb8e6a96797b49" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ScaleX<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>5,</highlight></codeline>
+<codeline lineno="22" refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba3475b72c6483a5c871d245e2567c96c7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ScaleY<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>6,</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24" refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bab1c94ca2fbc3e78fc30069c8d0f01680" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>All<sp/>=<sp/>0xFFFFFFFF</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="struct_boon_1_1_net_transform_1a86a49979345076cab14428d7786a2c9e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int16_t<sp/><ref refid="struct_boon_1_1_net_transform_1a86a49979345076cab14428d7786a2c9e" kindref="member">QPosX</ref>,<sp/><ref refid="struct_boon_1_1_net_transform_1a4fa14d42e07382b148967669220b031c" kindref="member">QPosY</ref>,<sp/><ref refid="struct_boon_1_1_net_transform_1a20dbb7806596d48546f3e152e63b7e58" kindref="member">QPosZ</ref>;</highlight></codeline>
+<codeline lineno="28" refid="struct_boon_1_1_net_transform_1a8f0a2b2a82a1da8810523b8d61b11620" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint16_t<sp/><ref refid="struct_boon_1_1_net_transform_1a8f0a2b2a82a1da8810523b8d61b11620" kindref="member">QRotDeg</ref>;</highlight></codeline>
+<codeline lineno="29" refid="struct_boon_1_1_net_transform_1af2574c3e7d64c702c658d445e1a63427" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int16_t<sp/><ref refid="struct_boon_1_1_net_transform_1af2574c3e7d64c702c658d445e1a63427" kindref="member">QScaleX</ref>,<sp/><ref refid="struct_boon_1_1_net_transform_1a85eef532a6f42c1e050c0ce30b7762fc" kindref="member">QScaleY</ref>;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="struct_boon_1_1_net_transform_1adfa23b5abaa4e757460f45a241ffa511" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int16_t<sp/><ref refid="struct_boon_1_1_net_transform_1adfa23b5abaa4e757460f45a241ffa511" kindref="member">LastQPosX</ref>,<sp/><ref refid="struct_boon_1_1_net_transform_1a4df200230c44e3ce0fe7e87d9794d12c" kindref="member">LastQPosY</ref>,<sp/><ref refid="struct_boon_1_1_net_transform_1adb824a55b34b7d69d99e604a58373128" kindref="member">LastQPosZ</ref>;</highlight></codeline>
+<codeline lineno="32" refid="struct_boon_1_1_net_transform_1a2890bbd2774133f00dfb6e312a9fd347" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint16_t<sp/><ref refid="struct_boon_1_1_net_transform_1a2890bbd2774133f00dfb6e312a9fd347" kindref="member">LastQRotDeg</ref>;</highlight></codeline>
+<codeline lineno="33" refid="struct_boon_1_1_net_transform_1afc296f5d8fc341cb9e55aef778538bf3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int16_t<sp/><ref refid="struct_boon_1_1_net_transform_1afc296f5d8fc341cb9e55aef778538bf3" kindref="member">LastQScaleX</ref>,<sp/><ref refid="struct_boon_1_1_net_transform_1a2721941379975154defa6dcb6c10f0ac" kindref="member">LastQScaleY</ref>;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="struct_boon_1_1_net_transform_1ac14c308a1cf2317e4c4a6f831fe2d6d1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3b" kindref="member">DirtyFlags</ref><sp/><ref refid="struct_boon_1_1_net_transform_1ac14c308a1cf2317e4c4a6f831fe2d6d1" kindref="member">ReplicationFlags</ref><sp/>=<sp/><ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bab1c94ca2fbc3e78fc30069c8d0f01680" kindref="member">DirtyFlags::All</ref>;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="struct_boon_1_1_net_transform_1a7d58494dd76d0f533bbfd7198f766a8b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_net_transform_1a7d58494dd76d0f533bbfd7198f766a8b" kindref="member">LateUpdate</ref>(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref><sp/>gameObject)</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_identity" kindref="compound">NetIdentity</ref>&amp;<sp/>netId<sp/>=<sp/>gameObject.<ref refid="class_boon_1_1_game_object_1a6aae671b5828b0614dca86e40016a3e2" kindref="member">GetComponent</ref>&lt;<ref refid="struct_boon_1_1_net_identity" kindref="compound">NetIdentity</ref>&gt;();</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref>&amp;<sp/>transform<sp/>=<sp/>gameObject.<ref refid="class_boon_1_1_game_object_1a11392275cc6467d66c90d3e4f7cc5944" kindref="member">GetTransform</ref>();</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(netId.<ref refid="struct_boon_1_1_net_identity_1a9b622cac07a736ffa56d7df976c6f165" kindref="member">IsAuthority</ref>())</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal"><sp/>=<sp/>gameObject.<ref refid="class_boon_1_1_game_object_1a6aae671b5828b0614dca86e40016a3e2" kindref="member">GetComponent</ref>&lt;<ref refid="struct_boon_1_1_net_identity" kindref="compound">NetIdentity</ref>&gt;();</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">.IsAuthority())</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>pos<sp/>=<sp/>transform.GetLocalPosition();</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>scale<sp/>=<sp/>transform.GetLocalScale();</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>quantize<sp/>current<sp/>transform</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_transform_1a86a49979345076cab14428d7786a2c9e" kindref="member">QPosX</ref><sp/>=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1ac14c308a1cf2317e4c4a6f831fe2d6d1" kindref="member">ReplicationFlags</ref><sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba05695693370a026c84acf4d674a62fd5" kindref="member">DirtyFlags::PosX</ref><sp/>?<sp/><ref refid="namespace_boon_1_1_replication_utils_1a1b39c9e13e3a725f8e1ecaed66ff3235" kindref="member">QuantizePos</ref>(pos.x)<sp/>:<sp/><ref refid="struct_boon_1_1_net_transform_1a86a49979345076cab14428d7786a2c9e" kindref="member">QPosX</ref>;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_transform_1a4fa14d42e07382b148967669220b031c" kindref="member">QPosY</ref><sp/>=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1ac14c308a1cf2317e4c4a6f831fe2d6d1" kindref="member">ReplicationFlags</ref><sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba7e75cf965eba430083929d0ec26c12a7" kindref="member">DirtyFlags::PosY</ref><sp/>?<sp/><ref refid="namespace_boon_1_1_replication_utils_1a1b39c9e13e3a725f8e1ecaed66ff3235" kindref="member">QuantizePos</ref>(pos.y)<sp/>:<sp/><ref refid="struct_boon_1_1_net_transform_1a4fa14d42e07382b148967669220b031c" kindref="member">QPosY</ref>;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_transform_1a20dbb7806596d48546f3e152e63b7e58" kindref="member">QPosZ</ref><sp/>=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1ac14c308a1cf2317e4c4a6f831fe2d6d1" kindref="member">ReplicationFlags</ref><sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bafddb9fb1311023128eeb738f978ce061" kindref="member">DirtyFlags::PosZ</ref><sp/>?<sp/><ref refid="namespace_boon_1_1_replication_utils_1a1b39c9e13e3a725f8e1ecaed66ff3235" kindref="member">QuantizePos</ref>(pos.z)<sp/>:<sp/><ref refid="struct_boon_1_1_net_transform_1a20dbb7806596d48546f3e152e63b7e58" kindref="member">QPosZ</ref>;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_transform_1a8f0a2b2a82a1da8810523b8d61b11620" kindref="member">QRotDeg</ref><sp/>=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1ac14c308a1cf2317e4c4a6f831fe2d6d1" kindref="member">ReplicationFlags</ref><sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba84248dbe2a954d98c39ec26df4ae1e2d" kindref="member">DirtyFlags::Rot</ref><sp/>?<sp/><ref refid="namespace_boon_1_1_replication_utils_1a5ade584aecbe23cd350f37bededea235" kindref="member">QuantizeAngleDeg</ref>(transform.GetLocalEulerRotation().z)<sp/>:<sp/><ref refid="struct_boon_1_1_net_transform_1a8f0a2b2a82a1da8810523b8d61b11620" kindref="member">QRotDeg</ref>;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_transform_1af2574c3e7d64c702c658d445e1a63427" kindref="member">QScaleX</ref><sp/>=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1ac14c308a1cf2317e4c4a6f831fe2d6d1" kindref="member">ReplicationFlags</ref><sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bab5e0c179725e7f282ffb8e6a96797b49" kindref="member">DirtyFlags::ScaleX</ref><sp/>?<sp/><ref refid="namespace_boon_1_1_replication_utils_1a1b39c9e13e3a725f8e1ecaed66ff3235" kindref="member">QuantizePos</ref>(scale.x)<sp/>:<sp/><ref refid="struct_boon_1_1_net_transform_1af2574c3e7d64c702c658d445e1a63427" kindref="member">QScaleX</ref>;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_transform_1a85eef532a6f42c1e050c0ce30b7762fc" kindref="member">QScaleY</ref><sp/>=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1ac14c308a1cf2317e4c4a6f831fe2d6d1" kindref="member">ReplicationFlags</ref><sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba3475b72c6483a5c871d245e2567c96c7" kindref="member">DirtyFlags::ScaleY</ref><sp/>?<sp/><ref refid="namespace_boon_1_1_replication_utils_1a1b39c9e13e3a725f8e1ecaed66ff3235" kindref="member">QuantizePos</ref>(scale.y)<sp/>:<sp/><ref refid="struct_boon_1_1_net_transform_1a85eef532a6f42c1e050c0ce30b7762fc" kindref="member">QScaleY</ref>;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>compute<sp/>dirty<sp/>flags</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1_net_transform_1a86a49979345076cab14428d7786a2c9e" kindref="member">QPosX</ref><sp/>!=<sp/><ref refid="struct_boon_1_1_net_transform_1adfa23b5abaa4e757460f45a241ffa511" kindref="member">LastQPosX</ref>)<sp/><ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>|=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba05695693370a026c84acf4d674a62fd5" kindref="member">DirtyFlags::PosX</ref>;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1_net_transform_1a4fa14d42e07382b148967669220b031c" kindref="member">QPosY</ref><sp/>!=<sp/><ref refid="struct_boon_1_1_net_transform_1a4df200230c44e3ce0fe7e87d9794d12c" kindref="member">LastQPosY</ref>)<sp/><ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>|=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba7e75cf965eba430083929d0ec26c12a7" kindref="member">DirtyFlags::PosY</ref>;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1_net_transform_1a20dbb7806596d48546f3e152e63b7e58" kindref="member">QPosZ</ref><sp/>!=<sp/><ref refid="struct_boon_1_1_net_transform_1adb824a55b34b7d69d99e604a58373128" kindref="member">LastQPosZ</ref>)<sp/><ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>|=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bafddb9fb1311023128eeb738f978ce061" kindref="member">DirtyFlags::PosZ</ref>;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1_net_transform_1a8f0a2b2a82a1da8810523b8d61b11620" kindref="member">QRotDeg</ref><sp/>!=<sp/><ref refid="struct_boon_1_1_net_transform_1a2890bbd2774133f00dfb6e312a9fd347" kindref="member">LastQRotDeg</ref>)<sp/><ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>|=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba84248dbe2a954d98c39ec26df4ae1e2d" kindref="member">DirtyFlags::Rot</ref>;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1_net_transform_1af2574c3e7d64c702c658d445e1a63427" kindref="member">QScaleX</ref><sp/>!=<sp/><ref refid="struct_boon_1_1_net_transform_1afc296f5d8fc341cb9e55aef778538bf3" kindref="member">LastQScaleX</ref>)<sp/><ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>|=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bab5e0c179725e7f282ffb8e6a96797b49" kindref="member">DirtyFlags::ScaleX</ref>;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1_net_transform_1a85eef532a6f42c1e050c0ce30b7762fc" kindref="member">QScaleY</ref><sp/>!=<sp/><ref refid="struct_boon_1_1_net_transform_1a2721941379975154defa6dcb6c10f0ac" kindref="member">LastQScaleY</ref>)<sp/><ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>|=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba3475b72c6483a5c871d245e2567c96c7" kindref="member">DirtyFlags::ScaleY</ref>;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>currentPos<sp/>=<sp/>transform.GetLocalPosition();</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>currentScale<sp/>=<sp/>transform.GetLocalScale();</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>pos<sp/>=<sp/></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba05695693370a026c84acf4d674a62fd5" kindref="member">DirtyFlags::PosX</ref><sp/>?<sp/><ref refid="namespace_boon_1_1_replication_utils_1a68ba5156441f3cf8ac555396b5f51c91" kindref="member">DequantizePos</ref>(<ref refid="struct_boon_1_1_net_transform_1a86a49979345076cab14428d7786a2c9e" kindref="member">QPosX</ref>)<sp/>:<sp/>currentPos.x,</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba7e75cf965eba430083929d0ec26c12a7" kindref="member">DirtyFlags::PosY</ref><sp/>?<sp/><ref refid="namespace_boon_1_1_replication_utils_1a68ba5156441f3cf8ac555396b5f51c91" kindref="member">DequantizePos</ref>(<ref refid="struct_boon_1_1_net_transform_1a4fa14d42e07382b148967669220b031c" kindref="member">QPosY</ref>)<sp/>:<sp/>currentPos.y,</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bafddb9fb1311023128eeb738f978ce061" kindref="member">DirtyFlags::PosZ</ref><sp/>?<sp/><ref refid="namespace_boon_1_1_replication_utils_1a68ba5156441f3cf8ac555396b5f51c91" kindref="member">DequantizePos</ref>(<ref refid="struct_boon_1_1_net_transform_1a20dbb7806596d48546f3e152e63b7e58" kindref="member">QPosZ</ref>)<sp/>:<sp/>currentPos.z</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>rot<sp/>=<sp/><ref refid="namespace_boon_1_1_replication_utils_1aad972c7a017fe3d82fb5a8348a218ad8" kindref="member">DequantizeAngleDeg</ref>(<ref refid="struct_boon_1_1_net_transform_1a8f0a2b2a82a1da8810523b8d61b11620" kindref="member">QRotDeg</ref>);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>scale<sp/>=<sp/></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bab5e0c179725e7f282ffb8e6a96797b49" kindref="member">DirtyFlags::ScaleX</ref><sp/>?<sp/><ref refid="namespace_boon_1_1_replication_utils_1a68ba5156441f3cf8ac555396b5f51c91" kindref="member">DequantizePos</ref>(<ref refid="struct_boon_1_1_net_transform_1af2574c3e7d64c702c658d445e1a63427" kindref="member">QScaleX</ref>)<sp/>:<sp/>currentScale.x,</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba3475b72c6483a5c871d245e2567c96c7" kindref="member">DirtyFlags::ScaleY</ref><sp/>?<sp/><ref refid="namespace_boon_1_1_replication_utils_1a68ba5156441f3cf8ac555396b5f51c91" kindref="member">DequantizePos</ref>(<ref refid="struct_boon_1_1_net_transform_1a85eef532a6f42c1e050c0ce30b7762fc" kindref="member">QScaleY</ref>)<sp/>:<sp/>currentScale.y,</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>currentScale.z<sp/></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>transform.SetLocalPosition(glm::mix(transform.GetLocalPosition(),<sp/>pos,<sp/>0.4f));</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba84248dbe2a954d98c39ec26df4ae1e2d" kindref="member">DirtyFlags::Rot</ref>)</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>transform.SetLocalRotation(0.f,<sp/>0.f,<sp/><ref refid="namespace_boon_1_1_replication_utils_1af1f788dd53bf6b70f745e91cff3db8ab" kindref="member">LerpAngleDegrees</ref>(transform.GetLocalRotation().z,<sp/>rot,<sp/>0.4f));</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>transform.SetLocalScale(glm::mix(transform.GetLocalScale(),<sp/>scale,<sp/>0.4f));</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="94"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Networking/Components/NetTransform.h"/>
+  </compounddef>
+</doxygen>

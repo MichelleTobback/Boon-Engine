@@ -11,6 +11,18 @@ namespace Boon
     class NetRepRegistry;
 
     template<typename T>
+    /**
+     * @brief Register reflection information for type T into the provided registry.
+     *
+     * This function populates a static BClass instance for T, sets lifecycle and
+     * component helper callbacks when available (detected via compile-time traits)
+     * and registers the BClass with the provided registry.
+     *
+     * @tparam T Type to register.
+     * @param registry Registry to insert the BClass into.
+     * @param name Human-readable name for the type.
+     * @return Pointer to the registered BClass instance.
+     */
     BClass* RegisterBClass(BClassRegistry& registry, std::string name)
     {
         static BClass cls(name, typeid(T));

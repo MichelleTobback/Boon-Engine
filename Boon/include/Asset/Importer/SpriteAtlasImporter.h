@@ -15,6 +15,12 @@ namespace Boon
     public:
         using AssetType = SpriteAtlasAsset;
 
+        /**
+         * @brief Import a sprite atlas from a JSON file (or legacy .bsa format).
+         *
+         * Returns a new SpriteAtlasAsset on success or nullptr on failure.
+         */
+
         // --------------------------------------------------------------------
         // IMPORT (Supports old .bsa and new format)
         // --------------------------------------------------------------------

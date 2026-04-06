@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_net_rigidbody2_d_serializer" kind="class" language="C++" prot="public">
+    <compoundname>Boon::NetRigidbody2DSerializer</compoundname>
+    <basecompoundref refid="class_boon_1_1_i_rep_serializer" prot="public" virt="non-virtual">Boon::IRepSerializer</basecompoundref>
+    <includes refid="_net_rigidbody2_d_serializer_8h" local="no">Networking/Components/NetRigidbody2DSerializer.h</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_net_rigidbody2_d_serializer_1a633fc01e66d04ff60ba3bf8b4272d2a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool Boon::NetRigidbody2DSerializer::IsDirty</definition>
+        <argsstring>(GameObject obj) override</argsstring>
+        <name>IsDirty</name>
+        <qualifiedname>Boon::NetRigidbody2DSerializer::IsDirty</qualifiedname>
+        <reimplements refid="class_boon_1_1_i_rep_serializer_1a55a12dfc3eeb8656f0835e28c49c830f">IsDirty</reimplements>
+        <param>
+          <type><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref></type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetRigidbody2DSerializer.h" line="12" column="22" bodyfile="Networking/Components/NetRigidbody2DSerializer.h" bodystart="12" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_net_rigidbody2_d_serializer_1a0e5a8bdb51c242a32672f53f94803b1c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Boon::NetRigidbody2DSerializer::Serialize</definition>
+        <argsstring>(BinarySerializer &amp;ser, GameObject obj) override</argsstring>
+        <name>Serialize</name>
+        <qualifiedname>Boon::NetRigidbody2DSerializer::Serialize</qualifiedname>
+        <reimplements refid="class_boon_1_1_i_rep_serializer_1a6fd74150b20d5ad28a189628ca22c105">Serialize</reimplements>
+        <param>
+          <type><ref refid="class_boon_1_1_binary_serializer" kindref="compound">BinarySerializer</ref> &amp;</type>
+          <declname>ser</declname>
+        </param>
+        <param>
+          <type><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref></type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetRigidbody2DSerializer.h" line="19" column="22" bodyfile="Networking/Components/NetRigidbody2DSerializer.h" bodystart="19" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_net_rigidbody2_d_serializer_1a37f9be655098867f97f803b43f6cc79b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Boon::NetRigidbody2DSerializer::Deserialize</definition>
+        <argsstring>(BinarySerializer &amp;ser, GameObject obj) override</argsstring>
+        <name>Deserialize</name>
+        <qualifiedname>Boon::NetRigidbody2DSerializer::Deserialize</qualifiedname>
+        <reimplements refid="class_boon_1_1_i_rep_serializer_1afb1e68220b3698e61a94cecaed175fb8">Deserialize</reimplements>
+        <param>
+          <type><ref refid="class_boon_1_1_binary_serializer" kindref="compound">BinarySerializer</ref> &amp;</type>
+          <declname>ser</declname>
+        </param>
+        <param>
+          <type><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref></type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetRigidbody2DSerializer.h" line="51" column="22" bodyfile="Networking/Components/NetRigidbody2DSerializer.h" bodystart="51" bodyend="74"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Boon::IRepSerializer</label>
+        <link refid="class_boon_1_1_i_rep_serializer"/>
+      </node>
+      <node id="1">
+        <label>Boon::NetRigidbody2DSerializer</label>
+        <link refid="class_boon_1_1_net_rigidbody2_d_serializer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::IRepSerializer</label>
+        <link refid="class_boon_1_1_i_rep_serializer"/>
+      </node>
+      <node id="1">
+        <label>Boon::NetRigidbody2DSerializer</label>
+        <link refid="class_boon_1_1_net_rigidbody2_d_serializer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Networking/Components/NetRigidbody2DSerializer.h" line="9" column="5" bodyfile="Networking/Components/NetRigidbody2DSerializer.h" bodystart="10" bodyend="75"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_net_rigidbody2_d_serializer_1a37f9be655098867f97f803b43f6cc79b" prot="public" virt="virtual"><scope>Boon::NetRigidbody2DSerializer</scope><name>Deserialize</name></member>
+      <member refid="class_boon_1_1_net_rigidbody2_d_serializer_1a633fc01e66d04ff60ba3bf8b4272d2a9" prot="public" virt="virtual"><scope>Boon::NetRigidbody2DSerializer</scope><name>IsDirty</name></member>
+      <member refid="class_boon_1_1_net_rigidbody2_d_serializer_1a0e5a8bdb51c242a32672f53f94803b1c" prot="public" virt="virtual"><scope>Boon::NetRigidbody2DSerializer</scope><name>Serialize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

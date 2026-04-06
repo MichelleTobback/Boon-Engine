@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_vertex_data_8h" kind="file" language="C++">
+    <compoundname>VertexData.h</compoundname>
+    <includes local="no">glm/glm.hpp</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>Renderer/VertexData.h</label>
+        <link refid="_vertex_data_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>glm/glm.hpp</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="struct_boon_1_1_quad_vertex" prot="public">Boon::QuadVertex</innerclass>
+    <innerclass refid="struct_boon_1_1_line_vertex" prot="public">Boon::LineVertex</innerclass>
+    <innerclass refid="struct_boon_1_1_tile_vertex" prot="public">Boon::TileVertex</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;glm/glm.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="6"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="7" refid="struct_boon_1_1_quad_vertex" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_quad_vertex" kindref="compound">QuadVertex</ref></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="9" refid="struct_boon_1_1_quad_vertex_1adfc45dc0baf2fd5ef2bf8d84f8513f82" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/><ref refid="struct_boon_1_1_quad_vertex_1adfc45dc0baf2fd5ef2bf8d84f8513f82" kindref="member">Position</ref>{};</highlight></codeline>
+<codeline lineno="10" refid="struct_boon_1_1_quad_vertex_1aa3f2b0230620b001cf868f522f24e93a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec4<sp/><ref refid="struct_boon_1_1_quad_vertex_1aa3f2b0230620b001cf868f522f24e93a" kindref="member">Color</ref>{<sp/>1.f,<sp/>1.f,<sp/>1.f,<sp/>1.f<sp/>};</highlight></codeline>
+<codeline lineno="11" refid="struct_boon_1_1_quad_vertex_1a9ed76dbb561590e3ce5c5acca685f5e5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec2<sp/><ref refid="struct_boon_1_1_quad_vertex_1a9ed76dbb561590e3ce5c5acca685f5e5" kindref="member">TexCoord</ref>{<sp/>0.f,<sp/>0.f<sp/>};</highlight></codeline>
+<codeline lineno="12" refid="struct_boon_1_1_quad_vertex_1a925161d82b520fa68d486a58b15d0918" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_quad_vertex_1a925161d82b520fa68d486a58b15d0918" kindref="member">TexIndex</ref>{};</highlight></codeline>
+<codeline lineno="13" refid="struct_boon_1_1_quad_vertex_1a5e8f8544f4b53965217d3203f619f736" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_quad_vertex_1a5e8f8544f4b53965217d3203f619f736" kindref="member">TilingFactor</ref>{};</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="struct_boon_1_1_quad_vertex_1a3954a9d869290e0294321fd4966e99fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_quad_vertex_1a3954a9d869290e0294321fd4966e99fd" kindref="member">GameObjectID</ref>{};</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="struct_boon_1_1_line_vertex" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_line_vertex" kindref="compound">LineVertex</ref></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="20" refid="struct_boon_1_1_line_vertex_1a6a6f743635c577a338dc59e40be60af8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/><ref refid="struct_boon_1_1_line_vertex_1a6a6f743635c577a338dc59e40be60af8" kindref="member">Position</ref>{};</highlight></codeline>
+<codeline lineno="21" refid="struct_boon_1_1_line_vertex_1aa907d2f33bdb045ed2360bc09335fae2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec4<sp/><ref refid="struct_boon_1_1_line_vertex_1aa907d2f33bdb045ed2360bc09335fae2" kindref="member">Color</ref>{1.f,<sp/>1.f,<sp/>1.f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="struct_boon_1_1_tile_vertex" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_tile_vertex" kindref="compound">TileVertex</ref></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="27" refid="struct_boon_1_1_tile_vertex_1adf27f987976c01c1525fbc8fa8f846e1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/><ref refid="struct_boon_1_1_tile_vertex_1adf27f987976c01c1525fbc8fa8f846e1" kindref="member">Position</ref>;</highlight></codeline>
+<codeline lineno="28" refid="struct_boon_1_1_tile_vertex_1a9d99fd84fa61ab9691971450a615b609" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec4<sp/><ref refid="struct_boon_1_1_tile_vertex_1a9d99fd84fa61ab9691971450a615b609" kindref="member">Color</ref>;</highlight></codeline>
+<codeline lineno="29" refid="struct_boon_1_1_tile_vertex_1aab67397abc055abdce22ee6220b7a112" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec2<sp/><ref refid="struct_boon_1_1_tile_vertex_1aab67397abc055abdce22ee6220b7a112" kindref="member">TexCoord</ref>;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="31"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Renderer/VertexData.h"/>
+  </compounddef>
+</doxygen>

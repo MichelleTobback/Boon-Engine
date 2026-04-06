@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_shader_8h" kind="file" language="C++">
+    <compoundname>Shader.h</compoundname>
+    <includes local="no">memory</includes>
+    <includes local="no">string</includes>
+    <includedby refid="_shader_asset_8h" local="yes">Asset/ShaderAsset.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>Renderer/Shader.h</label>
+        <link refid="_shader_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>memory</label>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>Asset/Assets.h</label>
+        <link refid="_assets_8h"/>
+      </node>
+      <node id="4">
+        <label>Asset/Importer/ShaderImporter.h</label>
+        <link refid="_shader_importer_8h"/>
+      </node>
+      <node id="2">
+        <label>Asset/ShaderAsset.h</label>
+        <link refid="_shader_asset_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Renderer/Shader.h</label>
+        <link refid="_shader_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_boon_1_1_shader" prot="public">Boon::Shader</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="7"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="8" refid="class_boon_1_1_shader" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_shader_1acda4b642c8e584797fe77a6c7ff8fedc" kindref="member">Shader</ref></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="11" refid="class_boon_1_1_shader_1acda4b642c8e584797fe77a6c7ff8fedc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_shader_1acda4b642c8e584797fe77a6c7ff8fedc" kindref="member">Shader</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="class_boon_1_1_shader_1a5944f419491a3931ca3ed2928c290ea3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_shader_1a5944f419491a3931ca3ed2928c290ea3" kindref="member">~Shader</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="class_boon_1_1_shader_1a86d6ae53473e28ec22a73d80d4e9e5de" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_shader_1a86d6ae53473e28ec22a73d80d4e9e5de" kindref="member">Shader</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_shader_1acda4b642c8e584797fe77a6c7ff8fedc" kindref="member">Shader</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="19" refid="class_boon_1_1_shader_1a884e9aa9b94a760eff10c4e8b2abb7fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_shader_1a884e9aa9b94a760eff10c4e8b2abb7fb" kindref="member">Shader</ref>(<ref refid="class_boon_1_1_shader_1acda4b642c8e584797fe77a6c7ff8fedc" kindref="member">Shader</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="20" refid="class_boon_1_1_shader_1a0bcb6d561a521c79234cc7cea3bbdf99" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_shader_1acda4b642c8e584797fe77a6c7ff8fedc" kindref="member">Shader</ref>&amp;<sp/><ref refid="class_boon_1_1_shader_1a0bcb6d561a521c79234cc7cea3bbdf99" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_shader_1acda4b642c8e584797fe77a6c7ff8fedc" kindref="member">Shader</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="21" refid="class_boon_1_1_shader_1aed88661424f599124a6685de1f14f4dd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_shader_1acda4b642c8e584797fe77a6c7ff8fedc" kindref="member">Shader</ref>&amp;<sp/><ref refid="class_boon_1_1_shader_1aed88661424f599124a6685de1f14f4dd" kindref="member">operator=</ref>(<ref refid="class_boon_1_1_shader_1acda4b642c8e584797fe77a6c7ff8fedc" kindref="member">Shader</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="class_boon_1_1_shader_1a338317785cb526e1fe1f040de6911c67" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_shader_1a338317785cb526e1fe1f040de6911c67" kindref="member">Bind</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="class_boon_1_1_shader_1a6b3eb8c569fefdba1bb521bcef776e99" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_shader_1a6b3eb8c569fefdba1bb521bcef776e99" kindref="member">Unbind</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="class_boon_1_1_shader_1af221e53bbc28e29af632c093d3968008" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;Shader&gt;<sp/><ref refid="class_boon_1_1_shader_1af221e53bbc28e29af632c093d3968008" kindref="member">Create</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>vertexSrc,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>fragmentSrc);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Renderer/Shader.h"/>
+  </compounddef>
+</doxygen>

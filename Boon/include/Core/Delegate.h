@@ -15,6 +15,12 @@ namespace Boon
     class Delegate<Ret(Args...)>
     {
     public:
+        /**
+         * @brief A fast delegate container for callables matching the specified signature.
+         *
+         * This class stores callable objects and allows binding/unbinding via handles.
+         * See member functions for concrete operations and semantics.
+         */
         using FunctionType = std::function<Ret(Args...)>;
         using IndexType = std::uint32_t;
         using GenerationType = std::uint32_t;
@@ -26,6 +32,12 @@ namespace Boon
             IndexType slot = InvalidIndex;
             GenerationType generation = 0;
 
+            /**
+             * @brief Check whether the handle refers to a slot (not explicitly invalid).
+             *
+             * This checks only that the handle's slot value is not the sentinel invalid
+             * index. It does not validate generation or whether the slot is currently bound.
+             */
             bool IsValid() const noexcept
             {
                 return slot != InvalidIndex;
@@ -60,6 +72,16 @@ namespace Boon
         Delegate& operator=(Delegate&&) noexcept = default;
         ~Delegate() = default;
 
+        /**
+         * @brief Bind a callable into the delegate.
+         *
+         * The callable must be convertible to the delegate's FunctionType. A handle
+         * is returned which can later be used to unbind the callable.
+         *
+         * @tparam F Callable type.
+         * @param func Callable to bind.
+         * @return Handle referring to the bound callable.
+         */
         template<typename F>
         Handle Bind(F&& func)
         {
@@ -100,11 +122,21 @@ namespace Boon
             return Handle{ slotIndex, 1 };
         }
 
+        /**
+         * @brief Convenience; bind a std::function and return its handle.
+         */
         Handle operator+=(const FunctionType& func)
         {
             return Bind(func);
         }
 
+        /**
+         * @brief Unbind a previously bound callable identified by handle.
+         *
+         * If the handle is not currently bound this is a no-op.
+         *
+         * @param handle Handle returned by a prior Bind call.
+         */
         void Unbind(Handle handle) noexcept
         {
             if (!IsBound(handle))
@@ -131,11 +163,23 @@ namespace Boon
             m_FreeHead = handle.slot;
         }
 
+        /**
+         * @brief Convenience operator to unbind a handle.
+         */
         void operator-=(Handle handle) noexcept
         {
             Unbind(handle);
         }
 
+        /**
+         * @brief Check whether a handle currently refers to an active binding.
+         *
+         * This verifies the handle is valid, within range and that the stored
+         * generation and active flag match.
+         *
+         * @param handle Handle to validate.
+         * @return true if the handle refers to an active bound callable, false otherwise.
+         */
         bool IsBound(Handle handle) const noexcept
         {
             if (!handle.IsValid())
@@ -148,6 +192,9 @@ namespace Boon
             return slot.active && slot.generation == handle.generation;
         }
 
+        /**
+         * @brief Remove all bindings and reset internal storage.
+         */
         void Clear() noexcept
         {
             m_Slots.clear();
@@ -155,27 +202,55 @@ namespace Boon
             m_FreeHead = Handle::InvalidIndex;
         }
 
+        /**
+         * @brief Reserve internal capacity for the given number of bindings.
+         *
+         * @param capacity Number of bindings to reserve space for.
+         */
         void Reserve(std::size_t capacity)
         {
             m_Slots.reserve(capacity);
             m_ActiveSlots.reserve(capacity);
         }
 
+        /**
+         * @brief Check whether there are no active bindings.
+         *
+         * @return true if no functions are bound, false otherwise.
+         */
         bool Empty() const noexcept
         {
             return m_ActiveSlots.empty();
         }
 
+        /**
+         * @brief Get the number of active bindings.
+         *
+         * @return Number of currently bound functions.
+         */
         std::size_t Size() const noexcept
         {
             return m_ActiveSlots.size();
         }
 
+        /**
+         * @brief Get the current capacity of the internal slot storage.
+         *
+         * @return Capacity of the internal slot vector.
+         */
         std::size_t Capacity() const noexcept
         {
             return m_Slots.capacity();
         }
 
+        /**
+         * @brief Invoke all bound callables with the provided arguments.
+         *
+         * Each active bound function is called in the order of the internal
+         * active slot list. See implementation for ordering guarantees.
+         *
+         * @param args Arguments forwarded to bound callables.
+         */
         void Invoke(Args... args) const
         {
             const IndexType* active = m_ActiveSlots.data();
@@ -188,6 +263,9 @@ namespace Boon
             }
         }
 
+        /**
+         * @brief Invoke operator forwarding to Invoke.
+         */
         void operator()(Args... args) const
         {
             Invoke(args...);

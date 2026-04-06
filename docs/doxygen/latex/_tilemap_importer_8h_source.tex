@@ -1,0 +1,132 @@
+\doxysection{Tilemap\+Importer.\+h}
+\hypertarget{_tilemap_importer_8h_source}{}\label{_tilemap_importer_8h_source}\index{TilemapImporter.h@{TilemapImporter.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}AssetImporter.h"{}}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}Asset/TilemapAsset.h"{}}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}Asset/SpriteAtlasAsset.h"{}}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}Core/ServiceLocator.h"{}}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}Asset/AssetLibrary.h"{}}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <nlohmann/json.hpp>}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00010}00010\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00011}00011\ \{}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00012}\doxymbox{\hyperlink{class_boon_1_1_tilemap_importer}{00012}}\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_tilemap_importer}{TilemapImporter}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_boon_1_1_asset_importer}{AssetImporter}}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00013}00013\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00015}00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }AssetType\ =\ \doxymbox{\hyperlink{class_boon_1_1_tilemap_asset}{TilemapAsset}};}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_asset}{Asset}}*\ ImportFromFile(\textcolor{keyword}{const}\ std::string\&\ filePath,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_asset_meta}{AssetMeta}}\&\ meta)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00018}00018\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_tilemap_asset}{TilemapAsset}}*\ pResult\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ std::ifstream\ file(filePath);}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!file)}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pResult;}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ nlohmann::json\ j;}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ file\ >>\ j;}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ AssetHandle\ handle\{\ meta.uuid\ \};}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ chunksX\ =\ j[\textcolor{stringliteral}{"{}chunksX"{}}].get<\textcolor{keywordtype}{int}>();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ chunksY\ =\ j[\textcolor{stringliteral}{"{}chunksY"{}}].get<\textcolor{keywordtype}{int}>();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ chunksSize\ =\ j[\textcolor{stringliteral}{"{}chunksSize"{}}].get<\textcolor{keywordtype}{int}>();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<Tilemap>\ pInstance\ =\ std::make\_shared<Tilemap>(chunksX,\ chunksY,\ chunksSize);}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_asset_library}{AssetLibrary}}\&\ assets\ =\ \doxymbox{\hyperlink{class_boon_1_1_service_locator_a24d80f5670a222c787d4f63bdba7c03a}{ServiceLocator::Get<AssetLibrary>}}();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_asset_ref}{AssetRef<SpriteAtlasAsset>}}\ spriteAtlas\ =\ assets.Import<\doxymbox{\hyperlink{class_boon_1_1_sprite_atlas_asset}{SpriteAtlasAsset}}>(j[\textcolor{stringliteral}{"{}atlas"{}}].get<std::string>());}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ pInstance-\/>SetAtlas(spriteAtlas);}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ entry\ :\ j[\textcolor{stringliteral}{"{}tiles"{}}])}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ x\ =\ entry[\textcolor{stringliteral}{"{}x"{}}].get<\textcolor{keywordtype}{int}>();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ y\ =\ entry[\textcolor{stringliteral}{"{}y"{}}].get<\textcolor{keywordtype}{int}>();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ sprite\ =\ entry[\textcolor{stringliteral}{"{}sprite"{}}].get<\textcolor{keywordtype}{int}>();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pInstance-\/>SetTile(x,\ y,\ sprite);}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ pResult\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_boon_1_1_tilemap_asset}{TilemapAsset}}(handle,\ pInstance);}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pResult;}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00051}00051\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ ExportToFile(\textcolor{keyword}{const}\ std::string\&\ filePath,\ \doxymbox{\hyperlink{class_boon_1_1_asset}{Asset}}*\ asset)}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_tilemap_asset}{TilemapAsset}}*\ pAsset\ =\ \textcolor{keyword}{dynamic\_cast<}\doxymbox{\hyperlink{class_boon_1_1_tilemap_asset}{TilemapAsset}}*\textcolor{keyword}{>}(asset);}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!pAsset)}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ texPath\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::ifstream\ in(filePath);}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nlohmann::json\ j;}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ in\ >>\ j;}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ texPath\ =\ j[\textcolor{stringliteral}{"{}atlas"{}}].get<std::string>();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ std::ofstream\ file(filePath);}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!file)}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ nlohmann::json\ j;}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<Tilemap>\ pTilemap\ =\ pAsset-\/>GetInstance();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!pTilemap)}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Basic\ layout\ info}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}chunksX"{}}]\ =\ pTilemap-\/>GetChunksX();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}chunksY"{}}]\ =\ pTilemap-\/>GetChunksY();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}chunksSize"{}}]\ =\ pTilemap-\/>GetChunkSize();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Atlas\ path\ (same\ as\ importer\ expects)}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_asset_ref}{AssetRef<SpriteAtlasAsset>}}\ atlas\ =\ pTilemap-\/>GetAtlas();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (atlas.\doxymbox{\hyperlink{class_boon_1_1_asset_ref_a7f24a6ab9016c7ad1861541cf65defcd}{IsValid}}())}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}atlas"{}}]\ =\ texPath;}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}atlas"{}}]\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Save\ tiles}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ nlohmann::json\ tileArray\ =\ nlohmann::json::array();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ width\ =\ pTilemap-\/>GetChunksX()\ *\ pTilemap-\/>GetChunkSize();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ height\ =\ pTilemap-\/>GetChunksY()\ *\ pTilemap-\/>GetChunkSize();}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ y\ =\ 0;\ y\ <\ height;\ y++)}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\ =\ 0;\ x\ <\ width;\ x++)}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ sprite\ =\ pTilemap-\/>GetTile(x,\ y);}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sprite\ >=\ 0)}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tileArray.push\_back(\{}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}x"{}},\ x\ \},}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}y"{}},\ y\ \},}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}sprite"{}},\ sprite\ \}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}tiles"{}}]\ =\ tileArray;}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Write\ JSON}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ file\ <<\ j.dump(4);\ \textcolor{comment}{//\ pretty\ print}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00119}00119\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00121}00121\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ std::vector<std::string>\ GetExtensions()\textcolor{keyword}{\ const\ override}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00122}00122\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\ \textcolor{stringliteral}{"{}.btm"{}}\ \};}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00124}00124\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00125}00125\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_tilemap_importer_8h_source_l00126}00126\ \}}
+
+\end{DoxyCode}

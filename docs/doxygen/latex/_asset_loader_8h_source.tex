@@ -1,0 +1,34 @@
+\doxysection{Asset\+Loader.\+h}
+\hypertarget{_asset_loader_8h_source}{}\label{_asset_loader_8h_source}\index{AssetLoader.h@{AssetLoader.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}Asset/Asset.h"{}}}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}Asset/AssetRegistry.h"{}}}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}Asset/AssetTraits.h"{}}}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}Asset/AssetRef.h"{}}}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00009}00009\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00011}00011\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_asset_pack_reader}{AssetPackReader}};}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00013}\doxymbox{\hyperlink{class_boon_1_1_asset_loader}{00013}}\ \ \ \ \ \textcolor{keyword}{class\ }AssetLoader}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00014}00014\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ AssetLoader(\doxymbox{\hyperlink{class_boon_1_1_asset_pack_reader}{AssetPackReader}}*\ reader)}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ :\ m\_Reader(reader)\ \{}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00018}00018\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00028}\doxymbox{\hyperlink{class_boon_1_1_asset_loader_a15cbe9a17b9466e70ab30d50c4f0fc56}{00028}}\ \ \ \ \ \ \ \ \ T*\ \doxymbox{\hyperlink{class_boon_1_1_asset_loader_a15cbe9a17b9466e70ab30d50c4f0fc56}{Load}}(AssetHandle\ handle);}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00036}\doxymbox{\hyperlink{class_boon_1_1_asset_loader_adf64fc861c2edb47647ebd4eae38c1a4}{00036}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_asset}{Asset}}*\ \doxymbox{\hyperlink{class_boon_1_1_asset_loader_adf64fc861c2edb47647ebd4eae38c1a4}{LoadGeneric}}(AssetHandle\ handle);}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00039}00039\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_asset_pack_reader}{AssetPackReader}}*\ m\_Reader\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00040}00040\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_asset_loader_8h_source_l00041}00041\ \}}
+
+\end{DoxyCode}

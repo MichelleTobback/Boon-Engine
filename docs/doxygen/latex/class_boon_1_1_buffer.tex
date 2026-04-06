@@ -1,0 +1,281 @@
+\doxysection{Boon::\+Buffer Class Reference}
+\hypertarget{class_boon_1_1_buffer}{}\label{class_boon_1_1_buffer}\index{Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_buffer_ab3fad271201ca594a4d2d446c84aa0db}{Buffer}} (size\+\_\+t size)
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_buffer_a41b9224195f9d26be3a63c17e419d9ca}{Buffer}} (const std::\+vector$<$ uint8\+\_\+t $>$ \&data)
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_buffer_a726fe15939088693f204ae17533cd1e4}{Buffer}} (const void \texorpdfstring{$\ast$}{*}data, size\+\_\+t size)
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_buffer_ac2ead5cc5a2e17f950851228418dcec8}{Append}} (const void \texorpdfstring{$\ast$}{*}data, size\+\_\+t size)
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_buffer_a252306769288813f3b1c641fb32b7ed6}{Append}} (const Buffer \&other)
+\item 
+{\footnotesize template$<$typename T$>$ }\\void \doxymbox{\hyperlink{class_boon_1_1_buffer_a748e9cee9584ce257973261f9f01bc8b}{Write}} (const T \&value)
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_buffer_a97da32d95748a10b2e4fbdc10f02ef4c}{Write\+Raw}} (const void \texorpdfstring{$\ast$}{*}data, size\+\_\+t size)
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_buffer_a0cccdade7c9b86723e38dd77e363098b}{Write\+String}} (const std::\+string \&str)
+\item 
+{\footnotesize template$<$typename T$>$ }\\T \doxymbox{\hyperlink{class_boon_1_1_buffer_a5970b9e7c9ced58b339d08a05f573b4d}{Read}} (size\+\_\+t \&offset) const
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_buffer_aeeaa2eaae283bc3fff91056067e2c72f}{Read\+Raw}} (void \texorpdfstring{$\ast$}{*}out, size\+\_\+t size, size\+\_\+t \&offset) const
+\item 
+std::\+string \doxymbox{\hyperlink{class_boon_1_1_buffer_aaf159af9d62ca816b476edc0ef253b43}{Read\+String}} (size\+\_\+t \&offset) const
+\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_1_1_buffer_a3a3bb99c084bab7fea1a5795f0045732}{Data}} ()
+\item 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_1_1_buffer_af9995568d04dc3021359de3ae25e684b}{Data}} () const
+\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_1_1_buffer_acb46864f29fad0faaa9da3915b10d206}{Data\+At}} (uint32\+\_\+t pos)
+\item 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_1_1_buffer_a6dff7660ec589075125a1053bb800902}{Data\+At}} (uint32\+\_\+t pos) const
+\item 
+size\+\_\+t \doxymbox{\hyperlink{class_boon_1_1_buffer_afc45fb9db642e80e9a1dfc4f5a8e10b6}{Size}} () const
+\item 
+bool \doxymbox{\hyperlink{class_boon_1_1_buffer_a92e6e05febe72acf488bbd81546bb2be}{Empty}} () const
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_buffer_acd50cf88ad22ec21a78eeec05569d49f}{Clear}} ()
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_buffer_ad0292321257c715620ba8a872efe0d75}{Reserve}} (size\+\_\+t cap)
+\item 
+std::\+vector$<$ uint8\+\_\+t $>$ \& \doxymbox{\hyperlink{class_boon_1_1_buffer_a4bf7fd3a7298aad9d6021e652ee32f3e}{Vector}} ()
+\item 
+const std::\+vector$<$ uint8\+\_\+t $>$ \& \doxymbox{\hyperlink{class_boon_1_1_buffer_af76a1e7bbd90aced3ce9a79063a413a9}{Vector}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00010}{10}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_boon_1_1_buffer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_boon_1_1_buffer_ab3fad271201ca594a4d2d446c84aa0db}\index{Boon::Buffer@{Boon::Buffer}!Buffer@{Buffer}}
+\index{Buffer@{Buffer}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{Buffer()}{Buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_ab3fad271201ca594a4d2d446c84aa0db} 
+Boon::\+\+Buffer::\+\+Buffer (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00015}{15}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_a41b9224195f9d26be3a63c17e419d9ca}\index{Boon::Buffer@{Boon::Buffer}!Buffer@{Buffer}}
+\index{Buffer@{Buffer}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{Buffer()}{Buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_a41b9224195f9d26be3a63c17e419d9ca} 
+Boon::\+\+Buffer::\+\+Buffer (\begin{DoxyParamCaption}\item[{const std::\+vector$<$ uint8\+\_\+t $>$ \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00019}{19}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_a726fe15939088693f204ae17533cd1e4}\index{Boon::Buffer@{Boon::Buffer}!Buffer@{Buffer}}
+\index{Buffer@{Buffer}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{Buffer()}{Buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_a726fe15939088693f204ae17533cd1e4} 
+Boon::\+\+Buffer::\+\+Buffer (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00023}{23}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_buffer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_buffer_a252306769288813f3b1c641fb32b7ed6}\index{Boon::Buffer@{Boon::Buffer}!Append@{Append}}
+\index{Append@{Append}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{Append()}{Append()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_a252306769288813f3b1c641fb32b7ed6} 
+void Boon::\+\+Buffer::\+\+Append (\begin{DoxyParamCaption}\item[{const Buffer \&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00035}{35}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_ac2ead5cc5a2e17f950851228418dcec8}\index{Boon::Buffer@{Boon::Buffer}!Append@{Append}}
+\index{Append@{Append}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{Append()}{Append()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_ac2ead5cc5a2e17f950851228418dcec8} 
+void Boon::\+\+Buffer::\+\+Append (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00028}{28}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_acd50cf88ad22ec21a78eeec05569d49f}\index{Boon::Buffer@{Boon::Buffer}!Clear@{Clear}}
+\index{Clear@{Clear}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_acd50cf88ad22ec21a78eeec05569d49f} 
+void Boon::\+\+Buffer::\+\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00103}{103}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_a3a3bb99c084bab7fea1a5795f0045732}\index{Boon::Buffer@{Boon::Buffer}!Data@{Data}}
+\index{Data@{Data}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_a3a3bb99c084bab7fea1a5795f0045732} 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} Boon::\+\+Buffer::\+\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00094}{94}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_af9995568d04dc3021359de3ae25e684b}\index{Boon::Buffer@{Boon::Buffer}!Data@{Data}}
+\index{Data@{Data}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_af9995568d04dc3021359de3ae25e684b} 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} Boon::\+\+Buffer::\+\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00095}{95}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_acb46864f29fad0faaa9da3915b10d206}\index{Boon::Buffer@{Boon::Buffer}!DataAt@{DataAt}}
+\index{DataAt@{DataAt}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{DataAt()}{DataAt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_acb46864f29fad0faaa9da3915b10d206} 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} Boon::\+\+Buffer::\+\+Data\+At (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{pos}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00097}{97}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_a6dff7660ec589075125a1053bb800902}\index{Boon::Buffer@{Boon::Buffer}!DataAt@{DataAt}}
+\index{DataAt@{DataAt}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{DataAt()}{DataAt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_a6dff7660ec589075125a1053bb800902} 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} Boon::\+\+Buffer::\+\+Data\+At (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{pos}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00098}{98}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_a92e6e05febe72acf488bbd81546bb2be}\index{Boon::Buffer@{Boon::Buffer}!Empty@{Empty}}
+\index{Empty@{Empty}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{Empty()}{Empty()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_a92e6e05febe72acf488bbd81546bb2be} 
+bool Boon::\+\+Buffer::\+\+Empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00101}{101}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_a5970b9e7c9ced58b339d08a05f573b4d}\index{Boon::Buffer@{Boon::Buffer}!Read@{Read}}
+\index{Read@{Read}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{Read()}{Read()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_a5970b9e7c9ced58b339d08a05f573b4d} 
+template$<$typename T$>$ \\
+T Boon::\+\+Buffer::\+\+Read (\begin{DoxyParamCaption}\item[{size\+\_\+t \&}]{offset}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00065}{65}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_aeeaa2eaae283bc3fff91056067e2c72f}\index{Boon::Buffer@{Boon::Buffer}!ReadRaw@{ReadRaw}}
+\index{ReadRaw@{ReadRaw}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{ReadRaw()}{ReadRaw()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_aeeaa2eaae283bc3fff91056067e2c72f} 
+void Boon::\+\+Buffer::\+\+Read\+Raw (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{out}{, }\item[{size\+\_\+t}]{size}{, }\item[{size\+\_\+t \&}]{offset}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00076}{76}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_aaf159af9d62ca816b476edc0ef253b43}\index{Boon::Buffer@{Boon::Buffer}!ReadString@{ReadString}}
+\index{ReadString@{ReadString}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{ReadString()}{ReadString()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_aaf159af9d62ca816b476edc0ef253b43} 
+std::\+string Boon::\+\+Buffer::\+\+Read\+String (\begin{DoxyParamCaption}\item[{size\+\_\+t \&}]{offset}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00082}{82}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_ad0292321257c715620ba8a872efe0d75}\index{Boon::Buffer@{Boon::Buffer}!Reserve@{Reserve}}
+\index{Reserve@{Reserve}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{Reserve()}{Reserve()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_ad0292321257c715620ba8a872efe0d75} 
+void Boon::\+\+Buffer::\+\+Reserve (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{cap}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00104}{104}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_afc45fb9db642e80e9a1dfc4f5a8e10b6}\index{Boon::Buffer@{Boon::Buffer}!Size@{Size}}
+\index{Size@{Size}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_afc45fb9db642e80e9a1dfc4f5a8e10b6} 
+size\+\_\+t Boon::\+\+Buffer::\+\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00100}{100}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_a4bf7fd3a7298aad9d6021e652ee32f3e}\index{Boon::Buffer@{Boon::Buffer}!Vector@{Vector}}
+\index{Vector@{Vector}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_a4bf7fd3a7298aad9d6021e652ee32f3e} 
+std::\+vector$<$ uint8\+\_\+t $>$ \& Boon::\+\+Buffer::\+\+Vector (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00106}{106}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_af76a1e7bbd90aced3ce9a79063a413a9}\index{Boon::Buffer@{Boon::Buffer}!Vector@{Vector}}
+\index{Vector@{Vector}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_af76a1e7bbd90aced3ce9a79063a413a9} 
+const std::\+vector$<$ uint8\+\_\+t $>$ \& Boon::\+\+Buffer::\+\+Vector (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00107}{107}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_a748e9cee9584ce257973261f9f01bc8b}\index{Boon::Buffer@{Boon::Buffer}!Write@{Write}}
+\index{Write@{Write}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_a748e9cee9584ce257973261f9f01bc8b} 
+template$<$typename T$>$ \\
+void Boon::\+\+Buffer::\+\+Write (\begin{DoxyParamCaption}\item[{const T \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00043}{43}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_a97da32d95748a10b2e4fbdc10f02ef4c}\index{Boon::Buffer@{Boon::Buffer}!WriteRaw@{WriteRaw}}
+\index{WriteRaw@{WriteRaw}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{WriteRaw()}{WriteRaw()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_a97da32d95748a10b2e4fbdc10f02ef4c} 
+void Boon::\+\+Buffer::\+\+Write\+Raw (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00051}{51}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_buffer_a0cccdade7c9b86723e38dd77e363098b}\index{Boon::Buffer@{Boon::Buffer}!WriteString@{WriteString}}
+\index{WriteString@{WriteString}!Boon::Buffer@{Boon::Buffer}}
+\doxysubsubsection{\texorpdfstring{WriteString()}{WriteString()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_buffer_a0cccdade7c9b86723e38dd77e363098b} 
+void Boon::\+\+Buffer::\+\+Write\+String (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_buffer_8h_source_l00056}{56}} of file \doxymbox{\hyperlink{_buffer_8h_source}{Buffer.\+h}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Buffer.\+h\end{DoxyCompactItemize}

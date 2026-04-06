@@ -14,6 +14,10 @@ namespace Boon
         Custom = Last << 1
     };
 
+    /**
+     * @brief Bitmask categories used to classify events.
+     */
+
     // combine categories with | operator
     inline EventCategory operator|(EventCategory a, EventCategory b) 
     {
@@ -22,17 +26,29 @@ namespace Boon
 
     namespace Event
     {
+        /**
+         * @brief Check whether a category bit is set on a category value.
+         *
+         * @param value Category value to test.
+         * @param category Category flag to check for.
+         * @return true if the category bit is present.
+         */
         inline bool HasCategory(EventCategory value, EventCategory category) 
         { 
             return (static_cast<uint32_t>(value) & static_cast<uint32_t>(category)) != 0; 
         }
     }
 
-	struct IEvent 
-	{
-		virtual ~IEvent() = default;
-		virtual EventCategory GetCategory() const = 0;
-	};
+    /**
+     * @brief Base interface for events in the system.
+     *
+     * Implementations must provide a category via GetCategory().
+     */
+    struct IEvent 
+    {
+        virtual ~IEvent() = default;
+        virtual EventCategory GetCategory() const = 0;
+    };
 
     using EventListenerID = uint64_t;
 }

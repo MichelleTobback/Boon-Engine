@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_i_event" kind="struct" language="C++" prot="public" abstract="yes">
+    <compoundname>Boon::IEvent</compoundname>
+    <derivedcompoundref refid="struct_boon_1_1_net_connection_event" prot="public" virt="non-virtual">Boon::NetConnectionEvent</derivedcompoundref>
+    <derivedcompoundref refid="struct_boon_1_1_scene_changed_event" prot="public" virt="non-virtual">Boon::SceneChangedEvent</derivedcompoundref>
+    <derivedcompoundref refid="struct_boon_1_1_window_close_event" prot="public" virt="non-virtual">Boon::WindowCloseEvent</derivedcompoundref>
+    <derivedcompoundref refid="struct_boon_1_1_window_resize_event" prot="public" virt="non-virtual">Boon::WindowResizeEvent</derivedcompoundref>
+    <derivedcompoundref refid="struct_boon_editor_1_1_editor_play_state_change_event" prot="public" virt="non-virtual">BoonEditor::EditorPlayStateChangeEvent</derivedcompoundref>
+    <includes refid="_event_8h" local="no">Event/Event.h</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_boon_1_1_i_event_1adb996e7f27838e0e7cb33c0d94d1cd16" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Boon::IEvent::~IEvent</definition>
+        <argsstring>()=default</argsstring>
+        <name>~IEvent</name>
+        <qualifiedname>Boon::IEvent::~IEvent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Event/Event.h" line="49" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_i_event_1a93df703c63c898d542cea03d6df35ee2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="namespace_boon_1aee82d7ef047ab4695310ded9fa96793d" kindref="member">EventCategory</ref></type>
+        <definition>virtual EventCategory Boon::IEvent::GetCategory</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetCategory</name>
+        <qualifiedname>Boon::IEvent::GetCategory</qualifiedname>
+        <reimplementedby refid="struct_boon_1_1_net_connection_event_1a9576a363425a7011ac2f3afcef4be640">GetCategory</reimplementedby>
+        <reimplementedby refid="struct_boon_1_1_scene_changed_event_1a15d94573f646030dfc6faefe8bac20ab">GetCategory</reimplementedby>
+        <reimplementedby refid="struct_boon_1_1_window_close_event_1a60607f8262996f09c0042d8726b22105">GetCategory</reimplementedby>
+        <reimplementedby refid="struct_boon_1_1_window_resize_event_1a5b544d4fb127894856ef67f83bef326b">GetCategory</reimplementedby>
+        <reimplementedby refid="struct_boon_editor_1_1_editor_play_state_change_event_1a50e9093d029623e780cec1420e2d4f7a">GetCategory</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Event/Event.h" line="50" column="31"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Base interface for events in the system. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Implementations must provide a category via <ref refid="struct_boon_1_1_i_event_1a93df703c63c898d542cea03d6df35ee2" kindref="member">GetCategory()</ref>. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>Boon::IEvent</label>
+        <link refid="struct_boon_1_1_i_event"/>
+      </node>
+      <node id="2">
+        <label>Boon::NetConnectionEvent</label>
+        <link refid="struct_boon_1_1_net_connection_event"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Boon::SceneChangedEvent</label>
+        <link refid="struct_boon_1_1_scene_changed_event"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Boon::WindowCloseEvent</label>
+        <link refid="struct_boon_1_1_window_close_event"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Boon::WindowResizeEvent</label>
+        <link refid="struct_boon_1_1_window_resize_event"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>BoonEditor::EditorPlayStateChangeEvent</label>
+        <link refid="struct_boon_editor_1_1_editor_play_state_change_event"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="Event/Event.h" line="47" column="5" bodyfile="Event/Event.h" bodystart="48" bodyend="51"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_i_event_1a93df703c63c898d542cea03d6df35ee2" prot="public" virt="pure-virtual"><scope>Boon::IEvent</scope><name>GetCategory</name></member>
+      <member refid="struct_boon_1_1_i_event_1adb996e7f27838e0e7cb33c0d94d1cd16" prot="public" virt="virtual"><scope>Boon::IEvent</scope><name>~IEvent</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

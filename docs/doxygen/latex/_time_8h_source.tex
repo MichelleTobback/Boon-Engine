@@ -1,0 +1,50 @@
+\doxysection{Time.\+h}
+\hypertarget{_time_8h_source}{}\label{_time_8h_source}\index{Time.h@{Time.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}Singleton.h"{}}}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00006}00006\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00007}00007\ \{}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00008}00008\ \ \ \ \ \textcolor{keyword}{using\ }Clock\ =\ std::chrono::steady\_clock;}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00009}00009\ \ \ \ \ \textcolor{keyword}{using\ }TimePoint\ =\ std::chrono::time\_point<Clock>;}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00011}\doxymbox{\hyperlink{class_boon_1_1_time}{00011}}\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_time}{Time}}\ final\ :\ \textcolor{keyword}{public}\ Singleton<Time>}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00012}00012\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00020}\doxymbox{\hyperlink{class_boon_1_1_time_a8e2c4fac536eefc4703cd79c0e22df23}{00020}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_time_a8e2c4fac536eefc4703cd79c0e22df23}{Start}}();}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00028}\doxymbox{\hyperlink{class_boon_1_1_time_a0ed49223d44cd315faa86d1eecedb0c0}{00028}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_time_a0ed49223d44cd315faa86d1eecedb0c0}{Step}}();}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00035}\doxymbox{\hyperlink{class_boon_1_1_time_a787b07dd7e09877d91bef2983646b0f5}{00035}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_time_a787b07dd7e09877d91bef2983646b0f5}{Wait}}();}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00044}\doxymbox{\hyperlink{class_boon_1_1_time_a759bef7cb4f1942728b2641ef15f11cb}{00044}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_boon_1_1_time_a759bef7cb4f1942728b2641ef15f11cb}{FixedStep}}();}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00050}\doxymbox{\hyperlink{class_boon_1_1_time_a7d8816ef429bc747baffb99c84a8501e}{00050}}\ \ \ \ \ \ \ \ \ TimePoint\ \doxymbox{\hyperlink{class_boon_1_1_time_a7d8816ef429bc747baffb99c84a8501e}{Now}}();}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Delta\ time\ is\ in\ seconds}}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ GetDeltaTime()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_DeltaTime;\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ GetDuration()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ std::chrono::duration<float>(m\_CurrentTime\ -\/\ m\_StartTime).count();\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ TimePoint\&\ GetTime()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_CurrentTime;\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ GetFixedTimeStep()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_FixedTimeStep;\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ SetFixedTimeStep(\textcolor{keywordtype}{float}\ value)\ \{\ m\_FixedTimeStep\ =\ value;\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ GetInterpolationAlpha()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_InterpolationAlpha;\ \}}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00060}00060\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_DeltaTime\{\};\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ seconds}}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_FixedTimeStep\ =\ 0.02f;\ \textcolor{comment}{//\ physics}}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_InterpolationAlpha\ =\ 0.f;}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_Accumulator\ =\ 0.0f;}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00066}00066\ \ \ \ \ \ \ \ \ TimePoint\ m\_LastTime\{\};}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00067}00067\ \ \ \ \ \ \ \ \ TimePoint\ m\_CurrentTime\{\};}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00068}00068\ \ \ \ \ \ \ \ \ TimePoint\ m\_StartTime\{\};}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ m\_MaxFPS\{144\};}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00071}00071\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_time_8h_source_l00072}00072\ \}}
+
+\end{DoxyCode}

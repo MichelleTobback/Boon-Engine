@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_asset_traits_3_01_tilemap_asset_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::AssetTraits&lt; TilemapAsset &gt;</compoundname>
+    <includes refid="_tilemap_asset_8h" local="no">Asset/TilemapAsset.h</includes>
+    <templateparamlist>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_asset_traits_3_01_tilemap_asset_01_4_1a55eae4e765632dd0240f634ef1e98874" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="namespace_boon_1a6867a346204e7bbed8bfe91d8dc2e807" kindref="member">AssetType</ref></type>
+        <definition>AssetType Boon::AssetTraits&lt; TilemapAsset &gt;::Type</definition>
+        <argsstring></argsstring>
+        <name>Type</name>
+        <qualifiedname>Boon::AssetTraits&lt; TilemapAsset &gt;::Type</qualifiedname>
+        <initializer>= <ref refid="namespace_boon_1a6867a346204e7bbed8bfe91d8dc2e807aa0daa906c0a689017d6f7ff81adec8e1" kindref="member">AssetType::Tilemap</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/TilemapAsset.h" line="30" column="36" bodyfile="Asset/TilemapAsset.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_asset_traits_1adad9bed2184c33eba29179cd3cbf04b0" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* Boon::AssetTraits&lt; TilemapAsset &gt;::Name</definition>
+        <argsstring></argsstring>
+        <name>Name</name>
+        <qualifiedname>Boon::AssetTraits&lt; TilemapAsset &gt;::Name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetTraits.h" line="10" column="37" bodyfile="Asset/AssetTraits.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="struct_boon_1_1_asset_traits_3_01_tilemap_asset_01_4_1a7e946c9da932665a03e5a83e7c86f6e5" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_tilemap_asset" kindref="compound">TilemapAsset</ref> *</type>
+        <definition>static TilemapAsset * Boon::AssetTraits&lt; TilemapAsset &gt;::Load</definition>
+        <argsstring>(Buffer &amp;buffer, const AssetMeta &amp;meta)</argsstring>
+        <name>Load</name>
+        <qualifiedname>Boon::AssetTraits&lt; TilemapAsset &gt;::Load</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_boon_1_1_asset_meta" kindref="compound">AssetMeta</ref> &amp;</type>
+          <declname>meta</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/TilemapAsset.h" line="35" column="29" bodyfile="Asset/TilemapAsset.h" bodystart="35" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_asset_traits_3_01_tilemap_asset_01_4_1a75544fd63b8b563cb2134394e8ca8d8b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_buffer" kindref="compound">Buffer</ref></type>
+        <definition>static Buffer Boon::AssetTraits&lt; TilemapAsset &gt;::Serialize</definition>
+        <argsstring>(TilemapAsset *asset)</argsstring>
+        <name>Serialize</name>
+        <qualifiedname>Boon::AssetTraits&lt; TilemapAsset &gt;::Serialize</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_tilemap_asset" kindref="compound">TilemapAsset</ref> *</type>
+          <declname>asset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/TilemapAsset.h" line="88" column="23" bodyfile="Asset/TilemapAsset.h" bodystart="88" bodyend="120"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Asset/TilemapAsset.h" line="28" column="5" bodyfile="Asset/TilemapAsset.h" bodystart="29" bodyend="121"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_asset_traits_3_01_tilemap_asset_01_4_1a7e946c9da932665a03e5a83e7c86f6e5" prot="public" virt="non-virtual"><scope>Boon::AssetTraits&lt; TilemapAsset &gt;</scope><name>Load</name></member>
+      <member refid="struct_boon_1_1_asset_traits_1adad9bed2184c33eba29179cd3cbf04b0" prot="public" virt="non-virtual"><scope>Boon::AssetTraits&lt; TilemapAsset &gt;</scope><name>Name</name></member>
+      <member refid="struct_boon_1_1_asset_traits_3_01_tilemap_asset_01_4_1a75544fd63b8b563cb2134394e8ca8d8b" prot="public" virt="non-virtual"><scope>Boon::AssetTraits&lt; TilemapAsset &gt;</scope><name>Serialize</name></member>
+      <member refid="struct_boon_1_1_asset_traits_3_01_tilemap_asset_01_4_1a55eae4e765632dd0240f634ef1e98874" prot="public" virt="non-virtual"><scope>Boon::AssetTraits&lt; TilemapAsset &gt;</scope><name>Type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

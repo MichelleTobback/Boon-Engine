@@ -1,0 +1,47 @@
+\doxysection{Net\+Rep\+Core.\+h}
+\hypertarget{_net_rep_core_8h_source}{}\label{_net_rep_core_8h_source}\index{NetRepCore.h@{NetRepCore.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}Core/UUID.h"{}}}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}Core/Memory/Buffer.h"{}}}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}NetPacket.h"{}}}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}NetIdentity.h"{}}}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}Reflection/BProperty.h"{}}}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}Reflection/BClass.h"{}}}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}NetRepRegistry.h"{}}}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00013}00013\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00014}00014\ \{}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_net_connection}{NetConnection}};}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_net_scene}{NetScene}};}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00017}\doxymbox{\hyperlink{class_boon_1_1_net_rep_core}{00017}}\ \ \ \ \ \textcolor{keyword}{class\ }NetRepCore}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00018}00018\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00020}00020\ \ \ \ \ \ \ \ \ NetRepCore();}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ ProcessPacket(\doxymbox{\hyperlink{class_boon_1_1_net_scene}{NetScene}}\&\ scene,\ \doxymbox{\hyperlink{class_boon_1_1_net_packet}{NetPacket}}\&\ pkt,\ \doxymbox{\hyperlink{class_boon_1_1_net_connection}{NetConnection}}*\ sender);}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Update(\doxymbox{\hyperlink{class_boon_1_1_net_scene}{NetScene}}\&\ scene);}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }ReplicatedInstance}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00027}00027\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_boon_1_1_replicated_class}{ReplicatedClass}}*\ pObject;}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_buffer}{Buffer}}\ snapshot;}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00030}00030\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }ReplicationState}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00033}00033\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_u_u_i_d}{UUID}}\ uuid;}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ std::unordered\_map<const\ BClass*,\ ReplicatedInstance>\ components;}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Cache:\ UUID\ -\/>\ state}}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00039}00039\ \ \ \ \ \ \ \ \ std::unordered\_map<UUID,\ ReplicationState>\ m\_StateCache;}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00040}00040\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_net_rep_core_8h_source_l00041}00041\ \}}
+
+\end{DoxyCode}

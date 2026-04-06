@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_editor_1_1_scene_panel" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>BoonEditor::ScenePanel</compoundname>
+    <basecompoundref refid="class_boon_editor_1_1_editor_panel" prot="public" virt="non-virtual">BoonEditor::EditorPanel</basecompoundref>
+    <includes refid="_scene_panel_8h" local="no">Panels/ScenePanel.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_editor_1_1_scene_panel_1adee0aaf8e3dd45edef691424a7639513" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_editor_1a7bed894f60212273968292b6e30ff61e" kindref="member">SceneContext</ref> *</type>
+        <definition>SceneContext* BoonEditor::ScenePanel::m_pSceneContext</definition>
+        <argsstring></argsstring>
+        <name>m_pSceneContext</name>
+        <qualifiedname>BoonEditor::ScenePanel::m_pSceneContext</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ScenePanel.h" line="31" column="14" bodyfile="Panels/ScenePanel.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_scene_panel_1a58415a6c9405da7047df461daf1a5efe" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_editor_1adf2a3b6eb0b5d2b95458502e66162172" kindref="member">GameObjectContext</ref> *</type>
+        <definition>GameObjectContext* BoonEditor::ScenePanel::m_pSelectionContext</definition>
+        <argsstring></argsstring>
+        <name>m_pSelectionContext</name>
+        <qualifiedname>BoonEditor::ScenePanel::m_pSelectionContext</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ScenePanel.h" line="32" column="19" bodyfile="Panels/ScenePanel.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_scene_panel_1ace84e6edfe447f073dc0d794d0093308" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_u_u_i_d" kindref="compound">UUID</ref></type>
+        <definition>UUID BoonEditor::ScenePanel::m_DraggedGameObject</definition>
+        <argsstring></argsstring>
+        <name>m_DraggedGameObject</name>
+        <qualifiedname>BoonEditor::ScenePanel::m_DraggedGameObject</qualifiedname>
+        <initializer>{ 0u }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ScenePanel.h" line="33" column="6" bodyfile="Panels/ScenePanel.h" bodystart="33" bodyend="33"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_scene_panel_1a951efc5412b9e09a99ff6de3692594ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::ScenePanel::ScenePanel</definition>
+        <argsstring>(const std::string &amp;name, DragDropRouter *pRouter, SceneContext *pScene, GameObjectContext *pSelectedGameObject)</argsstring>
+        <name>ScenePanel</name>
+        <qualifiedname>BoonEditor::ScenePanel::ScenePanel</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="class_drag_drop_router" kindref="compound">DragDropRouter</ref> *</type>
+          <declname>pRouter</declname>
+        </param>
+        <param>
+          <type><ref refid="namespace_boon_editor_1a7bed894f60212273968292b6e30ff61e" kindref="member">SceneContext</ref> *</type>
+          <declname>pScene</declname>
+        </param>
+        <param>
+          <type><ref refid="namespace_boon_editor_1adf2a3b6eb0b5d2b95458502e66162172" kindref="member">GameObjectContext</ref> *</type>
+          <declname>pSelectedGameObject</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ScenePanel.h" line="19" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_scene_panel_1a75db00c4659b3bd7d3fae18efe764edc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual BoonEditor::ScenePanel::~ScenePanel</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ScenePanel</name>
+        <qualifiedname>BoonEditor::ScenePanel::~ScenePanel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ScenePanel.h" line="20" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_scene_panel_1ad45192d001d1f7fe3806f2b2de2c7bbc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void BoonEditor::ScenePanel::Update</definition>
+        <argsstring>() override</argsstring>
+        <name>Update</name>
+        <qualifiedname>BoonEditor::ScenePanel::Update</qualifiedname>
+        <reimplements refid="class_boon_editor_1_1_editor_panel_1a061bb9f31c7cfe169180d1167c2faac2">Update</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ScenePanel.h" line="22" column="14" bodyfile="Panels/ScenePanel.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_scene_panel_1ac983707316e70f81fb759928da6a617e" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void BoonEditor::ScenePanel::OnRenderUI</definition>
+        <argsstring>() override</argsstring>
+        <name>OnRenderUI</name>
+        <qualifiedname>BoonEditor::ScenePanel::OnRenderUI</qualifiedname>
+        <reimplements refid="class_boon_editor_1_1_editor_panel_1a2348483af8910c64c3e9c6105fc5d884">OnRenderUI</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ScenePanel.h" line="25" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_scene_panel_1ad047b49bb77ba98852140ba1b3f79869" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::ScenePanel::DrawGameObjectNode</definition>
+        <argsstring>(GameObject gameObject)</argsstring>
+        <name>DrawGameObjectNode</name>
+        <qualifiedname>BoonEditor::ScenePanel::DrawGameObjectNode</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref></type>
+          <declname>gameObject</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ScenePanel.h" line="28" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_scene_panel_1aebdfaa24ea26ff5d78b3cd1fe368ceca" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref></type>
+        <definition>GameObject BoonEditor::ScenePanel::AddGameObjectPopup</definition>
+        <argsstring>(GameObject parent)</argsstring>
+        <name>AddGameObjectPopup</name>
+        <qualifiedname>BoonEditor::ScenePanel::AddGameObjectPopup</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref></type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ScenePanel.h" line="29" column="12"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>BoonEditor::EditorObject</label>
+        <link refid="class_boon_editor_1_1_editor_object"/>
+      </node>
+      <node id="2">
+        <label>BoonEditor::EditorPanel</label>
+        <link refid="class_boon_editor_1_1_editor_panel"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>BoonEditor::ScenePanel</label>
+        <link refid="class_boon_editor_1_1_scene_panel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>BoonEditor::EditorObject</label>
+        <link refid="class_boon_editor_1_1_editor_object"/>
+      </node>
+      <node id="2">
+        <label>BoonEditor::EditorPanel</label>
+        <link refid="class_boon_editor_1_1_editor_panel"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_Name</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_pRouter</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>BoonEditor::ScenePanel</label>
+        <link refid="class_boon_editor_1_1_scene_panel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>DragDropRouter</label>
+        <link refid="class_drag_drop_router"/>
+      </node>
+      <node id="5">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="4">
+        <label>std::string</label>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Panels/ScenePanel.h" line="16" column="1" bodyfile="Panels/ScenePanel.h" bodystart="17" bodyend="34"/>
+    <listofallmembers>
+      <member refid="class_boon_editor_1_1_scene_panel_1aebdfaa24ea26ff5d78b3cd1fe368ceca" prot="private" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>AddGameObjectPopup</name></member>
+      <member refid="class_boon_editor_1_1_scene_panel_1ad047b49bb77ba98852140ba1b3f79869" prot="private" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>DrawGameObjectNode</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a5f5df2a84dcabc146bf036b0d0a88cfb" prot="public" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a4936722347674cc693fe7629f3a489ff" prot="public" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a4ffa536dd53e7a1d6af8b9b01aba55da" prot="public" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1af7c8095284f6932cd3a18bc4a3aaad27" prot="protected" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>GetName</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a8f01a9b23acc248451ec11f5cbc1c1f8" prot="public" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>IsHovered</name></member>
+      <member refid="class_boon_editor_1_1_scene_panel_1ace84e6edfe447f073dc0d794d0093308" prot="private" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>m_DraggedGameObject</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a7c213f233755bb557917127b7720fb14" prot="protected" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>m_Flags</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a10d71879d56dfec644df8a1c3718e49e" prot="protected" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>m_Name</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1adea21029e134f339cbf9679f8d724beb" prot="protected" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>m_pRouter</name></member>
+      <member refid="class_boon_editor_1_1_scene_panel_1adee0aaf8e3dd45edef691424a7639513" prot="private" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>m_pSceneContext</name></member>
+      <member refid="class_boon_editor_1_1_scene_panel_1a58415a6c9405da7047df461daf1a5efe" prot="private" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>m_pSelectionContext</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1af52bce9632c058f5edfc288245c38013" prot="public" virt="virtual"><scope>BoonEditor::ScenePanel</scope><name>OnRender</name></member>
+      <member refid="class_boon_editor_1_1_scene_panel_1ac983707316e70f81fb759928da6a617e" prot="protected" virt="virtual"><scope>BoonEditor::ScenePanel</scope><name>OnRenderUI</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a213dbccbcaf8df25846ecd6c261afa94" prot="public" virt="virtual"><scope>BoonEditor::ScenePanel</scope><name>OnResize</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a1d76135066dcb4287011b5848d50ac57" prot="public" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>operator=</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a44929889a9fc1feb5a00bc38c4a7c329" prot="public" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>operator=</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1ad56510e7633de1175a9f0d310d3cc551" prot="protected" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>RenderFloat3Control</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a020092d7f515f99b4578b145a9f603d6" prot="public" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>RenderUI</name></member>
+      <member refid="class_boon_editor_1_1_scene_panel_1a951efc5412b9e09a99ff6de3692594ab" prot="public" virt="non-virtual"><scope>BoonEditor::ScenePanel</scope><name>ScenePanel</name></member>
+      <member refid="class_boon_editor_1_1_scene_panel_1ad45192d001d1f7fe3806f2b2de2c7bbc" prot="public" virt="virtual"><scope>BoonEditor::ScenePanel</scope><name>Update</name></member>
+      <member refid="class_boon_editor_1_1_editor_object_1aa2f1343ed311c73939b82ac8207fd788" prot="public" virt="virtual"><scope>BoonEditor::ScenePanel</scope><name>~EditorObject</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a74638d90561c3963e6b1b47dad0f244c" prot="public" virt="virtual"><scope>BoonEditor::ScenePanel</scope><name>~EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_scene_panel_1a75db00c4659b3bd7d3fae18efe764edc" prot="public" virt="virtual"><scope>BoonEditor::ScenePanel</scope><name>~ScenePanel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

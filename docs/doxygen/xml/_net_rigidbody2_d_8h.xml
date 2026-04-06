@@ -1,0 +1,527 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_net_rigidbody2_d_8h" kind="file" language="C++">
+    <compoundname>NetRigidbody2D.h</compoundname>
+    <includes refid="_replication_utils_8h" local="yes">Networking/ReplicationUtils.h</includes>
+    <includes refid="_net_identity_8h" local="yes">Networking/NetIdentity.h</includes>
+    <includes refid="_rigidbody2_d_8h" local="yes">Component/Rigidbody2D.h</includes>
+    <includes refid="_boon_8h" local="yes">Core/Boon.h</includes>
+    <includes local="no">glm/glm.hpp</includes>
+    <includes local="no">glm/common.hpp</includes>
+    <includedby refid="_net_rigidbody2_d_serializer_8h" local="yes">Networking/Components/NetRigidbody2DSerializer.h</includedby>
+    <incdepgraph>
+      <node id="49">
+        <label>Asset/Asset.h</label>
+        <link refid="_asset_8h"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>Asset/AssetRef.h</label>
+        <link refid="_asset_ref_8h"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>Asset/AssetTraits.h</label>
+        <link refid="_asset_traits_8h"/>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>Asset/AssetType.h</label>
+        <link refid="_asset_type_8h"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>Component/Rigidbody2D.h</label>
+        <link refid="_rigidbody2_d_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>Component/TransformComponent.h</label>
+        <link refid="_transform_component_8h"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>Component/UUIDComponent.h</label>
+        <link refid="_u_u_i_d_component_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>Core/Assert.h</label>
+        <link refid="_assert_8h"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Core/Boon.h</label>
+        <link refid="_boon_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Core/Delegate.h</label>
+        <link refid="_delegate_8h"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Core/UUID.h</label>
+        <link refid="_u_u_i_d_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>Core/Variant.h</label>
+        <link refid="_variant_8h"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Networking/Components/NetRigidbody2D.h</label>
+        <link refid="_net_rigidbody2_d_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>NetAuthority.h</label>
+        <link refid="_net_authority_8h"/>
+      </node>
+      <node id="4">
+        <label>Networking/NetIdentity.h</label>
+        <link refid="_net_identity_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Networking/ReplicationUtils.h</label>
+        <link refid="_replication_utils_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>Physics2DTypes.h</label>
+        <link refid="_physics2_d_types_8h"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>Physics/PhysicsWorld2D.h</label>
+        <link refid="_physics_world2_d_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>Reflection/BClass.h</label>
+        <link refid="_b_class_8h"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>Reflection/BClassBase.h</label>
+        <link refid="_b_class_base_8h"/>
+      </node>
+      <node id="33">
+        <label>BFunction.h</label>
+        <link refid="_b_function_8h"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>BProperty.h</label>
+        <link refid="_b_property_8h"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>Scene/BRef.h</label>
+        <link refid="_b_ref_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Scene/GameObject.h</label>
+        <link refid="_game_object_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>GameObjectID.h</label>
+        <link refid="_game_object_i_d_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Scene.h</label>
+        <link refid="_scene_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>box2d/id.h</label>
+      </node>
+      <node id="32">
+        <label>cstddef</label>
+      </node>
+      <node id="13">
+        <label>cstdint</label>
+      </node>
+      <node id="42">
+        <label>cstdlib</label>
+      </node>
+      <node id="35">
+        <label>cstring</label>
+      </node>
+      <node id="11">
+        <label>entt/entt.hpp</label>
+      </node>
+      <node id="14">
+        <label>functional</label>
+      </node>
+      <node id="54">
+        <label>glm/common.hpp</label>
+      </node>
+      <node id="22">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="45">
+        <label>glm/gtc/quaternion.hpp</label>
+      </node>
+      <node id="39">
+        <label>glm/gtc/type_precision.hpp</label>
+      </node>
+      <node id="46">
+        <label>glm/gtx/quaternion.hpp</label>
+      </node>
+      <node id="36">
+        <label>glm/vec2.hpp</label>
+      </node>
+      <node id="37">
+        <label>glm/vec3.hpp</label>
+      </node>
+      <node id="38">
+        <label>glm/vec4.hpp</label>
+      </node>
+      <node id="15">
+        <label>limits</label>
+      </node>
+      <node id="30">
+        <label>memory</label>
+      </node>
+      <node id="28">
+        <label>optional</label>
+      </node>
+      <node id="40">
+        <label>queue</label>
+      </node>
+      <node id="29">
+        <label>stdexcept</label>
+      </node>
+      <node id="3">
+        <label>stdint.h</label>
+      </node>
+      <node id="25">
+        <label>string</label>
+      </node>
+      <node id="16">
+        <label>type_traits</label>
+      </node>
+      <node id="26">
+        <label>typeindex</label>
+      </node>
+      <node id="27">
+        <label>unordered_map</label>
+      </node>
+      <node id="17">
+        <label>utility</label>
+      </node>
+      <node id="18">
+        <label>vector</label>
+      </node>
+      <node id="6">
+        <label>xhash</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>Networking/Components/NetRigidbody2D.h</label>
+        <link refid="_net_rigidbody2_d_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Networking/Components/NetRigidbody2DSerializer.h</label>
+        <link refid="_net_rigidbody2_d_serializer_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_boon_1_1_net_rigidbody2_d" prot="public">Boon::NetRigidbody2D</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_replication_utils_8h" kindref="compound">Networking/ReplicationUtils.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_net_identity_8h" kindref="compound">Networking/NetIdentity.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_rigidbody2_d_8h" kindref="compound">Component/Rigidbody2D.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_boon_8h" kindref="compound">Core/Boon.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;glm/glm.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;glm/common.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="10"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon_1_1_replication_utils" kindref="compound">ReplicationUtils</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_b_class_base_8h_1ac6a33ac42cf2fb39ad7064dd369c1b68" kindref="member">BCLASS</ref>(Replicated=</highlight><highlight class="stringliteral">&quot;NetRigidbody2DSerializer&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="14" refid="struct_boon_1_1_net_rigidbody2_d" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/>struct<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d" kindref="compound">NetRigidbody2D</ref><sp/>final</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="16" refid="struct_boon_1_1_net_rigidbody2_d_1ac42364afeca62d66bcb6dbed20660b3c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ac42364afeca62d66bcb6dbed20660b3c" kindref="member">DirtyFlags</ref><sp/>:<sp/>uint32_t</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="18" refid="struct_boon_1_1_net_rigidbody2_d_1ac42364afeca62d66bcb6dbed20660b3ca6adf97f83acf6453d4a6a4b1070f3754" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a6867a346204e7bbed8bfe91d8dc2e807a6adf97f83acf6453d4a6a4b1070f3754" kindref="member">None</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="struct_boon_1_1_net_rigidbody2_d_1ac42364afeca62d66bcb6dbed20660b3ca05695693370a026c84acf4d674a62fd5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PosX<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>1,</highlight></codeline>
+<codeline lineno="21" refid="struct_boon_1_1_net_rigidbody2_d_1ac42364afeca62d66bcb6dbed20660b3ca7e75cf965eba430083929d0ec26c12a7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PosY<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>2,</highlight></codeline>
+<codeline lineno="22" refid="struct_boon_1_1_net_rigidbody2_d_1ac42364afeca62d66bcb6dbed20660b3cafddb9fb1311023128eeb738f978ce061" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PosZ<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>3,</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24" refid="struct_boon_1_1_net_rigidbody2_d_1ac42364afeca62d66bcb6dbed20660b3ca84248dbe2a954d98c39ec26df4ae1e2d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Rot<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>4,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="struct_boon_1_1_net_rigidbody2_d_1ac42364afeca62d66bcb6dbed20660b3ca3347d4b89cacd240dc9d6ce9df8f1899" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VelX<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>5,</highlight></codeline>
+<codeline lineno="27" refid="struct_boon_1_1_net_rigidbody2_d_1ac42364afeca62d66bcb6dbed20660b3caeca1b7a336732ce03d3185c353ed8253" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VelY<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>6</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="struct_boon_1_1_net_rigidbody2_d_1ae56e9c45cdf35c7c76fa3397d61d2582" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec2<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ae56e9c45cdf35c7c76fa3397d61d2582" kindref="member">Velocity</ref>;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="struct_boon_1_1_net_rigidbody2_d_1a65d426d9096d2b264bd2eaa045b00c75" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int16_t<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a65d426d9096d2b264bd2eaa045b00c75" kindref="member">QPosX</ref>,<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a13aecc6572200f58a2f1ca9f7e638806" kindref="member">QPosY</ref>,<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1aad781fd7e12c5543a831ee9d2a6d79b3" kindref="member">QPosZ</ref>;</highlight></codeline>
+<codeline lineno="33" refid="struct_boon_1_1_net_rigidbody2_d_1a4f6028accd6587bcc97eefaa50a57427" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint16_t<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a4f6028accd6587bcc97eefaa50a57427" kindref="member">QRotDeg</ref>;</highlight></codeline>
+<codeline lineno="34" refid="struct_boon_1_1_net_rigidbody2_d_1a0e81571f76d349cdb94a9428a540ff3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int16_t<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a0e81571f76d349cdb94a9428a540ff3f" kindref="member">QVelX</ref>,<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a5c1d2c33a8557dd2e37871b130d3fd83" kindref="member">QVelY</ref>;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="struct_boon_1_1_net_rigidbody2_d_1ab3b8d0c917a0f4ac5f200870bf5eaba9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int16_t<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ab3b8d0c917a0f4ac5f200870bf5eaba9" kindref="member">LastQPosX</ref>,<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ad984534d88582fbe9f2a85a468f2de80" kindref="member">LastQPosY</ref>,<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a03c3d48f401ab7b858ee9fd0c57bb266" kindref="member">LastQPosZ</ref>;</highlight></codeline>
+<codeline lineno="37" refid="struct_boon_1_1_net_rigidbody2_d_1acfd3109c48a6b39dc65609d4e90692ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint16_t<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1acfd3109c48a6b39dc65609d4e90692ea" kindref="member">LastQRotDeg</ref>;</highlight></codeline>
+<codeline lineno="38" refid="struct_boon_1_1_net_rigidbody2_d_1a7ade0d948c9b1b2bb5adf827aed0408e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int16_t<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a7ade0d948c9b1b2bb5adf827aed0408e" kindref="member">LastQVelX</ref>,<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a456d1e8077bbb084fb1cad966a944831" kindref="member">LastQVelY</ref>;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="struct_boon_1_1_net_rigidbody2_d_1ac7bce76e384df1f85df2100184bf6ef8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ac7bce76e384df1f85df2100184bf6ef8" kindref="member">DirtyMask</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="struct_boon_1_1_net_rigidbody2_d_1a3317ffa72eb5f1a61f865323cb2b740b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a3317ffa72eb5f1a61f865323cb2b740b" kindref="member">Awake</ref>(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref><sp/>gameObject)</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="struct_boon_1_1_net_rigidbody2_d_1a688e6a3e8dd37082bd1d97f04c72a63e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a688e6a3e8dd37082bd1d97f04c72a63e" kindref="member">LateUpdate</ref>(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref><sp/>gameObject)</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!gameObject.<ref refid="class_boon_1_1_game_object_1a6c6df56c2c0911dcd70d32df97b34c36" kindref="member">HasComponent</ref>&lt;<ref refid="struct_boon_1_1_net_identity" kindref="compound">NetIdentity</ref>&gt;())</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!gameObject.<ref refid="class_boon_1_1_game_object_1a6c6df56c2c0911dcd70d32df97b34c36" kindref="member">HasComponent</ref>&lt;<ref refid="struct_boon_1_1_rigidbody2_d" kindref="compound">Rigidbody2D</ref>&gt;())</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_identity" kindref="compound">NetIdentity</ref>&amp;<sp/>netId<sp/>=<sp/>gameObject.<ref refid="class_boon_1_1_game_object_1a6aae671b5828b0614dca86e40016a3e2" kindref="member">GetComponent</ref>&lt;<ref refid="struct_boon_1_1_net_identity" kindref="compound">NetIdentity</ref>&gt;();</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref>&amp;<sp/>transform<sp/>=<sp/>gameObject.<ref refid="class_boon_1_1_game_object_1a11392275cc6467d66c90d3e4f7cc5944" kindref="member">GetTransform</ref>();</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(netId.<ref refid="struct_boon_1_1_net_identity_1a9b622cac07a736ffa56d7df976c6f165" kindref="member">IsAuthority</ref>())</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>pos<sp/>=<sp/>transform.GetLocalPosition();</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ae56e9c45cdf35c7c76fa3397d61d2582" kindref="member">Velocity</ref><sp/>=<sp/>gameObject.<ref refid="class_boon_1_1_game_object_1a6aae671b5828b0614dca86e40016a3e2" kindref="member">GetComponent</ref>&lt;<ref refid="struct_boon_1_1_rigidbody2_d" kindref="compound">Rigidbody2D</ref>&gt;().GetVelocity();</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>quantize<sp/>current<sp/>transform</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a65d426d9096d2b264bd2eaa045b00c75" kindref="member">QPosX</ref><sp/>=<sp/><ref refid="namespace_boon_1_1_replication_utils_1a1b39c9e13e3a725f8e1ecaed66ff3235" kindref="member">QuantizePos</ref>(pos.x);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a13aecc6572200f58a2f1ca9f7e638806" kindref="member">QPosY</ref><sp/>=<sp/><ref refid="namespace_boon_1_1_replication_utils_1a1b39c9e13e3a725f8e1ecaed66ff3235" kindref="member">QuantizePos</ref>(pos.y);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1aad781fd7e12c5543a831ee9d2a6d79b3" kindref="member">QPosZ</ref><sp/>=<sp/><ref refid="namespace_boon_1_1_replication_utils_1a1b39c9e13e3a725f8e1ecaed66ff3235" kindref="member">QuantizePos</ref>(pos.z);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a4f6028accd6587bcc97eefaa50a57427" kindref="member">QRotDeg</ref><sp/>=<sp/><ref refid="namespace_boon_1_1_replication_utils_1a5ade584aecbe23cd350f37bededea235" kindref="member">QuantizeAngleDeg</ref>(transform.GetLocalEulerRotation().z);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a0e81571f76d349cdb94a9428a540ff3f" kindref="member">QVelX</ref><sp/>=<sp/><ref refid="namespace_boon_1_1_replication_utils_1a1b39c9e13e3a725f8e1ecaed66ff3235" kindref="member">QuantizePos</ref>(<ref refid="struct_boon_1_1_net_rigidbody2_d_1ae56e9c45cdf35c7c76fa3397d61d2582" kindref="member">Velocity</ref>.x);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a5c1d2c33a8557dd2e37871b130d3fd83" kindref="member">QVelY</ref><sp/>=<sp/><ref refid="namespace_boon_1_1_replication_utils_1a1b39c9e13e3a725f8e1ecaed66ff3235" kindref="member">QuantizePos</ref>(<ref refid="struct_boon_1_1_net_rigidbody2_d_1ae56e9c45cdf35c7c76fa3397d61d2582" kindref="member">Velocity</ref>.y);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>compute<sp/>dirty<sp/>flags</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ac7bce76e384df1f85df2100184bf6ef8" kindref="member">DirtyMask</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1_net_rigidbody2_d_1a65d426d9096d2b264bd2eaa045b00c75" kindref="member">QPosX</ref><sp/>!=<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ab3b8d0c917a0f4ac5f200870bf5eaba9" kindref="member">LastQPosX</ref>)<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ac7bce76e384df1f85df2100184bf6ef8" kindref="member">DirtyMask</ref><sp/>|=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_rigidbody2_d_1ac42364afeca62d66bcb6dbed20660b3ca05695693370a026c84acf4d674a62fd5" kindref="member">DirtyFlags::PosX</ref>;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1_net_rigidbody2_d_1a13aecc6572200f58a2f1ca9f7e638806" kindref="member">QPosY</ref><sp/>!=<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ad984534d88582fbe9f2a85a468f2de80" kindref="member">LastQPosY</ref>)<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ac7bce76e384df1f85df2100184bf6ef8" kindref="member">DirtyMask</ref><sp/>|=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_rigidbody2_d_1ac42364afeca62d66bcb6dbed20660b3ca7e75cf965eba430083929d0ec26c12a7" kindref="member">DirtyFlags::PosY</ref>;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1_net_rigidbody2_d_1aad781fd7e12c5543a831ee9d2a6d79b3" kindref="member">QPosZ</ref><sp/>!=<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a03c3d48f401ab7b858ee9fd0c57bb266" kindref="member">LastQPosZ</ref>)<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ac7bce76e384df1f85df2100184bf6ef8" kindref="member">DirtyMask</ref><sp/>|=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_rigidbody2_d_1ac42364afeca62d66bcb6dbed20660b3cafddb9fb1311023128eeb738f978ce061" kindref="member">DirtyFlags::PosZ</ref>;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1_net_rigidbody2_d_1a4f6028accd6587bcc97eefaa50a57427" kindref="member">QRotDeg</ref><sp/>!=<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1acfd3109c48a6b39dc65609d4e90692ea" kindref="member">LastQRotDeg</ref>)<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ac7bce76e384df1f85df2100184bf6ef8" kindref="member">DirtyMask</ref><sp/>|=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_rigidbody2_d_1ac42364afeca62d66bcb6dbed20660b3ca84248dbe2a954d98c39ec26df4ae1e2d" kindref="member">DirtyFlags::Rot</ref>;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1_net_rigidbody2_d_1a0e81571f76d349cdb94a9428a540ff3f" kindref="member">QVelX</ref><sp/>!=<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a7ade0d948c9b1b2bb5adf827aed0408e" kindref="member">LastQVelX</ref>)<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ac7bce76e384df1f85df2100184bf6ef8" kindref="member">DirtyMask</ref><sp/>|=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_rigidbody2_d_1ac42364afeca62d66bcb6dbed20660b3ca3347d4b89cacd240dc9d6ce9df8f1899" kindref="member">DirtyFlags::VelX</ref>;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1_net_rigidbody2_d_1a5c1d2c33a8557dd2e37871b130d3fd83" kindref="member">QVelY</ref><sp/>!=<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1a456d1e8077bbb084fb1cad966a944831" kindref="member">LastQVelY</ref>)<sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ac7bce76e384df1f85df2100184bf6ef8" kindref="member">DirtyMask</ref><sp/>|=<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_rigidbody2_d_1ac42364afeca62d66bcb6dbed20660b3caeca1b7a336732ce03d3185c353ed8253" kindref="member">DirtyFlags::VelY</ref>;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_rigidbody2_d" kindref="compound">Rigidbody2D</ref>&amp;<sp/>rb<sp/>=<sp/>gameObject.<ref refid="class_boon_1_1_game_object_1a6aae671b5828b0614dca86e40016a3e2" kindref="member">GetComponent</ref>&lt;<ref refid="struct_boon_1_1_rigidbody2_d" kindref="compound">Rigidbody2D</ref>&gt;();</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rb.<ref refid="struct_boon_1_1_rigidbody2_d_1a0582f6d211a20da0973de35055d376eb" kindref="member">Type</ref><sp/>=<sp/>(int)<ref refid="struct_boon_1_1_rigidbody2_d_1a4a72a29aba3a283c456f23f3d44dfafea40c78b58b86002ee38fad2d3c9dd787e" kindref="member">Rigidbody2D::BodyType::Kinematic</ref>;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>pos<sp/>=<sp/>{<sp/><ref refid="namespace_boon_1_1_replication_utils_1a68ba5156441f3cf8ac555396b5f51c91" kindref="member">DequantizePos</ref>(<ref refid="struct_boon_1_1_net_rigidbody2_d_1a65d426d9096d2b264bd2eaa045b00c75" kindref="member">QPosX</ref>),<sp/><ref refid="namespace_boon_1_1_replication_utils_1a68ba5156441f3cf8ac555396b5f51c91" kindref="member">DequantizePos</ref>(<ref refid="struct_boon_1_1_net_rigidbody2_d_1a13aecc6572200f58a2f1ca9f7e638806" kindref="member">QPosY</ref>),<sp/><ref refid="namespace_boon_1_1_replication_utils_1a68ba5156441f3cf8ac555396b5f51c91" kindref="member">DequantizePos</ref>(<ref refid="struct_boon_1_1_net_rigidbody2_d_1aad781fd7e12c5543a831ee9d2a6d79b3" kindref="member">QPosZ</ref>)<sp/>};</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>rot<sp/>=<sp/><ref refid="namespace_boon_1_1_replication_utils_1aad972c7a017fe3d82fb5a8348a218ad8" kindref="member">DequantizeAngleDeg</ref>(<ref refid="struct_boon_1_1_net_rigidbody2_d_1a4f6028accd6587bcc97eefaa50a57427" kindref="member">QRotDeg</ref>);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec2<sp/>vel<sp/>=<sp/>{<sp/><ref refid="namespace_boon_1_1_replication_utils_1a68ba5156441f3cf8ac555396b5f51c91" kindref="member">DequantizePos</ref>(<ref refid="struct_boon_1_1_net_rigidbody2_d_1a0e81571f76d349cdb94a9428a540ff3f" kindref="member">QVelX</ref>),<sp/><ref refid="namespace_boon_1_1_replication_utils_1a68ba5156441f3cf8ac555396b5f51c91" kindref="member">DequantizePos</ref>(<ref refid="struct_boon_1_1_net_rigidbody2_d_1a5c1d2c33a8557dd2e37871b130d3fd83" kindref="member">QVelY</ref>)<sp/>};</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>transform.SetLocalPosition(glm::mix(transform.GetLocalPosition(),<sp/>pos,<sp/>0.4f));</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>transform.SetLocalRotation(0.f,<sp/>0.f,<sp/><ref refid="namespace_boon_1_1_replication_utils_1af1f788dd53bf6b70f745e91cff3db8ab" kindref="member">LerpAngleDegrees</ref>(transform.GetLocalRotation().z,<sp/>rot,<sp/>0.4f));</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_rigidbody2_d_1ae56e9c45cdf35c7c76fa3397d61d2582" kindref="member">Velocity</ref><sp/>=<sp/>glm::mix(<ref refid="struct_boon_1_1_net_rigidbody2_d_1ae56e9c45cdf35c7c76fa3397d61d2582" kindref="member">Velocity</ref>,<sp/>vel,<sp/>0.4f);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//rb.SetVelocity(Velocity);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Networking/Components/NetRigidbody2D.h"/>
+  </compounddef>
+</doxygen>

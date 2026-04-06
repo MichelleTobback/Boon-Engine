@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_net_rep_core_1_1_replicated_instance" kind="struct" language="C++" prot="private">
+    <compoundname>Boon::NetRepCore::ReplicatedInstance</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_net_rep_core_1_1_replicated_instance_1a73c465eb5fb5b789399029e87afced77" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_boon_1_1_replicated_class" kindref="compound">ReplicatedClass</ref> *</type>
+        <definition>ReplicatedClass* Boon::NetRepCore::ReplicatedInstance::pObject</definition>
+        <argsstring></argsstring>
+        <name>pObject</name>
+        <qualifiedname>Boon::NetRepCore::ReplicatedInstance::pObject</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepCore.h" line="28" column="29" bodyfile="Networking/NetRepCore.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_rep_core_1_1_replicated_instance_1a53027c04f4f480240aff170c02175dce" prot="public" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_buffer" kindref="compound">Buffer</ref></type>
+        <definition>Buffer Boon::NetRepCore::ReplicatedInstance::snapshot</definition>
+        <argsstring></argsstring>
+        <name>snapshot</name>
+        <qualifiedname>Boon::NetRepCore::ReplicatedInstance::snapshot</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepCore.h" line="29" column="20" bodyfile="Networking/NetRepCore.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>Boon::BClass</label>
+        <link refid="struct_boon_1_1_b_class"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>functions</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>meta</edgelabel>
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>registerLifecycle</edgelabel>
+        </childnode>
+        <childnode refid="20" relation="usage">
+          <edgelabel>addComponent</edgelabel>
+          <edgelabel>awake</edgelabel>
+          <edgelabel>getComponent</edgelabel>
+          <edgelabel>hasComponent</edgelabel>
+          <edgelabel>removeComponent</edgelabel>
+        </childnode>
+      </node>
+      <node id="14">
+        <label>Boon::BClassMeta</label>
+        <link refid="struct_boon_1_1_b_class_meta"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>key</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Boon::BFunction</label>
+        <link refid="struct_boon_1_1_b_function"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>meta</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>thunk</edgelabel>
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Boon::BFunctionMeta</label>
+        <link refid="struct_boon_1_1_b_function_meta"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>key</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Boon::BFunctionParam</label>
+        <link refid="struct_boon_1_1_b_function_param"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>name</edgelabel>
+          <edgelabel>typeName</edgelabel>
+        </childnode>
+      </node>
+      <node id="26">
+        <label>Boon::BProperty</label>
+        <link refid="struct_boon_1_1_b_property"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>name</edgelabel>
+          <edgelabel>typeName</edgelabel>
+        </childnode>
+        <childnode refid="27" relation="usage">
+          <edgelabel>meta</edgelabel>
+        </childnode>
+      </node>
+      <node id="28">
+        <label>Boon::BPropertyMeta</label>
+        <link refid="struct_boon_1_1_b_property_meta"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>key</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="30">
+        <label>Boon::Buffer</label>
+        <link refid="class_boon_1_1_buffer"/>
+      </node>
+      <node id="19">
+        <label>Boon::Delegate&lt; void(Boon::BClass &amp;)&gt;</label>
+        <link refid="class_boon_1_1_delegate"/>
+      </node>
+      <node id="15">
+        <label>Boon::ECSLifecycleSystem</label>
+        <link refid="struct_boon_1_1_e_c_s_lifecycle_system"/>
+        <childnode refid="16" relation="usage">
+          <edgelabel>scene</edgelabel>
+        </childnode>
+        <childnode refid="17" relation="usage">
+          <edgelabel>map</edgelabel>
+        </childnode>
+        <childnode refid="19" relation="usage">
+          <edgelabel>SceneListenerHandle</edgelabel>
+        </childnode>
+      </node>
+      <node id="18">
+        <label>Boon::ECSLifecycleSystem::Callbacks</label>
+        <link refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks"/>
+      </node>
+      <node id="20">
+        <label>Boon::GameObject</label>
+        <link refid="class_boon_1_1_game_object"/>
+      </node>
+      <node id="22">
+        <label>Boon::IRepSerializer</label>
+        <link refid="class_boon_1_1_i_rep_serializer"/>
+      </node>
+      <node id="1">
+        <label>Boon::NetRepCore::ReplicatedInstance</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>pObject</edgelabel>
+        </childnode>
+        <childnode refid="30" relation="usage">
+          <edgelabel>snapshot</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Boon::ReplicatedClass</label>
+        <link refid="struct_boon_1_1_replicated_class"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>cls</edgelabel>
+        </childnode>
+        <childnode refid="21" relation="usage">
+          <edgelabel>serializer</edgelabel>
+        </childnode>
+        <childnode refid="23" relation="usage">
+          <edgelabel>fields</edgelabel>
+        </childnode>
+        <childnode refid="29" relation="usage">
+          <edgelabel>clientRPCs</edgelabel>
+          <edgelabel>serverRPCs</edgelabel>
+        </childnode>
+      </node>
+      <node id="25">
+        <label>Boon::ReplicatedField</label>
+        <link refid="struct_boon_1_1_replicated_field"/>
+        <childnode refid="26" relation="usage">
+          <edgelabel>pProp</edgelabel>
+        </childnode>
+      </node>
+      <node id="16">
+        <label>Boon::Scene</label>
+        <link refid="class_boon_1_1_scene"/>
+      </node>
+      <node id="12">
+        <label>Boon::Variant</label>
+        <link refid="class_boon_1_1_variant"/>
+      </node>
+      <node id="5">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="21">
+        <label>std::shared_ptr&lt; Boon::IRepSerializer &gt;</label>
+        <childnode refid="22" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::string</label>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>std::unordered_map&lt; std::type_index, Boon::ECSLifecycleSystem::Callbacks &gt;</label>
+        <childnode refid="18" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="24">
+        <label>std::unordered_map&lt; uint32_t, Boon::ReplicatedField &gt;</label>
+        <childnode refid="25" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="29">
+        <label>std::unordered_map&lt; uint32_t, const Boon::BFunction * &gt;</label>
+        <childnode refid="7" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="13">
+        <label>std::vector&lt; Boon::BClassMeta &gt;</label>
+        <childnode refid="14" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>std::vector&lt; Boon::BFunction &gt;</label>
+        <childnode refid="7" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>std::vector&lt; Boon::BFunctionMeta &gt;</label>
+        <childnode refid="11" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>std::vector&lt; Boon::BFunctionParam &gt;</label>
+        <childnode refid="9" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="27">
+        <label>std::vector&lt; Boon::BPropertyMeta &gt;</label>
+        <childnode refid="28" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="23">
+        <label>std::vector&lt; std::unordered_map&lt; uint32_t, Boon::ReplicatedField &gt; &gt;</label>
+        <childnode refid="24" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Networking/NetRepCore.h" line="26" column="9" bodyfile="Networking/NetRepCore.h" bodystart="27" bodyend="30"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_net_rep_core_1_1_replicated_instance_1a73c465eb5fb5b789399029e87afced77" prot="public" virt="non-virtual"><scope>Boon::NetRepCore::ReplicatedInstance</scope><name>pObject</name></member>
+      <member refid="struct_boon_1_1_net_rep_core_1_1_replicated_instance_1a53027c04f4f480240aff170c02175dce" prot="public" virt="non-virtual"><scope>Boon::NetRepCore::ReplicatedInstance</scope><name>snapshot</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

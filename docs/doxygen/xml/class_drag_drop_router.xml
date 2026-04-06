@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_drag_drop_router" kind="class" language="C++" prot="public">
+    <compoundname>DragDropRouter</compoundname>
+    <includes refid="_drag_drop_router_8h" local="no">UI/DragDropRouter.h</includes>
+    <innerclass refid="struct_drag_drop_router_1_1_target" prot="public">DragDropRouter::Target</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="class_drag_drop_router_1aad3b0e11f7a39fb83a3bcbd2393c0ec1" prot="public" static="no">
+        <type>std::function&lt; void(const ImGuiPayload *)&gt;</type>
+        <definition>using DragDropRouter::DropCallback = std::function&lt;void(const ImGuiPayload*)&gt;</definition>
+        <argsstring></argsstring>
+        <name>DropCallback</name>
+        <qualifiedname>DragDropRouter::DropCallback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UI/DragDropRouter.h" line="10" column="5" bodyfile="UI/DragDropRouter.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_drag_drop_router_1aa47bc880e286b40d47b1b9cab4f64e8f" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="struct_drag_drop_router_1_1_target" kindref="compound">Target</ref> &gt;</type>
+        <definition>std::vector&lt;Target&gt; DragDropRouter::m_Targets</definition>
+        <argsstring></argsstring>
+        <name>m_Targets</name>
+        <qualifiedname>DragDropRouter::m_Targets</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UI/DragDropRouter.h" line="50" column="17" bodyfile="UI/DragDropRouter.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_drag_drop_router_1a5a7e3958efc72b462d41185c46586057" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void DragDropRouter::RegisterTarget</definition>
+        <argsstring>(const ImRect &amp;rect, DropCallback cb)</argsstring>
+        <name>RegisterTarget</name>
+        <qualifiedname>DragDropRouter::RegisterTarget</qualifiedname>
+        <param>
+          <type>const ImRect &amp;</type>
+          <declname>rect</declname>
+        </param>
+        <param>
+          <type><ref refid="class_drag_drop_router_1aad3b0e11f7a39fb83a3bcbd2393c0ec1" kindref="member">DropCallback</ref></type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UI/DragDropRouter.h" line="18" column="10" bodyfile="UI/DragDropRouter.h" bodystart="18" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="class_drag_drop_router_1a90baa4d2f8b2dc3fb2a058cbe6d43390" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void DragDropRouter::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>DragDropRouter::Clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UI/DragDropRouter.h" line="23" column="10" bodyfile="UI/DragDropRouter.h" bodystart="23" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_drag_drop_router_1abc013d2d1b1cd755416b4294d37732d2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void DragDropRouter::Process</definition>
+        <argsstring>()</argsstring>
+        <name>Process</name>
+        <qualifiedname>DragDropRouter::Process</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UI/DragDropRouter.h" line="28" column="10" bodyfile="UI/DragDropRouter.h" bodystart="28" bodyend="47"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="UI/DragDropRouter.h" line="7" column="1" bodyfile="UI/DragDropRouter.h" bodystart="8" bodyend="51"/>
+    <listofallmembers>
+      <member refid="class_drag_drop_router_1a90baa4d2f8b2dc3fb2a058cbe6d43390" prot="public" virt="non-virtual"><scope>DragDropRouter</scope><name>Clear</name></member>
+      <member refid="class_drag_drop_router_1aad3b0e11f7a39fb83a3bcbd2393c0ec1" prot="public" virt="non-virtual"><scope>DragDropRouter</scope><name>DropCallback</name></member>
+      <member refid="class_drag_drop_router_1aa47bc880e286b40d47b1b9cab4f64e8f" prot="private" virt="non-virtual"><scope>DragDropRouter</scope><name>m_Targets</name></member>
+      <member refid="class_drag_drop_router_1abc013d2d1b1cd755416b4294d37732d2" prot="public" virt="non-virtual"><scope>DragDropRouter</scope><name>Process</name></member>
+      <member refid="class_drag_drop_router_1a5a7e3958efc72b462d41185c46586057" prot="public" virt="non-virtual"><scope>DragDropRouter</scope><name>RegisterTarget</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

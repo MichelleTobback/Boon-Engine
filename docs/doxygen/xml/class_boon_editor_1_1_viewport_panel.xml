@@ -1,0 +1,570 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_editor_1_1_viewport_panel" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>BoonEditor::ViewportPanel</compoundname>
+    <basecompoundref refid="class_boon_editor_1_1_editor_panel" prot="public" virt="non-virtual">BoonEditor::EditorPanel</basecompoundref>
+    <includes refid="_viewport_panel_8h" local="no">Panels/ViewportPanel.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_editor_1_1_viewport_panel_1ab61dc2c878b4a5ae9a4ea6b39b54ee65" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="class_boon_1_1_scene_renderer" kindref="compound">SceneRenderer</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;SceneRenderer&gt; BoonEditor::ViewportPanel::m_pRenderer</definition>
+        <argsstring></argsstring>
+        <name>m_pRenderer</name>
+        <qualifiedname>BoonEditor::ViewportPanel::m_pRenderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="54" column="17" bodyfile="Panels/ViewportPanel.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_viewport_panel_1adafbac43992dbe1c529f70a36245c407" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_editor_1_1_editor_camera" kindref="compound">EditorCamera</ref></type>
+        <definition>EditorCamera BoonEditor::ViewportPanel::m_Camera</definition>
+        <argsstring></argsstring>
+        <name>m_Camera</name>
+        <qualifiedname>BoonEditor::ViewportPanel::m_Camera</qualifiedname>
+        <initializer>{0.f, 0.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="55" column="14" bodyfile="Panels/ViewportPanel.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_viewport_panel_1a157144f32eeae6d8f14525afe32ff2dc" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool BoonEditor::ViewportPanel::m_ViewportFocused</definition>
+        <argsstring></argsstring>
+        <name>m_ViewportFocused</name>
+        <qualifiedname>BoonEditor::ViewportPanel::m_ViewportFocused</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="57" column="6" bodyfile="Panels/ViewportPanel.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_viewport_panel_1ab37b54ef1fe4e814f8c272468b0436b3" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool BoonEditor::ViewportPanel::m_ViewportHovered</definition>
+        <argsstring></argsstring>
+        <name>m_ViewportHovered</name>
+        <qualifiedname>BoonEditor::ViewportPanel::m_ViewportHovered</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="57" column="25" bodyfile="Panels/ViewportPanel.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_viewport_panel_1a1e1ab70a579228da259e21a95f02a23c" prot="private" static="no" mutable="no">
+        <type>glm::vec2</type>
+        <definition>glm::vec2 BoonEditor::ViewportPanel::m_ViewportSize</definition>
+        <argsstring></argsstring>
+        <name>m_ViewportSize</name>
+        <qualifiedname>BoonEditor::ViewportPanel::m_ViewportSize</qualifiedname>
+        <initializer>= { 0.0f, 0.0f }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="58" column="11" bodyfile="Panels/ViewportPanel.h" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_viewport_panel_1a19831909a483277309ee301e0a957f7a" prot="private" static="no" mutable="no">
+        <type>glm::vec2</type>
+        <definition>glm::vec2 BoonEditor::ViewportPanel::m_ViewportBounds[2]</definition>
+        <argsstring>[2]</argsstring>
+        <name>m_ViewportBounds</name>
+        <qualifiedname>BoonEditor::ViewportPanel::m_ViewportBounds</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="59" column="11" bodyfile="Panels/ViewportPanel.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_viewport_panel_1a883fc8e40428a90b8b4b3dad19ea872a" prot="private" static="no" mutable="no">
+        <type>glm::vec2</type>
+        <definition>glm::vec2 BoonEditor::ViewportPanel::m_MousePosition</definition>
+        <argsstring></argsstring>
+        <name>m_MousePosition</name>
+        <qualifiedname>BoonEditor::ViewportPanel::m_MousePosition</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="60" column="11" bodyfile="Panels/ViewportPanel.h" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_viewport_panel_1a080c3085699ddb5ee60aaec7b5a8a3c6" prot="private" static="no" mutable="no">
+        <type>glm::vec2</type>
+        <definition>glm::vec2 BoonEditor::ViewportPanel::m_ViewportImagePosition</definition>
+        <argsstring></argsstring>
+        <name>m_ViewportImagePosition</name>
+        <qualifiedname>BoonEditor::ViewportPanel::m_ViewportImagePosition</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="61" column="11" bodyfile="Panels/ViewportPanel.h" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_viewport_panel_1ab9da8f7295a21be74899a3a7d73fd452" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref></type>
+        <definition>GameObject BoonEditor::ViewportPanel::m_HoveredGameObject</definition>
+        <argsstring></argsstring>
+        <name>m_HoveredGameObject</name>
+        <qualifiedname>BoonEditor::ViewportPanel::m_HoveredGameObject</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="63" column="12" bodyfile="Panels/ViewportPanel.h" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_viewport_panel_1ac0527418539460afffc2fc30aca917f6" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_editor_1a7bed894f60212273968292b6e30ff61e" kindref="member">SceneContext</ref> *</type>
+        <definition>SceneContext* BoonEditor::ViewportPanel::m_pContext</definition>
+        <argsstring></argsstring>
+        <name>m_pContext</name>
+        <qualifiedname>BoonEditor::ViewportPanel::m_pContext</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="64" column="14" bodyfile="Panels/ViewportPanel.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_viewport_panel_1a9573c386a3c003a604a6f8fdd7fc2c5f" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_editor_1adf2a3b6eb0b5d2b95458502e66162172" kindref="member">GameObjectContext</ref> *</type>
+        <definition>GameObjectContext* BoonEditor::ViewportPanel::m_pSelectionContext</definition>
+        <argsstring></argsstring>
+        <name>m_pSelectionContext</name>
+        <qualifiedname>BoonEditor::ViewportPanel::m_pSelectionContext</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="65" column="19" bodyfile="Panels/ViewportPanel.h" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_viewport_panel_1ae64fba4ae3c4e7a0874d94d1d70d3ba0" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="class_boon_editor_1_1_viewport_toolbar" kindref="compound">ViewportToolbar</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;ViewportToolbar&gt; BoonEditor::ViewportPanel::m_pToolbar</definition>
+        <argsstring></argsstring>
+        <name>m_pToolbar</name>
+        <qualifiedname>BoonEditor::ViewportPanel::m_pToolbar</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="66" column="17" bodyfile="Panels/ViewportPanel.h" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_viewport_panel_1ac4b6408156f9a88b6fe18df8b312ea4e" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="class_boon_editor_1_1_debug_renderer" kindref="compound">DebugRenderer</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;DebugRenderer&gt; BoonEditor::ViewportPanel::m_pDebugRenderer</definition>
+        <argsstring></argsstring>
+        <name>m_pDebugRenderer</name>
+        <qualifiedname>BoonEditor::ViewportPanel::m_pDebugRenderer</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="67" column="17" bodyfile="Panels/ViewportPanel.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_viewport_panel_1a103c0c7e29b7815af82e8326d6167efc" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_boon_editor_1_1_editor_viewport_settings" kindref="compound">EditorViewportSettings</ref></type>
+        <definition>EditorViewportSettings BoonEditor::ViewportPanel::m_Settings</definition>
+        <argsstring></argsstring>
+        <name>m_Settings</name>
+        <qualifiedname>BoonEditor::ViewportPanel::m_Settings</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="69" column="24" bodyfile="Panels/ViewportPanel.h" bodystart="69" bodyend="69"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_viewport_panel_1ac101c353cc7a5aec17d147f131a41eed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::ViewportPanel::ViewportPanel</definition>
+        <argsstring>(const std::string &amp;name, DragDropRouter *pRouter, SceneContext *pContext, GameObjectContext *pSelectionContext)</argsstring>
+        <name>ViewportPanel</name>
+        <qualifiedname>BoonEditor::ViewportPanel::ViewportPanel</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="class_drag_drop_router" kindref="compound">DragDropRouter</ref> *</type>
+          <declname>pRouter</declname>
+        </param>
+        <param>
+          <type><ref refid="namespace_boon_editor_1a7bed894f60212273968292b6e30ff61e" kindref="member">SceneContext</ref> *</type>
+          <declname>pContext</declname>
+        </param>
+        <param>
+          <type><ref refid="namespace_boon_editor_1adf2a3b6eb0b5d2b95458502e66162172" kindref="member">GameObjectContext</ref> *</type>
+          <declname>pSelectionContext</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="28" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_viewport_panel_1a16e4a2b47c084fca314d5756ec908bcb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual BoonEditor::ViewportPanel::~ViewportPanel</definition>
+        <argsstring>()</argsstring>
+        <name>~ViewportPanel</name>
+        <qualifiedname>BoonEditor::ViewportPanel::~ViewportPanel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="29" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_viewport_panel_1aa6395ca26838bd8ca64dcbd956e623b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void BoonEditor::ViewportPanel::Update</definition>
+        <argsstring>() override</argsstring>
+        <name>Update</name>
+        <qualifiedname>BoonEditor::ViewportPanel::Update</qualifiedname>
+        <reimplements refid="class_boon_editor_1_1_editor_panel_1a061bb9f31c7cfe169180d1167c2faac2">Update</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="31" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_viewport_panel_1a6bf94ba27e4a9536e85d70d7c36c8b6f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_boon_editor_1_1_viewport_toolbar" kindref="compound">ViewportToolbar</ref> *</type>
+        <definition>ViewportToolbar * BoonEditor::ViewportPanel::GetToolbar</definition>
+        <argsstring>() const</argsstring>
+        <name>GetToolbar</name>
+        <qualifiedname>BoonEditor::ViewportPanel::GetToolbar</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="33" column="24" bodyfile="Panels/ViewportPanel.h" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_viewport_panel_1a4a03030067fbe0ef7d62d5d70d66982f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_boon_editor_1_1_editor_camera" kindref="compound">EditorCamera</ref> &amp;</type>
+        <definition>EditorCamera &amp; BoonEditor::ViewportPanel::GetCamera</definition>
+        <argsstring>()</argsstring>
+        <name>GetCamera</name>
+        <qualifiedname>BoonEditor::ViewportPanel::GetCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="35" column="21" bodyfile="Panels/ViewportPanel.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_viewport_panel_1aaf491ce1955e32469ca4d6988dbed579" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_boon_editor_1_1_editor_viewport_settings" kindref="compound">EditorViewportSettings</ref> &amp;</type>
+        <definition>EditorViewportSettings &amp; BoonEditor::ViewportPanel::GetSettings</definition>
+        <argsstring>()</argsstring>
+        <name>GetSettings</name>
+        <qualifiedname>BoonEditor::ViewportPanel::GetSettings</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="37" column="31" bodyfile="Panels/ViewportPanel.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_viewport_panel_1a875782ffcfeee449789f78c372d72d8c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="struct_boon_editor_1_1_editor_viewport_settings" kindref="compound">EditorViewportSettings</ref> &amp;</type>
+        <definition>const EditorViewportSettings &amp; BoonEditor::ViewportPanel::GetSettings</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSettings</name>
+        <qualifiedname>BoonEditor::ViewportPanel::GetSettings</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="38" column="37" bodyfile="Panels/ViewportPanel.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_viewport_panel_1a34af62dec1c7d6abfe47f1880985a71e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::ViewportPanel::SetContext</definition>
+        <argsstring>(SceneContext *pContext)</argsstring>
+        <name>SetContext</name>
+        <qualifiedname>BoonEditor::ViewportPanel::SetContext</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_editor_1a7bed894f60212273968292b6e30ff61e" kindref="member">SceneContext</ref> *</type>
+          <declname>pContext</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="40" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_viewport_panel_1a8a3cb329204fb8dd96df0dca6b059cac" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const glm::vec2 &amp;</type>
+        <definition>const glm::vec2 &amp; BoonEditor::ViewportPanel::GetSize</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSize</name>
+        <qualifiedname>BoonEditor::ViewportPanel::GetSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="42" column="24" bodyfile="Panels/ViewportPanel.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_viewport_panel_1a282d89c2d7dc9a7454273c67be944c77" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const glm::vec2 &amp;</type>
+        <definition>const glm::vec2 &amp; BoonEditor::ViewportPanel::GetMousePosition</definition>
+        <argsstring>() const</argsstring>
+        <name>GetMousePosition</name>
+        <qualifiedname>BoonEditor::ViewportPanel::GetMousePosition</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="43" column="24" bodyfile="Panels/ViewportPanel.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_viewport_panel_1a9088c0f2e503b916718d5a027482d076" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_scene_renderer" kindref="compound">SceneRenderer</ref> *</type>
+        <definition>SceneRenderer * BoonEditor::ViewportPanel::GetRenderer</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRenderer</name>
+        <qualifiedname>BoonEditor::ViewportPanel::GetRenderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="45" column="22" bodyfile="Panels/ViewportPanel.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_viewport_panel_1a2e48adce697c4b86ee67069ba0bce5d2" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void BoonEditor::ViewportPanel::OnRenderUI</definition>
+        <argsstring>() override</argsstring>
+        <name>OnRenderUI</name>
+        <qualifiedname>BoonEditor::ViewportPanel::OnRenderUI</qualifiedname>
+        <reimplements refid="class_boon_editor_1_1_editor_panel_1a2348483af8910c64c3e9c6105fc5d884">OnRenderUI</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="48" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_viewport_panel_1ac4cd1f1a5b9c86e5f9c788e03fb360bf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::ViewportPanel::CameraSettings</definition>
+        <argsstring>(float posX, float posY, float maxWidth)</argsstring>
+        <name>CameraSettings</name>
+        <qualifiedname>BoonEditor::ViewportPanel::CameraSettings</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>posX</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>posY</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>maxWidth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="51" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_viewport_panel_1aeb635a46c90a9276a2cce3c88f91251c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::ViewportPanel::VisibilitySettings</definition>
+        <argsstring>(float posX, float posY, float maxWidth)</argsstring>
+        <name>VisibilitySettings</name>
+        <qualifiedname>BoonEditor::ViewportPanel::VisibilitySettings</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>posX</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>posY</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>maxWidth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ViewportPanel.h" line="52" column="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>BoonEditor::EditorObject</label>
+        <link refid="class_boon_editor_1_1_editor_object"/>
+      </node>
+      <node id="2">
+        <label>BoonEditor::EditorPanel</label>
+        <link refid="class_boon_editor_1_1_editor_panel"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>BoonEditor::ViewportPanel</label>
+        <link refid="class_boon_editor_1_1_viewport_panel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>BoonEditor::EditorObject</label>
+        <link refid="class_boon_editor_1_1_editor_object"/>
+      </node>
+      <node id="2">
+        <label>BoonEditor::EditorPanel</label>
+        <link refid="class_boon_editor_1_1_editor_panel"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_Name</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_pRouter</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>BoonEditor::ViewportPanel</label>
+        <link refid="class_boon_editor_1_1_viewport_panel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>DragDropRouter</label>
+        <link refid="class_drag_drop_router"/>
+      </node>
+      <node id="5">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="4">
+        <label>std::string</label>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Panels/ViewportPanel.h" line="25" column="1" bodyfile="Panels/ViewportPanel.h" bodystart="26" bodyend="70"/>
+    <listofallmembers>
+      <member refid="class_boon_editor_1_1_viewport_panel_1ac4cd1f1a5b9c86e5f9c788e03fb360bf" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>CameraSettings</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a5f5df2a84dcabc146bf036b0d0a88cfb" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a4936722347674cc693fe7629f3a489ff" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a4ffa536dd53e7a1d6af8b9b01aba55da" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a4a03030067fbe0ef7d62d5d70d66982f" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>GetCamera</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a282d89c2d7dc9a7454273c67be944c77" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>GetMousePosition</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1af7c8095284f6932cd3a18bc4a3aaad27" prot="protected" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>GetName</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a9088c0f2e503b916718d5a027482d076" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>GetRenderer</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1aaf491ce1955e32469ca4d6988dbed579" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>GetSettings</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a875782ffcfeee449789f78c372d72d8c" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>GetSettings</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a8a3cb329204fb8dd96df0dca6b059cac" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>GetSize</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a6bf94ba27e4a9536e85d70d7c36c8b6f" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>GetToolbar</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a8f01a9b23acc248451ec11f5cbc1c1f8" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>IsHovered</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1adafbac43992dbe1c529f70a36245c407" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_Camera</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a7c213f233755bb557917127b7720fb14" prot="protected" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_Flags</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1ab9da8f7295a21be74899a3a7d73fd452" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_HoveredGameObject</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a883fc8e40428a90b8b4b3dad19ea872a" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_MousePosition</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a10d71879d56dfec644df8a1c3718e49e" prot="protected" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_Name</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1ac0527418539460afffc2fc30aca917f6" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_pContext</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1ac4b6408156f9a88b6fe18df8b312ea4e" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_pDebugRenderer</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1ab61dc2c878b4a5ae9a4ea6b39b54ee65" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_pRenderer</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1adea21029e134f339cbf9679f8d724beb" prot="protected" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_pRouter</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a9573c386a3c003a604a6f8fdd7fc2c5f" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_pSelectionContext</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1ae64fba4ae3c4e7a0874d94d1d70d3ba0" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_pToolbar</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a103c0c7e29b7815af82e8326d6167efc" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_Settings</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a19831909a483277309ee301e0a957f7a" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_ViewportBounds</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a157144f32eeae6d8f14525afe32ff2dc" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_ViewportFocused</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1ab37b54ef1fe4e814f8c272468b0436b3" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_ViewportHovered</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a080c3085699ddb5ee60aaec7b5a8a3c6" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_ViewportImagePosition</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a1e1ab70a579228da259e21a95f02a23c" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>m_ViewportSize</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1af52bce9632c058f5edfc288245c38013" prot="public" virt="virtual"><scope>BoonEditor::ViewportPanel</scope><name>OnRender</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a2e48adce697c4b86ee67069ba0bce5d2" prot="protected" virt="virtual"><scope>BoonEditor::ViewportPanel</scope><name>OnRenderUI</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a213dbccbcaf8df25846ecd6c261afa94" prot="public" virt="virtual"><scope>BoonEditor::ViewportPanel</scope><name>OnResize</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a1d76135066dcb4287011b5848d50ac57" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>operator=</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a44929889a9fc1feb5a00bc38c4a7c329" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>operator=</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1ad56510e7633de1175a9f0d310d3cc551" prot="protected" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>RenderFloat3Control</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a020092d7f515f99b4578b145a9f603d6" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>RenderUI</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a34af62dec1c7d6abfe47f1880985a71e" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>SetContext</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1aa6395ca26838bd8ca64dcbd956e623b0" prot="public" virt="virtual"><scope>BoonEditor::ViewportPanel</scope><name>Update</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1ac101c353cc7a5aec17d147f131a41eed" prot="public" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>ViewportPanel</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1aeb635a46c90a9276a2cce3c88f91251c" prot="private" virt="non-virtual"><scope>BoonEditor::ViewportPanel</scope><name>VisibilitySettings</name></member>
+      <member refid="class_boon_editor_1_1_editor_object_1aa2f1343ed311c73939b82ac8207fd788" prot="public" virt="virtual"><scope>BoonEditor::ViewportPanel</scope><name>~EditorObject</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a74638d90561c3963e6b1b47dad0f244c" prot="public" virt="virtual"><scope>BoonEditor::ViewportPanel</scope><name>~EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_viewport_panel_1a16e4a2b47c084fca314d5756ec908bcb" prot="public" virt="virtual"><scope>BoonEditor::ViewportPanel</scope><name>~ViewportPanel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

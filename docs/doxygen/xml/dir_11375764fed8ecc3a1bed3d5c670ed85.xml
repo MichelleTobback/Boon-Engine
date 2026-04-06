@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_11375764fed8ecc3a1bed3d5c670ed85" kind="dir">
+    <compoundname>Serialization</compoundname>
+    <innerfile refid="_binary_serializer_8h">BinarySerializer.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Serialization/"/>
+  </compounddef>
+</doxygen>

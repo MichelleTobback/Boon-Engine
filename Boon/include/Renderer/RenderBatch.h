@@ -21,6 +21,15 @@ namespace Boon
     public:
         using BatchCallback = std::function<void()>;
 
+        /**
+         * @brief Initialize the render batch with required resources.
+         *
+         * @param maxVertices Maximum number of vertices per batch.
+         * @param layout Vertex layout used by the batch.
+         * @param shader Shader used when flushing the batch.
+         * @param primitiveType Primitive topology for the batch.
+         * @param indexBuffer Optional index buffer for indexed rendering.
+         */
         void Initialize(uint32_t maxVertices,
             const VertexBufferLayout& layout,
             const std::shared_ptr<Shader>& shader,
@@ -28,10 +37,25 @@ namespace Boon
             std::shared_ptr<IndexBuffer> indexBuffer = nullptr);
 
         RenderBatch() = default;
+
+        /**
+         * @brief Destroy the render batch and release resources.
+         */
         ~RenderBatch();
 
+        /**
+         * @brief Start recording vertices for the batch.
+         */
         void Begin();
+
+        /**
+         * @brief Flush the current batch to the GPU and issue draw calls.
+         */
         void Flush();
+
+        /**
+         * @brief Advance to the next batch (used when capacity is reached).
+         */
         void NextBatch();
 
         template<typename VertexType>

@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_logger_8h" kind="file" language="C++">
+    <compoundname>Logger.h</compoundname>
+    <includes refid="_service_locator_8h" local="yes">Core/ServiceLocator.h</includes>
+    <includes local="no">string</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>BoonDebug/Logger.h</label>
+        <link refid="_logger_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Assert.h</label>
+        <link refid="_assert_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Core/ServiceLocator.h</label>
+        <link refid="_service_locator_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>cstdlib</label>
+      </node>
+      <node id="6">
+        <label>memory</label>
+      </node>
+      <node id="8">
+        <label>stack</label>
+      </node>
+      <node id="4">
+        <label>string</label>
+      </node>
+      <node id="7">
+        <label>unordered_map</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="class_boon_1_1_logger" prot="public">Boon::Logger</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="_logger_8h_1a6607b6342c481367083d0b0027662355" prot="public" static="no">
+        <name>BOON_INIT_LOGGER</name>
+        <param></param>
+        <initializer><ref refid="class_boon_1_1_logger_1a3873f09a69a5e6aaad7cba2f7f1a410b" kindref="member">::Boon::Logger::Init</ref>()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/Logger.h" line="17" column="9" bodyfile="BoonDebug/Logger.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_logger_8h_1a1dddeee9b8509d65baeb3158f3031284" prot="public" static="no">
+        <name>BOON_LOG</name>
+        <param><defname>...</defname></param>
+        <initializer><ref refid="class_boon_1_1_service_locator_1a24d80f5670a222c787d4f63bdba7c03a" kindref="member">::Boon::ServiceLocator::Get</ref>&lt;<ref refid="class_boon_1_1_logger" kindref="compound">Boon::Logger</ref>&gt;().Log(__VA_ARGS__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/Logger.h" line="19" column="9" bodyfile="BoonDebug/Logger.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_logger_8h_1a41a5707cea15740a2be170df6c4c9066" prot="public" static="no">
+        <name>BOON_LOG_WARN</name>
+        <param><defname>...</defname></param>
+        <initializer><ref refid="class_boon_1_1_service_locator_1a24d80f5670a222c787d4f63bdba7c03a" kindref="member">::Boon::ServiceLocator::Get</ref>&lt;<ref refid="class_boon_1_1_logger" kindref="compound">Boon::Logger</ref>&gt;().Warn(__VA_ARGS__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/Logger.h" line="20" column="9" bodyfile="BoonDebug/Logger.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_logger_8h_1aaa9c110a8f9574c49e8f6e34ed4241f3" prot="public" static="no">
+        <name>BOON_LOG_ERROR</name>
+        <param><defname>...</defname></param>
+        <initializer><ref refid="class_boon_1_1_service_locator_1a24d80f5670a222c787d4f63bdba7c03a" kindref="member">::Boon::ServiceLocator::Get</ref>&lt;<ref refid="class_boon_1_1_logger" kindref="compound">Boon::Logger</ref>&gt;().Error(__VA_ARGS__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/Logger.h" line="21" column="9" bodyfile="BoonDebug/Logger.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_service_locator_8h" kindref="compound">Core/ServiceLocator.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="5"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="6" refid="class_boon_1_1_logger" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_logger" kindref="compound">Logger</ref><sp/>final</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="9" refid="class_boon_1_1_logger_1a3873f09a69a5e6aaad7cba2f7f1a410b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_logger_1a3873f09a69a5e6aaad7cba2f7f1a410b" kindref="member">Init</ref>();</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="class_boon_1_1_logger_1a6dc88da295c2c85cf0ceef611d6cfa79" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_logger_1a6dc88da295c2c85cf0ceef611d6cfa79" kindref="member">Log</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>msg);</highlight></codeline>
+<codeline lineno="12" refid="class_boon_1_1_logger_1a79cccb120143d879d258b52dda06cc4a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_logger_1a79cccb120143d879d258b52dda06cc4a" kindref="member">Warn</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>msg);</highlight></codeline>
+<codeline lineno="13" refid="class_boon_1_1_logger_1a4f7a00ca06672ac0d6bd29f8f8e8fcdc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_logger_1a4f7a00ca06672ac0d6bd29f8f8e8fcdc" kindref="member">Error</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>msg);</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="_logger_8h_1a6607b6342c481367083d0b0027662355" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BOON_INIT_LOGGER()<sp/>::Boon::Logger::Init()</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="_logger_8h_1a1dddeee9b8509d65baeb3158f3031284" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BOON_LOG(...)<sp/>::Boon::ServiceLocator::Get&lt;Boon::Logger&gt;().Log(__VA_ARGS__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="_logger_8h_1a41a5707cea15740a2be170df6c4c9066" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BOON_LOG_WARN(...)<sp/>::Boon::ServiceLocator::Get&lt;Boon::Logger&gt;().Warn(__VA_ARGS__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="_logger_8h_1aaa9c110a8f9574c49e8f6e34ed4241f3" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BOON_LOG_ERROR(...)<sp/>::Boon::ServiceLocator::Get&lt;Boon::Logger&gt;().Error(__VA_ARGS__)</highlight></codeline>
+    </programlisting>
+    <location file="BoonDebug/Logger.h"/>
+  </compounddef>
+</doxygen>

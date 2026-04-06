@@ -1,0 +1,56 @@
+\doxysection{Boon::\+Asset\+Pack\+Reader Class Reference}
+\hypertarget{class_boon_1_1_asset_pack_reader}{}\label{class_boon_1_1_asset_pack_reader}\index{Boon::AssetPackReader@{Boon::AssetPackReader}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_boon_1_1_asset_pack_reader_aa0b7295a158c05900dbd783b2ed64acd}\label{class_boon_1_1_asset_pack_reader_aa0b7295a158c05900dbd783b2ed64acd} 
+bool {\bfseries Open} (const std::\+string \&path)
+\item 
+const \doxymbox{\hyperlink{struct_boon_1_1_packed_asset_entry}{Packed\+Asset\+Entry}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_1_1_asset_pack_reader_a7a72f9c3c84464b769b6071007ee898a}{Get\+Entry}} (\doxymbox{\hyperlink{class_boon_1_1_u_u_i_d}{UUID}} id) const
+\item 
+\Hypertarget{class_boon_1_1_asset_pack_reader_a098c4cff3f834be524ca5ca81c3c2c0f}\label{class_boon_1_1_asset_pack_reader_a098c4cff3f834be524ca5ca81c3c2c0f} 
+bool {\bfseries Read\+Asset} (Asset\+Handle handle, \doxymbox{\hyperlink{class_boon_1_1_buffer}{Buffer}} \&out\+Buffer, \doxymbox{\hyperlink{struct_boon_1_1_asset_meta}{Asset\+Meta}} \&out\+Meta)
+\item 
+\Hypertarget{class_boon_1_1_asset_pack_reader_adb42a223cb7bcfb23d2047cccc79fb05}\label{class_boon_1_1_asset_pack_reader_adb42a223cb7bcfb23d2047cccc79fb05} 
+bool {\bfseries Read\+Bytes} (uint64\+\_\+t offset, uint64\+\_\+t size, void \texorpdfstring{$\ast$}{*}out\+Buffer) const
+\item 
+{\footnotesize template$<$typename T$>$ }\\bool \doxymbox{\hyperlink{class_boon_1_1_asset_pack_reader_a89f0667f72acd0bc5f1efddc507f5ced}{Read\+POD}} (uint64\+\_\+t offset, T \&out\+Value) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_asset_pack_reader_8h_source_l00014}{14}} of file \doxymbox{\hyperlink{_asset_pack_reader_8h_source}{Asset\+Pack\+Reader.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_asset_pack_reader_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_asset_pack_reader_a7a72f9c3c84464b769b6071007ee898a}\index{Boon::AssetPackReader@{Boon::AssetPackReader}!GetEntry@{GetEntry}}
+\index{GetEntry@{GetEntry}!Boon::AssetPackReader@{Boon::AssetPackReader}}
+\doxysubsubsection{\texorpdfstring{GetEntry()}{GetEntry()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_pack_reader_a7a72f9c3c84464b769b6071007ee898a} 
+const \doxymbox{\hyperlink{struct_boon_1_1_packed_asset_entry}{Packed\+Asset\+Entry}} \texorpdfstring{$\ast$}{*} Boon::\+\+Asset\+Pack\+Reader::\+\+Get\+Entry (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_u_u_i_d}{UUID}}}]{id}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_pack_reader_8h_source_l00022}{22}} of file \doxymbox{\hyperlink{_asset_pack_reader_8h_source}{Asset\+Pack\+Reader.\+h}}.
+
+\Hypertarget{class_boon_1_1_asset_pack_reader_a89f0667f72acd0bc5f1efddc507f5ced}\index{Boon::AssetPackReader@{Boon::AssetPackReader}!ReadPOD@{ReadPOD}}
+\index{ReadPOD@{ReadPOD}!Boon::AssetPackReader@{Boon::AssetPackReader}}
+\doxysubsubsection{\texorpdfstring{ReadPOD()}{ReadPOD()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_pack_reader_a89f0667f72acd0bc5f1efddc507f5ced} 
+template$<$typename T$>$ \\
+bool Boon::\+\+Asset\+Pack\+Reader::\+\+Read\+POD (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{offset}{, }\item[{T \&}]{out\+Value}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_pack_reader_8h_source_l00033}{33}} of file \doxymbox{\hyperlink{_asset_pack_reader_8h_source}{Asset\+Pack\+Reader.\+h}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Asset\+Pack\+Reader.\+h\end{DoxyCompactItemize}

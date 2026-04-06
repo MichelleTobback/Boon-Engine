@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_editor_object_8h" kind="file" language="C++">
+    <compoundname>EditorObject.h</compoundname>
+    <includedby refid="_asset_directory_scanner_8h" local="yes">Assets/AssetDirectoryScanner.h</includedby>
+    <includedby refid="_editor_camera_8h" local="yes">Core/EditorCamera.h</includedby>
+    <includedby refid="_editor_panel_8h" local="yes">Panels/EditorPanel.h</includedby>
+    <invincdepgraph>
+      <node id="2">
+        <label>Assets/AssetDirectoryScanner.h</label>
+        <link refid="_asset_directory_scanner_8h"/>
+      </node>
+      <node id="3">
+        <label>Core/EditorCamera.h</label>
+        <link refid="_editor_camera_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Core/EditorObject.h</label>
+        <link refid="_editor_object_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Core/EditorState.h</label>
+        <link refid="_editor_state_8h"/>
+      </node>
+      <node id="4">
+        <label>Panels/AssetEditor.h</label>
+        <link refid="_asset_editor_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Panels/AssetEditorPanel.h</label>
+        <link refid="_asset_editor_panel_8h"/>
+      </node>
+      <node id="11">
+        <label>Panels/ContentBrowser.h</label>
+        <link refid="_content_browser_8h"/>
+      </node>
+      <node id="9">
+        <label>Panels/EditorPanel.h</label>
+        <link refid="_editor_panel_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Panels/NetworkPanel.h</label>
+        <link refid="_network_panel_8h"/>
+      </node>
+      <node id="13">
+        <label>Panels/PropertiesPanel.h</label>
+        <link refid="_properties_panel_8h"/>
+      </node>
+      <node id="14">
+        <label>Panels/ScenePanel.h</label>
+        <link refid="_scene_panel_8h"/>
+      </node>
+      <node id="6">
+        <label>Panels/SpriteAtlasEditorPanel.h</label>
+        <link refid="_sprite_atlas_editor_panel_8h"/>
+      </node>
+      <node id="7">
+        <label>Panels/TilemapEditorPanel.h</label>
+        <link refid="_tilemap_editor_panel_8h"/>
+      </node>
+      <node id="8">
+        <label>Panels/ViewportPanel.h</label>
+        <link refid="_viewport_panel_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>Panels/ViewportToolbar.h</label>
+        <link refid="_viewport_toolbar_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_boon_editor_1_1_editor_object" prot="public">BoonEditor::EditorObject</innerclass>
+    <innernamespace refid="namespace_boon_editor">BoonEditor</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon_editor" kindref="compound">BoonEditor</ref></highlight></codeline>
+<codeline lineno="4"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="5" refid="class_boon_editor_1_1_editor_object" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_editor_1_1_editor_object" kindref="compound">EditorObject</ref></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="8" refid="class_boon_editor_1_1_editor_object_1aa2f1343ed311c73939b82ac8207fd788" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_editor_object_1aa2f1343ed311c73939b82ac8207fd788" kindref="member">~EditorObject</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="9" refid="class_boon_editor_1_1_editor_object_1a397e0d8281c6cfd56d48f377b32945c7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_editor_object_1a397e0d8281c6cfd56d48f377b32945c7" kindref="member">Update</ref>()<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Core/EditorObject.h"/>
+  </compounddef>
+</doxygen>

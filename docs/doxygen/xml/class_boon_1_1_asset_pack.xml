@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_asset_pack" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>Boon::AssetPack</compoundname>
+    <includes refid="_asset_pack_8h" local="no">Asset/AssetPack/AssetPack.h</includes>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="class_boon_1_1_asset_pack_1a79d5da883c51b0a6c9885509b49076ae" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class AssetPackBuilder</definition>
+        <argsstring></argsstring>
+        <name>AssetPackBuilder</name>
+        <qualifiedname>Boon::AssetPack::AssetPackBuilder</qualifiedname>
+        <param>
+          <type>AssetPackBuilder</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="39" column="22" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="class_boon_1_1_asset_pack_1ac6f2762cc6ac65c74a33ff6a86fb4ca8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class AssetPackReader</definition>
+        <argsstring></argsstring>
+        <name>AssetPackReader</name>
+        <qualifiedname>Boon::AssetPack::AssetPackReader</qualifiedname>
+        <param>
+          <type>AssetPackReader</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="40" column="22" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_asset_pack_1abbc102219b23096c03c5f859545823d1" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_boon_1_1_asset_pack_header" kindref="compound">AssetPackHeader</ref></type>
+        <definition>AssetPackHeader Boon::AssetPack::m_Header</definition>
+        <argsstring></argsstring>
+        <name>m_Header</name>
+        <qualifiedname>Boon::AssetPack::m_Header</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="42" column="25" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_asset_pack_1a65fbf81975ce55f104e98dec6cb0b9c9" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="class_boon_1_1_u_u_i_d" kindref="compound">UUID</ref>, <ref refid="struct_boon_1_1_packed_asset_entry" kindref="compound">PackedAssetEntry</ref> &gt;</type>
+        <definition>std::unordered_map&lt;UUID, PackedAssetEntry&gt; Boon::AssetPack::m_Entries</definition>
+        <argsstring></argsstring>
+        <name>m_Entries</name>
+        <qualifiedname>Boon::AssetPack::m_Entries</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="43" column="28" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_asset_pack_1a71f5bc6f0332d3fa62ed4cf2de034954" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_buffer" kindref="compound">Buffer</ref></type>
+        <definition>Buffer Boon::AssetPack::m_Data</definition>
+        <argsstring></argsstring>
+        <name>m_Data</name>
+        <qualifiedname>Boon::AssetPack::m_Data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="44" column="16" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_asset_pack_1a82b50a75b4f6095aa99ca708c12590aa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="struct_boon_1_1_asset_pack_header" kindref="compound">AssetPackHeader</ref> &amp;</type>
+        <definition>const AssetPackHeader &amp; Boon::AssetPack::GetHeader</definition>
+        <argsstring>() const</argsstring>
+        <name>GetHeader</name>
+        <qualifiedname>Boon::AssetPack::GetHeader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="34" column="38" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_asset_pack_1a02a93f7d7f27844b87ceab9636288027" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::unordered_map&lt; <ref refid="class_boon_1_1_u_u_i_d" kindref="compound">UUID</ref>, <ref refid="struct_boon_1_1_packed_asset_entry" kindref="compound">PackedAssetEntry</ref> &gt; &amp;</type>
+        <definition>const std::unordered_map&lt; UUID, PackedAssetEntry &gt; &amp; Boon::AssetPack::GetEntries</definition>
+        <argsstring>() const</argsstring>
+        <name>GetEntries</name>
+        <qualifiedname>Boon::AssetPack::GetEntries</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="35" column="41" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_asset_pack_1acc7decc802d09b2d0395eb754b936ecb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+        <definition>Buffer &amp; Boon::AssetPack::GetBuffer</definition>
+        <argsstring>()</argsstring>
+        <name>GetBuffer</name>
+        <qualifiedname>Boon::AssetPack::GetBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="36" column="23" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Asset/AssetPack/AssetPack.h" line="31" column="5" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="32" bodyend="45"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_asset_pack_1a79d5da883c51b0a6c9885509b49076ae" prot="private" virt="non-virtual"><scope>Boon::AssetPack</scope><name>AssetPackBuilder</name></member>
+      <member refid="class_boon_1_1_asset_pack_1ac6f2762cc6ac65c74a33ff6a86fb4ca8" prot="private" virt="non-virtual"><scope>Boon::AssetPack</scope><name>AssetPackReader</name></member>
+      <member refid="class_boon_1_1_asset_pack_1acc7decc802d09b2d0395eb754b936ecb" prot="public" virt="non-virtual"><scope>Boon::AssetPack</scope><name>GetBuffer</name></member>
+      <member refid="class_boon_1_1_asset_pack_1a02a93f7d7f27844b87ceab9636288027" prot="public" virt="non-virtual"><scope>Boon::AssetPack</scope><name>GetEntries</name></member>
+      <member refid="class_boon_1_1_asset_pack_1a82b50a75b4f6095aa99ca708c12590aa" prot="public" virt="non-virtual"><scope>Boon::AssetPack</scope><name>GetHeader</name></member>
+      <member refid="class_boon_1_1_asset_pack_1a71f5bc6f0332d3fa62ed4cf2de034954" prot="private" virt="non-virtual"><scope>Boon::AssetPack</scope><name>m_Data</name></member>
+      <member refid="class_boon_1_1_asset_pack_1a65fbf81975ce55f104e98dec6cb0b9c9" prot="private" virt="non-virtual"><scope>Boon::AssetPack</scope><name>m_Entries</name></member>
+      <member refid="class_boon_1_1_asset_pack_1abbc102219b23096c03c5f859545823d1" prot="private" virt="non-virtual"><scope>Boon::AssetPack</scope><name>m_Header</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

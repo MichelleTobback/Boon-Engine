@@ -1,0 +1,54 @@
+\doxysection{Hazard\+Pointer.\+h}
+\hypertarget{_hazard_pointer_8h_source}{}\label{_hazard_pointer_8h_source}\index{HazardPointer.h@{HazardPointer.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00007}00007\ \textcolor{keyword}{namespace\ }Boon\ \{}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00009}\doxymbox{\hyperlink{struct_boon_1_1_hazard_record}{00009}}\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_boon_1_1_hazard_record}{HazardRecord}}\ }
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00010}00010\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00011}00011\ \ \ \ \ \ \ \ \ std::atomic<void*>\ ptr\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00012}00012\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00014}\doxymbox{\hyperlink{class_boon_1_1_hazard_pointer}{00014}}\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_hazard_pointer}{HazardPointer}}\ }
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00015}00015\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ MAX\_THREADS\ =\ 128;}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{struct_boon_1_1_hazard_record}{HazardRecord}}*\ Acquire()\ }
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00020}00020\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ MAX\_THREADS;\ ++i)\ }
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}*\ expected\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (s\_Records[i].ptr.compare\_exchange\_strong(expected,\ \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{void}*\textcolor{keyword}{>}(1)))\ \{}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \&s\_Records[i];}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00029}00029\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Release(\doxymbox{\hyperlink{struct_boon_1_1_hazard_record}{HazardRecord}}*\ record)\ }
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00032}00032\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ record-\/>ptr.store(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00034}00034\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ IsHazard(\textcolor{keywordtype}{void}*\ ptr)\ }
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ MAX\_THREADS;\ ++i)}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (s\_Records[i].ptr.load()\ ==\ ptr)}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00042}00042\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00044}00044\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \doxymbox{\hyperlink{struct_boon_1_1_hazard_record}{HazardRecord}}\ s\_Records[MAX\_THREADS];}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00046}00046\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_hazard_pointer_8h_source_l00048}00048\ \}}
+
+\end{DoxyCode}

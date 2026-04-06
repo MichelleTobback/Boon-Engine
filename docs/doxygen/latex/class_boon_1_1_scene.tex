@@ -1,0 +1,453 @@
+\doxysection{Boon::\+Scene Class Reference}
+\hypertarget{class_boon_1_1_scene}{}\label{class_boon_1_1_scene}\index{Boon::Scene@{Boon::Scene}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_scene_a904a20ff18445dd4b98d40d177c600f0}{\texorpdfstring{$\sim$}{\string~}\+Scene}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \doxylink{class_boon_1_1_scene}{Scene}. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_scene_afc87ea9066bb35db3f506f6fb5f70c6e}\label{class_boon_1_1_scene_afc87ea9066bb35db3f506f6fb5f70c6e} 
+{\bfseries Scene} (const Scene \&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_scene_a1ecd3a0b589d263fc447089b04da4675}\label{class_boon_1_1_scene_a1ecd3a0b589d263fc447089b04da4675} 
+{\bfseries Scene} (Scene \&\&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_scene_ab6158403dbb70a40093ffe9bd81f8fa3}\label{class_boon_1_1_scene_ab6158403dbb70a40093ffe9bd81f8fa3} 
+Scene \& {\bfseries operator=} (const Scene \&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_scene_a30b0139c497ce23c3ddc2ec42045bea7}\label{class_boon_1_1_scene_a30b0139c497ce23c3ddc2ec42045bea7} 
+Scene \& {\bfseries operator=} (Scene \&\&other)=delete
+\item 
+Game\+Object \doxymbox{\hyperlink{class_boon_1_1_scene_a2c4c96c4eee1a9d2164d7b87c37475da}{Instantiate}} (const glm::\+vec3 \&pos=\{\})
+\begin{DoxyCompactList}\small\item\em Instantiate a new game object in the scene. \end{DoxyCompactList}\item 
+Game\+Object \doxymbox{\hyperlink{class_boon_1_1_scene_ab3ead563d150ab8e691fb7de402f22aa}{Instantiate}} (\doxymbox{\hyperlink{class_boon_1_1_u_u_i_d}{UUID}} uuid, const glm::\+vec3 \&pos=\{\})
+\begin{DoxyCompactList}\small\item\em Instantiate a new game object in the scene with a specific \doxylink{class_boon_1_1_u_u_i_d}{UUID}. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_scene_a288f88eef662d23e071080f61429d82c}{Awake}} ()
+\begin{DoxyCompactList}\small\item\em Transition the scene into the "{}awake"{} state. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_scene_a95a636f2a4057fd7f0ec8cc14df7c668}{Sleep}} ()
+\begin{DoxyCompactList}\small\item\em Transition the scene into the "{}sleep"{} state. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_scene_afbe726f896c8ad83e6f4d57ae3bf03d9}{Update}} ()
+\begin{DoxyCompactList}\small\item\em Run per-\/frame update for the scene. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_scene_aa120c1ba423fb916940461a3cc1a6987}{Fixed\+Update}} ()
+\begin{DoxyCompactList}\small\item\em Run fixed-\/timestep updates for the scene (e.\+g. physics). \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_boon_1_1_scene_aec13094133ecfd8feaaa8cc34537a9f5}{Raycast2D}} (const \doxymbox{\hyperlink{struct_boon_1_1_ray2_d}{Ray2D}} \&ray, \doxymbox{\hyperlink{struct_boon_1_1_hit_result2_d}{Hit\+Result2D}} \&result) const
+\begin{DoxyCompactList}\small\item\em Perform a 2D raycast against the scene\textquotesingle{}s physics world. \end{DoxyCompactList}\item 
+Game\+Object \doxymbox{\hyperlink{class_boon_1_1_scene_af9d420f20c82e133cca00df772eecee8}{Get\+Game\+Object}} (\doxymbox{\hyperlink{class_boon_1_1_u_u_i_d}{UUID}} uuid)
+\begin{DoxyCompactList}\small\item\em Retrieve a game object by \doxylink{class_boon_1_1_u_u_i_d}{UUID}. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_scene_abe6105ef620a02087c555fa23a136f2b}{Foreach\+Game\+Object}} (const std::\+function$<$ void(Game\+Object)$>$ \&fn)
+\begin{DoxyCompactList}\small\item\em Invoke a function for each game object in the scene. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Components$>$ }\\void \doxymbox{\hyperlink{class_boon_1_1_scene_a9c92ecc2437339025573e3acfe9a3e6c}{Foreach\+Game\+Object\+With}} (const std::\+function$<$ void(Game\+Object)$>$ \&fn)
+\item 
+{\footnotesize template$<$typename... Components$>$ }\\auto \doxymbox{\hyperlink{class_boon_1_1_scene_a1d40beaccfa21b9ed0882868a2579ee2}{Get\+All\+Game\+Objects\+With}} ()
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_scene_a3625ab91a4a02ef7b002bfff1439d463}{Destroy\+Game\+Object}} (Game\+Object object)
+\begin{DoxyCompactList}\small\item\em Destroy the given game object. \end{DoxyCompactList}\item 
+Scene\+Registry \& \doxymbox{\hyperlink{class_boon_1_1_scene_a264ebf4eb510cfd24a7310bdf38527f5}{Get\+Registry}} ()
+\begin{DoxyCompactList}\small\item\em Access the underlying entt registry for this scene. \end{DoxyCompactList}\item 
+Scene\+ID \doxymbox{\hyperlink{class_boon_1_1_scene_a8c979729ca101508ab799b33d0755bac}{Get\+ID}} () const
+\begin{DoxyCompactList}\small\item\em Get the unique id of this scene. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_boon_1_1_delegate}{Delegate}}$<$ void(Game\+Object)$>$ \& \doxymbox{\hyperlink{class_boon_1_1_scene_a6d6300bb22efa10cd4cd607d05d0fa45}{Get\+On\+Game\+Object\+Spawned}} ()
+\begin{DoxyCompactList}\small\item\em Get delegate invoked when a \doxylink{class_boon_1_1_game_object}{Game\+Object} is spawned. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_boon_1_1_delegate}{Delegate}}$<$ void(Game\+Object)$>$ \& \doxymbox{\hyperlink{class_boon_1_1_scene_a523474dd68b6b2529ef6b7fd3ab76c6c}{Get\+On\+Game\+Object\+Destroyed}} ()
+\begin{DoxyCompactList}\small\item\em Get delegate invoked when a \doxylink{class_boon_1_1_game_object}{Game\+Object} is destroyed. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_boon_1_1_delegate}{Delegate}}$<$ void(Game\+Object, const \doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \texorpdfstring{$\ast$}{*})$>$ \& \doxymbox{\hyperlink{class_boon_1_1_scene_addb275c8a29c0411bb837267c461f0a7}{Get\+On\+Component\+Added}} ()
+\begin{DoxyCompactList}\small\item\em Get delegate invoked when a component is added to a \doxylink{class_boon_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_boon_1_1_delegate}{Delegate}}$<$ void(Game\+Object, const \doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \texorpdfstring{$\ast$}{*})$>$ \& \doxymbox{\hyperlink{class_boon_1_1_scene_a3a48293b2efa0cc72dbdbbbc6e03906c}{Get\+On\+Component\+Removed}} ()
+\begin{DoxyCompactList}\small\item\em Get delegate invoked when a component is removed from a \doxylink{class_boon_1_1_game_object}{Game\+Object}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system}{ECSLifecycle\+System}} \& \doxymbox{\hyperlink{class_boon_1_1_scene_ac4784e268775c401bc0051689a60be3a}{Get\+ECSLifecycle\+System}} ()
+\begin{DoxyCompactList}\small\item\em Access the ECS lifecycle system for this scene. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_boon_1_1_scene_a337e01df00c09404929e52642cf93f38}{Is\+Running}} () const
+\begin{DoxyCompactList}\small\item\em Query whether the scene\textquotesingle{}s runtime is active. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_boon_1_1_scene_a59c52253dd71c96bb7b2ffd971b61190}{Physics\+World2D}}
+\item 
+class \doxymbox{\hyperlink{class_boon_1_1_scene_a00df87c957d8f7ee0fc51f07a0542f4a}{Game\+Object}}
+\item 
+class \doxymbox{\hyperlink{class_boon_1_1_scene_a284464b0561a6f2915f04b0245b987f0}{Scene\+Manager}}
+\item 
+class \doxymbox{\hyperlink{class_boon_1_1_scene_a5fa7cde0ffbc72d80ef032c1ea3e9c85}{Scene\+Serializer}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_scene_8h_source_l00024}{24}} of file \doxymbox{\hyperlink{_scene_8h_source}{Scene.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_boon_1_1_scene_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_boon_1_1_scene_a904a20ff18445dd4b98d40d177c600f0}\index{Boon::Scene@{Boon::Scene}!````~Scene@{\texorpdfstring{$\sim$}{\string~}Scene}}
+\index{````~Scene@{\texorpdfstring{$\sim$}{\string~}Scene}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Scene()}{\string~Scene()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a904a20ff18445dd4b98d40d177c600f0} 
+Boon::\+\+Scene::\+\texorpdfstring{$\sim$}{\string~}\+Scene (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destroy the \doxylink{class_boon_1_1_scene}{Scene}. 
+
+Public destructor for the scene object. See implementation for cleanup details. 
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_scene_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_scene_a288f88eef662d23e071080f61429d82c}\index{Boon::Scene@{Boon::Scene}!Awake@{Awake}}
+\index{Awake@{Awake}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{Awake()}{Awake()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a288f88eef662d23e071080f61429d82c} 
+void Boon::\+\+Scene::\+\+Awake (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Transition the scene into the "{}awake"{} state. 
+
+See implementation for the exact semantics performed during Awake. \Hypertarget{class_boon_1_1_scene_a3625ab91a4a02ef7b002bfff1439d463}\index{Boon::Scene@{Boon::Scene}!DestroyGameObject@{DestroyGameObject}}
+\index{DestroyGameObject@{DestroyGameObject}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{DestroyGameObject()}{DestroyGameObject()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a3625ab91a4a02ef7b002bfff1439d463} 
+void Boon::\+\+Scene::\+\+Destroy\+Game\+Object (\begin{DoxyParamCaption}\item[{Game\+Object}]{object}{}\end{DoxyParamCaption})}
+
+
+
+Destroy the given game object. 
+
+See implementation for exact destruction timing and side-\/effects.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & The \doxylink{class_boon_1_1_game_object}{Game\+Object} to destroy. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_scene_aa120c1ba423fb916940461a3cc1a6987}\index{Boon::Scene@{Boon::Scene}!FixedUpdate@{FixedUpdate}}
+\index{FixedUpdate@{FixedUpdate}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{FixedUpdate()}{FixedUpdate()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_aa120c1ba423fb916940461a3cc1a6987} 
+void Boon::\+\+Scene::\+\+Fixed\+Update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Run fixed-\/timestep updates for the scene (e.\+g. physics). 
+
+See implementation for timestep and systems affected. \Hypertarget{class_boon_1_1_scene_abe6105ef620a02087c555fa23a136f2b}\index{Boon::Scene@{Boon::Scene}!ForeachGameObject@{ForeachGameObject}}
+\index{ForeachGameObject@{ForeachGameObject}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{ForeachGameObject()}{ForeachGameObject()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_abe6105ef620a02087c555fa23a136f2b} 
+void Boon::\+\+Scene::\+\+Foreach\+Game\+Object (\begin{DoxyParamCaption}\item[{const std::\+function$<$ void(Game\+Object)$>$ \&}]{fn}{}\end{DoxyParamCaption})}
+
+
+
+Invoke a function for each game object in the scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fn} & Function to call for each \doxylink{class_boon_1_1_game_object}{Game\+Object}. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_scene_a9c92ecc2437339025573e3acfe9a3e6c}\index{Boon::Scene@{Boon::Scene}!ForeachGameObjectWith@{ForeachGameObjectWith}}
+\index{ForeachGameObjectWith@{ForeachGameObjectWith}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{ForeachGameObjectWith()}{ForeachGameObjectWith()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a9c92ecc2437339025573e3acfe9a3e6c} 
+template$<$typename... Components$>$ \\
+void Boon::\+\+Scene::\+\+Foreach\+Game\+Object\+With (\begin{DoxyParamCaption}\item[{const std::\+function$<$ void(Game\+Object)$>$ \&}]{fn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_scene_8h_source_l00108}{108}} of file \doxymbox{\hyperlink{_scene_8h_source}{Scene.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_a1d40beaccfa21b9ed0882868a2579ee2}\index{Boon::Scene@{Boon::Scene}!GetAllGameObjectsWith@{GetAllGameObjectsWith}}
+\index{GetAllGameObjectsWith@{GetAllGameObjectsWith}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{GetAllGameObjectsWith()}{GetAllGameObjectsWith()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a1d40beaccfa21b9ed0882868a2579ee2} 
+template$<$typename... Components$>$ \\
+auto Boon::\+\+Scene::\+\+Get\+All\+Game\+Objects\+With (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_scene_8h_source_l00119}{119}} of file \doxymbox{\hyperlink{_scene_8h_source}{Scene.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_ac4784e268775c401bc0051689a60be3a}\index{Boon::Scene@{Boon::Scene}!GetECSLifecycleSystem@{GetECSLifecycleSystem}}
+\index{GetECSLifecycleSystem@{GetECSLifecycleSystem}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{GetECSLifecycleSystem()}{GetECSLifecycleSystem()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_ac4784e268775c401bc0051689a60be3a} 
+\doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system}{ECSLifecycle\+System}} \& Boon::\+\+Scene::\+\+Get\+ECSLifecycle\+System (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access the ECS lifecycle system for this scene. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the \doxylink{struct_boon_1_1_e_c_s_lifecycle_system}{ECSLifecycle\+System} instance used by the scene. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_scene_8h_source_l00180}{180}} of file \doxymbox{\hyperlink{_scene_8h_source}{Scene.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_af9d420f20c82e133cca00df772eecee8}\index{Boon::Scene@{Boon::Scene}!GetGameObject@{GetGameObject}}
+\index{GetGameObject@{GetGameObject}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{GetGameObject()}{GetGameObject()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_af9d420f20c82e133cca00df772eecee8} 
+Game\+Object Boon::\+\+Scene::\+\+Get\+Game\+Object (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_u_u_i_d}{UUID}}}]{uuid}{}\end{DoxyParamCaption})}
+
+
+
+Retrieve a game object by \doxylink{class_boon_1_1_u_u_i_d}{UUID}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uuid} & \doxylink{class_boon_1_1_u_u_i_d}{UUID} of the requested game object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Handle to the corresponding \doxylink{class_boon_1_1_game_object}{Game\+Object}. See implementation for behavior when not found. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_scene_a8c979729ca101508ab799b33d0755bac}\index{Boon::Scene@{Boon::Scene}!GetID@{GetID}}
+\index{GetID@{GetID}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{GetID()}{GetID()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a8c979729ca101508ab799b33d0755bac} 
+Scene\+ID Boon::\+\+Scene::\+\+Get\+ID (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the unique id of this scene. 
+
+\begin{DoxyReturn}{Returns}
+Scene\+ID assigned to this scene. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_scene_8h_source_l00145}{145}} of file \doxymbox{\hyperlink{_scene_8h_source}{Scene.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_addb275c8a29c0411bb837267c461f0a7}\index{Boon::Scene@{Boon::Scene}!GetOnComponentAdded@{GetOnComponentAdded}}
+\index{GetOnComponentAdded@{GetOnComponentAdded}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{GetOnComponentAdded()}{GetOnComponentAdded()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_addb275c8a29c0411bb837267c461f0a7} 
+\doxymbox{\hyperlink{class_boon_1_1_delegate}{Delegate}}$<$ void(Game\+Object, const \doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \texorpdfstring{$\ast$}{*})$>$ \& Boon::\+\+Scene::\+\+Get\+On\+Component\+Added (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get delegate invoked when a component is added to a \doxylink{class_boon_1_1_game_object}{Game\+Object}. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the component-\/added delegate. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_scene_8h_source_l00166}{166}} of file \doxymbox{\hyperlink{_scene_8h_source}{Scene.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_a3a48293b2efa0cc72dbdbbbc6e03906c}\index{Boon::Scene@{Boon::Scene}!GetOnComponentRemoved@{GetOnComponentRemoved}}
+\index{GetOnComponentRemoved@{GetOnComponentRemoved}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{GetOnComponentRemoved()}{GetOnComponentRemoved()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a3a48293b2efa0cc72dbdbbbc6e03906c} 
+\doxymbox{\hyperlink{class_boon_1_1_delegate}{Delegate}}$<$ void(Game\+Object, const \doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \texorpdfstring{$\ast$}{*})$>$ \& Boon::\+\+Scene::\+\+Get\+On\+Component\+Removed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get delegate invoked when a component is removed from a \doxylink{class_boon_1_1_game_object}{Game\+Object}. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the component-\/removed delegate. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_scene_8h_source_l00173}{173}} of file \doxymbox{\hyperlink{_scene_8h_source}{Scene.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_a523474dd68b6b2529ef6b7fd3ab76c6c}\index{Boon::Scene@{Boon::Scene}!GetOnGameObjectDestroyed@{GetOnGameObjectDestroyed}}
+\index{GetOnGameObjectDestroyed@{GetOnGameObjectDestroyed}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{GetOnGameObjectDestroyed()}{GetOnGameObjectDestroyed()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a523474dd68b6b2529ef6b7fd3ab76c6c} 
+\doxymbox{\hyperlink{class_boon_1_1_delegate}{Delegate}}$<$ void(Game\+Object)$>$ \& Boon::\+\+Scene::\+\+Get\+On\+Game\+Object\+Destroyed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get delegate invoked when a \doxylink{class_boon_1_1_game_object}{Game\+Object} is destroyed. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the destroy delegate. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_scene_8h_source_l00159}{159}} of file \doxymbox{\hyperlink{_scene_8h_source}{Scene.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_a6d6300bb22efa10cd4cd607d05d0fa45}\index{Boon::Scene@{Boon::Scene}!GetOnGameObjectSpawned@{GetOnGameObjectSpawned}}
+\index{GetOnGameObjectSpawned@{GetOnGameObjectSpawned}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{GetOnGameObjectSpawned()}{GetOnGameObjectSpawned()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a6d6300bb22efa10cd4cd607d05d0fa45} 
+\doxymbox{\hyperlink{class_boon_1_1_delegate}{Delegate}}$<$ void(Game\+Object)$>$ \& Boon::\+\+Scene::\+\+Get\+On\+Game\+Object\+Spawned (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get delegate invoked when a \doxylink{class_boon_1_1_game_object}{Game\+Object} is spawned. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the spawn delegate. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_scene_8h_source_l00152}{152}} of file \doxymbox{\hyperlink{_scene_8h_source}{Scene.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_a264ebf4eb510cfd24a7310bdf38527f5}\index{Boon::Scene@{Boon::Scene}!GetRegistry@{GetRegistry}}
+\index{GetRegistry@{GetRegistry}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{GetRegistry()}{GetRegistry()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a264ebf4eb510cfd24a7310bdf38527f5} 
+Scene\+Registry \& Boon::\+\+Scene::\+\+Get\+Registry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access the underlying entt registry for this scene. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the scene\textquotesingle{}s registry. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_scene_8h_source_l00138}{138}} of file \doxymbox{\hyperlink{_scene_8h_source}{Scene.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_a2c4c96c4eee1a9d2164d7b87c37475da}\index{Boon::Scene@{Boon::Scene}!Instantiate@{Instantiate}}
+\index{Instantiate@{Instantiate}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{Instantiate()}{Instantiate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a2c4c96c4eee1a9d2164d7b87c37475da} 
+Game\+Object Boon::\+\+Scene::\+\+Instantiate (\begin{DoxyParamCaption}\item[{const glm::\+vec3 \&}]{pos}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+
+
+
+Instantiate a new game object in the scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & Initial position for the instantiated object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A handle to the created \doxylink{class_boon_1_1_game_object}{Game\+Object}. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_scene_ab3ead563d150ab8e691fb7de402f22aa}\index{Boon::Scene@{Boon::Scene}!Instantiate@{Instantiate}}
+\index{Instantiate@{Instantiate}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{Instantiate()}{Instantiate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_ab3ead563d150ab8e691fb7de402f22aa} 
+Game\+Object Boon::\+\+Scene::\+\+Instantiate (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_u_u_i_d}{UUID}}}]{uuid}{, }\item[{const glm::\+vec3 \&}]{pos}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+
+
+
+Instantiate a new game object in the scene with a specific \doxylink{class_boon_1_1_u_u_i_d}{UUID}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uuid} & \doxylink{class_boon_1_1_u_u_i_d}{UUID} to assign to the new object. \\
+\hline
+{\em pos} & Initial position for the instantiated object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A handle to the created \doxylink{class_boon_1_1_game_object}{Game\+Object}. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_scene_a337e01df00c09404929e52642cf93f38}\index{Boon::Scene@{Boon::Scene}!IsRunning@{IsRunning}}
+\index{IsRunning@{IsRunning}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{IsRunning()}{IsRunning()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a337e01df00c09404929e52642cf93f38} 
+bool Boon::\+\+Scene::\+\+Is\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Query whether the scene\textquotesingle{}s runtime is active. 
+
+\begin{DoxyReturn}{Returns}
+true when the scene is marked as running, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_scene_8h_source_l00187}{187}} of file \doxymbox{\hyperlink{_scene_8h_source}{Scene.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_aec13094133ecfd8feaaa8cc34537a9f5}\index{Boon::Scene@{Boon::Scene}!Raycast2D@{Raycast2D}}
+\index{Raycast2D@{Raycast2D}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{Raycast2D()}{Raycast2D()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_aec13094133ecfd8feaaa8cc34537a9f5} 
+bool Boon::\+\+Scene::\+\+Raycast2D (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_boon_1_1_ray2_d}{Ray2D}} \&}]{ray}{, }\item[{\doxymbox{\hyperlink{struct_boon_1_1_hit_result2_d}{Hit\+Result2D}} \&}]{result}{}\end{DoxyParamCaption}) const}
+
+
+
+Perform a 2D raycast against the scene\textquotesingle{}s physics world. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray} & The ray to cast. \\
+\hline
+{\em result} & Output parameter populated with hit information if a hit occurs. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the ray hit something and {\ttfamily result} was populated, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_scene_a95a636f2a4057fd7f0ec8cc14df7c668}\index{Boon::Scene@{Boon::Scene}!Sleep@{Sleep}}
+\index{Sleep@{Sleep}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{Sleep()}{Sleep()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a95a636f2a4057fd7f0ec8cc14df7c668} 
+void Boon::\+\+Scene::\+\+Sleep (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Transition the scene into the "{}sleep"{} state. 
+
+See implementation for the exact semantics performed during Sleep. \Hypertarget{class_boon_1_1_scene_afbe726f896c8ad83e6f4d57ae3bf03d9}\index{Boon::Scene@{Boon::Scene}!Update@{Update}}
+\index{Update@{Update}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_afbe726f896c8ad83e6f4d57ae3bf03d9} 
+void Boon::\+\+Scene::\+\+Update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Run per-\/frame update for the scene. 
+
+See implementation for which subsystems are updated. 
+
+\label{doc-related-members}
+\Hypertarget{class_boon_1_1_scene_doc-related-members}
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{class_boon_1_1_scene_a00df87c957d8f7ee0fc51f07a0542f4a}\index{Boon::Scene@{Boon::Scene}!GameObject@{GameObject}}
+\index{GameObject@{GameObject}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{GameObject}{GameObject}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a00df87c957d8f7ee0fc51f07a0542f4a} 
+friend class Game\+Object\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_scene_8h_source_l00191}{191}} of file \doxymbox{\hyperlink{_scene_8h_source}{Scene.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_a59c52253dd71c96bb7b2ffd971b61190}\index{Boon::Scene@{Boon::Scene}!PhysicsWorld2D@{PhysicsWorld2D}}
+\index{PhysicsWorld2D@{PhysicsWorld2D}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{PhysicsWorld2D}{PhysicsWorld2D}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a59c52253dd71c96bb7b2ffd971b61190} 
+friend class Physics\+World2D\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_scene_8h_source_l00190}{190}} of file \doxymbox{\hyperlink{_scene_8h_source}{Scene.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_a284464b0561a6f2915f04b0245b987f0}\index{Boon::Scene@{Boon::Scene}!SceneManager@{SceneManager}}
+\index{SceneManager@{SceneManager}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{SceneManager}{SceneManager}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a284464b0561a6f2915f04b0245b987f0} 
+friend class Scene\+Manager\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_scene_8h_source_l00192}{192}} of file \doxymbox{\hyperlink{_scene_8h_source}{Scene.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_a5fa7cde0ffbc72d80ef032c1ea3e9c85}\index{Boon::Scene@{Boon::Scene}!SceneSerializer@{SceneSerializer}}
+\index{SceneSerializer@{SceneSerializer}!Boon::Scene@{Boon::Scene}}
+\doxysubsubsection{\texorpdfstring{SceneSerializer}{SceneSerializer}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_a5fa7cde0ffbc72d80ef032c1ea3e9c85} 
+friend class Scene\+Serializer\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_scene_8h_source_l00193}{193}} of file \doxymbox{\hyperlink{_scene_8h_source}{Scene.\+h}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Scene.\+h\end{DoxyCompactItemize}

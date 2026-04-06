@@ -1,0 +1,40 @@
+\doxysection{Assert.\+h}
+\hypertarget{_assert_8h_source}{}\label{_assert_8h_source}\index{Assert.h@{Assert.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00006}00006\ \textcolor{preprocessor}{\#ifdef\ \_DEBUG}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00007}00007\ \textcolor{preprocessor}{\#define\ BN\_ENABLE\_ASSERT}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00008}00008\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00010}00010\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00011}00011\ \{}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00012}00012\ \ \ \ \ \textcolor{comment}{//\ Optional\ logging\ hook\ if\ you\ want\ printed\ output:}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ BnAssertFail(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{comment}{/*expr*/},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{comment}{/*msg*/},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{comment}{/*file*/},\ \textcolor{keywordtype}{int}\ \textcolor{comment}{/*line*/})}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00014}00014\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00015}00015\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ You\ can\ replace\ this\ with\ your\ logger:}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ printf("{}ASSERT\ FAILED:\ \%s\ |\ \%s\ |\ \%s:\%d\(\backslash\)n"{},\ expr,\ msg,\ file,\ line);}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ \_\_debugbreak();\ \textcolor{comment}{//\ halt\ in\ debugger}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00018}00018\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00019}00019\ \}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00021}00021\ \textcolor{preprocessor}{\#ifdef\ BN\_ENABLE\_ASSERT}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00023}00023\ \textcolor{preprocessor}{\#define\ BN\_ASSERT(condition,\ ...)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00024}00024\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ do\ \{\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00025}00025\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ if(!(condition))\ \{\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00026}00026\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ::Boon::BnAssertFail(\#condition,\ \#\#\_\_VA\_ARGS\_\_,\ \_\_FILE\_\_,\ \_\_LINE\_\_);\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00027}00027\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00028}00028\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ while(0)}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00030}00030\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00032}00032\ \textcolor{preprocessor}{\#define\ BN\_ASSERT(condition,\ ...)\ do\ \{\}\ while(0)}}
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_assert_8h_source_l00034}00034\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

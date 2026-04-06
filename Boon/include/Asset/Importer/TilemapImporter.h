@@ -14,6 +14,10 @@ namespace Boon
     public:
         using AssetType = TilemapAsset;
 
+        /**
+         * @brief Import a tilemap asset from a JSON file.
+         */
+
         Asset* ImportFromFile(const std::string& filePath, const AssetMeta& meta) override
         {
             TilemapAsset* pResult = nullptr;

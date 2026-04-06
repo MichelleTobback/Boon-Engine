@@ -1,0 +1,366 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_base_render_a_p_i" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>Boon::BaseRenderAPI</compoundname>
+    <includes refid="_render_a_p_i_8h" local="no">Renderer/RenderAPI.h</includes>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_base_render_a_p_i_1a47ebe2e06808f92af82510dac400081f" prot="private" static="yes" mutable="no">
+        <type><ref refid="namespace_boon_1a96b0ba171caefa90a7e352fb76e96a55" kindref="member">ERenderAPI</ref></type>
+        <definition>ERenderAPI Boon::BaseRenderAPI::s_Api</definition>
+        <argsstring></argsstring>
+        <name>s_Api</name>
+        <qualifiedname>Boon::BaseRenderAPI::s_Api</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="44" column="19" bodyfile="Renderer/RenderAPI.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1a00d958d3cd61e9227e980f7c8690302c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::BaseRenderAPI::BaseRenderAPI</definition>
+        <argsstring>()=default</argsstring>
+        <name>BaseRenderAPI</name>
+        <qualifiedname>Boon::BaseRenderAPI::BaseRenderAPI</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="17" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1a2ae8af97f0a914d773b171e783cf9828" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Boon::BaseRenderAPI::~BaseRenderAPI</definition>
+        <argsstring>()=default</argsstring>
+        <name>~BaseRenderAPI</name>
+        <qualifiedname>Boon::BaseRenderAPI::~BaseRenderAPI</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="18" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1a0c1d06540a564c88b352841588f1f8e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::BaseRenderAPI::BaseRenderAPI</definition>
+        <argsstring>(const BaseRenderAPI &amp;other)=delete</argsstring>
+        <name>BaseRenderAPI</name>
+        <qualifiedname>Boon::BaseRenderAPI::BaseRenderAPI</qualifiedname>
+        <param>
+          <type>const BaseRenderAPI &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="20" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1abff4ed52d7909f0123915af4518d2155" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::BaseRenderAPI::BaseRenderAPI</definition>
+        <argsstring>(BaseRenderAPI &amp;&amp;other)=delete</argsstring>
+        <name>BaseRenderAPI</name>
+        <qualifiedname>Boon::BaseRenderAPI::BaseRenderAPI</qualifiedname>
+        <param>
+          <type>BaseRenderAPI &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="21" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1ad9396701466df55bffab6d06d1def413" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_base_render_a_p_i_1a00d958d3cd61e9227e980f7c8690302c" kindref="member">BaseRenderAPI</ref> &amp;</type>
+        <definition>BaseRenderAPI &amp; Boon::BaseRenderAPI::operator=</definition>
+        <argsstring>(const BaseRenderAPI &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Boon::BaseRenderAPI::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="class_boon_1_1_base_render_a_p_i_1a00d958d3cd61e9227e980f7c8690302c" kindref="member">BaseRenderAPI</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="22" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1ab0aeb81a062838a9ec4fd0965875cc68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_base_render_a_p_i_1a00d958d3cd61e9227e980f7c8690302c" kindref="member">BaseRenderAPI</ref> &amp;</type>
+        <definition>BaseRenderAPI &amp; Boon::BaseRenderAPI::operator=</definition>
+        <argsstring>(BaseRenderAPI &amp;&amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Boon::BaseRenderAPI::operator=</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_base_render_a_p_i_1a00d958d3cd61e9227e980f7c8690302c" kindref="member">BaseRenderAPI</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="23" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1a1eb367e8ee3cc7ac68cb9c192f9d9f61" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Boon::BaseRenderAPI::Init</definition>
+        <argsstring>()=0</argsstring>
+        <name>Init</name>
+        <qualifiedname>Boon::BaseRenderAPI::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="25" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1aa6894b42d6bcc9b97ac3cc2b529dee02" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Boon::BaseRenderAPI::Shutdown</definition>
+        <argsstring>()=0</argsstring>
+        <name>Shutdown</name>
+        <qualifiedname>Boon::BaseRenderAPI::Shutdown</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="26" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1aaf4ba413f62b8a0b0c51a74bc0b8d1e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Boon::BaseRenderAPI::BeginFrame</definition>
+        <argsstring>()=0</argsstring>
+        <name>BeginFrame</name>
+        <qualifiedname>Boon::BaseRenderAPI::BeginFrame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="28" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1ab7f159205b8a71077b2de357e537a21d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Boon::BaseRenderAPI::EndFrame</definition>
+        <argsstring>()=0</argsstring>
+        <name>EndFrame</name>
+        <qualifiedname>Boon::BaseRenderAPI::EndFrame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="29" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1a8ef37de9d28465d1f4a77287c1c323ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Boon::BaseRenderAPI::SetViewport</definition>
+        <argsstring>(uint32_t x, uint32_t y, uint32_t width, uint32_t height)=0</argsstring>
+        <name>SetViewport</name>
+        <qualifiedname>Boon::BaseRenderAPI::SetViewport</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="31" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1a637b735dec5201267a12ac7787944841" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Boon::BaseRenderAPI::SetClearColor</definition>
+        <argsstring>(const glm::vec4 &amp;color)=0</argsstring>
+        <name>SetClearColor</name>
+        <qualifiedname>Boon::BaseRenderAPI::SetClearColor</qualifiedname>
+        <param>
+          <type>const glm::vec4 &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="32" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1a73af8863555a44943ed356eac9ed2154" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Boon::BaseRenderAPI::Clear</definition>
+        <argsstring>()=0</argsstring>
+        <name>Clear</name>
+        <qualifiedname>Boon::BaseRenderAPI::Clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1a00a003050858947724beddd27e51e54f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Boon::BaseRenderAPI::DrawIndexed</definition>
+        <argsstring>(const std::shared_ptr&lt; VertexInput &gt; &amp;vertexInput, uint32_t indexCount=0)=0</argsstring>
+        <name>DrawIndexed</name>
+        <qualifiedname>Boon::BaseRenderAPI::DrawIndexed</qualifiedname>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="class_boon_1_1_vertex_input" kindref="compound">VertexInput</ref> &gt; &amp;</type>
+          <declname>vertexInput</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>indexCount</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="35" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1ae37ba28890ee054b5ba61405b81b0125" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Boon::BaseRenderAPI::DrawLines</definition>
+        <argsstring>(const std::shared_ptr&lt; VertexInput &gt; &amp;vertexInput, uint32_t lineCount)=0</argsstring>
+        <name>DrawLines</name>
+        <qualifiedname>Boon::BaseRenderAPI::DrawLines</qualifiedname>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="class_boon_1_1_vertex_input" kindref="compound">VertexInput</ref> &gt; &amp;</type>
+          <declname>vertexInput</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>lineCount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="36" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1afc6c9add5f75cd6eeb599475984fe323" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Boon::BaseRenderAPI::DrawArrays</definition>
+        <argsstring>(const std::shared_ptr&lt; VertexInput &gt; &amp;vertexInput, uint32_t indexCount)=0</argsstring>
+        <name>DrawArrays</name>
+        <qualifiedname>Boon::BaseRenderAPI::DrawArrays</qualifiedname>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="class_boon_1_1_vertex_input" kindref="compound">VertexInput</ref> &gt; &amp;</type>
+          <declname>vertexInput</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>indexCount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="37" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1a7fd0870ac504e46d6784c78c638efc8b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::unique_ptr&lt; <ref refid="class_boon_1_1_base_render_a_p_i_1a00d958d3cd61e9227e980f7c8690302c" kindref="member">BaseRenderAPI</ref> &gt;</type>
+        <definition>static std::unique_ptr&lt; BaseRenderAPI &gt; Boon::BaseRenderAPI::Create</definition>
+        <argsstring>()</argsstring>
+        <name>Create</name>
+        <qualifiedname>Boon::BaseRenderAPI::Create</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="39" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_base_render_a_p_i_1a6b83c606bea145fe38e7878fe556902f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespace_boon_1a96b0ba171caefa90a7e352fb76e96a55" kindref="member">ERenderAPI</ref></type>
+        <definition>static ERenderAPI Boon::BaseRenderAPI::GetAPI</definition>
+        <argsstring>()</argsstring>
+        <name>GetAPI</name>
+        <qualifiedname>Boon::BaseRenderAPI::GetAPI</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderAPI.h" line="41" column="19" bodyfile="Renderer/RenderAPI.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Renderer/RenderAPI.h" line="14" column="1" bodyfile="Renderer/RenderAPI.h" bodystart="15" bodyend="45"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_base_render_a_p_i_1a00d958d3cd61e9227e980f7c8690302c" prot="public" virt="non-virtual"><scope>Boon::BaseRenderAPI</scope><name>BaseRenderAPI</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1a0c1d06540a564c88b352841588f1f8e3" prot="public" virt="non-virtual"><scope>Boon::BaseRenderAPI</scope><name>BaseRenderAPI</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1abff4ed52d7909f0123915af4518d2155" prot="public" virt="non-virtual"><scope>Boon::BaseRenderAPI</scope><name>BaseRenderAPI</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1aaf4ba413f62b8a0b0c51a74bc0b8d1e3" prot="public" virt="pure-virtual"><scope>Boon::BaseRenderAPI</scope><name>BeginFrame</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1a73af8863555a44943ed356eac9ed2154" prot="public" virt="pure-virtual"><scope>Boon::BaseRenderAPI</scope><name>Clear</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1a7fd0870ac504e46d6784c78c638efc8b" prot="public" virt="non-virtual"><scope>Boon::BaseRenderAPI</scope><name>Create</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1afc6c9add5f75cd6eeb599475984fe323" prot="public" virt="pure-virtual"><scope>Boon::BaseRenderAPI</scope><name>DrawArrays</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1a00a003050858947724beddd27e51e54f" prot="public" virt="pure-virtual"><scope>Boon::BaseRenderAPI</scope><name>DrawIndexed</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1ae37ba28890ee054b5ba61405b81b0125" prot="public" virt="pure-virtual"><scope>Boon::BaseRenderAPI</scope><name>DrawLines</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1ab7f159205b8a71077b2de357e537a21d" prot="public" virt="pure-virtual"><scope>Boon::BaseRenderAPI</scope><name>EndFrame</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1a6b83c606bea145fe38e7878fe556902f" prot="public" virt="non-virtual"><scope>Boon::BaseRenderAPI</scope><name>GetAPI</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1a1eb367e8ee3cc7ac68cb9c192f9d9f61" prot="public" virt="pure-virtual"><scope>Boon::BaseRenderAPI</scope><name>Init</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1ad9396701466df55bffab6d06d1def413" prot="public" virt="non-virtual"><scope>Boon::BaseRenderAPI</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1ab0aeb81a062838a9ec4fd0965875cc68" prot="public" virt="non-virtual"><scope>Boon::BaseRenderAPI</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1a47ebe2e06808f92af82510dac400081f" prot="private" virt="non-virtual"><scope>Boon::BaseRenderAPI</scope><name>s_Api</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1a637b735dec5201267a12ac7787944841" prot="public" virt="pure-virtual"><scope>Boon::BaseRenderAPI</scope><name>SetClearColor</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1a8ef37de9d28465d1f4a77287c1c323ce" prot="public" virt="pure-virtual"><scope>Boon::BaseRenderAPI</scope><name>SetViewport</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1aa6894b42d6bcc9b97ac3cc2b529dee02" prot="public" virt="pure-virtual"><scope>Boon::BaseRenderAPI</scope><name>Shutdown</name></member>
+      <member refid="class_boon_1_1_base_render_a_p_i_1a2ae8af97f0a914d773b171e783cf9828" prot="public" virt="virtual"><scope>Boon::BaseRenderAPI</scope><name>~BaseRenderAPI</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

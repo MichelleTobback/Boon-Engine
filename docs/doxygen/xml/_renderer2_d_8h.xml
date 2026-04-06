@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_renderer2_d_8h" kind="file" language="C++">
+    <compoundname>Renderer2D.h</compoundname>
+    <includes refid="_render_batch_8h" local="yes">Renderer/RenderBatch.h</includes>
+    <includes refid="_texture_8h" local="yes">Renderer/Texture.h</includes>
+    <includes local="no">array</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">glm/glm.hpp</includes>
+    <includedby refid="_boon_2include_2_boon_debug_2_debug_renderer_8h" local="yes">BoonDebug/DebugRenderer.h</includedby>
+    <incdepgraph>
+      <node id="10">
+        <label>Core/Memory/Buffer.h</label>
+        <link refid="_buffer_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Renderer/RenderBatch.h</label>
+        <link refid="_render_batch_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Renderer/Renderer2D.h</label>
+        <link refid="_renderer2_d_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Renderer/Texture.h</label>
+        <link refid="_texture_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>VertexBufferLayout.h</label>
+        <link refid="_vertex_buffer_layout_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>array</label>
+      </node>
+      <node id="11">
+        <label>cstdint</label>
+      </node>
+      <node id="12">
+        <label>cstring</label>
+      </node>
+      <node id="7">
+        <label>functional</label>
+      </node>
+      <node id="15">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="4">
+        <label>initializer_list</label>
+      </node>
+      <node id="8">
+        <label>memory</label>
+      </node>
+      <node id="5">
+        <label>string</label>
+      </node>
+      <node id="13">
+        <label>type_traits</label>
+      </node>
+      <node id="6">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>BoonDebug/DebugRenderer.h</label>
+        <link refid="_boon_2include_2_boon_debug_2_debug_renderer_8h"/>
+      </node>
+      <node id="1">
+        <label>Renderer/Renderer2D.h</label>
+        <link refid="_renderer2_d_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_boon_1_1_renderer2_d" prot="public">Boon::Renderer2D</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_render_batch_8h" kindref="compound">Renderer/RenderBatch.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_texture_8h" kindref="compound">Renderer/Texture.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;array&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;glm/glm.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="10"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="11" refid="class_boon_1_1_renderer2_d" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_renderer2_d_1a6aaa06725995ab1b5b55bffa82ec6277" kindref="member">Renderer2D</ref><sp/>final</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="14" refid="class_boon_1_1_renderer2_d_1a6aaa06725995ab1b5b55bffa82ec6277" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_renderer2_d_1a6aaa06725995ab1b5b55bffa82ec6277" kindref="member">Renderer2D</ref>();</highlight></codeline>
+<codeline lineno="15" refid="class_boon_1_1_renderer2_d_1af83470889e0de54aa0d8e40a90c1fc9c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_renderer2_d_1af83470889e0de54aa0d8e40a90c1fc9c" kindref="member">~Renderer2D</ref>();</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="class_boon_1_1_renderer2_d_1a46985bb20b46b83a31ced6026b97457d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_renderer2_d_1a46985bb20b46b83a31ced6026b97457d" kindref="member">Begin</ref>();</highlight></codeline>
+<codeline lineno="18" refid="class_boon_1_1_renderer2_d_1a9bf5dd876dfdf0fcaf6cf84d22c07ba6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_renderer2_d_1a9bf5dd876dfdf0fcaf6cf84d22c07ba6" kindref="member">End</ref>();</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="class_boon_1_1_renderer2_d_1a735005595456bcee08764863494e0d2a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_renderer2_d_1a735005595456bcee08764863494e0d2a" kindref="member">SubmitQuad</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::mat4&amp;<sp/>transform,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec4&amp;<sp/>color,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>gameObjectHandle);</highlight></codeline>
+<codeline lineno="21" refid="class_boon_1_1_renderer2_d_1a8098f86a8f511927e1ab4f9ac42897b7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_renderer2_d_1a8098f86a8f511927e1ab4f9ac42897b7" kindref="member">SubmitQuad</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::mat4&amp;<sp/>transform,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;Texture2D&gt;&amp;<sp/>texture,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>tilingFactor,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec4&amp;<sp/>color,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>gameObjectHandle);</highlight></codeline>
+<codeline lineno="22" refid="class_boon_1_1_renderer2_d_1a6019d7e288b9e6c529cbd741edf279c5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_renderer2_d_1a6019d7e288b9e6c529cbd741edf279c5" kindref="member">SubmitQuad</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::mat4&amp;<sp/>transform,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;Texture2D&gt;&amp;<sp/>texture,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>tilingFactor,</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec4&amp;<sp/>color,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>gameObjectHandle,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec2&amp;<sp/>spriteTexCoord,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec2&amp;<sp/>spriteTexSize);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="class_boon_1_1_renderer2_d_1a131c1ab049515614e47df4a9cdade2ef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_renderer2_d_1a131c1ab049515614e47df4a9cdade2ef" kindref="member">SubmitLine</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>p0,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>p1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec4&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="26" refid="class_boon_1_1_renderer2_d_1aab070e67899a59e2a1d4bd55f85efbf8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_renderer2_d_1aab070e67899a59e2a1d4bd55f85efbf8" kindref="member">SubmitRect</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>position,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec2&amp;<sp/>size,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec4&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="27" refid="class_boon_1_1_renderer2_d_1ae9995b5f4744625c601957e82fa91299" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_renderer2_d_1ae9995b5f4744625c601957e82fa91299" kindref="member">SubmitRect</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>position,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec2&amp;<sp/>size,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>rotation,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec4&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="28" refid="class_boon_1_1_renderer2_d_1a509377fcea9dca38e9f5daae23d02100" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_renderer2_d_1a509377fcea9dca38e9f5daae23d02100" kindref="member">SubmitRect</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::mat4&amp;<sp/>transform,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec2&amp;<sp/>size,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec4&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="29" refid="class_boon_1_1_renderer2_d_1a927d2bcfe42c1576bd2f43f5b57c9eb9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_renderer2_d_1a927d2bcfe42c1576bd2f43f5b57c9eb9" kindref="member">SubmitPolygon</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;glm::vec3&gt;&amp;<sp/>positions,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec4&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec4<sp/>m_QuadVertexPositions[4];</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_render_batch" kindref="compound">RenderBatch</ref><sp/>m_QuadBatch{};</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_render_batch" kindref="compound">RenderBatch</ref><sp/>m_LineBatch{};</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>s_MaxTextureSlots<sp/>=<sp/>32;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::array&lt;std::shared_ptr&lt;Texture2D&gt;,<sp/>s_MaxTextureSlots&gt;<sp/>m_TextureSlots;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>m_TextureSlotIndex<sp/>=<sp/>1;<sp/></highlight><highlight class="comment">//<sp/>0<sp/>=<sp/>white<sp/>texture</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Renderer/Renderer2D.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,112 @@
+\doxysection{Boon::\+Service\+Registry Class Reference}
+\hypertarget{class_boon_1_1_service_registry}{}\label{class_boon_1_1_service_registry}\index{Boon::ServiceRegistry@{Boon::ServiceRegistry}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\void \doxymbox{\hyperlink{class_boon_1_1_service_registry_a47d0cf1847c3ca48b1bff4e29e10a404}{Register}} (std::\+shared\+\_\+ptr$<$ T $>$ service)
+\begin{DoxyCompactList}\small\item\em Register a service instance for type T. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\T \& \doxymbox{\hyperlink{class_boon_1_1_service_registry_a4f5ec2ed490100c5d4e5367dcf21ee34}{Get}} ()
+\begin{DoxyCompactList}\small\item\em Retrieve a registered service instance by type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\void \doxymbox{\hyperlink{class_boon_1_1_service_registry_ad9befb25c5f79232c7d168fd17a68199}{Reset}} ()
+\begin{DoxyCompactList}\small\item\em Unregister service of type T. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_service_registry_a9b81a24a160eeb792fb27a62baaa782a}{Shutdown}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_service_locator_8h_source_l00010}{10}} of file \doxymbox{\hyperlink{_service_locator_8h_source}{Service\+Locator.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_service_registry_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_service_registry_a4f5ec2ed490100c5d4e5367dcf21ee34}\index{Boon::ServiceRegistry@{Boon::ServiceRegistry}!Get@{Get}}
+\index{Get@{Get}!Boon::ServiceRegistry@{Boon::ServiceRegistry}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_service_registry_a4f5ec2ed490100c5d4e5367dcf21ee34} 
+template$<$typename T$>$ \\
+T \& Boon::\+\+Service\+Registry::\+\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieve a registered service instance by type. 
+
+Will assert if no service of type T was registered. The returned reference is the dereferenced stored shared\+\_\+ptr and must not be stored beyond the lifetime of the registry entry.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Service type to retrieve. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+Reference to the registered service instance. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_service_locator_8h_source_l00042}{42}} of file \doxymbox{\hyperlink{_service_locator_8h_source}{Service\+Locator.\+h}}.
+
+\Hypertarget{class_boon_1_1_service_registry_a47d0cf1847c3ca48b1bff4e29e10a404}\index{Boon::ServiceRegistry@{Boon::ServiceRegistry}!Register@{Register}}
+\index{Register@{Register}!Boon::ServiceRegistry@{Boon::ServiceRegistry}}
+\doxysubsubsection{\texorpdfstring{Register()}{Register()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_service_registry_a47d0cf1847c3ca48b1bff4e29e10a404} 
+template$<$typename T$>$ \\
+void Boon::\+\+Service\+Registry::\+\+Register (\begin{DoxyParamCaption}\item[{std::\+shared\+\_\+ptr$<$ T $>$}]{service}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Register a service instance for type T. 
+
+Stores a shared pointer to the provided service under the type\textquotesingle{}s hash. The registered service can later be retrieved by calling \doxylink{class_boon_1_1_service_registry_a4f5ec2ed490100c5d4e5367dcf21ee34}{Service\+Registry::\+\+Get$<$\+T$>$()}.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Service type to register. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em service} & Shared pointer to the service instance. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_service_locator_8h_source_l00024}{24}} of file \doxymbox{\hyperlink{_service_locator_8h_source}{Service\+Locator.\+h}}.
+
+\Hypertarget{class_boon_1_1_service_registry_ad9befb25c5f79232c7d168fd17a68199}\index{Boon::ServiceRegistry@{Boon::ServiceRegistry}!Reset@{Reset}}
+\index{Reset@{Reset}!Boon::ServiceRegistry@{Boon::ServiceRegistry}}
+\doxysubsubsection{\texorpdfstring{Reset()}{Reset()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_service_registry_ad9befb25c5f79232c7d168fd17a68199} 
+template$<$typename T$>$ \\
+void Boon::\+\+Service\+Registry::\+\+Reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unregister service of type T. 
+
+Removes the service entry for the specified type if present. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Service type to remove. \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line \doxymbox{\hyperlink{_service_locator_8h_source_l00056}{56}} of file \doxymbox{\hyperlink{_service_locator_8h_source}{Service\+Locator.\+h}}.
+
+\Hypertarget{class_boon_1_1_service_registry_a9b81a24a160eeb792fb27a62baaa782a}\index{Boon::ServiceRegistry@{Boon::ServiceRegistry}!Shutdown@{Shutdown}}
+\index{Shutdown@{Shutdown}!Boon::ServiceRegistry@{Boon::ServiceRegistry}}
+\doxysubsubsection{\texorpdfstring{Shutdown()}{Shutdown()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_service_registry_a9b81a24a160eeb792fb27a62baaa782a} 
+void Boon::\+\+Service\+Registry::\+\+Shutdown (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_service_locator_8h_source_l00061}{61}} of file \doxymbox{\hyperlink{_service_locator_8h_source}{Service\+Locator.\+h}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Service\+Locator.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,225 @@
+\doxysection{Sprite\+Atlas\+Importer.\+h}
+\hypertarget{_sprite_atlas_importer_8h_source}{}\label{_sprite_atlas_importer_8h_source}\index{SpriteAtlasImporter.h@{SpriteAtlasImporter.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}AssetImporter.h"{}}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}Asset/SpriteAtlasAsset.h"{}}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}Core/ServiceLocator.h"{}}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}Asset/AssetLibrary.h"{}}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}Asset/TextureAsset.h"{}}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <nlohmann/json.hpp>}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00011}00011\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00013}\doxymbox{\hyperlink{class_boon_1_1_sprite_atlas_importer}{00013}}\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_sprite_atlas_importer}{SpriteAtlasImporter}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_boon_1_1_asset_importer}{AssetImporter}}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00014}00014\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }AssetType\ =\ \doxymbox{\hyperlink{class_boon_1_1_sprite_atlas_asset}{SpriteAtlasAsset}};}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ IMPORT\ (Supports\ old\ .bsa\ and\ new\ format)}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00020}00020\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00021}00021\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_asset}{Asset}}*\ ImportFromFile(\textcolor{keyword}{const}\ std::string\&\ filePath,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_asset_meta}{AssetMeta}}\&\ meta)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00022}00022\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_sprite_atlas_asset}{SpriteAtlasAsset}}*\ pResult\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<SpriteAtlas>\ pInstance\ =\ std::make\_shared<SpriteAtlas>();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ std::ifstream\ file(filePath);}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!file)}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ nlohmann::json\ j;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ file\ >>\ j;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ AssetHandle\ handle\{\ meta.uuid\ \};}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_asset_library}{AssetLibrary}}\&\ assets\ =\ \doxymbox{\hyperlink{class_boon_1_1_service_locator_a24d80f5670a222c787d4f63bdba7c03a}{ServiceLocator::Get<AssetLibrary>}}();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ texPath\ =\ j[\textcolor{stringliteral}{"{}texture"{}}].get<std::string>();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!texPath.empty())}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_asset_ref}{AssetRef<Texture2DAsset>}}\ tex\ =\ assets.Import<\doxymbox{\hyperlink{class_boon_1_1_texture2_d_asset}{Texture2DAsset}}>(texPath);}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pInstance-\/>SetTexture(tex);}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ FRAME\ IMPORT\ (backward\ compatible)}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ std::unordered\_map<int,\ int>\ oldToNew;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (j.contains(\textcolor{stringliteral}{"{}sprites"{}}))}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nlohmann::json\ spritesJson\ =\ j[\textcolor{stringliteral}{"{}sprites"{}}];}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ spritesJson.begin();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ it\ !=\ spritesJson.end();\ ++it)}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ key\ =\ it.key();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ nlohmann::json\&\ entry\ =\ it.value();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_boon_1_1_sprite_frame}{SpriteFrame}}\ uv;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uv.UV.x\ =\ entry[\textcolor{stringliteral}{"{}x"{}}];}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uv.UV.y\ =\ entry[\textcolor{stringliteral}{"{}y"{}}];}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uv.Size.x\ =\ entry[\textcolor{stringliteral}{"{}w"{}}];}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uv.Size.y\ =\ entry[\textcolor{stringliteral}{"{}h"{}}];}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uv.FrameTime\ =\ entry.contains(\textcolor{stringliteral}{"{}time"{}})\ ?\ entry[\textcolor{stringliteral}{"{}time"{}}].get<\textcolor{keywordtype}{float}>()\ :\ 0.0f;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ newId\ =\ pInstance-\/>AddSpriteFrame(uv);}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ old\ format\ included\ explicit\ "{}id"{}}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (entry.contains(\textcolor{stringliteral}{"{}id"{}}))}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ oldId\ =\ entry[\textcolor{stringliteral}{"{}id"{}}].get<\textcolor{keywordtype}{int}>();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ oldToNew[oldId]\ =\ newId;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ new\ format:\ key\ itself\ is\ the\ stable\ id}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ implicitOld\ =\ std::stoi(key);}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ oldToNew[implicitOld]\ =\ newId;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ CLIP\ IMPORT}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (j.contains(\textcolor{stringliteral}{"{}clips"{}}))}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ nlohmann::json\&\ clipsJson\ =\ j[\textcolor{stringliteral}{"{}clips"{}}];}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ clipsJson.size();\ ++i)}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pInstance-\/>AddClip(\doxymbox{\hyperlink{struct_boon_1_1_sprite_anim_clip}{SpriteAnimClip}}());}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ current\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ nlohmann::json\&\ entry\ :\ clipsJson)}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ frameId\ =\ entry.contains(\textcolor{stringliteral}{"{}idx"{}})}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ?\ entry[\textcolor{stringliteral}{"{}idx"{}}].get<\textcolor{keywordtype}{int}>()}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ 0;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_boon_1_1_sprite_anim_clip}{SpriteAnimClip}}\&\ clip\ =\ pInstance-\/>GetClip(frameId);}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ clip.Speed\ =\ entry.contains(\textcolor{stringliteral}{"{}speed"{}})\ ?\ entry[\textcolor{stringliteral}{"{}speed"{}}].get<\textcolor{keywordtype}{float}>()\ :\ 1.0f;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ clip.pAtlas\ =\ pInstance.get();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<int>\ frames\ =\ entry[\textcolor{stringliteral}{"{}frames"{}}].get<std::vector<int>>();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ clip.Frames.reserve(frames.size());}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ f\ =\ 0;\ f\ <\ frames.size();\ f++)}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ oldId\ =\ frames[f];}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//if\ (oldToNew.count(oldId))}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ clip.Frames.push\_back(oldToNew[oldId]);}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//else}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ clip.Frames.push\_back(oldId);}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current++;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ pResult\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_boon_1_1_sprite_atlas_asset}{SpriteAtlasAsset}}(handle,\ pInstance);}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pResult;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00121}00121\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00123}00123\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00124}00124\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ EXPORT\ (New\ format\ only)}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00125}00125\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00126}00126\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ ExportToFile(\textcolor{keyword}{const}\ std::string\&\ filePath,\ \doxymbox{\hyperlink{class_boon_1_1_asset}{Asset}}*\ asset)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00127}00127\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ texPath\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_sprite_atlas_asset}{SpriteAtlasAsset}}*\ atlasAsset\ =\ \textcolor{keyword}{dynamic\_cast<}\doxymbox{\hyperlink{class_boon_1_1_sprite_atlas_asset}{SpriteAtlasAsset}}*\textcolor{keyword}{>}(asset);}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_sprite_atlas}{SpriteAtlas}}*\ atlas\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (atlasAsset)}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ atlas\ =\ atlasAsset-\/>GetInstance().get();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::ifstream\ in(filePath);}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nlohmann::json\ j;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ in\ >>\ j;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ texPath\ =\ j[\textcolor{stringliteral}{"{}texture"{}}].get<std::string>();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ atlas\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_boon_1_1_sprite_atlas}{SpriteAtlas}}();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ nlohmann::json\ j;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Texture}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_boon_1_1_asset_ref}{AssetRef<Texture2DAsset>}}\&\ tex\ =\ atlas-\/>GetTexture();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}texture"{}}]\ =\ texPath;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SPRITES}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ nlohmann::json\ spritesJson\ =\ nlohmann::json::object();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<FrameEntry>\&\ frames\ =\ atlas-\/>GetFrameEntries();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ frames.size();\ i++)}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id}\ =\ frames[i].stableId;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_sprite_frame}{SpriteFrame}}\&\ frame\ =\ frames[i].frame;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nlohmann::json\ frameJson;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frameJson[\textcolor{stringliteral}{"{}x"{}}]\ =\ frame.UV.x;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frameJson[\textcolor{stringliteral}{"{}y"{}}]\ =\ frame.UV.y;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frameJson[\textcolor{stringliteral}{"{}w"{}}]\ =\ frame.Size.x;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frameJson[\textcolor{stringliteral}{"{}h"{}}]\ =\ frame.Size.y;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frameJson[\textcolor{stringliteral}{"{}time"{}}]\ =\ frame.FrameTime;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ spritesJson[std::to\_string(\textcolor{keywordtype}{id})]\ =\ frameJson;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}sprites"{}}]\ =\ spritesJson;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ CLIPS}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ nlohmann::json\ clipsJson\ =\ nlohmann::json::array();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<SpriteAnimClip>\&\ clips\ =\ atlas-\/>GetClips();}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ clips.size();\ i++)}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_sprite_anim_clip}{SpriteAnimClip}}\&\ clip\ =\ clips[i];}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nlohmann::json\ clipJson;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ clipJson[\textcolor{stringliteral}{"{}speed"{}}]\ =\ clip.Speed;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ clipJson[\textcolor{stringliteral}{"{}frames"{}}]\ =\ clip.Frames;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ clipsJson.push\_back(clipJson);}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}clips"{}}]\ =\ clipsJson;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!atlasAsset)}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ atlas;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ WRITE\ FILE}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ std::ofstream\ file(filePath);}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!file)}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ file\ <<\ std::setw(4)\ <<\ j;}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00209}00209\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00211}00211\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00212}00212\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ EXTENSIONS}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00213}00213\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00214}00214\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ std::vector<std::string>\ GetExtensions()\textcolor{keyword}{\ const\ override}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00215}00215\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\ \textcolor{stringliteral}{"{}.bsa"{}}\ \};}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00217}00217\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00218}00218\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_sprite_atlas_importer_8h_source_l00219}00219\ \}}
+
+\end{DoxyCode}

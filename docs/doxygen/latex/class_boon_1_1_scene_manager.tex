@@ -1,0 +1,250 @@
+\doxysection{Boon::\+Scene\+Manager Class Reference}
+\hypertarget{class_boon_1_1_scene_manager}{}\label{class_boon_1_1_scene_manager}\index{Boon::SceneManager@{Boon::SceneManager}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_scene_manager_ace866e6b6f49e71559fb9d8c93a702a2}{Scene\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{class_boon_1_1_scene_manager}{Scene\+Manager}. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_scene_manager_a6777b77c0f0f0af045b500f067f9c62e}\label{class_boon_1_1_scene_manager_a6777b77c0f0f0af045b500f067f9c62e} 
+void {\bfseries Shutdown} ()
+\begin{DoxyCompactList}\small\item\em Shutdown the scene manager and unload all scenes. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \& \doxymbox{\hyperlink{class_boon_1_1_scene_manager_aed9c75ba8e1b301fc99e6ab5fbdf6229}{Create\+Scene}} (const std::\+string \&name)
+\begin{DoxyCompactList}\small\item\em Create and register a new scene with the given name. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_scene_manager_a4dc639069c95fb13fee777aa751f9e78}{Unload\+Scene}} (Scene\+ID id)
+\begin{DoxyCompactList}\small\item\em Unload the scene identified by id. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_scene_manager_a0c08740d0a8e89dedfd17798b01e6c53}{Reload\+Scene}} (Scene\+ID id)
+\begin{DoxyCompactList}\small\item\em Reload the scene identified by id from its source. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_scene_manager_a6be1dec7a5718f5911257db34768c3b3}{Set\+Active\+Scene}} (Scene\+ID id, bool set\+Active=true)
+\begin{DoxyCompactList}\small\item\em Set the active scene by id. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \& \doxymbox{\hyperlink{class_boon_1_1_scene_manager_a464646e86b4ba0079af7c1269adbb509}{Get\+Active\+Scene}} ()
+\begin{DoxyCompactList}\small\item\em Get the currently active scene. \end{DoxyCompactList}\item 
+std::\+vector$<$ \doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \texorpdfstring{$\ast$}{*} $>$ \doxymbox{\hyperlink{class_boon_1_1_scene_manager_a2bee2752345a8f4278469e1762f52fd9}{Get\+Loaded\+Scenes}} ()
+\begin{DoxyCompactList}\small\item\em Retrieve a list of pointers to all loaded scenes. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_boon_1_1_scene_manager_ab0ff35a9d1e0ddaf7323bc610bb4800c}{Is\+Loaded}} (Scene\+ID id) const
+\begin{DoxyCompactList}\small\item\em Check whether a scene with the given id is registered with the manager. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_boon_1_1_scene_manager_a38ebaae1dac0ddc131f38206d95ddec8}{Has\+Active\+Scene}} () const
+\begin{DoxyCompactList}\small\item\em Check whether an active scene is set on the manager. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_scene_manager_a189b504af2d2000a1f63131bbf8f15c9}\label{class_boon_1_1_scene_manager_a189b504af2d2000a1f63131bbf8f15c9} 
+void {\bfseries Update} ()
+\begin{DoxyCompactList}\small\item\em Run per-\/frame update for loaded scenes. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_scene_manager_ab7472d2bf8287b2c433a9913c22253e4}\label{class_boon_1_1_scene_manager_ab7472d2bf8287b2c433a9913c22253e4} 
+void {\bfseries Fixed\+Update} ()
+\begin{DoxyCompactList}\small\item\em Run fixed-\/timestep updates (physics) for scenes. \end{DoxyCompactList}\item 
+Scene\+Changed\+Delegate::\+\+Handle \doxymbox{\hyperlink{class_boon_1_1_scene_manager_a8511ae5d1002a620005dfd4d5a746a50}{Bind\+On\+Scene\+Changed}} (const Scene\+Changed\+Delegate::\+\+Function\+Type \&fn)
+\begin{DoxyCompactList}\small\item\em Bind a callback to the scene-\/changed delegate. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_scene_manager_ab5c68766ee6f98ae2afec3f4080e0c33}{Unbind\+On\+Scene\+Changed}} (const Scene\+Changed\+Delegate::\+\+Handle \&handle)
+\begin{DoxyCompactList}\small\item\em Unbind a previously bound scene-\/changed callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_scene_manager_8h_source_l00014}{14}} of file \doxymbox{\hyperlink{_scene_manager_8h_source}{Scene\+Manager.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_boon_1_1_scene_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_boon_1_1_scene_manager_ace866e6b6f49e71559fb9d8c93a702a2}\index{Boon::SceneManager@{Boon::SceneManager}!SceneManager@{SceneManager}}
+\index{SceneManager@{SceneManager}!Boon::SceneManager@{Boon::SceneManager}}
+\doxysubsubsection{\texorpdfstring{SceneManager()}{SceneManager()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_manager_ace866e6b6f49e71559fb9d8c93a702a2} 
+Boon::\+\+Scene\+Manager::\+\+Scene\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Construct a new \doxylink{class_boon_1_1_scene_manager}{Scene\+Manager}. 
+
+Responsible for creating, loading and switching scenes. 
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_scene_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_scene_manager_a8511ae5d1002a620005dfd4d5a746a50}\index{Boon::SceneManager@{Boon::SceneManager}!BindOnSceneChanged@{BindOnSceneChanged}}
+\index{BindOnSceneChanged@{BindOnSceneChanged}!Boon::SceneManager@{Boon::SceneManager}}
+\doxysubsubsection{\texorpdfstring{BindOnSceneChanged()}{BindOnSceneChanged()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_manager_a8511ae5d1002a620005dfd4d5a746a50} 
+Scene\+Changed\+Delegate::\+\+Handle Boon::\+\+Scene\+Manager::\+\+Bind\+On\+Scene\+Changed (\begin{DoxyParamCaption}\item[{const Scene\+Changed\+Delegate::\+\+Function\+Type \&}]{fn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Bind a callback to the scene-\/changed delegate. 
+
+The provided function must match the delegate signature ({\ttfamily void(\doxylink{class_boon_1_1_scene}{Scene}\&)}). The returned handle can be used to unbind the callback.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fn} & Function to bind. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Handle representing the binding. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_scene_manager_8h_source_l00113}{113}} of file \doxymbox{\hyperlink{_scene_manager_8h_source}{Scene\+Manager.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_manager_aed9c75ba8e1b301fc99e6ab5fbdf6229}\index{Boon::SceneManager@{Boon::SceneManager}!CreateScene@{CreateScene}}
+\index{CreateScene@{CreateScene}!Boon::SceneManager@{Boon::SceneManager}}
+\doxysubsubsection{\texorpdfstring{CreateScene()}{CreateScene()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_manager_aed9c75ba8e1b301fc99e6ab5fbdf6229} 
+\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \& Boon::\+\+Scene\+Manager::\+\+Create\+Scene (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Create and register a new scene with the given name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name for the new scene. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the created \doxylink{class_boon_1_1_scene}{Scene}. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_scene_manager_a464646e86b4ba0079af7c1269adbb509}\index{Boon::SceneManager@{Boon::SceneManager}!GetActiveScene@{GetActiveScene}}
+\index{GetActiveScene@{GetActiveScene}!Boon::SceneManager@{Boon::SceneManager}}
+\doxysubsubsection{\texorpdfstring{GetActiveScene()}{GetActiveScene()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_manager_a464646e86b4ba0079af7c1269adbb509} 
+\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \& Boon::\+\+Scene\+Manager::\+\+Get\+Active\+Scene (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Get the currently active scene. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the active \doxylink{class_boon_1_1_scene}{Scene}. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_scene_manager_a2bee2752345a8f4278469e1762f52fd9}\index{Boon::SceneManager@{Boon::SceneManager}!GetLoadedScenes@{GetLoadedScenes}}
+\index{GetLoadedScenes@{GetLoadedScenes}!Boon::SceneManager@{Boon::SceneManager}}
+\doxysubsubsection{\texorpdfstring{GetLoadedScenes()}{GetLoadedScenes()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_manager_a2bee2752345a8f4278469e1762f52fd9} 
+std::\+vector$<$ \doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \texorpdfstring{$\ast$}{*} $>$ Boon::\+\+Scene\+Manager::\+\+Get\+Loaded\+Scenes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retrieve a list of pointers to all loaded scenes. 
+
+\begin{DoxyReturn}{Returns}
+Vector of loaded \doxylink{class_boon_1_1_scene}{Scene} pointers.
+\end{DoxyReturn}
+Retrieve a list of pointers to all loaded scenes.
+
+\begin{DoxyReturn}{Returns}
+Vector of loaded \doxylink{class_boon_1_1_scene}{Scene} pointers. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_scene_manager_a38ebaae1dac0ddc131f38206d95ddec8}\index{Boon::SceneManager@{Boon::SceneManager}!HasActiveScene@{HasActiveScene}}
+\index{HasActiveScene@{HasActiveScene}!Boon::SceneManager@{Boon::SceneManager}}
+\doxysubsubsection{\texorpdfstring{HasActiveScene()}{HasActiveScene()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_manager_a38ebaae1dac0ddc131f38206d95ddec8} 
+bool Boon::\+\+Scene\+Manager::\+\+Has\+Active\+Scene (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check whether an active scene is set on the manager. 
+
+The manager stores the active scene id in {\ttfamily m\+\_\+\+Active\+Scene}; this returns true when that id is not equal to {\ttfamily \doxylink{class_boon_1_1_u_u_i_d_ab60bb64dc9d3f512f119886fcf7a8275}{UUID::\+\+Null}}.
+
+\begin{DoxyReturn}{Returns}
+true if there is an active scene id, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_scene_manager_8h_source_l00091}{91}} of file \doxymbox{\hyperlink{_scene_manager_8h_source}{Scene\+Manager.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_manager_ab0ff35a9d1e0ddaf7323bc610bb4800c}\index{Boon::SceneManager@{Boon::SceneManager}!IsLoaded@{IsLoaded}}
+\index{IsLoaded@{IsLoaded}!Boon::SceneManager@{Boon::SceneManager}}
+\doxysubsubsection{\texorpdfstring{IsLoaded()}{IsLoaded()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_manager_ab0ff35a9d1e0ddaf7323bc610bb4800c} 
+bool Boon::\+\+Scene\+Manager::\+\+Is\+Loaded (\begin{DoxyParamCaption}\item[{Scene\+ID}]{id}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check whether a scene with the given id is registered with the manager. 
+
+This performs a lookup in the internal scene registry. See implementation for exact lookup semantics.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Scene\+ID to check for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the scene id is present in the manager\textquotesingle{}s registry, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_scene_manager_8h_source_l00081}{81}} of file \doxymbox{\hyperlink{_scene_manager_8h_source}{Scene\+Manager.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_manager_a0c08740d0a8e89dedfd17798b01e6c53}\index{Boon::SceneManager@{Boon::SceneManager}!ReloadScene@{ReloadScene}}
+\index{ReloadScene@{ReloadScene}!Boon::SceneManager@{Boon::SceneManager}}
+\doxysubsubsection{\texorpdfstring{ReloadScene()}{ReloadScene()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_manager_a0c08740d0a8e89dedfd17798b01e6c53} 
+void Boon::\+\+Scene\+Manager::\+\+Reload\+Scene (\begin{DoxyParamCaption}\item[{Scene\+ID}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Reload the scene identified by id from its source. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The Scene\+ID to reload. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_scene_manager_a6be1dec7a5718f5911257db34768c3b3}\index{Boon::SceneManager@{Boon::SceneManager}!SetActiveScene@{SetActiveScene}}
+\index{SetActiveScene@{SetActiveScene}!Boon::SceneManager@{Boon::SceneManager}}
+\doxysubsubsection{\texorpdfstring{SetActiveScene()}{SetActiveScene()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_manager_a6be1dec7a5718f5911257db34768c3b3} 
+void Boon::\+\+Scene\+Manager::\+\+Set\+Active\+Scene (\begin{DoxyParamCaption}\item[{Scene\+ID}]{id}{, }\item[{bool}]{set\+Active}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Set the active scene by id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Scene\+ID to activate. \\
+\hline
+{\em set\+Active} & If false, will deactivate the active scene. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_scene_manager_ab5c68766ee6f98ae2afec3f4080e0c33}\index{Boon::SceneManager@{Boon::SceneManager}!UnbindOnSceneChanged@{UnbindOnSceneChanged}}
+\index{UnbindOnSceneChanged@{UnbindOnSceneChanged}!Boon::SceneManager@{Boon::SceneManager}}
+\doxysubsubsection{\texorpdfstring{UnbindOnSceneChanged()}{UnbindOnSceneChanged()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_manager_ab5c68766ee6f98ae2afec3f4080e0c33} 
+void Boon::\+\+Scene\+Manager::\+\+Unbind\+On\+Scene\+Changed (\begin{DoxyParamCaption}\item[{const Scene\+Changed\+Delegate::\+\+Handle \&}]{handle}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unbind a previously bound scene-\/changed callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handle} & The handle returned by {\ttfamily \doxylink{class_boon_1_1_scene_manager_a8511ae5d1002a620005dfd4d5a746a50}{Bind\+On\+Scene\+Changed}} for the binding to remove. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_scene_manager_8h_source_l00120}{120}} of file \doxymbox{\hyperlink{_scene_manager_8h_source}{Scene\+Manager.\+h}}.
+
+\Hypertarget{class_boon_1_1_scene_manager_a4dc639069c95fb13fee777aa751f9e78}\index{Boon::SceneManager@{Boon::SceneManager}!UnloadScene@{UnloadScene}}
+\index{UnloadScene@{UnloadScene}!Boon::SceneManager@{Boon::SceneManager}}
+\doxysubsubsection{\texorpdfstring{UnloadScene()}{UnloadScene()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_manager_a4dc639069c95fb13fee777aa751f9e78} 
+void Boon::\+\+Scene\+Manager::\+\+Unload\+Scene (\begin{DoxyParamCaption}\item[{Scene\+ID}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Unload the scene identified by id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The Scene\+ID to unload. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Scene\+Manager.\+h\end{DoxyCompactItemize}

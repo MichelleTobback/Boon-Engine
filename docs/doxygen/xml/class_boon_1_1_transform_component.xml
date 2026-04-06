@@ -1,0 +1,1265 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_transform_component" kind="class" language="C++" prot="public">
+    <compoundname>Boon::TransformComponent</compoundname>
+    <includes refid="_transform_component_8h" local="no">Component/TransformComponent.h</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541d" prot="public" static="no" strong="yes">
+        <type>uint32_t</type>
+        <name>TransformFlag</name>
+        <qualifiedname>Boon::TransformComponent::TransformFlag</qualifiedname>
+        <enumvalue id="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541da6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+          <name>None</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541da52f5e0bc3859bc5f5e25130b6c7e8881" prot="public">
+          <name>Position</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541daf1a42bd417390fc63b030a519624607a" prot="public">
+          <name>Rotation</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541da85a7cd587d6142dbfc1a4de05af7b75d" prot="public">
+          <name>Scale</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541da67d2f6740a8eaebf4d5c6f79be8da481" prot="public">
+          <name>Forward</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541da258f49887ef8d14ac268c92b02503aaa" prot="public">
+          <name>Up</name>
+          <initializer>= 1 &lt;&lt; 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541da92b09c7c48c520c3c55e497875da437c" prot="public">
+          <name>Right</name>
+          <initializer>= 1 &lt;&lt; 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541daf5a7924e621e84c9280a9a27e1bcb7f6" prot="public">
+          <name>World</name>
+          <initializer>= 1 &lt;&lt; 5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541dab1c94ca2fbc3e78fc30069c8d0f01680" prot="public">
+          <name>All</name>
+          <initializer>= 0xffffffff</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="23" column="1" bodyfile="Component/TransformComponent.h" bodystart="24" bodyend="38"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_transform_component_1a3106dc8fb85ec5900bf3e4c85d945074" prot="private" static="no" mutable="no">
+        <type>glm::mat4</type>
+        <definition>glm::mat4 Boon::TransformComponent::m_WorldTransform</definition>
+        <argsstring></argsstring>
+        <name>m_WorldTransform</name>
+        <qualifiedname>Boon::TransformComponent::m_WorldTransform</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="98" column="11" bodyfile="Component/TransformComponent.h" bodystart="98" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_transform_component_1a1cfe6db984fbab6003d7a46dd15e3f6a" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 Boon::TransformComponent::m_LocalPosition</definition>
+        <argsstring></argsstring>
+        <name>m_LocalPosition</name>
+        <qualifiedname>Boon::TransformComponent::m_LocalPosition</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="101" column="11" bodyfile="Component/TransformComponent.h" bodystart="101" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_transform_component_1ac29c7c829222e6dc702fcb37c0925ce6" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 Boon::TransformComponent::m_WorldPosition</definition>
+        <argsstring></argsstring>
+        <name>m_WorldPosition</name>
+        <qualifiedname>Boon::TransformComponent::m_WorldPosition</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="102" column="11" bodyfile="Component/TransformComponent.h" bodystart="102" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_transform_component_1a33bd0fb1f16a7cf6a3e150ceb9b049e7" prot="private" static="no" mutable="no">
+        <type>glm::quat</type>
+        <definition>glm::quat Boon::TransformComponent::m_LocalRotQ</definition>
+        <argsstring></argsstring>
+        <name>m_LocalRotQ</name>
+        <qualifiedname>Boon::TransformComponent::m_LocalRotQ</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="104" column="11" bodyfile="Component/TransformComponent.h" bodystart="104" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_transform_component_1a29db8292b5e8c4a21bcbaf296262cc3d" prot="private" static="no" mutable="no">
+        <type>glm::quat</type>
+        <definition>glm::quat Boon::TransformComponent::m_WorldRotQ</definition>
+        <argsstring></argsstring>
+        <name>m_WorldRotQ</name>
+        <qualifiedname>Boon::TransformComponent::m_WorldRotQ</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="105" column="11" bodyfile="Component/TransformComponent.h" bodystart="105" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_transform_component_1a8dbec96e39f6ba5a3e04e559237a171f" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 Boon::TransformComponent::m_LocalEuler</definition>
+        <argsstring></argsstring>
+        <name>m_LocalEuler</name>
+        <qualifiedname>Boon::TransformComponent::m_LocalEuler</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="108" column="11" bodyfile="Component/TransformComponent.h" bodystart="108" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_transform_component_1a6db526271741dcb2c8c7a62af0361a7f" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 Boon::TransformComponent::m_WorldEuler</definition>
+        <argsstring></argsstring>
+        <name>m_WorldEuler</name>
+        <qualifiedname>Boon::TransformComponent::m_WorldEuler</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="109" column="11" bodyfile="Component/TransformComponent.h" bodystart="109" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_transform_component_1a38509bf593a99ad1585710df0362760e" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 Boon::TransformComponent::m_LocalScale</definition>
+        <argsstring></argsstring>
+        <name>m_LocalScale</name>
+        <qualifiedname>Boon::TransformComponent::m_LocalScale</qualifiedname>
+        <initializer>{ 1.f, 1.f, 1.f }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="112" column="11" bodyfile="Component/TransformComponent.h" bodystart="112" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_transform_component_1a9b31c65d51f1ec77b85c0cc81032b30a" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 Boon::TransformComponent::m_WorldScale</definition>
+        <argsstring></argsstring>
+        <name>m_WorldScale</name>
+        <qualifiedname>Boon::TransformComponent::m_WorldScale</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="113" column="11" bodyfile="Component/TransformComponent.h" bodystart="113" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_transform_component_1a254feceb902a3001ceba833044ae42ad" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 Boon::TransformComponent::m_Forward</definition>
+        <argsstring></argsstring>
+        <name>m_Forward</name>
+        <qualifiedname>Boon::TransformComponent::m_Forward</qualifiedname>
+        <initializer>{ 0.f, 0.f, -1.f }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="115" column="11" bodyfile="Component/TransformComponent.h" bodystart="115" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_transform_component_1ae94006705b628ff16d1a267aa6a3fab4" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 Boon::TransformComponent::m_Up</definition>
+        <argsstring></argsstring>
+        <name>m_Up</name>
+        <qualifiedname>Boon::TransformComponent::m_Up</qualifiedname>
+        <initializer>{ 0.f, 1.f, 0.f }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="116" column="11" bodyfile="Component/TransformComponent.h" bodystart="116" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_transform_component_1a64f31328a0b8c5b4a7900dea2cd12cd3" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 Boon::TransformComponent::m_Right</definition>
+        <argsstring></argsstring>
+        <name>m_Right</name>
+        <qualifiedname>Boon::TransformComponent::m_Right</qualifiedname>
+        <initializer>{ 1.f, 0.f, 0.f }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="117" column="11" bodyfile="Component/TransformComponent.h" bodystart="117" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_transform_component_1a2db2ba4df02279b45fc317a3d43ebe61" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541d" kindref="member">TransformFlag</ref></type>
+        <definition>TransformFlag Boon::TransformComponent::m_DirtyFlags</definition>
+        <argsstring></argsstring>
+        <name>m_DirtyFlags</name>
+        <qualifiedname>Boon::TransformComponent::m_DirtyFlags</qualifiedname>
+        <initializer>{ <ref refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541dab1c94ca2fbc3e78fc30069c8d0f01680" kindref="member">TransformFlag::All</ref> }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="119" column="15" bodyfile="Component/TransformComponent.h" bodystart="119" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_transform_component_1a6790f7a771679c648f8f1785efb17c55" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_transform_component_1ac94e77af6acdc9cbc063715e086fba5b" kindref="member">SceneComponent</ref> *</type>
+        <definition>SceneComponent* Boon::TransformComponent::m_Owner</definition>
+        <argsstring></argsstring>
+        <name>m_Owner</name>
+        <qualifiedname>Boon::TransformComponent::m_Owner</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="124" column="16" bodyfile="Component/TransformComponent.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="class_boon_1_1_transform_component_1a00df87c957d8f7ee0fc51f07a0542f4a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class GameObject</definition>
+        <argsstring></argsstring>
+        <name>GameObject</name>
+        <qualifiedname>Boon::TransformComponent::GameObject</qualifiedname>
+        <param>
+          <type>GameObject</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="121" column="14" bodyfile="Component/TransformComponent.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="class_boon_1_1_transform_component_1ac94e77af6acdc9cbc063715e086fba5b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class SceneComponent</definition>
+        <argsstring></argsstring>
+        <name>SceneComponent</name>
+        <qualifiedname>Boon::TransformComponent::SceneComponent</qualifiedname>
+        <param>
+          <type>SceneComponent</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="122" column="14" bodyfile="Component/TransformComponent.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="class_boon_1_1_transform_component_1a5fa7cde0ffbc72d80ef032c1ea3e9c85" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class SceneSerializer</definition>
+        <argsstring></argsstring>
+        <name>SceneSerializer</name>
+        <qualifiedname>Boon::TransformComponent::SceneSerializer</qualifiedname>
+        <param>
+          <type>SceneSerializer</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="123" column="14" bodyfile="Component/TransformComponent.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a4400ae07fc22b62cb75c512db5ba413b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::TransformComponent::TransformComponent</definition>
+        <argsstring>()=default</argsstring>
+        <name>TransformComponent</name>
+        <qualifiedname>Boon::TransformComponent::TransformComponent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="39" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a489c96d6af27f49bf39a769b13cb8bb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::TransformComponent::TransformComponent</definition>
+        <argsstring>(SceneComponent *owner)</argsstring>
+        <name>TransformComponent</name>
+        <qualifiedname>Boon::TransformComponent::TransformComponent</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_transform_component_1ac94e77af6acdc9cbc063715e086fba5b" kindref="member">SceneComponent</ref> *</type>
+          <declname>owner</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="40" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a66e481af031bda5e69413c76f6532cfc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::TransformComponent::~TransformComponent</definition>
+        <argsstring>()=default</argsstring>
+        <name>~TransformComponent</name>
+        <qualifiedname>Boon::TransformComponent::~TransformComponent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="41" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1adefdffaee4d66d5b908f81014800cd4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::TransformComponent::TransformComponent</definition>
+        <argsstring>(const TransformComponent &amp;other)=default</argsstring>
+        <name>TransformComponent</name>
+        <qualifiedname>Boon::TransformComponent::TransformComponent</qualifiedname>
+        <param>
+          <type>const TransformComponent &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="43" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a9abe3f29ac8bc39261193887d1bbefc1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::TransformComponent::TransformComponent</definition>
+        <argsstring>(TransformComponent &amp;&amp;other)=default</argsstring>
+        <name>TransformComponent</name>
+        <qualifiedname>Boon::TransformComponent::TransformComponent</qualifiedname>
+        <param>
+          <type>TransformComponent &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="44" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1ae4a0f5f5427b4292db9cd299a9e673d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_transform_component_1a4400ae07fc22b62cb75c512db5ba413b" kindref="member">TransformComponent</ref> &amp;</type>
+        <definition>TransformComponent &amp; Boon::TransformComponent::operator=</definition>
+        <argsstring>(const TransformComponent &amp;other)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Boon::TransformComponent::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="class_boon_1_1_transform_component_1a4400ae07fc22b62cb75c512db5ba413b" kindref="member">TransformComponent</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="45" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a322793bfc7c221d5ad57c481eae48088" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_transform_component_1a4400ae07fc22b62cb75c512db5ba413b" kindref="member">TransformComponent</ref> &amp;</type>
+        <definition>TransformComponent &amp; Boon::TransformComponent::operator=</definition>
+        <argsstring>(TransformComponent &amp;&amp;other)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Boon::TransformComponent::operator=</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_transform_component_1a4400ae07fc22b62cb75c512db5ba413b" kindref="member">TransformComponent</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="46" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1abe1986200792a6610dfb7bc61eb0f57d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const glm::mat4 &amp;</type>
+        <definition>const glm::mat4 &amp; Boon::TransformComponent::GetWorld</definition>
+        <argsstring>()</argsstring>
+        <name>GetWorld</name>
+        <qualifiedname>Boon::TransformComponent::GetWorld</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="48" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a8b961b91e1ad4c4b2adbf6fc457231af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const glm::vec3 &amp;</type>
+        <definition>const glm::vec3 &amp; Boon::TransformComponent::GetWorldPosition</definition>
+        <argsstring>()</argsstring>
+        <name>GetWorldPosition</name>
+        <qualifiedname>Boon::TransformComponent::GetWorldPosition</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="49" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a7f455f777c8d250a76599c7fc44af3e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const glm::vec3 &amp;</type>
+        <definition>const glm::vec3 &amp; Boon::TransformComponent::GetLocalPosition</definition>
+        <argsstring>() const</argsstring>
+        <name>GetLocalPosition</name>
+        <qualifiedname>Boon::TransformComponent::GetLocalPosition</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="50" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a0ee6ad73b229f3d228d957e535892090" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const glm::quat &amp;</type>
+        <definition>const glm::quat &amp; Boon::TransformComponent::GetWorldRotation</definition>
+        <argsstring>()</argsstring>
+        <name>GetWorldRotation</name>
+        <qualifiedname>Boon::TransformComponent::GetWorldRotation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="51" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1ac24eb9c280d98200d812c9c05ae611fd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const glm::quat &amp;</type>
+        <definition>const glm::quat &amp; Boon::TransformComponent::GetLocalRotation</definition>
+        <argsstring>() const</argsstring>
+        <name>GetLocalRotation</name>
+        <qualifiedname>Boon::TransformComponent::GetLocalRotation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="52" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1aca77f6498b7c628f2b2155ca656b28ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const glm::vec3 &amp;</type>
+        <definition>const glm::vec3 &amp; Boon::TransformComponent::GetWorldEulerRotation</definition>
+        <argsstring>()</argsstring>
+        <name>GetWorldEulerRotation</name>
+        <qualifiedname>Boon::TransformComponent::GetWorldEulerRotation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="53" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1ac0d5f2ab6a56313b4c8a7e7d2387860e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const glm::vec3 &amp;</type>
+        <definition>const glm::vec3 &amp; Boon::TransformComponent::GetLocalEulerRotation</definition>
+        <argsstring>() const</argsstring>
+        <name>GetLocalEulerRotation</name>
+        <qualifiedname>Boon::TransformComponent::GetLocalEulerRotation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="54" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a47b70d9ab5093ea97b1724ab31841ad3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const glm::vec3 &amp;</type>
+        <definition>const glm::vec3 &amp; Boon::TransformComponent::GetWorldScale</definition>
+        <argsstring>()</argsstring>
+        <name>GetWorldScale</name>
+        <qualifiedname>Boon::TransformComponent::GetWorldScale</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="55" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a652bccd8ea4ba31a69a1c00372e90535" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const glm::vec3 &amp;</type>
+        <definition>const glm::vec3 &amp; Boon::TransformComponent::GetLocalScale</definition>
+        <argsstring>() const</argsstring>
+        <name>GetLocalScale</name>
+        <qualifiedname>Boon::TransformComponent::GetLocalScale</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="56" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a46c3205634ec0534a40ef8339532e4c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::SetLocalPosition</definition>
+        <argsstring>(float x, float y, float z)</argsstring>
+        <name>SetLocalPosition</name>
+        <qualifiedname>Boon::TransformComponent::SetLocalPosition</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="58" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a33957ed9bec564026a232c39fdcc068f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::SetLocalPosition</definition>
+        <argsstring>(const glm::vec3 &amp;position)</argsstring>
+        <name>SetLocalPosition</name>
+        <qualifiedname>Boon::TransformComponent::SetLocalPosition</qualifiedname>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="59" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a2aa7062173bf7fff8735df545b95425a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::SetLocalRotation</definition>
+        <argsstring>(float x, float y, float z)</argsstring>
+        <name>SetLocalRotation</name>
+        <qualifiedname>Boon::TransformComponent::SetLocalRotation</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="60" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a021dae5745cf4c361c16feafdc1117c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::SetLocalRotation</definition>
+        <argsstring>(const glm::quat &amp;rotation)</argsstring>
+        <name>SetLocalRotation</name>
+        <qualifiedname>Boon::TransformComponent::SetLocalRotation</qualifiedname>
+        <param>
+          <type>const glm::quat &amp;</type>
+          <declname>rotation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="61" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1afbae452c5d00aa1414f784f760aa25a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::SetLocalRotation</definition>
+        <argsstring>(const glm::vec3 &amp;rotation)</argsstring>
+        <name>SetLocalRotation</name>
+        <qualifiedname>Boon::TransformComponent::SetLocalRotation</qualifiedname>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>rotation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="62" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a0edf17dd3526289b281370f7dd3d62fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::SetLocalScale</definition>
+        <argsstring>(float x, float y, float z)</argsstring>
+        <name>SetLocalScale</name>
+        <qualifiedname>Boon::TransformComponent::SetLocalScale</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="63" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1aed15e592f3b76f7bb112af10eb2d71d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::SetLocalScale</definition>
+        <argsstring>(const glm::vec3 &amp;scale)</argsstring>
+        <name>SetLocalScale</name>
+        <qualifiedname>Boon::TransformComponent::SetLocalScale</qualifiedname>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="64" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a072748f6ad07a2da23a3ced841c44aa1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::SetLocalTransform</definition>
+        <argsstring>(const glm::vec3 &amp;position, const glm::vec3 &amp;euler, const glm::vec3 &amp;scale)</argsstring>
+        <name>SetLocalTransform</name>
+        <qualifiedname>Boon::TransformComponent::SetLocalTransform</qualifiedname>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>euler</declname>
+        </param>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="65" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a60ea5e5a46045c7bed197963e26a9e36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::SetLocalTransform</definition>
+        <argsstring>(const glm::vec3 &amp;position, const glm::quat &amp;rotation, const glm::vec3 &amp;scale)</argsstring>
+        <name>SetLocalTransform</name>
+        <qualifiedname>Boon::TransformComponent::SetLocalTransform</qualifiedname>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const glm::quat &amp;</type>
+          <declname>rotation</declname>
+        </param>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="66" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a75e4500f656a9ca2bbe83551b3dcd890" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::Translate</definition>
+        <argsstring>(float x, float y, float z)</argsstring>
+        <name>Translate</name>
+        <qualifiedname>Boon::TransformComponent::Translate</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="68" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1ab1cb82932da439caa854ad4f970cc87f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::Translate</definition>
+        <argsstring>(const glm::vec3 &amp;translation)</argsstring>
+        <name>Translate</name>
+        <qualifiedname>Boon::TransformComponent::Translate</qualifiedname>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>translation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="69" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1ab977af2e8bc99bccee0b4c0f85f9dcb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::Rotate</definition>
+        <argsstring>(float x, float y, float z)</argsstring>
+        <name>Rotate</name>
+        <qualifiedname>Boon::TransformComponent::Rotate</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="70" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a0e6d377c7a2bb4aa0fc6efc74423914a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::Rotate</definition>
+        <argsstring>(const glm::quat &amp;rotation)</argsstring>
+        <name>Rotate</name>
+        <qualifiedname>Boon::TransformComponent::Rotate</qualifiedname>
+        <param>
+          <type>const glm::quat &amp;</type>
+          <declname>rotation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="71" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a78efafb4b9c43185d185f9e65175a967" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::Rotate</definition>
+        <argsstring>(const glm::vec3 &amp;rotation)</argsstring>
+        <name>Rotate</name>
+        <qualifiedname>Boon::TransformComponent::Rotate</qualifiedname>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>rotation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="72" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1aa18c596752707ea3f314187299685a01" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::Scale</definition>
+        <argsstring>(float x, float y, float z)</argsstring>
+        <name>Scale</name>
+        <qualifiedname>Boon::TransformComponent::Scale</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="73" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a560136663ebd81e48d80587e6d270d3a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::Scale</definition>
+        <argsstring>(const glm::vec3 &amp;scale)</argsstring>
+        <name>Scale</name>
+        <qualifiedname>Boon::TransformComponent::Scale</qualifiedname>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="74" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1ab1f541ca62f5c9360415fb1fe0d47f27" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::RotateTowards</definition>
+        <argsstring>(const glm::vec3 direction)</argsstring>
+        <name>RotateTowards</name>
+        <qualifiedname>Boon::TransformComponent::RotateTowards</qualifiedname>
+        <param>
+          <type>const glm::vec3</type>
+          <declname>direction</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="76" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a21b360fe0ca43e7e703b2386ebd30206" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::RotateToPoint</definition>
+        <argsstring>(const glm::vec3 point)</argsstring>
+        <name>RotateToPoint</name>
+        <qualifiedname>Boon::TransformComponent::RotateToPoint</qualifiedname>
+        <param>
+          <type>const glm::vec3</type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="77" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a3eaea08d309e39577678e738ab8bf4d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const glm::vec3 &amp;</type>
+        <definition>const glm::vec3 &amp; Boon::TransformComponent::GetForward</definition>
+        <argsstring>()</argsstring>
+        <name>GetForward</name>
+        <qualifiedname>Boon::TransformComponent::GetForward</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="79" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a9da4eb1553742cf696eda7eee7662d75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const glm::vec3 &amp;</type>
+        <definition>const glm::vec3 &amp; Boon::TransformComponent::GetUp</definition>
+        <argsstring>()</argsstring>
+        <name>GetUp</name>
+        <qualifiedname>Boon::TransformComponent::GetUp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="80" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a70abf55b7252d446141186308cf72399" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const glm::vec3 &amp;</type>
+        <definition>const glm::vec3 &amp; Boon::TransformComponent::GetRight</definition>
+        <argsstring>()</argsstring>
+        <name>GetRight</name>
+        <qualifiedname>Boon::TransformComponent::GetRight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="81" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a7c6966fadaf14a02136194ff238f1da8" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::SetChildrenDirty</definition>
+        <argsstring>(TransformFlag flag)</argsstring>
+        <name>SetChildrenDirty</name>
+        <qualifiedname>Boon::TransformComponent::SetChildrenDirty</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541d" kindref="member">TransformFlag</ref></type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="84" column="6"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a264a06a98f0da3fa5bc52b2210f3fe72" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::RecalculateWorldPosition</definition>
+        <argsstring>()</argsstring>
+        <name>RecalculateWorldPosition</name>
+        <qualifiedname>Boon::TransformComponent::RecalculateWorldPosition</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="87" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a5f42864b5b9908189c71beb1aea455ee" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::RecalculateWorldRotation</definition>
+        <argsstring>()</argsstring>
+        <name>RecalculateWorldRotation</name>
+        <qualifiedname>Boon::TransformComponent::RecalculateWorldRotation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="88" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a634ce16869a9724e4942ab6ab0e3d883" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::RecalculateWorldScale</definition>
+        <argsstring>()</argsstring>
+        <name>RecalculateWorldScale</name>
+        <qualifiedname>Boon::TransformComponent::RecalculateWorldScale</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="89" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a5fa2a5931dc81239d4c58bdd7fe3bb6a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::RecalculateWorldTransform</definition>
+        <argsstring>()</argsstring>
+        <name>RecalculateWorldTransform</name>
+        <qualifiedname>Boon::TransformComponent::RecalculateWorldTransform</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="90" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1aecba272f34a6e7ee541e7783f8142985" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::SetDirty</definition>
+        <argsstring>(TransformFlag flag, bool isDirty)</argsstring>
+        <name>SetDirty</name>
+        <qualifiedname>Boon::TransformComponent::SetDirty</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541d" kindref="member">TransformFlag</ref></type>
+          <declname>flag</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isDirty</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="91" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a625e160c7231689ecde104b53c754ad7" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::TransformComponent::IsDirty</definition>
+        <argsstring>(TransformFlag flag) const</argsstring>
+        <name>IsDirty</name>
+        <qualifiedname>Boon::TransformComponent::IsDirty</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541d" kindref="member">TransformFlag</ref></type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="92" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a6d652217389c44c024a38a3e35046691" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::RecalculateForward</definition>
+        <argsstring>()</argsstring>
+        <name>RecalculateForward</name>
+        <qualifiedname>Boon::TransformComponent::RecalculateForward</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="94" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a07166f45563b2c6c8f3763d4969f927e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::RecalculateUp</definition>
+        <argsstring>()</argsstring>
+        <name>RecalculateUp</name>
+        <qualifiedname>Boon::TransformComponent::RecalculateUp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="95" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_transform_component_1a56f5e471a2ebc3510c34a818326051c1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::TransformComponent::RecalculateRight</definition>
+        <argsstring>()</argsstring>
+        <name>RecalculateRight</name>
+        <qualifiedname>Boon::TransformComponent::RecalculateRight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="96" column="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Component/TransformComponent.h" line="18" column="1" bodyfile="Component/TransformComponent.h" bodystart="19" bodyend="125"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_transform_component_1a00df87c957d8f7ee0fc51f07a0542f4a" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>GameObject</name></member>
+      <member refid="class_boon_1_1_transform_component_1a3eaea08d309e39577678e738ab8bf4d7" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>GetForward</name></member>
+      <member refid="class_boon_1_1_transform_component_1ac0d5f2ab6a56313b4c8a7e7d2387860e" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>GetLocalEulerRotation</name></member>
+      <member refid="class_boon_1_1_transform_component_1a7f455f777c8d250a76599c7fc44af3e9" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>GetLocalPosition</name></member>
+      <member refid="class_boon_1_1_transform_component_1ac24eb9c280d98200d812c9c05ae611fd" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>GetLocalRotation</name></member>
+      <member refid="class_boon_1_1_transform_component_1a652bccd8ea4ba31a69a1c00372e90535" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>GetLocalScale</name></member>
+      <member refid="class_boon_1_1_transform_component_1a70abf55b7252d446141186308cf72399" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>GetRight</name></member>
+      <member refid="class_boon_1_1_transform_component_1a9da4eb1553742cf696eda7eee7662d75" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>GetUp</name></member>
+      <member refid="class_boon_1_1_transform_component_1abe1986200792a6610dfb7bc61eb0f57d" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>GetWorld</name></member>
+      <member refid="class_boon_1_1_transform_component_1aca77f6498b7c628f2b2155ca656b28ca" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>GetWorldEulerRotation</name></member>
+      <member refid="class_boon_1_1_transform_component_1a8b961b91e1ad4c4b2adbf6fc457231af" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>GetWorldPosition</name></member>
+      <member refid="class_boon_1_1_transform_component_1a0ee6ad73b229f3d228d957e535892090" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>GetWorldRotation</name></member>
+      <member refid="class_boon_1_1_transform_component_1a47b70d9ab5093ea97b1724ab31841ad3" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>GetWorldScale</name></member>
+      <member refid="class_boon_1_1_transform_component_1a625e160c7231689ecde104b53c754ad7" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>IsDirty</name></member>
+      <member refid="class_boon_1_1_transform_component_1a2db2ba4df02279b45fc317a3d43ebe61" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>m_DirtyFlags</name></member>
+      <member refid="class_boon_1_1_transform_component_1a254feceb902a3001ceba833044ae42ad" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>m_Forward</name></member>
+      <member refid="class_boon_1_1_transform_component_1a8dbec96e39f6ba5a3e04e559237a171f" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>m_LocalEuler</name></member>
+      <member refid="class_boon_1_1_transform_component_1a1cfe6db984fbab6003d7a46dd15e3f6a" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>m_LocalPosition</name></member>
+      <member refid="class_boon_1_1_transform_component_1a33bd0fb1f16a7cf6a3e150ceb9b049e7" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>m_LocalRotQ</name></member>
+      <member refid="class_boon_1_1_transform_component_1a38509bf593a99ad1585710df0362760e" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>m_LocalScale</name></member>
+      <member refid="class_boon_1_1_transform_component_1a6790f7a771679c648f8f1785efb17c55" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>m_Owner</name></member>
+      <member refid="class_boon_1_1_transform_component_1a64f31328a0b8c5b4a7900dea2cd12cd3" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>m_Right</name></member>
+      <member refid="class_boon_1_1_transform_component_1ae94006705b628ff16d1a267aa6a3fab4" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>m_Up</name></member>
+      <member refid="class_boon_1_1_transform_component_1a6db526271741dcb2c8c7a62af0361a7f" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>m_WorldEuler</name></member>
+      <member refid="class_boon_1_1_transform_component_1ac29c7c829222e6dc702fcb37c0925ce6" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>m_WorldPosition</name></member>
+      <member refid="class_boon_1_1_transform_component_1a29db8292b5e8c4a21bcbaf296262cc3d" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>m_WorldRotQ</name></member>
+      <member refid="class_boon_1_1_transform_component_1a9b31c65d51f1ec77b85c0cc81032b30a" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>m_WorldScale</name></member>
+      <member refid="class_boon_1_1_transform_component_1a3106dc8fb85ec5900bf3e4c85d945074" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>m_WorldTransform</name></member>
+      <member refid="class_boon_1_1_transform_component_1ae4a0f5f5427b4292db9cd299a9e673d6" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_transform_component_1a322793bfc7c221d5ad57c481eae48088" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_transform_component_1a6d652217389c44c024a38a3e35046691" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>RecalculateForward</name></member>
+      <member refid="class_boon_1_1_transform_component_1a56f5e471a2ebc3510c34a818326051c1" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>RecalculateRight</name></member>
+      <member refid="class_boon_1_1_transform_component_1a07166f45563b2c6c8f3763d4969f927e" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>RecalculateUp</name></member>
+      <member refid="class_boon_1_1_transform_component_1a264a06a98f0da3fa5bc52b2210f3fe72" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>RecalculateWorldPosition</name></member>
+      <member refid="class_boon_1_1_transform_component_1a5f42864b5b9908189c71beb1aea455ee" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>RecalculateWorldRotation</name></member>
+      <member refid="class_boon_1_1_transform_component_1a634ce16869a9724e4942ab6ab0e3d883" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>RecalculateWorldScale</name></member>
+      <member refid="class_boon_1_1_transform_component_1a5fa2a5931dc81239d4c58bdd7fe3bb6a" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>RecalculateWorldTransform</name></member>
+      <member refid="class_boon_1_1_transform_component_1ab977af2e8bc99bccee0b4c0f85f9dcb6" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>Rotate</name></member>
+      <member refid="class_boon_1_1_transform_component_1a0e6d377c7a2bb4aa0fc6efc74423914a" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>Rotate</name></member>
+      <member refid="class_boon_1_1_transform_component_1a78efafb4b9c43185d185f9e65175a967" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>Rotate</name></member>
+      <member refid="class_boon_1_1_transform_component_1a21b360fe0ca43e7e703b2386ebd30206" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>RotateToPoint</name></member>
+      <member refid="class_boon_1_1_transform_component_1ab1f541ca62f5c9360415fb1fe0d47f27" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>RotateTowards</name></member>
+      <member refid="class_boon_1_1_transform_component_1aa18c596752707ea3f314187299685a01" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>Scale</name></member>
+      <member refid="class_boon_1_1_transform_component_1a560136663ebd81e48d80587e6d270d3a" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>Scale</name></member>
+      <member refid="class_boon_1_1_transform_component_1ac94e77af6acdc9cbc063715e086fba5b" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>SceneComponent</name></member>
+      <member refid="class_boon_1_1_transform_component_1a5fa7cde0ffbc72d80ef032c1ea3e9c85" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>SceneSerializer</name></member>
+      <member refid="class_boon_1_1_transform_component_1a7c6966fadaf14a02136194ff238f1da8" prot="protected" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>SetChildrenDirty</name></member>
+      <member refid="class_boon_1_1_transform_component_1aecba272f34a6e7ee541e7783f8142985" prot="private" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>SetDirty</name></member>
+      <member refid="class_boon_1_1_transform_component_1a46c3205634ec0534a40ef8339532e4c3" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>SetLocalPosition</name></member>
+      <member refid="class_boon_1_1_transform_component_1a33957ed9bec564026a232c39fdcc068f" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>SetLocalPosition</name></member>
+      <member refid="class_boon_1_1_transform_component_1a2aa7062173bf7fff8735df545b95425a" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>SetLocalRotation</name></member>
+      <member refid="class_boon_1_1_transform_component_1a021dae5745cf4c361c16feafdc1117c3" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>SetLocalRotation</name></member>
+      <member refid="class_boon_1_1_transform_component_1afbae452c5d00aa1414f784f760aa25a0" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>SetLocalRotation</name></member>
+      <member refid="class_boon_1_1_transform_component_1a0edf17dd3526289b281370f7dd3d62fa" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>SetLocalScale</name></member>
+      <member refid="class_boon_1_1_transform_component_1aed15e592f3b76f7bb112af10eb2d71d1" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>SetLocalScale</name></member>
+      <member refid="class_boon_1_1_transform_component_1a072748f6ad07a2da23a3ced841c44aa1" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>SetLocalTransform</name></member>
+      <member refid="class_boon_1_1_transform_component_1a60ea5e5a46045c7bed197963e26a9e36" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>SetLocalTransform</name></member>
+      <member refid="class_boon_1_1_transform_component_1a4400ae07fc22b62cb75c512db5ba413b" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>TransformComponent</name></member>
+      <member refid="class_boon_1_1_transform_component_1a489c96d6af27f49bf39a769b13cb8bb6" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>TransformComponent</name></member>
+      <member refid="class_boon_1_1_transform_component_1adefdffaee4d66d5b908f81014800cd4c" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>TransformComponent</name></member>
+      <member refid="class_boon_1_1_transform_component_1a9abe3f29ac8bc39261193887d1bbefc1" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>TransformComponent</name></member>
+      <member refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541d" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>TransformFlag</name></member>
+      <member refid="class_boon_1_1_transform_component_1a75e4500f656a9ca2bbe83551b3dcd890" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>Translate</name></member>
+      <member refid="class_boon_1_1_transform_component_1ab1cb82932da439caa854ad4f970cc87f" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>Translate</name></member>
+      <member refid="class_boon_1_1_transform_component_1a66e481af031bda5e69413c76f6532cfc" prot="public" virt="non-virtual"><scope>Boon::TransformComponent</scope><name>~TransformComponent</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

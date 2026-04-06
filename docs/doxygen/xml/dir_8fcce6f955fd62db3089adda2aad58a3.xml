@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_8fcce6f955fd62db3089adda2aad58a3" kind="dir">
+    <compoundname>Boon</compoundname>
+    <innerdir refid="dir_43f3dfc9ce18d06b8aef9a5a51d684c0">include</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Boon/"/>
+  </compounddef>
+</doxygen>

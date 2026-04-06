@@ -1,0 +1,170 @@
+\doxysection{Boon::\+Asset\+Ref\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_boon_1_1_asset_ref}{}\label{class_boon_1_1_asset_ref}\index{Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_asset_ref_a79c3c5b20c3103b18d545a113b1688c2}{Asset\+Ref}} (Asset\+Handle h)
+\item 
+Asset\+Ref$<$ T $>$ \& \doxymbox{\hyperlink{class_boon_1_1_asset_ref_a8698be73bfa1536a717c7999b8cb8dcd}{operator=}} (const Asset\+Ref$<$ T $>$ \&other)
+\item 
+T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_1_1_asset_ref_a041a6aadce7318a99aaaba4bdd59b6be}{Get}} () const
+\begin{DoxyCompactList}\small\item\em Resolve the asset handle to a pointer to the asset. \end{DoxyCompactList}\item 
+T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_1_1_asset_ref_a9dad7f62d40d8f7e75ea39c6aef79791}{operator-\/$>$}} () const
+\item 
+T \& \doxymbox{\hyperlink{class_boon_1_1_asset_ref_ab653c2f81e7643220966873ad7851ae3}{operator\texorpdfstring{$\ast$}{*}}} () const
+\item 
+auto \doxymbox{\hyperlink{class_boon_1_1_asset_ref_a4a076cfb55669c9e681763308a6e3f23}{Instance}} () const -\/$>$ std::\+shared\+\_\+ptr$<$ typename T::\+\+Type $>$
+\begin{DoxyCompactList}\small\item\em Obtain the runtime instance held by the referenced asset. \end{DoxyCompactList}\item 
+Asset\+Handle \doxymbox{\hyperlink{class_boon_1_1_asset_ref_a0ed93827d979f9dc6e54195a56e46d7d}{Handle}} () const
+\begin{DoxyCompactList}\small\item\em Get the underlying asset handle. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_boon_1_1_asset_ref_a7f24a6ab9016c7ad1861541cf65defcd}{Is\+Valid}} () const
+\begin{DoxyCompactList}\small\item\em Check whether this reference contains a non-\/zero handle. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_boon_1_1_asset_ref_afbb9aafc2462337de64fdf22b9515216}{operator Asset\+Handle}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class Boon::\+\+Asset\+Ref$<$ T $>$}
+
+
+Definition at line \doxymbox{\hyperlink{_asset_ref_8h_source_l00007}{7}} of file \doxymbox{\hyperlink{_asset_ref_8h_source}{Asset\+Ref.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_boon_1_1_asset_ref_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_boon_1_1_asset_ref_a79c3c5b20c3103b18d545a113b1688c2}\index{Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}!AssetRef@{AssetRef}}
+\index{AssetRef@{AssetRef}!Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{AssetRef()}{AssetRef()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_ref_a79c3c5b20c3103b18d545a113b1688c2} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Boon::\+\+Asset\+Ref}}$<$ T $>$::\+\+Asset\+Ref (\begin{DoxyParamCaption}\item[{Asset\+Handle}]{h}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_ref_8h_source_l00011}{11}} of file \doxymbox{\hyperlink{_asset_ref_8h_source}{Asset\+Ref.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_asset_ref_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_asset_ref_a041a6aadce7318a99aaaba4bdd59b6be}\index{Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}!Get@{Get}}
+\index{Get@{Get}!Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_ref_a041a6aadce7318a99aaaba4bdd59b6be} 
+template$<$typename T$>$ \\
+T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Boon::\+\+Asset\+Ref}}$<$ T $>$::\+\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Resolve the asset handle to a pointer to the asset. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to the asset corresponding to the stored handle, or nullptr if not found. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_asset_ref_a0ed93827d979f9dc6e54195a56e46d7d}\index{Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}!Handle@{Handle}}
+\index{Handle@{Handle}!Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Handle()}{Handle()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_ref_a0ed93827d979f9dc6e54195a56e46d7d} 
+template$<$typename T$>$ \\
+Asset\+Handle \doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Boon::\+\+Asset\+Ref}}$<$ T $>$::\+\+Handle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the underlying asset handle. 
+
+\begin{DoxyReturn}{Returns}
+The Asset\+Handle stored by this reference. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_asset_ref_8h_source_l00048}{48}} of file \doxymbox{\hyperlink{_asset_ref_8h_source}{Asset\+Ref.\+h}}.
+
+\Hypertarget{class_boon_1_1_asset_ref_a4a076cfb55669c9e681763308a6e3f23}\index{Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}!Instance@{Instance}}
+\index{Instance@{Instance}!Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Instance()}{Instance()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_ref_a4a076cfb55669c9e681763308a6e3f23} 
+template$<$typename T$>$ \\
+auto \doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Boon::\+\+Asset\+Ref}}$<$ T $>$::\+\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ std::\+shared\+\_\+ptr$<$ typename T::\+\+Type $>$\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Obtain the runtime instance held by the referenced asset. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the asset instance, or nullptr if the asset is not available. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_asset_ref_8h_source_l00037}{37}} of file \doxymbox{\hyperlink{_asset_ref_8h_source}{Asset\+Ref.\+h}}.
+
+\Hypertarget{class_boon_1_1_asset_ref_a7f24a6ab9016c7ad1861541cf65defcd}\index{Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}!IsValid@{IsValid}}
+\index{IsValid@{IsValid}!Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{IsValid()}{IsValid()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_ref_a7f24a6ab9016c7ad1861541cf65defcd} 
+template$<$typename T$>$ \\
+bool \doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Boon::\+\+Asset\+Ref}}$<$ T $>$::\+\+Is\+Valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check whether this reference contains a non-\/zero handle. 
+
+\begin{DoxyReturn}{Returns}
+true if the handle is non-\/zero, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_asset_ref_8h_source_l00055}{55}} of file \doxymbox{\hyperlink{_asset_ref_8h_source}{Asset\+Ref.\+h}}.
+
+\Hypertarget{class_boon_1_1_asset_ref_afbb9aafc2462337de64fdf22b9515216}\index{Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}!operator AssetHandle@{operator AssetHandle}}
+\index{operator AssetHandle@{operator AssetHandle}!Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator AssetHandle()}{operator AssetHandle()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_ref_afbb9aafc2462337de64fdf22b9515216} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Boon::\+\+Asset\+Ref}}$<$ T $>$::\+operator Asset\+Handle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_ref_8h_source_l00057}{57}} of file \doxymbox{\hyperlink{_asset_ref_8h_source}{Asset\+Ref.\+h}}.
+
+\Hypertarget{class_boon_1_1_asset_ref_ab653c2f81e7643220966873ad7851ae3}\index{Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_ref_ab653c2f81e7643220966873ad7851ae3} 
+template$<$typename T$>$ \\
+T \& \doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Boon::\+\+Asset\+Ref}}$<$ T $>$::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_ref_8h_source_l00030}{30}} of file \doxymbox{\hyperlink{_asset_ref_8h_source}{Asset\+Ref.\+h}}.
+
+\Hypertarget{class_boon_1_1_asset_ref_a9dad7f62d40d8f7e75ea39c6aef79791}\index{Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_ref_a9dad7f62d40d8f7e75ea39c6aef79791} 
+template$<$typename T$>$ \\
+T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Boon::\+\+Asset\+Ref}}$<$ T $>$::\+operator-\/$>$ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_ref_8h_source_l00029}{29}} of file \doxymbox{\hyperlink{_asset_ref_8h_source}{Asset\+Ref.\+h}}.
+
+\Hypertarget{class_boon_1_1_asset_ref_a8698be73bfa1536a717c7999b8cb8dcd}\index{Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!Boon::AssetRef$<$ T $>$@{Boon::AssetRef$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_ref_a8698be73bfa1536a717c7999b8cb8dcd} 
+template$<$typename T$>$ \\
+Asset\+Ref$<$ T $>$ \& \doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Boon::\+\+Asset\+Ref}}$<$ T $>$::\+operator= (\begin{DoxyParamCaption}\item[{const Asset\+Ref$<$ T $>$ \&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_ref_8h_source_l00013}{13}} of file \doxymbox{\hyperlink{_asset_ref_8h_source}{Asset\+Ref.\+h}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Asset\+Ref.\+h\end{DoxyCompactItemize}

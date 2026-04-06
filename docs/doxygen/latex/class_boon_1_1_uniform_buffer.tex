@@ -1,0 +1,109 @@
+\doxysection{Boon::\+Uniform\+Buffer Class Reference}
+\hypertarget{class_boon_1_1_uniform_buffer}{}\label{class_boon_1_1_uniform_buffer}\index{Boon::UniformBuffer@{Boon::UniformBuffer}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_boon_1_1_uniform_buffer_ac44fbbe659b32661aa995bef1b9bdae1}\label{class_boon_1_1_uniform_buffer_ac44fbbe659b32661aa995bef1b9bdae1} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Uniform\+Buffer} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor for uniform buffer implementations. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_uniform_buffer_a7d576b21294dba0448ace63bf4146ae8}\label{class_boon_1_1_uniform_buffer_a7d576b21294dba0448ace63bf4146ae8} 
+{\bfseries Uniform\+Buffer} (const Uniform\+Buffer \&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_uniform_buffer_a788813e4fcc12ff8d1a41b0f3d51afa2}\label{class_boon_1_1_uniform_buffer_a788813e4fcc12ff8d1a41b0f3d51afa2} 
+{\bfseries Uniform\+Buffer} (Uniform\+Buffer \&\&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_uniform_buffer_a78d09b87522b3dffe65e8164a1be1d1d}\label{class_boon_1_1_uniform_buffer_a78d09b87522b3dffe65e8164a1be1d1d} 
+Uniform\+Buffer \& {\bfseries operator=} (const Uniform\+Buffer \&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_uniform_buffer_a2f0a4182fab81d91eb1b027ad6bf3cef}\label{class_boon_1_1_uniform_buffer_a2f0a4182fab81d91eb1b027ad6bf3cef} 
+Uniform\+Buffer \& {\bfseries operator=} (Uniform\+Buffer \&\&other)=delete
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_1_1_uniform_buffer_a88231914a73c0cb32a247f6e53cadee7}{Set\+Data}} (const void \texorpdfstring{$\ast$}{*}data, uint32\+\_\+t size, uint32\+\_\+t offset=0)=0
+\begin{DoxyCompactList}\small\item\em Set a block of data in the uniform buffer. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\void \doxymbox{\hyperlink{class_boon_1_1_uniform_buffer_a5266c47850263e4dc12fd57fc5080415}{Set\+Value}} (const T \&data, uint32\+\_\+t offset=0)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std::\+shared\+\_\+ptr$<$ Uniform\+Buffer $>$ \doxymbox{\hyperlink{class_boon_1_1_uniform_buffer_a063b3235b4c387a599ddb4ccce739cac}{Create}} (uint32\+\_\+t size, uint32\+\_\+t binding)
+\begin{DoxyCompactList}\small\item\em Create a uniform buffer of given size bound to the specified binding point. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static std::\+shared\+\_\+ptr$<$ Uniform\+Buffer $>$ \doxymbox{\hyperlink{class_boon_1_1_uniform_buffer_a04248a41f39e1f930783f062fc19c154}{Create}} (uint32\+\_\+t binding)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_uniform_buffer_8h_source_l00007}{7}} of file \doxymbox{\hyperlink{_uniform_buffer_8h_source}{Uniform\+Buffer.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_uniform_buffer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_uniform_buffer_a04248a41f39e1f930783f062fc19c154}\index{Boon::UniformBuffer@{Boon::UniformBuffer}!Create@{Create}}
+\index{Create@{Create}!Boon::UniformBuffer@{Boon::UniformBuffer}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_uniform_buffer_a04248a41f39e1f930783f062fc19c154} 
+template$<$typename T$>$ \\
+std::\+shared\+\_\+ptr$<$ Uniform\+Buffer $>$ Boon::\+\+Uniform\+Buffer::\+\+Create (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{binding}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_uniform_buffer_8h_source_l00047}{47}} of file \doxymbox{\hyperlink{_uniform_buffer_8h_source}{Uniform\+Buffer.\+h}}.
+
+\Hypertarget{class_boon_1_1_uniform_buffer_a063b3235b4c387a599ddb4ccce739cac}\index{Boon::UniformBuffer@{Boon::UniformBuffer}!Create@{Create}}
+\index{Create@{Create}!Boon::UniformBuffer@{Boon::UniformBuffer}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_uniform_buffer_a063b3235b4c387a599ddb4ccce739cac} 
+std::\+shared\+\_\+ptr$<$ Uniform\+Buffer $>$ Boon::\+\+Uniform\+Buffer::\+\+Create (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{size}{, }\item[{uint32\+\_\+t}]{binding}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create a uniform buffer of given size bound to the specified binding point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & Size in bytes of the buffer to create. \\
+\hline
+{\em binding} & Binding index for shader access. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Shared pointer to the created \doxylink{class_boon_1_1_uniform_buffer}{Uniform\+Buffer}. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_uniform_buffer_a88231914a73c0cb32a247f6e53cadee7}\index{Boon::UniformBuffer@{Boon::UniformBuffer}!SetData@{SetData}}
+\index{SetData@{SetData}!Boon::UniformBuffer@{Boon::UniformBuffer}}
+\doxysubsubsection{\texorpdfstring{SetData()}{SetData()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_uniform_buffer_a88231914a73c0cb32a247f6e53cadee7} 
+virtual void Boon::\+\+Uniform\+Buffer::\+\+Set\+Data (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{uint32\+\_\+t}]{size}{, }\item[{uint32\+\_\+t}]{offset}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Set a block of data in the uniform buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Pointer to the source data. \\
+\hline
+{\em size} & Number of bytes to copy. \\
+\hline
+{\em offset} & Byte offset within the buffer to write to. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_uniform_buffer_a5266c47850263e4dc12fd57fc5080415}\index{Boon::UniformBuffer@{Boon::UniformBuffer}!SetValue@{SetValue}}
+\index{SetValue@{SetValue}!Boon::UniformBuffer@{Boon::UniformBuffer}}
+\doxysubsubsection{\texorpdfstring{SetValue()}{SetValue()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_uniform_buffer_a5266c47850263e4dc12fd57fc5080415} 
+template$<$typename T$>$ \\
+void Boon::\+\+Uniform\+Buffer::\+\+Set\+Value (\begin{DoxyParamCaption}\item[{const T \&}]{data}{, }\item[{uint32\+\_\+t}]{offset}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_uniform_buffer_8h_source_l00032}{32}} of file \doxymbox{\hyperlink{_uniform_buffer_8h_source}{Uniform\+Buffer.\+h}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Uniform\+Buffer.\+h\end{DoxyCompactItemize}

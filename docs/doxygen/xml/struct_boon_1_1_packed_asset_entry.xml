@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_packed_asset_entry" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::PackedAssetEntry</compoundname>
+    <includes refid="_asset_pack_8h" local="no">Asset/AssetPack/AssetPack.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_packed_asset_entry_1ae0edf500cdc34a788cf37d3507da4026" prot="public" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_u_u_i_d" kindref="compound">UUID</ref></type>
+        <definition>UUID Boon::PackedAssetEntry::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <qualifiedname>Boon::PackedAssetEntry::id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="25" column="14" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_packed_asset_entry_1ac3a5ae7be1b42c3591a6f43674687510" prot="public" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1a6867a346204e7bbed8bfe91d8dc2e807" kindref="member">AssetType</ref></type>
+        <definition>AssetType Boon::PackedAssetEntry::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>Boon::PackedAssetEntry::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="26" column="19" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_packed_asset_entry_1ab38eb72ea5fa490211daf9e326e9af03" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t Boon::PackedAssetEntry::dataOffset</definition>
+        <argsstring></argsstring>
+        <name>dataOffset</name>
+        <qualifiedname>Boon::PackedAssetEntry::dataOffset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="27" column="18" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_packed_asset_entry_1ae139e3ad679dee1ef3253037d0644582" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t Boon::PackedAssetEntry::dataSize</definition>
+        <argsstring></argsstring>
+        <name>dataSize</name>
+        <qualifiedname>Boon::PackedAssetEntry::dataSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPack.h" line="28" column="18" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>Boon::PackedAssetEntry</label>
+        <link refid="struct_boon_1_1_packed_asset_entry"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>id</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Boon::UUID</label>
+        <link refid="class_boon_1_1_u_u_i_d"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>Null</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Asset/AssetPack/AssetPack.h" line="23" column="5" bodyfile="Asset/AssetPack/AssetPack.h" bodystart="24" bodyend="29"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_packed_asset_entry_1ab38eb72ea5fa490211daf9e326e9af03" prot="public" virt="non-virtual"><scope>Boon::PackedAssetEntry</scope><name>dataOffset</name></member>
+      <member refid="struct_boon_1_1_packed_asset_entry_1ae139e3ad679dee1ef3253037d0644582" prot="public" virt="non-virtual"><scope>Boon::PackedAssetEntry</scope><name>dataSize</name></member>
+      <member refid="struct_boon_1_1_packed_asset_entry_1ae0edf500cdc34a788cf37d3507da4026" prot="public" virt="non-virtual"><scope>Boon::PackedAssetEntry</scope><name>id</name></member>
+      <member refid="struct_boon_1_1_packed_asset_entry_1ac3a5ae7be1b42c3591a6f43674687510" prot="public" virt="non-virtual"><scope>Boon::PackedAssetEntry</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

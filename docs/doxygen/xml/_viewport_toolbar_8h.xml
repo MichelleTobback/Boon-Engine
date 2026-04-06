@@ -1,0 +1,488 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_viewport_toolbar_8h" kind="file" language="C++">
+    <compoundname>ViewportToolbar.h</compoundname>
+    <includes refid="_boon_editor_8h" local="yes">Core/BoonEditor.h</includes>
+    <includes refid="_editor_panel_8h" local="yes">EditorPanel.h</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">glm/glm.hpp</includes>
+    <includedby refid="_viewport_panel_8h" local="yes">Panels/ViewportPanel.h</includedby>
+    <incdepgraph>
+      <node id="45">
+        <label>Asset/Asset.h</label>
+        <link refid="_asset_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>Asset/AssetTraits.h</label>
+        <link refid="_asset_traits_8h"/>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>Asset/AssetType.h</label>
+        <link refid="_asset_type_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>Component/TransformComponent.h</label>
+        <link refid="_transform_component_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>Component/UUIDComponent.h</label>
+        <link refid="_u_u_i_d_component_8h"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>Core/Assert.h</label>
+        <link refid="_assert_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Core/Delegate.h</label>
+        <link refid="_delegate_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>Core/UUID.h</label>
+        <link refid="_u_u_i_d_8h"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>Core/Variant.h</label>
+        <link refid="_variant_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Physics2DTypes.h</label>
+        <link refid="_physics2_d_types_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>Physics/PhysicsWorld2D.h</label>
+        <link refid="_physics_world2_d_8h"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>Reflection/BClass.h</label>
+        <link refid="_b_class_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>Reflection/BClassBase.h</label>
+        <link refid="_b_class_base_8h"/>
+      </node>
+      <node id="29">
+        <label>BFunction.h</label>
+        <link refid="_b_function_8h"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>BProperty.h</label>
+        <link refid="_b_property_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>Scene/GameObject.h</label>
+        <link refid="_game_object_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>GameObjectID.h</label>
+        <link refid="_game_object_i_d_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Scene/Scene.h</label>
+        <link refid="_scene_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Core/BoonEditor.h</label>
+        <link refid="_boon_editor_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>EditorContext.h</label>
+        <link refid="_editor_context_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>Core/EditorObject.h</label>
+        <link refid="_editor_object_8h"/>
+      </node>
+      <node id="48">
+        <label>EditorPanel.h</label>
+        <link refid="_editor_panel_8h"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Panels/ViewportToolbar.h</label>
+        <link refid="_viewport_toolbar_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>UI/DragDropRouter.h</label>
+        <link refid="_drag_drop_router_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>box2d/id.h</label>
+      </node>
+      <node id="28">
+        <label>cstddef</label>
+      </node>
+      <node id="5">
+        <label>cstdint</label>
+      </node>
+      <node id="39">
+        <label>cstdlib</label>
+      </node>
+      <node id="31">
+        <label>cstring</label>
+      </node>
+      <node id="12">
+        <label>entt/entt.hpp</label>
+      </node>
+      <node id="6">
+        <label>functional</label>
+      </node>
+      <node id="18">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="42">
+        <label>glm/gtc/quaternion.hpp</label>
+      </node>
+      <node id="35">
+        <label>glm/gtc/type_precision.hpp</label>
+      </node>
+      <node id="43">
+        <label>glm/gtx/quaternion.hpp</label>
+      </node>
+      <node id="32">
+        <label>glm/vec2.hpp</label>
+      </node>
+      <node id="33">
+        <label>glm/vec3.hpp</label>
+      </node>
+      <node id="34">
+        <label>glm/vec4.hpp</label>
+      </node>
+      <node id="51">
+        <label>imgui.h</label>
+      </node>
+      <node id="52">
+        <label>imgui_internal.h</label>
+      </node>
+      <node id="7">
+        <label>limits</label>
+      </node>
+      <node id="26">
+        <label>memory</label>
+      </node>
+      <node id="24">
+        <label>optional</label>
+      </node>
+      <node id="36">
+        <label>queue</label>
+      </node>
+      <node id="25">
+        <label>stdexcept</label>
+      </node>
+      <node id="21">
+        <label>string</label>
+      </node>
+      <node id="8">
+        <label>type_traits</label>
+      </node>
+      <node id="22">
+        <label>typeindex</label>
+      </node>
+      <node id="23">
+        <label>unordered_map</label>
+      </node>
+      <node id="9">
+        <label>utility</label>
+      </node>
+      <node id="10">
+        <label>vector</label>
+      </node>
+      <node id="14">
+        <label>xhash</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>Panels/AssetEditorPanel.h</label>
+        <link refid="_asset_editor_panel_8h"/>
+      </node>
+      <node id="2">
+        <label>Panels/ViewportPanel.h</label>
+        <link refid="_viewport_panel_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Panels/ViewportToolbar.h</label>
+        <link refid="_viewport_toolbar_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_boon_editor_1_1_viewport_toolbar" prot="public">BoonEditor::ViewportToolbar</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <innernamespace refid="namespace_boon_editor">BoonEditor</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_boon_editor_8h" kindref="compound">Core/BoonEditor.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_editor_panel_8h" kindref="compound">EditorPanel.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;glm/glm.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="9"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_texture2_d" kindref="compound">Texture2D</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon_editor" kindref="compound">BoonEditor</ref></highlight></codeline>
+<codeline lineno="14"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="15" refid="namespace_boon_editor_1af9b9a359e33efd5b98545574f1a50f8f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_editor_1af9b9a359e33efd5b98545574f1a50f8f" kindref="member">ViewportToolbarSetting</ref></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="17" refid="namespace_boon_editor_1af9b9a359e33efd5b98545574f1a50f8fa6adf97f83acf6453d4a6a4b1070f3754" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19a4ede429b705fa47b52aaf49894e72032" kindref="member">None</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="18" refid="namespace_boon_editor_1af9b9a359e33efd5b98545574f1a50f8fa967d35e40f3f95b1f538bd248640bf3b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_camera" kindref="compound">Camera</ref><sp/>=<sp/>1,</highlight></codeline>
+<codeline lineno="19" refid="namespace_boon_editor_1af9b9a359e33efd5b98545574f1a50f8fa1729a56cfc89021478498fe0c89a843a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_editor_1af9b9a359e33efd5b98545574f1a50f8fa1729a56cfc89021478498fe0c89a843a" kindref="member">Visibility</ref><sp/>=<sp/>2</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="class_boon_editor_1_1_viewport_toolbar" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_editor_1_1_viewport_toolbar_1a9de15d79421fbcabf974d2e8379bfc26" kindref="member">ViewportToolbar</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_editor_panel_1a5f5df2a84dcabc146bf036b0d0a88cfb" kindref="member">EditorPanel</ref></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="25" refid="class_boon_editor_1_1_viewport_toolbar_1a9de15d79421fbcabf974d2e8379bfc26" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1a9de15d79421fbcabf974d2e8379bfc26" kindref="member">ViewportToolbar</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/><ref refid="class_drag_drop_router" kindref="compound">DragDropRouter</ref>*<sp/>pRouter);</highlight></codeline>
+<codeline lineno="26" refid="class_boon_editor_1_1_viewport_toolbar_1af8072c63c81a3340e7d27835b793a7b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1af8072c63c81a3340e7d27835b793a7b3" kindref="member">~ViewportToolbar</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28" refid="class_boon_editor_1_1_viewport_toolbar_1a6b04b091b20ad492a4173079045599d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1a6b04b091b20ad492a4173079045599d6" kindref="member">ViewportToolbar</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1a9de15d79421fbcabf974d2e8379bfc26" kindref="member">ViewportToolbar</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="29" refid="class_boon_editor_1_1_viewport_toolbar_1a50134905b035343bbb94f3ec1f01864c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1a50134905b035343bbb94f3ec1f01864c" kindref="member">ViewportToolbar</ref>(<ref refid="class_boon_editor_1_1_viewport_toolbar_1a9de15d79421fbcabf974d2e8379bfc26" kindref="member">ViewportToolbar</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30" refid="class_boon_editor_1_1_viewport_toolbar_1aa1a107b12104ac22a8a01d8896e0b4f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1a9de15d79421fbcabf974d2e8379bfc26" kindref="member">ViewportToolbar</ref>&amp;<sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1aa1a107b12104ac22a8a01d8896e0b4f1" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1a9de15d79421fbcabf974d2e8379bfc26" kindref="member">ViewportToolbar</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="31" refid="class_boon_editor_1_1_viewport_toolbar_1aa59706df1b96fb30a51f08c115643002" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1a9de15d79421fbcabf974d2e8379bfc26" kindref="member">ViewportToolbar</ref>&amp;<sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1aa59706df1b96fb30a51f08c115643002" kindref="member">operator=</ref>(<ref refid="class_boon_editor_1_1_viewport_toolbar_1a9de15d79421fbcabf974d2e8379bfc26" kindref="member">ViewportToolbar</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33" refid="class_boon_editor_1_1_viewport_toolbar_1abee65362a35af9d67b25128d03179585" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1abee65362a35af9d67b25128d03179585" kindref="member">OnRender</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec2&amp;<sp/>boundsMin,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec2&amp;<sp/>boundsMax);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="class_boon_editor_1_1_viewport_toolbar_1a2cd3bc7b1f0cef5fb5908a88e23bd5f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1a2cd3bc7b1f0cef5fb5908a88e23bd5f1" kindref="member">BindOnPlayCallback</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">()&gt;&amp;<sp/>fn);</highlight></codeline>
+<codeline lineno="36" refid="class_boon_editor_1_1_viewport_toolbar_1ae53d5b19832bfc9d4edbc2b4712c45a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1ae53d5b19832bfc9d4edbc2b4712c45a0" kindref="member">BindOnPauseCallback</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">()&gt;&amp;<sp/>fn);</highlight></codeline>
+<codeline lineno="37" refid="class_boon_editor_1_1_viewport_toolbar_1a5fabc915370a0546a43375681c6baa9d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1a5fabc915370a0546a43375681c6baa9d" kindref="member">BindOnStopCallback</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">()&gt;&amp;<sp/>fn);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="class_boon_editor_1_1_viewport_toolbar_1ab1478a626148f7d19fd74777284ffd7e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1ab1478a626148f7d19fd74777284ffd7e" kindref="member">SetActiveSetting</ref>(<ref refid="namespace_boon_editor_1af9b9a359e33efd5b98545574f1a50f8f" kindref="member">ViewportToolbarSetting</ref><sp/>setting)<sp/>{<sp/>m_ActiveSetting<sp/>=<sp/>setting;<sp/>}</highlight></codeline>
+<codeline lineno="40" refid="class_boon_editor_1_1_viewport_toolbar_1a9e8b717ee95bd496d902ef6fa28e960b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_editor_1af9b9a359e33efd5b98545574f1a50f8f" kindref="member">ViewportToolbarSetting</ref><sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1a9e8b717ee95bd496d902ef6fa28e960b" kindref="member">GetActiveSetting</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_ActiveSetting;<sp/>}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="43" refid="class_boon_editor_1_1_viewport_toolbar_1a11792bf435f73176626efeae76f5bf9e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_viewport_toolbar_1a11792bf435f73176626efeae76f5bf9e" kindref="member">OnRenderUI</ref>()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnPlay();</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnPause();</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnStop();</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;void()&gt;<sp/>m_fnOnPlayCallback{<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>};</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;void()&gt;<sp/>m_fnOnPauseCallback{<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;void()&gt;<sp/>m_fnOnStopCallback{<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>};</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_editor_1af46b44d156534852eaff07a015ed8215" kindref="member">EditorPlayState</ref><sp/>m_PlayState{<sp/><ref refid="namespace_boon_editor_1af46b44d156534852eaff07a015ed8215a7dce122004969d56ae2e0245cb754d35" kindref="member">EditorPlayState::Edit</ref><sp/>};</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_editor_1af9b9a359e33efd5b98545574f1a50f8f" kindref="member">ViewportToolbarSetting</ref><sp/>m_ActiveSetting{};</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;Texture2D&gt;<sp/>m_pPlayIcon;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;Texture2D&gt;<sp/>m_pStopIcon;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;Texture2D&gt;<sp/>m_pCameraIcon;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;Texture2D&gt;<sp/>m_pVisibilityIcon;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Panels/ViewportToolbar.h"/>
+  </compounddef>
+</doxygen>

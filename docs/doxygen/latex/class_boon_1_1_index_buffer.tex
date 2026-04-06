@@ -1,0 +1,83 @@
+\doxysection{Boon::\+Index\+Buffer Class Reference}
+\hypertarget{class_boon_1_1_index_buffer}{}\label{class_boon_1_1_index_buffer}\index{Boon::IndexBuffer@{Boon::IndexBuffer}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_boon_1_1_index_buffer_a8f0a0c3d83a53176eff4b2130e556e68}\label{class_boon_1_1_index_buffer_a8f0a0c3d83a53176eff4b2130e556e68} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Index\+Buffer} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor for index buffer implementations. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_index_buffer_a7888fdc7d8f50a12c7df9e14fa1af912}\label{class_boon_1_1_index_buffer_a7888fdc7d8f50a12c7df9e14fa1af912} 
+{\bfseries Index\+Buffer} (const Index\+Buffer \&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_index_buffer_a8f7d29d4693014fcc3d45d754171946a}\label{class_boon_1_1_index_buffer_a8f7d29d4693014fcc3d45d754171946a} 
+{\bfseries Index\+Buffer} (Index\+Buffer \&\&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_index_buffer_af2edd6355c0ebacd466ef63546818e6c}\label{class_boon_1_1_index_buffer_af2edd6355c0ebacd466ef63546818e6c} 
+Index\+Buffer \& {\bfseries operator=} (const Index\+Buffer \&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_index_buffer_ac9a7a23453f9eb66556edf95477b785b}\label{class_boon_1_1_index_buffer_ac9a7a23453f9eb66556edf95477b785b} 
+Index\+Buffer \& {\bfseries operator=} (Index\+Buffer \&\&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_index_buffer_ab5df6ee5169201d60b28c10ae422f27c}\label{class_boon_1_1_index_buffer_ab5df6ee5169201d60b28c10ae422f27c} 
+virtual void {\bfseries Bind} () const =0
+\begin{DoxyCompactList}\small\item\em Bind the index buffer. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_index_buffer_a48aedc4218699068b2860414f32e934a}\label{class_boon_1_1_index_buffer_a48aedc4218699068b2860414f32e934a} 
+virtual void {\bfseries Unbind} () const =0
+\begin{DoxyCompactList}\small\item\em Unbind the index buffer. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \doxymbox{\hyperlink{class_boon_1_1_index_buffer_a4990158ba8eedddb92e2d0e79277aea5}{Get\+Count}} () const =0
+\begin{DoxyCompactList}\small\item\em Get the number of indices stored in the buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std::\+shared\+\_\+ptr$<$ Index\+Buffer $>$ \doxymbox{\hyperlink{class_boon_1_1_index_buffer_af4a87730d42310454f6a36720298ecf7}{Create}} (uint32\+\_\+t \texorpdfstring{$\ast$}{*}indices, uint32\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Create an index buffer from raw index data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_index_buffer_8h_source_l00007}{7}} of file \doxymbox{\hyperlink{_index_buffer_8h_source}{Index\+Buffer.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_index_buffer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_index_buffer_af4a87730d42310454f6a36720298ecf7}\index{Boon::IndexBuffer@{Boon::IndexBuffer}!Create@{Create}}
+\index{Create@{Create}!Boon::IndexBuffer@{Boon::IndexBuffer}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_index_buffer_af4a87730d42310454f6a36720298ecf7} 
+std::\+shared\+\_\+ptr$<$ Index\+Buffer $>$ Boon::\+\+Index\+Buffer::\+\+Create (\begin{DoxyParamCaption}\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{indices}{, }\item[{uint32\+\_\+t}]{count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create an index buffer from raw index data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em indices} & Pointer to index data. \\
+\hline
+{\em count} & Number of indices. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Shared pointer to the created \doxylink{class_boon_1_1_index_buffer}{Index\+Buffer}. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_index_buffer_a4990158ba8eedddb92e2d0e79277aea5}\index{Boon::IndexBuffer@{Boon::IndexBuffer}!GetCount@{GetCount}}
+\index{GetCount@{GetCount}!Boon::IndexBuffer@{Boon::IndexBuffer}}
+\doxysubsubsection{\texorpdfstring{GetCount()}{GetCount()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_index_buffer_a4990158ba8eedddb92e2d0e79277aea5} 
+virtual uint32\+\_\+t Boon::\+\+Index\+Buffer::\+\+Get\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get the number of indices stored in the buffer. 
+
+\begin{DoxyReturn}{Returns}
+Index count. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Index\+Buffer.\+h\end{DoxyCompactItemize}

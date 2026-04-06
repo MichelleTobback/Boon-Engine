@@ -1,0 +1,371 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_asset_database_8h" kind="file" language="C++">
+    <compoundname>AssetDatabase.h</compoundname>
+    <includes refid="_asset_importer_registry_8h" local="yes">Asset/Importer/AssetImporterRegistry.h</includes>
+    <includes refid="_asset_ref_8h" local="yes">Asset/AssetRef.h</includes>
+    <includes local="no">functional</includes>
+    <includes refid="_texture_asset_8h" local="yes">Asset/TextureAsset.h</includes>
+    <includes refid="_service_locator_8h" local="yes">Core/ServiceLocator.h</includes>
+    <includedby refid="_content_browser_8h" local="yes">Panels/ContentBrowser.h</includedby>
+    <includedby refid="_u_i_8h" local="yes">UI/UI.h</includedby>
+    <incdepgraph>
+      <node id="4">
+        <label>Asset/Asset.h</label>
+        <link refid="_asset_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>Asset/AssetMeta.h</label>
+        <link refid="_asset_meta_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>Asset/AssetPack/AssetCache.h</label>
+        <link refid="_asset_cache_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Asset/AssetRef.h</label>
+        <link refid="_asset_ref_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>Asset/AssetRegistry.h</label>
+        <link refid="_asset_registry_8h"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>Asset/AssetTraits.h</label>
+        <link refid="_asset_traits_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Asset/AssetType.h</label>
+        <link refid="_asset_type_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>AssetImporter.h</label>
+        <link refid="_asset_importer_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Asset/Importer/AssetImporterRegistry.h</label>
+        <link refid="_asset_importer_registry_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>Asset/TextureAsset.h</label>
+        <link refid="_texture_asset_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>Assert.h</label>
+        <link refid="_assert_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>Core/Memory/Buffer.h</label>
+        <link refid="_buffer_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>Core/ServiceLocator.h</label>
+        <link refid="_service_locator_8h"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Core/UUID.h</label>
+        <link refid="_u_u_i_d_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>Renderer/Texture.h</label>
+        <link refid="_texture_8h"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Assets/AssetDatabase.h</label>
+        <link refid="_asset_database_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>cstdint</label>
+      </node>
+      <node id="30">
+        <label>cstdlib</label>
+      </node>
+      <node id="25">
+        <label>cstring</label>
+      </node>
+      <node id="19">
+        <label>filesystem</label>
+      </node>
+      <node id="21">
+        <label>fstream</label>
+      </node>
+      <node id="22">
+        <label>functional</label>
+      </node>
+      <node id="7">
+        <label>memory</label>
+      </node>
+      <node id="20">
+        <label>nlohmann/json.hpp</label>
+      </node>
+      <node id="31">
+        <label>stack</label>
+      </node>
+      <node id="5">
+        <label>string</label>
+      </node>
+      <node id="26">
+        <label>type_traits</label>
+      </node>
+      <node id="9">
+        <label>typeindex</label>
+      </node>
+      <node id="15">
+        <label>unordered_map</label>
+      </node>
+      <node id="8">
+        <label>vector</label>
+      </node>
+      <node id="11">
+        <label>xhash</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>Assets/AssetDatabase.h</label>
+        <link refid="_asset_database_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Panels/AssetEditor.h</label>
+        <link refid="_asset_editor_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Panels/AssetEditorPanel.h</label>
+        <link refid="_asset_editor_panel_8h"/>
+      </node>
+      <node id="2">
+        <label>Panels/ContentBrowser.h</label>
+        <link refid="_content_browser_8h"/>
+      </node>
+      <node id="8">
+        <label>Panels/PropertiesPanel.h</label>
+        <link refid="_properties_panel_8h"/>
+      </node>
+      <node id="6">
+        <label>Panels/SpriteAtlasEditorPanel.h</label>
+        <link refid="_sprite_atlas_editor_panel_8h"/>
+      </node>
+      <node id="7">
+        <label>Panels/TilemapEditorPanel.h</label>
+        <link refid="_tilemap_editor_panel_8h"/>
+      </node>
+      <node id="3">
+        <label>UI/UI.h</label>
+        <link refid="_u_i_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_boon_editor_1_1_asset_database" prot="public">BoonEditor::AssetDatabase</innerclass>
+    <innernamespace refid="namespace_boon_editor">BoonEditor</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_asset_importer_registry_8h" kindref="compound">Asset/Importer/AssetImporterRegistry.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_asset_ref_8h" kindref="compound">Asset/AssetRef.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_texture_asset_8h" kindref="compound">Asset/TextureAsset.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_service_locator_8h" kindref="compound">Core/ServiceLocator.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref>;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="namespace_boon_editor" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon_editor" kindref="compound">BoonEditor</ref></highlight></codeline>
+<codeline lineno="11"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="12" refid="class_boon_editor_1_1_asset_database" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">AssetDatabase<sp/>final</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="15" refid="class_boon_editor_1_1_asset_database_1ace16b7da0cba2023667284da04a12e06" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>AssetDatabase&amp;<sp/><ref refid="class_boon_editor_1_1_asset_database_1ace16b7da0cba2023667284da04a12e06" kindref="member">Get</ref>();</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="class_boon_editor_1_1_asset_database_1a1f916cd6a6dd2561f2929c30d3679b64" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_database_1a1f916cd6a6dd2561f2929c30d3679b64" kindref="member">RegisterAsset</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path,<sp/><ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref><sp/>handle);</highlight></codeline>
+<codeline lineno="18" refid="class_boon_editor_1_1_asset_database_1aa170982e3d5f70fa6f853d2d840496d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref><sp/><ref refid="class_boon_editor_1_1_asset_database_1aa170982e3d5f70fa6f853d2d840496d2" kindref="member">GetHandle</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="19" refid="class_boon_editor_1_1_asset_database_1adacac70d6668f6a12ef19c871f9440f8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="class_boon_editor_1_1_asset_database_1adacac70d6668f6a12ef19c871f9440f8" kindref="member">GetPath</ref>(<ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref><sp/>handle)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TAsset&gt;</highlight></codeline>
+<codeline lineno="22" refid="class_boon_editor_1_1_asset_database_1aa5075a952d05038802c8e7ea7947a676" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_asset_ref" kindref="compound">AssetRef&lt;TAsset&gt;</ref><sp/><ref refid="class_boon_editor_1_1_asset_database_1aa5075a952d05038802c8e7ea7947a676" kindref="member">Load</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path)</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_asset_importer_registry" kindref="compound">AssetImporterRegistry</ref>&amp;<sp/>reg<sp/>=<sp/><ref refid="class_boon_1_1_service_locator_1a24d80f5670a222c787d4f63bdba7c03a" kindref="member">ServiceLocator::Get&lt;AssetImporterRegistry&gt;</ref>();</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_asset_importer_registry_1_1_imported" kindref="compound">AssetImporterRegistry::Imported&lt;TAsset&gt;</ref><sp/>result<sp/>=<sp/>reg.<ref refid="class_boon_1_1_asset_importer_registry_1a149a18c435b0622b9575a02b4eb496d4" kindref="member">ImportAndLoad</ref>&lt;TAsset&gt;(path);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_asset_ref" kindref="compound">AssetRef&lt;TAsset&gt;</ref>(result.<ref refid="struct_boon_1_1_asset_importer_registry_1_1_imported_1ae5b7682db6a4d26050b2b76f2c5d4169" kindref="member">meta</ref>.<ref refid="struct_boon_1_1_asset_meta_1ae9a9e96f555d42d6bc50d12751fd129d" kindref="member">uuid</ref>);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TAsset&gt;</highlight></codeline>
+<codeline lineno="30" refid="class_boon_editor_1_1_asset_database_1aa987e31f197e8ba7f58157c4f190ed07" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_database_1aa987e31f197e8ba7f58157c4f190ed07" kindref="member">Export</ref>(<ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref><sp/>handle)</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path<sp/>=<sp/>m_HandleToPath.at(handle);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_service_locator_1a24d80f5670a222c787d4f63bdba7c03a" kindref="member">ServiceLocator::Get&lt;AssetImporterRegistry&gt;</ref>().Export&lt;TAsset&gt;(path,<sp/>handle);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="class_boon_editor_1_1_asset_database_1a40cd88d7844dbdda25fbaeac0b566070" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_database_1a40cd88d7844dbdda25fbaeac0b566070" kindref="member">Exists</ref>(<ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref><sp/>handle)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37" refid="class_boon_editor_1_1_asset_database_1a9407d7d19ada9e9e0ad00d74039033e3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_database_1a9407d7d19ada9e9e0ad00d74039033e3" kindref="member">Exists</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="class_boon_editor_1_1_asset_database_1a756e3b9f50294f9334727e268d737fd4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_database_1a756e3b9f50294f9334727e268d737fd4" kindref="member">Clear</ref>();</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41" refid="class_boon_editor_1_1_asset_database_1abd9809203296f42147cac32de159feeb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_database_1abd9809203296f42147cac32de159feeb" kindref="member">ForEachEntry</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(<ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;)&gt;&amp;<sp/>fn);</highlight></codeline>
+<codeline lineno="42" refid="class_boon_editor_1_1_asset_database_1a13894bdc0d0b0297208ae8ef4113aea7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="class_boon_editor_1_1_asset_database_1a13894bdc0d0b0297208ae8ef4113aea7" kindref="member">GetAssetRoot</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_AssetRoot;<sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44" refid="class_boon_editor_1_1_asset_database_1a9dee6e32c78518c4bd6c1cc2d382d1fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_database_1a9dee6e32c78518c4bd6c1cc2d382d1fb" kindref="member">IsDirty</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Dirty;<sp/>}</highlight></codeline>
+<codeline lineno="45" refid="class_boon_editor_1_1_asset_database_1a31867a8f5f409a1e65c99e2ed7a0f19c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_database_1a31867a8f5f409a1e65c99e2ed7a0f19c" kindref="member">ClearDirty</ref>()<sp/>{<sp/>m_Dirty<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="class_boon_editor_1_1_asset_database_1a3c3d60360d87ddf326977d601d4ecc39" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_asset_ref" kindref="compound">AssetRef&lt;Texture2DAsset&gt;</ref><sp/><ref refid="class_boon_editor_1_1_asset_database_1a3c3d60360d87ddf326977d601d4ecc39" kindref="member">GetThumbnail</ref>(<ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref><sp/>handle)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AssetDatabase();</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Init();</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;AssetHandle,<sp/>std::string&gt;<sp/>m_HandleToPath;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;std::string,<sp/>AssetHandle&gt;<sp/>m_PathToHandle;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>m_AssetRoot{</highlight><highlight class="stringliteral">&quot;Assets/&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_Dirty<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;AssetType,<sp/>AssetRef&lt;Texture2DAsset&gt;&gt;<sp/>m_DefaultTextures;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Assets/AssetDatabase.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_editor_1_1_editor_context" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>BoonEditor::EditorContext</compoundname>
+    <includes refid="_editor_context_8h" local="no">Core/EditorContext.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="class_boon_editor_1_1_editor_context_1a939a53fe60c6e7d220a4a400840997d4" prot="public" static="no">
+        <type>void(T &amp;)</type>
+        <definition>using BoonEditor::EditorContext&lt; T &gt;::Signature = void(T&amp;)</definition>
+        <argsstring></argsstring>
+        <name>Signature</name>
+        <qualifiedname>BoonEditor::EditorContext::Signature</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorContext.h" line="12" column="1" bodyfile="Core/EditorContext.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="class_boon_editor_1_1_editor_context_1addd4275d7810611b1080d2dcc7227359" prot="public" static="no">
+        <type>std::function&lt; <ref refid="class_boon_editor_1_1_editor_context_1a939a53fe60c6e7d220a4a400840997d4" kindref="member">Signature</ref> &gt;</type>
+        <definition>using BoonEditor::EditorContext&lt; T &gt;::Callback = std::function&lt;Signature&gt;</definition>
+        <argsstring></argsstring>
+        <name>Callback</name>
+        <qualifiedname>BoonEditor::EditorContext::Callback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorContext.h" line="13" column="1" bodyfile="Core/EditorContext.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_editor_1_1_editor_context_1ad5224843e913f90aa2601b556fb34a20" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T BoonEditor::EditorContext&lt; T &gt;::m_pContext</definition>
+        <argsstring></argsstring>
+        <name>m_pContext</name>
+        <qualifiedname>BoonEditor::EditorContext::m_pContext</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorContext.h" line="30" column="3" bodyfile="Core/EditorContext.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_editor_context_1a54e8d9e75783700b9b5ced83dc241e94" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_delegate" kindref="compound">Delegate</ref>&lt; <ref refid="class_boon_editor_1_1_editor_context_1a939a53fe60c6e7d220a4a400840997d4" kindref="member">Signature</ref> &gt;</type>
+        <definition>Delegate&lt;Signature&gt; BoonEditor::EditorContext&lt; T &gt;::m_OnContextChanged</definition>
+        <argsstring></argsstring>
+        <name>m_OnContextChanged</name>
+        <qualifiedname>BoonEditor::EditorContext::m_OnContextChanged</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorContext.h" line="31" column="10" bodyfile="Core/EditorContext.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_context_1ae019d5e54e7c67e201ffce4c50e6e4a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::EditorContext&lt; T &gt;::EditorContext</definition>
+        <argsstring>()=default</argsstring>
+        <name>EditorContext</name>
+        <qualifiedname>BoonEditor::EditorContext::EditorContext</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorContext.h" line="15" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_context_1a9dfee1d7eb09141056ebabe1a404ad92" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::EditorContext&lt; T &gt;::EditorContext</definition>
+        <argsstring>(const T &amp;context)</argsstring>
+        <name>EditorContext</name>
+        <qualifiedname>BoonEditor::EditorContext::EditorContext</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorContext.h" line="16" column="1" bodyfile="Core/EditorContext.h" bodystart="35" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_context_1a3ee2f7d98381af6de8c6452ca1d17608" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::EditorContext&lt; T &gt;::~EditorContext</definition>
+        <argsstring>()=default</argsstring>
+        <name>~EditorContext</name>
+        <qualifiedname>BoonEditor::EditorContext::~EditorContext</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorContext.h" line="17" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_context_1a5b807437a9dc4124178e67e87e246c7b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; BoonEditor::EditorContext&lt; T &gt;::Get</definition>
+        <argsstring>()</argsstring>
+        <name>Get</name>
+        <qualifiedname>BoonEditor::EditorContext::Get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorContext.h" line="19" column="3" bodyfile="Core/EditorContext.h" bodystart="40" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_context_1aea1ced161b156ea858b76f6cc99818f0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; BoonEditor::EditorContext&lt; T &gt;::Get</definition>
+        <argsstring>() const</argsstring>
+        <name>Get</name>
+        <qualifiedname>BoonEditor::EditorContext::Get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorContext.h" line="20" column="9" bodyfile="Core/EditorContext.h" bodystart="45" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_context_1a8d6195c1a4ebad0bfe7b0f425bf25478" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::EditorContext&lt; T &gt;::Set</definition>
+        <argsstring>(const T &amp;context)</argsstring>
+        <name>Set</name>
+        <qualifiedname>BoonEditor::EditorContext::Set</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorContext.h" line="21" column="6" bodyfile="Core/EditorContext.h" bodystart="50" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_context_1ad5380e30ab4414968311ebedb2974446" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::EditorContext&lt; T &gt;::AddOnContextChangedCallback</definition>
+        <argsstring>(const Callback &amp;fn)</argsstring>
+        <name>AddOnContextChangedCallback</name>
+        <qualifiedname>BoonEditor::EditorContext::AddOnContextChangedCallback</qualifiedname>
+        <param>
+          <type>const <ref refid="class_boon_editor_1_1_editor_context_1addd4275d7810611b1080d2dcc7227359" kindref="member">Callback</ref> &amp;</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorContext.h" line="22" column="6" bodyfile="Core/EditorContext.h" bodystart="56" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_context_1a1d22537655a32a73d432beca97a5f949" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool BoonEditor::EditorContext&lt; T &gt;::IsValid</definition>
+        <argsstring>() const</argsstring>
+        <name>IsValid</name>
+        <qualifiedname>BoonEditor::EditorContext::IsValid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorContext.h" line="24" column="6" bodyfile="Core/EditorContext.h" bodystart="72" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_context_1abf57195643c1f8d4136aaef8349b0f52" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; BoonEditor::EditorContext&lt; T &gt;::overator</definition>
+        <argsstring>()</argsstring>
+        <name>overator</name>
+        <qualifiedname>BoonEditor::EditorContext::overator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorContext.h" line="26" column="3" bodyfile="Core/EditorContext.h" bodystart="61" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_context_1a6ea950da31b0b06d1c2339b4e8954a8e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; BoonEditor::EditorContext&lt; T &gt;::overator</definition>
+        <argsstring>() const</argsstring>
+        <name>overator</name>
+        <qualifiedname>BoonEditor::EditorContext::overator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorContext.h" line="27" column="9" bodyfile="Core/EditorContext.h" bodystart="66" bodyend="69"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Core/EditorContext.h" line="9" column="1" bodyfile="Core/EditorContext.h" bodystart="10" bodyend="32"/>
+    <listofallmembers>
+      <member refid="class_boon_editor_1_1_editor_context_1ad5380e30ab4414968311ebedb2974446" prot="public" virt="non-virtual"><scope>BoonEditor::EditorContext</scope><name>AddOnContextChangedCallback</name></member>
+      <member refid="class_boon_editor_1_1_editor_context_1addd4275d7810611b1080d2dcc7227359" prot="public" virt="non-virtual"><scope>BoonEditor::EditorContext</scope><name>Callback</name></member>
+      <member refid="class_boon_editor_1_1_editor_context_1ae019d5e54e7c67e201ffce4c50e6e4a9" prot="public" virt="non-virtual"><scope>BoonEditor::EditorContext</scope><name>EditorContext</name></member>
+      <member refid="class_boon_editor_1_1_editor_context_1a9dfee1d7eb09141056ebabe1a404ad92" prot="public" virt="non-virtual"><scope>BoonEditor::EditorContext</scope><name>EditorContext</name></member>
+      <member refid="class_boon_editor_1_1_editor_context_1a5b807437a9dc4124178e67e87e246c7b" prot="public" virt="non-virtual"><scope>BoonEditor::EditorContext</scope><name>Get</name></member>
+      <member refid="class_boon_editor_1_1_editor_context_1aea1ced161b156ea858b76f6cc99818f0" prot="public" virt="non-virtual"><scope>BoonEditor::EditorContext</scope><name>Get</name></member>
+      <member refid="class_boon_editor_1_1_editor_context_1a1d22537655a32a73d432beca97a5f949" prot="public" virt="non-virtual"><scope>BoonEditor::EditorContext</scope><name>IsValid</name></member>
+      <member refid="class_boon_editor_1_1_editor_context_1a54e8d9e75783700b9b5ced83dc241e94" prot="private" virt="non-virtual"><scope>BoonEditor::EditorContext</scope><name>m_OnContextChanged</name></member>
+      <member refid="class_boon_editor_1_1_editor_context_1ad5224843e913f90aa2601b556fb34a20" prot="private" virt="non-virtual"><scope>BoonEditor::EditorContext</scope><name>m_pContext</name></member>
+      <member refid="class_boon_editor_1_1_editor_context_1abf57195643c1f8d4136aaef8349b0f52" prot="public" virt="non-virtual"><scope>BoonEditor::EditorContext</scope><name>overator</name></member>
+      <member refid="class_boon_editor_1_1_editor_context_1a6ea950da31b0b06d1c2339b4e8954a8e" prot="public" virt="non-virtual"><scope>BoonEditor::EditorContext</scope><name>overator</name></member>
+      <member refid="class_boon_editor_1_1_editor_context_1a8d6195c1a4ebad0bfe7b0f425bf25478" prot="public" virt="non-virtual"><scope>BoonEditor::EditorContext</scope><name>Set</name></member>
+      <member refid="class_boon_editor_1_1_editor_context_1a939a53fe60c6e7d220a4a400840997d4" prot="public" virt="non-virtual"><scope>BoonEditor::EditorContext</scope><name>Signature</name></member>
+      <member refid="class_boon_editor_1_1_editor_context_1a3ee2f7d98381af6de8c6452ca1d17608" prot="public" virt="non-virtual"><scope>BoonEditor::EditorContext</scope><name>~EditorContext</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_vertex_buffer_layout_8h" kind="file" language="C++">
+    <compoundname>VertexBufferLayout.h</compoundname>
+    <includes local="no">initializer_list</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="_render_batch_8h" local="yes">Renderer/RenderBatch.h</includedby>
+    <includedby refid="_vertex_buffer_8h" local="yes">Renderer/VertexBuffer.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>Renderer/VertexBufferLayout.h</label>
+        <link refid="_vertex_buffer_layout_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>initializer_list</label>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="8">
+        <label>Asset/Importer/TilemapImporter.h</label>
+        <link refid="_tilemap_importer_8h"/>
+      </node>
+      <node id="7">
+        <label>Asset/TilemapAsset.h</label>
+        <link refid="_tilemap_asset_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>BoonDebug/DebugRenderer.h</label>
+        <link refid="_boon_2include_2_boon_debug_2_debug_renderer_8h"/>
+      </node>
+      <node id="9">
+        <label>Component/TilemapRendererComponent.h</label>
+        <link refid="_tilemap_renderer_component_8h"/>
+      </node>
+      <node id="2">
+        <label>Renderer/RenderBatch.h</label>
+        <link refid="_render_batch_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Renderer/Renderer2D.h</label>
+        <link refid="_renderer2_d_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Renderer/Tilemap.h</label>
+        <link refid="_tilemap_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Renderer/VertexBuffer.h</label>
+        <link refid="_vertex_buffer_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Renderer/VertexBufferLayout.h</label>
+        <link refid="_vertex_buffer_layout_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Renderer/VertexInput.h</label>
+        <link refid="_vertex_input_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Panels/TilemapEditorPanel.h</label>
+        <link refid="_tilemap_editor_panel_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_boon_1_1_vertex_buffer_layout" prot="public">Boon::VertexBufferLayout</innerclass>
+    <innerclass refid="struct_boon_1_1_vertex_buffer_layout_1_1_element" prot="public">Boon::VertexBufferLayout::Element</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;initializer_list&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="8"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="9" refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2d" kindref="member">ShaderDataType</ref></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="11" refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2dac26f15e86e3de4c398a8273272aba034" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a6867a346204e7bbed8bfe91d8dc2e807a6adf97f83acf6453d4a6a4b1070f3754" kindref="member">None</ref><sp/>=<sp/>0,<sp/><ref refid="namespace_boon_1aa4757b7e72d3900686b003ef1d818921a22ae0e2b89e5e3d477f988cc36d3272b" kindref="member">Float</ref>,<sp/><ref refid="namespace_boon_1aa8ac0a1443718f6b346b8b08af5c5384a6694430a2b471b5d2de071f2ef1fdc57" kindref="member">Float2</ref>,<sp/><ref refid="namespace_boon_1aa8ac0a1443718f6b346b8b08af5c5384a8a8a1d211464d4bdee46db3c75bfa121" kindref="member">Float3</ref>,<sp/><ref refid="namespace_boon_1aa8ac0a1443718f6b346b8b08af5c5384a33116adc6690289da9b82ea736864eeb" kindref="member">Float4</ref>,<sp/><ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2da2495a7d9c1fab19af6441abbfed823e1" kindref="member">Mat3</ref>,<sp/><ref refid="namespace_boon_1aa8ac0a1443718f6b346b8b08af5c5384a80f7408b0a5b5d78c26adae9f6f420f9" kindref="member">Mat4</ref>,<sp/><ref refid="namespace_boon_1aa4757b7e72d3900686b003ef1d818921a1686a6c336b71b36d77354cea19a8b52" kindref="member">Int</ref>,<sp/><ref refid="namespace_boon_1aa8ac0a1443718f6b346b8b08af5c5384a4c6bc90f2bbdf35523e29c414a57bad3" kindref="member">Int2</ref>,<sp/><ref refid="namespace_boon_1aa8ac0a1443718f6b346b8b08af5c5384a56bf1b0e694b442bf4145a04b82ea943" kindref="member">Int3</ref>,<sp/><ref refid="namespace_boon_1aa8ac0a1443718f6b346b8b08af5c5384a1a44f12c3427b3e11c171d09632bad8d" kindref="member">Int4</ref>,<sp/><ref refid="namespace_boon_1aa4757b7e72d3900686b003ef1d818921ac26f15e86e3de4c398a8273272aba034" kindref="member">Bool</ref></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="namespace_boon_1a2bb2766cddfec4cef5c0acaf23904801" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>uint32_t<sp/><ref refid="namespace_boon_1a2bb2766cddfec4cef5c0acaf23904801" kindref="member">ShaderDataTypeSize</ref>(<ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2d" kindref="member">ShaderDataType</ref><sp/>type)</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(type)</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2da22ae0e2b89e5e3d477f988cc36d3272b" kindref="member">ShaderDataType::Float</ref>:<sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>4;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2da6694430a2b471b5d2de071f2ef1fdc57" kindref="member">ShaderDataType::Float2</ref>:<sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>4<sp/>*<sp/>2;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2da8a8a1d211464d4bdee46db3c75bfa121" kindref="member">ShaderDataType::Float3</ref>:<sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>4<sp/>*<sp/>3;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2da33116adc6690289da9b82ea736864eeb" kindref="member">ShaderDataType::Float4</ref>:<sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>4<sp/>*<sp/>4;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2da2495a7d9c1fab19af6441abbfed823e1" kindref="member">ShaderDataType::Mat3</ref>:<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>4<sp/>*<sp/>3<sp/>*<sp/>3;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2da80f7408b0a5b5d78c26adae9f6f420f9" kindref="member">ShaderDataType::Mat4</ref>:<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>4<sp/>*<sp/>4<sp/>*<sp/>4;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2da1686a6c336b71b36d77354cea19a8b52" kindref="member">ShaderDataType::Int</ref>:<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>4;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2da4c6bc90f2bbdf35523e29c414a57bad3" kindref="member">ShaderDataType::Int2</ref>:<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>4<sp/>*<sp/>2;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2da56bf1b0e694b442bf4145a04b82ea943" kindref="member">ShaderDataType::Int3</ref>:<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>4<sp/>*<sp/>3;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2da1a44f12c3427b3e11c171d09632bad8d" kindref="member">ShaderDataType::Int4</ref>:<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>4<sp/>*<sp/>4;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2dac26f15e86e3de4c398a8273272aba034" kindref="member">ShaderDataType::Bool</ref>:<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33" refid="class_boon_1_1_vertex_buffer_layout" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_vertex_buffer_layout_1af0ef6ef7e9fd921fe16cad14f443d7a9" kindref="member">VertexBufferLayout</ref><sp/>final</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="36" refid="struct_boon_1_1_vertex_buffer_layout_1_1_element" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1a5b525ee2b566061bef88347f64c13a64" kindref="member">Element</ref></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="38" refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1a5b561cbbf1203344aebd449664777c20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1a5b561cbbf1203344aebd449664777c20" kindref="member">Name</ref>;</highlight></codeline>
+<codeline lineno="39" refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1aadebe1b3f3f56dd7a8b59f5df8b7505c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2d" kindref="member">ShaderDataType</ref><sp/><ref refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1aadebe1b3f3f56dd7a8b59f5df8b7505c" kindref="member">Type</ref>;</highlight></codeline>
+<codeline lineno="40" refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1a2b1a8a5eb8915afc961b3b6ed62f27b4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1a2b1a8a5eb8915afc961b3b6ed62f27b4" kindref="member">Size</ref>;</highlight></codeline>
+<codeline lineno="41" refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1a595dced204dd60eeaf1457e0a76e2edd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1a595dced204dd60eeaf1457e0a76e2edd" kindref="member">Offset</ref>;</highlight></codeline>
+<codeline lineno="42" refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1ae44d3eeeb98cce638b424b43d6f993d4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1ae44d3eeeb98cce638b424b43d6f993d4" kindref="member">Normalized</ref>;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44" refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1a5b525ee2b566061bef88347f64c13a64" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1a5b525ee2b566061bef88347f64c13a64" kindref="member">Element</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="45" refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1a1ffec4ee34411c8e8604f913eb881753" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1a1ffec4ee34411c8e8604f913eb881753" kindref="member">Element</ref>(<ref refid="namespace_boon_1ac86ffb188397d476e23b4163ac368e2d" kindref="member">ShaderDataType</ref><sp/>type,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>normalized<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1a7f53590d4b413ddfb44f7f9794c2f0bf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_boon_1_1_vertex_buffer_layout_1_1_element_1a7f53590d4b413ddfb44f7f9794c2f0bf" kindref="member">GetComponentCount</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="class_boon_1_1_vertex_buffer_layout_1af0ef6ef7e9fd921fe16cad14f443d7a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1af0ef6ef7e9fd921fe16cad14f443d7a9" kindref="member">VertexBufferLayout</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="51" refid="class_boon_1_1_vertex_buffer_layout_1a77d0e53b9b96ba5ef10ab9e710244b9e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1a77d0e53b9b96ba5ef10ab9e710244b9e" kindref="member">VertexBufferLayout</ref>(std::initializer_list&lt;Element&gt;<sp/>elements);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="class_boon_1_1_vertex_buffer_layout_1af1911f0345b15d18dcd0f6a6bc1cdbcd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1af1911f0345b15d18dcd0f6a6bc1cdbcd" kindref="member">~VertexBufferLayout</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="class_boon_1_1_vertex_buffer_layout_1a99d192ba5b55feabc9ab015784e2f407" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1a99d192ba5b55feabc9ab015784e2f407" kindref="member">VertexBufferLayout</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1af0ef6ef7e9fd921fe16cad14f443d7a9" kindref="member">VertexBufferLayout</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="56" refid="class_boon_1_1_vertex_buffer_layout_1a8e984989261f8af1418b3b22f907fab1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1a8e984989261f8af1418b3b22f907fab1" kindref="member">VertexBufferLayout</ref>(<ref refid="class_boon_1_1_vertex_buffer_layout_1af0ef6ef7e9fd921fe16cad14f443d7a9" kindref="member">VertexBufferLayout</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="57" refid="class_boon_1_1_vertex_buffer_layout_1aeac51410fbb4c4d50eefdeea5fc56cd9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1af0ef6ef7e9fd921fe16cad14f443d7a9" kindref="member">VertexBufferLayout</ref>&amp;<sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1aeac51410fbb4c4d50eefdeea5fc56cd9" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1af0ef6ef7e9fd921fe16cad14f443d7a9" kindref="member">VertexBufferLayout</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="58" refid="class_boon_1_1_vertex_buffer_layout_1a790e18d29e7243c0ffe10435c656f630" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1af0ef6ef7e9fd921fe16cad14f443d7a9" kindref="member">VertexBufferLayout</ref>&amp;<sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1a790e18d29e7243c0ffe10435c656f630" kindref="member">operator=</ref>(<ref refid="class_boon_1_1_vertex_buffer_layout_1af0ef6ef7e9fd921fe16cad14f443d7a9" kindref="member">VertexBufferLayout</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60" refid="class_boon_1_1_vertex_buffer_layout_1a2caaf3adf71496c9c6fddd113bc1af8e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>uint32_t<sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1a2caaf3adf71496c9c6fddd113bc1af8e" kindref="member">GetStride</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Stride;<sp/>}</highlight></codeline>
+<codeline lineno="61" refid="class_boon_1_1_vertex_buffer_layout_1a47093b17c904fd8b286c57943f5c0580" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;Element&gt;&amp;<sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1a47093b17c904fd8b286c57943f5c0580" kindref="member">GetElements</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Elements;<sp/>}</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="class_boon_1_1_vertex_buffer_layout_1aa17aa8b0bcdc5ab7f41113590ec39e71" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::vector&lt;Element&gt;::iterator<sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1aa17aa8b0bcdc5ab7f41113590ec39e71" kindref="member">begin</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Elements.begin();<sp/>}</highlight></codeline>
+<codeline lineno="64" refid="class_boon_1_1_vertex_buffer_layout_1af4bf0b164275f2acc0a9d9ea0e762ec9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::vector&lt;Element&gt;::iterator<sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1af4bf0b164275f2acc0a9d9ea0e762ec9" kindref="member">end</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Elements.end();<sp/>}</highlight></codeline>
+<codeline lineno="65" refid="class_boon_1_1_vertex_buffer_layout_1a095e4d5f3dc9121ce12646105cfedbb2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::vector&lt;Element&gt;::const_iterator<sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1a095e4d5f3dc9121ce12646105cfedbb2" kindref="member">begin</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Elements.begin();<sp/>}</highlight></codeline>
+<codeline lineno="66" refid="class_boon_1_1_vertex_buffer_layout_1aa02671cda2f38092400ce4ddaec4f98f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::vector&lt;Element&gt;::const_iterator<sp/><ref refid="class_boon_1_1_vertex_buffer_layout_1aa02671cda2f38092400ce4ddaec4f98f" kindref="member">end</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Elements.end();<sp/>}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>CalculateOffsetsAndStride();</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;Element&gt;<sp/>m_Elements;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>m_Stride<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="74"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Renderer/VertexBufferLayout.h"/>
+  </compounddef>
+</doxygen>

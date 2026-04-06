@@ -1,0 +1,54 @@
+\doxysection{Editor\+Panel.\+h}
+\hypertarget{_editor_panel_8h_source}{}\label{_editor_panel_8h_source}\index{EditorPanel.h@{EditorPanel.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}Core/EditorObject.h"{}}}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}UI/DragDropRouter.h"{}}}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <glm/glm.hpp>}}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00009}00009\ \textcolor{keyword}{namespace\ }BoonEditor}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00011}00011\ \ \ \ \ \textcolor{keyword}{enum\ class}\ EditorPanelFlag}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00012}00012\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00013}00013\ \ \ \ \ \ \ \ \ None\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00014}00014\ \ \ \ \ \ \ \ \ Hovered\ =\ 1\ <\ 1}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00015}00015\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00017}\doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{00017}}\ \ \ \ \ \textcolor{keyword}{class\ }EditorPanel\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_boon_editor_1_1_editor_object}{EditorObject}}}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00018}00018\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00020}00020\ \ \ \ \ \ \ \ \ EditorPanel(\textcolor{keyword}{const}\ std::string\&\ name,\ \doxymbox{\hyperlink{class_drag_drop_router}{DragDropRouter}}*\ pRouter);}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \string~EditorPanel()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00023}00023\ \ \ \ \ \ \ \ \ EditorPanel(\textcolor{keyword}{const}\ EditorPanel\&\ other)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00024}00024\ \ \ \ \ \ \ \ \ EditorPanel(EditorPanel\&\&\ other)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00025}00025\ \ \ \ \ \ \ \ \ EditorPanel\&\ operator=(\textcolor{keyword}{const}\ EditorPanel\&\ other)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ EditorPanel\&\ operator=(EditorPanel\&\&\ other)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Update()\textcolor{keyword}{\ override\ }\{\};}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnResize(uint32\_t\ width,\ uint32\_t\ height)\ \{\}}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnRender()\{\}}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ RenderUI();}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsHovered()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00037}00037\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnRenderUI()\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ RenderFloat3Control(\textcolor{keyword}{const}\ std::string\&\ label,\ glm::vec3\&\ vector,\ \textcolor{keywordtype}{float}\ resetValue\ =\ 0.0f,\ \textcolor{keywordtype}{float}\ columnWidth\ =\ 100.0f);}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ std::string\&\ GetName()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \ m\_Name;\ \}}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ std::string\ m\_Name;}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00045}00045\ \ \ \ \ \ \ \ \ EditorPanelFlag\ m\_Flags;}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00046}00046\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_drag_drop_router}{DragDropRouter}}*\ m\_pRouter;}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00047}00047\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_editor_panel_8h_source_l00048}00048\ \}}
+
+\end{DoxyCode}

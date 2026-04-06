@@ -20,39 +20,105 @@ namespace Boon
     class NetScene
     {
     public:
+        /**
+         * @brief Network-aware wrapper around a Scene instance.
+         *
+         * Manages replication, RPCs and routing of network packets for a
+         * specific scene on a NetDriver.
+         * @param scene Scene instance this NetScene manages.
+         * @param driver Network driver used to send/receive packets.
+         */
         NetScene(Scene* scene, NetDriver* driver);
+
+        /**
+         * @brief Destroy the NetScene and cleanup networking resources.
+         */
         ~NetScene();
 
+        /**
+         * @brief Per-frame network update (process pending replication, RPCs).
+         */
         void Update();
 
         // ---------------------------------------------------------------------
         // Scene Registration
         // ---------------------------------------------------------------------
 
-        // Called when loading a level (static objects)
+        // ---------------------------------------------------------------------
+        // Scene Registration
+        // ---------------------------------------------------------------------
+
+        /**
+         * @brief Register a static (level) game object that exists on load.
+         * @param gameObject GameObject to register as static.
+         */
         void RegisterStaticGameObject(GameObject gameObject);
 
-        // Server-only: spawn runtime objects
+        /**
+         * @brief Server-only: spawn a dynamic (runtime) game object.
+         * @param gameObject GameObject data to spawn.
+         * @param ownerConnection Owner connection id for the spawned object.
+         * @return The spawned GameObject with assigned network identity.
+         */
         GameObject RegisterDynamicGameObject(GameObject gameObject, uint64_t ownerConnection);
 
-        // Client-only: scene spawns object because server told us
+        /**
+         * @brief Client-only: create a replicated game object because the server requested it.
+         * @param uuid Network UUID assigned to the new object.
+         * @param ownerConnection Owner connection id.
+         * @return Created GameObject instance.
+         */
         GameObject CreateReplicatedGameObject(const UUID& uuid, uint64_t ownerConnection);
 
-        // Lookup
+        /**
+         * @brief Lookup a game object by its network UUID.
+         * @param uuid UUID of the requested object.
+         * @return GameObject instance if found, otherwise an invalid/default GameObject.
+         */
         GameObject GetGameObjectByUUID(const UUID& uuid);
 
         // ---------------------------------------------------------------------
         // Packet Routing (called by NetDriver)
         // ---------------------------------------------------------------------
+
+        /**
+         * @brief Process an incoming network packet for this scene.
+         * @param sender Connection that sent the packet.
+         * @param pkt Packet data to process.
+         */
         void ProcessPacket(NetConnection* sender, NetPacket& pkt);
 
 
+        /**
+         * @brief Get the local connection identifier used by this NetScene.
+         * @return Local connection id.
+         */
         uint64_t GetLocalConnectionID() const;
+
+        /**
+         * @brief Access the underlying Scene managed by this NetScene.
+         * @return Reference to the Scene.
+         */
         inline Scene& GetScene() { return *m_Scene; }
+
+        /**
+         * @brief Access the NetDriver used by this NetScene.
+         * @return Pointer to the NetDriver.
+         */
         inline NetDriver* GetDriver() { return m_Driver; }
+
+        /**
+         * @brief Access the NetRPC subsystem for issuing RPCs.
+         * @return Pointer to the NetRPC instance or nullptr if not available.
+         */
         inline NetRPC* GetRPC() { return m_RPC.get(); }
 
-        // Spawn gameobject with owner
+        /**
+         * @brief Spawn a networked GameObject and assign ownership.
+         * @param connectionId Connection id that will own the instantiated object.
+         * @param uuid Optional UUID to assign (generated if not provided).
+         * @return The instantiated GameObject.
+         */
         GameObject InstantiateGameObject(uint64_t connectionId, UUID uuid = UUID());
 
     private:

@@ -29,11 +29,19 @@ namespace Boon
     class EventBus 
     {
     public:
+        /**
+         * @brief Construct an EventBus and start the background worker thread.
+         *
+         * A worker thread is created to process asynchronously posted events.
+         */
         EventBus() : m_Stop(false) 
         {
             m_WorkerThread = std::thread([this]() { ProcessQueueThread(); });
         }
 
+        /**
+         * @brief Destroy the EventBus and stop the worker thread.
+         */
         ~EventBus() 
         {
             m_Stop = true;
@@ -43,6 +51,18 @@ namespace Boon
         }
 
         // Subscribe
+        /**
+         * @brief Subscribe to events of type EventType.
+         *
+         * The provided callback will be invoked when events of EventType are
+         * dispatched. A numeric listener id is returned which can be used to
+         * unsubscribe later.
+         *
+         * @tparam EventType The event type to subscribe to.
+         * @tparam Func Callable type for the callback.
+         * @param callback Callable to invoke on events.
+         * @return EventListenerID Identifier for the registered listener.
+         */
         template<typename EventType, typename Func>
         EventListenerID Subscribe(Func&& callback) 
         {
@@ -54,6 +74,11 @@ namespace Boon
         }
 
         // Unsubscribe
+        /**
+         * @brief Unsubscribe a previously registered listener.
+         *
+         * If the id is not found this is a no-op.
+         */
         template<typename EventType>
         void Unsubscribe(EventListenerID id) 
         {
@@ -66,6 +91,11 @@ namespace Boon
         }
 
         // Dispatch synchronously
+        /**
+         * @brief Dispatch an event synchronously to all listeners of EventType.
+         *
+         * The call will invoke each registered listener callback on the current thread.
+         */
         template<typename EventType>
         void Dispatch(const EventType& event) 
         {
@@ -75,6 +105,11 @@ namespace Boon
         }
 
         // Post asynchronously
+        /**
+         * @brief Post an event for asynchronous delivery.
+         *
+         * The event will be enqueued and processed by the internal worker thread.
+         */
         template<typename EventType>
         void Post(const EventType& event) 
         {

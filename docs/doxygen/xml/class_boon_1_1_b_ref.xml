@@ -1,0 +1,319 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_b_ref" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>Boon::BRef</compoundname>
+    <basecompoundref refid="class_boon_1_1_b_ref_base" prot="public" virt="non-virtual">Boon::BRefBase</basecompoundref>
+    <includes refid="_b_ref_8h" local="no">Scene/BRef.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_b_ref_1abc61c08f5d693ae0f9a14d7870c3c6d7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::BRef&lt; T &gt;::BRef</definition>
+        <argsstring>()</argsstring>
+        <name>BRef</name>
+        <qualifiedname>Boon::BRef::BRef</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Scene/BRef.h" line="37" column="9" bodyfile="Scene/BRef.h" bodystart="37" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_b_ref_1a69dbd069dba6094c70d9717ef176a58b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::BRef&lt; T &gt;::BRef</definition>
+        <argsstring>(GameObject owner)</argsstring>
+        <name>BRef</name>
+        <qualifiedname>Boon::BRef::BRef</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref></type>
+          <declname>owner</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Scene/BRef.h" line="39" column="9" bodyfile="Scene/BRef.h" bodystart="39" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_b_ref_1a7f9bcfff01cc955df141d71e190b547c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Boon::BRef&lt; T &gt;::~BRef</definition>
+        <argsstring>()=default</argsstring>
+        <name>~BRef</name>
+        <qualifiedname>Boon::BRef::~BRef</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Scene/BRef.h" line="41" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_b_ref_1ac0d09826a82ba08821491856428d9d81" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_b_ref_1abc61c08f5d693ae0f9a14d7870c3c6d7" kindref="member">BRef</ref>&lt; T &gt; &amp;</type>
+        <definition>BRef&lt; T &gt; &amp; Boon::BRef&lt; T &gt;::operator=</definition>
+        <argsstring>(const BRef&lt; T &gt; &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Boon::BRef::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="class_boon_1_1_b_ref_1abc61c08f5d693ae0f9a14d7870c3c6d7" kindref="member">BRef</ref>&lt; T &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Scene/BRef.h" line="43" column="14" bodyfile="Scene/BRef.h" bodystart="43" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_b_ref_1a054df4c950cee5aeb8b3bf2bed8c9466" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T *</type>
+        <definition>T * Boon::BRef&lt; T &gt;::operator-&gt;</definition>
+        <argsstring>()</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>Boon::BRef::operator-&gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Scene/BRef.h" line="53" column="11" bodyfile="Scene/BRef.h" bodystart="53" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_b_ref_1a268480fe500dd3d9c360c5ab63b33a5b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T *</type>
+        <definition>T * Boon::BRef&lt; T &gt;::Get</definition>
+        <argsstring>()</argsstring>
+        <name>Get</name>
+        <qualifiedname>Boon::BRef::Get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Scene/BRef.h" line="58" column="11" bodyfile="Scene/BRef.h" bodystart="58" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_b_ref_1ab29725b8d14c69c9ab8cee21f1256add" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * Boon::BRef&lt; T &gt;::Raw</definition>
+        <argsstring>() const</argsstring>
+        <name>Raw</name>
+        <qualifiedname>Boon::BRef::Raw</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Scene/BRef.h" line="66" column="14" bodyfile="Scene/BRef.h" bodystart="66" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_b_ref_1a7b0bc5138753f300f1312b366e67fd28" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::BRef&lt; T &gt;::IsValid</definition>
+        <argsstring>()</argsstring>
+        <name>IsValid</name>
+        <qualifiedname>Boon::BRef::IsValid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Scene/BRef.h" line="73" column="14" bodyfile="Scene/BRef.h" bodystart="73" bodyend="76"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>Boon::BRef&lt; T &gt;</label>
+        <link refid="class_boon_1_1_b_ref"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Boon::BRefBase</label>
+        <link refid="class_boon_1_1_b_ref_base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>Boon::BClass</label>
+        <link refid="struct_boon_1_1_b_class"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>functions</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>meta</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>registerLifecycle</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>addComponent</edgelabel>
+          <edgelabel>awake</edgelabel>
+          <edgelabel>getComponent</edgelabel>
+          <edgelabel>hasComponent</edgelabel>
+          <edgelabel>removeComponent</edgelabel>
+        </childnode>
+      </node>
+      <node id="15">
+        <label>Boon::BClassMeta</label>
+        <link refid="struct_boon_1_1_b_class_meta"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>key</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Boon::BFunction</label>
+        <link refid="struct_boon_1_1_b_function"/>
+        <childnode refid="9" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>meta</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>thunk</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Boon::BFunctionMeta</label>
+        <link refid="struct_boon_1_1_b_function_meta"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>key</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Boon::BFunctionParam</label>
+        <link refid="struct_boon_1_1_b_function_param"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>name</edgelabel>
+          <edgelabel>typeName</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Boon::BRef&lt; T &gt;</label>
+        <link refid="class_boon_1_1_b_ref"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Boon::BRefBase</label>
+        <link refid="class_boon_1_1_b_ref_base"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_Object</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_Type</edgelabel>
+        </childnode>
+      </node>
+      <node id="20">
+        <label>Boon::Delegate&lt; void(Boon::BClass &amp;)&gt;</label>
+        <link refid="class_boon_1_1_delegate"/>
+      </node>
+      <node id="16">
+        <label>Boon::ECSLifecycleSystem</label>
+        <link refid="struct_boon_1_1_e_c_s_lifecycle_system"/>
+        <childnode refid="17" relation="usage">
+          <edgelabel>scene</edgelabel>
+        </childnode>
+        <childnode refid="18" relation="usage">
+          <edgelabel>map</edgelabel>
+        </childnode>
+        <childnode refid="20" relation="usage">
+          <edgelabel>SceneListenerHandle</edgelabel>
+        </childnode>
+      </node>
+      <node id="19">
+        <label>Boon::ECSLifecycleSystem::Callbacks</label>
+        <link refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks"/>
+      </node>
+      <node id="3">
+        <label>Boon::GameObject</label>
+        <link refid="class_boon_1_1_game_object"/>
+      </node>
+      <node id="17">
+        <label>Boon::Scene</label>
+        <link refid="class_boon_1_1_scene"/>
+      </node>
+      <node id="13">
+        <label>Boon::Variant</label>
+        <link refid="class_boon_1_1_variant"/>
+      </node>
+      <node id="6">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="5">
+        <label>std::string</label>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>std::unordered_map&lt; std::type_index, Boon::ECSLifecycleSystem::Callbacks &gt;</label>
+        <childnode refid="19" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="14">
+        <label>std::vector&lt; Boon::BClassMeta &gt;</label>
+        <childnode refid="15" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::vector&lt; Boon::BFunction &gt;</label>
+        <childnode refid="8" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="11">
+        <label>std::vector&lt; Boon::BFunctionMeta &gt;</label>
+        <childnode refid="12" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>std::vector&lt; Boon::BFunctionParam &gt;</label>
+        <childnode refid="10" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Scene/BRef.h" line="34" column="1" bodyfile="Scene/BRef.h" bodystart="35" bodyend="77"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_b_ref_1abc61c08f5d693ae0f9a14d7870c3c6d7" prot="public" virt="non-virtual"><scope>Boon::BRef</scope><name>BRef</name></member>
+      <member refid="class_boon_1_1_b_ref_1a69dbd069dba6094c70d9717ef176a58b" prot="public" virt="non-virtual"><scope>Boon::BRef</scope><name>BRef</name></member>
+      <member refid="class_boon_1_1_b_ref_base_1ae6ef9f22b8b2862968c473fd8e3ebc91" prot="public" virt="non-virtual"><scope>Boon::BRef</scope><name>BRefBase</name></member>
+      <member refid="class_boon_1_1_b_ref_base_1afd3d0f7872234dbb6d6db46feffa3a71" prot="public" virt="non-virtual"><scope>Boon::BRef</scope><name>Class</name></member>
+      <member refid="class_boon_1_1_b_ref_1a268480fe500dd3d9c360c5ab63b33a5b" prot="public" virt="non-virtual"><scope>Boon::BRef</scope><name>Get</name></member>
+      <member refid="class_boon_1_1_b_ref_1a7b0bc5138753f300f1312b366e67fd28" prot="public" virt="non-virtual"><scope>Boon::BRef</scope><name>IsValid</name></member>
+      <member refid="class_boon_1_1_b_ref_base_1a028a1880abdad4d146060359bd9519ae" prot="protected" virt="non-virtual"><scope>Boon::BRef</scope><name>m_Object</name></member>
+      <member refid="class_boon_1_1_b_ref_base_1a129f7976e208aa8055ed3f0fb058fca7" prot="protected" virt="non-virtual"><scope>Boon::BRef</scope><name>m_Type</name></member>
+      <member refid="class_boon_1_1_b_ref_1a054df4c950cee5aeb8b3bf2bed8c9466" prot="public" virt="non-virtual"><scope>Boon::BRef</scope><name>operator-&gt;</name></member>
+      <member refid="class_boon_1_1_b_ref_1ac0d09826a82ba08821491856428d9d81" prot="public" virt="non-virtual"><scope>Boon::BRef</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_b_ref_base_1a2cd6b41088945e6db26a5c0ce3c5c16b" prot="public" virt="non-virtual" ambiguityscope="Boon::BRefBase::"><scope>Boon::BRef</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_b_ref_base_1adc6fc701b7f87661b09fa1c0c5be5675" prot="public" virt="non-virtual"><scope>Boon::BRef</scope><name>Owner</name></member>
+      <member refid="class_boon_1_1_b_ref_1ab29725b8d14c69c9ab8cee21f1256add" prot="public" virt="non-virtual"><scope>Boon::BRef</scope><name>Raw</name></member>
+      <member refid="class_boon_1_1_b_ref_base_1a00c9b4fdfce8fd0909dfd0ee1423ab13" prot="public" virt="non-virtual"><scope>Boon::BRef</scope><name>Set</name></member>
+      <member refid="class_boon_1_1_b_ref_1a7f9bcfff01cc955df141d71e190b547c" prot="public" virt="virtual"><scope>Boon::BRef</scope><name>~BRef</name></member>
+      <member refid="class_boon_1_1_b_ref_base_1a6b3abbc95f34cf019786b6f3852422f7" prot="public" virt="virtual"><scope>Boon::BRef</scope><name>~BRefBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

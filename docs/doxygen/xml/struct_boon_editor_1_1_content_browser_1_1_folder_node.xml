@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_editor_1_1_content_browser_1_1_folder_node" kind="struct" language="C++" prot="private">
+    <compoundname>BoonEditor::ContentBrowser::FolderNode</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_editor_1_1_content_browser_1_1_folder_node_1ab1913189c2d8248cf263dce0bbbf3cd6" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string BoonEditor::ContentBrowser::FolderNode::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>BoonEditor::ContentBrowser::FolderNode::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="26" column="25" bodyfile="Panels/ContentBrowser.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_editor_1_1_content_browser_1_1_folder_node_1ab2605be0c982b985d7f47de1c0edbeec" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string BoonEditor::ContentBrowser::FolderNode::fullPath</definition>
+        <argsstring></argsstring>
+        <name>fullPath</name>
+        <qualifiedname>BoonEditor::ContentBrowser::FolderNode::fullPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="27" column="25" bodyfile="Panels/ContentBrowser.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_editor_1_1_content_browser_1_1_folder_node_1a1cc8ca30031870d13df7c1b6aa202946" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; BoonEditor::ContentBrowser::FolderNode::assets</definition>
+        <argsstring></argsstring>
+        <name>assets</name>
+        <qualifiedname>BoonEditor::ContentBrowser::FolderNode::assets</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="28" column="25" bodyfile="Panels/ContentBrowser.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_editor_1_1_content_browser_1_1_folder_node_1a7252f9b3cad6102840ac6073416e4bcd" prot="public" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, FolderNode * &gt;</type>
+        <definition>std::unordered_map&lt;std::string, FolderNode*&gt; BoonEditor::ContentBrowser::FolderNode::children</definition>
+        <argsstring></argsstring>
+        <name>children</name>
+        <qualifiedname>BoonEditor::ContentBrowser::FolderNode::children</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="29" column="32" bodyfile="Panels/ContentBrowser.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_boon_editor_1_1_content_browser_1_1_folder_node_1a5f3b9f6c07e203f24a7487663a087951" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::ContentBrowser::FolderNode::FolderNode</definition>
+        <argsstring>(const std::string &amp;name=&quot;&quot;, const std::string &amp;full=&quot;&quot;)</argsstring>
+        <name>FolderNode</name>
+        <qualifiedname>BoonEditor::ContentBrowser::FolderNode::FolderNode</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>full</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/ContentBrowser.h" line="31" column="13" bodyfile="Panels/ContentBrowser.h" bodystart="31" bodyend="33"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>BoonEditor::ContentBrowser::FolderNode</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>fullPath</edgelabel>
+          <edgelabel>name</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>assets</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>children</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="2">
+        <label>std::string</label>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::unordered_map&lt; std::string, FolderNode * &gt;</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>keys</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; std::string &gt;</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Panels/ContentBrowser.h" line="24" column="9" bodyfile="Panels/ContentBrowser.h" bodystart="25" bodyend="34"/>
+    <listofallmembers>
+      <member refid="struct_boon_editor_1_1_content_browser_1_1_folder_node_1a1cc8ca30031870d13df7c1b6aa202946" prot="public" virt="non-virtual"><scope>BoonEditor::ContentBrowser::FolderNode</scope><name>assets</name></member>
+      <member refid="struct_boon_editor_1_1_content_browser_1_1_folder_node_1a7252f9b3cad6102840ac6073416e4bcd" prot="public" virt="non-virtual"><scope>BoonEditor::ContentBrowser::FolderNode</scope><name>children</name></member>
+      <member refid="struct_boon_editor_1_1_content_browser_1_1_folder_node_1a5f3b9f6c07e203f24a7487663a087951" prot="public" virt="non-virtual"><scope>BoonEditor::ContentBrowser::FolderNode</scope><name>FolderNode</name></member>
+      <member refid="struct_boon_editor_1_1_content_browser_1_1_folder_node_1ab2605be0c982b985d7f47de1c0edbeec" prot="public" virt="non-virtual"><scope>BoonEditor::ContentBrowser::FolderNode</scope><name>fullPath</name></member>
+      <member refid="struct_boon_editor_1_1_content_browser_1_1_folder_node_1ab1913189c2d8248cf263dce0bbbf3cd6" prot="public" virt="non-virtual"><scope>BoonEditor::ContentBrowser::FolderNode</scope><name>name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

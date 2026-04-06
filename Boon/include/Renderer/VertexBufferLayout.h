@@ -42,12 +42,27 @@ namespace Boon
 			bool Normalized;
 
 			Element() = default;
+
+			/**
+			 * @brief Construct a layout element describing a vertex attribute.
+			 *
+			 * @param type ShaderDataType for the element.
+			 * @param name Attribute name.
+			 * @param normalized Whether integer data should be normalized.
+			 */
 			Element(ShaderDataType type, const std::string& name, bool normalized = false);
 
+			/**
+			 * @brief Get the number of components for the element's type.
+			 */
 			uint32_t GetComponentCount() const;
 		};
 
 		VertexBufferLayout() = default;
+
+		/**
+		 * @brief Construct a vertex buffer layout from a list of Elements.
+		 */
 		VertexBufferLayout(std::initializer_list<Element> elements);
 
 		virtual ~VertexBufferLayout() = default;
@@ -57,7 +72,14 @@ namespace Boon
 		VertexBufferLayout& operator=(const VertexBufferLayout& other) = default;
 		VertexBufferLayout& operator=(VertexBufferLayout&& other) = default;
 
+		/**
+		 * @brief Get the stride (in bytes) for a single vertex with this layout.
+		 */
 		inline uint32_t GetStride() const { return m_Stride; }
+
+		/**
+		 * @brief Get the elements that compose the layout.
+		 */
 		inline const std::vector<Element>& GetElements() const { return m_Elements; }
 
 		inline std::vector<Element>::iterator begin() { return m_Elements.begin(); }

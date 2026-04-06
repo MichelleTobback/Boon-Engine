@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_editor_1_1_editor_viewport_settings" kind="struct" language="C++" prot="public">
+    <compoundname>BoonEditor::EditorViewportSettings</compoundname>
+    <includes refid="_editor_viewport_settings_8h" local="no">DebugRenderer/EditorViewportSettings.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_editor_1_1_editor_viewport_settings_1a81fa629b0651f2a83612ff6b31f7b499" prot="public" static="no" mutable="no">
+        <type><ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19" kindref="member">DebugRenderLayer</ref></type>
+        <definition>DebugRenderLayer BoonEditor::EditorViewportSettings::DebugRenderLayers</definition>
+        <argsstring></argsstring>
+        <name>DebugRenderLayers</name>
+        <qualifiedname>BoonEditor::EditorViewportSettings::DebugRenderLayers</qualifiedname>
+        <initializer>{ <ref refid="namespace_boon_editor_1a8dbe7b79bf1fdd6d894895378c80ad19aed5845bc4fa6688c9e554f87b65bc86e" kindref="member">DebugRenderLayer::All</ref> }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="DebugRenderer/EditorViewportSettings.h" line="8" column="18" bodyfile="DebugRenderer/EditorViewportSettings.h" bodystart="8" bodyend="8"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="DebugRenderer/EditorViewportSettings.h" line="6" column="1" bodyfile="DebugRenderer/EditorViewportSettings.h" bodystart="7" bodyend="9"/>
+    <listofallmembers>
+      <member refid="struct_boon_editor_1_1_editor_viewport_settings_1a81fa629b0651f2a83612ff6b31f7b499" prot="public" virt="non-virtual"><scope>BoonEditor::EditorViewportSettings</scope><name>DebugRenderLayers</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

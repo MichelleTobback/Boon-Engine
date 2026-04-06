@@ -1,0 +1,25 @@
+\doxysection{Asset\+Meta.\+h}
+\hypertarget{_asset_meta_8h_source}{}\label{_asset_meta_8h_source}\index{AssetMeta.h@{AssetMeta.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}Core/UUID.h"{}}}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}AssetType.h"{}}}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00007}00007\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00009}\doxymbox{\hyperlink{struct_boon_1_1_asset_meta}{00009}}\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_boon_1_1_asset_meta}{AssetMeta}}}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00010}00010\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00011}00011\ \ \ \ \ \ \ \ \ AssetHandle\ uuid\ =\ \doxymbox{\hyperlink{class_boon_1_1_u_u_i_d_ab60bb64dc9d3f512f119886fcf7a8275}{UUID::Null}};}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00012}00012\ \ \ \ \ \ \ \ \ AssetType\ type\ =\ AssetType::None;}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00014}00014\ \ \ \ \ \ \ \ \ std::unordered\_map<std::string,\ std::string>\ settings;}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00015}00015\ \ \ \ \ \ \ \ \ std::vector<AssetHandle>\ dependencies;}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsValid()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ uuid.IsValid()\ \&\&\ type\ !=\ AssetType::None;\ \}}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00018}00018\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_asset_meta_8h_source_l00019}00019\ \}}
+
+\end{DoxyCode}

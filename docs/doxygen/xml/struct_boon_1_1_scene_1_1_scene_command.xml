@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_scene_1_1_scene_command" kind="struct" language="C++" prot="private">
+    <compoundname>Boon::Scene::SceneCommand</compoundname>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="struct_boon_1_1_scene_1_1_scene_command_1a349ae5df8df2fe9996f00356325c74c5" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Type</name>
+        <qualifiedname>Boon::Scene::SceneCommand::Type</qualifiedname>
+        <enumvalue id="struct_boon_1_1_scene_1_1_scene_command_1a349ae5df8df2fe9996f00356325c74c5abb2c8e361578e39d7fe3a32a327dd8c9" prot="public">
+          <name>AwakeComponent</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="struct_boon_1_1_scene_1_1_scene_command_1a349ae5df8df2fe9996f00356325c74c5a2664e473a314ea56173acce95c59a56b" prot="public">
+          <name>RemoveComponent</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Scene/Scene.h" line="224" column="1" bodyfile="Scene/Scene.h" bodystart="225" bodyend="228"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_scene_1_1_scene_command_1aaf8c5ef16a94ca4a83969ce3797045b9" prot="public" static="no" mutable="no">
+        <type>enum Boon::Scene::SceneCommand::Type</type>
+        <definition>enum Boon::Scene::SceneCommand::Type Boon::Scene::SceneCommand::Type</definition>
+        <argsstring></argsstring>
+        <name>Type</name>
+        <qualifiedname>Boon::Scene::SceneCommand::Type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Scene/Scene.h" line="228" column="6"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_scene_1_1_scene_command_1aab96e968a6b6732cadd1a1a2cef44048" prot="public" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1a3c4b811809646d3ae922d1795f4ad6e5" kindref="member">GameObjectID</ref></type>
+        <definition>GameObjectID Boon::Scene::SceneCommand::GameObjectId</definition>
+        <argsstring></argsstring>
+        <name>GameObjectId</name>
+        <qualifiedname>Boon::Scene::SceneCommand::GameObjectId</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Scene/Scene.h" line="230" column="14" bodyfile="Scene/Scene.h" bodystart="230" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_scene_1_1_scene_command_1a1e231b8a18965fb72a42f9249311c5ae" prot="public" static="no" mutable="no">
+        <type>const <ref refid="struct_boon_1_1_b_class" kindref="compound">BClass</ref> *</type>
+        <definition>const BClass* Boon::Scene::SceneCommand::pClass</definition>
+        <argsstring></argsstring>
+        <name>pClass</name>
+        <qualifiedname>Boon::Scene::SceneCommand::pClass</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Scene/Scene.h" line="231" column="14" bodyfile="Scene/Scene.h" bodystart="231" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::BClass</label>
+        <link refid="struct_boon_1_1_b_class"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>functions</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>meta</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>registerLifecycle</edgelabel>
+        </childnode>
+        <childnode refid="19" relation="usage">
+          <edgelabel>addComponent</edgelabel>
+          <edgelabel>awake</edgelabel>
+          <edgelabel>getComponent</edgelabel>
+          <edgelabel>hasComponent</edgelabel>
+          <edgelabel>removeComponent</edgelabel>
+        </childnode>
+      </node>
+      <node id="13">
+        <label>Boon::BClassMeta</label>
+        <link refid="struct_boon_1_1_b_class_meta"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>key</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Boon::BFunction</label>
+        <link refid="struct_boon_1_1_b_function"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>meta</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>thunk</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Boon::BFunctionMeta</label>
+        <link refid="struct_boon_1_1_b_function_meta"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>key</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Boon::BFunctionParam</label>
+        <link refid="struct_boon_1_1_b_function_param"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>name</edgelabel>
+          <edgelabel>typeName</edgelabel>
+        </childnode>
+      </node>
+      <node id="18">
+        <label>Boon::Delegate&lt; void(Boon::BClass &amp;)&gt;</label>
+        <link refid="class_boon_1_1_delegate"/>
+      </node>
+      <node id="14">
+        <label>Boon::ECSLifecycleSystem</label>
+        <link refid="struct_boon_1_1_e_c_s_lifecycle_system"/>
+        <childnode refid="15" relation="usage">
+          <edgelabel>scene</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>map</edgelabel>
+        </childnode>
+        <childnode refid="18" relation="usage">
+          <edgelabel>SceneListenerHandle</edgelabel>
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Boon::ECSLifecycleSystem::Callbacks</label>
+        <link refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks"/>
+      </node>
+      <node id="19">
+        <label>Boon::GameObject</label>
+        <link refid="class_boon_1_1_game_object"/>
+      </node>
+      <node id="15">
+        <label>Boon::Scene</label>
+        <link refid="class_boon_1_1_scene"/>
+      </node>
+      <node id="1">
+        <label>Boon::Scene::SceneCommand</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>pClass</edgelabel>
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Boon::Variant</label>
+        <link refid="class_boon_1_1_variant"/>
+      </node>
+      <node id="4">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="3">
+        <label>std::string</label>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>std::unordered_map&lt; std::type_index, Boon::ECSLifecycleSystem::Callbacks &gt;</label>
+        <childnode refid="17" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>std::vector&lt; Boon::BClassMeta &gt;</label>
+        <childnode refid="13" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::vector&lt; Boon::BFunction &gt;</label>
+        <childnode refid="6" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>std::vector&lt; Boon::BFunctionMeta &gt;</label>
+        <childnode refid="10" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::vector&lt; Boon::BFunctionParam &gt;</label>
+        <childnode refid="8" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Scene/Scene.h" line="222" column="1" bodyfile="Scene/Scene.h" bodystart="223" bodyend="232"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_scene_1_1_scene_command_1aab96e968a6b6732cadd1a1a2cef44048" prot="public" virt="non-virtual"><scope>Boon::Scene::SceneCommand</scope><name>GameObjectId</name></member>
+      <member refid="struct_boon_1_1_scene_1_1_scene_command_1a1e231b8a18965fb72a42f9249311c5ae" prot="public" virt="non-virtual"><scope>Boon::Scene::SceneCommand</scope><name>pClass</name></member>
+      <member refid="struct_boon_1_1_scene_1_1_scene_command_1a349ae5df8df2fe9996f00356325c74c5" prot="public" virt="non-virtual"><scope>Boon::Scene::SceneCommand</scope><name>Type</name></member>
+      <member refid="struct_boon_1_1_scene_1_1_scene_command_1aaf8c5ef16a94ca4a83969ce3797045b9" prot="public" virt="non-virtual"><scope>Boon::Scene::SceneCommand</scope><name>Type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

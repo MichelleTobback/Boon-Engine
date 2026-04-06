@@ -1,0 +1,491 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_rigidbody2_d_8h" kind="file" language="C++">
+    <compoundname>Rigidbody2D.h</compoundname>
+    <includes refid="_boon_8h" local="yes">Core/Boon.h</includes>
+    <includes local="no">glm/glm.hpp</includes>
+    <includedby refid="_net_rigidbody2_d_8h" local="yes">Networking/Components/NetRigidbody2D.h</includedby>
+    <includedby refid="_physics2_d_8h" local="yes">Physics/Physics2D.h</includedby>
+    <incdepgraph>
+      <node id="45">
+        <label>Asset/Asset.h</label>
+        <link refid="_asset_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>Asset/AssetRef.h</label>
+        <link refid="_asset_ref_8h"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>Asset/AssetTraits.h</label>
+        <link refid="_asset_traits_8h"/>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>Asset/AssetType.h</label>
+        <link refid="_asset_type_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Component/Rigidbody2D.h</label>
+        <link refid="_rigidbody2_d_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>Component/TransformComponent.h</label>
+        <link refid="_transform_component_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>Component/UUIDComponent.h</label>
+        <link refid="_u_u_i_d_component_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>Core/Assert.h</label>
+        <link refid="_assert_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Core/Boon.h</label>
+        <link refid="_boon_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Core/Delegate.h</label>
+        <link refid="_delegate_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Core/UUID.h</label>
+        <link refid="_u_u_i_d_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>Core/Variant.h</label>
+        <link refid="_variant_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Physics2DTypes.h</label>
+        <link refid="_physics2_d_types_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>Physics/PhysicsWorld2D.h</label>
+        <link refid="_physics_world2_d_8h"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>Reflection/BClass.h</label>
+        <link refid="_b_class_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>Reflection/BClassBase.h</label>
+        <link refid="_b_class_base_8h"/>
+      </node>
+      <node id="29">
+        <label>BFunction.h</label>
+        <link refid="_b_function_8h"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>BProperty.h</label>
+        <link refid="_b_property_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>Scene/BRef.h</label>
+        <link refid="_b_ref_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Scene/GameObject.h</label>
+        <link refid="_game_object_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>GameObjectID.h</label>
+        <link refid="_game_object_i_d_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Scene.h</label>
+        <link refid="_scene_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>box2d/id.h</label>
+      </node>
+      <node id="28">
+        <label>cstddef</label>
+      </node>
+      <node id="9">
+        <label>cstdint</label>
+      </node>
+      <node id="38">
+        <label>cstdlib</label>
+      </node>
+      <node id="31">
+        <label>cstring</label>
+      </node>
+      <node id="5">
+        <label>entt/entt.hpp</label>
+      </node>
+      <node id="10">
+        <label>functional</label>
+      </node>
+      <node id="18">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="41">
+        <label>glm/gtc/quaternion.hpp</label>
+      </node>
+      <node id="35">
+        <label>glm/gtc/type_precision.hpp</label>
+      </node>
+      <node id="42">
+        <label>glm/gtx/quaternion.hpp</label>
+      </node>
+      <node id="32">
+        <label>glm/vec2.hpp</label>
+      </node>
+      <node id="33">
+        <label>glm/vec3.hpp</label>
+      </node>
+      <node id="34">
+        <label>glm/vec4.hpp</label>
+      </node>
+      <node id="11">
+        <label>limits</label>
+      </node>
+      <node id="26">
+        <label>memory</label>
+      </node>
+      <node id="24">
+        <label>optional</label>
+      </node>
+      <node id="36">
+        <label>queue</label>
+      </node>
+      <node id="25">
+        <label>stdexcept</label>
+      </node>
+      <node id="21">
+        <label>string</label>
+      </node>
+      <node id="12">
+        <label>type_traits</label>
+      </node>
+      <node id="22">
+        <label>typeindex</label>
+      </node>
+      <node id="23">
+        <label>unordered_map</label>
+      </node>
+      <node id="13">
+        <label>utility</label>
+      </node>
+      <node id="14">
+        <label>vector</label>
+      </node>
+      <node id="7">
+        <label>xhash</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>Component/Rigidbody2D.h</label>
+        <link refid="_rigidbody2_d_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Networking/Components/NetRigidbody2D.h</label>
+        <link refid="_net_rigidbody2_d_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Networking/Components/NetRigidbody2DSerializer.h</label>
+        <link refid="_net_rigidbody2_d_serializer_8h"/>
+      </node>
+      <node id="4">
+        <label>Physics/Physics2D.h</label>
+        <link refid="_physics2_d_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_boon_1_1_rigidbody2_d" prot="public">Boon::Rigidbody2D</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_boon_8h" kindref="compound">Core/Boon.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;glm/glm.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="6"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_b_class_base_8h_1ac6a33ac42cf2fb39ad7064dd369c1b68" kindref="member">BCLASS</ref>()</highlight></codeline>
+<codeline lineno="8" refid="struct_boon_1_1_rigidbody2_d" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/>struct<sp/><ref refid="struct_boon_1_1_rigidbody2_d" kindref="compound">Rigidbody2D</ref><sp/>final</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="10" refid="struct_boon_1_1_rigidbody2_d_1a4a72a29aba3a283c456f23f3d44dfafe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a4a72a29aba3a283c456f23f3d44dfafe" kindref="member">BodyType</ref></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="12" refid="struct_boon_1_1_rigidbody2_d_1a4a72a29aba3a283c456f23f3d44dfafea84a8921b25f505d0d2077aeb5db4bc16" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Static<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="13" refid="struct_boon_1_1_rigidbody2_d_1a4a72a29aba3a283c456f23f3d44dfafea971fd8cc345d8bd9f92e9f7d88fdf20c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Dynamic<sp/>=<sp/>1,</highlight></codeline>
+<codeline lineno="14" refid="struct_boon_1_1_rigidbody2_d_1a4a72a29aba3a283c456f23f3d44dfafea40c78b58b86002ee38fad2d3c9dd787e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kinematic<sp/>=<sp/>2</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="struct_boon_1_1_rigidbody2_d_1ab09574aff68c08b78fa6da66d832aeb0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1ab09574aff68c08b78fa6da66d832aeb0" kindref="member">ForceMode</ref></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="19" refid="struct_boon_1_1_rigidbody2_d_1ab09574aff68c08b78fa6da66d832aeb0a9eb6b78a99cdb6ffd3d40d18621d9f80" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Force,</highlight></codeline>
+<codeline lineno="20" refid="struct_boon_1_1_rigidbody2_d_1ab09574aff68c08b78fa6da66d832aeb0a6b0a227bd9315bcde12dbcf6c217a9d7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Impulse</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_b_class_base_8h_1a9d1874ba27ed5506f5a15511a8f78035" kindref="member">BPROPERTY</ref>()</highlight></codeline>
+<codeline lineno="24" refid="struct_boon_1_1_rigidbody2_d_1a0582f6d211a20da0973de35055d376eb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a0582f6d211a20da0973de35055d376eb" kindref="member">Type</ref><sp/>=<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)<ref refid="struct_boon_1_1_rigidbody2_d_1a4a72a29aba3a283c456f23f3d44dfafe" kindref="member">BodyType</ref>::Static;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_b_class_base_8h_1a9d1874ba27ed5506f5a15511a8f78035" kindref="member">BPROPERTY</ref>()</highlight></codeline>
+<codeline lineno="27" refid="struct_boon_1_1_rigidbody2_d_1a60497dec857ee82744f97c7f5d1d23d3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a60497dec857ee82744f97c7f5d1d23d3" kindref="member">GravityScale</ref><sp/>=<sp/>1.f;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_b_class_base_8h_1a9d1874ba27ed5506f5a15511a8f78035" kindref="member">BPROPERTY</ref>()</highlight></codeline>
+<codeline lineno="30" refid="struct_boon_1_1_rigidbody2_d_1a6539f522ef69f714431a4f5c46e96538" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a6539f522ef69f714431a4f5c46e96538" kindref="member">FixedRotation</ref><sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_b_class_base_8h_1a9d1874ba27ed5506f5a15511a8f78035" kindref="member">BPROPERTY</ref>()</highlight></codeline>
+<codeline lineno="33" refid="struct_boon_1_1_rigidbody2_d_1a547a5a4ae7fb0cee0a99bcb157e65a59" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a547a5a4ae7fb0cee0a99bcb157e65a59" kindref="member">LinearDamping</ref><sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_b_class_base_8h_1a9d1874ba27ed5506f5a15511a8f78035" kindref="member">BPROPERTY</ref>()</highlight></codeline>
+<codeline lineno="36" refid="struct_boon_1_1_rigidbody2_d_1a84a86497b0611b7b12f7a454b66eb302" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a84a86497b0611b7b12f7a454b66eb302" kindref="member">AngularDamping</ref><sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_b_class_base_8h_1a9d1874ba27ed5506f5a15511a8f78035" kindref="member">BPROPERTY</ref>()</highlight></codeline>
+<codeline lineno="39" refid="struct_boon_1_1_rigidbody2_d_1a0d10ff3261a6383f409837e91e63a7b5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a0d10ff3261a6383f409837e91e63a7b5" kindref="member">Mass</ref><sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Cached<sp/>state<sp/>written<sp/>by<sp/>host<sp/>physics</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="struct_boon_1_1_rigidbody2_d_1a9577d5b2a6224a3ff2d91fe3886348fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec2<sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a9577d5b2a6224a3ff2d91fe3886348fd" kindref="member">Velocity</ref>{<sp/>0.0f,<sp/>0.0f<sp/>};</highlight></codeline>
+<codeline lineno="43" refid="struct_boon_1_1_rigidbody2_d_1ad4c764513f4032c160b7d908f231b60e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1ad4c764513f4032c160b7d908f231b60e" kindref="member">AngularVelocity</ref><sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="struct_boon_1_1_rigidbody2_d_1a94698c62a561ee68a45e33b4e4544d4a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec2<sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a94698c62a561ee68a45e33b4e4544d4a" kindref="member">Position</ref>{<sp/>0.0f,<sp/>0.0f<sp/>};</highlight></codeline>
+<codeline lineno="46" refid="struct_boon_1_1_rigidbody2_d_1a1d7f8e2c0f6ace79ff785cd9c1c1a6c0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a1d7f8e2c0f6ace79ff785cd9c1c1a6c0" kindref="member">Rotation</ref><sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="struct_boon_1_1_rigidbody2_d_1ab340f7090f8e5e5ca118490a62a96ad9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1ab340f7090f8e5e5ca118490a62a96ad9" kindref="member">Awake</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49" refid="struct_boon_1_1_rigidbody2_d_1a67dcd50aa4f94920acf55af50439c18e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a67dcd50aa4f94920acf55af50439c18e" kindref="member">OnGround</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Requests</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="struct_boon_1_1_rigidbody2_d_1a847fdc78c8208a9149009d414d7e05f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec2<sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a847fdc78c8208a9149009d414d7e05f1" kindref="member">PendingForce</ref>{<sp/>0.0f,<sp/>0.0f<sp/>};</highlight></codeline>
+<codeline lineno="53" refid="struct_boon_1_1_rigidbody2_d_1a560e1521aa93a9d29a524b13982b9cc3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec2<sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a560e1521aa93a9d29a524b13982b9cc3" kindref="member">PendingImpulse</ref>{<sp/>0.0f,<sp/>0.0f<sp/>};</highlight></codeline>
+<codeline lineno="54" refid="struct_boon_1_1_rigidbody2_d_1a62ac14a7e0e7f07be27bb29f6ecdf554" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a62ac14a7e0e7f07be27bb29f6ecdf554" kindref="member">PendingTorque</ref><sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56" refid="struct_boon_1_1_rigidbody2_d_1a413b312c678e014ef856c55acb5d2a49" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a413b312c678e014ef856c55acb5d2a49" kindref="member">WakeRequested</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="struct_boon_1_1_rigidbody2_d_1a640696eb728a57a103ef219d92479f07" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a640696eb728a57a103ef219d92479f07" kindref="member">HasPendingSetVelocity</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="59" refid="struct_boon_1_1_rigidbody2_d_1a1b01b5a77f4ad14246e63263666fcaf2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec2<sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a1b01b5a77f4ad14246e63263666fcaf2" kindref="member">PendingSetVelocity</ref>{<sp/>0.0f,<sp/>0.0f<sp/>};</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="struct_boon_1_1_rigidbody2_d_1a058d422680201cd41699367878d80a82" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a058d422680201cd41699367878d80a82" kindref="member">HasPendingSetAngularVelocity</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="62" refid="struct_boon_1_1_rigidbody2_d_1a9c6d311f952f9e0a0bfe39f8f2b04390" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a9c6d311f952f9e0a0bfe39f8f2b04390" kindref="member">PendingSetAngularVelocity</ref><sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="struct_boon_1_1_rigidbody2_d_1a05b9299545317fb36e32a8c0cbf39bb7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a05b9299545317fb36e32a8c0cbf39bb7" kindref="member">HasPendingSetTransform</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="65" refid="struct_boon_1_1_rigidbody2_d_1a4189af475f593e89028309502695a489" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec2<sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a4189af475f593e89028309502695a489" kindref="member">PendingSetPosition</ref>{<sp/>0.0f,<sp/>0.0f<sp/>};</highlight></codeline>
+<codeline lineno="66" refid="struct_boon_1_1_rigidbody2_d_1ad3f772df33a352c40517dff3635e3abc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1ad3f772df33a352c40517dff3635e3abc" kindref="member">PendingSetRotation</ref><sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68" refid="struct_boon_1_1_rigidbody2_d_1aecc9e276d2dac69901d1e6ddc4828f8c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1aecc9e276d2dac69901d1e6ddc4828f8c" kindref="member">DirtyBodyDef</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="69" refid="struct_boon_1_1_rigidbody2_d_1a0e84180042a8fca8a23061dcb70e515c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a0e84180042a8fca8a23061dcb70e515c" kindref="member">DirtyVelocity</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="70" refid="struct_boon_1_1_rigidbody2_d_1a7179320fbf37ea0a2953b487a8e24d65" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a7179320fbf37ea0a2953b487a8e24d65" kindref="member">DirtyTransform</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="71" refid="struct_boon_1_1_rigidbody2_d_1adb067cb6c6c2d334823ce61cb22d5377" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1adb067cb6c6c2d334823ce61cb22d5377" kindref="member">DirtyDamping</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73" refid="struct_boon_1_1_rigidbody2_d_1abb56e105ba50707974db5fc8cd765136" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec2<sp/><ref refid="struct_boon_1_1_rigidbody2_d_1abb56e105ba50707974db5fc8cd765136" kindref="member">GetVelocity</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a9577d5b2a6224a3ff2d91fe3886348fd" kindref="member">Velocity</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="74" refid="struct_boon_1_1_rigidbody2_d_1ae28ed9a6cc6aa745fa7c08979e0a1f3c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1ae28ed9a6cc6aa745fa7c08979e0a1f3c" kindref="member">SetVelocity</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec2&amp;<sp/>velocity);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="struct_boon_1_1_rigidbody2_d_1a4298640539fb3860618538e405520048" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a4298640539fb3860618538e405520048" kindref="member">GetAngularVelocity</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1ad4c764513f4032c160b7d908f231b60e" kindref="member">AngularVelocity</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="77" refid="struct_boon_1_1_rigidbody2_d_1a41f49d216ffe4858732e85eb539b05ac" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a41f49d216ffe4858732e85eb539b05ac" kindref="member">SetAngularVelocity</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>angularVelocity);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79" refid="struct_boon_1_1_rigidbody2_d_1a18841bbd742d183355d28eff4b98b8fa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a18841bbd742d183355d28eff4b98b8fa" kindref="member">GetMass</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a0d10ff3261a6383f409837e91e63a7b5" kindref="member">Mass</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="80" refid="struct_boon_1_1_rigidbody2_d_1abb0e9b2679713403368e3d3358d66b39" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1abb0e9b2679713403368e3d3358d66b39" kindref="member">SetMass</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>mass)<sp/>{<sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a0d10ff3261a6383f409837e91e63a7b5" kindref="member">Mass</ref><sp/>=<sp/>mass;<sp/>}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="struct_boon_1_1_rigidbody2_d_1a194dda30918a49579ec029d234372a4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a194dda30918a49579ec029d234372a4c" kindref="member">SetPosition</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec2&amp;<sp/>position);</highlight></codeline>
+<codeline lineno="83" refid="struct_boon_1_1_rigidbody2_d_1abf1276fd9881860b9e8824c009605ae0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1abf1276fd9881860b9e8824c009605ae0" kindref="member">SetRotation</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>degrees);</highlight></codeline>
+<codeline lineno="84" refid="struct_boon_1_1_rigidbody2_d_1ac98c52a5c1c6ec9190dbfaa4fba88316" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1ac98c52a5c1c6ec9190dbfaa4fba88316" kindref="member">SetTransform</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec2&amp;<sp/>position,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>degrees);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86" refid="struct_boon_1_1_rigidbody2_d_1af8d05ea439cd45b7aa0bb6b87e43abe9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1af8d05ea439cd45b7aa0bb6b87e43abe9" kindref="member">AddForce</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec2&amp;<sp/>force,<sp/><ref refid="struct_boon_1_1_rigidbody2_d_1ab09574aff68c08b78fa6da66d832aeb0" kindref="member">ForceMode</ref><sp/>mode<sp/>=<sp/><ref refid="struct_boon_1_1_rigidbody2_d_1ab09574aff68c08b78fa6da66d832aeb0a9eb6b78a99cdb6ffd3d40d18621d9f80" kindref="member">ForceMode::Force</ref>,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>wake<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="87" refid="struct_boon_1_1_rigidbody2_d_1a16dd4055195335073aef7322308fae1d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a16dd4055195335073aef7322308fae1d" kindref="member">AddTorque</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>torque,<sp/><ref refid="struct_boon_1_1_rigidbody2_d_1ab09574aff68c08b78fa6da66d832aeb0" kindref="member">ForceMode</ref><sp/>mode<sp/>=<sp/><ref refid="struct_boon_1_1_rigidbody2_d_1ab09574aff68c08b78fa6da66d832aeb0a9eb6b78a99cdb6ffd3d40d18621d9f80" kindref="member">ForceMode::Force</ref>,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>wake<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="88" refid="struct_boon_1_1_rigidbody2_d_1a6317846e58477571ce44ffab7ac830c1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1a6317846e58477571ce44ffab7ac830c1" kindref="member">AddImpulse</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec2&amp;<sp/>impulse,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>wake<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90" refid="struct_boon_1_1_rigidbody2_d_1abd00ff44673edfcc8a2f455b6f7a3a08" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1abd00ff44673edfcc8a2f455b6f7a3a08" kindref="member">IsAwake</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_rigidbody2_d_1ab340f7090f8e5e5ca118490a62a96ad9" kindref="member">Awake</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="92"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Component/Rigidbody2D.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,66 @@
+\doxysection{Asset\+Database.\+h}
+\hypertarget{_asset_database_8h_source}{}\label{_asset_database_8h_source}\index{AssetDatabase.h@{AssetDatabase.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}Asset/Importer/AssetImporterRegistry.h"{}}}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}Asset/AssetRef.h"{}}}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}Asset/TextureAsset.h"{}}}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}Core/ServiceLocator.h"{}}}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00008}00008\ \textcolor{keyword}{using\ namespace\ }Boon;}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00010}00010\ \textcolor{keyword}{namespace\ }BoonEditor}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00011}00011\ \{}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00012}\doxymbox{\hyperlink{class_boon_editor_1_1_asset_database}{00012}}\ \ \ \ \ \textcolor{keyword}{class\ }AssetDatabase\ final}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00013}00013\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00015}00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ AssetDatabase\&\ Get();}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ RegisterAsset(\textcolor{keyword}{const}\ std::string\&\ path,\ AssetHandle\ handle);}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00018}00018\ \ \ \ \ \ \ \ \ AssetHandle\ GetHandle(\textcolor{keyword}{const}\ std::string\&\ path)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ GetPath(AssetHandle\ handle)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ TAsset>}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00022}00022\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_asset_ref}{AssetRef<TAsset>}}\ Load(\textcolor{keyword}{const}\ std::string\&\ path)}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00023}00023\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_asset_importer_registry}{AssetImporterRegistry}}\&\ reg\ =\ \doxymbox{\hyperlink{class_boon_1_1_service_locator_a24d80f5670a222c787d4f63bdba7c03a}{ServiceLocator::Get<AssetImporterRegistry>}}();}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_boon_1_1_asset_importer_registry_1_1_imported}{AssetImporterRegistry::Imported<TAsset>}}\ result\ =\ reg.ImportAndLoad<TAsset>(path);}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_boon_1_1_asset_ref}{AssetRef<TAsset>}}(result.meta.uuid);}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00027}00027\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ TAsset>}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ Export(AssetHandle\ handle)}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00031}00031\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ path\ =\ m\_HandleToPath.at(handle);}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_boon_1_1_service_locator_a24d80f5670a222c787d4f63bdba7c03a}{ServiceLocator::Get<AssetImporterRegistry>}}().Export<TAsset>(path,\ handle);}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00034}00034\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ Exists(AssetHandle\ handle)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ Exists(\textcolor{keyword}{const}\ std::string\&\ path)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Clear();}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ ForEachEntry(\textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{void}(AssetHandle,\ \textcolor{keyword}{const}\ std::string\&)>\&\ fn);}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ GetAssetRoot()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_AssetRoot;\ \}}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsDirty()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Dirty;\ \}}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ ClearDirty()\ \{\ m\_Dirty\ =\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00047}00047\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_asset_ref}{AssetRef<Texture2DAsset>}}\ GetThumbnail(AssetHandle\ handle)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00049}00049\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00050}00050\ \ \ \ \ \ \ \ \ AssetDatabase();}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Init();}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ std::unordered\_map<AssetHandle,\ std::string>\ m\_HandleToPath;}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ std::unordered\_map<std::string,\ AssetHandle>\ m\_PathToHandle;}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00055}00055\ \ \ \ \ \ \ \ \ std::string\ m\_AssetRoot\{\textcolor{stringliteral}{"{}Assets/"{}}\};}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_Dirty\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00058}00058\ \ \ \ \ \ \ \ \ std::unordered\_map<AssetType,\ AssetRef<Texture2DAsset>>\ m\_DefaultTextures;}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00059}00059\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_asset_database_8h_source_l00060}00060\ \}}
+
+\end{DoxyCode}

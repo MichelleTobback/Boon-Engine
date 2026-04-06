@@ -1,0 +1,194 @@
+\doxysection{Boon::\+Net\+Identity Struct Reference}
+\hypertarget{struct_boon_1_1_net_identity}{}\label{struct_boon_1_1_net_identity}\index{Boon::NetIdentity@{Boon::NetIdentity}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{struct_boon_1_1_net_identity_a9b622cac07a736ffa56d7df976c6f165}{Is\+Authority}} () const
+\item 
+bool \doxymbox{\hyperlink{struct_boon_1_1_net_identity_a028821adfa9ce4cfb567ac0b3e4a2b31}{Is\+Autonomous\+Proxy}} () const
+\item 
+bool \doxymbox{\hyperlink{struct_boon_1_1_net_identity_ab95156c26a40a3a50c8e254052041fa9}{Is\+Simulated\+Proxy}} () const
+\item 
+bool \doxymbox{\hyperlink{struct_boon_1_1_net_identity_aaedb6558dbc34f4eeaa3ce43e1aadb56}{Is\+Owned\+By}} (uint64\+\_\+t conn) const
+\item 
+bool \doxymbox{\hyperlink{struct_boon_1_1_net_identity_afa3803a5150e2f888b010df6678b7a3a}{Is\+Owner}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_u_u_i_d}{UUID}} \doxymbox{\hyperlink{struct_boon_1_1_net_identity_aed6f842ec131546f04685189a526c1d5}{Net\+Id}}
+\item 
+uint64\+\_\+t \doxymbox{\hyperlink{struct_boon_1_1_net_identity_aecf6c443cf62d3cc18d40d0f50e7395c}{Owner\+Connection\+Id}} = 0
+\item 
+ENet\+Role \doxymbox{\hyperlink{struct_boon_1_1_net_identity_a54bad49a85c99897bc1bae3a5d7eb8e5}{Role}} = ENet\+Role::\+\+None
+\item 
+bool \doxymbox{\hyperlink{struct_boon_1_1_net_identity_a3e79fda5116cae43a03bcfbc700590a4}{b\+Replicates}} = true
+\item 
+bool \doxymbox{\hyperlink{struct_boon_1_1_net_identity_a9a29e6a62551edd4f6efb5f3c72db28a}{b\+Spawned}} = false
+\item 
+Net\+Scene \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_boon_1_1_net_identity_a24c4af8a8b1eccbdc5bc85711897c0d7}{p\+Scene}}
+\item 
+std::\+function$<$ void(\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}, \doxymbox{\hyperlink{struct_boon_1_1_net_identity}{Net\+Identity}} \texorpdfstring{$\ast$}{*})$>$ \doxymbox{\hyperlink{struct_boon_1_1_net_identity_ab392a5a3068fa24cf7cebaaf6c4c4a89}{on\+Net\+Awake}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{struct_boon_1_1_net_identity_ada2c2fcd246792c83c08b25ca2a6750f}{Net\+Scene}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_net_identity_8h_source_l00022}{22}} of file \doxymbox{\hyperlink{_net_identity_8h_source}{Net\+Identity.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{struct_boon_1_1_net_identity_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_boon_1_1_net_identity_a9b622cac07a736ffa56d7df976c6f165}\index{Boon::NetIdentity@{Boon::NetIdentity}!IsAuthority@{IsAuthority}}
+\index{IsAuthority@{IsAuthority}!Boon::NetIdentity@{Boon::NetIdentity}}
+\doxysubsubsection{\texorpdfstring{IsAuthority()}{IsAuthority()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_identity_a9b622cac07a736ffa56d7df976c6f165} 
+bool Boon::\+\+Net\+Identity::\+\+Is\+Authority (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_identity_8h_source_l00037}{37}} of file \doxymbox{\hyperlink{_net_identity_8h_source}{Net\+Identity.\+h}}.
+
+\Hypertarget{struct_boon_1_1_net_identity_a028821adfa9ce4cfb567ac0b3e4a2b31}\index{Boon::NetIdentity@{Boon::NetIdentity}!IsAutonomousProxy@{IsAutonomousProxy}}
+\index{IsAutonomousProxy@{IsAutonomousProxy}!Boon::NetIdentity@{Boon::NetIdentity}}
+\doxysubsubsection{\texorpdfstring{IsAutonomousProxy()}{IsAutonomousProxy()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_identity_a028821adfa9ce4cfb567ac0b3e4a2b31} 
+bool Boon::\+\+Net\+Identity::\+\+Is\+Autonomous\+Proxy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_identity_8h_source_l00038}{38}} of file \doxymbox{\hyperlink{_net_identity_8h_source}{Net\+Identity.\+h}}.
+
+\Hypertarget{struct_boon_1_1_net_identity_aaedb6558dbc34f4eeaa3ce43e1aadb56}\index{Boon::NetIdentity@{Boon::NetIdentity}!IsOwnedBy@{IsOwnedBy}}
+\index{IsOwnedBy@{IsOwnedBy}!Boon::NetIdentity@{Boon::NetIdentity}}
+\doxysubsubsection{\texorpdfstring{IsOwnedBy()}{IsOwnedBy()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_identity_aaedb6558dbc34f4eeaa3ce43e1aadb56} 
+bool Boon::\+\+Net\+Identity::\+\+Is\+Owned\+By (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{conn}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_identity_8h_source_l00041}{41}} of file \doxymbox{\hyperlink{_net_identity_8h_source}{Net\+Identity.\+h}}.
+
+\Hypertarget{struct_boon_1_1_net_identity_afa3803a5150e2f888b010df6678b7a3a}\index{Boon::NetIdentity@{Boon::NetIdentity}!IsOwner@{IsOwner}}
+\index{IsOwner@{IsOwner}!Boon::NetIdentity@{Boon::NetIdentity}}
+\doxysubsubsection{\texorpdfstring{IsOwner()}{IsOwner()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_identity_afa3803a5150e2f888b010df6678b7a3a} 
+bool Boon::\+\+Net\+Identity::\+\+Is\+Owner (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_identity_8h_source_l00042}{42}} of file \doxymbox{\hyperlink{_net_identity_8h_source}{Net\+Identity.\+h}}.
+
+\Hypertarget{struct_boon_1_1_net_identity_ab95156c26a40a3a50c8e254052041fa9}\index{Boon::NetIdentity@{Boon::NetIdentity}!IsSimulatedProxy@{IsSimulatedProxy}}
+\index{IsSimulatedProxy@{IsSimulatedProxy}!Boon::NetIdentity@{Boon::NetIdentity}}
+\doxysubsubsection{\texorpdfstring{IsSimulatedProxy()}{IsSimulatedProxy()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_identity_ab95156c26a40a3a50c8e254052041fa9} 
+bool Boon::\+\+Net\+Identity::\+\+Is\+Simulated\+Proxy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_identity_8h_source_l00039}{39}} of file \doxymbox{\hyperlink{_net_identity_8h_source}{Net\+Identity.\+h}}.
+
+
+
+\label{doc-related-members}
+\Hypertarget{struct_boon_1_1_net_identity_doc-related-members}
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{struct_boon_1_1_net_identity_ada2c2fcd246792c83c08b25ca2a6750f}\index{Boon::NetIdentity@{Boon::NetIdentity}!NetScene@{NetScene}}
+\index{NetScene@{NetScene}!Boon::NetIdentity@{Boon::NetIdentity}}
+\doxysubsubsection{\texorpdfstring{NetScene}{NetScene}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_identity_ada2c2fcd246792c83c08b25ca2a6750f} 
+friend class Net\+Scene\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_identity_8h_source_l00048}{48}} of file \doxymbox{\hyperlink{_net_identity_8h_source}{Net\+Identity.\+h}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{struct_boon_1_1_net_identity_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_boon_1_1_net_identity_a3e79fda5116cae43a03bcfbc700590a4}\index{Boon::NetIdentity@{Boon::NetIdentity}!bReplicates@{bReplicates}}
+\index{bReplicates@{bReplicates}!Boon::NetIdentity@{Boon::NetIdentity}}
+\doxysubsubsection{\texorpdfstring{bReplicates}{bReplicates}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_identity_a3e79fda5116cae43a03bcfbc700590a4} 
+bool Boon::\+\+Net\+Identity::\+b\+Replicates = true}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_identity_8h_source_l00030}{30}} of file \doxymbox{\hyperlink{_net_identity_8h_source}{Net\+Identity.\+h}}.
+
+\Hypertarget{struct_boon_1_1_net_identity_a9a29e6a62551edd4f6efb5f3c72db28a}\index{Boon::NetIdentity@{Boon::NetIdentity}!bSpawned@{bSpawned}}
+\index{bSpawned@{bSpawned}!Boon::NetIdentity@{Boon::NetIdentity}}
+\doxysubsubsection{\texorpdfstring{bSpawned}{bSpawned}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_identity_a9a29e6a62551edd4f6efb5f3c72db28a} 
+bool Boon::\+\+Net\+Identity::\+b\+Spawned = false}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_identity_8h_source_l00031}{31}} of file \doxymbox{\hyperlink{_net_identity_8h_source}{Net\+Identity.\+h}}.
+
+\Hypertarget{struct_boon_1_1_net_identity_aed6f842ec131546f04685189a526c1d5}\index{Boon::NetIdentity@{Boon::NetIdentity}!NetId@{NetId}}
+\index{NetId@{NetId}!Boon::NetIdentity@{Boon::NetIdentity}}
+\doxysubsubsection{\texorpdfstring{NetId}{NetId}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_identity_aed6f842ec131546f04685189a526c1d5} 
+\doxymbox{\hyperlink{class_boon_1_1_u_u_i_d}{UUID}} Boon::\+\+Net\+Identity::\+\+Net\+Id}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_identity_8h_source_l00024}{24}} of file \doxymbox{\hyperlink{_net_identity_8h_source}{Net\+Identity.\+h}}.
+
+\Hypertarget{struct_boon_1_1_net_identity_ab392a5a3068fa24cf7cebaaf6c4c4a89}\index{Boon::NetIdentity@{Boon::NetIdentity}!onNetAwake@{onNetAwake}}
+\index{onNetAwake@{onNetAwake}!Boon::NetIdentity@{Boon::NetIdentity}}
+\doxysubsubsection{\texorpdfstring{onNetAwake}{onNetAwake}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_identity_ab392a5a3068fa24cf7cebaaf6c4c4a89} 
+std::\+function$<$void(\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}, \doxymbox{\hyperlink{struct_boon_1_1_net_identity}{Net\+Identity}}\texorpdfstring{$\ast$}{*})$>$ Boon::\+\+Net\+Identity::\+on\+Net\+Awake}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_identity_8h_source_l00035}{35}} of file \doxymbox{\hyperlink{_net_identity_8h_source}{Net\+Identity.\+h}}.
+
+\Hypertarget{struct_boon_1_1_net_identity_aecf6c443cf62d3cc18d40d0f50e7395c}\index{Boon::NetIdentity@{Boon::NetIdentity}!OwnerConnectionId@{OwnerConnectionId}}
+\index{OwnerConnectionId@{OwnerConnectionId}!Boon::NetIdentity@{Boon::NetIdentity}}
+\doxysubsubsection{\texorpdfstring{OwnerConnectionId}{OwnerConnectionId}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_identity_aecf6c443cf62d3cc18d40d0f50e7395c} 
+uint64\+\_\+t Boon::\+\+Net\+Identity::\+\+Owner\+Connection\+Id = 0}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_identity_8h_source_l00026}{26}} of file \doxymbox{\hyperlink{_net_identity_8h_source}{Net\+Identity.\+h}}.
+
+\Hypertarget{struct_boon_1_1_net_identity_a24c4af8a8b1eccbdc5bc85711897c0d7}\index{Boon::NetIdentity@{Boon::NetIdentity}!pScene@{pScene}}
+\index{pScene@{pScene}!Boon::NetIdentity@{Boon::NetIdentity}}
+\doxysubsubsection{\texorpdfstring{pScene}{pScene}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_identity_a24c4af8a8b1eccbdc5bc85711897c0d7} 
+Net\+Scene\texorpdfstring{$\ast$}{*} Boon::\+\+Net\+Identity::\+p\+Scene}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_identity_8h_source_l00033}{33}} of file \doxymbox{\hyperlink{_net_identity_8h_source}{Net\+Identity.\+h}}.
+
+\Hypertarget{struct_boon_1_1_net_identity_a54bad49a85c99897bc1bae3a5d7eb8e5}\index{Boon::NetIdentity@{Boon::NetIdentity}!Role@{Role}}
+\index{Role@{Role}!Boon::NetIdentity@{Boon::NetIdentity}}
+\doxysubsubsection{\texorpdfstring{Role}{Role}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_identity_a54bad49a85c99897bc1bae3a5d7eb8e5} 
+ENet\+Role Boon::\+\+Net\+Identity::\+\+Role = ENet\+Role::\+\+None}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_identity_8h_source_l00028}{28}} of file \doxymbox{\hyperlink{_net_identity_8h_source}{Net\+Identity.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Net\+Identity.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,43 @@
+digraph "Component/TextureRendererComponent.h"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [id="Node000001",label="Component/TextureRenderer\lComponent.h",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Core/Boon.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_boon_8h.html",tooltip=" "];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="Scene/GameObject.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$_game_object_8h.html",tooltip=" "];
+  Node3 -> Node26 [id="edge3_Node000003_Node000026",color="steelblue1",style="solid",tooltip=" "];
+  Node26 [id="Node000026",label="memory",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node2 -> Node43 [id="edge4_Node000002_Node000043",color="steelblue1",style="solid",tooltip=" "];
+  Node43 [id="Node000043",label="Reflection/BClassBase.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_b_class_base_8h.html",tooltip=" "];
+  Node2 -> Node44 [id="edge5_Node000002_Node000044",color="steelblue1",style="solid",tooltip=" "];
+  Node44 [id="Node000044",label="Asset/AssetRef.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_asset_ref_8h.html",tooltip=" "];
+  Node44 -> Node45 [id="edge6_Node000044_Node000045",color="steelblue1",style="solid",tooltip=" "];
+  Node45 [id="Node000045",label="Asset/Asset.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$_asset_8h.html",tooltip=" "];
+  Node45 -> Node26 [id="edge7_Node000045_Node000026",color="steelblue1",style="solid",tooltip=" "];
+  Node45 -> Node47 [id="edge8_Node000045_Node000047",color="steelblue1",style="solid",tooltip=" "];
+  Node47 [id="Node000047",label="Asset/AssetTraits.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$_asset_traits_8h.html",tooltip=" "];
+  Node2 -> Node48 [id="edge9_Node000002_Node000048",color="steelblue1",style="solid",tooltip=" "];
+  Node48 [id="Node000048",label="Scene/BRef.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$_b_ref_8h.html",tooltip=" "];
+  Node48 -> Node3 [id="edge10_Node000048_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node45 [id="edge11_Node000001_Node000045",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node49 [id="edge12_Node000001_Node000049",color="steelblue1",style="solid",tooltip=" "];
+  Node49 [id="Node000049",label="Asset/TextureAsset.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_texture_asset_8h.html",tooltip=" "];
+  Node49 -> Node45 [id="edge13_Node000049_Node000045",color="steelblue1",style="solid",tooltip=" "];
+  Node49 -> Node47 [id="edge14_Node000049_Node000047",color="steelblue1",style="solid",tooltip=" "];
+  Node49 -> Node50 [id="edge15_Node000049_Node000050",color="steelblue1",style="solid",tooltip=" "];
+  Node50 [id="Node000050",label="Asset/AssetMeta.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$_asset_meta_8h.html",tooltip=" "];
+  Node49 -> Node51 [id="edge16_Node000049_Node000051",color="steelblue1",style="solid",tooltip=" "];
+  Node51 [id="Node000051",label="Core/Memory/Buffer.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$_buffer_8h.html",tooltip=" "];
+  Node49 -> Node52 [id="edge17_Node000049_Node000052",color="steelblue1",style="solid",tooltip=" "];
+  Node52 [id="Node000052",label="Renderer/Texture.h",height=0.2,width=0.4,color="red", fillcolor="#FFF0F0", style="filled",URL="$_texture_8h.html",tooltip=" "];
+  Node52 -> Node51 [id="edge18_Node000052_Node000051",color="steelblue1",style="solid",tooltip=" "];
+  Node52 -> Node26 [id="edge19_Node000052_Node000026",color="steelblue1",style="solid",tooltip=" "];
+  Node49 -> Node26 [id="edge20_Node000049_Node000026",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node18 [id="edge21_Node000001_Node000018",color="steelblue1",style="solid",tooltip=" "];
+  Node18 [id="Node000018",label="glm/glm.hpp",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+}

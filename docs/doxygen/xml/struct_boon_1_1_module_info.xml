@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_module_info" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::ModuleInfo</compoundname>
+    <includes refid="_module_a_p_i_8h" local="no">Module/ModuleAPI.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_module_info_1a17f605c6b39ada74b20f040aab78755c" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* Boon::ModuleInfo::Name</definition>
+        <argsstring></argsstring>
+        <name>Name</name>
+        <qualifiedname>Boon::ModuleInfo::Name</qualifiedname>
+        <initializer>= &quot;&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Module/ModuleAPI.h" line="21" column="20" bodyfile="Module/ModuleAPI.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_module_info_1a81254fac27b84da5a337f8bda422f2c1" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Boon::ModuleInfo::VersionMajor</definition>
+        <argsstring></argsstring>
+        <name>VersionMajor</name>
+        <qualifiedname>Boon::ModuleInfo::VersionMajor</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Module/ModuleAPI.h" line="22" column="13" bodyfile="Module/ModuleAPI.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_module_info_1ad984f376d84714cca27a2ff3b09b1a0d" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Boon::ModuleInfo::VersionMinor</definition>
+        <argsstring></argsstring>
+        <name>VersionMinor</name>
+        <qualifiedname>Boon::ModuleInfo::VersionMinor</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Module/ModuleAPI.h" line="23" column="13" bodyfile="Module/ModuleAPI.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Module/ModuleAPI.h" line="19" column="5" bodyfile="Module/ModuleAPI.h" bodystart="20" bodyend="24"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_module_info_1a17f605c6b39ada74b20f040aab78755c" prot="public" virt="non-virtual"><scope>Boon::ModuleInfo</scope><name>Name</name></member>
+      <member refid="struct_boon_1_1_module_info_1a81254fac27b84da5a337f8bda422f2c1" prot="public" virt="non-virtual"><scope>Boon::ModuleInfo</scope><name>VersionMajor</name></member>
+      <member refid="struct_boon_1_1_module_info_1ad984f376d84714cca27a2ff3b09b1a0d" prot="public" virt="non-virtual"><scope>Boon::ModuleInfo</scope><name>VersionMinor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

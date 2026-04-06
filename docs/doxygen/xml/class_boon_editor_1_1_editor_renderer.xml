@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_editor_1_1_editor_renderer" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>BoonEditor::EditorRenderer</compoundname>
+    <includes refid="_editor_renderer_8h" local="no">UI/EditorRenderer.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_editor_1_1_editor_renderer_1a5aec51f6c3e8f0fb10677318b6543211" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; EditorRendererImpl &gt;</type>
+        <definition>std::unique_ptr&lt;EditorRendererImpl&gt; BoonEditor::EditorRenderer::m_pImpl</definition>
+        <argsstring></argsstring>
+        <name>m_pImpl</name>
+        <qualifiedname>BoonEditor::EditorRenderer::m_pImpl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UI/EditorRenderer.h" line="23" column="17" bodyfile="UI/EditorRenderer.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_renderer_1ad0ff7e58dc32a4b6d2ec1041aa23afd6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::EditorRenderer::EditorRenderer</definition>
+        <argsstring>()</argsstring>
+        <name>EditorRenderer</name>
+        <qualifiedname>BoonEditor::EditorRenderer::EditorRenderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UI/EditorRenderer.h" line="10" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_renderer_1a1857bd6f95aacb3a2efe0944075a8abb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::EditorRenderer::~EditorRenderer</definition>
+        <argsstring>()</argsstring>
+        <name>~EditorRenderer</name>
+        <qualifiedname>BoonEditor::EditorRenderer::~EditorRenderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UI/EditorRenderer.h" line="11" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_renderer_1ae79e7c881d67f7bcd5eb54882610191e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::EditorRenderer::EditorRenderer</definition>
+        <argsstring>(const EditorRenderer &amp;other)=delete</argsstring>
+        <name>EditorRenderer</name>
+        <qualifiedname>BoonEditor::EditorRenderer::EditorRenderer</qualifiedname>
+        <param>
+          <type>const EditorRenderer &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UI/EditorRenderer.h" line="13" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_renderer_1aa2ca5a3c40b3b433e6b78137e84dc5f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::EditorRenderer::EditorRenderer</definition>
+        <argsstring>(EditorRenderer &amp;&amp;other)=delete</argsstring>
+        <name>EditorRenderer</name>
+        <qualifiedname>BoonEditor::EditorRenderer::EditorRenderer</qualifiedname>
+        <param>
+          <type>EditorRenderer &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UI/EditorRenderer.h" line="14" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_renderer_1aee8c4e9ea6e871bccfa9c64053eb3840" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_editor_1_1_editor_renderer_1ad0ff7e58dc32a4b6d2ec1041aa23afd6" kindref="member">EditorRenderer</ref> &amp;</type>
+        <definition>EditorRenderer &amp; BoonEditor::EditorRenderer::operator=</definition>
+        <argsstring>(const EditorRenderer &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>BoonEditor::EditorRenderer::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="class_boon_editor_1_1_editor_renderer_1ad0ff7e58dc32a4b6d2ec1041aa23afd6" kindref="member">EditorRenderer</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UI/EditorRenderer.h" line="15" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_renderer_1a5997dfb6b3ee172c2b4a93bff8be6010" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_editor_1_1_editor_renderer_1ad0ff7e58dc32a4b6d2ec1041aa23afd6" kindref="member">EditorRenderer</ref> &amp;</type>
+        <definition>EditorRenderer &amp; BoonEditor::EditorRenderer::operator=</definition>
+        <argsstring>(EditorRenderer &amp;&amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>BoonEditor::EditorRenderer::operator=</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_editor_1_1_editor_renderer_1ad0ff7e58dc32a4b6d2ec1041aa23afd6" kindref="member">EditorRenderer</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UI/EditorRenderer.h" line="16" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_renderer_1a749eaf1d1f1d012cc8c87f0c3ce268f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::EditorRenderer::BeginFrame</definition>
+        <argsstring>()</argsstring>
+        <name>BeginFrame</name>
+        <qualifiedname>BoonEditor::EditorRenderer::BeginFrame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UI/EditorRenderer.h" line="18" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_renderer_1a805ee7e7ac6eaa3e9c920258d55bec7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::EditorRenderer::EndFrame</definition>
+        <argsstring>()</argsstring>
+        <name>EndFrame</name>
+        <qualifiedname>BoonEditor::EditorRenderer::EndFrame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UI/EditorRenderer.h" line="19" column="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="UI/EditorRenderer.h" line="7" column="1" bodyfile="UI/EditorRenderer.h" bodystart="8" bodyend="24"/>
+    <listofallmembers>
+      <member refid="class_boon_editor_1_1_editor_renderer_1a749eaf1d1f1d012cc8c87f0c3ce268f1" prot="public" virt="non-virtual"><scope>BoonEditor::EditorRenderer</scope><name>BeginFrame</name></member>
+      <member refid="class_boon_editor_1_1_editor_renderer_1ad0ff7e58dc32a4b6d2ec1041aa23afd6" prot="public" virt="non-virtual"><scope>BoonEditor::EditorRenderer</scope><name>EditorRenderer</name></member>
+      <member refid="class_boon_editor_1_1_editor_renderer_1ae79e7c881d67f7bcd5eb54882610191e" prot="public" virt="non-virtual"><scope>BoonEditor::EditorRenderer</scope><name>EditorRenderer</name></member>
+      <member refid="class_boon_editor_1_1_editor_renderer_1aa2ca5a3c40b3b433e6b78137e84dc5f6" prot="public" virt="non-virtual"><scope>BoonEditor::EditorRenderer</scope><name>EditorRenderer</name></member>
+      <member refid="class_boon_editor_1_1_editor_renderer_1a805ee7e7ac6eaa3e9c920258d55bec7f" prot="public" virt="non-virtual"><scope>BoonEditor::EditorRenderer</scope><name>EndFrame</name></member>
+      <member refid="class_boon_editor_1_1_editor_renderer_1a5aec51f6c3e8f0fb10677318b6543211" prot="private" virt="non-virtual"><scope>BoonEditor::EditorRenderer</scope><name>m_pImpl</name></member>
+      <member refid="class_boon_editor_1_1_editor_renderer_1aee8c4e9ea6e871bccfa9c64053eb3840" prot="public" virt="non-virtual"><scope>BoonEditor::EditorRenderer</scope><name>operator=</name></member>
+      <member refid="class_boon_editor_1_1_editor_renderer_1a5997dfb6b3ee172c2b4a93bff8be6010" prot="public" virt="non-virtual"><scope>BoonEditor::EditorRenderer</scope><name>operator=</name></member>
+      <member refid="class_boon_editor_1_1_editor_renderer_1a1857bd6f95aacb3a2efe0944075a8abb" prot="public" virt="non-virtual"><scope>BoonEditor::EditorRenderer</scope><name>~EditorRenderer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

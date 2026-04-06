@@ -1,0 +1,366 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_game_object_i_d_8h" kind="file" language="C++">
+    <compoundname>GameObjectID.h</compoundname>
+    <includes local="no">entt/entt.hpp</includes>
+    <includedby refid="_physics2_d_types_8h" local="yes">Physics/Physics2DTypes.h</includedby>
+    <includedby refid="_game_object_8h" local="yes">Scene/GameObject.h</includedby>
+    <includedby refid="_scene_8h" local="yes">Scene/Scene.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>Scene/GameObjectID.h</label>
+        <link refid="_game_object_i_d_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>entt/entt.hpp</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="7">
+        <label>Asset/Assets.h</label>
+        <link refid="_assets_8h"/>
+      </node>
+      <node id="8">
+        <label>Asset/Importer/SceneImporter.h</label>
+        <link refid="_scene_importer_8h"/>
+      </node>
+      <node id="6">
+        <label>Asset/SceneAsset.h</label>
+        <link refid="_scene_asset_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>Component/BoxCollider2D.h</label>
+        <link refid="_box_collider2_d_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>Component/CameraComponent.h</label>
+        <link refid="_camera_component_8h"/>
+      </node>
+      <node id="9">
+        <label>Component/ECSLifecycle.h</label>
+        <link refid="_e_c_s_lifecycle_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>Component/NameComponent.h</label>
+        <link refid="_name_component_8h"/>
+      </node>
+      <node id="30">
+        <label>Component/Rigidbody2D.h</label>
+        <link refid="_rigidbody2_d_8h"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>Component/SceneComponent.h</label>
+        <link refid="_scene_component_8h"/>
+      </node>
+      <node id="33">
+        <label>Component/SpriteAnimatorComponent.h</label>
+        <link refid="_sprite_animator_component_8h"/>
+      </node>
+      <node id="34">
+        <label>Component/SpriteRendererComponent.h</label>
+        <link refid="_sprite_renderer_component_8h"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>Component/TextureRendererComponent.h</label>
+        <link refid="_texture_renderer_component_8h"/>
+      </node>
+      <node id="26">
+        <label>Core/Boon.h</label>
+        <link refid="_boon_8h"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>Event/SceneEvents.h</label>
+        <link refid="_scene_events_8h"/>
+      </node>
+      <node id="31">
+        <label>Networking/Components/NetRigidbody2D.h</label>
+        <link refid="_net_rigidbody2_d_8h"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>Networking/Components/NetRigidbody2DSerializer.h</label>
+        <link refid="_net_rigidbody2_d_serializer_8h"/>
+      </node>
+      <node id="36">
+        <label>Networking/Components/NetTransform.h</label>
+        <link refid="_net_transform_8h"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>Networking/Components/NetTransformSerializer.h</label>
+        <link refid="_net_transform_serializer_8h"/>
+      </node>
+      <node id="40">
+        <label>Networking/IRepSerializer.h</label>
+        <link refid="_i_rep_serializer_8h"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>Networking/NetIdentity.h</label>
+        <link refid="_net_identity_8h"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>Networking/NetRepCore.h</label>
+        <link refid="_net_rep_core_8h"/>
+      </node>
+      <node id="41">
+        <label>Networking/NetRepRegistry.h</label>
+        <link refid="_net_rep_registry_8h"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>Networking/NetScene.h</label>
+        <link refid="_net_scene_8h"/>
+      </node>
+      <node id="3">
+        <label>Physics/Physics2D.h</label>
+        <link refid="_physics2_d_8h"/>
+      </node>
+      <node id="2">
+        <label>Physics/Physics2DTypes.h</label>
+        <link refid="_physics2_d_types_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Physics/PhysicsWorld2D.h</label>
+        <link refid="_physics_world2_d_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>Reflection/ECSLifecycleDetection.h</label>
+        <link refid="_e_c_s_lifecycle_detection_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Reflection/RegisterBClass.h</label>
+        <link refid="_register_b_class_8h"/>
+      </node>
+      <node id="44">
+        <label>Scene/BRef.h</label>
+        <link refid="_b_ref_8h"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>Scene/GameObject.h</label>
+        <link refid="_game_object_8h"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Scene/GameObjectID.h</label>
+        <link refid="_game_object_i_d_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Scene/Scene.h</label>
+        <link refid="_scene_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>Scene/SceneManager.h</label>
+        <link refid="_scene_manager_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>Scene/SceneSerializer.h</label>
+        <link refid="_scene_serializer_8h"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Core/BoonEditor.h</label>
+        <link refid="_boon_editor_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Core/EditorState.h</label>
+        <link refid="_editor_state_8h"/>
+      </node>
+      <node id="13">
+        <label>Event/EditorEvent.h</label>
+        <link refid="_editor_event_8h"/>
+      </node>
+      <node id="14">
+        <label>Panels/AssetEditor.h</label>
+        <link refid="_asset_editor_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>Panels/AssetEditorPanel.h</label>
+        <link refid="_asset_editor_panel_8h"/>
+      </node>
+      <node id="18">
+        <label>Panels/ContentBrowser.h</label>
+        <link refid="_content_browser_8h"/>
+      </node>
+      <node id="19">
+        <label>Panels/PropertiesPanel.h</label>
+        <link refid="_properties_panel_8h"/>
+      </node>
+      <node id="20">
+        <label>Panels/ScenePanel.h</label>
+        <link refid="_scene_panel_8h"/>
+      </node>
+      <node id="16">
+        <label>Panels/SpriteAtlasEditorPanel.h</label>
+        <link refid="_sprite_atlas_editor_panel_8h"/>
+      </node>
+      <node id="17">
+        <label>Panels/TilemapEditorPanel.h</label>
+        <link refid="_tilemap_editor_panel_8h"/>
+      </node>
+      <node id="21">
+        <label>Panels/ViewportPanel.h</label>
+        <link refid="_viewport_panel_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>Panels/ViewportToolbar.h</label>
+        <link refid="_viewport_toolbar_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;entt/entt.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="6"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="7" refid="namespace_boon_1a3c4b811809646d3ae922d1795f4ad6e5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespace_boon_1a3c4b811809646d3ae922d1795f4ad6e5" kindref="member">GameObjectID</ref><sp/>=<sp/>entt::entity;</highlight></codeline>
+<codeline lineno="8" refid="namespace_boon_1a70bb9bf27a027ea3b3490b39422aa1f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1a70bb9bf27a027ea3b3490b39422aa1f1" kindref="member">NullGameObject</ref><sp/>=<sp/>entt::null;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Scene/GameObjectID.h"/>
+  </compounddef>
+</doxygen>

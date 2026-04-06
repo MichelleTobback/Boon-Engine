@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_framebuffer_texture_descriptor" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::FramebufferTextureDescriptor</compoundname>
+    <includes refid="_framebuffer_8h" local="no">Renderer/Framebuffer.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_framebuffer_texture_descriptor_1acc5b6cb52f67c4ddf2562e4906d94d63" prot="public" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1a8b57d6d1536f265d78d43be6f9cef84f" kindref="member">FramebufferTextureFormat</ref></type>
+        <definition>FramebufferTextureFormat Boon::FramebufferTextureDescriptor::TextureFormat</definition>
+        <argsstring></argsstring>
+        <name>TextureFormat</name>
+        <qualifiedname>Boon::FramebufferTextureDescriptor::TextureFormat</qualifiedname>
+        <initializer>= <ref refid="namespace_boon_1a8b57d6d1536f265d78d43be6f9cef84fa6adf97f83acf6453d4a6a4b1070f3754" kindref="member">FramebufferTextureFormat::None</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Framebuffer.h" line="29" column="26" bodyfile="Renderer/Framebuffer.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_boon_1_1_framebuffer_texture_descriptor_1ab80b1486cf0a448839f098143a91b0f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::FramebufferTextureDescriptor::FramebufferTextureDescriptor</definition>
+        <argsstring>()=default</argsstring>
+        <name>FramebufferTextureDescriptor</name>
+        <qualifiedname>Boon::FramebufferTextureDescriptor::FramebufferTextureDescriptor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Framebuffer.h" line="25" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_framebuffer_texture_descriptor_1ae39b2c0448a18df498c0d878805c7e71" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::FramebufferTextureDescriptor::FramebufferTextureDescriptor</definition>
+        <argsstring>(FramebufferTextureFormat format)</argsstring>
+        <name>FramebufferTextureDescriptor</name>
+        <qualifiedname>Boon::FramebufferTextureDescriptor::FramebufferTextureDescriptor</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a8b57d6d1536f265d78d43be6f9cef84f" kindref="member">FramebufferTextureFormat</ref></type>
+          <declname>format</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Framebuffer.h" line="26" column="1" bodyfile="Renderer/Framebuffer.h" bodystart="26" bodyend="27"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Renderer/Framebuffer.h" line="23" column="1" bodyfile="Renderer/Framebuffer.h" bodystart="24" bodyend="30"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_framebuffer_texture_descriptor_1ab80b1486cf0a448839f098143a91b0f4" prot="public" virt="non-virtual"><scope>Boon::FramebufferTextureDescriptor</scope><name>FramebufferTextureDescriptor</name></member>
+      <member refid="struct_boon_1_1_framebuffer_texture_descriptor_1ae39b2c0448a18df498c0d878805c7e71" prot="public" virt="non-virtual"><scope>Boon::FramebufferTextureDescriptor</scope><name>FramebufferTextureDescriptor</name></member>
+      <member refid="struct_boon_1_1_framebuffer_texture_descriptor_1acc5b6cb52f67c4ddf2562e4906d94d63" prot="public" virt="non-virtual"><scope>Boon::FramebufferTextureDescriptor</scope><name>TextureFormat</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

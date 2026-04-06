@@ -1,0 +1,158 @@
+\doxysection{Boon::\+Asset\+Importer\+Registry Class Reference}
+\hypertarget{class_boon_1_1_asset_importer_registry}{}\label{class_boon_1_1_asset_importer_registry}\index{Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_boon_1_1_asset_importer_registry_1_1_imported}{Imported}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename TImporter$>$ }\\void \doxymbox{\hyperlink{class_boon_1_1_asset_importer_registry_a443c56f5086e116b7f7c860ae205a5fa}{Register\+Importer}} ()
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_asset_importer}{Asset\+Importer}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_1_1_asset_importer_registry_a04eeb1c7ef992c8c94f280bcf141a2ee}{Get\+Importer}} (Asset\+Type type)
+\item 
+{\footnotesize template$<$typename T$>$ }\\\doxymbox{\hyperlink{struct_boon_1_1_asset_importer_registry_1_1_imported}{Imported}}$<$ T $>$ \doxymbox{\hyperlink{class_boon_1_1_asset_importer_registry_a149a18c435b0622b9575a02b4eb496d4}{Import\+And\+Load}} (const std::\+string \&filepath)
+\item 
+\doxymbox{\hyperlink{struct_boon_1_1_asset_importer_registry_1_1_imported}{Imported}}$<$ \doxymbox{\hyperlink{class_boon_1_1_asset}{Asset}} $>$ \doxymbox{\hyperlink{class_boon_1_1_asset_importer_registry_a2beace62d7aa3464e63813540a09fc60}{Import\+And\+Load}} (const std::\+string \&filepath)
+\item 
+{\footnotesize template$<$typename T$>$ }\\bool \doxymbox{\hyperlink{class_boon_1_1_asset_importer_registry_a9ec91c3e1960592f4e03317de8a0b190}{Export}} (const std::\+string \&filepath, Asset\+Handle asset)
+\item 
+bool \doxymbox{\hyperlink{class_boon_1_1_asset_importer_registry_a1393a0518df8c27411d7ab2a5a3f4992}{Has\+Extension}} (const std::\+string \&extension) const
+\item 
+\doxymbox{\hyperlink{struct_boon_1_1_asset_meta}{Asset\+Meta}} \doxymbox{\hyperlink{class_boon_1_1_asset_importer_registry_a1c99bfa9d52abe0e06bf1afdd03c4904}{Load\+Meta}} (const std::\+string \&filepath)
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_asset_importer_registry_ae5b08665a061a0736c9e6ab6a134c955}{Write\+Meta}} (const std::\+string \&filepath, const \doxymbox{\hyperlink{struct_boon_1_1_asset_meta}{Asset\+Meta}} \&meta)
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_asset_registry}{Asset\+Registry}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_1_1_asset_importer_registry_a83f63db6eb772f7691ceadab83b231ca}{Get\+Registry}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_boon_1_1_asset_importer_registry_a292e4feeaca3aaa2322af3612b47bc14}{Asset\+Library}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_asset_importer_registry_8h_source_l00015}{15}} of file \doxymbox{\hyperlink{_asset_importer_registry_8h_source}{Asset\+Importer\+Registry.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_asset_importer_registry_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_asset_importer_registry_a9ec91c3e1960592f4e03317de8a0b190}\index{Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}!Export@{Export}}
+\index{Export@{Export}!Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}}
+\doxysubsubsection{\texorpdfstring{Export()}{Export()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_importer_registry_a9ec91c3e1960592f4e03317de8a0b190} 
+template$<$typename T$>$ \\
+bool Boon::\+\+Asset\+Importer\+Registry::\+\+Export (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{filepath}{, }\item[{Asset\+Handle}]{asset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_importer_registry_8h_source_l00081}{81}} of file \doxymbox{\hyperlink{_asset_importer_registry_8h_source}{Asset\+Importer\+Registry.\+h}}.
+
+\Hypertarget{class_boon_1_1_asset_importer_registry_a04eeb1c7ef992c8c94f280bcf141a2ee}\index{Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}!GetImporter@{GetImporter}}
+\index{GetImporter@{GetImporter}!Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}}
+\doxysubsubsection{\texorpdfstring{GetImporter()}{GetImporter()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_importer_registry_a04eeb1c7ef992c8c94f280bcf141a2ee} 
+\doxymbox{\hyperlink{class_boon_1_1_asset_importer}{Asset\+Importer}} \texorpdfstring{$\ast$}{*} Boon::\+\+Asset\+Importer\+Registry::\+\+Get\+Importer (\begin{DoxyParamCaption}\item[{Asset\+Type}]{type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_importer_registry_8h_source_l00045}{45}} of file \doxymbox{\hyperlink{_asset_importer_registry_8h_source}{Asset\+Importer\+Registry.\+h}}.
+
+\Hypertarget{class_boon_1_1_asset_importer_registry_a83f63db6eb772f7691ceadab83b231ca}\index{Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}!GetRegistry@{GetRegistry}}
+\index{GetRegistry@{GetRegistry}!Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}}
+\doxysubsubsection{\texorpdfstring{GetRegistry()}{GetRegistry()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_importer_registry_a83f63db6eb772f7691ceadab83b231ca} 
+\doxymbox{\hyperlink{class_boon_1_1_asset_registry}{Asset\+Registry}} \texorpdfstring{$\ast$}{*} Boon::\+\+Asset\+Importer\+Registry::\+\+Get\+Registry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_importer_registry_8h_source_l00124}{124}} of file \doxymbox{\hyperlink{_asset_importer_registry_8h_source}{Asset\+Importer\+Registry.\+h}}.
+
+\Hypertarget{class_boon_1_1_asset_importer_registry_a1393a0518df8c27411d7ab2a5a3f4992}\index{Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}!HasExtension@{HasExtension}}
+\index{HasExtension@{HasExtension}!Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}}
+\doxysubsubsection{\texorpdfstring{HasExtension()}{HasExtension()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_importer_registry_a1393a0518df8c27411d7ab2a5a3f4992} 
+bool Boon::\+\+Asset\+Importer\+Registry::\+\+Has\+Extension (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{extension}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_importer_registry_8h_source_l00087}{87}} of file \doxymbox{\hyperlink{_asset_importer_registry_8h_source}{Asset\+Importer\+Registry.\+h}}.
+
+\Hypertarget{class_boon_1_1_asset_importer_registry_a2beace62d7aa3464e63813540a09fc60}\index{Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}!ImportAndLoad@{ImportAndLoad}}
+\index{ImportAndLoad@{ImportAndLoad}!Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}}
+\doxysubsubsection{\texorpdfstring{ImportAndLoad()}{ImportAndLoad()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_importer_registry_a2beace62d7aa3464e63813540a09fc60} 
+\doxymbox{\hyperlink{struct_boon_1_1_asset_importer_registry_1_1_imported}{Imported}}$<$ \doxymbox{\hyperlink{class_boon_1_1_asset}{Asset}} $>$ Boon::\+\+Asset\+Importer\+Registry::\+\+Import\+And\+Load (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{filepath}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_importer_registry_8h_source_l00063}{63}} of file \doxymbox{\hyperlink{_asset_importer_registry_8h_source}{Asset\+Importer\+Registry.\+h}}.
+
+\Hypertarget{class_boon_1_1_asset_importer_registry_a149a18c435b0622b9575a02b4eb496d4}\index{Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}!ImportAndLoad@{ImportAndLoad}}
+\index{ImportAndLoad@{ImportAndLoad}!Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}}
+\doxysubsubsection{\texorpdfstring{ImportAndLoad()}{ImportAndLoad()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_importer_registry_a149a18c435b0622b9575a02b4eb496d4} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{struct_boon_1_1_asset_importer_registry_1_1_imported}{Imported}}$<$ T $>$ Boon::\+\+Asset\+Importer\+Registry::\+\+Import\+And\+Load (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{filepath}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_importer_registry_8h_source_l00052}{52}} of file \doxymbox{\hyperlink{_asset_importer_registry_8h_source}{Asset\+Importer\+Registry.\+h}}.
+
+\Hypertarget{class_boon_1_1_asset_importer_registry_a1c99bfa9d52abe0e06bf1afdd03c4904}\index{Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}!LoadMeta@{LoadMeta}}
+\index{LoadMeta@{LoadMeta}!Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}}
+\doxysubsubsection{\texorpdfstring{LoadMeta()}{LoadMeta()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_importer_registry_a1c99bfa9d52abe0e06bf1afdd03c4904} 
+\doxymbox{\hyperlink{struct_boon_1_1_asset_meta}{Asset\+Meta}} Boon::\+\+Asset\+Importer\+Registry::\+\+Load\+Meta (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{filepath}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_importer_registry_8h_source_l00092}{92}} of file \doxymbox{\hyperlink{_asset_importer_registry_8h_source}{Asset\+Importer\+Registry.\+h}}.
+
+\Hypertarget{class_boon_1_1_asset_importer_registry_a443c56f5086e116b7f7c860ae205a5fa}\index{Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}!RegisterImporter@{RegisterImporter}}
+\index{RegisterImporter@{RegisterImporter}!Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}}
+\doxysubsubsection{\texorpdfstring{RegisterImporter()}{RegisterImporter()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_importer_registry_a443c56f5086e116b7f7c860ae205a5fa} 
+template$<$typename TImporter$>$ \\
+void Boon::\+\+Asset\+Importer\+Registry::\+\+Register\+Importer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_importer_registry_8h_source_l00030}{30}} of file \doxymbox{\hyperlink{_asset_importer_registry_8h_source}{Asset\+Importer\+Registry.\+h}}.
+
+\Hypertarget{class_boon_1_1_asset_importer_registry_ae5b08665a061a0736c9e6ab6a134c955}\index{Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}!WriteMeta@{WriteMeta}}
+\index{WriteMeta@{WriteMeta}!Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}}
+\doxysubsubsection{\texorpdfstring{WriteMeta()}{WriteMeta()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_importer_registry_ae5b08665a061a0736c9e6ab6a134c955} 
+void Boon::\+\+Asset\+Importer\+Registry::\+\+Write\+Meta (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{filepath}{, }\item[{const \doxymbox{\hyperlink{struct_boon_1_1_asset_meta}{Asset\+Meta}} \&}]{meta}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_importer_registry_8h_source_l00105}{105}} of file \doxymbox{\hyperlink{_asset_importer_registry_8h_source}{Asset\+Importer\+Registry.\+h}}.
+
+
+
+\label{doc-related-members}
+\Hypertarget{class_boon_1_1_asset_importer_registry_doc-related-members}
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{class_boon_1_1_asset_importer_registry_a292e4feeaca3aaa2322af3612b47bc14}\index{Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}!AssetLibrary@{AssetLibrary}}
+\index{AssetLibrary@{AssetLibrary}!Boon::AssetImporterRegistry@{Boon::AssetImporterRegistry}}
+\doxysubsubsection{\texorpdfstring{AssetLibrary}{AssetLibrary}}
+{\footnotesize\ttfamily \label{class_boon_1_1_asset_importer_registry_a292e4feeaca3aaa2322af3612b47bc14} 
+friend class Asset\+Library\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_asset_importer_registry_8h_source_l00127}{127}} of file \doxymbox{\hyperlink{_asset_importer_registry_8h_source}{Asset\+Importer\+Registry.\+h}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Asset\+Importer\+Registry.\+h\end{DoxyCompactItemize}

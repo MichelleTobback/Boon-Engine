@@ -1,0 +1,221 @@
+\doxysection{Boon::\+ECSLifecycle\+System Struct Reference}
+\hypertarget{struct_boon_1_1_e_c_s_lifecycle_system}{}\label{struct_boon_1_1_e_c_s_lifecycle_system}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks}{Callbacks}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_a6650f9cb5d5326ad9909caf923bfcf32}{ECSLifecycle\+System}} (\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \&s)
+\item 
+{\footnotesize template$<$typename T$>$ }\\void \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_ad4e071891227b5fc2cde4f305005c7aa}{Register\+Type}} ()
+\item 
+{\footnotesize template$<$typename T$>$ }\\void \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_ac583ed2fac32a6b4e96a66d2b07d4069}{Unregister\+Type}} ()
+\item 
+{\footnotesize template$<$typename T$>$ }\\void \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_a6a5ae6fbca0fd589743e86de9b569a10}{Awake\+Component}} (\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}} owner)
+\item 
+void \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_a00bd91f43c3450dc220f02133ccc6553}{Awake\+All}} ()
+\item 
+void \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_a8cdd28ceac7f127b1cf2b6b5f7c32ae6}{On\+End\+Play\+All}} ()
+\item 
+void \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_a98262c5d8a1b019a82ac0738dd87757b}{Update\+All}} ()
+\item 
+void \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_a848e408c946d03021497a9ef9705a877}{Fixed\+Update\+All}} ()
+\item 
+void \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_a1017a186bda8e925d16c9841bb59b552}{Late\+Update\+All}} ()
+\item 
+void \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_a8ee89b40c0e623ad74dc1c7f33027925}{Begin\+Overlap}} (\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}} overlapped, \doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}} other)
+\item 
+void \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_a213a00b90560be07a1fef8108d16eaaa}{End\+Overlap}} (\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}} overlapped, \doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}} other)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \& \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_ad508bbaf91c0fc218b76aa38be639ae0}{scene}}
+\item 
+std::\+unordered\+\_\+map$<$ std::\+type\+\_\+index, \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks}{Callbacks}} $>$ \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_aceec3f3cfeb58808b92247d163fb0ff0}{map}}
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_delegate}{Delegate}}$<$ void(\doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \&)$>$::\+\+Handle \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_ace14366adab1d03da93105c3f517f3f1}{Scene\+Listener\+Handle}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00106}{106}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_a6650f9cb5d5326ad9909caf923bfcf32}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}!ECSLifecycleSystem@{ECSLifecycleSystem}}
+\index{ECSLifecycleSystem@{ECSLifecycleSystem}!Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection{\texorpdfstring{ECSLifecycleSystem()}{ECSLifecycleSystem()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_e_c_s_lifecycle_system_a6650f9cb5d5326ad9909caf923bfcf32} 
+Boon::\+\+ECSLifecycle\+System::\+\+ECSLifecycle\+System (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \&}]{s}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00124}{124}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_abfc3ddd35eb9c9c8ea8edf196a83970b}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}!````~ECSLifecycleSystem@{\texorpdfstring{$\sim$}{\string~}ECSLifecycleSystem}}
+\index{````~ECSLifecycleSystem@{\texorpdfstring{$\sim$}{\string~}ECSLifecycleSystem}!Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ECSLifecycleSystem()}{\string~ECSLifecycleSystem()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_e_c_s_lifecycle_system_abfc3ddd35eb9c9c8ea8edf196a83970b} 
+Boon::\+\+ECSLifecycle\+System::\+\texorpdfstring{$\sim$}{\string~}\+ECSLifecycle\+System (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00139}{139}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_a00bd91f43c3450dc220f02133ccc6553}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}!AwakeAll@{AwakeAll}}
+\index{AwakeAll@{AwakeAll}!Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection{\texorpdfstring{AwakeAll()}{AwakeAll()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_e_c_s_lifecycle_system_a00bd91f43c3450dc220f02133ccc6553} 
+void Boon::\+\+ECSLifecycle\+System::\+\+Awake\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00188}{188}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_a6a5ae6fbca0fd589743e86de9b569a10}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}!AwakeComponent@{AwakeComponent}}
+\index{AwakeComponent@{AwakeComponent}!Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection{\texorpdfstring{AwakeComponent()}{AwakeComponent()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_e_c_s_lifecycle_system_a6a5ae6fbca0fd589743e86de9b569a10} 
+template$<$typename T$>$ \\
+void Boon::\+\+ECSLifecycle\+System::\+\+Awake\+Component (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}}]{owner}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00179}{179}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_a8ee89b40c0e623ad74dc1c7f33027925}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}!BeginOverlap@{BeginOverlap}}
+\index{BeginOverlap@{BeginOverlap}!Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection{\texorpdfstring{BeginOverlap()}{BeginOverlap()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_e_c_s_lifecycle_system_a8ee89b40c0e623ad74dc1c7f33027925} 
+void Boon::\+\+ECSLifecycle\+System::\+\+Begin\+Overlap (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}}]{overlapped}{, }\item[{\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00193}{193}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_a213a00b90560be07a1fef8108d16eaaa}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}!EndOverlap@{EndOverlap}}
+\index{EndOverlap@{EndOverlap}!Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection{\texorpdfstring{EndOverlap()}{EndOverlap()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_e_c_s_lifecycle_system_a213a00b90560be07a1fef8108d16eaaa} 
+void Boon::\+\+ECSLifecycle\+System::\+\+End\+Overlap (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}}]{overlapped}{, }\item[{\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00198}{198}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_a848e408c946d03021497a9ef9705a877}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}!FixedUpdateAll@{FixedUpdateAll}}
+\index{FixedUpdateAll@{FixedUpdateAll}!Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection{\texorpdfstring{FixedUpdateAll()}{FixedUpdateAll()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_e_c_s_lifecycle_system_a848e408c946d03021497a9ef9705a877} 
+void Boon::\+\+ECSLifecycle\+System::\+\+Fixed\+Update\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00191}{191}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_a1017a186bda8e925d16c9841bb59b552}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}!LateUpdateAll@{LateUpdateAll}}
+\index{LateUpdateAll@{LateUpdateAll}!Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection{\texorpdfstring{LateUpdateAll()}{LateUpdateAll()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_e_c_s_lifecycle_system_a1017a186bda8e925d16c9841bb59b552} 
+void Boon::\+\+ECSLifecycle\+System::\+\+Late\+Update\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00192}{192}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_a8cdd28ceac7f127b1cf2b6b5f7c32ae6}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}!OnEndPlayAll@{OnEndPlayAll}}
+\index{OnEndPlayAll@{OnEndPlayAll}!Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection{\texorpdfstring{OnEndPlayAll()}{OnEndPlayAll()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_e_c_s_lifecycle_system_a8cdd28ceac7f127b1cf2b6b5f7c32ae6} 
+void Boon::\+\+ECSLifecycle\+System::\+\+On\+End\+Play\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00189}{189}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_ad4e071891227b5fc2cde4f305005c7aa}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}!RegisterType@{RegisterType}}
+\index{RegisterType@{RegisterType}!Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection{\texorpdfstring{RegisterType()}{RegisterType()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_e_c_s_lifecycle_system_ad4e071891227b5fc2cde4f305005c7aa} 
+template$<$typename T$>$ \\
+void Boon::\+\+ECSLifecycle\+System::\+\+Register\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00145}{145}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_ac583ed2fac32a6b4e96a66d2b07d4069}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}!UnregisterType@{UnregisterType}}
+\index{UnregisterType@{UnregisterType}!Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection{\texorpdfstring{UnregisterType()}{UnregisterType()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_e_c_s_lifecycle_system_ac583ed2fac32a6b4e96a66d2b07d4069} 
+template$<$typename T$>$ \\
+void Boon::\+\+ECSLifecycle\+System::\+\+Unregister\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00165}{165}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_a98262c5d8a1b019a82ac0738dd87757b}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}!UpdateAll@{UpdateAll}}
+\index{UpdateAll@{UpdateAll}!Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection{\texorpdfstring{UpdateAll()}{UpdateAll()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_e_c_s_lifecycle_system_a98262c5d8a1b019a82ac0738dd87757b} 
+void Boon::\+\+ECSLifecycle\+System::\+\+Update\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00190}{190}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_aceec3f3cfeb58808b92247d163fb0ff0}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}!map@{map}}
+\index{map@{map}!Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection{\texorpdfstring{map}{map}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_e_c_s_lifecycle_system_aceec3f3cfeb58808b92247d163fb0ff0} 
+std::\+unordered\+\_\+map$<$std::\+type\+\_\+index, \doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks}{Callbacks}}$>$ Boon::\+\+ECSLifecycle\+System::\+map}
+
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00121}{121}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_ad508bbaf91c0fc218b76aa38be639ae0}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}!scene@{scene}}
+\index{scene@{scene}!Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection{\texorpdfstring{scene}{scene}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_e_c_s_lifecycle_system_ad508bbaf91c0fc218b76aa38be639ae0} 
+\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}}\& Boon::\+\+ECSLifecycle\+System::\+scene}
+
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00108}{108}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+\Hypertarget{struct_boon_1_1_e_c_s_lifecycle_system_ace14366adab1d03da93105c3f517f3f1}\index{Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}!SceneListenerHandle@{SceneListenerHandle}}
+\index{SceneListenerHandle@{SceneListenerHandle}!Boon::ECSLifecycleSystem@{Boon::ECSLifecycleSystem}}
+\doxysubsubsection{\texorpdfstring{SceneListenerHandle}{SceneListenerHandle}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_e_c_s_lifecycle_system_ace14366adab1d03da93105c3f517f3f1} 
+\doxymbox{\hyperlink{class_boon_1_1_delegate}{Delegate}}$<$void(\doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}}\&)$>$::\+\+Handle Boon::\+\+ECSLifecycle\+System::\+\+Scene\+Listener\+Handle}
+
+
+
+Definition at line \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source_l00122}{122}} of file \doxymbox{\hyperlink{_e_c_s_lifecycle_8h_source}{ECSLifecycle.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+ECSLifecycle.\+h\end{DoxyCompactItemize}

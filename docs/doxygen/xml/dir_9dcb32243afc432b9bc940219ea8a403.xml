@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_9dcb32243afc432b9bc940219ea8a403" kind="dir">
+    <compoundname>Input</compoundname>
+    <innerfile refid="_gamepad_codes_8h">GamepadCodes.h</innerfile>
+    <innerfile refid="_input_8h">Input.h</innerfile>
+    <innerfile refid="_key_codes_8h">KeyCodes.h</innerfile>
+    <innerfile refid="_mouse_codes_8h">MouseCodes.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Input/"/>
+  </compounddef>
+</doxygen>

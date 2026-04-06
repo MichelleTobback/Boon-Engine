@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::Delegate&lt; Ret(Args...)&gt;::Handle</compoundname>
+    <includes refid="_delegate_8h" local="no">Core/Delegate.h</includes>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle_1a0838fdfca278cb96666924f6825ff4f2" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="class_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1a59fd763067235d31e3fad72bab624195" kindref="member">IndexType</ref></type>
+        <definition>IndexType Boon::Delegate&lt; Ret(Args...)&gt;::Handle::InvalidIndex</definition>
+        <argsstring></argsstring>
+        <name>InvalidIndex</name>
+        <qualifiedname>Boon::Delegate&lt; Ret(Args...)&gt;::Handle::InvalidIndex</qualifiedname>
+        <initializer>= std::numeric_limits&lt;<ref refid="class_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1a59fd763067235d31e3fad72bab624195" kindref="member">IndexType</ref>&gt;::max()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Delegate.h" line="30" column="40" bodyfile="Core/Delegate.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle_1aecdc757e8a6424a3f787f0d19296f6df" prot="public" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1a59fd763067235d31e3fad72bab624195" kindref="member">IndexType</ref></type>
+        <definition>IndexType Boon::Delegate&lt; Ret(Args...)&gt;::Handle::slot</definition>
+        <argsstring></argsstring>
+        <name>slot</name>
+        <qualifiedname>Boon::Delegate&lt; Ret(Args...)&gt;::Handle::slot</qualifiedname>
+        <initializer>= <ref refid="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle_1a0838fdfca278cb96666924f6825ff4f2" kindref="member">InvalidIndex</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Delegate.h" line="32" column="23" bodyfile="Core/Delegate.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle_1ac4c8f7d068f48f21cf78fcea8f0ecf24" prot="public" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1abddfefcb433771e466373d18129368ed" kindref="member">GenerationType</ref></type>
+        <definition>GenerationType Boon::Delegate&lt; Ret(Args...)&gt;::Handle::generation</definition>
+        <argsstring></argsstring>
+        <name>generation</name>
+        <qualifiedname>Boon::Delegate&lt; Ret(Args...)&gt;::Handle::generation</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Delegate.h" line="33" column="28" bodyfile="Core/Delegate.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle_1ae183c4279c8147d6a8e2d999594d66fd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::Delegate&lt; Ret(Args...)&gt;::Handle::IsValid</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsValid</name>
+        <qualifiedname>Boon::Delegate&lt; Ret(Args...)&gt;::Handle::IsValid</qualifiedname>
+        <briefdescription>
+<para>Check whether the handle refers to a slot (not explicitly invalid). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This checks only that the handle&apos;s slot value is not the sentinel invalid index. It does not validate generation or whether the slot is currently bound. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Delegate.h" line="41" column="18" bodyfile="Core/Delegate.h" bodystart="41" bodyend="44"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle_1ab8a414605a2afd0ccfdaa2680638f014" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator==</definition>
+        <argsstring>(const Handle &amp;lhs, const Handle &amp;rhs) noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>Boon::Delegate&lt; Ret(Args...)&gt;::Handle::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle" kindref="compound">Handle</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle" kindref="compound">Handle</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Delegate.h" line="46" column="25" bodyfile="Core/Delegate.h" bodystart="46" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="friend" id="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle_1a3bcd5d2b802bb3f5d579d0a019fd75bf" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator!=</definition>
+        <argsstring>(const Handle &amp;lhs, const Handle &amp;rhs) noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>Boon::Delegate&lt; Ret(Args...)&gt;::Handle::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle" kindref="compound">Handle</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle" kindref="compound">Handle</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Delegate.h" line="51" column="25" bodyfile="Core/Delegate.h" bodystart="51" bodyend="54"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Core/Delegate.h" line="28" column="9" bodyfile="Core/Delegate.h" bodystart="29" bodyend="55"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle_1ac4c8f7d068f48f21cf78fcea8f0ecf24" prot="public" virt="non-virtual"><scope>Boon::Delegate&lt; Ret(Args...)&gt;::Handle</scope><name>generation</name></member>
+      <member refid="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle_1a0838fdfca278cb96666924f6825ff4f2" prot="public" virt="non-virtual"><scope>Boon::Delegate&lt; Ret(Args...)&gt;::Handle</scope><name>InvalidIndex</name></member>
+      <member refid="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle_1ae183c4279c8147d6a8e2d999594d66fd" prot="public" virt="non-virtual"><scope>Boon::Delegate&lt; Ret(Args...)&gt;::Handle</scope><name>IsValid</name></member>
+      <member refid="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle_1a3bcd5d2b802bb3f5d579d0a019fd75bf" prot="public" virt="non-virtual"><scope>Boon::Delegate&lt; Ret(Args...)&gt;::Handle</scope><name>operator!=</name></member>
+      <member refid="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle_1ab8a414605a2afd0ccfdaa2680638f014" prot="public" virt="non-virtual"><scope>Boon::Delegate&lt; Ret(Args...)&gt;::Handle</scope><name>operator==</name></member>
+      <member refid="struct_boon_1_1_delegate_3_01_ret_07_args_8_8_8_08_4_1_1_handle_1aecdc757e8a6424a3f787f0d19296f6df" prot="public" virt="non-virtual"><scope>Boon::Delegate&lt; Ret(Args...)&gt;::Handle</scope><name>slot</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

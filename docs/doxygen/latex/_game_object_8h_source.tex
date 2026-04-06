@@ -1,0 +1,194 @@
+\doxysection{Game\+Object.\+h}
+\hypertarget{_game_object_8h_source}{}\label{_game_object_8h_source}\index{GameObject.h@{GameObject.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}Scene.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}GameObjectID.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}Core/Assert.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}Component/UUIDComponent.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}Component/TransformComponent.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}Reflection/BClass.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00011}00011\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{enum\ class}\ GameObjectFlag}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00014}00014\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00015}00015\ \ \ \ \ \ \ \ \ None\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00016}00016\ \ \ \ \ \ \ \ \ Active\ =\ 1,}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ Valid\ =\ 2}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00018}00018\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00020}\doxymbox{\hyperlink{struct_boon_1_1_game_object_data_component}{00020}}\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_boon_1_1_game_object_data_component}{GameObjectDataComponent}}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00021}00021\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00022}00022\ \ \ \ \ \ \ \ \ GameObjectFlag\ Flags;}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00023}00023\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_transform_component}{TransformComponent}};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00027}\doxymbox{\hyperlink{class_boon_1_1_game_object}{00027}}\ \ \ \ \ \textcolor{keyword}{class\ }GameObject\ final}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00028}00028\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00030}00030\ \ \ \ \ \ \ \ \ GameObject()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00038}\doxymbox{\hyperlink{class_boon_1_1_game_object_a282d05a2b651824cb417c2b6c34a4dd5}{00038}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_game_object_a282d05a2b651824cb417c2b6c34a4dd5}{GameObject}}(GameObjectID\ handle,\ \doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}}*\ pScene);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00045}\doxymbox{\hyperlink{class_boon_1_1_game_object_adffb25c09315f4c4678f9e6a69e29b1e}{00045}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_game_object_adffb25c09315f4c4678f9e6a69e29b1e}{\string~GameObject}}();}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00047}00047\ \ \ \ \ \ \ \ \ GameObject(\textcolor{keyword}{const}\ GameObject\&\ other)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00048}00048\ \ \ \ \ \ \ \ \ GameObject(GameObject\&\&\ other)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00049}00049\ \ \ \ \ \ \ \ \ GameObject\&\ operator=(\textcolor{keyword}{const}\ GameObject\&\ other)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00050}00050\ \ \ \ \ \ \ \ \ GameObject\&\ operator=(GameObject\&\&\ other)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00057}\doxymbox{\hyperlink{class_boon_1_1_game_object_a4705150571dceaaf661bac054ab1a5f1}{00057}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a4705150571dceaaf661bac054ab1a5f1}{SetActive}}(\textcolor{keywordtype}{bool}\ active);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00064}\doxymbox{\hyperlink{class_boon_1_1_game_object_a6cd616161b44ad91f7791b613549ab13}{00064}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a6cd616161b44ad91f7791b613549ab13}{IsActive}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00072}\doxymbox{\hyperlink{class_boon_1_1_game_object_a8a12c5a3c6e6683c1b55599a89d48131}{00072}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a8a12c5a3c6e6683c1b55599a89d48131}{AttachToGameObject}}(GameObject\ parent,\ \textcolor{keywordtype}{bool}\ keepWorld\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00079}\doxymbox{\hyperlink{class_boon_1_1_game_object_af101f7a7162c2261d7a3a66ffc122c71}{00079}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_game_object_af101f7a7162c2261d7a3a66ffc122c71}{DetachGameObject}}(GameObject\ child);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00086}\doxymbox{\hyperlink{class_boon_1_1_game_object_a33d87e3963a47a3a84c9fb63aa6b711f}{00086}}\ \ \ \ \ \ \ \ \ GameObject\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a33d87e3963a47a3a84c9fb63aa6b711f}{GetRoot}}();}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00093}\doxymbox{\hyperlink{class_boon_1_1_game_object_a4b6e3e532faa1808cf6900fad0f47464}{00093}}\ \ \ \ \ \ \ \ \ GameObject\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a4b6e3e532faa1808cf6900fad0f47464}{GetRoot}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00100}\doxymbox{\hyperlink{class_boon_1_1_game_object_a77df93a805cf66a51f7471ed6ac5ee20}{00100}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}}*\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a77df93a805cf66a51f7471ed6ac5ee20}{GetScene}}()\ \{\ \textcolor{keywordflow}{return}\ m\_pScene;\ \}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00107}\doxymbox{\hyperlink{class_boon_1_1_game_object_a86a3578c3d008d43bd981bbf98d653cf}{00107}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a86a3578c3d008d43bd981bbf98d653cf}{IsValid}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00114}\doxymbox{\hyperlink{class_boon_1_1_game_object_a54eb9b419696ac8a16a2e06b73d43842}{00114}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a54eb9b419696ac8a16a2e06b73d43842}{IsRoot}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00122}\doxymbox{\hyperlink{class_boon_1_1_game_object_aa58f59e1eea1ad1d1793f1f7ba120939}{00122}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}*\ \doxymbox{\hyperlink{class_boon_1_1_game_object_aa58f59e1eea1ad1d1793f1f7ba120939}{AddComponentFromClass}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}}*\ pClass);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00130}\doxymbox{\hyperlink{class_boon_1_1_game_object_ab2494711fc3c94fe350c06d93f7c373c}{00130}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}*\ \doxymbox{\hyperlink{class_boon_1_1_game_object_ab2494711fc3c94fe350c06d93f7c373c}{GetComponentByClass}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}}*\ pClass);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00138}\doxymbox{\hyperlink{class_boon_1_1_game_object_ab5db0a8d7112cd5a1ecbb90b971d1e8c}{00138}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}*\ \doxymbox{\hyperlink{class_boon_1_1_game_object_ab5db0a8d7112cd5a1ecbb90b971d1e8c}{GetOrAddComponentByClass}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}}*\ pClass);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00146}\doxymbox{\hyperlink{class_boon_1_1_game_object_a629f57d4ca21e4068ad48e535c43a9a2}{00146}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a629f57d4ca21e4068ad48e535c43a9a2}{HasComponentByClass}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}}*\ pClass);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00153}\doxymbox{\hyperlink{class_boon_1_1_game_object_a0fea791f134d75c4b8744bd753452f83}{00153}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a0fea791f134d75c4b8744bd753452f83}{RemoveComponentByClass}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}}*\ pClass);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00155}00155\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ ...\ TArgs>}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00156}00156\ \ \ \ \ \ \ \ \ T\&\ AddComponent(TArgs\&\&\ ...\ args)}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00157}00157\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(!std::is\_empty\_v<T>,}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Component\ type\ T\ is\ empty.\ Empty\ components\ are\ stored\ as\ tags\ by\ entt\ and\ "{}}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cannot\ be\ added\ as\ normal\ components.\ Add\ at\ least\ one\ data\ member."{}});}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ BN\_ASSERT(!HasComponent<T>(),\ \textcolor{stringliteral}{"{}GameObject\ already\ has\ component!"{}});}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_pScene-\/>AddComponent<T>(m\_Handle,\ std::forward<TArgs>(args)...);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00165}00165\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00167}00167\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ ...\ TArgs>}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00168}00168\ \ \ \ \ \ \ \ \ T\&\ GetOrAddComponent(TArgs\&\&\ ...\ args)}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00169}00169\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (HasComponent<T>())}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ GetComponent<T>();}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ AddComponent<T>();}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00174}00174\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00176}00176\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00177}00177\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ RemoveComponent()}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00178}00178\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ BN\_ASSERT(HasComponent<T>(),\ \textcolor{stringliteral}{"{}GameObject\ does\ not\ have\ component!"{}});}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ m\_pScene-\/>m\_Registry.remove<T>(m\_Handle);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ BClass*\ cls\ =\ BClassRegistry::Get().Find<T>();}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cls)}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_pScene-\/>m\_OnComponentRemoved.Invoke(*\textcolor{keyword}{this},\ cls);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00185}00185\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00187}00187\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00188}00188\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ T\&\ GetComponent()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00189}00189\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ BN\_ASSERT(HasComponent<T>(),\ \textcolor{stringliteral}{"{}GameObject\ does\ not\ have\ component!"{}});}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_pScene-\/>m\_Registry.get<T>(m\_Handle);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00192}00192\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00194}00194\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00195}00195\ \ \ \ \ \ \ \ \ T\&\ GetComponent()}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00196}00196\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ BN\_ASSERT(HasComponent<T>(),\ \textcolor{stringliteral}{"{}GameObject\ does\ not\ have\ component!"{}});}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_pScene-\/>m\_Registry.get<T>(m\_Handle);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00199}00199\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00201}00201\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00202}00202\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ HasComponent()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00203}00203\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_pScene-\/>m\_Registry.any\_of<T>(m\_Handle);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00205}00205\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00207}00207\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00208}00208\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ T*\ TryGetComponentInParent()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00209}00209\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (HasComponent<T>())}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \&GetComponent<T>();}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ GameObject\ parent\ =\ \doxymbox{\hyperlink{class_boon_1_1_game_object_aa13bba6fa2b975d6ccb17cc453dc8bbe}{GetParent}}();}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!parent.IsValid())}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ parent.TryGetComponentInParent<T>();}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00219}00219\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00221}00221\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00222}00222\ \ \ \ \ \ \ \ \ GameObject\ TryGetParentWithComponent()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00223}00223\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (HasComponent<T>())}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ GameObject\ parent\ =\ \doxymbox{\hyperlink{class_boon_1_1_game_object_aa13bba6fa2b975d6ccb17cc453dc8bbe}{GetParent}}();}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!parent.IsValid())}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ GameObject();}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ parent.TryGetParentWithComponent<T>();}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00233}00233\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00240}\doxymbox{\hyperlink{class_boon_1_1_game_object_a1e1b3d4c4ae44573bbc4ab99c2faafff}{00240}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a1e1b3d4c4ae44573bbc4ab99c2faafff}{Destroy}}();}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00242}00242\ \ \ \ \ \ \ \ \ \textcolor{keyword}{operator}\ bool()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Handle\ !=\ NullGameObject;\ \}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00243}00243\ \ \ \ \ \ \ \ \ \textcolor{keyword}{operator}\ GameObjectID()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Handle;\ \}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00244}00244\ \ \ \ \ \ \ \ \ \textcolor{keyword}{operator}\ uint32\_t()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ (uint32\_t)m\_Handle;\ \}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00246}00246\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ GameObject\&\ other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00247}00247\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ m\_Handle\ ==\ other.m\_Handle\ \&\&\ m\_pScene\ ==\ other.m\_pScene;}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00249}00249\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00251}00251\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ operator!=(\textcolor{keyword}{const}\ GameObject\&\ other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00252}00252\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ !(*\textcolor{keyword}{this}\ ==\ other);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00254}00254\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00260}\doxymbox{\hyperlink{class_boon_1_1_game_object_aa13bba6fa2b975d6ccb17cc453dc8bbe}{00260}}\ \ \ \ \ \ \ \ \ GameObject\ \doxymbox{\hyperlink{class_boon_1_1_game_object_aa13bba6fa2b975d6ccb17cc453dc8bbe}{GetParent}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00267}\doxymbox{\hyperlink{class_boon_1_1_game_object_a67b5498a119a94b6237963e22f885ad6}{00267}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<GameObject>\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a67b5498a119a94b6237963e22f885ad6}{GetChildren}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00275}\doxymbox{\hyperlink{class_boon_1_1_game_object_af2d32a5fbab30222f5b6862d81ea4823}{00275}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_game_object_af2d32a5fbab30222f5b6862d81ea4823}{AttachTo}}(GameObject\ parent,\ \textcolor{keywordtype}{bool}\ keepWorld\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00282}\doxymbox{\hyperlink{class_boon_1_1_game_object_a3d422b724121f75d4512cccb6ed407af}{00282}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a3d422b724121f75d4512cccb6ed407af}{Detach}}(GameObject\ child);}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00283}00283\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00287}\doxymbox{\hyperlink{class_boon_1_1_game_object_a0e5345777c87644ed441fba39e9bbd22}{00287}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a0e5345777c87644ed441fba39e9bbd22}{DetachFromParent}}();}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00294}\doxymbox{\hyperlink{class_boon_1_1_game_object_aed8acca7d69057e9472818745ce79b59}{00294}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_u_u_i_d}{UUID}}\ \doxymbox{\hyperlink{class_boon_1_1_game_object_aed8acca7d69057e9472818745ce79b59}{GetUUID}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00295}00295\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00301}\doxymbox{\hyperlink{class_boon_1_1_game_object_a11392275cc6467d66c90d3e4f7cc5944}{00301}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_transform_component}{TransformComponent}}\&\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a11392275cc6467d66c90d3e4f7cc5944}{GetTransform}}();}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00302}00302\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00308}\doxymbox{\hyperlink{class_boon_1_1_game_object_a60352daef7640b4d1aceb0295801d158}{00308}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_boon_1_1_transform_component}{TransformComponent}}\&\ \doxymbox{\hyperlink{class_boon_1_1_game_object_a60352daef7640b4d1aceb0295801d158}{GetTransform}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00309}00309\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00310}00310\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00311}00311\ \ \ \ \ \ \ \ \ GameObjectID\ m\_Handle\{\ NullGameObject\ \};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00312}00312\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}}*\ m\_pScene\{\};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00313}00313\ \ \ \ \ \ \ \ \ SceneID\ m\_SceneID\{0u\};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00314}00314\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00315}00315\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00316}00316\ }
+\DoxyCodeLine{\Hypertarget{_game_object_8h_source_l00317}00317\ \}}
+
+\end{DoxyCode}

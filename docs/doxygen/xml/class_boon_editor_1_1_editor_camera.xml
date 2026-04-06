@@ -1,0 +1,649 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_editor_1_1_editor_camera" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>BoonEditor::EditorCamera</compoundname>
+    <basecompoundref refid="class_boon_editor_1_1_editor_object" prot="public" virt="non-virtual">BoonEditor::EditorObject</basecompoundref>
+    <includes refid="_editor_camera_8h" local="no">Core/EditorCamera.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_editor_1_1_editor_camera_1a32d7ecb1052727dbdcfed93af53565f0" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_camera" kindref="compound">Camera</ref></type>
+        <definition>Camera BoonEditor::EditorCamera::m_OrthoCamera</definition>
+        <argsstring></argsstring>
+        <name>m_OrthoCamera</name>
+        <qualifiedname>BoonEditor::EditorCamera::m_OrthoCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="52" column="8" bodyfile="Core/EditorCamera.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_editor_camera_1a5e84bb8d31be2a5571b694705786654d" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_camera" kindref="compound">Camera</ref></type>
+        <definition>Camera BoonEditor::EditorCamera::m_PerspCamera</definition>
+        <argsstring></argsstring>
+        <name>m_PerspCamera</name>
+        <qualifiedname>BoonEditor::EditorCamera::m_PerspCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="52" column="22" bodyfile="Core/EditorCamera.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_editor_camera_1a4244f8e313b77e6543cc0c02692ff7fa" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref></type>
+        <definition>TransformComponent BoonEditor::EditorCamera::m_OrthoTransform</definition>
+        <argsstring></argsstring>
+        <name>m_OrthoTransform</name>
+        <qualifiedname>BoonEditor::EditorCamera::m_OrthoTransform</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="53" column="20" bodyfile="Core/EditorCamera.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_editor_camera_1a44d898036710456f7d7d34db8ffda0a2" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref></type>
+        <definition>TransformComponent BoonEditor::EditorCamera::m_PerspTransform</definition>
+        <argsstring></argsstring>
+        <name>m_PerspTransform</name>
+        <qualifiedname>BoonEditor::EditorCamera::m_PerspTransform</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="53" column="37" bodyfile="Core/EditorCamera.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_editor_camera_1a746190fc703fbdb1004f1480380c485a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool BoonEditor::EditorCamera::m_Active</definition>
+        <argsstring></argsstring>
+        <name>m_Active</name>
+        <qualifiedname>BoonEditor::EditorCamera::m_Active</qualifiedname>
+        <initializer>{ false }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="54" column="6" bodyfile="Core/EditorCamera.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_editor_camera_1acfdfe06d9ee9578972138e4f0969791a" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_camera_1abb84663b7a80fd65462f7558f4958c12" kindref="member">Camera::ProjectionType</ref></type>
+        <definition>Camera::ProjectionType BoonEditor::EditorCamera::m_Mode</definition>
+        <argsstring></argsstring>
+        <name>m_Mode</name>
+        <qualifiedname>BoonEditor::EditorCamera::m_Mode</qualifiedname>
+        <initializer>{ Camera::ProjectionType::Orthographic }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="55" column="24" bodyfile="Core/EditorCamera.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_editor_camera_1a1460d6403cad885a54d3ecbef19d9db2" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float BoonEditor::EditorCamera::m_TargetZoom</definition>
+        <argsstring></argsstring>
+        <name>m_TargetZoom</name>
+        <qualifiedname>BoonEditor::EditorCamera::m_TargetZoom</qualifiedname>
+        <initializer>= 5.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="57" column="7" bodyfile="Core/EditorCamera.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_editor_camera_1aace680d4cab69b1d71c4c53c31713211" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float BoonEditor::EditorCamera::m_ZoomVelocity</definition>
+        <argsstring></argsstring>
+        <name>m_ZoomVelocity</name>
+        <qualifiedname>BoonEditor::EditorCamera::m_ZoomVelocity</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="58" column="7" bodyfile="Core/EditorCamera.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1ab7ffdd32e8f7d4456762620fa79b9b76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::EditorCamera::EditorCamera</definition>
+        <argsstring>(float width, float height)</argsstring>
+        <name>EditorCamera</name>
+        <qualifiedname>BoonEditor::EditorCamera::EditorCamera</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="13" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1a632177b4847c0691a0679afeb2dc1121" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::EditorCamera::EditorCamera</definition>
+        <argsstring>(float size, float aspectRatio, float near, float far)</argsstring>
+        <name>EditorCamera</name>
+        <qualifiedname>BoonEditor::EditorCamera::EditorCamera</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>aspectRatio</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>near</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>far</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="14" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1ad40557deb04a10800c07f814f9b50ccd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual BoonEditor::EditorCamera::~EditorCamera</definition>
+        <argsstring>()</argsstring>
+        <name>~EditorCamera</name>
+        <qualifiedname>BoonEditor::EditorCamera::~EditorCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="15" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1a767406045761f4d1eb94fe3df2b3dc76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::EditorCamera::EditorCamera</definition>
+        <argsstring>(const EditorCamera &amp;other)=default</argsstring>
+        <name>EditorCamera</name>
+        <qualifiedname>BoonEditor::EditorCamera::EditorCamera</qualifiedname>
+        <param>
+          <type>const EditorCamera &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="17" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1ab62649523d057dab8d051145946037ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::EditorCamera::EditorCamera</definition>
+        <argsstring>(EditorCamera &amp;&amp;other)=default</argsstring>
+        <name>EditorCamera</name>
+        <qualifiedname>BoonEditor::EditorCamera::EditorCamera</qualifiedname>
+        <param>
+          <type>EditorCamera &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="18" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1ac37282d57c02d0375f306abc521f7db5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_editor_1_1_editor_camera_1ab7ffdd32e8f7d4456762620fa79b9b76" kindref="member">EditorCamera</ref> &amp;</type>
+        <definition>EditorCamera &amp; BoonEditor::EditorCamera::operator=</definition>
+        <argsstring>(const EditorCamera &amp;other)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>BoonEditor::EditorCamera::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="class_boon_editor_1_1_editor_camera_1ab7ffdd32e8f7d4456762620fa79b9b76" kindref="member">EditorCamera</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="19" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1ad8c6577623c963f82825809de15e3253" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_editor_1_1_editor_camera_1ab7ffdd32e8f7d4456762620fa79b9b76" kindref="member">EditorCamera</ref> &amp;</type>
+        <definition>EditorCamera &amp; BoonEditor::EditorCamera::operator=</definition>
+        <argsstring>(EditorCamera &amp;&amp;other)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>BoonEditor::EditorCamera::operator=</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_editor_1_1_editor_camera_1ab7ffdd32e8f7d4456762620fa79b9b76" kindref="member">EditorCamera</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="20" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1a65d8f0f1a1e27a6a862a77082460fea5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void BoonEditor::EditorCamera::Update</definition>
+        <argsstring>() override</argsstring>
+        <name>Update</name>
+        <qualifiedname>BoonEditor::EditorCamera::Update</qualifiedname>
+        <reimplements refid="class_boon_editor_1_1_editor_object_1a397e0d8281c6cfd56d48f377b32945c7">Update</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="22" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1af755e4a69586e8e2882fd4aaa21d546c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::EditorCamera::Resize</definition>
+        <argsstring>(float width, float height)</argsstring>
+        <name>Resize</name>
+        <qualifiedname>BoonEditor::EditorCamera::Resize</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="24" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1ae65c152e59d8b57270334f36b41871b5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref> &amp;</type>
+        <definition>const TransformComponent &amp; BoonEditor::EditorCamera::GetTransform</definition>
+        <argsstring>() const</argsstring>
+        <name>GetTransform</name>
+        <qualifiedname>BoonEditor::EditorCamera::GetTransform</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="26" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1ad0fbdc7e2cc7ab5996f0486a54f484a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref> &amp;</type>
+        <definition>TransformComponent &amp; BoonEditor::EditorCamera::GetTransform</definition>
+        <argsstring>()</argsstring>
+        <name>GetTransform</name>
+        <qualifiedname>BoonEditor::EditorCamera::GetTransform</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="27" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1a60f17a3e25d98153c4347f5861437a1e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref> &amp;</type>
+        <definition>const TransformComponent &amp; BoonEditor::EditorCamera::GetOrthographicTransform</definition>
+        <argsstring>() const</argsstring>
+        <name>GetOrthographicTransform</name>
+        <qualifiedname>BoonEditor::EditorCamera::GetOrthographicTransform</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="28" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1a11d9c44f19004ecbcabe833d3136d38e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref> &amp;</type>
+        <definition>TransformComponent &amp; BoonEditor::EditorCamera::GetOrthographicTransform</definition>
+        <argsstring>()</argsstring>
+        <name>GetOrthographicTransform</name>
+        <qualifiedname>BoonEditor::EditorCamera::GetOrthographicTransform</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="29" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1aa77c78a04ab3b9c7372ae5696c1edd9e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref> &amp;</type>
+        <definition>const TransformComponent &amp; BoonEditor::EditorCamera::GetPerspectiveTransform</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPerspectiveTransform</name>
+        <qualifiedname>BoonEditor::EditorCamera::GetPerspectiveTransform</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="30" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1affd801acc4bffe0f78c83f4e91ed1c1d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref> &amp;</type>
+        <definition>TransformComponent &amp; BoonEditor::EditorCamera::GetPerspectiveTransform</definition>
+        <argsstring>()</argsstring>
+        <name>GetPerspectiveTransform</name>
+        <qualifiedname>BoonEditor::EditorCamera::GetPerspectiveTransform</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="31" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1ad872a88fd83c3095a888a0ed3938eabd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="class_boon_1_1_camera" kindref="compound">Camera</ref> &amp;</type>
+        <definition>const Camera &amp; BoonEditor::EditorCamera::GetCamera</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCamera</name>
+        <qualifiedname>BoonEditor::EditorCamera::GetCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1a6843d5b2368d42604fa9fc1be343c305" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_camera" kindref="compound">Camera</ref> &amp;</type>
+        <definition>Camera &amp; BoonEditor::EditorCamera::GetCamera</definition>
+        <argsstring>()</argsstring>
+        <name>GetCamera</name>
+        <qualifiedname>BoonEditor::EditorCamera::GetCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="34" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1a93ea8f2424b81f660278f5eac57bdb90" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="class_boon_1_1_camera" kindref="compound">Camera</ref> &amp;</type>
+        <definition>const Camera &amp; BoonEditor::EditorCamera::GetOrthographicCamera</definition>
+        <argsstring>() const</argsstring>
+        <name>GetOrthographicCamera</name>
+        <qualifiedname>BoonEditor::EditorCamera::GetOrthographicCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="35" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1addf7f66831ce25bee42ebcd32849c42e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_camera" kindref="compound">Camera</ref> &amp;</type>
+        <definition>Camera &amp; BoonEditor::EditorCamera::GetOrthographicCamera</definition>
+        <argsstring>()</argsstring>
+        <name>GetOrthographicCamera</name>
+        <qualifiedname>BoonEditor::EditorCamera::GetOrthographicCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="36" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1ac617eec97111adb1f6cf5a2dab59ffb0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="class_boon_1_1_camera" kindref="compound">Camera</ref> &amp;</type>
+        <definition>const Camera &amp; BoonEditor::EditorCamera::GetPerspectiveCamera</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPerspectiveCamera</name>
+        <qualifiedname>BoonEditor::EditorCamera::GetPerspectiveCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="37" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1ab4b95f2800c8b78ed85713182fe7dafd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_camera" kindref="compound">Camera</ref> &amp;</type>
+        <definition>Camera &amp; BoonEditor::EditorCamera::GetPerspectiveCamera</definition>
+        <argsstring>()</argsstring>
+        <name>GetPerspectiveCamera</name>
+        <qualifiedname>BoonEditor::EditorCamera::GetPerspectiveCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="38" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1aa4b9b23a86e965a0de64259056b03fda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>glm::mat4</type>
+        <definition>glm::mat4 BoonEditor::EditorCamera::GetView</definition>
+        <argsstring>()</argsstring>
+        <name>GetView</name>
+        <qualifiedname>BoonEditor::EditorCamera::GetView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="40" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1ac70a2ce962367e51b6abba19e257b5b7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::EditorCamera::SetMode</definition>
+        <argsstring>(Camera::ProjectionType mode)</argsstring>
+        <name>SetMode</name>
+        <qualifiedname>BoonEditor::EditorCamera::SetMode</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_camera_1abb84663b7a80fd65462f7558f4958c12" kindref="member">Camera::ProjectionType</ref></type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="42" column="13" bodyfile="Core/EditorCamera.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1a6f3351fa2ec592360b6fb8ca391f9a7b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_camera_1abb84663b7a80fd65462f7558f4958c12" kindref="member">Camera::ProjectionType</ref></type>
+        <definition>Camera::ProjectionType BoonEditor::EditorCamera::GetMode</definition>
+        <argsstring>() const</argsstring>
+        <name>GetMode</name>
+        <qualifiedname>BoonEditor::EditorCamera::GetMode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="43" column="31" bodyfile="Core/EditorCamera.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1a012214d54b5d22134f03c4eaa87e2ddf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::EditorCamera::SetActive</definition>
+        <argsstring>(bool active)</argsstring>
+        <name>SetActive</name>
+        <qualifiedname>BoonEditor::EditorCamera::SetActive</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>active</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="45" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1a07be510103e2d6e0879e9bfbe5125ac9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool BoonEditor::EditorCamera::GetActive</definition>
+        <argsstring>() const</argsstring>
+        <name>GetActive</name>
+        <qualifiedname>BoonEditor::EditorCamera::GetActive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="46" column="13" bodyfile="Core/EditorCamera.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1a88ec304b895683ed7b92bf6fdfdd291e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::EditorCamera::UpdatePerspectiveController</definition>
+        <argsstring>()</argsstring>
+        <name>UpdatePerspectiveController</name>
+        <qualifiedname>BoonEditor::EditorCamera::UpdatePerspectiveController</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="49" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_editor_camera_1a74d1b303f9dbcde7ac1c4eeb611ae4cc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::EditorCamera::UpdateOrthographicController</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateOrthographicController</name>
+        <qualifiedname>BoonEditor::EditorCamera::UpdateOrthographicController</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/EditorCamera.h" line="50" column="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>BoonEditor::EditorCamera</label>
+        <link refid="class_boon_editor_1_1_editor_camera"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>BoonEditor::EditorObject</label>
+        <link refid="class_boon_editor_1_1_editor_object"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>BoonEditor::EditorCamera</label>
+        <link refid="class_boon_editor_1_1_editor_camera"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>BoonEditor::EditorObject</label>
+        <link refid="class_boon_editor_1_1_editor_object"/>
+      </node>
+    </collaborationgraph>
+    <location file="Core/EditorCamera.h" line="10" column="1" bodyfile="Core/EditorCamera.h" bodystart="11" bodyend="59"/>
+    <listofallmembers>
+      <member refid="class_boon_editor_1_1_editor_camera_1ab7ffdd32e8f7d4456762620fa79b9b76" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>EditorCamera</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a632177b4847c0691a0679afeb2dc1121" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>EditorCamera</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a767406045761f4d1eb94fe3df2b3dc76" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>EditorCamera</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1ab62649523d057dab8d051145946037ca" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>EditorCamera</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a07be510103e2d6e0879e9bfbe5125ac9" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>GetActive</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1ad872a88fd83c3095a888a0ed3938eabd" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>GetCamera</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a6843d5b2368d42604fa9fc1be343c305" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>GetCamera</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a6f3351fa2ec592360b6fb8ca391f9a7b" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>GetMode</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a93ea8f2424b81f660278f5eac57bdb90" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>GetOrthographicCamera</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1addf7f66831ce25bee42ebcd32849c42e" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>GetOrthographicCamera</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a60f17a3e25d98153c4347f5861437a1e" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>GetOrthographicTransform</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a11d9c44f19004ecbcabe833d3136d38e" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>GetOrthographicTransform</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1ac617eec97111adb1f6cf5a2dab59ffb0" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>GetPerspectiveCamera</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1ab4b95f2800c8b78ed85713182fe7dafd" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>GetPerspectiveCamera</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1aa77c78a04ab3b9c7372ae5696c1edd9e" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>GetPerspectiveTransform</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1affd801acc4bffe0f78c83f4e91ed1c1d" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>GetPerspectiveTransform</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1ae65c152e59d8b57270334f36b41871b5" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>GetTransform</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1ad0fbdc7e2cc7ab5996f0486a54f484a5" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>GetTransform</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1aa4b9b23a86e965a0de64259056b03fda" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>GetView</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a746190fc703fbdb1004f1480380c485a" prot="private" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>m_Active</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1acfdfe06d9ee9578972138e4f0969791a" prot="private" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>m_Mode</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a32d7ecb1052727dbdcfed93af53565f0" prot="private" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>m_OrthoCamera</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a4244f8e313b77e6543cc0c02692ff7fa" prot="private" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>m_OrthoTransform</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a5e84bb8d31be2a5571b694705786654d" prot="private" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>m_PerspCamera</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a44d898036710456f7d7d34db8ffda0a2" prot="private" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>m_PerspTransform</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a1460d6403cad885a54d3ecbef19d9db2" prot="private" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>m_TargetZoom</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1aace680d4cab69b1d71c4c53c31713211" prot="private" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>m_ZoomVelocity</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1ac37282d57c02d0375f306abc521f7db5" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>operator=</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1ad8c6577623c963f82825809de15e3253" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>operator=</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1af755e4a69586e8e2882fd4aaa21d546c" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>Resize</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a012214d54b5d22134f03c4eaa87e2ddf" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>SetActive</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1ac70a2ce962367e51b6abba19e257b5b7" prot="public" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>SetMode</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a65d8f0f1a1e27a6a862a77082460fea5" prot="public" virt="virtual"><scope>BoonEditor::EditorCamera</scope><name>Update</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a74d1b303f9dbcde7ac1c4eeb611ae4cc" prot="private" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>UpdateOrthographicController</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1a88ec304b895683ed7b92bf6fdfdd291e" prot="private" virt="non-virtual"><scope>BoonEditor::EditorCamera</scope><name>UpdatePerspectiveController</name></member>
+      <member refid="class_boon_editor_1_1_editor_camera_1ad40557deb04a10800c07f814f9b50ccd" prot="public" virt="virtual"><scope>BoonEditor::EditorCamera</scope><name>~EditorCamera</name></member>
+      <member refid="class_boon_editor_1_1_editor_object_1aa2f1343ed311c73939b82ac8207fd788" prot="public" virt="virtual"><scope>BoonEditor::EditorCamera</scope><name>~EditorObject</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

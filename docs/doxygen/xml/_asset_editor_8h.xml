@@ -1,0 +1,849 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_asset_editor_8h" kind="file" language="C++">
+    <compoundname>AssetEditor.h</compoundname>
+    <includes refid="_boon_editor_8h" local="no">Core/BoonEditor.h</includes>
+    <includes refid="_editor_panel_8h" local="yes">Panels/EditorPanel.h</includes>
+    <includes refid="_scene_renderer_8h" local="yes">Renderer/SceneRenderer.h</includes>
+    <includes refid="_editor_camera_8h" local="yes">Core/EditorCamera.h</includes>
+    <includes refid="_service_locator_8h" local="no">Core/ServiceLocator.h</includes>
+    <includes refid="_asset_library_8h" local="no">Asset/AssetLibrary.h</includes>
+    <includes refid="_scene_8h" local="no">Scene/Scene.h</includes>
+    <includes refid="_scene_serializer_8h" local="no">Scene/SceneSerializer.h</includes>
+    <includes refid="_u_i_8h" local="yes">UI/UI.h</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">glm/glm.hpp</includes>
+    <includedby refid="_asset_editor_panel_8h" local="yes">Panels/AssetEditorPanel.h</includedby>
+    <includedby refid="_sprite_atlas_editor_panel_8h" local="yes">Panels/SpriteAtlasEditorPanel.h</includedby>
+    <includedby refid="_tilemap_editor_panel_8h" local="yes">Panels/TilemapEditorPanel.h</includedby>
+    <incdepgraph>
+      <node id="45">
+        <label>Asset/Asset.h</label>
+        <link refid="_asset_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="60">
+        <label>Asset/AssetLibrary.h</label>
+        <link refid="_asset_library_8h"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>Asset/AssetMeta.h</label>
+        <link refid="_asset_meta_8h"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>AssetPack/AssetCache.h</label>
+        <link refid="_asset_cache_8h"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>Asset/AssetPack/AssetPack.h</label>
+        <link refid="_asset_pack_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>AssetPack/AssetPackReader.h</label>
+        <link refid="_asset_pack_reader_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>Asset/AssetRef.h</label>
+        <link refid="_asset_ref_8h"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>Asset/AssetRegistry.h</label>
+        <link refid="_asset_registry_8h"/>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>Asset/AssetTraits.h</label>
+        <link refid="_asset_traits_8h"/>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>Asset/AssetType.h</label>
+        <link refid="_asset_type_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>AssetImporter.h</label>
+        <link refid="_asset_importer_8h"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>Asset/Importer/AssetImporterRegistry.h</label>
+        <link refid="_asset_importer_registry_8h"/>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>Asset/Loader/AssetLoader.h</label>
+        <link refid="_asset_loader_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>Asset/TextureAsset.h</label>
+        <link refid="_texture_asset_8h"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>Component/TransformComponent.h</label>
+        <link refid="_transform_component_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>Component/UUIDComponent.h</label>
+        <link refid="_u_u_i_d_component_8h"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>Core/Assert.h</label>
+        <link refid="_assert_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Core/Delegate.h</label>
+        <link refid="_delegate_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>Core/Memory/Buffer.h</label>
+        <link refid="_buffer_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>Core/ServiceLocator.h</label>
+        <link refid="_service_locator_8h"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>Core/UUID.h</label>
+        <link refid="_u_u_i_d_8h"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>Core/Variant.h</label>
+        <link refid="_variant_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Physics2DTypes.h</label>
+        <link refid="_physics2_d_types_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>Physics/PhysicsWorld2D.h</label>
+        <link refid="_physics_world2_d_8h"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>Reflection/BClass.h</label>
+        <link refid="_b_class_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>Reflection/BClassBase.h</label>
+        <link refid="_b_class_base_8h"/>
+      </node>
+      <node id="29">
+        <label>BFunction.h</label>
+        <link refid="_b_function_8h"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>BProperty.h</label>
+        <link refid="_b_property_8h"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>Renderer/Camera.h</label>
+        <link refid="_camera_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>Renderer/SceneRenderer.h</label>
+        <link refid="_scene_renderer_8h"/>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>Renderer/Texture.h</label>
+        <link refid="_texture_8h"/>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>UBData.h</label>
+        <link refid="_u_b_data_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>Scene/GameObject.h</label>
+        <link refid="_game_object_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>GameObjectID.h</label>
+        <link refid="_game_object_i_d_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Scene/Scene.h</label>
+        <link refid="_scene_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>Scene/SceneSerializer.h</label>
+        <link refid="_scene_serializer_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>Assets/AssetDatabase.h</label>
+        <link refid="_asset_database_8h"/>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Core/BoonEditor.h</label>
+        <link refid="_boon_editor_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>Core/EditorCamera.h</label>
+        <link refid="_editor_camera_8h"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>EditorContext.h</label>
+        <link refid="_editor_context_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>Core/EditorObject.h</label>
+        <link refid="_editor_object_8h"/>
+      </node>
+      <node id="1">
+        <label>Panels/AssetEditor.h</label>
+        <link refid="_asset_editor_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>Panels/EditorPanel.h</label>
+        <link refid="_editor_panel_8h"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>UI/DragDropRouter.h</label>
+        <link refid="_drag_drop_router_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>UI/UI.h</label>
+        <link refid="_u_i_8h"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>algorithm</label>
+      </node>
+      <node id="55">
+        <label>array</label>
+      </node>
+      <node id="19">
+        <label>box2d/id.h</label>
+      </node>
+      <node id="28">
+        <label>cstddef</label>
+      </node>
+      <node id="5">
+        <label>cstdint</label>
+      </node>
+      <node id="39">
+        <label>cstdlib</label>
+      </node>
+      <node id="31">
+        <label>cstring</label>
+      </node>
+      <node id="12">
+        <label>entt/entt.hpp</label>
+      </node>
+      <node id="71">
+        <label>filesystem</label>
+      </node>
+      <node id="73">
+        <label>fstream</label>
+      </node>
+      <node id="6">
+        <label>functional</label>
+      </node>
+      <node id="18">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="42">
+        <label>glm/gtc/quaternion.hpp</label>
+      </node>
+      <node id="35">
+        <label>glm/gtc/type_precision.hpp</label>
+      </node>
+      <node id="43">
+        <label>glm/gtx/quaternion.hpp</label>
+      </node>
+      <node id="32">
+        <label>glm/vec2.hpp</label>
+      </node>
+      <node id="33">
+        <label>glm/vec3.hpp</label>
+      </node>
+      <node id="34">
+        <label>glm/vec4.hpp</label>
+      </node>
+      <node id="51">
+        <label>imgui.h</label>
+      </node>
+      <node id="52">
+        <label>imgui_internal.h</label>
+      </node>
+      <node id="7">
+        <label>limits</label>
+      </node>
+      <node id="26">
+        <label>memory</label>
+      </node>
+      <node id="72">
+        <label>nlohmann/json.hpp</label>
+      </node>
+      <node id="24">
+        <label>optional</label>
+      </node>
+      <node id="36">
+        <label>queue</label>
+      </node>
+      <node id="59">
+        <label>stack</label>
+      </node>
+      <node id="25">
+        <label>stdexcept</label>
+      </node>
+      <node id="21">
+        <label>string</label>
+      </node>
+      <node id="8">
+        <label>type_traits</label>
+      </node>
+      <node id="22">
+        <label>typeindex</label>
+      </node>
+      <node id="23">
+        <label>unordered_map</label>
+      </node>
+      <node id="9">
+        <label>utility</label>
+      </node>
+      <node id="10">
+        <label>vector</label>
+      </node>
+      <node id="14">
+        <label>xhash</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>Panels/AssetEditor.h</label>
+        <link refid="_asset_editor_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Panels/AssetEditorPanel.h</label>
+        <link refid="_asset_editor_panel_8h"/>
+      </node>
+      <node id="3">
+        <label>Panels/SpriteAtlasEditorPanel.h</label>
+        <link refid="_sprite_atlas_editor_panel_8h"/>
+      </node>
+      <node id="4">
+        <label>Panels/TilemapEditorPanel.h</label>
+        <link refid="_tilemap_editor_panel_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_boon_editor_1_1_asset_editor_base" prot="public">BoonEditor::AssetEditorBase</innerclass>
+    <innerclass refid="class_boon_editor_1_1_asset_editor" prot="public">BoonEditor::AssetEditor</innerclass>
+    <innernamespace refid="namespace_boon_editor">BoonEditor</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_boon_editor_8h" kindref="compound">Core/BoonEditor.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_editor_panel_8h" kindref="compound">Panels/EditorPanel.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_scene_renderer_8h" kindref="compound">Renderer/SceneRenderer.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_editor_camera_8h" kindref="compound">Core/EditorCamera.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_service_locator_8h" kindref="compound">Core/ServiceLocator.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_asset_library_8h" kindref="compound">Asset/AssetLibrary.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_scene_8h" kindref="compound">Scene/Scene.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_scene_serializer_8h" kindref="compound">Scene/SceneSerializer.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_u_i_8h" kindref="compound">UI/UI.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;glm/glm.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon_editor" kindref="compound">BoonEditor</ref></highlight></codeline>
+<codeline lineno="17"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_editor_1_1_viewport_panel" kindref="compound">ViewportPanel</ref>;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="class_boon_editor_1_1_asset_editor_base" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_editor_1_1_asset_editor_base_1ad0339e0cb7504025f9a00c2fbd1327fe" kindref="member">AssetEditorBase</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_editor_panel_1a5f5df2a84dcabc146bf036b0d0a88cfb" kindref="member">EditorPanel</ref></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="23" refid="class_boon_editor_1_1_asset_editor_base_1ad0339e0cb7504025f9a00c2fbd1327fe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_editor_1_1_asset_editor_base_1ad0339e0cb7504025f9a00c2fbd1327fe" kindref="member">AssetEditorBase</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/><ref refid="class_drag_drop_router" kindref="compound">DragDropRouter</ref>*<sp/>pRouter)</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="class_boon_editor_1_1_editor_panel_1a5f5df2a84dcabc146bf036b0d0a88cfb" kindref="member">EditorPanel</ref>(name,<sp/>pRouter)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="class_boon_editor_1_1_asset_editor_base_1abfdac502e798c6429ece70df971c3916" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_base_1abfdac502e798c6429ece70df971c3916" kindref="member">OnRender</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28" refid="class_boon_editor_1_1_asset_editor_base_1a8131c8c53b23b2514dfe5bac70cf5c0a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;<sp/><ref refid="class_boon_editor_1_1_asset_editor_base_1a8131c8c53b23b2514dfe5bac70cf5c0a" kindref="member">GetScene</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*m_PrevScene-&gt;Get();<sp/>}</highlight></codeline>
+<codeline lineno="29" refid="class_boon_editor_1_1_asset_editor_base_1a1c0e6e04ec78cb1fb84cb474d8c0793c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_viewport_panel" kindref="compound">ViewportPanel</ref>*<sp/><ref refid="class_boon_editor_1_1_asset_editor_base_1a1c0e6e04ec78cb1fb84cb474d8c0793c" kindref="member">GetViewport</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_pViewport;<sp/>}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="32" refid="class_boon_editor_1_1_asset_editor_base_1a6060f137d8292977ef410990f27fce24" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_base_1a6060f137d8292977ef410990f27fce24" kindref="member">SetContext</ref>(<ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref><sp/>handle)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="class_boon_editor_1_1_asset_editor_base_1afb33c8476eab46b0b349c581faead2b7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_base_1afb33c8476eab46b0b349c581faead2b7" kindref="member">RenderToolbar</ref>()<sp/>{}</highlight></codeline>
+<codeline lineno="35" refid="class_boon_editor_1_1_asset_editor_base_1a3ed0f330dcca5ee636135027e86968a6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_base_1a3ed0f330dcca5ee636135027e86968a6" kindref="member">RenderMainArea</ref>()<sp/>{}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="class_boon_editor_1_1_asset_editor_base_1a45962f33192b975c57ca64e0b9c83f06" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/><ref refid="class_boon_editor_1_1_asset_editor_base_1a45962f33192b975c57ca64e0b9c83f06" kindref="member">ScreenToWorld</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec2&amp;<sp/>mousePos);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="40" refid="class_boon_editor_1_1_asset_editor_base_1a4ceb24cd2812ac0381d9bd2851d6a287" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_editor_1_1_asset_editor_base_1a4ceb24cd2812ac0381d9bd2851d6a287" kindref="member">AssetEditorPanel</ref>;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_editor_1a7bed894f60212273968292b6e30ff61e" kindref="member">SceneContext</ref>*<sp/>m_PrevScene;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_editor_1_1_viewport_panel" kindref="compound">ViewportPanel</ref>*<sp/>m_pViewport<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TAsset&gt;</highlight></codeline>
+<codeline lineno="47" refid="class_boon_editor_1_1_asset_editor" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_editor_1_1_asset_editor_1a661c7b4b4743250c3b78a4cd71bae1c2" kindref="member">AssetEditor</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_base_1ad0339e0cb7504025f9a00c2fbd1327fe" kindref="member">AssetEditorBase</ref></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="50" refid="class_boon_editor_1_1_asset_editor_1a661c7b4b4743250c3b78a4cd71bae1c2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_editor_1_1_asset_editor_1a661c7b4b4743250c3b78a4cd71bae1c2" kindref="member">AssetEditor</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/><ref refid="class_drag_drop_router" kindref="compound">DragDropRouter</ref>*<sp/>pRouter);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="class_boon_editor_1_1_asset_editor_1a4b4dfac245d095641394f8b6bdbb26e0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_1a4b4dfac245d095641394f8b6bdbb26e0" kindref="member">Update</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="53" refid="class_boon_editor_1_1_asset_editor_1af97fcd84c00816500344cb8b3dc9e41f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_1af97fcd84c00816500344cb8b3dc9e41f" kindref="member">OnRenderUI</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="class_boon_editor_1_1_asset_editor_1aea0a4c098ebee7817421baf34573eee5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_asset_ref" kindref="compound">AssetRef&lt;TAsset&gt;</ref>&amp;<sp/><ref refid="class_boon_editor_1_1_asset_editor_1aea0a4c098ebee7817421baf34573eee5" kindref="member">GetAsset</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_1a922bbf7299712beaa686f4a3e3ff5623" kindref="member">m_Asset</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="56" refid="class_boon_editor_1_1_asset_editor_1a6061452a04631cf00300d3ba045813ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_1a6061452a04631cf00300d3ba045813ea" kindref="member">SetAsset</ref>(<ref refid="class_boon_1_1_asset_ref" kindref="compound">AssetRef&lt;TAsset&gt;</ref><sp/>asset)<sp/>{<sp/><ref refid="class_boon_editor_1_1_asset_editor_1a922bbf7299712beaa686f4a3e3ff5623" kindref="member">m_Asset</ref><sp/>=<sp/>asset;<sp/>}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="59" refid="class_boon_editor_1_1_asset_editor_1a7d936d6556e4e6f06e0787306048437f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_1a7d936d6556e4e6f06e0787306048437f" kindref="member">SetContext</ref>(<ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref><sp/>handle)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="class_boon_editor_1_1_asset_editor_1a3f96a690f593458375e9b0fac321b544" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_1a3f96a690f593458375e9b0fac321b544" kindref="member">RenderToolbar</ref>()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{}</highlight></codeline>
+<codeline lineno="62" refid="class_boon_editor_1_1_asset_editor_1a6320287cd1b6294bbde9e1a45b48a217" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_1a6320287cd1b6294bbde9e1a45b48a217" kindref="member">RenderMainArea</ref>()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{}</highlight></codeline>
+<codeline lineno="63" refid="class_boon_editor_1_1_asset_editor_1ae492f5304c3592431dbb8278c82ea611" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_1ae492f5304c3592431dbb8278c82ea611" kindref="member">BuildPreviewScene</ref>(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;<sp/>scene)<sp/>{}</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="class_boon_editor_1_1_asset_editor_1a922bbf7299712beaa686f4a3e3ff5623" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_asset_ref" kindref="compound">AssetRef&lt;TAsset&gt;</ref><sp/><ref refid="class_boon_editor_1_1_asset_editor_1a922bbf7299712beaa686f4a3e3ff5623" kindref="member">m_Asset</ref>{};</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TAsset&gt;</highlight></codeline>
+<codeline lineno="71" refid="class_boon_editor_1_1_asset_editor_1a661c7b4b4743250c3b78a4cd71bae1c2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_1a661c7b4b4743250c3b78a4cd71bae1c2" kindref="member">AssetEditor&lt;TAsset&gt;::AssetEditor</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/><ref refid="class_drag_drop_router" kindref="compound">DragDropRouter</ref>*<sp/>pRouter)</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="class_boon_editor_1_1_asset_editor_base_1ad0339e0cb7504025f9a00c2fbd1327fe" kindref="member">AssetEditorBase</ref>(name,<sp/>pRouter){<sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TAsset&gt;</highlight></codeline>
+<codeline lineno="75" refid="class_boon_editor_1_1_asset_editor_1a4b4dfac245d095641394f8b6bdbb26e0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_1a4b4dfac245d095641394f8b6bdbb26e0" kindref="member">AssetEditor&lt;TAsset&gt;::Update</ref>()</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TAsset&gt;</highlight></codeline>
+<codeline lineno="80" refid="class_boon_editor_1_1_asset_editor_1af97fcd84c00816500344cb8b3dc9e41f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_1af97fcd84c00816500344cb8b3dc9e41f" kindref="member">AssetEditor&lt;TAsset&gt;::OnRenderUI</ref>()</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="class_boon_editor_1_1_asset_editor_1a922bbf7299712beaa686f4a3e3ff5623" kindref="member">m_Asset</ref>.IsValid())<sp/>{<sp/>ImGui::Text(</highlight><highlight class="stringliteral">&quot;Invalid<sp/>Asset&quot;</highlight><highlight class="normal">);<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_editor_1_1_asset_editor_1a3f96a690f593458375e9b0fac321b544" kindref="member">RenderToolbar</ref>();</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_editor_1_1_asset_editor_1a6320287cd1b6294bbde9e1a45b48a217" kindref="member">RenderMainArea</ref>();</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TAsset&gt;</highlight></codeline>
+<codeline lineno="89" refid="class_boon_editor_1_1_asset_editor_1a7d936d6556e4e6f06e0787306048437f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_boon_editor_1_1_asset_editor_1a7d936d6556e4e6f06e0787306048437f" kindref="member">AssetEditor&lt;TAsset&gt;::SetContext</ref>(<ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref><sp/>handle)</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_asset_library" kindref="compound">AssetLibrary</ref>&amp;<sp/>lib<sp/>=<sp/><ref refid="class_boon_1_1_service_locator_1a24d80f5670a222c787d4f63bdba7c03a" kindref="member">ServiceLocator::Get&lt;AssetLibrary&gt;</ref>();</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_asset_meta" kindref="compound">AssetMeta</ref>*<sp/>pMeta<sp/>=<sp/>lib.<ref refid="class_boon_1_1_asset_library_1a587b662caafff46b0b34fc3584e36fec" kindref="member">GetMeta</ref>(handle);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!pMeta)</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pMeta-&gt;<ref refid="struct_boon_1_1_asset_meta_1a670306c3a522156686f68bd3ce1fea29" kindref="member">type</ref><sp/>!=<sp/><ref refid="struct_boon_1_1_asset_traits_1adf0910f4189faa13183dc3a683c2975b" kindref="member">AssetTraits&lt;TAsset&gt;::Type</ref>)</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_editor_1_1_asset_editor_1a922bbf7299712beaa686f4a3e3ff5623" kindref="member">m_Asset</ref><sp/>=<sp/><ref refid="class_boon_1_1_asset_ref" kindref="compound">AssetRef&lt;TAsset&gt;</ref>(handle);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_scene_serializer" kindref="compound">SceneSerializer</ref><sp/>ser(<ref refid="class_boon_editor_1_1_asset_editor_base_1a8131c8c53b23b2514dfe5bac70cf5c0a" kindref="member">GetScene</ref>());</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ser.<ref refid="class_boon_1_1_scene_serializer_1aa0360b5e9a85d45cb9157070b24aa304" kindref="member">Clear</ref>();</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_editor_1_1_asset_editor_1ae492f5304c3592431dbb8278c82ea611" kindref="member">BuildPreviewScene</ref>(<ref refid="class_boon_editor_1_1_asset_editor_base_1a8131c8c53b23b2514dfe5bac70cf5c0a" kindref="member">GetScene</ref>());</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Panels/AssetEditor.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,164 @@
+\doxysection{Boon::\+Render\+Batch Class Reference}
+\hypertarget{class_boon_1_1_render_batch}{}\label{class_boon_1_1_render_batch}\index{Boon::RenderBatch@{Boon::RenderBatch}}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \doxymbox{\hyperlink{class_boon_1_1_render_batch_a265a4b4b547b55736f74942884b5380a}{Batch\+Callback}} = std::\+function$<$void()$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_render_batch_a83b1adc90908ad191e3e4d97c61ecaf0}{Initialize}} (uint32\+\_\+t max\+Vertices, const \doxymbox{\hyperlink{class_boon_1_1_vertex_buffer_layout}{Vertex\+Buffer\+Layout}} \&layout, const std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_shader}{Shader}} $>$ \&shader, Primitive\+Type primitive\+Type, std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_index_buffer}{Index\+Buffer}} $>$ index\+Buffer=nullptr)
+\begin{DoxyCompactList}\small\item\em Initialize the render batch with required resources. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_render_batch_a4fa312016e2639f32372d23fed326692}\label{class_boon_1_1_render_batch_a4fa312016e2639f32372d23fed326692} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Render\+Batch} ()
+\begin{DoxyCompactList}\small\item\em Destroy the render batch and release resources. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_render_batch_ae07e5cef9ce8fb8a58e079377a1f6cb2}\label{class_boon_1_1_render_batch_ae07e5cef9ce8fb8a58e079377a1f6cb2} 
+void {\bfseries Begin} ()
+\begin{DoxyCompactList}\small\item\em Start recording vertices for the batch. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_render_batch_a417928fbbd06b4945978789b451ac496}\label{class_boon_1_1_render_batch_a417928fbbd06b4945978789b451ac496} 
+void {\bfseries Flush} ()
+\begin{DoxyCompactList}\small\item\em Flush the current batch to the GPU and issue draw calls. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_render_batch_ac841641ef201722f2c46747c250fc438}\label{class_boon_1_1_render_batch_ac841641ef201722f2c46747c250fc438} 
+void {\bfseries Next\+Batch} ()
+\begin{DoxyCompactList}\small\item\em Advance to the next batch (used when capacity is reached). \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Vertex\+Type$>$ }\\Vertex\+Type \& \doxymbox{\hyperlink{class_boon_1_1_render_batch_a968c25d3f4e87fe945a91a975368be26}{Push\+Vertex}} ()
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_render_batch_a6edc06e1c4cfd40dbb9ced2d44021e86}{Bind\+Pre\+Flush\+Callback}} (Batch\+Callback cb)
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_render_batch_aad0121370a175ccccd4487438cd1e92a}{Bind\+Post\+Flush\+Callback}} (Batch\+Callback cb)
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_render_batch_ae7283b0e83607e807c1ca43d2f86853e}{Bind\+Begin\+Batch\+Callback}} (Batch\+Callback cb)
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_render_batch_ab0ed2eeb0b3494bd357959c9c0a91c67}{Set\+Shader}} (const std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_shader}{Shader}} $>$ \&shader)
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_render_batch_ad5243b45855775fb3ef5d55a137bf746}{Set\+Primitive\+Type}} (Primitive\+Type type)
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{class_boon_1_1_render_batch_a72cb98d7fc47137af6c6a66cc690a9db}{Get\+Vertex\+Count}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_render_batch_8h_source_l00019}{19}} of file \doxymbox{\hyperlink{_render_batch_8h_source}{Render\+Batch.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{class_boon_1_1_render_batch_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{class_boon_1_1_render_batch_a265a4b4b547b55736f74942884b5380a}\index{Boon::RenderBatch@{Boon::RenderBatch}!BatchCallback@{BatchCallback}}
+\index{BatchCallback@{BatchCallback}!Boon::RenderBatch@{Boon::RenderBatch}}
+\doxysubsubsection{\texorpdfstring{BatchCallback}{BatchCallback}}
+{\footnotesize\ttfamily \label{class_boon_1_1_render_batch_a265a4b4b547b55736f74942884b5380a} 
+using Boon::\+\+Render\+Batch::\+\+Batch\+Callback = std::\+function$<$void()$>$}
+
+
+
+Definition at line \doxymbox{\hyperlink{_render_batch_8h_source_l00022}{22}} of file \doxymbox{\hyperlink{_render_batch_8h_source}{Render\+Batch.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_render_batch_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_render_batch_ae7283b0e83607e807c1ca43d2f86853e}\index{Boon::RenderBatch@{Boon::RenderBatch}!BindBeginBatchCallback@{BindBeginBatchCallback}}
+\index{BindBeginBatchCallback@{BindBeginBatchCallback}!Boon::RenderBatch@{Boon::RenderBatch}}
+\doxysubsubsection{\texorpdfstring{BindBeginBatchCallback()}{BindBeginBatchCallback()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_render_batch_ae7283b0e83607e807c1ca43d2f86853e} 
+void Boon::\+\+Render\+Batch::\+\+Bind\+Begin\+Batch\+Callback (\begin{DoxyParamCaption}\item[{Batch\+Callback}]{cb}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_render_batch_8h_source_l00075}{75}} of file \doxymbox{\hyperlink{_render_batch_8h_source}{Render\+Batch.\+h}}.
+
+\Hypertarget{class_boon_1_1_render_batch_aad0121370a175ccccd4487438cd1e92a}\index{Boon::RenderBatch@{Boon::RenderBatch}!BindPostFlushCallback@{BindPostFlushCallback}}
+\index{BindPostFlushCallback@{BindPostFlushCallback}!Boon::RenderBatch@{Boon::RenderBatch}}
+\doxysubsubsection{\texorpdfstring{BindPostFlushCallback()}{BindPostFlushCallback()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_render_batch_aad0121370a175ccccd4487438cd1e92a} 
+void Boon::\+\+Render\+Batch::\+\+Bind\+Post\+Flush\+Callback (\begin{DoxyParamCaption}\item[{Batch\+Callback}]{cb}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_render_batch_8h_source_l00074}{74}} of file \doxymbox{\hyperlink{_render_batch_8h_source}{Render\+Batch.\+h}}.
+
+\Hypertarget{class_boon_1_1_render_batch_a6edc06e1c4cfd40dbb9ced2d44021e86}\index{Boon::RenderBatch@{Boon::RenderBatch}!BindPreFlushCallback@{BindPreFlushCallback}}
+\index{BindPreFlushCallback@{BindPreFlushCallback}!Boon::RenderBatch@{Boon::RenderBatch}}
+\doxysubsubsection{\texorpdfstring{BindPreFlushCallback()}{BindPreFlushCallback()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_render_batch_a6edc06e1c4cfd40dbb9ced2d44021e86} 
+void Boon::\+\+Render\+Batch::\+\+Bind\+Pre\+Flush\+Callback (\begin{DoxyParamCaption}\item[{Batch\+Callback}]{cb}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_render_batch_8h_source_l00073}{73}} of file \doxymbox{\hyperlink{_render_batch_8h_source}{Render\+Batch.\+h}}.
+
+\Hypertarget{class_boon_1_1_render_batch_a72cb98d7fc47137af6c6a66cc690a9db}\index{Boon::RenderBatch@{Boon::RenderBatch}!GetVertexCount@{GetVertexCount}}
+\index{GetVertexCount@{GetVertexCount}!Boon::RenderBatch@{Boon::RenderBatch}}
+\doxysubsubsection{\texorpdfstring{GetVertexCount()}{GetVertexCount()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_render_batch_a72cb98d7fc47137af6c6a66cc690a9db} 
+uint32\+\_\+t Boon::\+\+Render\+Batch::\+\+Get\+Vertex\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_render_batch_8h_source_l00080}{80}} of file \doxymbox{\hyperlink{_render_batch_8h_source}{Render\+Batch.\+h}}.
+
+\Hypertarget{class_boon_1_1_render_batch_a83b1adc90908ad191e3e4d97c61ecaf0}\index{Boon::RenderBatch@{Boon::RenderBatch}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!Boon::RenderBatch@{Boon::RenderBatch}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_render_batch_a83b1adc90908ad191e3e4d97c61ecaf0} 
+void Boon::\+\+Render\+Batch::\+\+Initialize (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{max\+Vertices}{, }\item[{const \doxymbox{\hyperlink{class_boon_1_1_vertex_buffer_layout}{Vertex\+Buffer\+Layout}} \&}]{layout}{, }\item[{const std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_shader}{Shader}} $>$ \&}]{shader}{, }\item[{Primitive\+Type}]{primitive\+Type}{, }\item[{std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_index_buffer}{Index\+Buffer}} $>$}]{index\+Buffer}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})}
+
+
+
+Initialize the render batch with required resources. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+Vertices} & Maximum number of vertices per batch. \\
+\hline
+{\em layout} & Vertex layout used by the batch. \\
+\hline
+{\em shader} & \doxylink{class_boon_1_1_shader}{Shader} used when flushing the batch. \\
+\hline
+{\em primitive\+Type} & Primitive topology for the batch. \\
+\hline
+{\em index\+Buffer} & Optional index buffer for indexed rendering. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_render_batch_a968c25d3f4e87fe945a91a975368be26}\index{Boon::RenderBatch@{Boon::RenderBatch}!PushVertex@{PushVertex}}
+\index{PushVertex@{PushVertex}!Boon::RenderBatch@{Boon::RenderBatch}}
+\doxysubsubsection{\texorpdfstring{PushVertex()}{PushVertex()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_render_batch_a968c25d3f4e87fe945a91a975368be26} 
+template$<$typename Vertex\+Type$>$ \\
+Vertex\+Type \& Boon::\+\+Render\+Batch::\+\+Push\+Vertex (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_render_batch_8h_source_l00062}{62}} of file \doxymbox{\hyperlink{_render_batch_8h_source}{Render\+Batch.\+h}}.
+
+\Hypertarget{class_boon_1_1_render_batch_ad5243b45855775fb3ef5d55a137bf746}\index{Boon::RenderBatch@{Boon::RenderBatch}!SetPrimitiveType@{SetPrimitiveType}}
+\index{SetPrimitiveType@{SetPrimitiveType}!Boon::RenderBatch@{Boon::RenderBatch}}
+\doxysubsubsection{\texorpdfstring{SetPrimitiveType()}{SetPrimitiveType()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_render_batch_ad5243b45855775fb3ef5d55a137bf746} 
+void Boon::\+\+Render\+Batch::\+\+Set\+Primitive\+Type (\begin{DoxyParamCaption}\item[{Primitive\+Type}]{type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_render_batch_8h_source_l00078}{78}} of file \doxymbox{\hyperlink{_render_batch_8h_source}{Render\+Batch.\+h}}.
+
+\Hypertarget{class_boon_1_1_render_batch_ab0ed2eeb0b3494bd357959c9c0a91c67}\index{Boon::RenderBatch@{Boon::RenderBatch}!SetShader@{SetShader}}
+\index{SetShader@{SetShader}!Boon::RenderBatch@{Boon::RenderBatch}}
+\doxysubsubsection{\texorpdfstring{SetShader()}{SetShader()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_render_batch_ab0ed2eeb0b3494bd357959c9c0a91c67} 
+void Boon::\+\+Render\+Batch::\+\+Set\+Shader (\begin{DoxyParamCaption}\item[{const std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_shader}{Shader}} $>$ \&}]{shader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_render_batch_8h_source_l00077}{77}} of file \doxymbox{\hyperlink{_render_batch_8h_source}{Render\+Batch.\+h}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Render\+Batch.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,469 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_b_class_base_8h" kind="file" language="C++">
+    <compoundname>BClassBase.h</compoundname>
+    <includedby refid="_tilemap_renderer_component_8h" local="yes">Component/TilemapRendererComponent.h</includedby>
+    <includedby refid="_transform_component_8h" local="yes">Component/TransformComponent.h</includedby>
+    <includedby refid="_boon_8h" local="yes">Core/Boon.h</includedby>
+    <includedby refid="_tilemap_8h" local="yes">Renderer/Tilemap.h</includedby>
+    <invincdepgraph>
+      <node id="43">
+        <label>Asset/Importer/TilemapImporter.h</label>
+        <link refid="_tilemap_importer_8h"/>
+      </node>
+      <node id="42">
+        <label>Asset/TilemapAsset.h</label>
+        <link refid="_tilemap_asset_8h"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>Component/BoxCollider2D.h</label>
+        <link refid="_box_collider2_d_8h"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>Component/CameraComponent.h</label>
+        <link refid="_camera_component_8h"/>
+      </node>
+      <node id="38">
+        <label>Component/ECSLifecycle.h</label>
+        <link refid="_e_c_s_lifecycle_8h"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>Component/NameComponent.h</label>
+        <link refid="_name_component_8h"/>
+      </node>
+      <node id="17">
+        <label>Component/Rigidbody2D.h</label>
+        <link refid="_rigidbody2_d_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Component/SceneComponent.h</label>
+        <link refid="_scene_component_8h"/>
+      </node>
+      <node id="20">
+        <label>Component/SpriteAnimatorComponent.h</label>
+        <link refid="_sprite_animator_component_8h"/>
+      </node>
+      <node id="21">
+        <label>Component/SpriteRendererComponent.h</label>
+        <link refid="_sprite_renderer_component_8h"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>Component/TextureRendererComponent.h</label>
+        <link refid="_texture_renderer_component_8h"/>
+      </node>
+      <node id="2">
+        <label>Component/TilemapRendererComponent.h</label>
+        <link refid="_tilemap_renderer_component_8h"/>
+      </node>
+      <node id="3">
+        <label>Component/TransformComponent.h</label>
+        <link refid="_transform_component_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Core/Boon.h</label>
+        <link refid="_boon_8h"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>Networking/Components/NetRigidbody2D.h</label>
+        <link refid="_net_rigidbody2_d_8h"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>Networking/Components/NetRigidbody2DSerializer.h</label>
+        <link refid="_net_rigidbody2_d_serializer_8h"/>
+      </node>
+      <node id="23">
+        <label>Networking/Components/NetTransform.h</label>
+        <link refid="_net_transform_8h"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>Networking/Components/NetTransformSerializer.h</label>
+        <link refid="_net_transform_serializer_8h"/>
+      </node>
+      <node id="34">
+        <label>Networking/IRepSerializer.h</label>
+        <link refid="_i_rep_serializer_8h"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>Networking/NetIdentity.h</label>
+        <link refid="_net_identity_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>Networking/NetRepCore.h</label>
+        <link refid="_net_rep_core_8h"/>
+      </node>
+      <node id="35">
+        <label>Networking/NetRepRegistry.h</label>
+        <link refid="_net_rep_registry_8h"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>Networking/NetScene.h</label>
+        <link refid="_net_scene_8h"/>
+      </node>
+      <node id="14">
+        <label>Physics/Physics2D.h</label>
+        <link refid="_physics2_d_8h"/>
+      </node>
+      <node id="1">
+        <label>Reflection/BClassBase.h</label>
+        <link refid="_b_class_base_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>Reflection/ECSLifecycleDetection.h</label>
+        <link refid="_e_c_s_lifecycle_detection_8h"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>Reflection/RegisterBClass.h</label>
+        <link refid="_register_b_class_8h"/>
+      </node>
+      <node id="41">
+        <label>Renderer/Tilemap.h</label>
+        <link refid="_tilemap_8h"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>Scene/BRef.h</label>
+        <link refid="_b_ref_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Scene/GameObject.h</label>
+        <link refid="_game_object_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>Core/BoonEditor.h</label>
+        <link refid="_boon_editor_8h"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Core/EditorCamera.h</label>
+        <link refid="_editor_camera_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>Core/EditorState.h</label>
+        <link refid="_editor_state_8h"/>
+      </node>
+      <node id="29">
+        <label>Event/EditorEvent.h</label>
+        <link refid="_editor_event_8h"/>
+      </node>
+      <node id="5">
+        <label>Panels/AssetEditor.h</label>
+        <link refid="_asset_editor_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Panels/AssetEditorPanel.h</label>
+        <link refid="_asset_editor_panel_8h"/>
+      </node>
+      <node id="30">
+        <label>Panels/ContentBrowser.h</label>
+        <link refid="_content_browser_8h"/>
+      </node>
+      <node id="31">
+        <label>Panels/PropertiesPanel.h</label>
+        <link refid="_properties_panel_8h"/>
+      </node>
+      <node id="32">
+        <label>Panels/ScenePanel.h</label>
+        <link refid="_scene_panel_8h"/>
+      </node>
+      <node id="7">
+        <label>Panels/SpriteAtlasEditorPanel.h</label>
+        <link refid="_sprite_atlas_editor_panel_8h"/>
+      </node>
+      <node id="8">
+        <label>Panels/TilemapEditorPanel.h</label>
+        <link refid="_tilemap_editor_panel_8h"/>
+      </node>
+      <node id="9">
+        <label>Panels/ViewportPanel.h</label>
+        <link refid="_viewport_panel_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>Panels/ViewportToolbar.h</label>
+        <link refid="_viewport_toolbar_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="_b_class_base_8h_1ac6a33ac42cf2fb39ad7064dd369c1b68" prot="public" static="no">
+        <name>BCLASS</name>
+        <param><defname>...</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Reflection/BClassBase.h" line="3" column="9" bodyfile="Reflection/BClassBase.h" bodystart="3" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_b_class_base_8h_1a9d1874ba27ed5506f5a15511a8f78035" prot="public" static="no">
+        <name>BPROPERTY</name>
+        <param><defname>...</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Reflection/BClassBase.h" line="4" column="9" bodyfile="Reflection/BClassBase.h" bodystart="4" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_b_class_base_8h_1aaa9495bee5a24ddd70cdf3f8c0e9157b" prot="public" static="no">
+        <name>BFUNCTION</name>
+        <param><defname>...</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Reflection/BClassBase.h" line="5" column="9" bodyfile="Reflection/BClassBase.h" bodystart="5" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_b_class_base_8h_1ad1142c4fcd7b5ed7745ac5660d3f81e6" prot="public" static="no">
+        <name>BOON_PP_CAT_IMPL</name>
+        <param><defname>a</defname></param>
+        <param><defname>b</defname></param>
+        <initializer>a##b</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Reflection/BClassBase.h" line="11" column="9" bodyfile="Reflection/BClassBase.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_b_class_base_8h_1a64b79f90a1943f3086b80662ca81c9ab" prot="public" static="no">
+        <name>BOON_PP_CAT</name>
+        <param><defname>a</defname></param>
+        <param><defname>b</defname></param>
+        <initializer><ref refid="_b_class_base_8h_1ad1142c4fcd7b5ed7745ac5660d3f81e6" kindref="member">BOON_PP_CAT_IMPL</ref>(a, b)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Reflection/BClassBase.h" line="12" column="9" bodyfile="Reflection/BClassBase.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_b_class_base_8h_1ad2dfe7057242f2b6d07ee4affe23ff81" prot="public" static="no">
+        <name>BOON_REGISTER_FN_NAME</name>
+        <param><defname>module</defname></param>
+        <initializer><ref refid="_b_class_base_8h_1a64b79f90a1943f3086b80662ca81c9ab" kindref="member">BOON_PP_CAT</ref>(RegisterGeneratedClasses_, module)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Reflection/BClassBase.h" line="14" column="9" bodyfile="Reflection/BClassBase.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_b_class_base_8h_1a33f765c67f8673e47533e0aec17d9f13" prot="public" static="no">
+        <name>BOON_UNREGISTER_FN_NAME</name>
+        <param><defname>module</defname></param>
+        <initializer><ref refid="_b_class_base_8h_1a64b79f90a1943f3086b80662ca81c9ab" kindref="member">BOON_PP_CAT</ref>(UnregisterGeneratedClasses_, module)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Reflection/BClassBase.h" line="15" column="9" bodyfile="Reflection/BClassBase.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_b_class_base_8h_1a0161ad11089b0142a44fb85865677f03" prot="public" static="no">
+        <name>BOON_REGISTER_FN</name>
+        <initializer><ref refid="_b_class_base_8h_1ad2dfe7057242f2b6d07ee4affe23ff81" kindref="member">BOON_REGISTER_FN_NAME</ref>(BOON_MODULE_NAME)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Reflection/BClassBase.h" line="17" column="9" bodyfile="Reflection/BClassBase.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_b_class_base_8h_1aa446d78bfd8eb9b6abbd1d4c3f9308e0" prot="public" static="no">
+        <name>BOON_UNREGISTER_FN</name>
+        <initializer><ref refid="_b_class_base_8h_1a33f765c67f8673e47533e0aec17d9f13" kindref="member">BOON_UNREGISTER_FN_NAME</ref>(BOON_MODULE_NAME)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Reflection/BClassBase.h" line="18" column="9" bodyfile="Reflection/BClassBase.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_b_class_base_8h_1a004bec15a5fa52e788eb2dc0388a80dc" prot="public" static="no">
+        <name>BCLASS_BODY</name>
+        <param></param>
+        <initializer>friend void <ref refid="namespace_boon_1a3862ab134b8b986d0afe3ff6a262bba7" kindref="member">Boon::BOON_REGISTER_FN</ref>(<ref refid="struct_boon_1_1_b_class_registry" kindref="compound">Boon::BClassRegistry</ref>&amp;, <ref refid="struct_boon_1_1_net_rep_registry" kindref="compound">Boon::NetRepRegistry</ref>&amp;); \
+friend void <ref refid="namespace_boon_1aa195f83840b08a95bf94bc603ff25df2" kindref="member">Boon::BOON_UNREGISTER_FN</ref>(<ref refid="struct_boon_1_1_b_class_registry" kindref="compound">Boon::BClassRegistry</ref>&amp;, <ref refid="struct_boon_1_1_net_rep_registry" kindref="compound">Boon::NetRepRegistry</ref>&amp;);</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Reflection/BClassBase.h" line="29" column="9" bodyfile="Reflection/BClassBase.h" bodystart="29" bodyend="31"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3" refid="_b_class_base_8h_1ac6a33ac42cf2fb39ad7064dd369c1b68" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BCLASS(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4" refid="_b_class_base_8h_1a9d1874ba27ed5506f5a15511a8f78035" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BPROPERTY(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5" refid="_b_class_base_8h_1aaa9495bee5a24ddd70cdf3f8c0e9157b" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BFUNCTION(...)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>BOON_MODULE_NAME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#error<sp/>BOON_MODULE_NAME<sp/>must<sp/>be<sp/>defined<sp/>for<sp/>reflected<sp/>targets</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="_b_class_base_8h_1ad1142c4fcd7b5ed7745ac5660d3f81e6" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BOON_PP_CAT_IMPL(a,<sp/>b)<sp/>a##b</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="_b_class_base_8h_1a64b79f90a1943f3086b80662ca81c9ab" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BOON_PP_CAT(a,<sp/>b)<sp/>BOON_PP_CAT_IMPL(a,<sp/>b)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="_b_class_base_8h_1ad2dfe7057242f2b6d07ee4affe23ff81" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BOON_REGISTER_FN_NAME(module)<sp/>BOON_PP_CAT(RegisterGeneratedClasses_,<sp/>module)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="_b_class_base_8h_1a33f765c67f8673e47533e0aec17d9f13" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BOON_UNREGISTER_FN_NAME(module)<sp/>BOON_PP_CAT(UnregisterGeneratedClasses_,<sp/>module)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="_b_class_base_8h_1a0161ad11089b0142a44fb85865677f03" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BOON_REGISTER_FN<sp/>BOON_REGISTER_FN_NAME(BOON_MODULE_NAME)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="_b_class_base_8h_1aa446d78bfd8eb9b6abbd1d4c3f9308e0" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BOON_UNREGISTER_FN<sp/>BOON_UNREGISTER_FN_NAME(BOON_MODULE_NAME)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="21"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">BClassRegistry;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NetRepRegistry;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="namespace_boon_1a3862ab134b8b986d0afe3ff6a262bba7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_b_class_base_8h_1a0161ad11089b0142a44fb85865677f03" kindref="member">BOON_REGISTER_FN</ref>(<ref refid="struct_boon_1_1_b_class_registry" kindref="compound">BClassRegistry</ref>&amp;,<sp/><ref refid="struct_boon_1_1_net_rep_registry" kindref="compound">NetRepRegistry</ref>&amp;);</highlight></codeline>
+<codeline lineno="26" refid="namespace_boon_1aa195f83840b08a95bf94bc603ff25df2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_b_class_base_8h_1aa446d78bfd8eb9b6abbd1d4c3f9308e0" kindref="member">BOON_UNREGISTER_FN</ref>(<ref refid="struct_boon_1_1_b_class_registry" kindref="compound">BClassRegistry</ref>&amp;,<sp/><ref refid="struct_boon_1_1_net_rep_registry" kindref="compound">NetRepRegistry</ref>&amp;);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="_b_class_base_8h_1a004bec15a5fa52e788eb2dc0388a80dc" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BCLASS_BODY()<sp/>\</highlight></codeline>
+<codeline lineno="30"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>friend<sp/>void<sp/>Boon::BOON_REGISTER_FN(Boon::BClassRegistry&amp;,<sp/>Boon::NetRepRegistry&amp;);<sp/>\</highlight></codeline>
+<codeline lineno="31"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>friend<sp/>void<sp/>Boon::BOON_UNREGISTER_FN(Boon::BClassRegistry&amp;,<sp/>Boon::NetRepRegistry&amp;);</highlight></codeline>
+    </programlisting>
+    <location file="Reflection/BClassBase.h"/>
+  </compounddef>
+</doxygen>

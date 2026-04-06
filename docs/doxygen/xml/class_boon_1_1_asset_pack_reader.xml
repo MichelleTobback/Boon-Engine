@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_asset_pack_reader" kind="class" language="C++" prot="public">
+    <compoundname>Boon::AssetPackReader</compoundname>
+    <includes refid="_asset_pack_reader_8h" local="no">Asset/AssetPack/AssetPackReader.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_asset_pack_reader_1a9e391286ab7ae2c3b0ddc4ff302d3ef7" prot="private" static="no" mutable="no">
+        <type>FILE *</type>
+        <definition>FILE* Boon::AssetPackReader::m_File</definition>
+        <argsstring></argsstring>
+        <name>m_File</name>
+        <qualifiedname>Boon::AssetPackReader::m_File</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPackReader.h" line="39" column="14" bodyfile="Asset/AssetPack/AssetPackReader.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_asset_pack_reader_1ad8154ec72a2b6ea5df8fe75cb9b69595" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_asset_pack" kindref="compound">AssetPack</ref></type>
+        <definition>AssetPack Boon::AssetPackReader::m_AssetPack</definition>
+        <argsstring></argsstring>
+        <name>m_AssetPack</name>
+        <qualifiedname>Boon::AssetPackReader::m_AssetPack</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPackReader.h" line="40" column="19" bodyfile="Asset/AssetPack/AssetPackReader.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_asset_pack_reader_1a5a25432d2eac0fe095967dbb532759b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::AssetPackReader::AssetPackReader</definition>
+        <argsstring>()=default</argsstring>
+        <name>AssetPackReader</name>
+        <qualifiedname>Boon::AssetPackReader::AssetPackReader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPackReader.h" line="17" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_asset_pack_reader_1a7eb52d7bb8324f7a18520e873b02957e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::AssetPackReader::~AssetPackReader</definition>
+        <argsstring>()</argsstring>
+        <name>~AssetPackReader</name>
+        <qualifiedname>Boon::AssetPackReader::~AssetPackReader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPackReader.h" line="18" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_asset_pack_reader_1aa0b7295a158c05900dbd783b2ed64acd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::AssetPackReader::Open</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>Open</name>
+        <qualifiedname>Boon::AssetPackReader::Open</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPackReader.h" line="20" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_asset_pack_reader_1a7a72f9c3c84464b769b6071007ee898a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="struct_boon_1_1_packed_asset_entry" kindref="compound">PackedAssetEntry</ref> *</type>
+        <definition>const PackedAssetEntry * Boon::AssetPackReader::GetEntry</definition>
+        <argsstring>(UUID id) const</argsstring>
+        <name>GetEntry</name>
+        <qualifiedname>Boon::AssetPackReader::GetEntry</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_u_u_i_d" kindref="compound">UUID</ref></type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPackReader.h" line="22" column="32" bodyfile="Asset/AssetPack/AssetPackReader.h" bodystart="22" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_asset_pack_reader_1a098c4cff3f834be524ca5ca81c3c2c0f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::AssetPackReader::ReadAsset</definition>
+        <argsstring>(AssetHandle handle, Buffer &amp;outBuffer, AssetMeta &amp;outMeta)</argsstring>
+        <name>ReadAsset</name>
+        <qualifiedname>Boon::AssetPackReader::ReadAsset</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type><ref refid="class_boon_1_1_buffer" kindref="compound">Buffer</ref> &amp;</type>
+          <declname>outBuffer</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_boon_1_1_asset_meta" kindref="compound">AssetMeta</ref> &amp;</type>
+          <declname>outMeta</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPackReader.h" line="28" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_asset_pack_reader_1adb42a223cb7bcfb23d2047cccc79fb05" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::AssetPackReader::ReadBytes</definition>
+        <argsstring>(uint64_t offset, uint64_t size, void *outBuffer) const</argsstring>
+        <name>ReadBytes</name>
+        <qualifiedname>Boon::AssetPackReader::ReadBytes</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>outBuffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPackReader.h" line="30" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_asset_pack_reader_1a89f0667f72acd0bc5f1efddc507f5ced" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool Boon::AssetPackReader::ReadPOD</definition>
+        <argsstring>(uint64_t offset, T &amp;outValue) const</argsstring>
+        <name>ReadPOD</name>
+        <qualifiedname>Boon::AssetPackReader::ReadPOD</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>T &amp;</type>
+          <declname>outValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetPackReader.h" line="33" column="14" bodyfile="Asset/AssetPack/AssetPackReader.h" bodystart="33" bodyend="36"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Asset/AssetPack/AssetPackReader.h" line="14" column="5" bodyfile="Asset/AssetPack/AssetPackReader.h" bodystart="15" bodyend="41"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_asset_pack_reader_1a5a25432d2eac0fe095967dbb532759b1" prot="public" virt="non-virtual"><scope>Boon::AssetPackReader</scope><name>AssetPackReader</name></member>
+      <member refid="class_boon_1_1_asset_pack_reader_1a7a72f9c3c84464b769b6071007ee898a" prot="public" virt="non-virtual"><scope>Boon::AssetPackReader</scope><name>GetEntry</name></member>
+      <member refid="class_boon_1_1_asset_pack_reader_1ad8154ec72a2b6ea5df8fe75cb9b69595" prot="private" virt="non-virtual"><scope>Boon::AssetPackReader</scope><name>m_AssetPack</name></member>
+      <member refid="class_boon_1_1_asset_pack_reader_1a9e391286ab7ae2c3b0ddc4ff302d3ef7" prot="private" virt="non-virtual"><scope>Boon::AssetPackReader</scope><name>m_File</name></member>
+      <member refid="class_boon_1_1_asset_pack_reader_1aa0b7295a158c05900dbd783b2ed64acd" prot="public" virt="non-virtual"><scope>Boon::AssetPackReader</scope><name>Open</name></member>
+      <member refid="class_boon_1_1_asset_pack_reader_1a098c4cff3f834be524ca5ca81c3c2c0f" prot="public" virt="non-virtual"><scope>Boon::AssetPackReader</scope><name>ReadAsset</name></member>
+      <member refid="class_boon_1_1_asset_pack_reader_1adb42a223cb7bcfb23d2047cccc79fb05" prot="public" virt="non-virtual"><scope>Boon::AssetPackReader</scope><name>ReadBytes</name></member>
+      <member refid="class_boon_1_1_asset_pack_reader_1a89f0667f72acd0bc5f1efddc507f5ced" prot="public" virt="non-virtual"><scope>Boon::AssetPackReader</scope><name>ReadPOD</name></member>
+      <member refid="class_boon_1_1_asset_pack_reader_1a7eb52d7bb8324f7a18520e873b02957e" prot="public" virt="non-virtual"><scope>Boon::AssetPackReader</scope><name>~AssetPackReader</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

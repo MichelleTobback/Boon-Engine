@@ -10,6 +10,12 @@ namespace Boon
     class Buffer
     {
     public:
+        /**
+         * @brief Simple byte buffer utility for read/write operations.
+         *
+         * Supports appending raw data, writing trivially-copyable types and
+         * reading data by offset. Data is stored in an internal std::vector<uint8_t>.
+         */
         Buffer() = default;
 
         explicit Buffer(size_t size)
@@ -91,13 +97,23 @@ namespace Boon
         }
 
         // ---------- Utility ----------
+        /**
+         * @brief Pointer to the internal data buffer.
+         */
         uint8_t* Data() { return m_Data.data(); }
         const uint8_t* Data() const { return m_Data.data(); }
 
         uint8_t* DataAt(uint32_t pos) { return m_Data.data() + pos; }
         const uint8_t* DataAt(uint32_t pos) const { return m_Data.data() + pos; }
 
+        /**
+         * @brief Get the size of the buffer in bytes.
+         */
         size_t Size() const { return m_Data.size(); }
+
+        /**
+         * @brief Check whether the buffer contains no data.
+         */
         bool Empty() const { return m_Data.empty(); }
 
         void Clear() { m_Data.clear(); }

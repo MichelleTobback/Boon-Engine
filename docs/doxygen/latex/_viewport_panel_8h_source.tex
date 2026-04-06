@@ -1,0 +1,77 @@
+\doxysection{Viewport\+Panel.\+h}
+\hypertarget{_viewport_panel_8h_source}{}\label{_viewport_panel_8h_source}\index{ViewportPanel.h@{ViewportPanel.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}EditorPanel.h"{}}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}Core/BoonEditor.h"{}}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}Panels/ViewportToolbar.h"{}}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}Core/EditorCamera.h"{}}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}DebugRenderer/EditorViewportSettings.h"{}}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <Scene/GameObject.h>}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <glm/glm.hpp>}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00016}00016\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00017}00017\ \{}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_scene_renderer}{SceneRenderer}};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00020}00020\ \}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00022}00022\ \textcolor{keyword}{namespace\ }BoonEditor}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00023}00023\ \{}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_editor_1_1_debug_renderer}{DebugRenderer}};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00025}\doxymbox{\hyperlink{class_boon_editor_1_1_viewport_panel}{00025}}\ \ \ \ \ \textcolor{keyword}{class\ }ViewportPanel\ final\ :\ \textcolor{keyword}{public}\ EditorPanel}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00026}00026\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00028}00028\ \ \ \ \ \ \ \ \ ViewportPanel(\textcolor{keyword}{const}\ std::string\&\ name,\ \doxymbox{\hyperlink{class_drag_drop_router}{DragDropRouter}}*\ pRouter,\ SceneContext*\ pContext,\ GameObjectContext*\ pSelectionContext);}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \string~ViewportPanel();}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Update()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \doxymbox{\hyperlink{class_boon_editor_1_1_viewport_toolbar}{ViewportToolbar}}*\ GetToolbar()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_pToolbar.get();\ \}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \doxymbox{\hyperlink{class_boon_editor_1_1_editor_camera}{EditorCamera}}\&\ GetCamera()\ \{\ \textcolor{keywordflow}{return}\ m\_Camera;\ \}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \doxymbox{\hyperlink{struct_boon_editor_1_1_editor_viewport_settings}{EditorViewportSettings}}\&\ GetSettings()\ \{\ \textcolor{keywordflow}{return}\ m\_Settings;\ \}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_editor_1_1_editor_viewport_settings}{EditorViewportSettings}}\&\ GetSettings()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Settings;\ \}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetContext(SceneContext*\ pContext);}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ glm::vec2\&\ GetSize()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_ViewportSize;\ \}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ glm::vec2\&\ GetMousePosition()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_MousePosition;\ \}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \doxymbox{\hyperlink{class_boon_1_1_scene_renderer}{SceneRenderer}}*\ GetRenderer()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_pRenderer.get();\ \}}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00047}00047\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnRenderUI()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00050}00050\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ CameraSettings(\textcolor{keywordtype}{float}\ posX,\ \textcolor{keywordtype}{float}\ posY,\ \textcolor{keywordtype}{float}\ maxWidth);}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ VisibilitySettings(\textcolor{keywordtype}{float}\ posX,\ \textcolor{keywordtype}{float}\ posY,\ \textcolor{keywordtype}{float}\ maxWidth);}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ std::unique\_ptr<SceneRenderer>\ m\_pRenderer;}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00055}00055\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_editor_1_1_editor_camera}{EditorCamera}}\ m\_Camera\{0.f,\ 0.f\};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_ViewportFocused\ =\ \textcolor{keyword}{false},\ m\_ViewportHovered\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00058}00058\ \ \ \ \ \ \ \ \ glm::vec2\ m\_ViewportSize\ =\ \{\ 0.0f,\ 0.0f\ \};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00059}00059\ \ \ \ \ \ \ \ \ glm::vec2\ m\_ViewportBounds[2];}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00060}00060\ \ \ \ \ \ \ \ \ glm::vec2\ m\_MousePosition\{\};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00061}00061\ \ \ \ \ \ \ \ \ glm::vec2\ m\_ViewportImagePosition\{\};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00063}00063\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_game_object}{GameObject}}\ m\_HoveredGameObject\{\};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00064}00064\ \ \ \ \ \ \ \ \ SceneContext*\ m\_pContext;}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00065}00065\ \ \ \ \ \ \ \ \ GameObjectContext*\ m\_pSelectionContext\{\};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00066}00066\ \ \ \ \ \ \ \ \ std::unique\_ptr<ViewportToolbar>\ m\_pToolbar\{\};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00067}00067\ \ \ \ \ \ \ \ \ std::unique\_ptr<DebugRenderer>\ m\_pDebugRenderer\{\};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00069}00069\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_boon_editor_1_1_editor_viewport_settings}{EditorViewportSettings}}\ m\_Settings\{\};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00070}00070\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_viewport_panel_8h_source_l00071}00071\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,79 @@
+\doxysection{Framebuffer.\+h}
+\hypertarget{_framebuffer_8h_source}{}\label{_framebuffer_8h_source}\index{Framebuffer.h@{Framebuffer.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00006}00006\ \textcolor{keyword}{namespace\ }Boon\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00007}00007\ \{}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00008}00008\ \ \ \ \ \textcolor{keyword}{enum\ class}\ FramebufferTextureFormat}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00009}00009\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00010}00010\ \ \ \ \ \ \ \ \ None\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00012}00012\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Color}}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00013}00013\ \ \ \ \ \ \ \ \ RGBA8,}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00014}00014\ \ \ \ \ \ \ \ \ RED\_INTEGER,}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Depth/stencil}}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ DEPTH24STENCIL8,}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Defaults}}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00020}00020\ \ \ \ \ \ \ \ \ Depth\ =\ DEPTH24STENCIL8}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00021}00021\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00023}\doxymbox{\hyperlink{struct_boon_1_1_framebuffer_texture_descriptor}{00023}}\ \ \ \ \ \textcolor{keyword}{struct\ }FramebufferTextureDescriptor}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00024}00024\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00025}00025\ \ \ \ \ \ \ \ \ FramebufferTextureDescriptor()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ FramebufferTextureDescriptor(FramebufferTextureFormat\ format)}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ :\ TextureFormat(format)\ \{\}}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00029}00029\ \ \ \ \ \ \ \ \ FramebufferTextureFormat\ TextureFormat\ =\ FramebufferTextureFormat::None;}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00030}00030\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00032}\doxymbox{\hyperlink{struct_boon_1_1_framebuffer_attachment_descriptor}{00032}}\ \ \ \ \ \textcolor{keyword}{struct\ }FramebufferAttachmentDescriptor}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00033}00033\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00034}00034\ \ \ \ \ \ \ \ \ FramebufferAttachmentDescriptor()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00035}00035\ \ \ \ \ \ \ \ \ FramebufferAttachmentDescriptor(std::initializer\_list<FramebufferTextureDescriptor>\ attachments)}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ :\ Attachments(attachments)\ \{\}}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ std::vector<FramebufferTextureDescriptor>\ Attachments;}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00039}00039\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00041}\doxymbox{\hyperlink{struct_boon_1_1_framebuffer_descriptor}{00041}}\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_boon_1_1_framebuffer_descriptor}{FramebufferDescriptor}}}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00042}00042\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00043}00043\ \ \ \ \ \ \ \ \ uint32\_t\ Width\ =\ 0,\ Height\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_boon_1_1_framebuffer_attachment_descriptor}{FramebufferAttachmentDescriptor}}\ Attachments;}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00045}00045\ \ \ \ \ \ \ \ \ uint32\_t\ Samples\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ SwapChainTarget\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00048}00048\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00050}\doxymbox{\hyperlink{class_boon_1_1_framebuffer}{00050}}\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_framebuffer}{Framebuffer}}}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00051}00051\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{class_boon_1_1_framebuffer}{\string~Framebuffer}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00058}\doxymbox{\hyperlink{class_boon_1_1_framebuffer_ad28db393bce6e91e75c129b7a60e3d17}{00058}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_framebuffer_ad28db393bce6e91e75c129b7a60e3d17}{Bind}}()\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00063}\doxymbox{\hyperlink{class_boon_1_1_framebuffer_afb3ae43a8cd14d0464b9f3be746e00e8}{00063}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_framebuffer_afb3ae43a8cd14d0464b9f3be746e00e8}{Unbind}}()\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00071}\doxymbox{\hyperlink{class_boon_1_1_framebuffer_a312f07c65cfd8ad0ea91c83ac3ff289e}{00071}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_framebuffer_a312f07c65cfd8ad0ea91c83ac3ff289e}{Resize}}(uint32\_t\ width,\ uint32\_t\ height)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00081}\doxymbox{\hyperlink{class_boon_1_1_framebuffer_a2d0c7d88dc3f7c7c72a028a02cda1552}{00081}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_boon_1_1_framebuffer_a2d0c7d88dc3f7c7c72a028a02cda1552}{ReadPixel}}(uint32\_t\ attachmentIndex,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00089}\doxymbox{\hyperlink{class_boon_1_1_framebuffer_a5aa91f21d07d37d8d782f62522375683}{00089}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_framebuffer_a5aa91f21d07d37d8d782f62522375683}{ClearAttachment}}(uint32\_t\ attachmentIndex,\ \textcolor{keywordtype}{int}\ value)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00097}\doxymbox{\hyperlink{class_boon_1_1_framebuffer_a29fcbdeccfae3712cd2858d967fa9682}{00097}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ uint32\_t\ \doxymbox{\hyperlink{class_boon_1_1_framebuffer_a29fcbdeccfae3712cd2858d967fa9682}{GetColorAttachmentRendererID}}(uint32\_t\ index\ =\ 0)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00104}\doxymbox{\hyperlink{class_boon_1_1_framebuffer_a0fc50928c6836b94dca2ee7ba82cb223}{00104}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_framebuffer_descriptor}{FramebufferDescriptor}}\&\ \doxymbox{\hyperlink{class_boon_1_1_framebuffer_a0fc50928c6836b94dca2ee7ba82cb223}{GetDescriptor}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00112}\doxymbox{\hyperlink{class_boon_1_1_framebuffer_a05fe877dfccedbac5f0e86b0281051d6}{00112}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<Framebuffer>\ \doxymbox{\hyperlink{class_boon_1_1_framebuffer_a05fe877dfccedbac5f0e86b0281051d6}{Create}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_framebuffer_descriptor}{FramebufferDescriptor}}\&\ spec);}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00113}00113\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{_framebuffer_8h_source_l00116}00116\ \}}
+
+\end{DoxyCode}

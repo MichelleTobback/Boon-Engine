@@ -1,0 +1,507 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_render_batch" kind="class" language="C++" prot="public">
+    <compoundname>Boon::RenderBatch</compoundname>
+    <includes refid="_render_batch_8h" local="no">Renderer/RenderBatch.h</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="class_boon_1_1_render_batch_1a265a4b4b547b55736f74942884b5380a" prot="public" static="no">
+        <type>std::function&lt; void()&gt;</type>
+        <definition>using Boon::RenderBatch::BatchCallback = std::function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>BatchCallback</name>
+        <qualifiedname>Boon::RenderBatch::BatchCallback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="22" column="9" bodyfile="Renderer/RenderBatch.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_render_batch_1abb63aaf4bec2495d9b42059865307c4e" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_vertex_input" kindref="compound">VertexInput</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;VertexInput&gt; Boon::RenderBatch::m_VertexInput</definition>
+        <argsstring></argsstring>
+        <name>m_VertexInput</name>
+        <qualifiedname>Boon::RenderBatch::m_VertexInput</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="83" column="26" bodyfile="Renderer/RenderBatch.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_render_batch_1add08e746706c83b6b15fc473a6d97ce0" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_vertex_buffer" kindref="compound">VertexBuffer</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; Boon::RenderBatch::m_VertexBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_VertexBuffer</name>
+        <qualifiedname>Boon::RenderBatch::m_VertexBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="84" column="25" bodyfile="Renderer/RenderBatch.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_render_batch_1a042cbabcd9a54cf36ad19b38054a6215" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_index_buffer" kindref="compound">IndexBuffer</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;IndexBuffer&gt; Boon::RenderBatch::m_IndexBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_IndexBuffer</name>
+        <qualifiedname>Boon::RenderBatch::m_IndexBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="85" column="26" bodyfile="Renderer/RenderBatch.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_render_batch_1a153601c3bd5653991b905bf5aaaa1ca3" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_shader" kindref="compound">Shader</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;Shader&gt; Boon::RenderBatch::m_Shader</definition>
+        <argsstring></argsstring>
+        <name>m_Shader</name>
+        <qualifiedname>Boon::RenderBatch::m_Shader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="86" column="31" bodyfile="Renderer/RenderBatch.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_render_batch_1a3a622fa5d07c97ff9ed2c129d51fb7d2" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Boon::RenderBatch::m_MaxVertices</definition>
+        <argsstring></argsstring>
+        <name>m_MaxVertices</name>
+        <qualifiedname>Boon::RenderBatch::m_MaxVertices</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="88" column="18" bodyfile="Renderer/RenderBatch.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_render_batch_1aced6f764804e734efb40d8e13e0ec211" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Boon::RenderBatch::m_VertexCount</definition>
+        <argsstring></argsstring>
+        <name>m_VertexCount</name>
+        <qualifiedname>Boon::RenderBatch::m_VertexCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="89" column="18" bodyfile="Renderer/RenderBatch.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_render_batch_1ad2652e4d0301f9f7997b3faea0aeab26" prot="private" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* Boon::RenderBatch::m_BufferBase</definition>
+        <argsstring></argsstring>
+        <name>m_BufferBase</name>
+        <qualifiedname>Boon::RenderBatch::m_BufferBase</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="91" column="17" bodyfile="Renderer/RenderBatch.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_render_batch_1a5f0a4ab6f49ee5c953ad9f425477d85f" prot="private" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* Boon::RenderBatch::m_BufferPtr</definition>
+        <argsstring></argsstring>
+        <name>m_BufferPtr</name>
+        <qualifiedname>Boon::RenderBatch::m_BufferPtr</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="92" column="17" bodyfile="Renderer/RenderBatch.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_render_batch_1ad3af718dbd68de19b602681207a754e3" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1afc49add761d5c9fc13fca2f7fc7c6d08" kindref="member">PrimitiveType</ref></type>
+        <definition>PrimitiveType Boon::RenderBatch::m_PrimitiveType</definition>
+        <argsstring></argsstring>
+        <name>m_PrimitiveType</name>
+        <qualifiedname>Boon::RenderBatch::m_PrimitiveType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="94" column="23" bodyfile="Renderer/RenderBatch.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_render_batch_1a4ea2318beebff64a47bcdd4d60fa29e8" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_render_batch_1a265a4b4b547b55736f74942884b5380a" kindref="member">BatchCallback</ref></type>
+        <definition>BatchCallback Boon::RenderBatch::m_PreFlushFunc</definition>
+        <argsstring></argsstring>
+        <name>m_PreFlushFunc</name>
+        <qualifiedname>Boon::RenderBatch::m_PreFlushFunc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="96" column="23" bodyfile="Renderer/RenderBatch.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_render_batch_1af2bf0d0f74d92bcabe6909b2f72beef2" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_render_batch_1a265a4b4b547b55736f74942884b5380a" kindref="member">BatchCallback</ref></type>
+        <definition>BatchCallback Boon::RenderBatch::m_PostFlushFunc</definition>
+        <argsstring></argsstring>
+        <name>m_PostFlushFunc</name>
+        <qualifiedname>Boon::RenderBatch::m_PostFlushFunc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="97" column="23" bodyfile="Renderer/RenderBatch.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_render_batch_1adc40af7d6125417ff8f433df4c8800e0" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_render_batch_1a265a4b4b547b55736f74942884b5380a" kindref="member">BatchCallback</ref></type>
+        <definition>BatchCallback Boon::RenderBatch::m_BeginBatchFunc</definition>
+        <argsstring></argsstring>
+        <name>m_BeginBatchFunc</name>
+        <qualifiedname>Boon::RenderBatch::m_BeginBatchFunc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="98" column="23" bodyfile="Renderer/RenderBatch.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_render_batch_1a83b1adc90908ad191e3e4d97c61ecaf0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::RenderBatch::Initialize</definition>
+        <argsstring>(uint32_t maxVertices, const VertexBufferLayout &amp;layout, const std::shared_ptr&lt; Shader &gt; &amp;shader, PrimitiveType primitiveType, std::shared_ptr&lt; IndexBuffer &gt; indexBuffer=nullptr)</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>Boon::RenderBatch::Initialize</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>maxVertices</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_boon_1_1_vertex_buffer_layout" kindref="compound">VertexBufferLayout</ref> &amp;</type>
+          <declname>layout</declname>
+        </param>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="class_boon_1_1_shader" kindref="compound">Shader</ref> &gt; &amp;</type>
+          <declname>shader</declname>
+        </param>
+        <param>
+          <type><ref refid="namespace_boon_1afc49add761d5c9fc13fca2f7fc7c6d08" kindref="member">PrimitiveType</ref></type>
+          <declname>primitiveType</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_index_buffer" kindref="compound">IndexBuffer</ref> &gt;</type>
+          <declname>indexBuffer</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Initialize the render batch with required resources. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>maxVertices</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of vertices per batch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>layout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vertex layout used by the batch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>shader</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="class_boon_1_1_shader" kindref="compound">Shader</ref> used when flushing the batch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>primitiveType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Primitive topology for the batch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>indexBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional index buffer for indexed rendering. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_render_batch_1a672b4350c332aa3c6e4864d955fb6d4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::RenderBatch::RenderBatch</definition>
+        <argsstring>()=default</argsstring>
+        <name>RenderBatch</name>
+        <qualifiedname>Boon::RenderBatch::RenderBatch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="39" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_render_batch_1a4fa312016e2639f32372d23fed326692" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::RenderBatch::~RenderBatch</definition>
+        <argsstring>()</argsstring>
+        <name>~RenderBatch</name>
+        <qualifiedname>Boon::RenderBatch::~RenderBatch</qualifiedname>
+        <briefdescription>
+<para>Destroy the render batch and release resources. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="44" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_render_batch_1ae07e5cef9ce8fb8a58e079377a1f6cb2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::RenderBatch::Begin</definition>
+        <argsstring>()</argsstring>
+        <name>Begin</name>
+        <qualifiedname>Boon::RenderBatch::Begin</qualifiedname>
+        <briefdescription>
+<para>Start recording vertices for the batch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="49" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_render_batch_1a417928fbbd06b4945978789b451ac496" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::RenderBatch::Flush</definition>
+        <argsstring>()</argsstring>
+        <name>Flush</name>
+        <qualifiedname>Boon::RenderBatch::Flush</qualifiedname>
+        <briefdescription>
+<para>Flush the current batch to the GPU and issue draw calls. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="54" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_render_batch_1ac841641ef201722f2c46747c250fc438" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::RenderBatch::NextBatch</definition>
+        <argsstring>()</argsstring>
+        <name>NextBatch</name>
+        <qualifiedname>Boon::RenderBatch::NextBatch</qualifiedname>
+        <briefdescription>
+<para>Advance to the next batch (used when capacity is reached). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="59" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_render_batch_1a968c25d3f4e87fe945a91a975368be26" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename VertexType</type>
+          </param>
+        </templateparamlist>
+        <type>VertexType &amp;</type>
+        <definition>VertexType &amp; Boon::RenderBatch::PushVertex</definition>
+        <argsstring>()</argsstring>
+        <name>PushVertex</name>
+        <qualifiedname>Boon::RenderBatch::PushVertex</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="62" column="27" bodyfile="Renderer/RenderBatch.h" bodystart="62" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_render_batch_1a6edc06e1c4cfd40dbb9ced2d44021e86" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::RenderBatch::BindPreFlushCallback</definition>
+        <argsstring>(BatchCallback cb)</argsstring>
+        <name>BindPreFlushCallback</name>
+        <qualifiedname>Boon::RenderBatch::BindPreFlushCallback</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_render_batch_1a265a4b4b547b55736f74942884b5380a" kindref="member">BatchCallback</ref></type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="73" column="21" bodyfile="Renderer/RenderBatch.h" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_render_batch_1aad0121370a175ccccd4487438cd1e92a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::RenderBatch::BindPostFlushCallback</definition>
+        <argsstring>(BatchCallback cb)</argsstring>
+        <name>BindPostFlushCallback</name>
+        <qualifiedname>Boon::RenderBatch::BindPostFlushCallback</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_render_batch_1a265a4b4b547b55736f74942884b5380a" kindref="member">BatchCallback</ref></type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="74" column="21" bodyfile="Renderer/RenderBatch.h" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_render_batch_1ae7283b0e83607e807c1ca43d2f86853e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::RenderBatch::BindBeginBatchCallback</definition>
+        <argsstring>(BatchCallback cb)</argsstring>
+        <name>BindBeginBatchCallback</name>
+        <qualifiedname>Boon::RenderBatch::BindBeginBatchCallback</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_render_batch_1a265a4b4b547b55736f74942884b5380a" kindref="member">BatchCallback</ref></type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="75" column="21" bodyfile="Renderer/RenderBatch.h" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_render_batch_1ab0ed2eeb0b3494bd357959c9c0a91c67" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::RenderBatch::SetShader</definition>
+        <argsstring>(const std::shared_ptr&lt; Shader &gt; &amp;shader)</argsstring>
+        <name>SetShader</name>
+        <qualifiedname>Boon::RenderBatch::SetShader</qualifiedname>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="class_boon_1_1_shader" kindref="compound">Shader</ref> &gt; &amp;</type>
+          <declname>shader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="77" column="21" bodyfile="Renderer/RenderBatch.h" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_render_batch_1ad5243b45855775fb3ef5d55a137bf746" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::RenderBatch::SetPrimitiveType</definition>
+        <argsstring>(PrimitiveType type)</argsstring>
+        <name>SetPrimitiveType</name>
+        <qualifiedname>Boon::RenderBatch::SetPrimitiveType</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1afc49add761d5c9fc13fca2f7fc7c6d08" kindref="member">PrimitiveType</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="78" column="21" bodyfile="Renderer/RenderBatch.h" bodystart="78" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_render_batch_1a72cb98d7fc47137af6c6a66cc690a9db" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t Boon::RenderBatch::GetVertexCount</definition>
+        <argsstring>() const</argsstring>
+        <name>GetVertexCount</name>
+        <qualifiedname>Boon::RenderBatch::GetVertexCount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/RenderBatch.h" line="80" column="25" bodyfile="Renderer/RenderBatch.h" bodystart="80" bodyend="80"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Renderer/RenderBatch.h" line="19" column="5" bodyfile="Renderer/RenderBatch.h" bodystart="20" bodyend="99"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_render_batch_1a265a4b4b547b55736f74942884b5380a" prot="public" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>BatchCallback</name></member>
+      <member refid="class_boon_1_1_render_batch_1ae07e5cef9ce8fb8a58e079377a1f6cb2" prot="public" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>Begin</name></member>
+      <member refid="class_boon_1_1_render_batch_1ae7283b0e83607e807c1ca43d2f86853e" prot="public" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>BindBeginBatchCallback</name></member>
+      <member refid="class_boon_1_1_render_batch_1aad0121370a175ccccd4487438cd1e92a" prot="public" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>BindPostFlushCallback</name></member>
+      <member refid="class_boon_1_1_render_batch_1a6edc06e1c4cfd40dbb9ced2d44021e86" prot="public" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>BindPreFlushCallback</name></member>
+      <member refid="class_boon_1_1_render_batch_1a417928fbbd06b4945978789b451ac496" prot="public" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>Flush</name></member>
+      <member refid="class_boon_1_1_render_batch_1a72cb98d7fc47137af6c6a66cc690a9db" prot="public" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>GetVertexCount</name></member>
+      <member refid="class_boon_1_1_render_batch_1a83b1adc90908ad191e3e4d97c61ecaf0" prot="public" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>Initialize</name></member>
+      <member refid="class_boon_1_1_render_batch_1adc40af7d6125417ff8f433df4c8800e0" prot="private" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>m_BeginBatchFunc</name></member>
+      <member refid="class_boon_1_1_render_batch_1ad2652e4d0301f9f7997b3faea0aeab26" prot="private" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>m_BufferBase</name></member>
+      <member refid="class_boon_1_1_render_batch_1a5f0a4ab6f49ee5c953ad9f425477d85f" prot="private" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>m_BufferPtr</name></member>
+      <member refid="class_boon_1_1_render_batch_1a042cbabcd9a54cf36ad19b38054a6215" prot="private" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>m_IndexBuffer</name></member>
+      <member refid="class_boon_1_1_render_batch_1a3a622fa5d07c97ff9ed2c129d51fb7d2" prot="private" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>m_MaxVertices</name></member>
+      <member refid="class_boon_1_1_render_batch_1af2bf0d0f74d92bcabe6909b2f72beef2" prot="private" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>m_PostFlushFunc</name></member>
+      <member refid="class_boon_1_1_render_batch_1a4ea2318beebff64a47bcdd4d60fa29e8" prot="private" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>m_PreFlushFunc</name></member>
+      <member refid="class_boon_1_1_render_batch_1ad3af718dbd68de19b602681207a754e3" prot="private" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>m_PrimitiveType</name></member>
+      <member refid="class_boon_1_1_render_batch_1a153601c3bd5653991b905bf5aaaa1ca3" prot="private" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>m_Shader</name></member>
+      <member refid="class_boon_1_1_render_batch_1add08e746706c83b6b15fc473a6d97ce0" prot="private" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>m_VertexBuffer</name></member>
+      <member refid="class_boon_1_1_render_batch_1aced6f764804e734efb40d8e13e0ec211" prot="private" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>m_VertexCount</name></member>
+      <member refid="class_boon_1_1_render_batch_1abb63aaf4bec2495d9b42059865307c4e" prot="private" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>m_VertexInput</name></member>
+      <member refid="class_boon_1_1_render_batch_1ac841641ef201722f2c46747c250fc438" prot="public" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>NextBatch</name></member>
+      <member refid="class_boon_1_1_render_batch_1a968c25d3f4e87fe945a91a975368be26" prot="public" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>PushVertex</name></member>
+      <member refid="class_boon_1_1_render_batch_1a672b4350c332aa3c6e4864d955fb6d4f" prot="public" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>RenderBatch</name></member>
+      <member refid="class_boon_1_1_render_batch_1ad5243b45855775fb3ef5d55a137bf746" prot="public" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>SetPrimitiveType</name></member>
+      <member refid="class_boon_1_1_render_batch_1ab0ed2eeb0b3494bd357959c9c0a91c67" prot="public" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>SetShader</name></member>
+      <member refid="class_boon_1_1_render_batch_1a4fa312016e2639f32372d23fed326692" prot="public" virt="non-virtual"><scope>Boon::RenderBatch</scope><name>~RenderBatch</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

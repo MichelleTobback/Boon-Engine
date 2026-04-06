@@ -1,0 +1,358 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_time" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>Boon::Time</compoundname>
+    <basecompoundref refid="class_boon_1_1_singleton" prot="public" virt="non-virtual">Boon::Singleton&lt; Time &gt;</basecompoundref>
+    <includes refid="_time_8h" local="no">Core/Time.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_time_1a552c31131913bc2adbd5ecd2be3f4071" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Boon::Time::m_DeltaTime</definition>
+        <argsstring></argsstring>
+        <name>m_DeltaTime</name>
+        <qualifiedname>Boon::Time::m_DeltaTime</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="61" column="15" bodyfile="Core/Time.h" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_time_1aa66f64006f785b260d34dbca5a1b6e61" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Boon::Time::m_FixedTimeStep</definition>
+        <argsstring></argsstring>
+        <name>m_FixedTimeStep</name>
+        <qualifiedname>Boon::Time::m_FixedTimeStep</qualifiedname>
+        <initializer>= 0.02f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="62" column="15" bodyfile="Core/Time.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_time_1a243438dbd2faec6c9375f1812fd3bb33" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Boon::Time::m_InterpolationAlpha</definition>
+        <argsstring></argsstring>
+        <name>m_InterpolationAlpha</name>
+        <qualifiedname>Boon::Time::m_InterpolationAlpha</qualifiedname>
+        <initializer>= 0.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="63" column="15" bodyfile="Core/Time.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_time_1a3397ee0db4b24c4edfae74547534b81a" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Boon::Time::m_Accumulator</definition>
+        <argsstring></argsstring>
+        <name>m_Accumulator</name>
+        <qualifiedname>Boon::Time::m_Accumulator</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="64" column="15" bodyfile="Core/Time.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_time_1a73e293fa6fcf0eb52e653374bb0c00e1" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1a0e5e61da9d5d9bdbf886a9460dbf6624" kindref="member">TimePoint</ref></type>
+        <definition>TimePoint Boon::Time::m_LastTime</definition>
+        <argsstring></argsstring>
+        <name>m_LastTime</name>
+        <qualifiedname>Boon::Time::m_LastTime</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="66" column="19" bodyfile="Core/Time.h" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_time_1a86bb037e5917fc194686910ff36771b7" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1a0e5e61da9d5d9bdbf886a9460dbf6624" kindref="member">TimePoint</ref></type>
+        <definition>TimePoint Boon::Time::m_CurrentTime</definition>
+        <argsstring></argsstring>
+        <name>m_CurrentTime</name>
+        <qualifiedname>Boon::Time::m_CurrentTime</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="67" column="19" bodyfile="Core/Time.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_time_1a23d57c67235c4be80dc43a2f2e2e1e3d" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1a0e5e61da9d5d9bdbf886a9460dbf6624" kindref="member">TimePoint</ref></type>
+        <definition>TimePoint Boon::Time::m_StartTime</definition>
+        <argsstring></argsstring>
+        <name>m_StartTime</name>
+        <qualifiedname>Boon::Time::m_StartTime</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="68" column="19" bodyfile="Core/Time.h" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_time_1aceadb0ae47713aa5ed1b1b197b956b23" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Boon::Time::m_MaxFPS</definition>
+        <argsstring></argsstring>
+        <name>m_MaxFPS</name>
+        <qualifiedname>Boon::Time::m_MaxFPS</qualifiedname>
+        <initializer>{144}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="70" column="13" bodyfile="Core/Time.h" bodystart="70" bodyend="70"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_time_1a8e2c4fac536eefc4703cd79c0e22df23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::Time::Start</definition>
+        <argsstring>()</argsstring>
+        <name>Start</name>
+        <qualifiedname>Boon::Time::Start</qualifiedname>
+        <briefdescription>
+<para>Start or reset the engine time tracking. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Records the current time as the start time and resets internal accumulators. Call once before running the main loop. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="20" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_time_1a0ed49223d44cd315faa86d1eecedb0c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::Time::Step</definition>
+        <argsstring>()</argsstring>
+        <name>Step</name>
+        <qualifiedname>Boon::Time::Step</qualifiedname>
+        <briefdescription>
+<para>Advance time by computing delta since last step. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Updates the internal delta time and accumulators. Should be called once per frame. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="28" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_time_1a787b07dd7e09877d91bef2983646b0f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::Time::Wait</definition>
+        <argsstring>()</argsstring>
+        <name>Wait</name>
+        <qualifiedname>Boon::Time::Wait</qualifiedname>
+        <briefdescription>
+<para>Wait/sleep to enforce a maximum FPS if configured. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>May block the calling thread to maintain frame timing. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="35" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_time_1a759bef7cb4f1942728b2641ef15f11cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::Time::FixedStep</definition>
+        <argsstring>()</argsstring>
+        <name>FixedStep</name>
+        <qualifiedname>Boon::Time::FixedStep</qualifiedname>
+        <briefdescription>
+<para>Determine whether a fixed physics step should run. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Uses the internal accumulator and fixed time step to indicate if a physics update should be executed this frame. <simplesect kind="return"><para>True if a fixed step should be performed. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="44" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_time_1a7d8816ef429bc747baffb99c84a8501e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespace_boon_1a0e5e61da9d5d9bdbf886a9460dbf6624" kindref="member">TimePoint</ref></type>
+        <definition>TimePoint Boon::Time::Now</definition>
+        <argsstring>()</argsstring>
+        <name>Now</name>
+        <qualifiedname>Boon::Time::Now</qualifiedname>
+        <briefdescription>
+<para>Get the current time point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><ref refid="namespace_boon_1a0e5e61da9d5d9bdbf886a9460dbf6624" kindref="member">TimePoint</ref> representing the current steady clock time. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="50" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_time_1adce16841db0d7f5734fe116da73346bf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Boon::Time::GetDeltaTime</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDeltaTime</name>
+        <qualifiedname>Boon::Time::GetDeltaTime</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="53" column="22" bodyfile="Core/Time.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_time_1abc90145477bee0c11a13981ebf1180ef" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Boon::Time::GetDuration</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDuration</name>
+        <qualifiedname>Boon::Time::GetDuration</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="54" column="22" bodyfile="Core/Time.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_time_1affae1d17ee45a340458c6411da143c7a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="namespace_boon_1a0e5e61da9d5d9bdbf886a9460dbf6624" kindref="member">TimePoint</ref> &amp;</type>
+        <definition>const TimePoint &amp; Boon::Time::GetTime</definition>
+        <argsstring>() const</argsstring>
+        <name>GetTime</name>
+        <qualifiedname>Boon::Time::GetTime</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="55" column="32" bodyfile="Core/Time.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_time_1a7e2f1e76053caf4a0fd74186bca47f24" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Boon::Time::GetFixedTimeStep</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFixedTimeStep</name>
+        <qualifiedname>Boon::Time::GetFixedTimeStep</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="56" column="22" bodyfile="Core/Time.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_time_1a3bf2b1e1db48fc45969426b9e042c66b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::Time::SetFixedTimeStep</definition>
+        <argsstring>(float value)</argsstring>
+        <name>SetFixedTimeStep</name>
+        <qualifiedname>Boon::Time::SetFixedTimeStep</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="57" column="21" bodyfile="Core/Time.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_time_1a7e04cf6703a4cc34359faefe30a917c9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Boon::Time::GetInterpolationAlpha</definition>
+        <argsstring>() const</argsstring>
+        <name>GetInterpolationAlpha</name>
+        <qualifiedname>Boon::Time::GetInterpolationAlpha</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Time.h" line="58" column="22" bodyfile="Core/Time.h" bodystart="58" bodyend="58"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Boon::Singleton&lt; Time &gt;</label>
+        <link refid="class_boon_1_1_singleton"/>
+      </node>
+      <node id="1">
+        <label>Boon::Time</label>
+        <link refid="class_boon_1_1_time"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::Singleton&lt; Time &gt;</label>
+        <link refid="class_boon_1_1_singleton"/>
+      </node>
+      <node id="1">
+        <label>Boon::Time</label>
+        <link refid="class_boon_1_1_time"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Core/Time.h" line="11" column="5" bodyfile="Core/Time.h" bodystart="12" bodyend="71"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_time_1a759bef7cb4f1942728b2641ef15f11cb" prot="public" virt="non-virtual"><scope>Boon::Time</scope><name>FixedStep</name></member>
+      <member refid="class_boon_1_1_singleton_1a3119416b57e971c3d1d7c16faaa1bc6f" prot="public" virt="non-virtual"><scope>Boon::Time</scope><name>Get</name></member>
+      <member refid="class_boon_1_1_time_1adce16841db0d7f5734fe116da73346bf" prot="public" virt="non-virtual"><scope>Boon::Time</scope><name>GetDeltaTime</name></member>
+      <member refid="class_boon_1_1_time_1abc90145477bee0c11a13981ebf1180ef" prot="public" virt="non-virtual"><scope>Boon::Time</scope><name>GetDuration</name></member>
+      <member refid="class_boon_1_1_time_1a7e2f1e76053caf4a0fd74186bca47f24" prot="public" virt="non-virtual"><scope>Boon::Time</scope><name>GetFixedTimeStep</name></member>
+      <member refid="class_boon_1_1_time_1a7e04cf6703a4cc34359faefe30a917c9" prot="public" virt="non-virtual"><scope>Boon::Time</scope><name>GetInterpolationAlpha</name></member>
+      <member refid="class_boon_1_1_time_1affae1d17ee45a340458c6411da143c7a" prot="public" virt="non-virtual"><scope>Boon::Time</scope><name>GetTime</name></member>
+      <member refid="class_boon_1_1_time_1a3397ee0db4b24c4edfae74547534b81a" prot="private" virt="non-virtual"><scope>Boon::Time</scope><name>m_Accumulator</name></member>
+      <member refid="class_boon_1_1_time_1a86bb037e5917fc194686910ff36771b7" prot="private" virt="non-virtual"><scope>Boon::Time</scope><name>m_CurrentTime</name></member>
+      <member refid="class_boon_1_1_time_1a552c31131913bc2adbd5ecd2be3f4071" prot="private" virt="non-virtual"><scope>Boon::Time</scope><name>m_DeltaTime</name></member>
+      <member refid="class_boon_1_1_time_1aa66f64006f785b260d34dbca5a1b6e61" prot="private" virt="non-virtual"><scope>Boon::Time</scope><name>m_FixedTimeStep</name></member>
+      <member refid="class_boon_1_1_time_1a243438dbd2faec6c9375f1812fd3bb33" prot="private" virt="non-virtual"><scope>Boon::Time</scope><name>m_InterpolationAlpha</name></member>
+      <member refid="class_boon_1_1_time_1a73e293fa6fcf0eb52e653374bb0c00e1" prot="private" virt="non-virtual"><scope>Boon::Time</scope><name>m_LastTime</name></member>
+      <member refid="class_boon_1_1_time_1aceadb0ae47713aa5ed1b1b197b956b23" prot="private" virt="non-virtual"><scope>Boon::Time</scope><name>m_MaxFPS</name></member>
+      <member refid="class_boon_1_1_time_1a23d57c67235c4be80dc43a2f2e2e1e3d" prot="private" virt="non-virtual"><scope>Boon::Time</scope><name>m_StartTime</name></member>
+      <member refid="class_boon_1_1_time_1a7d8816ef429bc747baffb99c84a8501e" prot="public" virt="non-virtual"><scope>Boon::Time</scope><name>Now</name></member>
+      <member refid="class_boon_1_1_singleton_1af56732dfaae558bb49cdd6d39daae84e" prot="public" virt="non-virtual"><scope>Boon::Time</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_time_1a3bf2b1e1db48fc45969426b9e042c66b" prot="public" virt="non-virtual"><scope>Boon::Time</scope><name>SetFixedTimeStep</name></member>
+      <member refid="class_boon_1_1_singleton_1a139b13372cea88f1ab221b9f8c3e28f3" prot="public" virt="non-virtual"><scope>Boon::Time</scope><name>Singleton</name></member>
+      <member refid="class_boon_1_1_time_1a8e2c4fac536eefc4703cd79c0e22df23" prot="public" virt="non-virtual"><scope>Boon::Time</scope><name>Start</name></member>
+      <member refid="class_boon_1_1_time_1a0ed49223d44cd315faa86d1eecedb0c0" prot="public" virt="non-virtual"><scope>Boon::Time</scope><name>Step</name></member>
+      <member refid="class_boon_1_1_time_1a787b07dd7e09877d91bef2983646b0f5" prot="public" virt="non-virtual"><scope>Boon::Time</scope><name>Wait</name></member>
+      <member refid="class_boon_1_1_singleton_1a993950c1060d7a6711c11e736d93dd89" prot="public" virt="virtual"><scope>Boon::Time</scope><name>~Singleton</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

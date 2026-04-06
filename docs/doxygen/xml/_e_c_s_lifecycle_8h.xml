@@ -1,0 +1,550 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_e_c_s_lifecycle_8h" kind="file" language="C++">
+    <compoundname>ECSLifecycle.h</compoundname>
+    <includes refid="_b_class_8h" local="yes">Reflection/BClass.h</includes>
+    <includes refid="_e_c_s_lifecycle_detection_8h" local="yes">Reflection/ECSLifecycleDetection.h</includes>
+    <includes refid="_scene_8h" local="yes">Scene/Scene.h</includes>
+    <includes local="no">unordered_map</includes>
+    <includedby refid="_register_b_class_8h" local="yes">Reflection/RegisterBClass.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>Component/ECSLifecycle.h</label>
+        <link refid="_e_c_s_lifecycle_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>Component/TransformComponent.h</label>
+        <link refid="_transform_component_8h"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>Component/UUIDComponent.h</label>
+        <link refid="_u_u_i_d_component_8h"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>Core/Assert.h</label>
+        <link refid="_assert_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>Core/Delegate.h</label>
+        <link refid="_delegate_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>Core/UUID.h</label>
+        <link refid="_u_u_i_d_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Core/Variant.h</label>
+        <link refid="_variant_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>Physics2DTypes.h</label>
+        <link refid="_physics2_d_types_8h"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>Physics/PhysicsWorld2D.h</label>
+        <link refid="_physics_world2_d_8h"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Reflection/BClass.h</label>
+        <link refid="_b_class_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>Reflection/BClassBase.h</label>
+        <link refid="_b_class_base_8h"/>
+      </node>
+      <node id="16">
+        <label>BFunction.h</label>
+        <link refid="_b_function_8h"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>BProperty.h</label>
+        <link refid="_b_property_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>Reflection/ECSLifecycleDetection.h</label>
+        <link refid="_e_c_s_lifecycle_detection_8h"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>Scene/GameObject.h</label>
+        <link refid="_game_object_8h"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>GameObjectID.h</label>
+        <link refid="_game_object_i_d_8h"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>Scene.h</label>
+        <link refid="_scene_8h"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>box2d/id.h</label>
+      </node>
+      <node id="14">
+        <label>cstddef</label>
+      </node>
+      <node id="6">
+        <label>cstdint</label>
+      </node>
+      <node id="38">
+        <label>cstdlib</label>
+      </node>
+      <node id="18">
+        <label>cstring</label>
+      </node>
+      <node id="30">
+        <label>entt/entt.hpp</label>
+      </node>
+      <node id="7">
+        <label>functional</label>
+      </node>
+      <node id="34">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="41">
+        <label>glm/gtc/quaternion.hpp</label>
+      </node>
+      <node id="23">
+        <label>glm/gtc/type_precision.hpp</label>
+      </node>
+      <node id="42">
+        <label>glm/gtx/quaternion.hpp</label>
+      </node>
+      <node id="20">
+        <label>glm/vec2.hpp</label>
+      </node>
+      <node id="21">
+        <label>glm/vec3.hpp</label>
+      </node>
+      <node id="22">
+        <label>glm/vec4.hpp</label>
+      </node>
+      <node id="26">
+        <label>limits</label>
+      </node>
+      <node id="12">
+        <label>memory</label>
+      </node>
+      <node id="9">
+        <label>optional</label>
+      </node>
+      <node id="36">
+        <label>queue</label>
+      </node>
+      <node id="11">
+        <label>stdexcept</label>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="19">
+        <label>type_traits</label>
+      </node>
+      <node id="4">
+        <label>typeindex</label>
+      </node>
+      <node id="5">
+        <label>unordered_map</label>
+      </node>
+      <node id="15">
+        <label>utility</label>
+      </node>
+      <node id="8">
+        <label>vector</label>
+      </node>
+      <node id="10">
+        <label>xhash</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>Component/ECSLifecycle.h</label>
+        <link refid="_e_c_s_lifecycle_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Reflection/RegisterBClass.h</label>
+        <link refid="_register_b_class_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_boon_1_1_e_c_s_lifecycle_callbacks" prot="public">Boon::ECSLifecycleCallbacks</innerclass>
+    <innerclass refid="struct_boon_1_1_e_c_s_lifecycle_system" prot="public">Boon::ECSLifecycleSystem</innerclass>
+    <innerclass refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks" prot="public">Boon::ECSLifecycleSystem::Callbacks</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_b_class_8h" kindref="compound">Reflection/BClass.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_e_c_s_lifecycle_detection_8h" kindref="compound">Reflection/ECSLifecycleDetection.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_scene_8h" kindref="compound">Scene/Scene.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="8"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="10" refid="struct_boon_1_1_e_c_s_lifecycle_callbacks" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks" kindref="compound">ECSLifecycleCallbacks</ref></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="12" refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a77641ff0598d199589a79b1a09d497fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::function&lt;void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a77641ff0598d199589a79b1a09d497fb" kindref="member">awake</ref>;</highlight></codeline>
+<codeline lineno="13" refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a3962bcc1313083bfe666dfa74e4cf566" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::function&lt;void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a3962bcc1313083bfe666dfa74e4cf566" kindref="member">onEndPlay</ref>;</highlight></codeline>
+<codeline lineno="14" refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1aea8e8fc3f39ebdc51a2efebcd8d69ea0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::function&lt;void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1aea8e8fc3f39ebdc51a2efebcd8d69ea0" kindref="member">update</ref>;</highlight></codeline>
+<codeline lineno="15" refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a65752e1fcbb47df2a383737dfcc21cd3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::function&lt;void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a65752e1fcbb47df2a383737dfcc21cd3" kindref="member">fixedUpdate</ref>;</highlight></codeline>
+<codeline lineno="16" refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1ad6c3c17fa149fac48e20580d42202f26" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::function&lt;void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1ad6c3c17fa149fac48e20580d42202f26" kindref="member">lateUpdate</ref>;</highlight></codeline>
+<codeline lineno="17" refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1ad3e5fee322bbd27ba99bb59a81097694" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::function&lt;void(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;,<sp/><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1ad3e5fee322bbd27ba99bb59a81097694" kindref="member">onBeginOverlap</ref>;</highlight></codeline>
+<codeline lineno="18" refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a05ea4d7dcf3f4d0f19562a6d973d3b1e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::function&lt;void(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;,<sp/><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a05ea4d7dcf3f4d0f19562a6d973d3b1e" kindref="member">onEndOverlap</ref>;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a7851e4bb173a46408289a5a3d73e1868" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a7851e4bb173a46408289a5a3d73e1868" kindref="member">Init</ref>()</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1has__awake" kindref="compound">has_awake&lt;T&gt;::value</ref>)</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a77641ff0598d199589a79b1a09d497fb" kindref="member">awake</ref><sp/>=<sp/>[](<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;<sp/>scene)</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>view<sp/>=<sp/>scene.GetRegistry().view&lt;T&gt;();</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>entity<sp/>:<sp/>view)</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>comp<sp/>=<sp/>scene.GetRegistry().get&lt;T&gt;(entity);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>comp.Awake(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>(entity,<sp/>&amp;scene));</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1has__onendplay" kindref="compound">has_onendplay&lt;T&gt;::value</ref>)</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a3962bcc1313083bfe666dfa74e4cf566" kindref="member">onEndPlay</ref><sp/>=<sp/>[](<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;<sp/>scene)</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>view<sp/>=<sp/>scene.GetRegistry().view&lt;T&gt;();</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>entity<sp/>:<sp/>view)</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>comp<sp/>=<sp/>scene.GetRegistry().get&lt;T&gt;(entity);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>comp.OnEndPlay(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>(entity,<sp/>&amp;scene));</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1has__update" kindref="compound">has_update&lt;T&gt;::value</ref>)</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1aea8e8fc3f39ebdc51a2efebcd8d69ea0" kindref="member">update</ref><sp/>=<sp/>[](<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;<sp/>scene)</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>view<sp/>=<sp/>scene.<ref refid="class_boon_1_1_scene_1a264ebf4eb510cfd24a7310bdf38527f5" kindref="member">GetRegistry</ref>().view&lt;T&gt;();</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>entity<sp/>:<sp/>view)</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>comp<sp/>=<sp/>scene.<ref refid="class_boon_1_1_scene_1a264ebf4eb510cfd24a7310bdf38527f5" kindref="member">GetRegistry</ref>().get&lt;T&gt;(entity);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>comp.Update(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>(entity,<sp/>&amp;scene));</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1has__fixedupdate" kindref="compound">has_fixedupdate&lt;T&gt;::value</ref>)</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a65752e1fcbb47df2a383737dfcc21cd3" kindref="member">fixedUpdate</ref><sp/>=<sp/>[](<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;<sp/>scene)</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>view<sp/>=<sp/>scene.<ref refid="class_boon_1_1_scene_1a264ebf4eb510cfd24a7310bdf38527f5" kindref="member">GetRegistry</ref>().view&lt;T&gt;();</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>entity<sp/>:<sp/>view)</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>comp<sp/>=<sp/>scene.<ref refid="class_boon_1_1_scene_1a264ebf4eb510cfd24a7310bdf38527f5" kindref="member">GetRegistry</ref>().get&lt;T&gt;(entity);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>comp.FixedUpdate(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>(entity,<sp/>&amp;scene));</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1has__lateupdate" kindref="compound">has_lateupdate&lt;T&gt;::value</ref>)</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1ad6c3c17fa149fac48e20580d42202f26" kindref="member">lateUpdate</ref><sp/>=<sp/>[](<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;<sp/>scene)</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>view<sp/>=<sp/>scene.<ref refid="class_boon_1_1_scene_1a264ebf4eb510cfd24a7310bdf38527f5" kindref="member">GetRegistry</ref>().view&lt;T&gt;();</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>entity<sp/>:<sp/>view)</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>comp<sp/>=<sp/>scene.<ref refid="class_boon_1_1_scene_1a264ebf4eb510cfd24a7310bdf38527f5" kindref="member">GetRegistry</ref>().get&lt;T&gt;(entity);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>comp.LateUpdate(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>(entity,<sp/>&amp;scene));</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1has__onbeginoverlap" kindref="compound">has_onbeginoverlap&lt;T&gt;::value</ref>)</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1ad3e5fee322bbd27ba99bb59a81097694" kindref="member">onBeginOverlap</ref><sp/>=<sp/>[](<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;<sp/>overlapped,<sp/><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;<sp/>other)</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(overlapped.<ref refid="class_boon_1_1_game_object_1a6c6df56c2c0911dcd70d32df97b34c36" kindref="member">HasComponent</ref>&lt;T&gt;())</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>overlapped.<ref refid="class_boon_1_1_game_object_1a6aae671b5828b0614dca86e40016a3e2" kindref="member">GetComponent</ref>&lt;T&gt;().OnBeginOverlap(overlapped,<sp/>other);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1has__onendoverlap" kindref="compound">has_onendoverlap&lt;T&gt;::value</ref>)</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a05ea4d7dcf3f4d0f19562a6d973d3b1e" kindref="member">onEndOverlap</ref><sp/>=<sp/>[](<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;<sp/>overlapped,<sp/><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;<sp/>other)</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(overlapped.<ref refid="class_boon_1_1_game_object_1a6c6df56c2c0911dcd70d32df97b34c36" kindref="member">HasComponent</ref>&lt;T&gt;())</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>overlapped.<ref refid="class_boon_1_1_game_object_1a6aae671b5828b0614dca86e40016a3e2" kindref="member">GetComponent</ref>&lt;T&gt;().OnEndOverlap(overlapped,<sp/>other);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97" refid="namespace_boon_1a03bd9f5ceb7e5a5399fd72ccf4c83f42" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>std::function&lt;void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a77641ff0598d199589a79b1a09d497fb" kindref="member">ECSLifecycleCallbacks&lt;T&gt;::awake</ref>;</highlight></codeline>
+<codeline lineno="98" refid="namespace_boon_1abce3e229a62aa9875fbd699f7269ebb7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>std::function&lt;void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a3962bcc1313083bfe666dfa74e4cf566" kindref="member">ECSLifecycleCallbacks&lt;T&gt;::onEndPlay</ref>;</highlight></codeline>
+<codeline lineno="99" refid="namespace_boon_1ad688b355246b62baf211367e8010fb68" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>std::function&lt;void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1aea8e8fc3f39ebdc51a2efebcd8d69ea0" kindref="member">ECSLifecycleCallbacks&lt;T&gt;::update</ref>;</highlight></codeline>
+<codeline lineno="100" refid="namespace_boon_1af89f1ba707d90a625b18b8f9bac7ea27" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>std::function&lt;void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a65752e1fcbb47df2a383737dfcc21cd3" kindref="member">ECSLifecycleCallbacks&lt;T&gt;::fixedUpdate</ref>;</highlight></codeline>
+<codeline lineno="101" refid="namespace_boon_1ad3e48b03f3e25a00ebc7b89df8493815" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>std::function&lt;void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1ad6c3c17fa149fac48e20580d42202f26" kindref="member">ECSLifecycleCallbacks&lt;T&gt;::lateUpdate</ref>;</highlight></codeline>
+<codeline lineno="102" refid="namespace_boon_1a7f3107eb727baa4fbbf496f98e51d291" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>std::function&lt;void(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;,<sp/><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1ad3e5fee322bbd27ba99bb59a81097694" kindref="member">ECSLifecycleCallbacks&lt;T&gt;::onBeginOverlap</ref>;</highlight></codeline>
+<codeline lineno="103" refid="namespace_boon_1ad44ec6b8f2a9686bf007625a8f41a3b1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>std::function&lt;void(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;,<sp/><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a05ea4d7dcf3f4d0f19562a6d973d3b1e" kindref="member">ECSLifecycleCallbacks&lt;T&gt;::onEndOverlap</ref>;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106" refid="struct_boon_1_1_e_c_s_lifecycle_system" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1a6650f9cb5d5326ad9909caf923bfcf32" kindref="member">ECSLifecycleSystem</ref></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="108" refid="struct_boon_1_1_e_c_s_lifecycle_system_1ad508bbaf91c0fc218b76aa38be639ae0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1ad508bbaf91c0fc218b76aa38be639ae0" kindref="member">scene</ref>;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110" refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks" kindref="compound">Callbacks</ref></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="112" refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1adeb03fbb9bdf10af1d5587db0bee3a18" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1adeb03fbb9bdf10af1d5587db0bee3a18" kindref="member">awake</ref>;</highlight></codeline>
+<codeline lineno="113" refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1aff5f86a56ca79efd98765b5af8dc965d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1aff5f86a56ca79efd98765b5af8dc965d" kindref="member">onEndPlay</ref>;</highlight></codeline>
+<codeline lineno="114" refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1a0f11a69b1b64548ec888a8ed08b8cf20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1a0f11a69b1b64548ec888a8ed08b8cf20" kindref="member">update</ref>;</highlight></codeline>
+<codeline lineno="115" refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1a7b9384723882d4c9026b1c44229025cd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1a7b9384723882d4c9026b1c44229025cd" kindref="member">fixedUpdate</ref>;</highlight></codeline>
+<codeline lineno="116" refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1a4365bacca42a70b5f89b306f5067a67d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1a4365bacca42a70b5f89b306f5067a67d" kindref="member">lateUpdate</ref>;</highlight></codeline>
+<codeline lineno="117" refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1ada7340996f9c02022bfa83ed64ebb68a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;void(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;,<sp/><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1ada7340996f9c02022bfa83ed64ebb68a" kindref="member">onBeginOverlap</ref>;</highlight></codeline>
+<codeline lineno="118" refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1ae0fe143219fc29d29b40751aae722f11" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;void(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;,<sp/><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>&amp;)&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1ae0fe143219fc29d29b40751aae722f11" kindref="member">onEndOverlap</ref>;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121" refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;std::type_index,<sp/>Callbacks&gt;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>;</highlight></codeline>
+<codeline lineno="122" refid="struct_boon_1_1_e_c_s_lifecycle_system_1ace14366adab1d03da93105c3f517f3f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_delegate" kindref="compound">Delegate</ref>&lt;void(<ref refid="struct_boon_1_1_b_class" kindref="compound">BClass</ref>&amp;)&gt;::Handle<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1ace14366adab1d03da93105c3f517f3f1" kindref="member">SceneListenerHandle</ref>;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124" refid="struct_boon_1_1_e_c_s_lifecycle_system_1a6650f9cb5d5326ad9909caf923bfcf32" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1a6650f9cb5d5326ad9909caf923bfcf32" kindref="member">ECSLifecycleSystem</ref>(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>&amp;<sp/>s)<sp/>:<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1ad508bbaf91c0fc218b76aa38be639ae0" kindref="member">scene</ref>(s)</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_registry_1aaf98573a809387088cf9ba5cd30cb30d" kindref="member">BClassRegistry::Get</ref>().<ref refid="struct_boon_1_1_b_class_registry_1a0c6746126c7bd8208e111a94ace06292" kindref="member">ForEach</ref>([</highlight><highlight class="keyword">this</highlight><highlight class="normal">](<ref refid="struct_boon_1_1_b_class" kindref="compound">BClass</ref>&amp;<sp/>cls)</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cls.<ref refid="struct_boon_1_1_b_class_1ad30070c7b79b1186d8ef040888393f31" kindref="member">registerLifecycle</ref>)</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cls.<ref refid="struct_boon_1_1_b_class_1ad30070c7b79b1186d8ef040888393f31" kindref="member">registerLifecycle</ref>(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1ace14366adab1d03da93105c3f517f3f1" kindref="member">SceneListenerHandle</ref><sp/>=<sp/><ref refid="struct_boon_1_1_b_class_registry_1aaf98573a809387088cf9ba5cd30cb30d" kindref="member">BClassRegistry::Get</ref>().<ref refid="struct_boon_1_1_b_class_registry_1ae892fdd009906b0250a8d117677aec91" kindref="member">GetListeners</ref>().Bind([</highlight><highlight class="keyword">this</highlight><highlight class="normal">](<ref refid="struct_boon_1_1_b_class" kindref="compound">BClass</ref>&amp;<sp/>cls)</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cls.<ref refid="struct_boon_1_1_b_class_1ad30070c7b79b1186d8ef040888393f31" kindref="member">registerLifecycle</ref>)</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cls.<ref refid="struct_boon_1_1_b_class_1ad30070c7b79b1186d8ef040888393f31" kindref="member">registerLifecycle</ref>(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139" refid="struct_boon_1_1_e_c_s_lifecycle_system_1abfc3ddd35eb9c9c8ea8edf196a83970b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1abfc3ddd35eb9c9c8ea8edf196a83970b" kindref="member">~ECSLifecycleSystem</ref>()</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_b_class_registry_1aaf98573a809387088cf9ba5cd30cb30d" kindref="member">BClassRegistry::Get</ref>().<ref refid="struct_boon_1_1_b_class_registry_1ae892fdd009906b0250a8d117677aec91" kindref="member">GetListeners</ref>().Unbind(<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1ace14366adab1d03da93105c3f517f3f1" kindref="member">SceneListenerHandle</ref>);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="145" refid="struct_boon_1_1_e_c_s_lifecycle_system_1ad4e071891227b5fc2cde4f305005c7aa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1ad4e071891227b5fc2cde4f305005c7aa" kindref="member">RegisterType</ref>()</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>.find(</highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(T))<sp/>!=<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>.end())</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a7851e4bb173a46408289a5a3d73e1868" kindref="member">ECSLifecycleCallbacks&lt;T&gt;::Init</ref>();</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks" kindref="compound">Callbacks</ref><sp/>cb;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cb.<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1adeb03fbb9bdf10af1d5587db0bee3a18" kindref="member">awake</ref><sp/>=<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a77641ff0598d199589a79b1a09d497fb" kindref="member">ECSLifecycleCallbacks&lt;T&gt;::awake</ref>;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cb.<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1aff5f86a56ca79efd98765b5af8dc965d" kindref="member">onEndPlay</ref><sp/>=<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a3962bcc1313083bfe666dfa74e4cf566" kindref="member">ECSLifecycleCallbacks&lt;T&gt;::onEndPlay</ref>;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cb.<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1a0f11a69b1b64548ec888a8ed08b8cf20" kindref="member">update</ref><sp/>=<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1aea8e8fc3f39ebdc51a2efebcd8d69ea0" kindref="member">ECSLifecycleCallbacks&lt;T&gt;::update</ref>;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cb.<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1a7b9384723882d4c9026b1c44229025cd" kindref="member">fixedUpdate</ref><sp/>=<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a65752e1fcbb47df2a383737dfcc21cd3" kindref="member">ECSLifecycleCallbacks&lt;T&gt;::fixedUpdate</ref>;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cb.<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1a4365bacca42a70b5f89b306f5067a67d" kindref="member">lateUpdate</ref><sp/>=<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1ad6c3c17fa149fac48e20580d42202f26" kindref="member">ECSLifecycleCallbacks&lt;T&gt;::lateUpdate</ref>;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cb.<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1ada7340996f9c02022bfa83ed64ebb68a" kindref="member">onBeginOverlap</ref><sp/>=<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1ad3e5fee322bbd27ba99bb59a81097694" kindref="member">ECSLifecycleCallbacks&lt;T&gt;::onBeginOverlap</ref>;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cb.<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks_1ae0fe143219fc29d29b40751aae722f11" kindref="member">onEndOverlap</ref><sp/>=<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a05ea4d7dcf3f4d0f19562a6d973d3b1e" kindref="member">ECSLifecycleCallbacks&lt;T&gt;::onEndOverlap</ref>;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>.emplace(</highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(T),<sp/>cb);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="165" refid="struct_boon_1_1_e_c_s_lifecycle_system_1ac583ed2fac32a6b4e96a66d2b07d4069" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1ac583ed2fac32a6b4e96a66d2b07d4069" kindref="member">UnregisterType</ref>()</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>type<sp/>=<sp/></highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(T);</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>.contains(type))</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1ad508bbaf91c0fc218b76aa38be639ae0" kindref="member">scene</ref>.IsRunning()<sp/>&amp;&amp;<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>[type].onEndPlay)</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>[type].onEndPlay(<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1ad508bbaf91c0fc218b76aa38be639ae0" kindref="member">scene</ref>);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>.erase(type);</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="179" refid="struct_boon_1_1_e_c_s_lifecycle_system_1a6a5ae6fbca0fd589743e86de9b569a10" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1a6a5ae6fbca0fd589743e86de9b569a10" kindref="member">AwakeComponent</ref>(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref><sp/>owner)</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>it<sp/>=<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>.find(</highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(T));</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(it<sp/>==<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>.end())</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>it-&gt;second.awakeComponent(owner);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188" refid="struct_boon_1_1_e_c_s_lifecycle_system_1a00bd91f43c3450dc220f02133ccc6553" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1a00bd91f43c3450dc220f02133ccc6553" kindref="member">AwakeAll</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>[_,<sp/>cb]<sp/>:<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>)<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cb.awake)<sp/><sp/><sp/><sp/><sp/><sp/>cb.awake(<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1ad508bbaf91c0fc218b76aa38be639ae0" kindref="member">scene</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="189" refid="struct_boon_1_1_e_c_s_lifecycle_system_1a8cdd28ceac7f127b1cf2b6b5f7c32ae6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1a8cdd28ceac7f127b1cf2b6b5f7c32ae6" kindref="member">OnEndPlayAll</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>[_,<sp/>cb]<sp/>:<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>)<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cb.onEndPlay)<sp/><sp/><sp/><sp/><sp/><sp/>cb.onEndPlay(<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1ad508bbaf91c0fc218b76aa38be639ae0" kindref="member">scene</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="190" refid="struct_boon_1_1_e_c_s_lifecycle_system_1a98262c5d8a1b019a82ac0738dd87757b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1a98262c5d8a1b019a82ac0738dd87757b" kindref="member">UpdateAll</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>[_,<sp/>cb]<sp/>:<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>)<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cb.update)<sp/><sp/><sp/><sp/><sp/><sp/>cb.update(<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1ad508bbaf91c0fc218b76aa38be639ae0" kindref="member">scene</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="191" refid="struct_boon_1_1_e_c_s_lifecycle_system_1a848e408c946d03021497a9ef9705a877" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1a848e408c946d03021497a9ef9705a877" kindref="member">FixedUpdateAll</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>[_,<sp/>cb]<sp/>:<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>)<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cb.fixedUpdate)<sp/>cb.fixedUpdate(<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1ad508bbaf91c0fc218b76aa38be639ae0" kindref="member">scene</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="192" refid="struct_boon_1_1_e_c_s_lifecycle_system_1a1017a186bda8e925d16c9841bb59b552" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1a1017a186bda8e925d16c9841bb59b552" kindref="member">LateUpdateAll</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>[_,<sp/>cb]<sp/>:<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>)<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cb.lateUpdate)<sp/><sp/>cb.lateUpdate(<ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1ad508bbaf91c0fc218b76aa38be639ae0" kindref="member">scene</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="193" refid="struct_boon_1_1_e_c_s_lifecycle_system_1a8ee89b40c0e623ad74dc1c7f33027925" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1a8ee89b40c0e623ad74dc1c7f33027925" kindref="member">BeginOverlap</ref>(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref><sp/>overlapped,<sp/><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref><sp/>other)<sp/></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>[_,<sp/>cb]<sp/>:<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>)<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cb.onBeginOverlap)<sp/></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cb.onBeginOverlap(overlapped,<sp/>other);<sp/></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="198" refid="struct_boon_1_1_e_c_s_lifecycle_system_1a213a00b90560be07a1fef8108d16eaaa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1a213a00b90560be07a1fef8108d16eaaa" kindref="member">EndOverlap</ref>(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref><sp/>overlapped,<sp/><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref><sp/>other)</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>[_,<sp/>cb]<sp/>:<sp/><ref refid="struct_boon_1_1_e_c_s_lifecycle_system_1aceec3f3cfeb58808b92247d163fb0ff0" kindref="member">map</ref>)<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cb.onEndOverlap)<sp/></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cb.onEndOverlap(overlapped,<sp/>other);</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="204"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Component/ECSLifecycle.h"/>
+  </compounddef>
+</doxygen>

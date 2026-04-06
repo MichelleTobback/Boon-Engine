@@ -24,23 +24,84 @@ namespace Boon
 	class Scene final
 	{
 	public:
+		/**
+		 * @brief Destroy the Scene.
+		 *
+		 * Public destructor for the scene object. See implementation for cleanup details.
+		 */
 		~Scene();
 		Scene(const Scene& other) = delete;
 		Scene(Scene&& other) = delete;
 		Scene& operator=(const Scene& other) = delete;
 		Scene& operator=(Scene&& other) = delete;
 
+		/**
+		 * @brief Instantiate a new game object in the scene.
+		 *
+		 * @param pos Initial position for the instantiated object.
+		 * @return A handle to the created GameObject.
+		 */
 		GameObject Instantiate(const glm::vec3& pos = {});
+
+		/**
+		 * @brief Instantiate a new game object in the scene with a specific UUID.
+		 *
+		 * @param uuid UUID to assign to the new object.
+		 * @param pos Initial position for the instantiated object.
+		 * @return A handle to the created GameObject.
+		 */
 		GameObject Instantiate(UUID uuid, const glm::vec3& pos = {});
 
+		/**
+		 * @brief Transition the scene into the "awake" state.
+		 *
+		 * See implementation for the exact semantics performed during Awake.
+		 */
 		void Awake();
+
+		/**
+		 * @brief Transition the scene into the "sleep" state.
+		 *
+		 * See implementation for the exact semantics performed during Sleep.
+		 */
 		void Sleep();
+
+		/**
+		 * @brief Run per-frame update for the scene.
+		 *
+		 * See implementation for which subsystems are updated.
+		 */
 		void Update();
+
+		/**
+		 * @brief Run fixed-timestep updates for the scene (e.g. physics).
+		 *
+		 * See implementation for timestep and systems affected.
+		 */
 		void FixedUpdate();
 
+		/**
+		 * @brief Perform a 2D raycast against the scene's physics world.
+		 *
+		 * @param ray The ray to cast.
+		 * @param result Output parameter populated with hit information if a hit occurs.
+		 * @return true if the ray hit something and `result` was populated, false otherwise.
+		 */
 		bool Raycast2D(const Ray2D& ray, HitResult2D& result) const;
 
+		/**
+		 * @brief Retrieve a game object by UUID.
+		 *
+		 * @param uuid UUID of the requested game object.
+		 * @return Handle to the corresponding GameObject. See implementation for behavior when not found.
+		 */
 		GameObject GetGameObject(UUID uuid);
+
+		/**
+		 * @brief Invoke a function for each game object in the scene.
+		 *
+		 * @param fn Function to call for each GameObject.
+		 */
 		void ForeachGameObject(const std::function<void(GameObject)>& fn);
 
 		template<typename... Components>
@@ -60,18 +121,69 @@ namespace Boon
 			return m_Registry.view<Components...>();
 		}
 
+		/**
+		 * @brief Destroy the given game object.
+		 *
+		 * See implementation for exact destruction timing and side-effects.
+		 *
+		 * @param object The GameObject to destroy.
+		 */
 		void DestroyGameObject(GameObject object);
 
+		/**
+		 * @brief Access the underlying entt registry for this scene.
+		 *
+		 * @return Reference to the scene's registry.
+		 */
 		inline SceneRegistry& GetRegistry() { return m_Registry; }
+
+		/**
+		 * @brief Get the unique id of this scene.
+		 *
+		 * @return SceneID assigned to this scene.
+		 */
 		inline SceneID GetID() const { return m_ID; }
 
+		/**
+		 * @brief Get delegate invoked when a GameObject is spawned.
+		 *
+		 * @return Reference to the spawn delegate.
+		 */
 		inline Delegate<void(GameObject)>& GetOnGameObjectSpawned() { return m_OnGameObjectSpawned; }
+
+		/**
+		 * @brief Get delegate invoked when a GameObject is destroyed.
+		 *
+		 * @return Reference to the destroy delegate.
+		 */
 		inline Delegate<void(GameObject)>& GetOnGameObjectDestroyed() { return m_OnGameObjectDestroyed; }
+
+		/**
+		 * @brief Get delegate invoked when a component is added to a GameObject.
+		 *
+		 * @return Reference to the component-added delegate.
+		 */
 		inline Delegate<void(GameObject, const BClass*)>& GetOnComponentAdded() { return m_OnComponentAdded; }
+
+		/**
+		 * @brief Get delegate invoked when a component is removed from a GameObject.
+		 *
+		 * @return Reference to the component-removed delegate.
+		 */
 		inline Delegate<void(GameObject, const BClass*)>& GetOnComponentRemoved() { return m_OnComponentRemoved; }
 
+		/**
+		 * @brief Access the ECS lifecycle system for this scene.
+		 *
+		 * @return Reference to the ECSLifecycleSystem instance used by the scene.
+		 */
 		inline ECSLifecycleSystem& GetECSLifecycleSystem() { return *m_pECSlifecycle; }
 
+		/**
+		 * @brief Query whether the scene's runtime is active.
+		 *
+		 * @return true when the scene is marked as running, false otherwise.
+		 */
 		inline bool IsRunning() const { return m_Running; }
 
 	private:

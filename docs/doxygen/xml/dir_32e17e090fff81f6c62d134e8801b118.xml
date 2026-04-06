@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_32e17e090fff81f6c62d134e8801b118" kind="dir">
+    <compoundname>Asset</compoundname>
+    <innerdir refid="dir_14f08e37dab69f37d8ac5a9e9eee9fed">Asset/AssetPack</innerdir>
+    <innerdir refid="dir_91d930d1464f465aaf6157311abac52e">Asset/Importer</innerdir>
+    <innerdir refid="dir_6a6696f4111dba15c4ba709133839a46">Asset/Loader</innerdir>
+    <innerfile refid="_asset_8h">Asset.h</innerfile>
+    <innerfile refid="_asset_library_8h">AssetLibrary.h</innerfile>
+    <innerfile refid="_asset_meta_8h">AssetMeta.h</innerfile>
+    <innerfile refid="_asset_ref_8h">AssetRef.h</innerfile>
+    <innerfile refid="_asset_registry_8h">AssetRegistry.h</innerfile>
+    <innerfile refid="_assets_8h">Assets.h</innerfile>
+    <innerfile refid="_asset_traits_8h">AssetTraits.h</innerfile>
+    <innerfile refid="_asset_type_8h">AssetType.h</innerfile>
+    <innerfile refid="_scene_asset_8h">SceneAsset.h</innerfile>
+    <innerfile refid="_shader_asset_8h">ShaderAsset.h</innerfile>
+    <innerfile refid="_sprite_atlas_asset_8h">SpriteAtlasAsset.h</innerfile>
+    <innerfile refid="_texture_asset_8h">TextureAsset.h</innerfile>
+    <innerfile refid="_tilemap_asset_8h">TilemapAsset.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Asset/"/>
+  </compounddef>
+</doxygen>

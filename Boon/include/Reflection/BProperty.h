@@ -38,6 +38,12 @@ namespace Boon
         std::string value;
     };
 
+    /**
+     * @brief Reflection information for a single class property/member.
+     *
+     * Contains the property's name, type name, byte offset within the
+     * instance, size and optional metadata entries.
+     */
     struct BProperty
     {
         std::string name;
@@ -47,6 +53,12 @@ namespace Boon
         BTypeId typeId{ BTypeId::Unknown };
         std::vector<BPropertyMeta> meta;
 
+        /**
+         * @brief Check whether metadata with the given key exists for this property.
+         *
+         * @param key Metadata key to search for.
+         * @return true if a metadata entry with the key exists, false otherwise.
+         */
         bool HasMeta(const std::string& key) const
         {
             for (auto& m : meta)
@@ -55,6 +67,12 @@ namespace Boon
             return false;
         }
 
+        /**
+         * @brief Get the value for a metadata entry if present.
+         *
+         * @param key Metadata key to retrieve.
+         * @return Optional string containing the metadata value when present.
+         */
         std::optional<std::string> GetMeta(const std::string& key) const
         {
             for (auto& m : meta)

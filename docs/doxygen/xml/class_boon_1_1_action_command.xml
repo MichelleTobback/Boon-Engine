@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_action_command" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>Boon::ActionCommand</compoundname>
+    <basecompoundref refid="class_boon_1_1_command" prot="public" virt="non-virtual">Boon::Command</basecompoundref>
+    <includes refid="_command_8h" local="no">Core/Command.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_action_command_1a44b8868eea75e257015e936274d799f4" prot="private" static="no" mutable="no">
+        <type>std::function&lt; void()&gt;</type>
+        <definition>std::function&lt;void()&gt; Boon::ActionCommand::m_FnAction</definition>
+        <argsstring></argsstring>
+        <name>m_FnAction</name>
+        <qualifiedname>Boon::ActionCommand::m_FnAction</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Command.h" line="29" column="15" bodyfile="Core/Command.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_action_command_1a91269b1ea152085db43faa7bf28f81b5" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::ActionCommand::ActionCommand</definition>
+        <argsstring>(const std::function&lt; void()&gt; &amp;fnAction)</argsstring>
+        <name>ActionCommand</name>
+        <qualifiedname>Boon::ActionCommand::ActionCommand</qualifiedname>
+        <param>
+          <type>const std::function&lt; void()&gt; &amp;</type>
+          <declname>fnAction</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Command.h" line="17" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_action_command_1a4ca0f8645fe891415f1fa47b1339774c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Boon::ActionCommand::~ActionCommand</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~ActionCommand</name>
+        <qualifiedname>Boon::ActionCommand::~ActionCommand</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Command.h" line="18" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_action_command_1a2842f071de6f36211a5c7d48eedcd036" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Boon::ActionCommand::Execute</definition>
+        <argsstring>() override</argsstring>
+        <name>Execute</name>
+        <qualifiedname>Boon::ActionCommand::Execute</qualifiedname>
+        <reimplements refid="class_boon_1_1_command_1acbb00380c3802e3e5ff38f3b51b59de5">Execute</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Command.h" line="20" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_boon_1_1_action_command_1ab7a4ad31c344331bbe07a23c39e16232" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Obj</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_action_command_1a91269b1ea152085db43faa7bf28f81b5" kindref="member">ActionCommand</ref> &gt;</type>
+        <definition>static std::shared_ptr&lt; ActionCommand &gt; Boon::ActionCommand::Create</definition>
+        <argsstring>(Obj *t, Func &amp;&amp;fn)</argsstring>
+        <name>Create</name>
+        <qualifiedname>Boon::ActionCommand::Create</qualifiedname>
+        <param>
+          <type>Obj *</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Command.h" line="23" column="31" bodyfile="Core/Command.h" bodystart="23" bodyend="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>Boon::ActionCommand</label>
+        <link refid="class_boon_1_1_action_command"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Boon::Command</label>
+        <link refid="class_boon_1_1_command"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>Boon::ActionCommand</label>
+        <link refid="class_boon_1_1_action_command"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Boon::Command</label>
+        <link refid="class_boon_1_1_command"/>
+      </node>
+    </collaborationgraph>
+    <location file="Core/Command.h" line="14" column="1" bodyfile="Core/Command.h" bodystart="15" bodyend="30"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_action_command_1a91269b1ea152085db43faa7bf28f81b5" prot="public" virt="non-virtual"><scope>Boon::ActionCommand</scope><name>ActionCommand</name></member>
+      <member refid="class_boon_1_1_action_command_1ab7a4ad31c344331bbe07a23c39e16232" prot="public" virt="non-virtual"><scope>Boon::ActionCommand</scope><name>Create</name></member>
+      <member refid="class_boon_1_1_action_command_1a2842f071de6f36211a5c7d48eedcd036" prot="public" virt="virtual"><scope>Boon::ActionCommand</scope><name>Execute</name></member>
+      <member refid="class_boon_1_1_action_command_1a44b8868eea75e257015e936274d799f4" prot="private" virt="non-virtual"><scope>Boon::ActionCommand</scope><name>m_FnAction</name></member>
+      <member refid="class_boon_1_1_action_command_1a4ca0f8645fe891415f1fa47b1339774c" prot="public" virt="virtual"><scope>Boon::ActionCommand</scope><name>~ActionCommand</name></member>
+      <member refid="class_boon_1_1_command_1aa52291dedcd8bad56562665df35009dc" prot="public" virt="virtual"><scope>Boon::ActionCommand</scope><name>~Command</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

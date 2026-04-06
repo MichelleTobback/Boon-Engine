@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_net_authority_8h" kind="file" language="C++">
+    <compoundname>NetAuthority.h</compoundname>
+    <includedby refid="_application_8h" local="yes">Core/Application.h</includedby>
+    <includedby refid="_net_connection_8h" local="yes">Networking/NetConnection.h</includedby>
+    <includedby refid="_net_driver_8h" local="yes">Networking/NetDriver.h</includedby>
+    <includedby refid="_net_identity_8h" local="yes">Networking/NetIdentity.h</includedby>
+    <includedby refid="_net_scene_8h" local="yes">Networking/NetScene.h</includedby>
+    <includedby refid="_network_settings_8h" local="yes">Networking/NetworkSettings.h</includedby>
+    <invincdepgraph>
+      <node id="2">
+        <label>Core/Application.h</label>
+        <link refid="_application_8h"/>
+      </node>
+      <node id="8">
+        <label>Networking/Components/NetRigidbody2D.h</label>
+        <link refid="_net_rigidbody2_d_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Networking/Components/NetRigidbody2DSerializer.h</label>
+        <link refid="_net_rigidbody2_d_serializer_8h"/>
+      </node>
+      <node id="10">
+        <label>Networking/Components/NetTransform.h</label>
+        <link refid="_net_transform_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Networking/Components/NetTransformSerializer.h</label>
+        <link refid="_net_transform_serializer_8h"/>
+      </node>
+      <node id="4">
+        <label>Networking/Events/NetConnectionEvent.h</label>
+        <link refid="_net_connection_event_8h"/>
+      </node>
+      <node id="1">
+        <label>Networking/NetAuthority.h</label>
+        <link refid="_net_authority_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Networking/NetConnection.h</label>
+        <link refid="_net_connection_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Networking/NetDriver.h</label>
+        <link refid="_net_driver_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Networking/NetIdentity.h</label>
+        <link refid="_net_identity_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Networking/NetRepCore.h</label>
+        <link refid="_net_rep_core_8h"/>
+      </node>
+      <node id="13">
+        <label>Networking/NetScene.h</label>
+        <link refid="_net_scene_8h"/>
+      </node>
+      <node id="14">
+        <label>Networking/NetworkSettings.h</label>
+        <link refid="_network_settings_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Platform/Steam/SteamNetDriver.h</label>
+        <link refid="_steam_net_driver_8h"/>
+      </node>
+      <node id="15">
+        <label>Core/EditorState.h</label>
+        <link refid="_editor_state_8h"/>
+      </node>
+      <node id="16">
+        <label>Panels/NetworkPanel.h</label>
+        <link refid="_network_panel_8h"/>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="4"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="5" refid="namespace_boon_1ae1adfe62e98721adc28eb2b11c48a260" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1ae1adfe62e98721adc28eb2b11c48a260" kindref="member">ENetDriverMode</ref></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="7" refid="namespace_boon_1ae1adfe62e98721adc28eb2b11c48a260a5c80f101108a356211fcb26b3f83eabb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1ae1adfe62e98721adc28eb2b11c48a260a5c80f101108a356211fcb26b3f83eabb" kindref="member">Standalone</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>no<sp/>networking</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8" refid="namespace_boon_1ae1adfe62e98721adc28eb2b11c48a260af2959c0d7a92e2b73c4c8196b140c65c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1ae1adfe62e98721adc28eb2b11c48a260af2959c0d7a92e2b73c4c8196b140c65c" kindref="member">DedicatedServer</ref>,<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>server<sp/>with<sp/>no<sp/>local<sp/>player</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9" refid="namespace_boon_1ae1adfe62e98721adc28eb2b11c48a260a6fda9fb5bd49b0ae883672f609b5032c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1ae1adfe62e98721adc28eb2b11c48a260a6fda9fb5bd49b0ae883672f609b5032c" kindref="member">ListenServer</ref>,<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>server<sp/>hosting<sp/>+<sp/>local<sp/>player</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="namespace_boon_1ae1adfe62e98721adc28eb2b11c48a260a577d7068826de925ea2aec01dbadf5e4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1ae1adfe62e98721adc28eb2b11c48a260a577d7068826de925ea2aec01dbadf5e4" kindref="member">Client</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>remote<sp/>client</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="namespace_boon_1a354109b1d1320fbe24fafa092811092e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1a354109b1d1320fbe24fafa092811092e" kindref="member">ENetRole</ref></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="15" refid="namespace_boon_1a354109b1d1320fbe24fafa092811092ea60f1a22c0e577712dfd7ff055183e4ad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a354109b1d1320fbe24fafa092811092ea60f1a22c0e577712dfd7ff055183e4ad" kindref="member">Authority</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Server<sp/>owns<sp/>this<sp/>object</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="namespace_boon_1a354109b1d1320fbe24fafa092811092ea747bdf14616118b23fc798fda5e08c5b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a354109b1d1320fbe24fafa092811092ea747bdf14616118b23fc798fda5e08c5b" kindref="member">AutonomousProxy</ref>,<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Owned<sp/>by<sp/>this<sp/>client</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="namespace_boon_1a354109b1d1320fbe24fafa092811092ea919fd2373e2fed8c413d375f5e116a29" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a354109b1d1320fbe24fafa092811092ea919fd2373e2fed8c413d375f5e116a29" kindref="member">SimulatedProxy</ref>,<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Replicated<sp/>from<sp/>server</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="namespace_boon_1a354109b1d1320fbe24fafa092811092ea6adf97f83acf6453d4a6a4b1070f3754" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a6867a346204e7bbed8bfe91d8dc2e807a6adf97f83acf6453d4a6a4b1070f3754" kindref="member">None</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Not<sp/>networked<sp/>yet</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Networking/NetAuthority.h"/>
+  </compounddef>
+</doxygen>

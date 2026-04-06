@@ -60,6 +60,14 @@ namespace Boon
             return Imported<T>( dynamic_cast<T*>(m_Importers[meta.type]->ImportFromFile(filepath, meta)), meta );
         }
 
+        /**
+         * @brief Import a file and load the resulting asset of type T.
+         *
+         * The function reads or creates metadata for the file, registers the
+         * metadata and invokes the importer. Returns an Imported<T> wrapper
+         * containing the loaded asset pointer and metadata.
+         */
+
         Imported<Asset> ImportAndLoad(const std::string& filepath)
         {
             AssetMeta meta = MetaFromFile(filepath);
@@ -84,10 +92,18 @@ namespace Boon
             return m_Importers[AssetTraits<T>::Type]->ExportToFile(filepath, pAsset);
         }
 
+        /**
+         * @brief Export an asset to a file using the importer for type T.
+         */
+
         bool HasExtension(const std::string& extension) const
         {
             return m_ExtentionsToType.find(extension) != m_ExtentionsToType.end();
         }
+
+        /**
+         * @brief Check whether an extension is supported by any registered importer.
+         */
 
         AssetMeta LoadMeta(const std::string& filepath)
         {

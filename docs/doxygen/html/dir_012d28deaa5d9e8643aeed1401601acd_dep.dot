@@ -1,0 +1,14 @@
+digraph "Physics"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  dir_012d28deaa5d9e8643aeed1401601acd [label="Physics", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_012d28deaa5d9e8643aeed1401601acd.html",tooltip=""];
+  dir_2862cfb23ed5fe1d5ff0ef26c8688e06 [label="Scene", fillcolor="#edf0f7", color="grey25", style="filled", URL="dir_2862cfb23ed5fe1d5ff0ef26c8688e06.html",tooltip=""];
+  dir_50c60d702c70b5c988872b9594da1c15 [label="Component", fillcolor="#edf0f7", color="grey25", style="filled", URL="dir_50c60d702c70b5c988872b9594da1c15.html",tooltip=""];
+  dir_012d28deaa5d9e8643aeed1401601acd->dir_2862cfb23ed5fe1d5ff0ef26c8688e06 [headlabel="1", labeldistance=1.5 headhref="dir_000019_000023.html" href="dir_000019_000023.html" color="steelblue1" fontcolor="steelblue1"];
+  dir_012d28deaa5d9e8643aeed1401601acd->dir_50c60d702c70b5c988872b9594da1c15 [headlabel="2", labeldistance=1.5 headhref="dir_000019_000004.html" href="dir_000019_000004.html" color="steelblue1" fontcolor="steelblue1"];
+}

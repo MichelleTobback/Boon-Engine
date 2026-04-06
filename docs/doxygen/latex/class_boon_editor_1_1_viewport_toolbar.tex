@@ -1,0 +1,138 @@
+\doxysection{Boon\+Editor::\+Viewport\+Toolbar Class Reference}
+\hypertarget{class_boon_editor_1_1_viewport_toolbar}{}\label{class_boon_editor_1_1_viewport_toolbar}\index{BoonEditor::ViewportToolbar@{BoonEditor::ViewportToolbar}}
+Inheritance diagram for Boon\+Editor::\+Viewport\+Toolbar:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_boon_editor_1_1_viewport_toolbar}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_boon_editor_1_1_viewport_toolbar_a9de15d79421fbcabf974d2e8379bfc26}\label{class_boon_editor_1_1_viewport_toolbar_a9de15d79421fbcabf974d2e8379bfc26} 
+{\bfseries Viewport\+Toolbar} (const std::\+string \&name, \doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*}p\+Router)
+\item 
+\Hypertarget{class_boon_editor_1_1_viewport_toolbar_a6b04b091b20ad492a4173079045599d6}\label{class_boon_editor_1_1_viewport_toolbar_a6b04b091b20ad492a4173079045599d6} 
+{\bfseries Viewport\+Toolbar} (const Viewport\+Toolbar \&other)=delete
+\item 
+\Hypertarget{class_boon_editor_1_1_viewport_toolbar_a50134905b035343bbb94f3ec1f01864c}\label{class_boon_editor_1_1_viewport_toolbar_a50134905b035343bbb94f3ec1f01864c} 
+{\bfseries Viewport\+Toolbar} (Viewport\+Toolbar \&\&other)=delete
+\item 
+\Hypertarget{class_boon_editor_1_1_viewport_toolbar_aa1a107b12104ac22a8a01d8896e0b4f1}\label{class_boon_editor_1_1_viewport_toolbar_aa1a107b12104ac22a8a01d8896e0b4f1} 
+Viewport\+Toolbar \& {\bfseries operator=} (const Viewport\+Toolbar \&other)=delete
+\item 
+\Hypertarget{class_boon_editor_1_1_viewport_toolbar_aa59706df1b96fb30a51f08c115643002}\label{class_boon_editor_1_1_viewport_toolbar_aa59706df1b96fb30a51f08c115643002} 
+Viewport\+Toolbar \& {\bfseries operator=} (Viewport\+Toolbar \&\&other)=delete
+\item 
+\Hypertarget{class_boon_editor_1_1_viewport_toolbar_abee65362a35af9d67b25128d03179585}\label{class_boon_editor_1_1_viewport_toolbar_abee65362a35af9d67b25128d03179585} 
+void {\bfseries On\+Render} (const glm::\+vec2 \&bounds\+Min, const glm::\+vec2 \&bounds\+Max)
+\item 
+\Hypertarget{class_boon_editor_1_1_viewport_toolbar_a2cd3bc7b1f0cef5fb5908a88e23bd5f1}\label{class_boon_editor_1_1_viewport_toolbar_a2cd3bc7b1f0cef5fb5908a88e23bd5f1} 
+void {\bfseries Bind\+On\+Play\+Callback} (const std::\+function$<$ void()$>$ \&fn)
+\item 
+\Hypertarget{class_boon_editor_1_1_viewport_toolbar_ae53d5b19832bfc9d4edbc2b4712c45a0}\label{class_boon_editor_1_1_viewport_toolbar_ae53d5b19832bfc9d4edbc2b4712c45a0} 
+void {\bfseries Bind\+On\+Pause\+Callback} (const std::\+function$<$ void()$>$ \&fn)
+\item 
+\Hypertarget{class_boon_editor_1_1_viewport_toolbar_a5fabc915370a0546a43375681c6baa9d}\label{class_boon_editor_1_1_viewport_toolbar_a5fabc915370a0546a43375681c6baa9d} 
+void {\bfseries Bind\+On\+Stop\+Callback} (const std::\+function$<$ void()$>$ \&fn)
+\item 
+void \doxymbox{\hyperlink{class_boon_editor_1_1_viewport_toolbar_ab1478a626148f7d19fd74777284ffd7e}{Set\+Active\+Setting}} (Viewport\+Toolbar\+Setting setting)
+\item 
+Viewport\+Toolbar\+Setting \doxymbox{\hyperlink{class_boon_editor_1_1_viewport_toolbar_a9e8b717ee95bd496d902ef6fa28e960b}{Get\+Active\+Setting}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Editor\+Panel} (const std::\+string \&name, \doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*}p\+Router)
+\item 
+{\bfseries Editor\+Panel} (const Editor\+Panel \&other)=delete
+\item 
+{\bfseries Editor\+Panel} (Editor\+Panel \&\&other)=delete
+\item 
+Editor\+Panel \& {\bfseries operator=} (const Editor\+Panel \&other)=delete
+\item 
+Editor\+Panel \& {\bfseries operator=} (Editor\+Panel \&\&other)=delete
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a061bb9f31c7cfe169180d1167c2faac2}{Update}} () override
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a213dbccbcaf8df25846ecd6c261afa94}{On\+Resize}} (uint32\+\_\+t width, uint32\+\_\+t height)
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_af52bce9632c058f5edfc288245c38013}{On\+Render}} ()
+\item 
+void {\bfseries Render\+UI} ()
+\item 
+bool {\bfseries Is\+Hovered} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_viewport_toolbar_a11792bf435f73176626efeae76f5bf9e}{On\+Render\+UI}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bfseries Render\+Float3\+Control} (const std::\+string \&label, glm::\+vec3 \&vector, float reset\+Value=0.\+0f, float column\+Width=100.\+0f)
+\item 
+const std::\+string \& \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_af7c8095284f6932cd3a18bc4a3aaad27}{Get\+Name}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}}
+\begin{DoxyCompactItemize}
+\item 
+std::\+string \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a10d71879d56dfec644df8a1c3718e49e}{m\+\_\+\+Name}}
+\item 
+Editor\+Panel\+Flag \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a7c213f233755bb557917127b7720fb14}{m\+\_\+\+Flags}}
+\item 
+\doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_adea21029e134f339cbf9679f8d724beb}{m\+\_\+p\+Router}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_viewport_toolbar_8h_source_l00022}{22}} of file \doxymbox{\hyperlink{_viewport_toolbar_8h_source}{Viewport\+Toolbar.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_editor_1_1_viewport_toolbar_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_editor_1_1_viewport_toolbar_a9e8b717ee95bd496d902ef6fa28e960b}\index{BoonEditor::ViewportToolbar@{BoonEditor::ViewportToolbar}!GetActiveSetting@{GetActiveSetting}}
+\index{GetActiveSetting@{GetActiveSetting}!BoonEditor::ViewportToolbar@{BoonEditor::ViewportToolbar}}
+\doxysubsubsection{\texorpdfstring{GetActiveSetting()}{GetActiveSetting()}}
+{\footnotesize\ttfamily \label{class_boon_editor_1_1_viewport_toolbar_a9e8b717ee95bd496d902ef6fa28e960b} 
+Viewport\+Toolbar\+Setting Boon\+Editor::\+\+Viewport\+Toolbar::\+\+Get\+Active\+Setting (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_viewport_toolbar_8h_source_l00040}{40}} of file \doxymbox{\hyperlink{_viewport_toolbar_8h_source}{Viewport\+Toolbar.\+h}}.
+
+\Hypertarget{class_boon_editor_1_1_viewport_toolbar_a11792bf435f73176626efeae76f5bf9e}\index{BoonEditor::ViewportToolbar@{BoonEditor::ViewportToolbar}!OnRenderUI@{OnRenderUI}}
+\index{OnRenderUI@{OnRenderUI}!BoonEditor::ViewportToolbar@{BoonEditor::ViewportToolbar}}
+\doxysubsubsection{\texorpdfstring{OnRenderUI()}{OnRenderUI()}}
+{\footnotesize\ttfamily \label{class_boon_editor_1_1_viewport_toolbar_a11792bf435f73176626efeae76f5bf9e} 
+virtual void Boon\+Editor::\+\+Viewport\+Toolbar::\+\+On\+Render\+UI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_viewport_toolbar_8h_source_l00043}{43}} of file \doxymbox{\hyperlink{_viewport_toolbar_8h_source}{Viewport\+Toolbar.\+h}}.
+
+\Hypertarget{class_boon_editor_1_1_viewport_toolbar_ab1478a626148f7d19fd74777284ffd7e}\index{BoonEditor::ViewportToolbar@{BoonEditor::ViewportToolbar}!SetActiveSetting@{SetActiveSetting}}
+\index{SetActiveSetting@{SetActiveSetting}!BoonEditor::ViewportToolbar@{BoonEditor::ViewportToolbar}}
+\doxysubsubsection{\texorpdfstring{SetActiveSetting()}{SetActiveSetting()}}
+{\footnotesize\ttfamily \label{class_boon_editor_1_1_viewport_toolbar_ab1478a626148f7d19fd74777284ffd7e} 
+void Boon\+Editor::\+\+Viewport\+Toolbar::\+\+Set\+Active\+Setting (\begin{DoxyParamCaption}\item[{Viewport\+Toolbar\+Setting}]{setting}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_viewport_toolbar_8h_source_l00039}{39}} of file \doxymbox{\hyperlink{_viewport_toolbar_8h_source}{Viewport\+Toolbar.\+h}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Viewport\+Toolbar.\+h\end{DoxyCompactItemize}

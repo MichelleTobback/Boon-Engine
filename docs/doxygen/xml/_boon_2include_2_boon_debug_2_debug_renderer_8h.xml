@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_boon_2include_2_boon_debug_2_debug_renderer_8h" kind="file" language="C++">
+    <compoundname>DebugRenderer.h</compoundname>
+    <includes refid="_singleton_8h" local="yes">Core/Singleton.h</includes>
+    <includes refid="_renderer2_d_8h" local="yes">Renderer/Renderer2D.h</includes>
+    <includes local="no">queue</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>BoonDebug/DebugRenderer.h</label>
+        <link refid="_boon_2include_2_boon_debug_2_debug_renderer_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Core/Memory/Buffer.h</label>
+        <link refid="_buffer_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Core/Singleton.h</label>
+        <link refid="_singleton_8h"/>
+      </node>
+      <node id="4">
+        <label>Renderer/RenderBatch.h</label>
+        <link refid="_render_batch_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Renderer/Renderer2D.h</label>
+        <link refid="_renderer2_d_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Renderer/Texture.h</label>
+        <link refid="_texture_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>VertexBufferLayout.h</label>
+        <link refid="_vertex_buffer_layout_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>array</label>
+      </node>
+      <node id="13">
+        <label>cstdint</label>
+      </node>
+      <node id="14">
+        <label>cstring</label>
+      </node>
+      <node id="9">
+        <label>functional</label>
+      </node>
+      <node id="17">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="6">
+        <label>initializer_list</label>
+      </node>
+      <node id="10">
+        <label>memory</label>
+      </node>
+      <node id="18">
+        <label>queue</label>
+      </node>
+      <node id="7">
+        <label>string</label>
+      </node>
+      <node id="15">
+        <label>type_traits</label>
+      </node>
+      <node id="8">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="class_boon_1_1_debug_draw_cmd" prot="public">Boon::DebugDrawCmd</innerclass>
+    <innerclass refid="class_boon_1_1_draw_debug_line_cmd" prot="public">Boon::DrawDebugLineCmd</innerclass>
+    <innerclass refid="class_boon_1_1_draw_debug_rect_cmd" prot="public">Boon::DrawDebugRectCmd</innerclass>
+    <innerclass refid="class_boon_1_1_debug_renderer" prot="public">Boon::DebugRenderer</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="_boon_2include_2_boon_debug_2_debug_renderer_8h_1a448e8bf22b36319206cbe414b147c950" prot="public" static="no">
+        <name>DEBUG_DRAW_LINE</name>
+        <param><defname>p0</defname></param>
+        <param><defname>p1</defname></param>
+        <param><defname>color</defname></param>
+        <initializer><ref refid="class_boon_1_1_singleton_1a3119416b57e971c3d1d7c16faaa1bc6f" kindref="member">Boon::DebugRenderer::Get</ref>().PushCommand(new <ref refid="class_boon_1_1_draw_debug_line_cmd" kindref="compound">Boon::DrawDebugLineCmd</ref>((p0), (p1), (color)))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/DebugRenderer.h" line="84" column="9" bodyfile="BoonDebug/DebugRenderer.h" bodystart="84" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="define" id="_boon_2include_2_boon_debug_2_debug_renderer_8h_1ab972aa3c36eb97fe6bc243363e50d4f4" prot="public" static="no">
+        <name>DEBUG_DRAW_RECT</name>
+        <param><defname>p</defname></param>
+        <param><defname>size</defname></param>
+        <param><defname>color</defname></param>
+        <initializer><ref refid="class_boon_1_1_singleton_1a3119416b57e971c3d1d7c16faaa1bc6f" kindref="member">Boon::DebugRenderer::Get</ref>().PushCommand(new <ref refid="class_boon_1_1_draw_debug_rect_cmd" kindref="compound">Boon::DrawDebugRectCmd</ref>((p), (size), (color)))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/DebugRenderer.h" line="87" column="9" bodyfile="BoonDebug/DebugRenderer.h" bodystart="87" bodyend="88"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_singleton_8h" kindref="compound">Core/Singleton.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_renderer2_d_8h" kindref="compound">Renderer/Renderer2D.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;queue&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="7"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="8" refid="class_boon_1_1_debug_draw_cmd" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_debug_draw_cmd" kindref="compound">DebugDrawCmd</ref></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="11" refid="class_boon_1_1_debug_draw_cmd_1abadae995bcf88831d36a84e925bc0f96" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_debug_draw_cmd_1abadae995bcf88831d36a84e925bc0f96" kindref="member">Draw</ref>(<ref refid="class_boon_1_1_renderer2_d" kindref="compound">Renderer2D</ref>&amp;<sp/>renderer)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="class_boon_1_1_draw_debug_line_cmd" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_draw_debug_line_cmd_1ad2c5c6bd6d774dcbbdb14a67d63bc01a" kindref="member">DrawDebugLineCmd</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_debug_draw_cmd" kindref="compound">DebugDrawCmd</ref></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="17" refid="class_boon_1_1_draw_debug_line_cmd_1ad2c5c6bd6d774dcbbdb14a67d63bc01a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_draw_debug_line_cmd_1ad2c5c6bd6d774dcbbdb14a67d63bc01a" kindref="member">DrawDebugLineCmd</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>p0,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>p1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec4&amp;<sp/>color)</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_p0(p0),<sp/>m_p1(p1),<sp/>m_Color(color)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="class_boon_1_1_draw_debug_line_cmd_1ab08f3d7981f51579277f06101eb9bd9d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_draw_debug_line_cmd_1ab08f3d7981f51579277f06101eb9bd9d" kindref="member">Draw</ref>(<ref refid="class_boon_1_1_renderer2_d" kindref="compound">Renderer2D</ref>&amp;<sp/>renderer)</highlight><highlight class="keyword"><sp/>override</highlight></codeline>
+<codeline lineno="21"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>renderer.<ref refid="class_boon_1_1_renderer2_d_1a131c1ab049515614e47df4a9cdade2ef" kindref="member">SubmitLine</ref>(m_p0,<sp/>m_p1,<sp/>m_Color);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_p0,<sp/>m_p1;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec4<sp/>m_Color;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="class_boon_1_1_draw_debug_rect_cmd" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_draw_debug_rect_cmd_1a129edcd0ad973f3c44ecc1903e92f6d2" kindref="member">DrawDebugRectCmd</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_debug_draw_cmd" kindref="compound">DebugDrawCmd</ref></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="33" refid="class_boon_1_1_draw_debug_rect_cmd_1a129edcd0ad973f3c44ecc1903e92f6d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_draw_debug_rect_cmd_1a129edcd0ad973f3c44ecc1903e92f6d2" kindref="member">DrawDebugRectCmd</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>p,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec2&amp;<sp/>size,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec4&amp;<sp/>color)</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_p(p),<sp/>m_Size(size),<sp/>m_Color(color)<sp/>{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="class_boon_1_1_draw_debug_rect_cmd_1ad694bc527f561d11272dcc5a2a3607b2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_draw_debug_rect_cmd_1ad694bc527f561d11272dcc5a2a3607b2" kindref="member">Draw</ref>(<ref refid="class_boon_1_1_renderer2_d" kindref="compound">Renderer2D</ref>&amp;<sp/>renderer)</highlight><highlight class="keyword"><sp/>override</highlight></codeline>
+<codeline lineno="38"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>renderer.<ref refid="class_boon_1_1_renderer2_d_1aab070e67899a59e2a1d4bd55f85efbf8" kindref="member">SubmitRect</ref>(m_p,<sp/>m_Size,<sp/>m_Color);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_p;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec2<sp/>m_Size;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec4<sp/>m_Color;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="class_boon_1_1_debug_renderer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_debug_renderer_1a96cba7d980869755db63c87b012aca0b" kindref="member">DebugRenderer</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_singleton_1a139b13372cea88f1ab221b9f8c3e28f3" kindref="member">Singleton</ref>&lt;DebugRenderer&gt;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="51" refid="class_boon_1_1_debug_renderer_1a96cba7d980869755db63c87b012aca0b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_debug_renderer_1a96cba7d980869755db63c87b012aca0b" kindref="member">DebugRenderer</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="class_boon_1_1_debug_renderer_1ab654d2accf6c9931d7c0539b71331b01" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_debug_renderer_1ab654d2accf6c9931d7c0539b71331b01" kindref="member">FlushQueue</ref>(<ref refid="class_boon_1_1_renderer2_d" kindref="compound">Renderer2D</ref>&amp;<sp/>renderer)</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>queue<sp/>=<sp/>m_pCommands;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(!queue.empty())</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>queue.front()-&gt;Draw(renderer);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal"><sp/>queue.front();</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>queue.pop();</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="class_boon_1_1_debug_renderer_1a09b60a511dc323943c0f575c41b99307" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_debug_renderer_1a09b60a511dc323943c0f575c41b99307" kindref="member">BeginFrame</ref>()</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(!m_pCommands.empty())</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal"><sp/>m_pCommands.front();</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_pCommands.pop();</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74" refid="class_boon_1_1_debug_renderer_1a5a6b111575b88e24be2b99d1d3585165" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_debug_renderer_1a5a6b111575b88e24be2b99d1d3585165" kindref="member">PushCommand</ref>(<ref refid="class_boon_1_1_debug_draw_cmd" kindref="compound">DebugDrawCmd</ref>*<sp/>pCmd)</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_pCommands.push(pCmd);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::queue&lt;DebugDrawCmd*&gt;<sp/>m_pCommands;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="82"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84" refid="_boon_2include_2_boon_debug_2_debug_renderer_8h_1a448e8bf22b36319206cbe414b147c950" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DEBUG_DRAW_LINE(p0,<sp/>p1,<sp/>color)<sp/>\</highlight></codeline>
+<codeline lineno="85"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>Boon::DebugRenderer::Get().PushCommand(new<sp/>Boon::DrawDebugLineCmd((p0),<sp/>(p1),<sp/>(color)))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87" refid="_boon_2include_2_boon_debug_2_debug_renderer_8h_1ab972aa3c36eb97fe6bc243363e50d4f4" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DEBUG_DRAW_RECT(p,<sp/>size,<sp/>color)<sp/>\</highlight></codeline>
+<codeline lineno="88"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>Boon::DebugRenderer::Get().PushCommand(new<sp/>Boon::DrawDebugRectCmd((p),<sp/>(size),<sp/>(color)))</highlight></codeline>
+    </programlisting>
+    <location file="BoonDebug/DebugRenderer.h"/>
+  </compounddef>
+</doxygen>

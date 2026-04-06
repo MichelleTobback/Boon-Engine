@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_draw_debug_rect_cmd" kind="class" language="C++" prot="public">
+    <compoundname>Boon::DrawDebugRectCmd</compoundname>
+    <basecompoundref refid="class_boon_1_1_debug_draw_cmd" prot="public" virt="non-virtual">Boon::DebugDrawCmd</basecompoundref>
+    <includes refid="_boon_2include_2_boon_debug_2_debug_renderer_8h" local="no">BoonDebug/DebugRenderer.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_draw_debug_rect_cmd_1a7cb460a85fec61b0c5d4f65cb815d094" prot="private" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 Boon::DrawDebugRectCmd::m_p</definition>
+        <argsstring></argsstring>
+        <name>m_p</name>
+        <qualifiedname>Boon::DrawDebugRectCmd::m_p</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/DebugRenderer.h" line="43" column="11" bodyfile="BoonDebug/DebugRenderer.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_draw_debug_rect_cmd_1aa1560734b141d5603b9465d4b46a5ec9" prot="private" static="no" mutable="no">
+        <type>glm::vec2</type>
+        <definition>glm::vec2 Boon::DrawDebugRectCmd::m_Size</definition>
+        <argsstring></argsstring>
+        <name>m_Size</name>
+        <qualifiedname>Boon::DrawDebugRectCmd::m_Size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/DebugRenderer.h" line="44" column="11" bodyfile="BoonDebug/DebugRenderer.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_draw_debug_rect_cmd_1acf7a0dba2233f874743339093b23a7ad" prot="private" static="no" mutable="no">
+        <type>glm::vec4</type>
+        <definition>glm::vec4 Boon::DrawDebugRectCmd::m_Color</definition>
+        <argsstring></argsstring>
+        <name>m_Color</name>
+        <qualifiedname>Boon::DrawDebugRectCmd::m_Color</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/DebugRenderer.h" line="45" column="11" bodyfile="BoonDebug/DebugRenderer.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_draw_debug_rect_cmd_1a129edcd0ad973f3c44ecc1903e92f6d2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::DrawDebugRectCmd::DrawDebugRectCmd</definition>
+        <argsstring>(const glm::vec3 &amp;p, const glm::vec2 &amp;size, const glm::vec4 &amp;color)</argsstring>
+        <name>DrawDebugRectCmd</name>
+        <qualifiedname>Boon::DrawDebugRectCmd::DrawDebugRectCmd</qualifiedname>
+        <param>
+          <type>const glm::vec3 &amp;</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>const glm::vec2 &amp;</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>const glm::vec4 &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/DebugRenderer.h" line="33" column="1" bodyfile="BoonDebug/DebugRenderer.h" bodystart="33" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_draw_debug_rect_cmd_1ad694bc527f561d11272dcc5a2a3607b2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Boon::DrawDebugRectCmd::Draw</definition>
+        <argsstring>(Renderer2D &amp;renderer) override</argsstring>
+        <name>Draw</name>
+        <qualifiedname>Boon::DrawDebugRectCmd::Draw</qualifiedname>
+        <reimplements refid="class_boon_1_1_debug_draw_cmd_1abadae995bcf88831d36a84e925bc0f96">Draw</reimplements>
+        <param>
+          <type><ref refid="class_boon_1_1_renderer2_d" kindref="compound">Renderer2D</ref> &amp;</type>
+          <declname>renderer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/DebugRenderer.h" line="37" column="14" bodyfile="BoonDebug/DebugRenderer.h" bodystart="37" bodyend="40"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Boon::DebugDrawCmd</label>
+        <link refid="class_boon_1_1_debug_draw_cmd"/>
+      </node>
+      <node id="1">
+        <label>Boon::DrawDebugRectCmd</label>
+        <link refid="class_boon_1_1_draw_debug_rect_cmd"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::DebugDrawCmd</label>
+        <link refid="class_boon_1_1_debug_draw_cmd"/>
+      </node>
+      <node id="1">
+        <label>Boon::DrawDebugRectCmd</label>
+        <link refid="class_boon_1_1_draw_debug_rect_cmd"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="BoonDebug/DebugRenderer.h" line="30" column="1" bodyfile="BoonDebug/DebugRenderer.h" bodystart="31" bodyend="46"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_draw_debug_rect_cmd_1ad694bc527f561d11272dcc5a2a3607b2" prot="public" virt="virtual"><scope>Boon::DrawDebugRectCmd</scope><name>Draw</name></member>
+      <member refid="class_boon_1_1_draw_debug_rect_cmd_1a129edcd0ad973f3c44ecc1903e92f6d2" prot="public" virt="non-virtual"><scope>Boon::DrawDebugRectCmd</scope><name>DrawDebugRectCmd</name></member>
+      <member refid="class_boon_1_1_draw_debug_rect_cmd_1acf7a0dba2233f874743339093b23a7ad" prot="private" virt="non-virtual"><scope>Boon::DrawDebugRectCmd</scope><name>m_Color</name></member>
+      <member refid="class_boon_1_1_draw_debug_rect_cmd_1a7cb460a85fec61b0c5d4f65cb815d094" prot="private" virt="non-virtual"><scope>Boon::DrawDebugRectCmd</scope><name>m_p</name></member>
+      <member refid="class_boon_1_1_draw_debug_rect_cmd_1aa1560734b141d5603b9465d4b46a5ec9" prot="private" virt="non-virtual"><scope>Boon::DrawDebugRectCmd</scope><name>m_Size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

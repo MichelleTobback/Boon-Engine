@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_quad_vertex" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::QuadVertex</compoundname>
+    <includes refid="_vertex_data_8h" local="no">Renderer/VertexData.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_quad_vertex_1adfc45dc0baf2fd5ef2bf8d84f8513f82" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 Boon::QuadVertex::Position</definition>
+        <argsstring></argsstring>
+        <name>Position</name>
+        <qualifiedname>Boon::QuadVertex::Position</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexData.h" line="9" column="11" bodyfile="Renderer/VertexData.h" bodystart="9" bodyend="9"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_quad_vertex_1aa3f2b0230620b001cf868f522f24e93a" prot="public" static="no" mutable="no">
+        <type>glm::vec4</type>
+        <definition>glm::vec4 Boon::QuadVertex::Color</definition>
+        <argsstring></argsstring>
+        <name>Color</name>
+        <qualifiedname>Boon::QuadVertex::Color</qualifiedname>
+        <initializer>{ 1.f, 1.f, 1.f, 1.f }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexData.h" line="10" column="11" bodyfile="Renderer/VertexData.h" bodystart="10" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_quad_vertex_1a9ed76dbb561590e3ce5c5acca685f5e5" prot="public" static="no" mutable="no">
+        <type>glm::vec2</type>
+        <definition>glm::vec2 Boon::QuadVertex::TexCoord</definition>
+        <argsstring></argsstring>
+        <name>TexCoord</name>
+        <qualifiedname>Boon::QuadVertex::TexCoord</qualifiedname>
+        <initializer>{ 0.f, 0.f }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexData.h" line="11" column="11" bodyfile="Renderer/VertexData.h" bodystart="11" bodyend="11"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_quad_vertex_1a925161d82b520fa68d486a58b15d0918" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Boon::QuadVertex::TexIndex</definition>
+        <argsstring></argsstring>
+        <name>TexIndex</name>
+        <qualifiedname>Boon::QuadVertex::TexIndex</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexData.h" line="12" column="7" bodyfile="Renderer/VertexData.h" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_quad_vertex_1a5e8f8544f4b53965217d3203f619f736" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Boon::QuadVertex::TilingFactor</definition>
+        <argsstring></argsstring>
+        <name>TilingFactor</name>
+        <qualifiedname>Boon::QuadVertex::TilingFactor</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexData.h" line="13" column="7" bodyfile="Renderer/VertexData.h" bodystart="13" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_quad_vertex_1a3954a9d869290e0294321fd4966e99fd" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Boon::QuadVertex::GameObjectID</definition>
+        <argsstring></argsstring>
+        <name>GameObjectID</name>
+        <qualifiedname>Boon::QuadVertex::GameObjectID</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexData.h" line="15" column="5" bodyfile="Renderer/VertexData.h" bodystart="15" bodyend="15"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Renderer/VertexData.h" line="7" column="1" bodyfile="Renderer/VertexData.h" bodystart="8" bodyend="16"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_quad_vertex_1aa3f2b0230620b001cf868f522f24e93a" prot="public" virt="non-virtual"><scope>Boon::QuadVertex</scope><name>Color</name></member>
+      <member refid="struct_boon_1_1_quad_vertex_1a3954a9d869290e0294321fd4966e99fd" prot="public" virt="non-virtual"><scope>Boon::QuadVertex</scope><name>GameObjectID</name></member>
+      <member refid="struct_boon_1_1_quad_vertex_1adfc45dc0baf2fd5ef2bf8d84f8513f82" prot="public" virt="non-virtual"><scope>Boon::QuadVertex</scope><name>Position</name></member>
+      <member refid="struct_boon_1_1_quad_vertex_1a9ed76dbb561590e3ce5c5acca685f5e5" prot="public" virt="non-virtual"><scope>Boon::QuadVertex</scope><name>TexCoord</name></member>
+      <member refid="struct_boon_1_1_quad_vertex_1a925161d82b520fa68d486a58b15d0918" prot="public" virt="non-virtual"><scope>Boon::QuadVertex</scope><name>TexIndex</name></member>
+      <member refid="struct_boon_1_1_quad_vertex_1a5e8f8544f4b53965217d3203f619f736" prot="public" virt="non-virtual"><scope>Boon::QuadVertex</scope><name>TilingFactor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,788 @@
+\doxysection{Boon::\+BClass Struct Reference}
+\hypertarget{struct_boon_1_1_b_class}{}\label{struct_boon_1_1_b_class}\index{Boon::BClass@{Boon::BClass}}
+
+
+Runtime reflection data for a C++ type registered with the engine.  
+
+
+
+
+{\ttfamily \+\#include $<$BClass.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries Function\+Flags} :\+ uint8\+\_\+t \{ \newline
+{\bfseries None} = 0
+, {\bfseries Awake} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 0
+, {\bfseries Update} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, {\bfseries Fixed\+Update} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 2
+, \newline
+{\bfseries Late\+Update} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 3
+ \}
+\item 
+using \doxymbox{\hyperlink{struct_boon_1_1_b_class_a5a2f23160186cf5a6c6820cded4f5d1c}{Register\+Func}} = void(\texorpdfstring{$\ast$}{*})(\doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system}{ECSLifecycle\+System}}\&)
+\item 
+using \doxymbox{\hyperlink{struct_boon_1_1_b_class_a21894146f3b617d950ce506a2b3ddcd8}{Unregister\+Func}} = void(\texorpdfstring{$\ast$}{*})()
+\item 
+using \doxymbox{\hyperlink{struct_boon_1_1_b_class_af4c3ad47c1fdcee3844039e32ed459eb}{Create\+Instance\+Fn}} = void\texorpdfstring{$\ast$}{*} (\texorpdfstring{$\ast$}{*})()
+\item 
+using \doxymbox{\hyperlink{struct_boon_1_1_b_class_a5c24b43348c6b4399b758ac387d76cbf}{Destroy\+Instance\+Fn}} = void(\texorpdfstring{$\ast$}{*})(void\texorpdfstring{$\ast$}{*})
+\item 
+using \doxymbox{\hyperlink{struct_boon_1_1_b_class_aef5f3e06e761c9d8df62ed6ffb3e732d}{Copy\+Instance\+Fn}} = void (\texorpdfstring{$\ast$}{*})(void\texorpdfstring{$\ast$}{*}, void\texorpdfstring{$\ast$}{*})
+\item 
+using \doxymbox{\hyperlink{struct_boon_1_1_b_class_a20a231efd627c8bf8d17dd6b00ce402e}{Awake\+Fn}} = void (\texorpdfstring{$\ast$}{*})(\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}\&)
+\item 
+using \doxymbox{\hyperlink{struct_boon_1_1_b_class_a230d93903c834ab40208c1bef90b6663}{Add\+Component\+Fn}} = void\texorpdfstring{$\ast$}{*} (\texorpdfstring{$\ast$}{*})(\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}\&)
+\item 
+using \doxymbox{\hyperlink{struct_boon_1_1_b_class_a85e54a38bbc9f5a378d8abaa12ea951d}{Get\+Component\+Fn}} = void\texorpdfstring{$\ast$}{*} (\texorpdfstring{$\ast$}{*})(\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}\&)
+\item 
+using \doxymbox{\hyperlink{struct_boon_1_1_b_class_ad973ba83ff0f9d5c8ce638a05eaf2ef2}{Has\+Component\+Fn}} = bool (\texorpdfstring{$\ast$}{*})(\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}\&)
+\item 
+using \doxymbox{\hyperlink{struct_boon_1_1_b_class_a1eff6c99595a6ac2672f1869818686d2}{Remove\+Component\+Fn}} = void (\texorpdfstring{$\ast$}{*})(\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}\&)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{struct_boon_1_1_b_class_a7977c2915ab40b47217762768bf8bbf8}{BClass}} (std::\+string \+\_\+name, std::\+type\+\_\+index \+\_\+type)
+\item 
+void \doxymbox{\hyperlink{struct_boon_1_1_b_class_ada333c17f1fb4c81d94fbf74a7395b72}{Set\+Flag}} (Function\+Flags f)
+\item 
+const \doxymbox{\hyperlink{struct_boon_1_1_b_property}{BProperty}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_boon_1_1_b_class_a100abff9dfd2880ffce70f49501c025e}{Find\+Property}} (const char \texorpdfstring{$\ast$}{*}prop\+Name) const
+\begin{DoxyCompactList}\small\item\em Find property metadata by name. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{struct_boon_1_1_b_class_a09d94681569f6c19cf78ffb934edf4b2}{Has\+Property}} (const char \texorpdfstring{$\ast$}{*}prop\+Name) const
+\begin{DoxyCompactList}\small\item\em Check whether a property with the given name exists. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struct_boon_1_1_b_class_ac71db8386e19d48faa969e85502eec0f}{For\+Each\+Property}} (const std::\+function$<$ void(const \doxymbox{\hyperlink{struct_boon_1_1_b_property}{BProperty}} \&)$>$ \&fn) const
+\begin{DoxyCompactList}\small\item\em Iterate over all properties (const). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struct_boon_1_1_b_class_a3f971bdb6a851d02d07c36f39a2e9322}{For\+Each\+Property\+Mutable}} (const std::\+function$<$ void(\doxymbox{\hyperlink{struct_boon_1_1_b_property}{BProperty}} \&)$>$ \&fn)
+\begin{DoxyCompactList}\small\item\em Iterate over all properties (mutable). \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\T \& \doxymbox{\hyperlink{struct_boon_1_1_b_class_a02dd93cfac5d9a35b9f20b95ba8497d0}{Get\+Value\+Ref}} (void \texorpdfstring{$\ast$}{*}instance, const char \texorpdfstring{$\ast$}{*}prop\+Name) const
+\begin{DoxyCompactList}\small\item\em Get a reference to a property value on a raw instance pointer. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\const T \& \doxymbox{\hyperlink{struct_boon_1_1_b_class_a90a2a82b3ce3b569a4ee04f7a52762a1}{Get\+Value\+Ref}} (const void \texorpdfstring{$\ast$}{*}instance, const char \texorpdfstring{$\ast$}{*}prop\+Name) const
+\begin{DoxyCompactList}\small\item\em Const overload of Get\+Value\+Ref for read-\/only access. \end{DoxyCompactList}\item 
+const std::\+vector$<$ \doxymbox{\hyperlink{struct_boon_1_1_b_property}{BProperty}} $>$ \& \doxymbox{\hyperlink{struct_boon_1_1_b_class_a1d1d255d49bb1d7f5e9d31caaaef3e38}{Get\+Properties}} () const
+\begin{DoxyCompactList}\small\item\em Access the list of properties for this class. \end{DoxyCompactList}\item 
+size\+\_\+t \doxymbox{\hyperlink{struct_boon_1_1_b_class_ade79da77e5dade161bce3cb3d63e32a1}{Get\+Properties\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Get the number of reflected properties. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{struct_boon_1_1_b_class_a893245c584c436feda919d5c77843463}{Has\+Meta}} (const std::\+string \&key) const
+\begin{DoxyCompactList}\small\item\em Check whether a metadata key exists for this class. \end{DoxyCompactList}\item 
+std::\+optional$<$ std::\+string $>$ \doxymbox{\hyperlink{struct_boon_1_1_b_class_afe542a8c340923fd9168254ed4dd16a9}{Get\+Meta}} (const std::\+string \&key) const
+\begin{DoxyCompactList}\small\item\em Get a metadata value by key if present. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struct_boon_1_1_b_class_a31f45f6663d4b788e6864c515c8bda2c}{Add\+Function}} (uint32\+\_\+t id, BFunction::\+\+Thunk\+Fn thunk, std::\+initializer\+\_\+list$<$ \doxymbox{\hyperlink{struct_boon_1_1_b_function_meta}{BFunction\+Meta}} $>$ meta\+List=\{\}, std::\+initializer\+\_\+list$<$ \doxymbox{\hyperlink{struct_boon_1_1_b_function_param}{BFunction\+Param}} $>$ params\+List=\{\})
+\begin{DoxyCompactList}\small\item\em Register a reflected function for this class. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_boon_1_1_b_class_ac200d9f2caa933ae875f9ada0dced6d8}{Find\+Function}} (uint32\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Find a reflected function by hashed id. \end{DoxyCompactList}\item 
+const \doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_boon_1_1_b_class_a2eee486255fc4b0602f1e9c590bfa154}{Find\+Function}} (uint32\+\_\+t id) const
+\begin{DoxyCompactList}\small\item\em Const overload of Find\+Function. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{struct_boon_1_1_b_class_aaf0e7fd81c42471041f3d8e43894b58b}{Invoke\+By\+Id}} (void \texorpdfstring{$\ast$}{*}instance, uint32\+\_\+t id, \doxymbox{\hyperlink{class_boon_1_1_variant}{Variant}} \texorpdfstring{$\ast$}{*}args=nullptr, size\+\_\+t arg\+Count=0)
+\begin{DoxyCompactList}\small\item\em Invoke a reflected function by id on the provided instance. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{struct_boon_1_1_b_class_a90ce5e340d7c9ff47bdd06d157a253fa}{Invoke\+By\+Name}} (void \texorpdfstring{$\ast$}{*}instance, const std::\+string \&name, \doxymbox{\hyperlink{class_boon_1_1_variant}{Variant}} \texorpdfstring{$\ast$}{*}args=nullptr, size\+\_\+t arg\+Count=0) const
+\begin{DoxyCompactList}\small\item\em Convenience invocation by function name (hashed at runtime). \end{DoxyCompactList}\item 
+const std::\+vector$<$ \doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}} $>$ \& \doxymbox{\hyperlink{struct_boon_1_1_b_class_ac6f6ca132e459437b430ac445384662f}{Get\+Functions}} () const
+\begin{DoxyCompactList}\small\item\em Access reflected function list. \end{DoxyCompactList}\item 
+size\+\_\+t \doxymbox{\hyperlink{struct_boon_1_1_b_class_a60c5dea109626cdd5d4d7e42554509d5}{Get\+Function\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Get the number of reflected functions. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struct_boon_1_1_b_class_a69e1f8f827c52a1df852a148038d74f6}{Add\+Property\+Offset}} (const char \texorpdfstring{$\ast$}{*}prop\+Name, const char \texorpdfstring{$\ast$}{*}type\+Name, std::\+size\+\_\+t offset, std::\+size\+\_\+t size, BType\+Id type\+Id, std::\+initializer\+\_\+list$<$ \doxymbox{\hyperlink{struct_boon_1_1_b_property_meta}{BProperty\+Meta}} $>$ metas=\{\})
+\begin{DoxyCompactList}\small\item\em Add a property description by offset into the instance. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{struct_boon_1_1_b_class_abac58a1a7f64226dfad88e7a9f4521b6}{Add\+Meta}} (const std::\+string \&key, const std::\+string \&value="{}"{})
+\begin{DoxyCompactList}\small\item\em Add a key/\+value metadata pair to this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+BClass\+ID \doxymbox{\hyperlink{struct_boon_1_1_b_class_a0db7b0108e5a2f41f1eb6dc147565232}{hash}}
+\item 
+std::\+string \doxymbox{\hyperlink{struct_boon_1_1_b_class_a9e72af1eafec50a5c5e81ba53396f3a7}{name}}
+\item 
+std::\+type\+\_\+index \doxymbox{\hyperlink{struct_boon_1_1_b_class_aa29b41374ecd75ca9ace8c6165ef1f61}{type}}
+\item 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}} $>$ \doxymbox{\hyperlink{struct_boon_1_1_b_class_a4a4d5a3031001b8c9941204a2239b073}{functions}}
+\item 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_boon_1_1_b_class_meta}{BClass\+Meta}} $>$ \doxymbox{\hyperlink{struct_boon_1_1_b_class_aee6fafa518c99900e8653ea090627fc7}{meta}}
+\item 
+Register\+Func \doxymbox{\hyperlink{struct_boon_1_1_b_class_ad30070c7b79b1186d8ef040888393f31}{register\+Lifecycle}} = nullptr
+\item 
+Unregister\+Func \doxymbox{\hyperlink{struct_boon_1_1_b_class_a5696ed958260e451091c0d08610d8dc6}{unregister}} = nullptr
+\item 
+Create\+Instance\+Fn \doxymbox{\hyperlink{struct_boon_1_1_b_class_ad43db38256cd0e99a3c9408fc9e9a728}{create\+Instance}} = nullptr
+\item 
+Destroy\+Instance\+Fn \doxymbox{\hyperlink{struct_boon_1_1_b_class_ad8107cd0e0b6fb4228a3743d85601b2f}{destroy\+Instance}} = nullptr
+\item 
+Copy\+Instance\+Fn \doxymbox{\hyperlink{struct_boon_1_1_b_class_a18a997182b0b99ae9c287b3a169836d2}{copy\+Instance}} = nullptr
+\item 
+Awake\+Fn \doxymbox{\hyperlink{struct_boon_1_1_b_class_a13361b250e3610f0f5f6ca2e303d6f07}{awake}} = nullptr
+\item 
+Add\+Component\+Fn \doxymbox{\hyperlink{struct_boon_1_1_b_class_a13b140e9ff0b999a67cdcd3b4afa001c}{add\+Component}} = nullptr
+\item 
+Get\+Component\+Fn \doxymbox{\hyperlink{struct_boon_1_1_b_class_a626a21c96d81dc963da22062162d6618}{get\+Component}} = nullptr
+\item 
+Has\+Component\+Fn \doxymbox{\hyperlink{struct_boon_1_1_b_class_a3e0cb632323ed8a92e7b7589307ae62e}{has\+Component}} = nullptr
+\item 
+Remove\+Component\+Fn \doxymbox{\hyperlink{struct_boon_1_1_b_class_a9224c432746827804964805ec57dd6b7}{remove\+Component}} = nullptr
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_boon_1_1_b_class_adb6cdb672a27a2f4ec20e5b94180492c}{flags}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Runtime reflection data for a C++ type registered with the engine. 
+
+Stores function and property reflection metadata and various lifecycle callbacks that may be used by systems such as the ECS lifecycle. 
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00038}{38}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{struct_boon_1_1_b_class_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{struct_boon_1_1_b_class_a230d93903c834ab40208c1bef90b6663}\index{Boon::BClass@{Boon::BClass}!AddComponentFn@{AddComponentFn}}
+\index{AddComponentFn@{AddComponentFn}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{AddComponentFn}{AddComponentFn}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a230d93903c834ab40208c1bef90b6663} 
+using Boon::\+\+BClass::\+\+Add\+Component\+Fn = void\texorpdfstring{$\ast$}{*} (\texorpdfstring{$\ast$}{*})(\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}\&)}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00060}{60}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a20a231efd627c8bf8d17dd6b00ce402e}\index{Boon::BClass@{Boon::BClass}!AwakeFn@{AwakeFn}}
+\index{AwakeFn@{AwakeFn}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{AwakeFn}{AwakeFn}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a20a231efd627c8bf8d17dd6b00ce402e} 
+using Boon::\+\+BClass::\+\+Awake\+Fn = void (\texorpdfstring{$\ast$}{*})(\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}\&)}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00059}{59}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_aef5f3e06e761c9d8df62ed6ffb3e732d}\index{Boon::BClass@{Boon::BClass}!CopyInstanceFn@{CopyInstanceFn}}
+\index{CopyInstanceFn@{CopyInstanceFn}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{CopyInstanceFn}{CopyInstanceFn}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_aef5f3e06e761c9d8df62ed6ffb3e732d} 
+using Boon::\+\+BClass::\+\+Copy\+Instance\+Fn = void (\texorpdfstring{$\ast$}{*})(void\texorpdfstring{$\ast$}{*}, void\texorpdfstring{$\ast$}{*})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00057}{57}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_af4c3ad47c1fdcee3844039e32ed459eb}\index{Boon::BClass@{Boon::BClass}!CreateInstanceFn@{CreateInstanceFn}}
+\index{CreateInstanceFn@{CreateInstanceFn}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{CreateInstanceFn}{CreateInstanceFn}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_af4c3ad47c1fdcee3844039e32ed459eb} 
+using Boon::\+\+BClass::\+\+Create\+Instance\+Fn = void\texorpdfstring{$\ast$}{*} (\texorpdfstring{$\ast$}{*})()}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00055}{55}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a5c24b43348c6b4399b758ac387d76cbf}\index{Boon::BClass@{Boon::BClass}!DestroyInstanceFn@{DestroyInstanceFn}}
+\index{DestroyInstanceFn@{DestroyInstanceFn}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{DestroyInstanceFn}{DestroyInstanceFn}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a5c24b43348c6b4399b758ac387d76cbf} 
+using Boon::\+\+BClass::\+\+Destroy\+Instance\+Fn = void(\texorpdfstring{$\ast$}{*})(void\texorpdfstring{$\ast$}{*})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00056}{56}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a85e54a38bbc9f5a378d8abaa12ea951d}\index{Boon::BClass@{Boon::BClass}!GetComponentFn@{GetComponentFn}}
+\index{GetComponentFn@{GetComponentFn}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{GetComponentFn}{GetComponentFn}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a85e54a38bbc9f5a378d8abaa12ea951d} 
+using Boon::\+\+BClass::\+\+Get\+Component\+Fn = void\texorpdfstring{$\ast$}{*} (\texorpdfstring{$\ast$}{*})(\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}\&)}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00061}{61}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_ad973ba83ff0f9d5c8ce638a05eaf2ef2}\index{Boon::BClass@{Boon::BClass}!HasComponentFn@{HasComponentFn}}
+\index{HasComponentFn@{HasComponentFn}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{HasComponentFn}{HasComponentFn}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_ad973ba83ff0f9d5c8ce638a05eaf2ef2} 
+using Boon::\+\+BClass::\+\+Has\+Component\+Fn = bool (\texorpdfstring{$\ast$}{*})(\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}\&)}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00062}{62}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a5a2f23160186cf5a6c6820cded4f5d1c}\index{Boon::BClass@{Boon::BClass}!RegisterFunc@{RegisterFunc}}
+\index{RegisterFunc@{RegisterFunc}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{RegisterFunc}{RegisterFunc}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a5a2f23160186cf5a6c6820cded4f5d1c} 
+using Boon::\+\+BClass::\+\+Register\+Func = void(\texorpdfstring{$\ast$}{*})(\doxymbox{\hyperlink{struct_boon_1_1_e_c_s_lifecycle_system}{ECSLifecycle\+System}}\&)}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00053}{53}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a1eff6c99595a6ac2672f1869818686d2}\index{Boon::BClass@{Boon::BClass}!RemoveComponentFn@{RemoveComponentFn}}
+\index{RemoveComponentFn@{RemoveComponentFn}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{RemoveComponentFn}{RemoveComponentFn}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a1eff6c99595a6ac2672f1869818686d2} 
+using Boon::\+\+BClass::\+\+Remove\+Component\+Fn = void (\texorpdfstring{$\ast$}{*})(\doxymbox{\hyperlink{class_boon_1_1_game_object}{Game\+Object}}\&)}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00063}{63}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a21894146f3b617d950ce506a2b3ddcd8}\index{Boon::BClass@{Boon::BClass}!UnregisterFunc@{UnregisterFunc}}
+\index{UnregisterFunc@{UnregisterFunc}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{UnregisterFunc}{UnregisterFunc}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a21894146f3b617d950ce506a2b3ddcd8} 
+using Boon::\+\+BClass::\+\+Unregister\+Func = void(\texorpdfstring{$\ast$}{*})()}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00054}{54}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+
+
+\label{doc-enum-members}
+\Hypertarget{struct_boon_1_1_b_class_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{struct_boon_1_1_b_class_abdb590516e960bb2f5781d8f271bb27f}\index{Boon::BClass@{Boon::BClass}!FunctionFlags@{FunctionFlags}}
+\index{FunctionFlags@{FunctionFlags}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{FunctionFlags}{FunctionFlags}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_abdb590516e960bb2f5781d8f271bb27f} 
+enum Boon::\+\+BClass::\+\+Function\+Flags :\+ uint8\+\_\+t}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00079}{79}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{struct_boon_1_1_b_class_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{struct_boon_1_1_b_class_a7977c2915ab40b47217762768bf8bbf8}\index{Boon::BClass@{Boon::BClass}!BClass@{BClass}}
+\index{BClass@{BClass}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{BClass()}{BClass()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a7977c2915ab40b47217762768bf8bbf8} 
+Boon::\+\+BClass::\+\+BClass (\begin{DoxyParamCaption}\item[{std::\+string}]{\+\_\+name}{, }\item[{std::\+type\+\_\+index}]{\+\_\+type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00040}{40}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{struct_boon_1_1_b_class_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_boon_1_1_b_class_a31f45f6663d4b788e6864c515c8bda2c}\index{Boon::BClass@{Boon::BClass}!AddFunction@{AddFunction}}
+\index{AddFunction@{AddFunction}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{AddFunction()}{AddFunction()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a31f45f6663d4b788e6864c515c8bda2c} 
+void Boon::\+\+BClass::\+\+Add\+Function (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{id}{, }\item[{BFunction::\+\+Thunk\+Fn}]{thunk}{, }\item[{std::\+initializer\+\_\+list$<$ \doxymbox{\hyperlink{struct_boon_1_1_b_function_meta}{BFunction\+Meta}} $>$}]{meta\+List}{ = {\ttfamily \{\}}, }\item[{std::\+initializer\+\_\+list$<$ \doxymbox{\hyperlink{struct_boon_1_1_b_function_param}{BFunction\+Param}} $>$}]{params\+List}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Register a reflected function for this class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Hashed id of the function name. \\
+\hline
+{\em thunk} & Invocation wrapper used to call the function. \\
+\hline
+{\em meta\+List} & Optional metadata entries. \\
+\hline
+{\em params\+List} & Optional parameter descriptions. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00200}{200}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_abac58a1a7f64226dfad88e7a9f4521b6}\index{Boon::BClass@{Boon::BClass}!AddMeta@{AddMeta}}
+\index{AddMeta@{AddMeta}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{AddMeta()}{AddMeta()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_abac58a1a7f64226dfad88e7a9f4521b6} 
+void Boon::\+\+BClass::\+\+Add\+Meta (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{key}{, }\item[{const std::\+string \&}]{value}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add a key/\+value metadata pair to this class. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00313}{313}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a69e1f8f827c52a1df852a148038d74f6}\index{Boon::BClass@{Boon::BClass}!AddPropertyOffset@{AddPropertyOffset}}
+\index{AddPropertyOffset@{AddPropertyOffset}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{AddPropertyOffset()}{AddPropertyOffset()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a69e1f8f827c52a1df852a148038d74f6} 
+void Boon::\+\+BClass::\+\+Add\+Property\+Offset (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{prop\+Name}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{type\+Name}{, }\item[{std::\+size\+\_\+t}]{offset}{, }\item[{std::\+size\+\_\+t}]{size}{, }\item[{BType\+Id}]{type\+Id}{, }\item[{std::\+initializer\+\_\+list$<$ \doxymbox{\hyperlink{struct_boon_1_1_b_property_meta}{BProperty\+Meta}} $>$}]{metas}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add a property description by offset into the instance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prop\+Name} & Name of the property. \\
+\hline
+{\em type\+Name} & Textual type name. \\
+\hline
+{\em offset} & Byte offset within the instance. \\
+\hline
+{\em size} & Size in bytes of the property. \\
+\hline
+{\em type\+Id} & Enumerated type id. \\
+\hline
+{\em metas} & Optional metadata entries. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00293}{293}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_ac200d9f2caa933ae875f9ada0dced6d8}\index{Boon::BClass@{Boon::BClass}!FindFunction@{FindFunction}}
+\index{FindFunction@{FindFunction}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{FindFunction()}{FindFunction()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_ac200d9f2caa933ae875f9ada0dced6d8} 
+\doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}} \texorpdfstring{$\ast$}{*} Boon::\+\+BClass::\+\+Find\+Function (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Find a reflected function by hashed id. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00218}{218}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a2eee486255fc4b0602f1e9c590bfa154}\index{Boon::BClass@{Boon::BClass}!FindFunction@{FindFunction}}
+\index{FindFunction@{FindFunction}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{FindFunction()}{FindFunction()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a2eee486255fc4b0602f1e9c590bfa154} 
+const \doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}} \texorpdfstring{$\ast$}{*} Boon::\+\+BClass::\+\+Find\+Function (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{id}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Const overload of Find\+Function. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00229}{229}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a100abff9dfd2880ffce70f49501c025e}\index{Boon::BClass@{Boon::BClass}!FindProperty@{FindProperty}}
+\index{FindProperty@{FindProperty}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{FindProperty()}{FindProperty()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a100abff9dfd2880ffce70f49501c025e} 
+const \doxymbox{\hyperlink{struct_boon_1_1_b_property}{BProperty}} \texorpdfstring{$\ast$}{*} Boon::\+\+BClass::\+\+Find\+Property (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{prop\+Name}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Find property metadata by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prop\+Name} & Name of the property to find. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the \doxylink{struct_boon_1_1_b_property}{BProperty} if found, otherwise nullptr. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00097}{97}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_ac71db8386e19d48faa969e85502eec0f}\index{Boon::BClass@{Boon::BClass}!ForEachProperty@{ForEachProperty}}
+\index{ForEachProperty@{ForEachProperty}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{ForEachProperty()}{ForEachProperty()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_ac71db8386e19d48faa969e85502eec0f} 
+void Boon::\+\+BClass::\+\+For\+Each\+Property (\begin{DoxyParamCaption}\item[{const std::\+function$<$ void(const \doxymbox{\hyperlink{struct_boon_1_1_b_property}{BProperty}} \&)$>$ \&}]{fn}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Iterate over all properties (const). 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00113}{113}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a3f971bdb6a851d02d07c36f39a2e9322}\index{Boon::BClass@{Boon::BClass}!ForEachPropertyMutable@{ForEachPropertyMutable}}
+\index{ForEachPropertyMutable@{ForEachPropertyMutable}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{ForEachPropertyMutable()}{ForEachPropertyMutable()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a3f971bdb6a851d02d07c36f39a2e9322} 
+void Boon::\+\+BClass::\+\+For\+Each\+Property\+Mutable (\begin{DoxyParamCaption}\item[{const std::\+function$<$ void(\doxymbox{\hyperlink{struct_boon_1_1_b_property}{BProperty}} \&)$>$ \&}]{fn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Iterate over all properties (mutable). 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00121}{121}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a60c5dea109626cdd5d4d7e42554509d5}\index{Boon::BClass@{Boon::BClass}!GetFunctionCount@{GetFunctionCount}}
+\index{GetFunctionCount@{GetFunctionCount}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{GetFunctionCount()}{GetFunctionCount()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a60c5dea109626cdd5d4d7e42554509d5} 
+size\+\_\+t Boon::\+\+BClass::\+\+Get\+Function\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the number of reflected functions. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00281}{281}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_ac6f6ca132e459437b430ac445384662f}\index{Boon::BClass@{Boon::BClass}!GetFunctions@{GetFunctions}}
+\index{GetFunctions@{GetFunctions}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{GetFunctions()}{GetFunctions()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_ac6f6ca132e459437b430ac445384662f} 
+const std::\+vector$<$ \doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}} $>$ \& Boon::\+\+BClass::\+\+Get\+Functions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access reflected function list. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00276}{276}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_afe542a8c340923fd9168254ed4dd16a9}\index{Boon::BClass@{Boon::BClass}!GetMeta@{GetMeta}}
+\index{GetMeta@{GetMeta}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{GetMeta()}{GetMeta()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_afe542a8c340923fd9168254ed4dd16a9} 
+std::\+optional$<$ std::\+string $>$ Boon::\+\+BClass::\+\+Get\+Meta (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get a metadata value by key if present. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00179}{179}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a1d1d255d49bb1d7f5e9d31caaaef3e38}\index{Boon::BClass@{Boon::BClass}!GetProperties@{GetProperties}}
+\index{GetProperties@{GetProperties}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{GetProperties()}{GetProperties()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a1d1d255d49bb1d7f5e9d31caaaef3e38} 
+const std::\+vector$<$ \doxymbox{\hyperlink{struct_boon_1_1_b_property}{BProperty}} $>$ \& Boon::\+\+BClass::\+\+Get\+Properties (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access the list of properties for this class. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00158}{158}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_ade79da77e5dade161bce3cb3d63e32a1}\index{Boon::BClass@{Boon::BClass}!GetPropertiesCount@{GetPropertiesCount}}
+\index{GetPropertiesCount@{GetPropertiesCount}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{GetPropertiesCount()}{GetPropertiesCount()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_ade79da77e5dade161bce3cb3d63e32a1} 
+size\+\_\+t Boon::\+\+BClass::\+\+Get\+Properties\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the number of reflected properties. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00163}{163}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a90a2a82b3ce3b569a4ee04f7a52762a1}\index{Boon::BClass@{Boon::BClass}!GetValueRef@{GetValueRef}}
+\index{GetValueRef@{GetValueRef}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{GetValueRef()}{GetValueRef()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a90a2a82b3ce3b569a4ee04f7a52762a1} 
+template$<$typename T$>$ \\
+const T \& Boon::\+\+BClass::\+\+Get\+Value\+Ref (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{instance}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{prop\+Name}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Const overload of Get\+Value\+Ref for read-\/only access. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00148}{148}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a02dd93cfac5d9a35b9f20b95ba8497d0}\index{Boon::BClass@{Boon::BClass}!GetValueRef@{GetValueRef}}
+\index{GetValueRef@{GetValueRef}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{GetValueRef()}{GetValueRef()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a02dd93cfac5d9a35b9f20b95ba8497d0} 
+template$<$typename T$>$ \\
+T \& Boon::\+\+BClass::\+\+Get\+Value\+Ref (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{instance}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{prop\+Name}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get a reference to a property value on a raw instance pointer. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Expected type of the property. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & Pointer to the object instance memory. \\
+\hline
+{\em prop\+Name} & Name of the property. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the property value. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+runtime\+\_\+error} & if the property is not found. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00137}{137}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a893245c584c436feda919d5c77843463}\index{Boon::BClass@{Boon::BClass}!HasMeta@{HasMeta}}
+\index{HasMeta@{HasMeta}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{HasMeta()}{HasMeta()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a893245c584c436feda919d5c77843463} 
+bool Boon::\+\+BClass::\+\+Has\+Meta (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check whether a metadata key exists for this class. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00168}{168}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a09d94681569f6c19cf78ffb934edf4b2}\index{Boon::BClass@{Boon::BClass}!HasProperty@{HasProperty}}
+\index{HasProperty@{HasProperty}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{HasProperty()}{HasProperty()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a09d94681569f6c19cf78ffb934edf4b2} 
+bool Boon::\+\+BClass::\+\+Has\+Property (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{prop\+Name}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check whether a property with the given name exists. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00105}{105}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_aaf0e7fd81c42471041f3d8e43894b58b}\index{Boon::BClass@{Boon::BClass}!InvokeById@{InvokeById}}
+\index{InvokeById@{InvokeById}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{InvokeById()}{InvokeById()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_aaf0e7fd81c42471041f3d8e43894b58b} 
+bool Boon::\+\+BClass::\+\+Invoke\+By\+Id (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{instance}{, }\item[{uint32\+\_\+t}]{id}{, }\item[{\doxymbox{\hyperlink{class_boon_1_1_variant}{Variant}} \texorpdfstring{$\ast$}{*}}]{args}{ = {\ttfamily nullptr}, }\item[{size\+\_\+t}]{arg\+Count}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Invoke a reflected function by id on the provided instance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & Pointer to the object instance. \\
+\hline
+{\em id} & Hashed id of the function to invoke. \\
+\hline
+{\em args} & Optional array of \doxylink{class_boon_1_1_variant}{Variant} arguments. \\
+\hline
+{\em arg\+Count} & Number of arguments provided. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if invocation was performed, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00247}{247}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a90ce5e340d7c9ff47bdd06d157a253fa}\index{Boon::BClass@{Boon::BClass}!InvokeByName@{InvokeByName}}
+\index{InvokeByName@{InvokeByName}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{InvokeByName()}{InvokeByName()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a90ce5e340d7c9ff47bdd06d157a253fa} 
+bool Boon::\+\+BClass::\+\+Invoke\+By\+Name (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{instance}{, }\item[{const std::\+string \&}]{name}{, }\item[{\doxymbox{\hyperlink{class_boon_1_1_variant}{Variant}} \texorpdfstring{$\ast$}{*}}]{args}{ = {\ttfamily nullptr}, }\item[{size\+\_\+t}]{arg\+Count}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convenience invocation by function name (hashed at runtime). 
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00261}{261}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_ada333c17f1fb4c81d94fbf74a7395b72}\index{Boon::BClass@{Boon::BClass}!SetFlag@{SetFlag}}
+\index{SetFlag@{SetFlag}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{SetFlag()}{SetFlag()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_ada333c17f1fb4c81d94fbf74a7395b72} 
+void Boon::\+\+BClass::\+\+Set\+Flag (\begin{DoxyParamCaption}\item[{Function\+Flags}]{f}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00088}{88}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{struct_boon_1_1_b_class_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_boon_1_1_b_class_a13b140e9ff0b999a67cdcd3b4afa001c}\index{Boon::BClass@{Boon::BClass}!addComponent@{addComponent}}
+\index{addComponent@{addComponent}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{addComponent}{addComponent}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a13b140e9ff0b999a67cdcd3b4afa001c} 
+Add\+Component\+Fn Boon::\+\+BClass::\+add\+Component = nullptr}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00072}{72}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a13361b250e3610f0f5f6ca2e303d6f07}\index{Boon::BClass@{Boon::BClass}!awake@{awake}}
+\index{awake@{awake}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{awake}{awake}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a13361b250e3610f0f5f6ca2e303d6f07} 
+Awake\+Fn Boon::\+\+BClass::\+awake = nullptr}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00071}{71}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a18a997182b0b99ae9c287b3a169836d2}\index{Boon::BClass@{Boon::BClass}!copyInstance@{copyInstance}}
+\index{copyInstance@{copyInstance}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{copyInstance}{copyInstance}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a18a997182b0b99ae9c287b3a169836d2} 
+Copy\+Instance\+Fn Boon::\+\+BClass::\+copy\+Instance = nullptr}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00069}{69}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_ad43db38256cd0e99a3c9408fc9e9a728}\index{Boon::BClass@{Boon::BClass}!createInstance@{createInstance}}
+\index{createInstance@{createInstance}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{createInstance}{createInstance}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_ad43db38256cd0e99a3c9408fc9e9a728} 
+Create\+Instance\+Fn Boon::\+\+BClass::\+create\+Instance = nullptr}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00067}{67}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_ad8107cd0e0b6fb4228a3743d85601b2f}\index{Boon::BClass@{Boon::BClass}!destroyInstance@{destroyInstance}}
+\index{destroyInstance@{destroyInstance}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{destroyInstance}{destroyInstance}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_ad8107cd0e0b6fb4228a3743d85601b2f} 
+Destroy\+Instance\+Fn Boon::\+\+BClass::\+destroy\+Instance = nullptr}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00068}{68}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_adb6cdb672a27a2f4ec20e5b94180492c}\index{Boon::BClass@{Boon::BClass}!flags@{flags}}
+\index{flags@{flags}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{flags}{flags}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_adb6cdb672a27a2f4ec20e5b94180492c} 
+uint8\+\_\+t Boon::\+\+BClass::\+flags = 0}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00077}{77}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a4a4d5a3031001b8c9941204a2239b073}\index{Boon::BClass@{Boon::BClass}!functions@{functions}}
+\index{functions@{functions}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{functions}{functions}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a4a4d5a3031001b8c9941204a2239b073} 
+std::\+vector$<$\doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}}$>$ Boon::\+\+BClass::\+functions}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00050}{50}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a626a21c96d81dc963da22062162d6618}\index{Boon::BClass@{Boon::BClass}!getComponent@{getComponent}}
+\index{getComponent@{getComponent}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{getComponent}{getComponent}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a626a21c96d81dc963da22062162d6618} 
+Get\+Component\+Fn Boon::\+\+BClass::\+get\+Component = nullptr}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00073}{73}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a3e0cb632323ed8a92e7b7589307ae62e}\index{Boon::BClass@{Boon::BClass}!hasComponent@{hasComponent}}
+\index{hasComponent@{hasComponent}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{hasComponent}{hasComponent}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a3e0cb632323ed8a92e7b7589307ae62e} 
+Has\+Component\+Fn Boon::\+\+BClass::\+has\+Component = nullptr}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00074}{74}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a0db7b0108e5a2f41f1eb6dc147565232}\index{Boon::BClass@{Boon::BClass}!hash@{hash}}
+\index{hash@{hash}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{hash}{hash}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a0db7b0108e5a2f41f1eb6dc147565232} 
+BClass\+ID Boon::\+\+BClass::\+hash}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00047}{47}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_aee6fafa518c99900e8653ea090627fc7}\index{Boon::BClass@{Boon::BClass}!meta@{meta}}
+\index{meta@{meta}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{meta}{meta}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_aee6fafa518c99900e8653ea090627fc7} 
+std::\+vector$<$\doxymbox{\hyperlink{struct_boon_1_1_b_class_meta}{BClass\+Meta}}$>$ Boon::\+\+BClass::\+meta}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00051}{51}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a9e72af1eafec50a5c5e81ba53396f3a7}\index{Boon::BClass@{Boon::BClass}!name@{name}}
+\index{name@{name}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a9e72af1eafec50a5c5e81ba53396f3a7} 
+std::\+string Boon::\+\+BClass::\+name}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00048}{48}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_ad30070c7b79b1186d8ef040888393f31}\index{Boon::BClass@{Boon::BClass}!registerLifecycle@{registerLifecycle}}
+\index{registerLifecycle@{registerLifecycle}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{registerLifecycle}{registerLifecycle}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_ad30070c7b79b1186d8ef040888393f31} 
+Register\+Func Boon::\+\+BClass::\+register\+Lifecycle = nullptr}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00065}{65}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a9224c432746827804964805ec57dd6b7}\index{Boon::BClass@{Boon::BClass}!removeComponent@{removeComponent}}
+\index{removeComponent@{removeComponent}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{removeComponent}{removeComponent}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a9224c432746827804964805ec57dd6b7} 
+Remove\+Component\+Fn Boon::\+\+BClass::\+remove\+Component = nullptr}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00075}{75}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_aa29b41374ecd75ca9ace8c6165ef1f61}\index{Boon::BClass@{Boon::BClass}!type@{type}}
+\index{type@{type}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_aa29b41374ecd75ca9ace8c6165ef1f61} 
+std::\+type\+\_\+index Boon::\+\+BClass::\+type}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00049}{49}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_class_a5696ed958260e451091c0d08610d8dc6}\index{Boon::BClass@{Boon::BClass}!unregister@{unregister}}
+\index{unregister@{unregister}!Boon::BClass@{Boon::BClass}}
+\doxysubsubsection{\texorpdfstring{unregister}{unregister}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_class_a5696ed958260e451091c0d08610d8dc6} 
+Unregister\+Func Boon::\+\+BClass::\+unregister = nullptr}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_class_8h_source_l00066}{66}} of file \doxymbox{\hyperlink{_b_class_8h_source}{BClass.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+BClass.\+h\end{DoxyCompactItemize}

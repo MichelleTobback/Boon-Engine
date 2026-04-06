@@ -1,0 +1,141 @@
+\doxysection{Boon::\+Replicated\+Class Struct Reference}
+\hypertarget{struct_boon_1_1_replicated_class}{}\label{struct_boon_1_1_replicated_class}\index{Boon::ReplicatedClass@{Boon::ReplicatedClass}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+const \doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_boon_1_1_replicated_class_a70baa26f9be3efa07c16bf63318af6a1}{Find\+Server\+RPC}} (uint32\+\_\+t id) const
+\item 
+const \doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_boon_1_1_replicated_class_a4ff8b22158f6cde992ba88f239ff3284}{Find\+Client\+RPC}} (uint32\+\_\+t id) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_boon_1_1_replicated_class_a5687bbc0b0a513d3aa5341718f2fb0ee}{cls}}
+\item 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_i_rep_serializer}{IRep\+Serializer}} $>$ \doxymbox{\hyperlink{struct_boon_1_1_replicated_class_a3bfe6ffae1967c8b6cba8aeeac1072d2}{serializer}} = nullptr
+\item 
+size\+\_\+t \doxymbox{\hyperlink{struct_boon_1_1_replicated_class_a4dff09c97433bbf85b19965f26248254}{size}} = 0
+\item 
+std::\+vector$<$ std::\+unordered\+\_\+map$<$ uint32\+\_\+t, \doxymbox{\hyperlink{struct_boon_1_1_replicated_field}{Replicated\+Field}} $>$ $>$ \doxymbox{\hyperlink{struct_boon_1_1_replicated_class_a5d8cc3f5332064f773f5c60d7c932c5b}{fields}}
+\item 
+std::\+unordered\+\_\+map$<$ uint32\+\_\+t, const \doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}} \texorpdfstring{$\ast$}{*} $>$ \doxymbox{\hyperlink{struct_boon_1_1_replicated_class_a29373582c5027d541bbbe711b547f644}{server\+RPCs}}
+\item 
+std::\+unordered\+\_\+map$<$ uint32\+\_\+t, const \doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}} \texorpdfstring{$\ast$}{*} $>$ \doxymbox{\hyperlink{struct_boon_1_1_replicated_class_a5afd18e86a01440853c41317eb3ce312}{client\+RPCs}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00020}{20}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{struct_boon_1_1_replicated_class_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{struct_boon_1_1_replicated_class_a90501228fcda1984aef13241b9290384}\index{Boon::ReplicatedClass@{Boon::ReplicatedClass}!````~ReplicatedClass@{\texorpdfstring{$\sim$}{\string~}ReplicatedClass}}
+\index{````~ReplicatedClass@{\texorpdfstring{$\sim$}{\string~}ReplicatedClass}!Boon::ReplicatedClass@{Boon::ReplicatedClass}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ReplicatedClass()}{\string~ReplicatedClass()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_replicated_class_a90501228fcda1984aef13241b9290384} 
+Boon::\+\+Replicated\+Class::\+\texorpdfstring{$\sim$}{\string~}\+Replicated\+Class (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00022}{22}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{struct_boon_1_1_replicated_class_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_boon_1_1_replicated_class_a4ff8b22158f6cde992ba88f239ff3284}\index{Boon::ReplicatedClass@{Boon::ReplicatedClass}!FindClientRPC@{FindClientRPC}}
+\index{FindClientRPC@{FindClientRPC}!Boon::ReplicatedClass@{Boon::ReplicatedClass}}
+\doxysubsubsection{\texorpdfstring{FindClientRPC()}{FindClientRPC()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_replicated_class_a4ff8b22158f6cde992ba88f239ff3284} 
+const \doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}} \texorpdfstring{$\ast$}{*} Boon::\+\+Replicated\+Class::\+\+Find\+Client\+RPC (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{id}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00043}{43}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+\Hypertarget{struct_boon_1_1_replicated_class_a70baa26f9be3efa07c16bf63318af6a1}\index{Boon::ReplicatedClass@{Boon::ReplicatedClass}!FindServerRPC@{FindServerRPC}}
+\index{FindServerRPC@{FindServerRPC}!Boon::ReplicatedClass@{Boon::ReplicatedClass}}
+\doxysubsubsection{\texorpdfstring{FindServerRPC()}{FindServerRPC()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_replicated_class_a70baa26f9be3efa07c16bf63318af6a1} 
+const \doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}} \texorpdfstring{$\ast$}{*} Boon::\+\+Replicated\+Class::\+\+Find\+Server\+RPC (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{id}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00038}{38}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{struct_boon_1_1_replicated_class_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_boon_1_1_replicated_class_a5afd18e86a01440853c41317eb3ce312}\index{Boon::ReplicatedClass@{Boon::ReplicatedClass}!clientRPCs@{clientRPCs}}
+\index{clientRPCs@{clientRPCs}!Boon::ReplicatedClass@{Boon::ReplicatedClass}}
+\doxysubsubsection{\texorpdfstring{clientRPCs}{clientRPCs}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_replicated_class_a5afd18e86a01440853c41317eb3ce312} 
+std::\+unordered\+\_\+map$<$uint32\+\_\+t, const \doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}}\texorpdfstring{$\ast$}{*}$>$ Boon::\+\+Replicated\+Class::\+client\+RPCs}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00036}{36}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+\Hypertarget{struct_boon_1_1_replicated_class_a5687bbc0b0a513d3aa5341718f2fb0ee}\index{Boon::ReplicatedClass@{Boon::ReplicatedClass}!cls@{cls}}
+\index{cls@{cls}!Boon::ReplicatedClass@{Boon::ReplicatedClass}}
+\doxysubsubsection{\texorpdfstring{cls}{cls}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_replicated_class_a5687bbc0b0a513d3aa5341718f2fb0ee} 
+const \doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}}\texorpdfstring{$\ast$}{*} Boon::\+\+Replicated\+Class::\+cls}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00024}{24}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+\Hypertarget{struct_boon_1_1_replicated_class_a5d8cc3f5332064f773f5c60d7c932c5b}\index{Boon::ReplicatedClass@{Boon::ReplicatedClass}!fields@{fields}}
+\index{fields@{fields}!Boon::ReplicatedClass@{Boon::ReplicatedClass}}
+\doxysubsubsection{\texorpdfstring{fields}{fields}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_replicated_class_a5d8cc3f5332064f773f5c60d7c932c5b} 
+std::\+vector$<$std::\+unordered\+\_\+map$<$uint32\+\_\+t, \doxymbox{\hyperlink{struct_boon_1_1_replicated_field}{Replicated\+Field}}$>$ $>$ Boon::\+\+Replicated\+Class::\+fields}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00030}{30}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+\Hypertarget{struct_boon_1_1_replicated_class_a3bfe6ffae1967c8b6cba8aeeac1072d2}\index{Boon::ReplicatedClass@{Boon::ReplicatedClass}!serializer@{serializer}}
+\index{serializer@{serializer}!Boon::ReplicatedClass@{Boon::ReplicatedClass}}
+\doxysubsubsection{\texorpdfstring{serializer}{serializer}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_replicated_class_a3bfe6ffae1967c8b6cba8aeeac1072d2} 
+std::\+shared\+\_\+ptr$<$\doxymbox{\hyperlink{class_boon_1_1_i_rep_serializer}{IRep\+Serializer}}$>$ Boon::\+\+Replicated\+Class::\+serializer = nullptr}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00025}{25}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+\Hypertarget{struct_boon_1_1_replicated_class_a29373582c5027d541bbbe711b547f644}\index{Boon::ReplicatedClass@{Boon::ReplicatedClass}!serverRPCs@{serverRPCs}}
+\index{serverRPCs@{serverRPCs}!Boon::ReplicatedClass@{Boon::ReplicatedClass}}
+\doxysubsubsection{\texorpdfstring{serverRPCs}{serverRPCs}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_replicated_class_a29373582c5027d541bbbe711b547f644} 
+std::\+unordered\+\_\+map$<$uint32\+\_\+t, const \doxymbox{\hyperlink{struct_boon_1_1_b_function}{BFunction}}\texorpdfstring{$\ast$}{*}$>$ Boon::\+\+Replicated\+Class::\+server\+RPCs}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00035}{35}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+\Hypertarget{struct_boon_1_1_replicated_class_a4dff09c97433bbf85b19965f26248254}\index{Boon::ReplicatedClass@{Boon::ReplicatedClass}!size@{size}}
+\index{size@{size}!Boon::ReplicatedClass@{Boon::ReplicatedClass}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_replicated_class_a4dff09c97433bbf85b19965f26248254} 
+size\+\_\+t Boon::\+\+Replicated\+Class::\+size = 0}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00027}{27}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Net\+Rep\+Registry.\+h\end{DoxyCompactItemize}

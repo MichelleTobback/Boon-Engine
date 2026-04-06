@@ -1,0 +1,512 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_net_transform_serializer_8h" kind="file" language="C++">
+    <compoundname>NetTransformSerializer.h</compoundname>
+    <includes refid="_i_rep_serializer_8h" local="yes">Networking/IRepSerializer.h</includes>
+    <includes refid="_net_transform_8h" local="yes">Networking/Components/NetTransform.h</includes>
+    <incdepgraph>
+      <node id="52">
+        <label>Asset/Asset.h</label>
+        <link refid="_asset_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>Asset/AssetRef.h</label>
+        <link refid="_asset_ref_8h"/>
+        <childnode refid="52" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>Asset/AssetTraits.h</label>
+        <link refid="_asset_traits_8h"/>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>Asset/AssetType.h</label>
+        <link refid="_asset_type_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>Component/TransformComponent.h</label>
+        <link refid="_transform_component_8h"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>Component/UUIDComponent.h</label>
+        <link refid="_u_u_i_d_component_8h"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>Core/Assert.h</label>
+        <link refid="_assert_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>Core/Boon.h</label>
+        <link refid="_boon_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>Core/Delegate.h</label>
+        <link refid="_delegate_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Core/Memory/Buffer.h</label>
+        <link refid="_buffer_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>Core/UUID.h</label>
+        <link refid="_u_u_i_d_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>Core/Variant.h</label>
+        <link refid="_variant_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>Networking/Components/NetTransform.h</label>
+        <link refid="_net_transform_8h"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Networking/Components/NetTransformSerializer.h</label>
+        <link refid="_net_transform_serializer_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Networking/IRepSerializer.h</label>
+        <link refid="_i_rep_serializer_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>NetAuthority.h</label>
+        <link refid="_net_authority_8h"/>
+      </node>
+      <node id="48">
+        <label>Networking/NetIdentity.h</label>
+        <link refid="_net_identity_8h"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>Physics2DTypes.h</label>
+        <link refid="_physics2_d_types_8h"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>Physics/PhysicsWorld2D.h</label>
+        <link refid="_physics_world2_d_8h"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>Reflection/BClass.h</label>
+        <link refid="_b_class_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>Reflection/BClassBase.h</label>
+        <link refid="_b_class_base_8h"/>
+      </node>
+      <node id="33">
+        <label>BFunction.h</label>
+        <link refid="_b_function_8h"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>BProperty.h</label>
+        <link refid="_b_property_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>Scene/BRef.h</label>
+        <link refid="_b_ref_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Scene/GameObject.h</label>
+        <link refid="_game_object_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>GameObjectID.h</label>
+        <link refid="_game_object_i_d_8h"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Scene.h</label>
+        <link refid="_scene_8h"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Serialization/BinarySerializer.h</label>
+        <link refid="_binary_serializer_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>box2d/id.h</label>
+      </node>
+      <node id="10">
+        <label>cassert</label>
+      </node>
+      <node id="32">
+        <label>cstddef</label>
+      </node>
+      <node id="6">
+        <label>cstdint</label>
+      </node>
+      <node id="41">
+        <label>cstdlib</label>
+      </node>
+      <node id="7">
+        <label>cstring</label>
+      </node>
+      <node id="13">
+        <label>entt/entt.hpp</label>
+      </node>
+      <node id="17">
+        <label>functional</label>
+      </node>
+      <node id="23">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="44">
+        <label>glm/gtc/quaternion.hpp</label>
+      </node>
+      <node id="38">
+        <label>glm/gtc/type_precision.hpp</label>
+      </node>
+      <node id="45">
+        <label>glm/gtx/quaternion.hpp</label>
+      </node>
+      <node id="35">
+        <label>glm/vec2.hpp</label>
+      </node>
+      <node id="36">
+        <label>glm/vec3.hpp</label>
+      </node>
+      <node id="37">
+        <label>glm/vec4.hpp</label>
+      </node>
+      <node id="18">
+        <label>limits</label>
+      </node>
+      <node id="30">
+        <label>memory</label>
+      </node>
+      <node id="28">
+        <label>optional</label>
+      </node>
+      <node id="39">
+        <label>queue</label>
+      </node>
+      <node id="29">
+        <label>stdexcept</label>
+      </node>
+      <node id="9">
+        <label>string</label>
+      </node>
+      <node id="8">
+        <label>type_traits</label>
+      </node>
+      <node id="26">
+        <label>typeindex</label>
+      </node>
+      <node id="27">
+        <label>unordered_map</label>
+      </node>
+      <node id="19">
+        <label>utility</label>
+      </node>
+      <node id="5">
+        <label>vector</label>
+      </node>
+      <node id="15">
+        <label>xhash</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="class_boon_1_1_net_transform_serializer" prot="public">Boon::NetTransformSerializer</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_i_rep_serializer_8h" kindref="compound">Networking/IRepSerializer.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_net_transform_8h" kindref="compound">Networking/Components/NetTransform.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="6"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon_1_1_replication_utils" kindref="compound">ReplicationUtils</ref>;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9" refid="class_boon_1_1_net_transform_serializer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_net_transform_serializer" kindref="compound">NetTransformSerializer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_i_rep_serializer" kindref="compound">IRepSerializer</ref></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="12" refid="class_boon_1_1_net_transform_serializer_1a1bdd221eb2d8f463673000aa25ae4e1f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_net_transform_serializer_1a1bdd221eb2d8f463673000aa25ae4e1f" kindref="member">IsDirty</ref>(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref><sp/>obj)</highlight><highlight class="keyword"><sp/>override</highlight></codeline>
+<codeline lineno="13"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>t<sp/>=<sp/>obj.<ref refid="class_boon_1_1_game_object_1a6aae671b5828b0614dca86e40016a3e2" kindref="member">GetComponent</ref>&lt;<ref refid="struct_boon_1_1_net_transform" kindref="compound">NetTransform</ref>&gt;();</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>t.<ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>!=<sp/>0;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="class_boon_1_1_net_transform_serializer_1a9ac91e3bdc5b9734ab2097d6c388055b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_net_transform_serializer_1a9ac91e3bdc5b9734ab2097d6c388055b" kindref="member">Serialize</ref>(<ref refid="class_boon_1_1_binary_serializer" kindref="compound">BinarySerializer</ref>&amp;<sp/>ser,<sp/><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref><sp/>obj)</highlight><highlight class="keyword"><sp/>override</highlight></codeline>
+<codeline lineno="20"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>t<sp/>=<sp/>obj.<ref refid="class_boon_1_1_game_object_1a6aae671b5828b0614dca86e40016a3e2" kindref="member">GetComponent</ref>&lt;<ref refid="struct_boon_1_1_net_transform" kindref="compound">NetTransform</ref>&gt;();</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ser.<ref refid="class_boon_1_1_binary_serializer_1a28043940e4ec880385bbe9516988d705" kindref="member">Write</ref>&lt;uint8_t&gt;(t.DirtyMask);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(t.DirtyMask<sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba05695693370a026c84acf4d674a62fd5" kindref="member">NetTransform::DirtyFlags::PosX</ref>)</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ser.<ref refid="class_boon_1_1_binary_serializer_1a5c5622de42ff4a32bd428b636386f7eb" kindref="member">WriteBits</ref>(t.QPosX,<sp/>16);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(t.DirtyMask<sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba7e75cf965eba430083929d0ec26c12a7" kindref="member">NetTransform::DirtyFlags::PosY</ref>)</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ser.<ref refid="class_boon_1_1_binary_serializer_1a5c5622de42ff4a32bd428b636386f7eb" kindref="member">WriteBits</ref>(t.QPosY,<sp/>16);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(t.DirtyMask<sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bafddb9fb1311023128eeb738f978ce061" kindref="member">NetTransform::DirtyFlags::PosZ</ref>)</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ser.<ref refid="class_boon_1_1_binary_serializer_1a5c5622de42ff4a32bd428b636386f7eb" kindref="member">WriteBits</ref>(t.QPosZ,<sp/>16);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(t.DirtyMask<sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba84248dbe2a954d98c39ec26df4ae1e2d" kindref="member">NetTransform::DirtyFlags::Rot</ref>)</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ser.<ref refid="class_boon_1_1_binary_serializer_1a5c5622de42ff4a32bd428b636386f7eb" kindref="member">WriteBits</ref>(t.QRotDeg,<sp/>16);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(t.DirtyMask<sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bab5e0c179725e7f282ffb8e6a96797b49" kindref="member">NetTransform::DirtyFlags::ScaleX</ref>)</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ser.<ref refid="class_boon_1_1_binary_serializer_1a5c5622de42ff4a32bd428b636386f7eb" kindref="member">WriteBits</ref>(t.QScaleX,<sp/>16);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(t.DirtyMask<sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba3475b72c6483a5c871d245e2567c96c7" kindref="member">NetTransform::DirtyFlags::ScaleY</ref>)</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ser.<ref refid="class_boon_1_1_binary_serializer_1a5c5622de42ff4a32bd428b636386f7eb" kindref="member">WriteBits</ref>(t.QScaleY,<sp/>16);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.LastQPosX<sp/>=<sp/>t.QPosX;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.LastQPosY<sp/>=<sp/>t.QPosY;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.LastQPosZ<sp/>=<sp/>t.QPosZ;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.LastQRotDeg<sp/>=<sp/>t.QRotDeg;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.LastQScaleX<sp/>=<sp/>t.QScaleX;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.LastQScaleY<sp/>=<sp/>t.QScaleY;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="class_boon_1_1_net_transform_serializer_1a6ccd4ed90256a6c756a848a7d11c8fd6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_net_transform_serializer_1a6ccd4ed90256a6c756a848a7d11c8fd6" kindref="member">Deserialize</ref>(<ref refid="class_boon_1_1_binary_serializer" kindref="compound">BinarySerializer</ref>&amp;<sp/>ser,<sp/><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref><sp/>obj)</highlight><highlight class="keyword"><sp/>override</highlight></codeline>
+<codeline lineno="52"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>t<sp/>=<sp/>obj.<ref refid="class_boon_1_1_game_object_1a6aae671b5828b0614dca86e40016a3e2" kindref="member">GetComponent</ref>&lt;<ref refid="struct_boon_1_1_net_transform" kindref="compound">NetTransform</ref>&gt;();</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.<ref refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" kindref="member">DirtyMask</ref><sp/>=<sp/>(uint32_t)ser.<ref refid="class_boon_1_1_binary_serializer_1a8b4dc378dc6d92fffb83d56a2e7e8346" kindref="member">Read</ref>&lt;uint8_t&gt;();</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(t.DirtyMask<sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba05695693370a026c84acf4d674a62fd5" kindref="member">NetTransform::DirtyFlags::PosX</ref>)</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.QPosX<sp/>=<sp/>(int16_t)ser.<ref refid="class_boon_1_1_binary_serializer_1aa9a642bc26b84b7e382615b97c631e2d" kindref="member">ReadBits</ref>(16);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(t.DirtyMask<sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba7e75cf965eba430083929d0ec26c12a7" kindref="member">NetTransform::DirtyFlags::PosY</ref>)</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.QPosY<sp/>=<sp/>(int16_t)ser.<ref refid="class_boon_1_1_binary_serializer_1aa9a642bc26b84b7e382615b97c631e2d" kindref="member">ReadBits</ref>(16);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(t.DirtyMask<sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bafddb9fb1311023128eeb738f978ce061" kindref="member">NetTransform::DirtyFlags::PosZ</ref>)</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.QPosZ<sp/>=<sp/>(int16_t)ser.<ref refid="class_boon_1_1_binary_serializer_1aa9a642bc26b84b7e382615b97c631e2d" kindref="member">ReadBits</ref>(16);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(t.DirtyMask<sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba84248dbe2a954d98c39ec26df4ae1e2d" kindref="member">NetTransform::DirtyFlags::Rot</ref>)</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.QRotDeg<sp/>=<sp/>(uint16_t)ser.<ref refid="class_boon_1_1_binary_serializer_1aa9a642bc26b84b7e382615b97c631e2d" kindref="member">ReadBits</ref>(16);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(t.DirtyMask<sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bab5e0c179725e7f282ffb8e6a96797b49" kindref="member">NetTransform::DirtyFlags::ScaleX</ref>)</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.QScaleX<sp/>=<sp/>(int16_t)ser.<ref refid="class_boon_1_1_binary_serializer_1aa9a642bc26b84b7e382615b97c631e2d" kindref="member">ReadBits</ref>(16);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(t.DirtyMask<sp/>&amp;<sp/>(uint32_t)<ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba3475b72c6483a5c871d245e2567c96c7" kindref="member">NetTransform::DirtyFlags::ScaleY</ref>)</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.QScaleY<sp/>=<sp/>(int16_t)ser.<ref refid="class_boon_1_1_binary_serializer_1aa9a642bc26b84b7e382615b97c631e2d" kindref="member">ReadBits</ref>(16);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="76"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Networking/Components/NetTransformSerializer.h"/>
+  </compounddef>
+</doxygen>

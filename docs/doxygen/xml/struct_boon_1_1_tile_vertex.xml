@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_tile_vertex" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::TileVertex</compoundname>
+    <includes refid="_vertex_data_8h" local="no">Renderer/VertexData.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_tile_vertex_1adf27f987976c01c1525fbc8fa8f846e1" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 Boon::TileVertex::Position</definition>
+        <argsstring></argsstring>
+        <name>Position</name>
+        <qualifiedname>Boon::TileVertex::Position</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexData.h" line="27" column="11" bodyfile="Renderer/VertexData.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_tile_vertex_1a9d99fd84fa61ab9691971450a615b609" prot="public" static="no" mutable="no">
+        <type>glm::vec4</type>
+        <definition>glm::vec4 Boon::TileVertex::Color</definition>
+        <argsstring></argsstring>
+        <name>Color</name>
+        <qualifiedname>Boon::TileVertex::Color</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexData.h" line="28" column="11" bodyfile="Renderer/VertexData.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_tile_vertex_1aab67397abc055abdce22ee6220b7a112" prot="public" static="no" mutable="no">
+        <type>glm::vec2</type>
+        <definition>glm::vec2 Boon::TileVertex::TexCoord</definition>
+        <argsstring></argsstring>
+        <name>TexCoord</name>
+        <qualifiedname>Boon::TileVertex::TexCoord</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexData.h" line="29" column="11" bodyfile="Renderer/VertexData.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Renderer/VertexData.h" line="25" column="1" bodyfile="Renderer/VertexData.h" bodystart="26" bodyend="30"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_tile_vertex_1a9d99fd84fa61ab9691971450a615b609" prot="public" virt="non-virtual"><scope>Boon::TileVertex</scope><name>Color</name></member>
+      <member refid="struct_boon_1_1_tile_vertex_1adf27f987976c01c1525fbc8fa8f846e1" prot="public" virt="non-virtual"><scope>Boon::TileVertex</scope><name>Position</name></member>
+      <member refid="struct_boon_1_1_tile_vertex_1aab67397abc055abdce22ee6220b7a112" prot="public" virt="non-virtual"><scope>Boon::TileVertex</scope><name>TexCoord</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

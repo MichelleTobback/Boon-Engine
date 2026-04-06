@@ -1,0 +1,14 @@
+digraph "BoonDebug"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  dir_3edeb620c7699d5866365bb82fc8dfdb [label="BoonDebug", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_3edeb620c7699d5866365bb82fc8dfdb.html",tooltip=""];
+  dir_613372d2a8a30808e93b4c8b83a9b505 [label="Renderer", fillcolor="#edf0f7", color="grey25", style="filled", URL="dir_613372d2a8a30808e93b4c8b83a9b505.html",tooltip=""];
+  dir_6cca29431361e5869420d402f83d4a04 [label="Core", fillcolor="#edf0f7", color="red", style="filled", URL="dir_6cca29431361e5869420d402f83d4a04.html",tooltip=""];
+  dir_3edeb620c7699d5866365bb82fc8dfdb->dir_613372d2a8a30808e93b4c8b83a9b505 [headlabel="1", labeldistance=1.5 headhref="dir_000003_000022.html" href="dir_000003_000022.html" color="steelblue1" fontcolor="steelblue1"];
+  dir_3edeb620c7699d5866365bb82fc8dfdb->dir_6cca29431361e5869420d402f83d4a04 [headlabel="2", labeldistance=1.5 headhref="dir_000003_000006.html" href="dir_000003_000006.html" color="steelblue1" fontcolor="steelblue1"];
+}

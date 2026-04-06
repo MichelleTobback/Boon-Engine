@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_observable_type" kind="class" language="C++" prot="public">
+    <compoundname>Boon::ObservableType</compoundname>
+    <includes refid="_observable_type_8h" local="no">Core/ObservableType.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="class_boon_1_1_observable_type_1aa198a8cf07aeb06e785f10ec13d0a184" prot="public" static="no">
+        <type><ref refid="class_boon_1_1_delegate" kindref="compound">Delegate</ref>&lt; void(T)&gt;</type>
+        <definition>using Boon::ObservableType&lt; T &gt;::OnValueChangedDelegate = Delegate&lt;void(T)&gt;</definition>
+        <argsstring></argsstring>
+        <name>OnValueChangedDelegate</name>
+        <qualifiedname>Boon::ObservableType::OnValueChangedDelegate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/ObservableType.h" line="9" column="9" bodyfile="Core/ObservableType.h" bodystart="9" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_observable_type_1a88dcff0219865c84597c935d2d536d15" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T Boon::ObservableType&lt; T &gt;::m_Value</definition>
+        <argsstring></argsstring>
+        <name>m_Value</name>
+        <qualifiedname>Boon::ObservableType::m_Value</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/ObservableType.h" line="60" column="11" bodyfile="Core/ObservableType.h" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_observable_type_1a97fa4d8d7b1dbe8666c839a060a62caf" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="class_boon_1_1_observable_type_1aa198a8cf07aeb06e785f10ec13d0a184" kindref="member">OnValueChangedDelegate</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;OnValueChangedDelegate&gt; Boon::ObservableType&lt; T &gt;::m_pOnValueChangedDelegate</definition>
+        <argsstring></argsstring>
+        <name>m_pOnValueChangedDelegate</name>
+        <qualifiedname>Boon::ObservableType::m_pOnValueChangedDelegate</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/ObservableType.h" line="61" column="25" bodyfile="Core/ObservableType.h" bodystart="61" bodyend="61"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_observable_type_1aed2af19aa02ba19b82fd929ac2f8a31e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::ObservableType&lt; T &gt;::ObservableType</definition>
+        <argsstring>(T value=T{})</argsstring>
+        <name>ObservableType</name>
+        <qualifiedname>Boon::ObservableType::ObservableType</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+          <defval>T{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/ObservableType.h" line="10" column="9" bodyfile="Core/ObservableType.h" bodystart="10" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_observable_type_1a2f495c117a78d543a965ec1fdf15ecd8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::ObservableType&lt; T &gt;::operator+=</definition>
+        <argsstring>(const T &amp;right)</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>Boon::ObservableType::operator+=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/ObservableType.h" line="17" column="14" bodyfile="Core/ObservableType.h" bodystart="17" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_observable_type_1a2f2bc8cfc015d112aeb233ca97ad3cc8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::ObservableType&lt; T &gt;::operator-=</definition>
+        <argsstring>(const T &amp;right)</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>Boon::ObservableType::operator-=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/ObservableType.h" line="22" column="14" bodyfile="Core/ObservableType.h" bodystart="22" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_observable_type_1a7dd94b8a04f20a093cb251cd3abcf72d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::ObservableType&lt; T &gt;::operator*=</definition>
+        <argsstring>(const T &amp;right)</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>Boon::ObservableType::operator*=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/ObservableType.h" line="27" column="14" bodyfile="Core/ObservableType.h" bodystart="27" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_observable_type_1ad5d545fb54fc811488befca0bed7c6e5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::ObservableType&lt; T &gt;::operator/=</definition>
+        <argsstring>(const T &amp;right)</argsstring>
+        <name>operator/=</name>
+        <qualifiedname>Boon::ObservableType::operator/=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/ObservableType.h" line="32" column="14" bodyfile="Core/ObservableType.h" bodystart="32" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_observable_type_1a24552d48cc473cb296c4099f82f17e60" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::ObservableType&lt; T &gt;::operator=</definition>
+        <argsstring>(const T &amp;right)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Boon::ObservableType::operator=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/ObservableType.h" line="37" column="14" bodyfile="Core/ObservableType.h" bodystart="37" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_observable_type_1ac4965198e2ae44970df2649773bb707e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; Boon::ObservableType&lt; T &gt;::operator--</definition>
+        <argsstring>()</argsstring>
+        <name>operator--</name>
+        <qualifiedname>Boon::ObservableType::operator--</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/ObservableType.h" line="42" column="11" bodyfile="Core/ObservableType.h" bodystart="42" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_observable_type_1a68c23ecdbf376abdc0e9644ae3b89c98" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; Boon::ObservableType&lt; T &gt;::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <qualifiedname>Boon::ObservableType::operator++</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/ObservableType.h" line="48" column="11" bodyfile="Core/ObservableType.h" bodystart="48" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_observable_type_1af6dfa42fcbd6431f501be1b5d72881c6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; Boon::ObservableType&lt; T &gt;::operator()</definition>
+        <argsstring>() const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>Boon::ObservableType::operator()</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/ObservableType.h" line="55" column="17" bodyfile="Core/ObservableType.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_observable_type_1a4480ff831d89deabeebcbb92f2f1079f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_observable_type_1aa198a8cf07aeb06e785f10ec13d0a184" kindref="member">OnValueChangedDelegate</ref> &amp;</type>
+        <definition>OnValueChangedDelegate &amp; Boon::ObservableType&lt; T &gt;::GetOnValueChangedDelegate</definition>
+        <argsstring>()</argsstring>
+        <name>GetOnValueChangedDelegate</name>
+        <qualifiedname>Boon::ObservableType::GetOnValueChangedDelegate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/ObservableType.h" line="57" column="32" bodyfile="Core/ObservableType.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Core/ObservableType.h" line="6" column="5" bodyfile="Core/ObservableType.h" bodystart="7" bodyend="62"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_observable_type_1a4480ff831d89deabeebcbb92f2f1079f" prot="public" virt="non-virtual"><scope>Boon::ObservableType</scope><name>GetOnValueChangedDelegate</name></member>
+      <member refid="class_boon_1_1_observable_type_1a97fa4d8d7b1dbe8666c839a060a62caf" prot="private" virt="non-virtual"><scope>Boon::ObservableType</scope><name>m_pOnValueChangedDelegate</name></member>
+      <member refid="class_boon_1_1_observable_type_1a88dcff0219865c84597c935d2d536d15" prot="private" virt="non-virtual"><scope>Boon::ObservableType</scope><name>m_Value</name></member>
+      <member refid="class_boon_1_1_observable_type_1aed2af19aa02ba19b82fd929ac2f8a31e" prot="public" virt="non-virtual"><scope>Boon::ObservableType</scope><name>ObservableType</name></member>
+      <member refid="class_boon_1_1_observable_type_1aa198a8cf07aeb06e785f10ec13d0a184" prot="public" virt="non-virtual"><scope>Boon::ObservableType</scope><name>OnValueChangedDelegate</name></member>
+      <member refid="class_boon_1_1_observable_type_1af6dfa42fcbd6431f501be1b5d72881c6" prot="public" virt="non-virtual"><scope>Boon::ObservableType</scope><name>operator()</name></member>
+      <member refid="class_boon_1_1_observable_type_1a7dd94b8a04f20a093cb251cd3abcf72d" prot="public" virt="non-virtual"><scope>Boon::ObservableType</scope><name>operator*=</name></member>
+      <member refid="class_boon_1_1_observable_type_1a68c23ecdbf376abdc0e9644ae3b89c98" prot="public" virt="non-virtual"><scope>Boon::ObservableType</scope><name>operator++</name></member>
+      <member refid="class_boon_1_1_observable_type_1a2f495c117a78d543a965ec1fdf15ecd8" prot="public" virt="non-virtual"><scope>Boon::ObservableType</scope><name>operator+=</name></member>
+      <member refid="class_boon_1_1_observable_type_1ac4965198e2ae44970df2649773bb707e" prot="public" virt="non-virtual"><scope>Boon::ObservableType</scope><name>operator--</name></member>
+      <member refid="class_boon_1_1_observable_type_1a2f2bc8cfc015d112aeb233ca97ad3cc8" prot="public" virt="non-virtual"><scope>Boon::ObservableType</scope><name>operator-=</name></member>
+      <member refid="class_boon_1_1_observable_type_1ad5d545fb54fc811488befca0bed7c6e5" prot="public" virt="non-virtual"><scope>Boon::ObservableType</scope><name>operator/=</name></member>
+      <member refid="class_boon_1_1_observable_type_1a24552d48cc473cb296c4099f82f17e60" prot="public" virt="non-virtual"><scope>Boon::ObservableType</scope><name>operator=</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

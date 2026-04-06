@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_replicated_field" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::ReplicatedField</compoundname>
+    <includes refid="_net_rep_registry_8h" local="no">Networking/NetRepRegistry.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_replicated_field_1a23875dd5600e02a85824d32776d8f351" prot="public" static="no" mutable="no">
+        <type>const <ref refid="struct_boon_1_1_b_property" kindref="compound">BProperty</ref> *</type>
+        <definition>const BProperty* Boon::ReplicatedField::pProp</definition>
+        <argsstring></argsstring>
+        <name>pProp</name>
+        <qualifiedname>Boon::ReplicatedField::pProp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepRegistry.h" line="13" column="25" bodyfile="Networking/NetRepRegistry.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_replicated_field_1aa2f34b0db53cb8901edc3634993ec9cc" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Boon::ReplicatedField::Packedoffset</definition>
+        <argsstring></argsstring>
+        <name>Packedoffset</name>
+        <qualifiedname>Boon::ReplicatedField::Packedoffset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepRegistry.h" line="17" column="18" bodyfile="Networking/NetRepRegistry.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_boon_1_1_replicated_field_1ae51a7e6037fab0d36d8a5898fc676088" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t Boon::ReplicatedField::Offset</definition>
+        <argsstring>() const</argsstring>
+        <name>Offset</name>
+        <qualifiedname>Boon::ReplicatedField::Offset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepRegistry.h" line="14" column="18" bodyfile="Networking/NetRepRegistry.h" bodystart="14" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_replicated_field_1ac02ad6239d0aedb91b69361ca4374681" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t Boon::ReplicatedField::Size</definition>
+        <argsstring>() const</argsstring>
+        <name>Size</name>
+        <qualifiedname>Boon::ReplicatedField::Size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepRegistry.h" line="15" column="18" bodyfile="Networking/NetRepRegistry.h" bodystart="15" bodyend="15"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::BProperty</label>
+        <link refid="struct_boon_1_1_b_property"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>name</edgelabel>
+          <edgelabel>typeName</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>meta</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Boon::BPropertyMeta</label>
+        <link refid="struct_boon_1_1_b_property_meta"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>key</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Boon::ReplicatedField</label>
+        <link refid="struct_boon_1_1_replicated_field"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>pProp</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="3">
+        <label>std::string</label>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::vector&lt; Boon::BPropertyMeta &gt;</label>
+        <childnode refid="6" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Networking/NetRepRegistry.h" line="11" column="5" bodyfile="Networking/NetRepRegistry.h" bodystart="12" bodyend="18"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_replicated_field_1ae51a7e6037fab0d36d8a5898fc676088" prot="public" virt="non-virtual"><scope>Boon::ReplicatedField</scope><name>Offset</name></member>
+      <member refid="struct_boon_1_1_replicated_field_1aa2f34b0db53cb8901edc3634993ec9cc" prot="public" virt="non-virtual"><scope>Boon::ReplicatedField</scope><name>Packedoffset</name></member>
+      <member refid="struct_boon_1_1_replicated_field_1a23875dd5600e02a85824d32776d8f351" prot="public" virt="non-virtual"><scope>Boon::ReplicatedField</scope><name>pProp</name></member>
+      <member refid="struct_boon_1_1_replicated_field_1ac02ad6239d0aedb91b69361ca4374681" prot="public" virt="non-virtual"><scope>Boon::ReplicatedField</scope><name>Size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,99 @@
+\doxysection{Boon::\+Net\+Rep\+Registry Struct Reference}
+\hypertarget{struct_boon_1_1_net_rep_registry}{}\label{struct_boon_1_1_net_rep_registry}\index{Boon::NetRepRegistry@{Boon::NetRepRegistry}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{struct_boon_1_1_net_rep_registry_a5db0b36b8c0562844c2edfc00542d3f7}{Register}} (\doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \texorpdfstring{$\ast$}{*}cls, \doxymbox{\hyperlink{class_boon_1_1_i_rep_serializer}{IRep\+Serializer}} \texorpdfstring{$\ast$}{*}p\+Serializer=nullptr)
+\item 
+{\footnotesize template$<$typename T$>$ }\\void \doxymbox{\hyperlink{struct_boon_1_1_net_rep_registry_a0c03e63c489fc5bd1ca75816ad32a67b}{Unregister}} ()
+\item 
+\doxymbox{\hyperlink{struct_boon_1_1_replicated_class}{Replicated\+Class}} \& \doxymbox{\hyperlink{struct_boon_1_1_net_rep_registry_abc7ea08c1156629abb22f55ca1c860c4}{Get\+Class}} (BClass\+ID id)
+\item 
+{\footnotesize template$<$typename Fn$>$ }\\void \doxymbox{\hyperlink{struct_boon_1_1_net_rep_registry_a37c52bf1c18cda77c481ef819c4b4e00}{For\+Each}} (Fn \&\&fn)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \doxymbox{\hyperlink{struct_boon_1_1_net_rep_registry}{Net\+Rep\+Registry}} \& \doxymbox{\hyperlink{struct_boon_1_1_net_rep_registry_aeb14a93659aa021486816e2d3aed707a}{Get}} ()
+\item 
+static void \doxymbox{\hyperlink{struct_boon_1_1_net_rep_registry_ad66f7a8eae7947f2b179f1591fa282e1}{Set\+Registry}} (\doxymbox{\hyperlink{struct_boon_1_1_net_rep_registry}{Net\+Rep\+Registry}} \texorpdfstring{$\ast$}{*}p\+Registry)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00050}{50}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{struct_boon_1_1_net_rep_registry_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_boon_1_1_net_rep_registry_a37c52bf1c18cda77c481ef819c4b4e00}\index{Boon::NetRepRegistry@{Boon::NetRepRegistry}!ForEach@{ForEach}}
+\index{ForEach@{ForEach}!Boon::NetRepRegistry@{Boon::NetRepRegistry}}
+\doxysubsubsection{\texorpdfstring{ForEach()}{ForEach()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_rep_registry_a37c52bf1c18cda77c481ef819c4b4e00} 
+template$<$typename Fn$>$ \\
+void Boon::\+\+Net\+Rep\+Registry::\+\+For\+Each (\begin{DoxyParamCaption}\item[{Fn \&\&}]{fn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00138}{138}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+\Hypertarget{struct_boon_1_1_net_rep_registry_aeb14a93659aa021486816e2d3aed707a}\index{Boon::NetRepRegistry@{Boon::NetRepRegistry}!Get@{Get}}
+\index{Get@{Get}!Boon::NetRepRegistry@{Boon::NetRepRegistry}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_rep_registry_aeb14a93659aa021486816e2d3aed707a} 
+\doxymbox{\hyperlink{struct_boon_1_1_net_rep_registry}{Net\+Rep\+Registry}} \& Boon::\+\+Net\+Rep\+Registry::\+\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00052}{52}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+\Hypertarget{struct_boon_1_1_net_rep_registry_abc7ea08c1156629abb22f55ca1c860c4}\index{Boon::NetRepRegistry@{Boon::NetRepRegistry}!GetClass@{GetClass}}
+\index{GetClass@{GetClass}!Boon::NetRepRegistry@{Boon::NetRepRegistry}}
+\doxysubsubsection{\texorpdfstring{GetClass()}{GetClass()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_rep_registry_abc7ea08c1156629abb22f55ca1c860c4} 
+\doxymbox{\hyperlink{struct_boon_1_1_replicated_class}{Replicated\+Class}} \& Boon::\+\+Net\+Rep\+Registry::\+\+Get\+Class (\begin{DoxyParamCaption}\item[{BClass\+ID}]{id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00130}{130}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+\Hypertarget{struct_boon_1_1_net_rep_registry_a5db0b36b8c0562844c2edfc00542d3f7}\index{Boon::NetRepRegistry@{Boon::NetRepRegistry}!Register@{Register}}
+\index{Register@{Register}!Boon::NetRepRegistry@{Boon::NetRepRegistry}}
+\doxysubsubsection{\texorpdfstring{Register()}{Register()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_rep_registry_a5db0b36b8c0562844c2edfc00542d3f7} 
+void Boon::\+\+Net\+Rep\+Registry::\+\+Register (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_boon_1_1_b_class}{BClass}} \texorpdfstring{$\ast$}{*}}]{cls}{, }\item[{\doxymbox{\hyperlink{class_boon_1_1_i_rep_serializer}{IRep\+Serializer}} \texorpdfstring{$\ast$}{*}}]{p\+Serializer}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00062}{62}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+\Hypertarget{struct_boon_1_1_net_rep_registry_ad66f7a8eae7947f2b179f1591fa282e1}\index{Boon::NetRepRegistry@{Boon::NetRepRegistry}!SetRegistry@{SetRegistry}}
+\index{SetRegistry@{SetRegistry}!Boon::NetRepRegistry@{Boon::NetRepRegistry}}
+\doxysubsubsection{\texorpdfstring{SetRegistry()}{SetRegistry()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_rep_registry_ad66f7a8eae7947f2b179f1591fa282e1} 
+void Boon::\+\+Net\+Rep\+Registry::\+\+Set\+Registry (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_boon_1_1_net_rep_registry}{Net\+Rep\+Registry}} \texorpdfstring{$\ast$}{*}}]{p\+Registry}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00057}{57}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+\Hypertarget{struct_boon_1_1_net_rep_registry_a0c03e63c489fc5bd1ca75816ad32a67b}\index{Boon::NetRepRegistry@{Boon::NetRepRegistry}!Unregister@{Unregister}}
+\index{Unregister@{Unregister}!Boon::NetRepRegistry@{Boon::NetRepRegistry}}
+\doxysubsubsection{\texorpdfstring{Unregister()}{Unregister()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_net_rep_registry_a0c03e63c489fc5bd1ca75816ad32a67b} 
+template$<$typename T$>$ \\
+void Boon::\+\+Net\+Rep\+Registry::\+\+Unregister (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_rep_registry_8h_source_l00125}{125}} of file \doxymbox{\hyperlink{_net_rep_registry_8h_source}{Net\+Rep\+Registry.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Net\+Rep\+Registry.\+h\end{DoxyCompactItemize}

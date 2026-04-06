@@ -1,0 +1,389 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_editor_1_1_asset_database" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>BoonEditor::AssetDatabase</compoundname>
+    <includes refid="_asset_database_8h" local="no">Assets/AssetDatabase.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_editor_1_1_asset_database_1add29269bef2b287812b05450da976198" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref>, std::string &gt;</type>
+        <definition>std::unordered_map&lt;AssetHandle, std::string&gt; BoonEditor::AssetDatabase::m_HandleToPath</definition>
+        <argsstring></argsstring>
+        <name>m_HandleToPath</name>
+        <qualifiedname>BoonEditor::AssetDatabase::m_HandleToPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="53" column="20" bodyfile="Assets/AssetDatabase.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_asset_database_1acd6fc48d89ec8cc2725f122d0565f282" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, <ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref> &gt;</type>
+        <definition>std::unordered_map&lt;std::string, AssetHandle&gt; BoonEditor::AssetDatabase::m_PathToHandle</definition>
+        <argsstring></argsstring>
+        <name>m_PathToHandle</name>
+        <qualifiedname>BoonEditor::AssetDatabase::m_PathToHandle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="54" column="20" bodyfile="Assets/AssetDatabase.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_asset_database_1aaccedf544874ce8ea7d210455f6214d8" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string BoonEditor::AssetDatabase::m_AssetRoot</definition>
+        <argsstring></argsstring>
+        <name>m_AssetRoot</name>
+        <qualifiedname>BoonEditor::AssetDatabase::m_AssetRoot</qualifiedname>
+        <initializer>{&quot;Assets/&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="55" column="13" bodyfile="Assets/AssetDatabase.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_asset_database_1a9cc0752e991e13b59321a1f4313b7f5a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool BoonEditor::AssetDatabase::m_Dirty</definition>
+        <argsstring></argsstring>
+        <name>m_Dirty</name>
+        <qualifiedname>BoonEditor::AssetDatabase::m_Dirty</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="56" column="6" bodyfile="Assets/AssetDatabase.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_editor_1_1_asset_database_1aee7d4a8a3395edea72267e8400996eeb" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="namespace_boon_1a6867a346204e7bbed8bfe91d8dc2e807" kindref="member">AssetType</ref>, <ref refid="class_boon_1_1_asset_ref" kindref="compound">AssetRef</ref>&lt; <ref refid="class_boon_1_1_texture2_d_asset" kindref="compound">Texture2DAsset</ref> &gt; &gt;</type>
+        <definition>std::unordered_map&lt;AssetType, AssetRef&lt;Texture2DAsset&gt; &gt; BoonEditor::AssetDatabase::m_DefaultTextures</definition>
+        <argsstring></argsstring>
+        <name>m_DefaultTextures</name>
+        <qualifiedname>BoonEditor::AssetDatabase::m_DefaultTextures</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="58" column="20" bodyfile="Assets/AssetDatabase.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1ace16b7da0cba2023667284da04a12e06" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>AssetDatabase &amp;</type>
+        <definition>static AssetDatabase &amp; BoonEditor::AssetDatabase::Get</definition>
+        <argsstring>()</argsstring>
+        <name>Get</name>
+        <qualifiedname>BoonEditor::AssetDatabase::Get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="15" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1a1f916cd6a6dd2561f2929c30d3679b64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::AssetDatabase::RegisterAsset</definition>
+        <argsstring>(const std::string &amp;path, AssetHandle handle)</argsstring>
+        <name>RegisterAsset</name>
+        <qualifiedname>BoonEditor::AssetDatabase::RegisterAsset</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="17" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1aa170982e3d5f70fa6f853d2d840496d2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref></type>
+        <definition>AssetHandle BoonEditor::AssetDatabase::GetHandle</definition>
+        <argsstring>(const std::string &amp;path) const</argsstring>
+        <name>GetHandle</name>
+        <qualifiedname>BoonEditor::AssetDatabase::GetHandle</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="18" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1adacac70d6668f6a12ef19c871f9440f8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; BoonEditor::AssetDatabase::GetPath</definition>
+        <argsstring>(AssetHandle handle) const</argsstring>
+        <name>GetPath</name>
+        <qualifiedname>BoonEditor::AssetDatabase::GetPath</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="19" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1aa5075a952d05038802c8e7ea7947a676" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TAsset</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="class_boon_1_1_asset_ref" kindref="compound">AssetRef</ref>&lt; TAsset &gt;</type>
+        <definition>AssetRef&lt; TAsset &gt; BoonEditor::AssetDatabase::Load</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>Load</name>
+        <qualifiedname>BoonEditor::AssetDatabase::Load</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="22" column="10" bodyfile="Assets/AssetDatabase.h" bodystart="22" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1aa987e31f197e8ba7f58157c4f190ed07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TAsset</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool BoonEditor::AssetDatabase::Export</definition>
+        <argsstring>(AssetHandle handle)</argsstring>
+        <name>Export</name>
+        <qualifiedname>BoonEditor::AssetDatabase::Export</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="30" column="6" bodyfile="Assets/AssetDatabase.h" bodystart="30" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1a40cd88d7844dbdda25fbaeac0b566070" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool BoonEditor::AssetDatabase::Exists</definition>
+        <argsstring>(AssetHandle handle) const</argsstring>
+        <name>Exists</name>
+        <qualifiedname>BoonEditor::AssetDatabase::Exists</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="36" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1a9407d7d19ada9e9e0ad00d74039033e3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool BoonEditor::AssetDatabase::Exists</definition>
+        <argsstring>(const std::string &amp;path) const</argsstring>
+        <name>Exists</name>
+        <qualifiedname>BoonEditor::AssetDatabase::Exists</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="37" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1a756e3b9f50294f9334727e268d737fd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::AssetDatabase::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>BoonEditor::AssetDatabase::Clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="39" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1abd9809203296f42147cac32de159feeb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::AssetDatabase::ForEachEntry</definition>
+        <argsstring>(const std::function&lt; void(AssetHandle, const std::string &amp;)&gt; &amp;fn)</argsstring>
+        <name>ForEachEntry</name>
+        <qualifiedname>BoonEditor::AssetDatabase::ForEachEntry</qualifiedname>
+        <param>
+          <type>const std::function&lt; void(<ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref>, const std::string &amp;)&gt; &amp;</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="41" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1a13894bdc0d0b0297208ae8ef4113aea7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; BoonEditor::AssetDatabase::GetAssetRoot</definition>
+        <argsstring>() const</argsstring>
+        <name>GetAssetRoot</name>
+        <qualifiedname>BoonEditor::AssetDatabase::GetAssetRoot</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="42" column="19" bodyfile="Assets/AssetDatabase.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1a9dee6e32c78518c4bd6c1cc2d382d1fb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool BoonEditor::AssetDatabase::IsDirty</definition>
+        <argsstring>() const</argsstring>
+        <name>IsDirty</name>
+        <qualifiedname>BoonEditor::AssetDatabase::IsDirty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="44" column="6" bodyfile="Assets/AssetDatabase.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1a31867a8f5f409a1e65c99e2ed7a0f19c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::AssetDatabase::ClearDirty</definition>
+        <argsstring>()</argsstring>
+        <name>ClearDirty</name>
+        <qualifiedname>BoonEditor::AssetDatabase::ClearDirty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="45" column="6" bodyfile="Assets/AssetDatabase.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1a3c3d60360d87ddf326977d601d4ecc39" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_asset_ref" kindref="compound">AssetRef</ref>&lt; <ref refid="class_boon_1_1_texture2_d_asset" kindref="compound">Texture2DAsset</ref> &gt;</type>
+        <definition>AssetRef&lt; Texture2DAsset &gt; BoonEditor::AssetDatabase::GetThumbnail</definition>
+        <argsstring>(AssetHandle handle) const</argsstring>
+        <name>GetThumbnail</name>
+        <qualifiedname>BoonEditor::AssetDatabase::GetThumbnail</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="47" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1a8e5a292a5ca15bb231ff434b8fdda2f6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::AssetDatabase::AssetDatabase</definition>
+        <argsstring>()</argsstring>
+        <name>AssetDatabase</name>
+        <qualifiedname>BoonEditor::AssetDatabase::AssetDatabase</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="50" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_asset_database_1aef05fadf159b91a3eaf04e966a172670" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::AssetDatabase::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>BoonEditor::AssetDatabase::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Assets/AssetDatabase.h" line="51" column="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Assets/AssetDatabase.h" line="12" column="1" bodyfile="Assets/AssetDatabase.h" bodystart="13" bodyend="59"/>
+    <listofallmembers>
+      <member refid="class_boon_editor_1_1_asset_database_1a8e5a292a5ca15bb231ff434b8fdda2f6" prot="private" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>AssetDatabase</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1a756e3b9f50294f9334727e268d737fd4" prot="public" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>Clear</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1a31867a8f5f409a1e65c99e2ed7a0f19c" prot="public" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>ClearDirty</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1a40cd88d7844dbdda25fbaeac0b566070" prot="public" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>Exists</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1a9407d7d19ada9e9e0ad00d74039033e3" prot="public" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>Exists</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1aa987e31f197e8ba7f58157c4f190ed07" prot="public" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>Export</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1abd9809203296f42147cac32de159feeb" prot="public" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>ForEachEntry</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1ace16b7da0cba2023667284da04a12e06" prot="public" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>Get</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1a13894bdc0d0b0297208ae8ef4113aea7" prot="public" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>GetAssetRoot</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1aa170982e3d5f70fa6f853d2d840496d2" prot="public" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>GetHandle</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1adacac70d6668f6a12ef19c871f9440f8" prot="public" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>GetPath</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1a3c3d60360d87ddf326977d601d4ecc39" prot="public" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>GetThumbnail</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1aef05fadf159b91a3eaf04e966a172670" prot="private" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>Init</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1a9dee6e32c78518c4bd6c1cc2d382d1fb" prot="public" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>IsDirty</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1aa5075a952d05038802c8e7ea7947a676" prot="public" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>Load</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1aaccedf544874ce8ea7d210455f6214d8" prot="private" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>m_AssetRoot</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1aee7d4a8a3395edea72267e8400996eeb" prot="private" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>m_DefaultTextures</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1a9cc0752e991e13b59321a1f4313b7f5a" prot="private" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>m_Dirty</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1add29269bef2b287812b05450da976198" prot="private" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>m_HandleToPath</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1acd6fc48d89ec8cc2725f122d0565f282" prot="private" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>m_PathToHandle</name></member>
+      <member refid="class_boon_editor_1_1_asset_database_1a1f916cd6a6dd2561f2929c30d3679b64" prot="public" virt="non-virtual"><scope>BoonEditor::AssetDatabase</scope><name>RegisterAsset</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,418 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_physics_world2_d_8h" kind="file" language="C++">
+    <compoundname>PhysicsWorld2D.h</compoundname>
+    <includes refid="_physics2_d_types_8h" local="yes">Physics2DTypes.h</includes>
+    <includes local="no">box2d/id.h</includes>
+    <includes local="no">functional</includes>
+    <includedby refid="_scene_8h" local="yes">Scene/Scene.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>Physics2DTypes.h</label>
+        <link refid="_physics2_d_types_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Physics/PhysicsWorld2D.h</label>
+        <link refid="_physics_world2_d_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Scene/GameObjectID.h</label>
+        <link refid="_game_object_i_d_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>box2d/id.h</label>
+      </node>
+      <node id="4">
+        <label>entt/entt.hpp</label>
+      </node>
+      <node id="7">
+        <label>functional</label>
+      </node>
+      <node id="5">
+        <label>glm/glm.hpp</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4">
+        <label>Asset/Assets.h</label>
+        <link refid="_assets_8h"/>
+      </node>
+      <node id="5">
+        <label>Asset/Importer/SceneImporter.h</label>
+        <link refid="_scene_importer_8h"/>
+      </node>
+      <node id="3">
+        <label>Asset/SceneAsset.h</label>
+        <link refid="_scene_asset_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>Component/BoxCollider2D.h</label>
+        <link refid="_box_collider2_d_8h"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>Component/CameraComponent.h</label>
+        <link refid="_camera_component_8h"/>
+      </node>
+      <node id="6">
+        <label>Component/ECSLifecycle.h</label>
+        <link refid="_e_c_s_lifecycle_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>Component/NameComponent.h</label>
+        <link refid="_name_component_8h"/>
+      </node>
+      <node id="28">
+        <label>Component/Rigidbody2D.h</label>
+        <link refid="_rigidbody2_d_8h"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>Component/SceneComponent.h</label>
+        <link refid="_scene_component_8h"/>
+      </node>
+      <node id="31">
+        <label>Component/SpriteAnimatorComponent.h</label>
+        <link refid="_sprite_animator_component_8h"/>
+      </node>
+      <node id="32">
+        <label>Component/SpriteRendererComponent.h</label>
+        <link refid="_sprite_renderer_component_8h"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>Component/TextureRendererComponent.h</label>
+        <link refid="_texture_renderer_component_8h"/>
+      </node>
+      <node id="23">
+        <label>Core/Boon.h</label>
+        <link refid="_boon_8h"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>Event/SceneEvents.h</label>
+        <link refid="_scene_events_8h"/>
+      </node>
+      <node id="29">
+        <label>Networking/Components/NetRigidbody2D.h</label>
+        <link refid="_net_rigidbody2_d_8h"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>Networking/Components/NetRigidbody2DSerializer.h</label>
+        <link refid="_net_rigidbody2_d_serializer_8h"/>
+      </node>
+      <node id="34">
+        <label>Networking/Components/NetTransform.h</label>
+        <link refid="_net_transform_8h"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>Networking/Components/NetTransformSerializer.h</label>
+        <link refid="_net_transform_serializer_8h"/>
+      </node>
+      <node id="38">
+        <label>Networking/IRepSerializer.h</label>
+        <link refid="_i_rep_serializer_8h"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>Networking/NetIdentity.h</label>
+        <link refid="_net_identity_8h"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>Networking/NetRepCore.h</label>
+        <link refid="_net_rep_core_8h"/>
+      </node>
+      <node id="39">
+        <label>Networking/NetRepRegistry.h</label>
+        <link refid="_net_rep_registry_8h"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>Networking/NetScene.h</label>
+        <link refid="_net_scene_8h"/>
+      </node>
+      <node id="25">
+        <label>Physics/Physics2D.h</label>
+        <link refid="_physics2_d_8h"/>
+      </node>
+      <node id="1">
+        <label>Physics/PhysicsWorld2D.h</label>
+        <link refid="_physics_world2_d_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>Reflection/ECSLifecycleDetection.h</label>
+        <link refid="_e_c_s_lifecycle_detection_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Reflection/RegisterBClass.h</label>
+        <link refid="_register_b_class_8h"/>
+      </node>
+      <node id="42">
+        <label>Scene/BRef.h</label>
+        <link refid="_b_ref_8h"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>Scene/GameObject.h</label>
+        <link refid="_game_object_8h"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Scene/Scene.h</label>
+        <link refid="_scene_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>Scene/SceneManager.h</label>
+        <link refid="_scene_manager_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>Scene/SceneSerializer.h</label>
+        <link refid="_scene_serializer_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Core/BoonEditor.h</label>
+        <link refid="_boon_editor_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Core/EditorState.h</label>
+        <link refid="_editor_state_8h"/>
+      </node>
+      <node id="10">
+        <label>Event/EditorEvent.h</label>
+        <link refid="_editor_event_8h"/>
+      </node>
+      <node id="11">
+        <label>Panels/AssetEditor.h</label>
+        <link refid="_asset_editor_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Panels/AssetEditorPanel.h</label>
+        <link refid="_asset_editor_panel_8h"/>
+      </node>
+      <node id="15">
+        <label>Panels/ContentBrowser.h</label>
+        <link refid="_content_browser_8h"/>
+      </node>
+      <node id="16">
+        <label>Panels/PropertiesPanel.h</label>
+        <link refid="_properties_panel_8h"/>
+      </node>
+      <node id="17">
+        <label>Panels/ScenePanel.h</label>
+        <link refid="_scene_panel_8h"/>
+      </node>
+      <node id="13">
+        <label>Panels/SpriteAtlasEditorPanel.h</label>
+        <link refid="_sprite_atlas_editor_panel_8h"/>
+      </node>
+      <node id="14">
+        <label>Panels/TilemapEditorPanel.h</label>
+        <link refid="_tilemap_editor_panel_8h"/>
+      </node>
+      <node id="18">
+        <label>Panels/ViewportPanel.h</label>
+        <link refid="_viewport_panel_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>Panels/ViewportToolbar.h</label>
+        <link refid="_viewport_toolbar_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_boon_1_1_physics_world2_d" prot="public">Boon::PhysicsWorld2D</innerclass>
+    <innerclass refid="struct_boon_1_1_physics_world2_d_1_1_rigidbody_runtime" prot="private">Boon::PhysicsWorld2D::RigidbodyRuntime</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_physics2_d_types_8h" kindref="compound">Physics2DTypes.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;box2d/id.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">b2ContactBeginTouchEvent;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="10"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>;</highlight></codeline>
+<codeline lineno="12" refid="class_boon_1_1_physics_world2_d" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_physics_world2_d_1a7c808c11f40183e73c95b4927d55eb04" kindref="member">PhysicsWorld2D</ref><sp/>final</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="20" refid="class_boon_1_1_physics_world2_d_1a7c808c11f40183e73c95b4927d55eb04" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_physics_world2_d_1a7c808c11f40183e73c95b4927d55eb04" kindref="member">PhysicsWorld2D</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="class_boon_1_1_physics_world2_d_1a6c2c4f893f6f9603e40a2f9ebb71a4c8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_physics_world2_d_1a6c2c4f893f6f9603e40a2f9ebb71a4c8" kindref="member">~PhysicsWorld2D</ref>();</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="class_boon_1_1_physics_world2_d_1a4d47d0f74829e75aa6d74453e3910a4f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_physics_world2_d_1a4d47d0f74829e75aa6d74453e3910a4f" kindref="member">PhysicsWorld2D</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_physics_world2_d_1a7c808c11f40183e73c95b4927d55eb04" kindref="member">PhysicsWorld2D</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="28" refid="class_boon_1_1_physics_world2_d_1a141abb8809932143666f6e23545f8fbe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_physics_world2_d_1a141abb8809932143666f6e23545f8fbe" kindref="member">PhysicsWorld2D</ref>(<ref refid="class_boon_1_1_physics_world2_d_1a7c808c11f40183e73c95b4927d55eb04" kindref="member">PhysicsWorld2D</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="29" refid="class_boon_1_1_physics_world2_d_1a9d8ff4915789feff8015cfd40e82e406" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_physics_world2_d_1a7c808c11f40183e73c95b4927d55eb04" kindref="member">PhysicsWorld2D</ref>&amp;<sp/><ref refid="class_boon_1_1_physics_world2_d_1a9d8ff4915789feff8015cfd40e82e406" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_physics_world2_d_1a7c808c11f40183e73c95b4927d55eb04" kindref="member">PhysicsWorld2D</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30" refid="class_boon_1_1_physics_world2_d_1a1c6b905c1c564065d82f5dbc26ae59dd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_physics_world2_d_1a7c808c11f40183e73c95b4927d55eb04" kindref="member">PhysicsWorld2D</ref>&amp;<sp/><ref refid="class_boon_1_1_physics_world2_d_1a1c6b905c1c564065d82f5dbc26ae59dd" kindref="member">operator=</ref>(<ref refid="class_boon_1_1_physics_world2_d_1a7c808c11f40183e73c95b4927d55eb04" kindref="member">PhysicsWorld2D</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="class_boon_1_1_physics_world2_d_1ae0d47c072cf614c763d8632aa268a4a4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_physics_world2_d_1ae0d47c072cf614c763d8632aa268a4a4" kindref="member">Begin</ref>(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>*<sp/>pScene);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="class_boon_1_1_physics_world2_d_1a348e4866ce2e0deb799e5604654a54cc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_physics_world2_d_1a348e4866ce2e0deb799e5604654a54cc" kindref="member">End</ref>(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>*<sp/>pScene);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="class_boon_1_1_physics_world2_d_1a8a04e18008b63d51f53916cdcd5da419" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_physics_world2_d_1a8a04e18008b63d51f53916cdcd5da419" kindref="member">Step</ref>(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>*<sp/>pScene);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="class_boon_1_1_physics_world2_d_1a2127d497b5b19923455ee0c8fe00cae6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_physics_world2_d_1a2127d497b5b19923455ee0c8fe00cae6" kindref="member">Update</ref>(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>*<sp/>pScene);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62" refid="class_boon_1_1_physics_world2_d_1abf16cab12b10598202d8cf24e7a1a010" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_physics_world2_d_1abf16cab12b10598202d8cf24e7a1a010" kindref="member">Raycast</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_ray2_d" kindref="compound">Ray2D</ref>&amp;<sp/>ray,<sp/><ref refid="struct_boon_1_1_hit_result2_d" kindref="compound">HitResult2D</ref>&amp;<sp/>result)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SpawnRigidbody(</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref>*<sp/>obj);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>HandleEvents(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref>*<sp/>pScene);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>b2WorldId<sp/>m_PhysicsWorldId<sp/>=<sp/>b2_nullWorldId;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">RigidbodyRuntime</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>b2BodyId<sp/>Body<sp/>=<sp/>b2_nullBodyId;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Valid<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RigidbodyRuntime*<sp/>GetRuntime(<ref refid="namespace_boon_1a3c4b811809646d3ae922d1795f4ad6e5" kindref="member">GameObjectID</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;GameObjectID,<sp/>RigidbodyRuntime&gt;<sp/>m_RigidbodyRuntime;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="80"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Physics/PhysicsWorld2D.h"/>
+  </compounddef>
+</doxygen>

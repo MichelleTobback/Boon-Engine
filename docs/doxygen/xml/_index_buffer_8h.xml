@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_index_buffer_8h" kind="file" language="C++">
+    <compoundname>IndexBuffer.h</compoundname>
+    <includes local="no">memory</includes>
+    <includedby refid="_tilemap_8h" local="yes">Renderer/Tilemap.h</includedby>
+    <includedby refid="_vertex_input_8h" local="yes">Renderer/VertexInput.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>Renderer/IndexBuffer.h</label>
+        <link refid="_index_buffer_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4">
+        <label>Asset/Importer/TilemapImporter.h</label>
+        <link refid="_tilemap_importer_8h"/>
+      </node>
+      <node id="3">
+        <label>Asset/TilemapAsset.h</label>
+        <link refid="_tilemap_asset_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Component/TilemapRendererComponent.h</label>
+        <link refid="_tilemap_renderer_component_8h"/>
+      </node>
+      <node id="1">
+        <label>Renderer/IndexBuffer.h</label>
+        <link refid="_index_buffer_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Renderer/Tilemap.h</label>
+        <link refid="_tilemap_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Renderer/VertexInput.h</label>
+        <link refid="_vertex_input_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Panels/TilemapEditorPanel.h</label>
+        <link refid="_tilemap_editor_panel_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_boon_1_1_index_buffer" prot="public">Boon::IndexBuffer</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="6"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="7" refid="class_boon_1_1_index_buffer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_index_buffer_1a33ceb33090c3304791cbc915cd576473" kindref="member">IndexBuffer</ref></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="10" refid="class_boon_1_1_index_buffer_1a33ceb33090c3304791cbc915cd576473" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_index_buffer_1a33ceb33090c3304791cbc915cd576473" kindref="member">IndexBuffer</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="class_boon_1_1_index_buffer_1a8f0a0c3d83a53176eff4b2130e556e68" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_index_buffer_1a8f0a0c3d83a53176eff4b2130e556e68" kindref="member">~IndexBuffer</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="class_boon_1_1_index_buffer_1a7888fdc7d8f50a12c7df9e14fa1af912" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_index_buffer_1a7888fdc7d8f50a12c7df9e14fa1af912" kindref="member">IndexBuffer</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_index_buffer_1a33ceb33090c3304791cbc915cd576473" kindref="member">IndexBuffer</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="18" refid="class_boon_1_1_index_buffer_1a8f7d29d4693014fcc3d45d754171946a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_index_buffer_1a8f7d29d4693014fcc3d45d754171946a" kindref="member">IndexBuffer</ref>(<ref refid="class_boon_1_1_index_buffer_1a33ceb33090c3304791cbc915cd576473" kindref="member">IndexBuffer</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="19" refid="class_boon_1_1_index_buffer_1af2edd6355c0ebacd466ef63546818e6c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_index_buffer_1a33ceb33090c3304791cbc915cd576473" kindref="member">IndexBuffer</ref>&amp;<sp/><ref refid="class_boon_1_1_index_buffer_1af2edd6355c0ebacd466ef63546818e6c" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_index_buffer_1a33ceb33090c3304791cbc915cd576473" kindref="member">IndexBuffer</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="20" refid="class_boon_1_1_index_buffer_1ac9a7a23453f9eb66556edf95477b785b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_index_buffer_1a33ceb33090c3304791cbc915cd576473" kindref="member">IndexBuffer</ref>&amp;<sp/><ref refid="class_boon_1_1_index_buffer_1ac9a7a23453f9eb66556edf95477b785b" kindref="member">operator=</ref>(<ref refid="class_boon_1_1_index_buffer_1a33ceb33090c3304791cbc915cd576473" kindref="member">IndexBuffer</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="class_boon_1_1_index_buffer_1ab5df6ee5169201d60b28c10ae422f27c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_index_buffer_1ab5df6ee5169201d60b28c10ae422f27c" kindref="member">Bind</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="class_boon_1_1_index_buffer_1a48aedc4218699068b2860414f32e934a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_index_buffer_1a48aedc4218699068b2860414f32e934a" kindref="member">Unbind</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="class_boon_1_1_index_buffer_1a4990158ba8eedddb92e2d0e79277aea5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>uint32_t<sp/><ref refid="class_boon_1_1_index_buffer_1a4990158ba8eedddb92e2d0e79277aea5" kindref="member">GetCount</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="class_boon_1_1_index_buffer_1af4a87730d42310454f6a36720298ecf7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;IndexBuffer&gt;<sp/><ref refid="class_boon_1_1_index_buffer_1af4a87730d42310454f6a36720298ecf7" kindref="member">Create</ref>(uint32_t*<sp/>indices,<sp/>uint32_t<sp/>count);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Renderer/IndexBuffer.h"/>
+  </compounddef>
+</doxygen>

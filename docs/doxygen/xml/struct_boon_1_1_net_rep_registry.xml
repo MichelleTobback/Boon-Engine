@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_net_rep_registry" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::NetRepRegistry</compoundname>
+    <includes refid="_net_rep_registry_8h" local="no">Networking/NetRepRegistry.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_net_rep_registry_1a3f526a9d3c0f336101a366394e253377" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="namespace_boon_1a20738def45829e24908b136189943581" kindref="member">BClassID</ref>, <ref refid="struct_boon_1_1_replicated_class" kindref="compound">ReplicatedClass</ref> &gt;</type>
+        <definition>std::unordered_map&lt;BClassID, ReplicatedClass&gt; Boon::NetRepRegistry::m_ReplicatedClasses</definition>
+        <argsstring></argsstring>
+        <name>m_ReplicatedClasses</name>
+        <qualifiedname>Boon::NetRepRegistry::m_ReplicatedClasses</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepRegistry.h" line="145" column="28" bodyfile="Networking/NetRepRegistry.h" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_rep_registry_1a51615cabb9a86482395146fab33318a0" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_boon_1_1_replicated_class" kindref="compound">ReplicatedClass</ref></type>
+        <definition>ReplicatedClass Boon::NetRepRegistry::m_Empty</definition>
+        <argsstring></argsstring>
+        <name>m_Empty</name>
+        <qualifiedname>Boon::NetRepRegistry::m_Empty</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepRegistry.h" line="146" column="25" bodyfile="Networking/NetRepRegistry.h" bodystart="146" bodyend="146"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_net_rep_registry_1a09a07e0c1e809ace08fc54bd500edc0d" prot="private" static="yes" mutable="no">
+        <type><ref refid="struct_boon_1_1_net_rep_registry" kindref="compound">NetRepRegistry</ref> *</type>
+        <definition>NetRepRegistry* Boon::NetRepRegistry::s_Instance</definition>
+        <argsstring></argsstring>
+        <name>s_Instance</name>
+        <qualifiedname>Boon::NetRepRegistry::s_Instance</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepRegistry.h" line="148" column="31" bodyfile="Networking/NetRepRegistry.h" bodystart="148" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="struct_boon_1_1_net_rep_registry_1aeb14a93659aa021486816e2d3aed707a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_boon_1_1_net_rep_registry" kindref="compound">NetRepRegistry</ref> &amp;</type>
+        <definition>static NetRepRegistry &amp; Boon::NetRepRegistry::Get</definition>
+        <argsstring>()</argsstring>
+        <name>Get</name>
+        <qualifiedname>Boon::NetRepRegistry::Get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepRegistry.h" line="52" column="31" bodyfile="Networking/NetRepRegistry.h" bodystart="52" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_net_rep_registry_1ad66f7a8eae7947f2b179f1591fa282e1" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Boon::NetRepRegistry::SetRegistry</definition>
+        <argsstring>(NetRepRegistry *pRegistry)</argsstring>
+        <name>SetRegistry</name>
+        <qualifiedname>Boon::NetRepRegistry::SetRegistry</qualifiedname>
+        <param>
+          <type><ref refid="struct_boon_1_1_net_rep_registry" kindref="compound">NetRepRegistry</ref> *</type>
+          <declname>pRegistry</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepRegistry.h" line="57" column="21" bodyfile="Networking/NetRepRegistry.h" bodystart="57" bodyend="60"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_boon_1_1_net_rep_registry_1a5db0b36b8c0562844c2edfc00542d3f7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::NetRepRegistry::Register</definition>
+        <argsstring>(BClass *cls, IRepSerializer *pSerializer=nullptr)</argsstring>
+        <name>Register</name>
+        <qualifiedname>Boon::NetRepRegistry::Register</qualifiedname>
+        <param>
+          <type><ref refid="struct_boon_1_1_b_class" kindref="compound">BClass</ref> *</type>
+          <declname>cls</declname>
+        </param>
+        <param>
+          <type><ref refid="class_boon_1_1_i_rep_serializer" kindref="compound">IRepSerializer</ref> *</type>
+          <declname>pSerializer</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepRegistry.h" line="62" column="14" bodyfile="Networking/NetRepRegistry.h" bodystart="62" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_net_rep_registry_1a0c03e63c489fc5bd1ca75816ad32a67b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void Boon::NetRepRegistry::Unregister</definition>
+        <argsstring>()</argsstring>
+        <name>Unregister</name>
+        <qualifiedname>Boon::NetRepRegistry::Unregister</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepRegistry.h" line="125" column="14" bodyfile="Networking/NetRepRegistry.h" bodystart="125" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_net_rep_registry_1abc7ea08c1156629abb22f55ca1c860c4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_boon_1_1_replicated_class" kindref="compound">ReplicatedClass</ref> &amp;</type>
+        <definition>ReplicatedClass &amp; Boon::NetRepRegistry::GetClass</definition>
+        <argsstring>(BClassID id)</argsstring>
+        <name>GetClass</name>
+        <qualifiedname>Boon::NetRepRegistry::GetClass</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a20738def45829e24908b136189943581" kindref="member">BClassID</ref></type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepRegistry.h" line="130" column="25" bodyfile="Networking/NetRepRegistry.h" bodystart="130" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_net_rep_registry_1a37c52bf1c18cda77c481ef819c4b4e00" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Fn</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void Boon::NetRepRegistry::ForEach</definition>
+        <argsstring>(Fn &amp;&amp;fn)</argsstring>
+        <name>ForEach</name>
+        <qualifiedname>Boon::NetRepRegistry::ForEach</qualifiedname>
+        <param>
+          <type>Fn &amp;&amp;</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepRegistry.h" line="138" column="14" bodyfile="Networking/NetRepRegistry.h" bodystart="138" bodyend="142"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Networking/NetRepRegistry.h" line="50" column="5" bodyfile="Networking/NetRepRegistry.h" bodystart="51" bodyend="149"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_net_rep_registry_1a37c52bf1c18cda77c481ef819c4b4e00" prot="public" virt="non-virtual"><scope>Boon::NetRepRegistry</scope><name>ForEach</name></member>
+      <member refid="struct_boon_1_1_net_rep_registry_1aeb14a93659aa021486816e2d3aed707a" prot="public" virt="non-virtual"><scope>Boon::NetRepRegistry</scope><name>Get</name></member>
+      <member refid="struct_boon_1_1_net_rep_registry_1abc7ea08c1156629abb22f55ca1c860c4" prot="public" virt="non-virtual"><scope>Boon::NetRepRegistry</scope><name>GetClass</name></member>
+      <member refid="struct_boon_1_1_net_rep_registry_1a51615cabb9a86482395146fab33318a0" prot="private" virt="non-virtual"><scope>Boon::NetRepRegistry</scope><name>m_Empty</name></member>
+      <member refid="struct_boon_1_1_net_rep_registry_1a3f526a9d3c0f336101a366394e253377" prot="private" virt="non-virtual"><scope>Boon::NetRepRegistry</scope><name>m_ReplicatedClasses</name></member>
+      <member refid="struct_boon_1_1_net_rep_registry_1a5db0b36b8c0562844c2edfc00542d3f7" prot="public" virt="non-virtual"><scope>Boon::NetRepRegistry</scope><name>Register</name></member>
+      <member refid="struct_boon_1_1_net_rep_registry_1a09a07e0c1e809ace08fc54bd500edc0d" prot="private" virt="non-virtual"><scope>Boon::NetRepRegistry</scope><name>s_Instance</name></member>
+      <member refid="struct_boon_1_1_net_rep_registry_1ad66f7a8eae7947f2b179f1591fa282e1" prot="public" virt="non-virtual"><scope>Boon::NetRepRegistry</scope><name>SetRegistry</name></member>
+      <member refid="struct_boon_1_1_net_rep_registry_1a0c03e63c489fc5bd1ca75816ad32a67b" prot="public" virt="non-virtual"><scope>Boon::NetRepRegistry</scope><name>Unregister</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

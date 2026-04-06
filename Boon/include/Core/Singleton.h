@@ -5,6 +5,14 @@ namespace Boon
 	class Singleton
 	{
 	public:
+		/**
+		 * @brief Access the singleton instance for type T.
+		 *
+		 * Returns a reference to a function-local static instance. The instance
+		 * is constructed on first use.
+		 *
+		 * @return Reference to the singleton instance of T.
+		 */
 		static T& Get()
 		{
 			static T pInstance{};

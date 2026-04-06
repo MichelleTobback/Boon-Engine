@@ -1,0 +1,168 @@
+\doxysection{Boon::\+Camera Class Reference}
+\hypertarget{class_boon_1_1_camera}{}\label{class_boon_1_1_camera}\index{Boon::Camera@{Boon::Camera}}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class {\bfseries Projection\+Type} \{ {\bfseries Perspective} = 0
+, {\bfseries Orthographic} = 1
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_camera_aa731d2efe136202cc1092151eb866847}{Camera}} (float fov=90.f, float near=0.\+1f, float far=10.\+0f)
+\begin{DoxyCompactList}\small\item\em Construct a perspective camera. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_boon_1_1_camera_a7d1c525a3031c474527ca10855b851ae}{Camera}} (float size, float aspect\+Ratio, float near, float far)
+\begin{DoxyCompactList}\small\item\em Construct an orthographic camera. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_a8dc852372d7dfedaf7d1cb6c4b5154f3}\label{class_boon_1_1_camera_a8dc852372d7dfedaf7d1cb6c4b5154f3} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Camera} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \doxylink{class_boon_1_1_camera}{Camera}. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_a491c8b4bf94442babab7b85881e9a153}\label{class_boon_1_1_camera_a491c8b4bf94442babab7b85881e9a153} 
+{\bfseries Camera} (const Camera \&other)=default
+\item 
+\Hypertarget{class_boon_1_1_camera_a7ddfc8dd764741c913ad3f7ee185026a}\label{class_boon_1_1_camera_a7ddfc8dd764741c913ad3f7ee185026a} 
+{\bfseries Camera} (Camera \&\&other)=default
+\item 
+\Hypertarget{class_boon_1_1_camera_adb37ff6ba24df995fe6308295b939200}\label{class_boon_1_1_camera_adb37ff6ba24df995fe6308295b939200} 
+\doxymbox{\hyperlink{class_boon_1_1_camera_aa731d2efe136202cc1092151eb866847}{Camera}} \& {\bfseries operator=} (const \doxymbox{\hyperlink{class_boon_1_1_camera_aa731d2efe136202cc1092151eb866847}{Camera}} \&other)=default
+\item 
+\Hypertarget{class_boon_1_1_camera_a411bed134784cd79710b5aec87e21ade}\label{class_boon_1_1_camera_a411bed134784cd79710b5aec87e21ade} 
+\doxymbox{\hyperlink{class_boon_1_1_camera_aa731d2efe136202cc1092151eb866847}{Camera}} \& {\bfseries operator=} (\doxymbox{\hyperlink{class_boon_1_1_camera_aa731d2efe136202cc1092151eb866847}{Camera}} \&\&other)=default
+\item 
+\Hypertarget{class_boon_1_1_camera_a70a626e689c411329d315d28ea8472c5}\label{class_boon_1_1_camera_a70a626e689c411329d315d28ea8472c5} 
+void {\bfseries Set\+Projection\+Type} (Projection\+Type type)
+\begin{DoxyCompactList}\small\item\em Set the projection type (perspective or orthographic). \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_a627c96d98c5f19c0381780b7da78680d}\label{class_boon_1_1_camera_a627c96d98c5f19c0381780b7da78680d} 
+void {\bfseries Set\+Perspective} (float fov=90.f, float near=0.\+1f, float far=10.\+0f)
+\begin{DoxyCompactList}\small\item\em Configure perspective projection parameters. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_a7b703161ac0db82340c3e647f42f343a}\label{class_boon_1_1_camera_a7b703161ac0db82340c3e647f42f343a} 
+void {\bfseries Set\+Orthographic} (float size, float aspect\+Ratio, float near=0.\+1, float far=10.f)
+\begin{DoxyCompactList}\small\item\em Configure orthographic projection parameters. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_a3c6d32be70454174190146431f90243e}\label{class_boon_1_1_camera_a3c6d32be70454174190146431f90243e} 
+void {\bfseries Set\+Aspect\+Ratio} (float aspect\+Ratio)
+\begin{DoxyCompactList}\small\item\em Set the aspect ratio. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_a150ea9ae32eb9f29ccd69c9bb7c0b1b4}\label{class_boon_1_1_camera_a150ea9ae32eb9f29ccd69c9bb7c0b1b4} 
+void {\bfseries Set\+Aspect\+Ratio} (float width, float height)
+\begin{DoxyCompactList}\small\item\em Set the aspect ratio using width and height. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_a2b87fa425c38890bfa12e8b5ac8c4c45}\label{class_boon_1_1_camera_a2b87fa425c38890bfa12e8b5ac8c4c45} 
+void {\bfseries Set\+Size} (float size)
+\begin{DoxyCompactList}\small\item\em Set orthographic size. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_a9dd6ccdeb303b999519f67080bd937d3}\label{class_boon_1_1_camera_a9dd6ccdeb303b999519f67080bd937d3} 
+void {\bfseries Set\+Fov} (float fov)
+\begin{DoxyCompactList}\small\item\em Set field of view for perspective projection. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_a73fc5b60ae3fc0b9d3161c227439570a}\label{class_boon_1_1_camera_a73fc5b60ae3fc0b9d3161c227439570a} 
+void {\bfseries Set\+Near} (float near)
+\begin{DoxyCompactList}\small\item\em Set near clipping plane distance. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_a142d54df0b20ebab16044273e4cc0a45}\label{class_boon_1_1_camera_a142d54df0b20ebab16044273e4cc0a45} 
+void {\bfseries Set\+Far} (float far)
+\begin{DoxyCompactList}\small\item\em Set far clipping plane distance. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_aa3c51b707d9b7f17aa093276fdfce952}\label{class_boon_1_1_camera_aa3c51b707d9b7f17aa093276fdfce952} 
+Projection\+Type {\bfseries Get\+Projection\+Type} () const
+\begin{DoxyCompactList}\small\item\em Get the current projection type. \end{DoxyCompactList}\item 
+const glm::\+mat4 \& \doxymbox{\hyperlink{class_boon_1_1_camera_aa75a24464c656bf42982b928c7fd35a5}{Get\+Projection}} ()
+\begin{DoxyCompactList}\small\item\em Get the projection matrix. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_a201b9724f47fe188dfab640997625d93}\label{class_boon_1_1_camera_a201b9724f47fe188dfab640997625d93} 
+float {\bfseries Get\+Aspect\+Ratio} () const
+\begin{DoxyCompactList}\small\item\em Get the aspect ratio (width/\+height). \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_a974cc7b0072d1716a4bb550909821cb3}\label{class_boon_1_1_camera_a974cc7b0072d1716a4bb550909821cb3} 
+float {\bfseries Get\+Size} () const
+\begin{DoxyCompactList}\small\item\em Get the orthographic size. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_a4b21553cd691dd95a80cf76425f95a88}\label{class_boon_1_1_camera_a4b21553cd691dd95a80cf76425f95a88} 
+float {\bfseries Get\+Fov} () const
+\begin{DoxyCompactList}\small\item\em Get the field of view. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_adf9c69ae9889663d4688fa8d5c789568}\label{class_boon_1_1_camera_adf9c69ae9889663d4688fa8d5c789568} 
+float {\bfseries Get\+Near} () const
+\begin{DoxyCompactList}\small\item\em Get the near clipping plane distance. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_camera_a7438124cad754fda5dc60cd447149f8c}\label{class_boon_1_1_camera_a7438124cad754fda5dc60cd447149f8c} 
+float {\bfseries Get\+Far} () const
+\begin{DoxyCompactList}\small\item\em Get the far clipping plane distance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_camera_8h_source_l00007}{7}} of file \doxymbox{\hyperlink{_camera_8h_source}{Camera.\+h}}.
+
+
+
+\label{doc-enum-members}
+\Hypertarget{class_boon_1_1_camera_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_boon_1_1_camera_abb84663b7a80fd65462f7558f4958c12}\index{Boon::Camera@{Boon::Camera}!ProjectionType@{ProjectionType}}
+\index{ProjectionType@{ProjectionType}!Boon::Camera@{Boon::Camera}}
+\doxysubsubsection{\texorpdfstring{ProjectionType}{ProjectionType}}
+{\footnotesize\ttfamily \label{class_boon_1_1_camera_abb84663b7a80fd65462f7558f4958c12} 
+enum class Boon::\+\+Camera::\+\+Projection\+Type\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_camera_8h_source_l00010}{10}} of file \doxymbox{\hyperlink{_camera_8h_source}{Camera.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_boon_1_1_camera_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_boon_1_1_camera_aa731d2efe136202cc1092151eb866847}\index{Boon::Camera@{Boon::Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Boon::Camera@{Boon::Camera}}
+\doxysubsubsection{\texorpdfstring{Camera()}{Camera()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_camera_aa731d2efe136202cc1092151eb866847} 
+Boon::\+\+Camera::\+\+Camera (\begin{DoxyParamCaption}\item[{float}]{fov}{ = {\ttfamily 90.f}, }\item[{float}]{near}{ = {\ttfamily 0.1f}, }\item[{float}]{far}{ = {\ttfamily 10.0f}}\end{DoxyParamCaption})}
+
+
+
+Construct a perspective camera. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fov} & Field of view in degrees. \\
+\hline
+{\em near} & Near clipping plane distance. \\
+\hline
+{\em far} & Far clipping plane distance. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_camera_a7d1c525a3031c474527ca10855b851ae}\index{Boon::Camera@{Boon::Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Boon::Camera@{Boon::Camera}}
+\doxysubsubsection{\texorpdfstring{Camera()}{Camera()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_camera_a7d1c525a3031c474527ca10855b851ae} 
+Boon::\+\+Camera::\+\+Camera (\begin{DoxyParamCaption}\item[{float}]{size}{, }\item[{float}]{aspect\+Ratio}{, }\item[{float}]{near}{, }\item[{float}]{far}{}\end{DoxyParamCaption})}
+
+
+
+Construct an orthographic camera. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & Orthographic size. \\
+\hline
+{\em aspect\+Ratio} & Aspect ratio (width/\+height). \\
+\hline
+{\em near} & Near clipping plane distance. \\
+\hline
+{\em far} & Far clipping plane distance. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_camera_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_camera_aa75a24464c656bf42982b928c7fd35a5}\index{Boon::Camera@{Boon::Camera}!GetProjection@{GetProjection}}
+\index{GetProjection@{GetProjection}!Boon::Camera@{Boon::Camera}}
+\doxysubsubsection{\texorpdfstring{GetProjection()}{GetProjection()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_camera_aa75a24464c656bf42982b928c7fd35a5} 
+const glm::\+mat4 \& Boon::\+\+Camera::\+\+Get\+Projection (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Get the projection matrix. 
+
+\begin{DoxyReturn}{Returns}
+Const reference to the computed projection matrix. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Camera.\+h\end{DoxyCompactItemize}

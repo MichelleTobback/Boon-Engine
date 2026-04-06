@@ -65,3 +65,10 @@ build\\bin\\Release\\Editor\\Editor.exe
 
 
 <img width="1618" height="779" alt="Screenshot_2025-11-20_120335" src="https://github.com/user-attachments/assets/0292dbd2-dcb3-4edd-9a3d-ef6e21cb40e5" />
+
+---
+
+## Documentation
+
+- API reference (Doxygen): `docs/html/index.html` — the generated Doxygen HTML output. If you publish the docs (for example to GitHub Pages), replace this link with your hosted URL.
+

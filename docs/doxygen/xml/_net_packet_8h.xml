@@ -1,0 +1,283 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_net_packet_8h" kind="file" language="C++">
+    <compoundname>NetPacket.h</compoundname>
+    <includes local="no">cstdint</includes>
+    <includes refid="_buffer_8h" local="yes">Core/Memory/Buffer.h</includes>
+    <includes refid="_binary_serializer_8h" local="yes">Serialization/BinarySerializer.h</includes>
+    <includedby refid="_editor_state_8h" local="no">Core/EditorState.h</includedby>
+    <includedby refid="_net_driver_8h" local="yes">Networking/NetDriver.h</includedby>
+    <includedby refid="_net_r_p_c_8h" local="yes">Networking/NetRPC.h</includedby>
+    <includedby refid="_net_rep_core_8h" local="yes">Networking/NetRepCore.h</includedby>
+    <includedby refid="_net_scene_8h" local="yes">Networking/NetScene.h</includedby>
+    <includedby refid="_steam_net_driver_8h" local="yes">Platform/Steam/SteamNetDriver.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>Core/Memory/Buffer.h</label>
+        <link refid="_buffer_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Networking/NetPacket.h</label>
+        <link refid="_net_packet_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Serialization/BinarySerializer.h</label>
+        <link refid="_binary_serializer_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>cassert</label>
+      </node>
+      <node id="2">
+        <label>cstdint</label>
+      </node>
+      <node id="5">
+        <label>cstring</label>
+      </node>
+      <node id="7">
+        <label>string</label>
+      </node>
+      <node id="6">
+        <label>type_traits</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>Networking/NetDriver.h</label>
+        <link refid="_net_driver_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Networking/NetPacket.h</label>
+        <link refid="_net_packet_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Networking/NetRPC.h</label>
+        <link refid="_net_r_p_c_8h"/>
+      </node>
+      <node id="6">
+        <label>Networking/NetRepCore.h</label>
+        <link refid="_net_rep_core_8h"/>
+      </node>
+      <node id="7">
+        <label>Networking/NetScene.h</label>
+        <link refid="_net_scene_8h"/>
+      </node>
+      <node id="4">
+        <label>Platform/Steam/SteamNetDriver.h</label>
+        <link refid="_steam_net_driver_8h"/>
+      </node>
+      <node id="2">
+        <label>Core/EditorState.h</label>
+        <link refid="_editor_state_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_boon_1_1_net_packet_header" prot="public">Boon::NetPacketHeader</innerclass>
+    <innerclass refid="class_boon_1_1_net_packet" prot="public">Boon::NetPacket</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_buffer_8h" kindref="compound">Core/Memory/Buffer.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_binary_serializer_8h" kindref="compound">Serialization/BinarySerializer.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="7"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>All<sp/>packet<sp/>types<sp/>used<sp/>by<sp/>the<sp/>networking<sp/>system</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31" kindref="member">ENetPacketType</ref><sp/>:<sp/>uint8_t</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="13" refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a6adf97f83acf6453d4a6a4b1070f3754" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a6867a346204e7bbed8bfe91d8dc2e807a6adf97f83acf6453d4a6a4b1070f3754" kindref="member">None</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Scene<sp/>/<sp/>Object<sp/>Management</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a4fd1dddbd78f7f7cdcd62e926266611e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a4fd1dddbd78f7f7cdcd62e926266611e" kindref="member">Spawn</ref>,</highlight></codeline>
+<codeline lineno="17" refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a573a38c8ee30e1c0d6ad84ce4f965cf0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a573a38c8ee30e1c0d6ad84ce4f965cf0" kindref="member">Despawn</ref>,</highlight></codeline>
+<codeline lineno="18" refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a2cb05e4bb7830be982f0922fed86b4cd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a2cb05e4bb7830be982f0922fed86b4cd" kindref="member">Component</ref>,</highlight></codeline>
+<codeline lineno="19" refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a5485be898200faddd28b6c2b137cba37" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a5485be898200faddd28b6c2b137cba37" kindref="member">LoadScene</ref>,</highlight></codeline>
+<codeline lineno="20" refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a5a732ac3faa75579fd9fa0842ced6d7f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a5a732ac3faa75579fd9fa0842ced6d7f" kindref="member">InitScene</ref>,</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Data<sp/>Flow</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a8c340dc334134096f68b880b42a8692c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a8c340dc334134096f68b880b42a8692c" kindref="member">Replication</ref>,</highlight></codeline>
+<codeline lineno="24" refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a6defe438c8cba7575d04f8a4e24467ad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a6defe438c8cba7575d04f8a4e24467ad" kindref="member">RPC</ref>,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Connection<sp/>/<sp/>Handshake</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a7559811a22a9c4b79332bd85a197e4c5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a7559811a22a9c4b79332bd85a197e4c5" kindref="member">Handshake</ref>,</highlight></codeline>
+<codeline lineno="28" refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31ab85815d04cec053ce6deb8021f2df1b8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31ab85815d04cec053ce6deb8021f2df1b8" kindref="member">Ping</ref>,</highlight></codeline>
+<codeline lineno="29" refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a4d94412495a32342e1b8c78f7960f2bc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a4d94412495a32342e1b8c78f7960f2bc" kindref="member">Pong</ref>,</highlight></codeline>
+<codeline lineno="30" refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31ad87d81b725e13863c4f785fc2df6130a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31ad87d81b725e13863c4f785fc2df6130a" kindref="member">AssignID</ref></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Standard<sp/>packet<sp/>header<sp/>(16<sp/>bytes<sp/>total)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="struct_boon_1_1_net_packet_header" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_net_packet_header_1ae870316ebb4e1db9169a1de62990e959" kindref="member">NetPacketHeader</ref></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="38" refid="struct_boon_1_1_net_packet_header_1ae870316ebb4e1db9169a1de62990e959" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_packet_header_1ae870316ebb4e1db9169a1de62990e959" kindref="member">NetPacketHeader</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="39" refid="struct_boon_1_1_net_packet_header_1aaab371bea77c231b901fa29be72f15cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_packet_header_1aaab371bea77c231b901fa29be72f15cb" kindref="member">NetPacketHeader</ref>(<ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31" kindref="member">ENetPacketType</ref><sp/>type)</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="struct_boon_1_1_net_packet_header_1aff074eec8933f64d3f3d89437f6520d3" kindref="member">Type</ref>(type)<sp/>{}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="struct_boon_1_1_net_packet_header_1afecccb61bc38ed6d371d0db1dc098cb0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint16_t<sp/><ref refid="struct_boon_1_1_net_packet_header_1afecccb61bc38ed6d371d0db1dc098cb0" kindref="member">ProtocolVersion</ref><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="43" refid="struct_boon_1_1_net_packet_header_1aff074eec8933f64d3f3d89437f6520d3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31" kindref="member">ENetPacketType</ref><sp/><ref refid="struct_boon_1_1_net_packet_header_1aff074eec8933f64d3f3d89437f6520d3" kindref="member">Type</ref><sp/>=<sp/><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31a6adf97f83acf6453d4a6a4b1070f3754" kindref="member">ENetPacketType::None</ref>;</highlight></codeline>
+<codeline lineno="44" refid="struct_boon_1_1_net_packet_header_1afdc6fb83630ec7f903ad374d354dfbc9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="struct_boon_1_1_net_packet_header_1afdc6fb83630ec7f903ad374d354dfbc9" kindref="member">Reserved0</ref><sp/>=<sp/>0;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>alignment</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="struct_boon_1_1_net_packet_header_1a8bebcaefa46be61027f0970aeb80f87f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_boon_1_1_net_packet_header_1a8bebcaefa46be61027f0970aeb80f87f" kindref="member">PayloadSize</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="47" refid="struct_boon_1_1_net_packet_header_1a3aba026f4e35fd378f9352908124faa5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_boon_1_1_net_packet_header_1a3aba026f4e35fd378f9352908124faa5" kindref="member">Flags</ref><sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>compressed,<sp/>reliable,<sp/>fragmented,<sp/>etc.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="struct_boon_1_1_net_packet_header_1a6683b65bde34a8618286fea7c91710d9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_boon_1_1_net_packet_header_1a6683b65bde34a8618286fea7c91710d9" kindref="member">ServerTick</ref><sp/>=<sp/>0;<sp/><sp/></highlight><highlight class="comment">//<sp/>for<sp/>time<sp/>sync,<sp/>lagcomp</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="struct_boon_1_1_net_packet_header_1a731dfc58c832507376638be44f8d9f32" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_net_packet_header_1a731dfc58c832507376638be44f8d9f32" kindref="member">Size</ref>()</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_boon_1_1_net_packet_header_1ae870316ebb4e1db9169a1de62990e959" kindref="member">NetPacketHeader</ref>);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>NetPacket<sp/>combines:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-<sp/>header<sp/>(type<sp/>+<sp/>size)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-<sp/>BinarySerializer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-<sp/>Buffer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62" refid="class_boon_1_1_net_packet" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_net_packet_1af44b700bf78799fc8db2fd4fe01cb9b6" kindref="member">NetPacket</ref></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Writing<sp/>new<sp/>packet</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="class_boon_1_1_net_packet_1af44b700bf78799fc8db2fd4fe01cb9b6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_net_packet_1af44b700bf78799fc8db2fd4fe01cb9b6" kindref="member">NetPacket</ref>(<ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31" kindref="member">ENetPacketType</ref><sp/>type)</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_Header{<sp/>type<sp/>},<sp/>m_Serializer()</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Reading<sp/>received<sp/>packet</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="class_boon_1_1_net_packet_1a3659745be237ff3aa3e2def88d814ebb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_net_packet_1a3659745be237ff3aa3e2def88d814ebb" kindref="member">NetPacket</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*<sp/>data,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>size)</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Header<sp/>first</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::memcpy(&amp;m_Header,<sp/>data,<sp/><ref refid="struct_boon_1_1_net_packet_header_1a731dfc58c832507376638be44f8d9f32" kindref="member">NetPacketHeader::Size</ref>());</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Remaining<sp/>buffer<sp/>for<sp/>serializer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>payloadSize<sp/>=<sp/>size<sp/>-<sp/><ref refid="struct_boon_1_1_net_packet_header_1a731dfc58c832507376638be44f8d9f32" kindref="member">NetPacketHeader::Size</ref>();</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_Serializer<sp/>=<sp/><ref refid="class_boon_1_1_binary_serializer" kindref="compound">BinarySerializer</ref>(data<sp/>+<sp/><ref refid="struct_boon_1_1_net_packet_header_1a731dfc58c832507376638be44f8d9f32" kindref="member">NetPacketHeader::Size</ref>(),<sp/>payloadSize);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>---------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Write<sp/>API</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>---------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="85" refid="class_boon_1_1_net_packet_1ae79a1dc4a9baaf794ae59d08a9abf599" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_net_packet_1ae79a1dc4a9baaf794ae59d08a9abf599" kindref="member">Write</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>value)</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_Serializer.Write(value);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90" refid="class_boon_1_1_net_packet_1a0099955b13ee5400324a9a308d8a29cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_net_packet_1a0099955b13ee5400324a9a308d8a29cb" kindref="member">WriteString</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>str)</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_Serializer.WriteString(str);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95" refid="class_boon_1_1_net_packet_1aec13f3c3dd05c3bff65ef2ebe9529ef1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_net_packet_1aec13f3c3dd05c3bff65ef2ebe9529ef1" kindref="member">WriteBytes</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>data,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>size)</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_Serializer.WriteBytes(data,<sp/>size);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>---------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Read<sp/>API</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>---------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="104" refid="class_boon_1_1_net_packet_1a2308225404dd6b4428bf29b039cbf7c7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T<sp/><ref refid="class_boon_1_1_net_packet_1a2308225404dd6b4428bf29b039cbf7c7" kindref="member">Read</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Serializer.Read&lt;T&gt;();<sp/>}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106" refid="class_boon_1_1_net_packet_1a546a4c2157a6a720c3314b781aac05ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="class_boon_1_1_net_packet_1a546a4c2157a6a720c3314b781aac05ec" kindref="member">ReadString</ref>()</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Serializer.ReadString();</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111" refid="class_boon_1_1_net_packet_1ab679276fe61019fa32fb35f571e83524" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_net_packet_1ab679276fe61019fa32fb35f571e83524" kindref="member">ReadBytes</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>out,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>size)</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_Serializer.ReadBytes(out,<sp/>size);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>---------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Finalize<sp/>packet<sp/>into<sp/>raw<sp/>byte<sp/>stream</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>---------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125" refid="class_boon_1_1_net_packet_1a8b5bf048b31d2999bfb8f023449d498f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_net_packet_1a8b5bf048b31d2999bfb8f023449d498f" kindref="member">BuildBuffer</ref>(<ref refid="class_boon_1_1_buffer" kindref="compound">Buffer</ref>&amp;<sp/>output)</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_buffer" kindref="compound">Buffer</ref>&amp;<sp/>payload<sp/>=<sp/>m_Serializer.GetBuffer();</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_Header.PayloadSize<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(payload.<ref refid="class_boon_1_1_buffer_1afc45fb9db642e80e9a1dfc4f5a8e10b6" kindref="member">Size</ref>());</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>output.<ref refid="class_boon_1_1_buffer_1ad0292321257c715620ba8a872efe0d75" kindref="member">Reserve</ref>(<ref refid="struct_boon_1_1_net_packet_header_1a731dfc58c832507376638be44f8d9f32" kindref="member">NetPacketHeader::Size</ref>()<sp/>+<sp/>payload.<ref refid="class_boon_1_1_buffer_1afc45fb9db642e80e9a1dfc4f5a8e10b6" kindref="member">Size</ref>());</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>output.<ref refid="class_boon_1_1_buffer_1ac2ead5cc5a2e17f950851228418dcec8" kindref="member">Append</ref>(&amp;m_Header,<sp/><ref refid="struct_boon_1_1_net_packet_header_1a731dfc58c832507376638be44f8d9f32" kindref="member">NetPacketHeader::Size</ref>());</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>output.<ref refid="class_boon_1_1_buffer_1ac2ead5cc5a2e17f950851228418dcec8" kindref="member">Append</ref>(payload);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Direct<sp/>data<sp/>for<sp/>sending</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="138" refid="class_boon_1_1_net_packet_1a44578d56271daf3978276c9d44424d9f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*<sp/><ref refid="class_boon_1_1_net_packet_1a44578d56271daf3978276c9d44424d9f" kindref="member">RawData</ref>()</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_BuiltCache.Empty())</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_net_packet_1a8b5bf048b31d2999bfb8f023449d498f" kindref="member">BuildBuffer</ref>(m_BuiltCache);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_BuiltCache.Data();</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145" refid="class_boon_1_1_net_packet_1a1f1fe8d7b6b2cc6a2fb5c4ad244600ef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_net_packet_1a1f1fe8d7b6b2cc6a2fb5c4ad244600ef" kindref="member">RawSize</ref>()</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_BuiltCache.Empty())</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_net_packet_1a8b5bf048b31d2999bfb8f023449d498f" kindref="member">BuildBuffer</ref>(m_BuiltCache);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_BuiltCache.Size();</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152" refid="class_boon_1_1_net_packet_1a7492f6335c8767f955743905f0b1dafb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a40db7697de65418ff7b6502be3255c31" kindref="member">ENetPacketType</ref><sp/><ref refid="class_boon_1_1_net_packet_1a7492f6335c8767f955743905f0b1dafb" kindref="member">GetType</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Header.Type;<sp/>}</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154" refid="class_boon_1_1_net_packet_1a127307c621aba2b1f1d54223cfa28893" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_binary_serializer" kindref="compound">BinarySerializer</ref>&amp;<sp/><ref refid="class_boon_1_1_net_packet_1a127307c621aba2b1f1d54223cfa28893" kindref="member">GetSerializer</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Serializer;<sp/>}</highlight></codeline>
+<codeline lineno="155" refid="class_boon_1_1_net_packet_1aa028746e1ce0d958491a4a505661ab36" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_binary_serializer" kindref="compound">BinarySerializer</ref>&amp;<sp/><ref refid="class_boon_1_1_net_packet_1aa028746e1ce0d958491a4a505661ab36" kindref="member">GetSerializer</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_Serializer;<sp/>}</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_net_packet_header" kindref="compound">NetPacketHeader</ref><sp/>m_Header{};</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BinarySerializer<sp/>m_Serializer;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>built<sp/>packet<sp/>for<sp/>sending<sp/>(only<sp/>built<sp/>once)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Buffer<sp/>m_BuiltCache;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="164"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Networking/NetPacket.h"/>
+  </compounddef>
+</doxygen>

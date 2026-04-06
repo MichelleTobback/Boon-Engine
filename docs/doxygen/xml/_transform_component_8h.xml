@@ -1,0 +1,450 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_transform_component_8h" kind="file" language="C++">
+    <compoundname>TransformComponent.h</compoundname>
+    <includes local="no">glm/glm.hpp</includes>
+    <includes local="no">glm/gtc/quaternion.hpp</includes>
+    <includes local="no">glm/gtx/quaternion.hpp</includes>
+    <includes refid="_b_class_base_8h" local="yes">Reflection/BClassBase.h</includes>
+    <includedby refid="_editor_camera_8h" local="yes">Core/EditorCamera.h</includedby>
+    <includedby refid="_game_object_8h" local="yes">Scene/GameObject.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>Component/TransformComponent.h</label>
+        <link refid="_transform_component_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Reflection/BClassBase.h</label>
+        <link refid="_b_class_base_8h"/>
+      </node>
+      <node id="2">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="3">
+        <label>glm/gtc/quaternion.hpp</label>
+      </node>
+      <node id="4">
+        <label>glm/gtx/quaternion.hpp</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="11">
+        <label>Component/BoxCollider2D.h</label>
+        <link refid="_box_collider2_d_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>Component/CameraComponent.h</label>
+        <link refid="_camera_component_8h"/>
+      </node>
+      <node id="36">
+        <label>Component/ECSLifecycle.h</label>
+        <link refid="_e_c_s_lifecycle_8h"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>Component/NameComponent.h</label>
+        <link refid="_name_component_8h"/>
+      </node>
+      <node id="15">
+        <label>Component/Rigidbody2D.h</label>
+        <link refid="_rigidbody2_d_8h"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Component/SceneComponent.h</label>
+        <link refid="_scene_component_8h"/>
+      </node>
+      <node id="18">
+        <label>Component/SpriteAnimatorComponent.h</label>
+        <link refid="_sprite_animator_component_8h"/>
+      </node>
+      <node id="19">
+        <label>Component/SpriteRendererComponent.h</label>
+        <link refid="_sprite_renderer_component_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>Component/TextureRendererComponent.h</label>
+        <link refid="_texture_renderer_component_8h"/>
+      </node>
+      <node id="1">
+        <label>Component/TransformComponent.h</label>
+        <link refid="_transform_component_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Core/Boon.h</label>
+        <link refid="_boon_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>Networking/Components/NetRigidbody2D.h</label>
+        <link refid="_net_rigidbody2_d_8h"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Networking/Components/NetRigidbody2DSerializer.h</label>
+        <link refid="_net_rigidbody2_d_serializer_8h"/>
+      </node>
+      <node id="21">
+        <label>Networking/Components/NetTransform.h</label>
+        <link refid="_net_transform_8h"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>Networking/Components/NetTransformSerializer.h</label>
+        <link refid="_net_transform_serializer_8h"/>
+      </node>
+      <node id="32">
+        <label>Networking/IRepSerializer.h</label>
+        <link refid="_i_rep_serializer_8h"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>Networking/NetIdentity.h</label>
+        <link refid="_net_identity_8h"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>Networking/NetRepCore.h</label>
+        <link refid="_net_rep_core_8h"/>
+      </node>
+      <node id="33">
+        <label>Networking/NetRepRegistry.h</label>
+        <link refid="_net_rep_registry_8h"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>Networking/NetScene.h</label>
+        <link refid="_net_scene_8h"/>
+      </node>
+      <node id="12">
+        <label>Physics/Physics2D.h</label>
+        <link refid="_physics2_d_8h"/>
+      </node>
+      <node id="35">
+        <label>Reflection/ECSLifecycleDetection.h</label>
+        <link refid="_e_c_s_lifecycle_detection_8h"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>Reflection/RegisterBClass.h</label>
+        <link refid="_register_b_class_8h"/>
+      </node>
+      <node id="38">
+        <label>Scene/BRef.h</label>
+        <link refid="_b_ref_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Scene/GameObject.h</label>
+        <link refid="_game_object_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>Core/BoonEditor.h</label>
+        <link refid="_boon_editor_8h"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Core/EditorCamera.h</label>
+        <link refid="_editor_camera_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>Core/EditorState.h</label>
+        <link refid="_editor_state_8h"/>
+      </node>
+      <node id="27">
+        <label>Event/EditorEvent.h</label>
+        <link refid="_editor_event_8h"/>
+      </node>
+      <node id="3">
+        <label>Panels/AssetEditor.h</label>
+        <link refid="_asset_editor_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Panels/AssetEditorPanel.h</label>
+        <link refid="_asset_editor_panel_8h"/>
+      </node>
+      <node id="28">
+        <label>Panels/ContentBrowser.h</label>
+        <link refid="_content_browser_8h"/>
+      </node>
+      <node id="29">
+        <label>Panels/PropertiesPanel.h</label>
+        <link refid="_properties_panel_8h"/>
+      </node>
+      <node id="30">
+        <label>Panels/ScenePanel.h</label>
+        <link refid="_scene_panel_8h"/>
+      </node>
+      <node id="5">
+        <label>Panels/SpriteAtlasEditorPanel.h</label>
+        <link refid="_sprite_atlas_editor_panel_8h"/>
+      </node>
+      <node id="6">
+        <label>Panels/TilemapEditorPanel.h</label>
+        <link refid="_tilemap_editor_panel_8h"/>
+      </node>
+      <node id="7">
+        <label>Panels/ViewportPanel.h</label>
+        <link refid="_viewport_panel_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>Panels/ViewportToolbar.h</label>
+        <link refid="_viewport_toolbar_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_boon_1_1_transform_component" prot="public">Boon::TransformComponent</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="_transform_component_8h_1abd75661fe7969e19439052a5f69ba5d1" prot="public" static="no">
+        <name>GLM_ENABLE_EXPERIMENTAL</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TransformComponent.h" line="5" column="9" bodyfile="Component/TransformComponent.h" bodystart="5" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;glm/glm.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//TODO<sp/>-<sp/>Make<sp/>wrapper<sp/>class<sp/>so<sp/>these<sp/>includes<sp/>can<sp/>be<sp/>moved<sp/>to<sp/>a<sp/>cpp<sp/>file</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5" refid="_transform_component_8h_1abd75661fe7969e19439052a5f69ba5d1" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GLM_ENABLE_EXPERIMENTAL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>warning(push)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>warning(disable:<sp/>4201)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;glm/gtc/quaternion.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;glm/gtx/quaternion.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>warning(pop)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_b_class_base_8h" kindref="compound">Reflection/BClassBase.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="15"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">SceneComponent;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_b_class_base_8h_1ac6a33ac42cf2fb39ad7064dd369c1b68" kindref="member">BCLASS</ref>(HideInInspector)</highlight></codeline>
+<codeline lineno="18" refid="class_boon_1_1_transform_component" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/>class<sp/><ref refid="class_boon_1_1_transform_component_1a4400ae07fc22b62cb75c512db5ba413b" kindref="member">TransformComponent</ref></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_b_class_base_8h_1a004bec15a5fa52e788eb2dc0388a80dc" kindref="member">BCLASS_BODY</ref>()</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>enum<sp/>class<sp/><ref refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541d" kindref="member">TransformFlag</ref><sp/>:<sp/>uint32_t</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="25" refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541da6adf97f83acf6453d4a6a4b1070f3754" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a6867a346204e7bbed8bfe91d8dc2e807a6adf97f83acf6453d4a6a4b1070f3754" kindref="member">None</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541da52f5e0bc3859bc5f5e25130b6c7e8881" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Position<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>0,</highlight></codeline>
+<codeline lineno="28" refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541daf1a42bd417390fc63b030a519624607a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Rotation<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>1,</highlight></codeline>
+<codeline lineno="29" refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541da85a7cd587d6142dbfc1a4de05af7b75d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_transform_component_1aa18c596752707ea3f314187299685a01" kindref="member">Scale</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>2,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541da67d2f6740a8eaebf4d5c6f79be8da481" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Forward<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>3,</highlight></codeline>
+<codeline lineno="32" refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541da258f49887ef8d14ac268c92b02503aaa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_boon_1a7db3aa79b03ca781a0090a006cae0cfca258f49887ef8d14ac268c92b02503aaa" kindref="member">Up</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>4,</highlight></codeline>
+<codeline lineno="33" refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541da92b09c7c48c520c3c55e497875da437c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Right<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>4,</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541daf5a7924e621e84c9280a9a27e1bcb7f6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>World<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>5,</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541dab1c94ca2fbc3e78fc30069c8d0f01680" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>All<sp/>=<sp/>0xffffffff</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="39" refid="class_boon_1_1_transform_component_1a4400ae07fc22b62cb75c512db5ba413b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_transform_component_1a4400ae07fc22b62cb75c512db5ba413b" kindref="member">TransformComponent</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40" refid="class_boon_1_1_transform_component_1a489c96d6af27f49bf39a769b13cb8bb6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_transform_component_1a489c96d6af27f49bf39a769b13cb8bb6" kindref="member">TransformComponent</ref>(<ref refid="class_boon_1_1_transform_component_1ac94e77af6acdc9cbc063715e086fba5b" kindref="member">SceneComponent</ref>*<sp/>owner);</highlight></codeline>
+<codeline lineno="41" refid="class_boon_1_1_transform_component_1a66e481af031bda5e69413c76f6532cfc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_transform_component_1a66e481af031bda5e69413c76f6532cfc" kindref="member">~TransformComponent</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43" refid="class_boon_1_1_transform_component_1adefdffaee4d66d5b908f81014800cd4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_transform_component_1adefdffaee4d66d5b908f81014800cd4c" kindref="member">TransformComponent</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1a4400ae07fc22b62cb75c512db5ba413b" kindref="member">TransformComponent</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="44" refid="class_boon_1_1_transform_component_1a9abe3f29ac8bc39261193887d1bbefc1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_transform_component_1a9abe3f29ac8bc39261193887d1bbefc1" kindref="member">TransformComponent</ref>(<ref refid="class_boon_1_1_transform_component_1a4400ae07fc22b62cb75c512db5ba413b" kindref="member">TransformComponent</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="45" refid="class_boon_1_1_transform_component_1ae4a0f5f5427b4292db9cd299a9e673d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_transform_component_1a4400ae07fc22b62cb75c512db5ba413b" kindref="member">TransformComponent</ref>&amp;<sp/><ref refid="class_boon_1_1_transform_component_1ae4a0f5f5427b4292db9cd299a9e673d6" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1a4400ae07fc22b62cb75c512db5ba413b" kindref="member">TransformComponent</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="46" refid="class_boon_1_1_transform_component_1a322793bfc7c221d5ad57c481eae48088" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_transform_component_1a4400ae07fc22b62cb75c512db5ba413b" kindref="member">TransformComponent</ref>&amp;<sp/><ref refid="class_boon_1_1_transform_component_1a322793bfc7c221d5ad57c481eae48088" kindref="member">operator=</ref>(<ref refid="class_boon_1_1_transform_component_1a4400ae07fc22b62cb75c512db5ba413b" kindref="member">TransformComponent</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="class_boon_1_1_transform_component_1abe1986200792a6610dfb7bc61eb0f57d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::mat4&amp;<sp/><ref refid="class_boon_1_1_transform_component_1abe1986200792a6610dfb7bc61eb0f57d" kindref="member">GetWorld</ref>();</highlight></codeline>
+<codeline lineno="49" refid="class_boon_1_1_transform_component_1a8b961b91e1ad4c4b2adbf6fc457231af" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/><ref refid="class_boon_1_1_transform_component_1a8b961b91e1ad4c4b2adbf6fc457231af" kindref="member">GetWorldPosition</ref>();</highlight></codeline>
+<codeline lineno="50" refid="class_boon_1_1_transform_component_1a7f455f777c8d250a76599c7fc44af3e9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/><ref refid="class_boon_1_1_transform_component_1a7f455f777c8d250a76599c7fc44af3e9" kindref="member">GetLocalPosition</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="51" refid="class_boon_1_1_transform_component_1a0ee6ad73b229f3d228d957e535892090" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::quat&amp;<sp/><ref refid="class_boon_1_1_transform_component_1a0ee6ad73b229f3d228d957e535892090" kindref="member">GetWorldRotation</ref>();</highlight></codeline>
+<codeline lineno="52" refid="class_boon_1_1_transform_component_1ac24eb9c280d98200d812c9c05ae611fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::quat&amp;<sp/><ref refid="class_boon_1_1_transform_component_1ac24eb9c280d98200d812c9c05ae611fd" kindref="member">GetLocalRotation</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="53" refid="class_boon_1_1_transform_component_1aca77f6498b7c628f2b2155ca656b28ca" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/><ref refid="class_boon_1_1_transform_component_1aca77f6498b7c628f2b2155ca656b28ca" kindref="member">GetWorldEulerRotation</ref>();</highlight></codeline>
+<codeline lineno="54" refid="class_boon_1_1_transform_component_1ac0d5f2ab6a56313b4c8a7e7d2387860e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/><ref refid="class_boon_1_1_transform_component_1ac0d5f2ab6a56313b4c8a7e7d2387860e" kindref="member">GetLocalEulerRotation</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="55" refid="class_boon_1_1_transform_component_1a47b70d9ab5093ea97b1724ab31841ad3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/><ref refid="class_boon_1_1_transform_component_1a47b70d9ab5093ea97b1724ab31841ad3" kindref="member">GetWorldScale</ref>();</highlight></codeline>
+<codeline lineno="56" refid="class_boon_1_1_transform_component_1a652bccd8ea4ba31a69a1c00372e90535" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/><ref refid="class_boon_1_1_transform_component_1a652bccd8ea4ba31a69a1c00372e90535" kindref="member">GetLocalScale</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="class_boon_1_1_transform_component_1a46c3205634ec0534a40ef8339532e4c3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1a46c3205634ec0534a40ef8339532e4c3" kindref="member">SetLocalPosition</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z);</highlight></codeline>
+<codeline lineno="59" refid="class_boon_1_1_transform_component_1a33957ed9bec564026a232c39fdcc068f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1a33957ed9bec564026a232c39fdcc068f" kindref="member">SetLocalPosition</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>position);</highlight></codeline>
+<codeline lineno="60" refid="class_boon_1_1_transform_component_1a2aa7062173bf7fff8735df545b95425a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1a2aa7062173bf7fff8735df545b95425a" kindref="member">SetLocalRotation</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z);</highlight></codeline>
+<codeline lineno="61" refid="class_boon_1_1_transform_component_1a021dae5745cf4c361c16feafdc1117c3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1a021dae5745cf4c361c16feafdc1117c3" kindref="member">SetLocalRotation</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::quat&amp;<sp/>rotation);</highlight></codeline>
+<codeline lineno="62" refid="class_boon_1_1_transform_component_1afbae452c5d00aa1414f784f760aa25a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1afbae452c5d00aa1414f784f760aa25a0" kindref="member">SetLocalRotation</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>rotation);</highlight></codeline>
+<codeline lineno="63" refid="class_boon_1_1_transform_component_1a0edf17dd3526289b281370f7dd3d62fa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1a0edf17dd3526289b281370f7dd3d62fa" kindref="member">SetLocalScale</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z);</highlight></codeline>
+<codeline lineno="64" refid="class_boon_1_1_transform_component_1aed15e592f3b76f7bb112af10eb2d71d1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1aed15e592f3b76f7bb112af10eb2d71d1" kindref="member">SetLocalScale</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>scale);</highlight></codeline>
+<codeline lineno="65" refid="class_boon_1_1_transform_component_1a072748f6ad07a2da23a3ced841c44aa1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1a072748f6ad07a2da23a3ced841c44aa1" kindref="member">SetLocalTransform</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>position,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>euler,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>scale);</highlight></codeline>
+<codeline lineno="66" refid="class_boon_1_1_transform_component_1a60ea5e5a46045c7bed197963e26a9e36" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1a60ea5e5a46045c7bed197963e26a9e36" kindref="member">SetLocalTransform</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>position,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::quat&amp;<sp/>rotation,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>scale);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68" refid="class_boon_1_1_transform_component_1a75e4500f656a9ca2bbe83551b3dcd890" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1a75e4500f656a9ca2bbe83551b3dcd890" kindref="member">Translate</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z);</highlight></codeline>
+<codeline lineno="69" refid="class_boon_1_1_transform_component_1ab1cb82932da439caa854ad4f970cc87f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1ab1cb82932da439caa854ad4f970cc87f" kindref="member">Translate</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>translation);</highlight></codeline>
+<codeline lineno="70" refid="class_boon_1_1_transform_component_1ab977af2e8bc99bccee0b4c0f85f9dcb6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1ab977af2e8bc99bccee0b4c0f85f9dcb6" kindref="member">Rotate</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z);</highlight></codeline>
+<codeline lineno="71" refid="class_boon_1_1_transform_component_1a0e6d377c7a2bb4aa0fc6efc74423914a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1a0e6d377c7a2bb4aa0fc6efc74423914a" kindref="member">Rotate</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::quat&amp;<sp/>rotation);</highlight></codeline>
+<codeline lineno="72" refid="class_boon_1_1_transform_component_1a78efafb4b9c43185d185f9e65175a967" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1a78efafb4b9c43185d185f9e65175a967" kindref="member">Rotate</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>rotation);</highlight></codeline>
+<codeline lineno="73" refid="class_boon_1_1_transform_component_1aa18c596752707ea3f314187299685a01" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1aa18c596752707ea3f314187299685a01" kindref="member">Scale</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z);</highlight></codeline>
+<codeline lineno="74" refid="class_boon_1_1_transform_component_1a560136663ebd81e48d80587e6d270d3a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1a560136663ebd81e48d80587e6d270d3a" kindref="member">Scale</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/>scale);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="class_boon_1_1_transform_component_1ab1f541ca62f5c9360415fb1fe0d47f27" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1ab1f541ca62f5c9360415fb1fe0d47f27" kindref="member">RotateTowards</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3<sp/>direction);</highlight></codeline>
+<codeline lineno="77" refid="class_boon_1_1_transform_component_1a21b360fe0ca43e7e703b2386ebd30206" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1a21b360fe0ca43e7e703b2386ebd30206" kindref="member">RotateToPoint</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3<sp/>point);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79" refid="class_boon_1_1_transform_component_1a3eaea08d309e39577678e738ab8bf4d7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/><ref refid="class_boon_1_1_transform_component_1a3eaea08d309e39577678e738ab8bf4d7" kindref="member">GetForward</ref>();</highlight></codeline>
+<codeline lineno="80" refid="class_boon_1_1_transform_component_1a9da4eb1553742cf696eda7eee7662d75" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/><ref refid="class_boon_1_1_transform_component_1a9da4eb1553742cf696eda7eee7662d75" kindref="member">GetUp</ref>();</highlight></codeline>
+<codeline lineno="81" refid="class_boon_1_1_transform_component_1a70abf55b7252d446141186308cf72399" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>glm::vec3&amp;<sp/><ref refid="class_boon_1_1_transform_component_1a70abf55b7252d446141186308cf72399" kindref="member">GetRight</ref>();</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="84" refid="class_boon_1_1_transform_component_1a7c6966fadaf14a02136194ff238f1da8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_boon_1_1_transform_component_1a7c6966fadaf14a02136194ff238f1da8" kindref="member">SetChildrenDirty</ref>(<ref refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541d" kindref="member">TransformFlag</ref><sp/>flag);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>RecalculateWorldPosition();</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>RecalculateWorldRotation();</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>RecalculateWorldScale();</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>RecalculateWorldTransform();</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetDirty(<ref refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541d" kindref="member">TransformFlag</ref><sp/>flag,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isDirty);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsDirty(<ref refid="class_boon_1_1_transform_component_1a066ea6a36aaf5029ce43337a18e6541d" kindref="member">TransformFlag</ref><sp/>flag)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>RecalculateForward();</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>RecalculateUp();</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>RecalculateRight();</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::mat4<sp/>m_WorldTransform{};</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_b_class_base_8h_1a9d1874ba27ed5506f5a15511a8f78035" kindref="member">BPROPERTY</ref>(HideInInspector)</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_LocalPosition{};</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_WorldPosition{};</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::quat<sp/>m_LocalRotQ{};</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::quat<sp/>m_WorldRotQ{};</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_b_class_base_8h_1a9d1874ba27ed5506f5a15511a8f78035" kindref="member">BPROPERTY</ref>(HideInInspector)</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_LocalEuler{};</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_WorldEuler{};</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_b_class_base_8h_1a9d1874ba27ed5506f5a15511a8f78035" kindref="member">BPROPERTY</ref>(HideInInspector)</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_LocalScale{<sp/>1.f,<sp/>1.f,<sp/>1.f<sp/>};</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_WorldScale{};</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_Forward{<sp/>0.f,<sp/>0.f,<sp/>-1.f<sp/>};</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_Up{<sp/>0.f,<sp/>1.f,<sp/>0.f<sp/>};</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::vec3<sp/>m_Right{<sp/>1.f,<sp/>0.f,<sp/>0.f<sp/>};</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TransformFlag<sp/>m_DirtyFlags{<sp/>TransformFlag::All<sp/>};</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121" refid="class_boon_1_1_transform_component_1a00df87c957d8f7ee0fc51f07a0542f4a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_transform_component_1a00df87c957d8f7ee0fc51f07a0542f4a" kindref="member">GameObject</ref>;</highlight></codeline>
+<codeline lineno="122" refid="class_boon_1_1_transform_component_1ac94e77af6acdc9cbc063715e086fba5b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_transform_component_1ac94e77af6acdc9cbc063715e086fba5b" kindref="member">SceneComponent</ref>;</highlight></codeline>
+<codeline lineno="123" refid="class_boon_1_1_transform_component_1a5fa7cde0ffbc72d80ef032c1ea3e9c85" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_boon_1_1_transform_component_1a5fa7cde0ffbc72d80ef032c1ea3e9c85" kindref="member">SceneSerializer</ref>;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_boon_1_1_transform_component_1ac94e77af6acdc9cbc063715e086fba5b" kindref="member">SceneComponent</ref>*<sp/>m_Owner;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="126"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Component/TransformComponent.h"/>
+  </compounddef>
+</doxygen>

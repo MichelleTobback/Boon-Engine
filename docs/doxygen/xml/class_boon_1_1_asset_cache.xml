@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_asset_cache" kind="class" language="C++" prot="public">
+    <compoundname>Boon::AssetCache</compoundname>
+    <includes refid="_asset_cache_8h" local="no">Asset/AssetPack/AssetCache.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_asset_cache_1ac22aa13933883395c97d7ef5dd303f4b" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref>, std::unique_ptr&lt; <ref refid="class_boon_1_1_asset" kindref="compound">Asset</ref> &gt; &gt;</type>
+        <definition>std::unordered_map&lt;AssetHandle, std::unique_ptr&lt;Asset&gt; &gt; Boon::AssetCache::m_Assets</definition>
+        <argsstring></argsstring>
+        <name>m_Assets</name>
+        <qualifiedname>Boon::AssetCache::m_Assets</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetCache.h" line="36" column="28" bodyfile="Asset/AssetPack/AssetCache.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_asset_cache_1ad1830a7d4732325b853b545893016e7b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * Boon::AssetCache::Find</definition>
+        <argsstring>(AssetHandle handle)</argsstring>
+        <name>Find</name>
+        <qualifiedname>Boon::AssetCache::Find</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetCache.h" line="14" column="11" bodyfile="Asset/AssetPack/AssetCache.h" bodystart="14" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_asset_cache_1a566d1e0bf503fc0aa1a83124f2a11400" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void Boon::AssetCache::Store</definition>
+        <argsstring>(T *asset)</argsstring>
+        <name>Store</name>
+        <qualifiedname>Boon::AssetCache::Store</qualifiedname>
+        <param>
+          <type>T *</type>
+          <declname>asset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetCache.h" line="25" column="14" bodyfile="Asset/AssetPack/AssetCache.h" bodystart="25" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_asset_cache_1a80f57be0a4e855e1508aea73c75289c3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::AssetCache::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>Boon::AssetCache::Clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/AssetPack/AssetCache.h" line="30" column="14" bodyfile="Asset/AssetPack/AssetCache.h" bodystart="30" bodyend="33"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Asset/AssetPack/AssetCache.h" line="10" column="5" bodyfile="Asset/AssetPack/AssetCache.h" bodystart="11" bodyend="37"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_asset_cache_1a80f57be0a4e855e1508aea73c75289c3" prot="public" virt="non-virtual"><scope>Boon::AssetCache</scope><name>Clear</name></member>
+      <member refid="class_boon_1_1_asset_cache_1ad1830a7d4732325b853b545893016e7b" prot="public" virt="non-virtual"><scope>Boon::AssetCache</scope><name>Find</name></member>
+      <member refid="class_boon_1_1_asset_cache_1ac22aa13933883395c97d7ef5dd303f4b" prot="private" virt="non-virtual"><scope>Boon::AssetCache</scope><name>m_Assets</name></member>
+      <member refid="class_boon_1_1_asset_cache_1a566d1e0bf503fc0aa1a83124f2a11400" prot="public" virt="non-virtual"><scope>Boon::AssetCache</scope><name>Store</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,197 @@
+\doxysection{Boon::\+Net\+Packet Class Reference}
+\hypertarget{class_boon_1_1_net_packet}{}\label{class_boon_1_1_net_packet}\index{Boon::NetPacket@{Boon::NetPacket}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_net_packet_af44b700bf78799fc8db2fd4fe01cb9b6}{Net\+Packet}} (ENet\+Packet\+Type type)
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_net_packet_a3659745be237ff3aa3e2def88d814ebb}{Net\+Packet}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t size)
+\item 
+{\footnotesize template$<$typename T$>$ }\\void \doxymbox{\hyperlink{class_boon_1_1_net_packet_ae79a1dc4a9baaf794ae59d08a9abf599}{Write}} (const T \&value)
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_net_packet_a0099955b13ee5400324a9a308d8a29cb}{Write\+String}} (const std::\+string \&str)
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_net_packet_aec13f3c3dd05c3bff65ef2ebe9529ef1}{Write\+Bytes}} (const void \texorpdfstring{$\ast$}{*}data, size\+\_\+t size)
+\item 
+{\footnotesize template$<$typename T$>$ }\\T \doxymbox{\hyperlink{class_boon_1_1_net_packet_a2308225404dd6b4428bf29b039cbf7c7}{Read}} ()
+\item 
+std::\+string \doxymbox{\hyperlink{class_boon_1_1_net_packet_a546a4c2157a6a720c3314b781aac05ec}{Read\+String}} ()
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_net_packet_ab679276fe61019fa32fb35f571e83524}{Read\+Bytes}} (void \texorpdfstring{$\ast$}{*}out, size\+\_\+t size)
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_net_packet_a8b5bf048b31d2999bfb8f023449d498f}{Build\+Buffer}} (\doxymbox{\hyperlink{class_boon_1_1_buffer}{Buffer}} \&output)
+\item 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_1_1_net_packet_a44578d56271daf3978276c9d44424d9f}{Raw\+Data}} ()
+\item 
+size\+\_\+t \doxymbox{\hyperlink{class_boon_1_1_net_packet_a1f1fe8d7b6b2cc6a2fb5c4ad244600ef}{Raw\+Size}} ()
+\item 
+ENet\+Packet\+Type \doxymbox{\hyperlink{class_boon_1_1_net_packet_a7492f6335c8767f955743905f0b1dafb}{Get\+Type}} () const
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_binary_serializer}{Binary\+Serializer}} \& \doxymbox{\hyperlink{class_boon_1_1_net_packet_a127307c621aba2b1f1d54223cfa28893}{Get\+Serializer}} ()
+\item 
+const \doxymbox{\hyperlink{class_boon_1_1_binary_serializer}{Binary\+Serializer}} \& \doxymbox{\hyperlink{class_boon_1_1_net_packet_aa028746e1ce0d958491a4a505661ab36}{Get\+Serializer}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_net_packet_8h_source_l00062}{62}} of file \doxymbox{\hyperlink{_net_packet_8h_source}{Net\+Packet.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_boon_1_1_net_packet_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_boon_1_1_net_packet_af44b700bf78799fc8db2fd4fe01cb9b6}\index{Boon::NetPacket@{Boon::NetPacket}!NetPacket@{NetPacket}}
+\index{NetPacket@{NetPacket}!Boon::NetPacket@{Boon::NetPacket}}
+\doxysubsubsection{\texorpdfstring{NetPacket()}{NetPacket()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_net_packet_af44b700bf78799fc8db2fd4fe01cb9b6} 
+Boon::\+\+Net\+Packet::\+\+Net\+Packet (\begin{DoxyParamCaption}\item[{ENet\+Packet\+Type}]{type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_packet_8h_source_l00066}{66}} of file \doxymbox{\hyperlink{_net_packet_8h_source}{Net\+Packet.\+h}}.
+
+\Hypertarget{class_boon_1_1_net_packet_a3659745be237ff3aa3e2def88d814ebb}\index{Boon::NetPacket@{Boon::NetPacket}!NetPacket@{NetPacket}}
+\index{NetPacket@{NetPacket}!Boon::NetPacket@{Boon::NetPacket}}
+\doxysubsubsection{\texorpdfstring{NetPacket()}{NetPacket()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_net_packet_a3659745be237ff3aa3e2def88d814ebb} 
+Boon::\+\+Net\+Packet::\+\+Net\+Packet (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_packet_8h_source_l00071}{71}} of file \doxymbox{\hyperlink{_net_packet_8h_source}{Net\+Packet.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_net_packet_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_net_packet_a8b5bf048b31d2999bfb8f023449d498f}\index{Boon::NetPacket@{Boon::NetPacket}!BuildBuffer@{BuildBuffer}}
+\index{BuildBuffer@{BuildBuffer}!Boon::NetPacket@{Boon::NetPacket}}
+\doxysubsubsection{\texorpdfstring{BuildBuffer()}{BuildBuffer()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_net_packet_a8b5bf048b31d2999bfb8f023449d498f} 
+void Boon::\+\+Net\+Packet::\+\+Build\+Buffer (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_buffer}{Buffer}} \&}]{output}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_packet_8h_source_l00119}{119}} of file \doxymbox{\hyperlink{_net_packet_8h_source}{Net\+Packet.\+h}}.
+
+\Hypertarget{class_boon_1_1_net_packet_a127307c621aba2b1f1d54223cfa28893}\index{Boon::NetPacket@{Boon::NetPacket}!GetSerializer@{GetSerializer}}
+\index{GetSerializer@{GetSerializer}!Boon::NetPacket@{Boon::NetPacket}}
+\doxysubsubsection{\texorpdfstring{GetSerializer()}{GetSerializer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_net_packet_a127307c621aba2b1f1d54223cfa28893} 
+\doxymbox{\hyperlink{class_boon_1_1_binary_serializer}{Binary\+Serializer}} \& Boon::\+\+Net\+Packet::\+\+Get\+Serializer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_packet_8h_source_l00148}{148}} of file \doxymbox{\hyperlink{_net_packet_8h_source}{Net\+Packet.\+h}}.
+
+\Hypertarget{class_boon_1_1_net_packet_aa028746e1ce0d958491a4a505661ab36}\index{Boon::NetPacket@{Boon::NetPacket}!GetSerializer@{GetSerializer}}
+\index{GetSerializer@{GetSerializer}!Boon::NetPacket@{Boon::NetPacket}}
+\doxysubsubsection{\texorpdfstring{GetSerializer()}{GetSerializer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_net_packet_aa028746e1ce0d958491a4a505661ab36} 
+const \doxymbox{\hyperlink{class_boon_1_1_binary_serializer}{Binary\+Serializer}} \& Boon::\+\+Net\+Packet::\+\+Get\+Serializer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_packet_8h_source_l00149}{149}} of file \doxymbox{\hyperlink{_net_packet_8h_source}{Net\+Packet.\+h}}.
+
+\Hypertarget{class_boon_1_1_net_packet_a7492f6335c8767f955743905f0b1dafb}\index{Boon::NetPacket@{Boon::NetPacket}!GetType@{GetType}}
+\index{GetType@{GetType}!Boon::NetPacket@{Boon::NetPacket}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_net_packet_a7492f6335c8767f955743905f0b1dafb} 
+ENet\+Packet\+Type Boon::\+\+Net\+Packet::\+\+Get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_packet_8h_source_l00146}{146}} of file \doxymbox{\hyperlink{_net_packet_8h_source}{Net\+Packet.\+h}}.
+
+\Hypertarget{class_boon_1_1_net_packet_a44578d56271daf3978276c9d44424d9f}\index{Boon::NetPacket@{Boon::NetPacket}!RawData@{RawData}}
+\index{RawData@{RawData}!Boon::NetPacket@{Boon::NetPacket}}
+\doxysubsubsection{\texorpdfstring{RawData()}{RawData()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_net_packet_a44578d56271daf3978276c9d44424d9f} 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} Boon::\+\+Net\+Packet::\+\+Raw\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_packet_8h_source_l00132}{132}} of file \doxymbox{\hyperlink{_net_packet_8h_source}{Net\+Packet.\+h}}.
+
+\Hypertarget{class_boon_1_1_net_packet_a1f1fe8d7b6b2cc6a2fb5c4ad244600ef}\index{Boon::NetPacket@{Boon::NetPacket}!RawSize@{RawSize}}
+\index{RawSize@{RawSize}!Boon::NetPacket@{Boon::NetPacket}}
+\doxysubsubsection{\texorpdfstring{RawSize()}{RawSize()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_net_packet_a1f1fe8d7b6b2cc6a2fb5c4ad244600ef} 
+size\+\_\+t Boon::\+\+Net\+Packet::\+\+Raw\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_packet_8h_source_l00139}{139}} of file \doxymbox{\hyperlink{_net_packet_8h_source}{Net\+Packet.\+h}}.
+
+\Hypertarget{class_boon_1_1_net_packet_a2308225404dd6b4428bf29b039cbf7c7}\index{Boon::NetPacket@{Boon::NetPacket}!Read@{Read}}
+\index{Read@{Read}!Boon::NetPacket@{Boon::NetPacket}}
+\doxysubsubsection{\texorpdfstring{Read()}{Read()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_net_packet_a2308225404dd6b4428bf29b039cbf7c7} 
+template$<$typename T$>$ \\
+T Boon::\+\+Net\+Packet::\+\+Read (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_packet_8h_source_l00104}{104}} of file \doxymbox{\hyperlink{_net_packet_8h_source}{Net\+Packet.\+h}}.
+
+\Hypertarget{class_boon_1_1_net_packet_ab679276fe61019fa32fb35f571e83524}\index{Boon::NetPacket@{Boon::NetPacket}!ReadBytes@{ReadBytes}}
+\index{ReadBytes@{ReadBytes}!Boon::NetPacket@{Boon::NetPacket}}
+\doxysubsubsection{\texorpdfstring{ReadBytes()}{ReadBytes()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_net_packet_ab679276fe61019fa32fb35f571e83524} 
+void Boon::\+\+Net\+Packet::\+\+Read\+Bytes (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{out}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_packet_8h_source_l00111}{111}} of file \doxymbox{\hyperlink{_net_packet_8h_source}{Net\+Packet.\+h}}.
+
+\Hypertarget{class_boon_1_1_net_packet_a546a4c2157a6a720c3314b781aac05ec}\index{Boon::NetPacket@{Boon::NetPacket}!ReadString@{ReadString}}
+\index{ReadString@{ReadString}!Boon::NetPacket@{Boon::NetPacket}}
+\doxysubsubsection{\texorpdfstring{ReadString()}{ReadString()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_net_packet_a546a4c2157a6a720c3314b781aac05ec} 
+std::\+string Boon::\+\+Net\+Packet::\+\+Read\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_packet_8h_source_l00106}{106}} of file \doxymbox{\hyperlink{_net_packet_8h_source}{Net\+Packet.\+h}}.
+
+\Hypertarget{class_boon_1_1_net_packet_ae79a1dc4a9baaf794ae59d08a9abf599}\index{Boon::NetPacket@{Boon::NetPacket}!Write@{Write}}
+\index{Write@{Write}!Boon::NetPacket@{Boon::NetPacket}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_net_packet_ae79a1dc4a9baaf794ae59d08a9abf599} 
+template$<$typename T$>$ \\
+void Boon::\+\+Net\+Packet::\+\+Write (\begin{DoxyParamCaption}\item[{const T \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_packet_8h_source_l00085}{85}} of file \doxymbox{\hyperlink{_net_packet_8h_source}{Net\+Packet.\+h}}.
+
+\Hypertarget{class_boon_1_1_net_packet_aec13f3c3dd05c3bff65ef2ebe9529ef1}\index{Boon::NetPacket@{Boon::NetPacket}!WriteBytes@{WriteBytes}}
+\index{WriteBytes@{WriteBytes}!Boon::NetPacket@{Boon::NetPacket}}
+\doxysubsubsection{\texorpdfstring{WriteBytes()}{WriteBytes()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_net_packet_aec13f3c3dd05c3bff65ef2ebe9529ef1} 
+void Boon::\+\+Net\+Packet::\+\+Write\+Bytes (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_packet_8h_source_l00095}{95}} of file \doxymbox{\hyperlink{_net_packet_8h_source}{Net\+Packet.\+h}}.
+
+\Hypertarget{class_boon_1_1_net_packet_a0099955b13ee5400324a9a308d8a29cb}\index{Boon::NetPacket@{Boon::NetPacket}!WriteString@{WriteString}}
+\index{WriteString@{WriteString}!Boon::NetPacket@{Boon::NetPacket}}
+\doxysubsubsection{\texorpdfstring{WriteString()}{WriteString()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_net_packet_a0099955b13ee5400324a9a308d8a29cb} 
+void Boon::\+\+Net\+Packet::\+\+Write\+String (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_net_packet_8h_source_l00090}{90}} of file \doxymbox{\hyperlink{_net_packet_8h_source}{Net\+Packet.\+h}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Net\+Packet.\+h\end{DoxyCompactItemize}

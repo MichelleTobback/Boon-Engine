@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_c9b596ea313df427439ade63dd9ec16f" kind="dir">
+    <compoundname>Event</compoundname>
+    <innerfile refid="_editor_event_8h">EditorEvent.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Event/"/>
+  </compounddef>
+</doxygen>

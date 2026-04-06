@@ -1,0 +1,17 @@
+digraph "Asset/Importer"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_32e17e090fff81f6c62d134e8801b118 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="Asset", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_32e17e090fff81f6c62d134e8801b118.html",tooltip=""]
+  dir_14f08e37dab69f37d8ac5a9e9eee9fed [label="AssetPack", fillcolor="#c8d2e7", color="grey25", style="filled", URL="dir_14f08e37dab69f37d8ac5a9e9eee9fed.html",tooltip=""];
+  dir_91d930d1464f465aaf6157311abac52e [label="Importer", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_91d930d1464f465aaf6157311abac52e.html",tooltip=""];
+  }
+  dir_6cca29431361e5869420d402f83d4a04 [label="Core", fillcolor="#edf0f7", color="red", style="filled", URL="dir_6cca29431361e5869420d402f83d4a04.html",tooltip=""];
+  dir_91d930d1464f465aaf6157311abac52e->dir_14f08e37dab69f37d8ac5a9e9eee9fed [headlabel="1", labeldistance=1.5 headhref="dir_000012_000001.html" href="dir_000012_000001.html" color="steelblue1" fontcolor="steelblue1"];
+  dir_91d930d1464f465aaf6157311abac52e->dir_6cca29431361e5869420d402f83d4a04 [headlabel="2", labeldistance=1.5 headhref="dir_000012_000006.html" href="dir_000012_000006.html" color="steelblue1" fontcolor="steelblue1"];
+}

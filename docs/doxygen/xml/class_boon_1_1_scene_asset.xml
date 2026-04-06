@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_scene_asset" kind="class" language="C++" prot="public">
+    <compoundname>Boon::SceneAsset</compoundname>
+    <basecompoundref refid="class_boon_1_1_asset" prot="public" virt="non-virtual">Boon::Asset</basecompoundref>
+    <includes refid="_scene_asset_8h" local="no">Asset/SceneAsset.h</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="class_boon_1_1_scene_asset_1ab579afc38bb7878cbe7681336398051b" prot="public" static="no">
+        <type><ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref></type>
+        <definition>using Boon::SceneAsset::Type = Scene</definition>
+        <argsstring></argsstring>
+        <name>Type</name>
+        <qualifiedname>Boon::SceneAsset::Type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/SceneAsset.h" line="15" column="9" bodyfile="Asset/SceneAsset.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_scene_asset_1ac3dc740844caca8807866cb3b8c731af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::SceneAsset::SceneAsset</definition>
+        <argsstring>(AssetHandle handle)</argsstring>
+        <name>SceneAsset</name>
+        <qualifiedname>Boon::SceneAsset::SceneAsset</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/SceneAsset.h" line="16" column="9" bodyfile="Asset/SceneAsset.h" bodystart="16" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_asset_1a012061b8df4ee1447a84c991e158db68" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; Scene &gt; Boon::SceneAsset::GetInstance</definition>
+        <argsstring>()</argsstring>
+        <name>GetInstance</name>
+        <qualifiedname>Boon::SceneAsset::GetInstance</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/SceneAsset.h" line="19" column="25" bodyfile="Asset/SceneAsset.h" bodystart="19" bodyend="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Boon::Asset</label>
+        <link refid="class_boon_1_1_asset"/>
+      </node>
+      <node id="1">
+        <label>Boon::SceneAsset</label>
+        <link refid="class_boon_1_1_scene_asset"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::Asset</label>
+        <link refid="class_boon_1_1_asset"/>
+      </node>
+      <node id="1">
+        <label>Boon::SceneAsset</label>
+        <link refid="class_boon_1_1_scene_asset"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Asset/SceneAsset.h" line="12" column="5" bodyfile="Asset/SceneAsset.h" bodystart="13" bodyend="25"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_asset_1a21f559563c0c9283f2e94620019a2414" prot="public" virt="non-virtual"><scope>Boon::SceneAsset</scope><name>Asset</name></member>
+      <member refid="class_boon_1_1_asset_1abaddea81c54ce410934ca79b041d1cee" prot="public" virt="non-virtual"><scope>Boon::SceneAsset</scope><name>GetHandle</name></member>
+      <member refid="class_boon_1_1_scene_asset_1a012061b8df4ee1447a84c991e158db68" prot="public" virt="non-virtual"><scope>Boon::SceneAsset</scope><name>GetInstance</name></member>
+      <member refid="class_boon_1_1_asset_1a51d2767872ecb7825198ebf72361a7e1" prot="public" virt="non-virtual"><scope>Boon::SceneAsset</scope><name>GetType</name></member>
+      <member refid="class_boon_1_1_scene_asset_1ac3dc740844caca8807866cb3b8c731af" prot="public" virt="non-virtual"><scope>Boon::SceneAsset</scope><name>SceneAsset</name></member>
+      <member refid="class_boon_1_1_scene_asset_1ab579afc38bb7878cbe7681336398051b" prot="public" virt="non-virtual"><scope>Boon::SceneAsset</scope><name>Type</name></member>
+      <member refid="class_boon_1_1_asset_1afbfc42a9b140b06b3c45de99b57779ce" prot="public" virt="virtual"><scope>Boon::SceneAsset</scope><name>~Asset</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

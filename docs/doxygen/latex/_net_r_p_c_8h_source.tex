@@ -1,0 +1,34 @@
+\doxysection{Net\+RPC.\+h}
+\hypertarget{_net_r_p_c_8h_source}{}\label{_net_r_p_c_8h_source}\index{NetRPC.h@{NetRPC.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}Core/Variant.h"{}}}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}NetPacket.h"{}}}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}Core/UUID.h"{}}}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00008}00008\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_net_scene}{NetScene}};}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00012}\doxymbox{\hyperlink{class_boon_1_1_net_r_p_c}{00012}}\ \ \ \ \ \textcolor{keyword}{class\ }NetRPC\ final}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00013}00013\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00015}00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ NetRPC(\doxymbox{\hyperlink{class_boon_1_1_net_scene}{NetScene}}*\ scene);}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reflection\ typed\ RPC\ calls}}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ CallServer(uint32\_t\ classId,\ uint32\_t\ fnId,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_boon_1_1_u_u_i_d}{UUID}}\&\ uuid,\ \textcolor{keyword}{const}\ std::vector<Variant>\&\ args);}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00020}00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ CallClient(uint64\_t\ clientId,\ uint32\_t\ classId,\ uint32\_t\ fnId,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_boon_1_1_u_u_i_d}{UUID}}\&\ uuid,\ \textcolor{keyword}{const}\ std::vector<Variant>\&\ args);}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Called\ by\ NetScene\ after\ receiving\ an\ ENetPacketType::RPC}}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Process(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_boon_1_1_net_packet}{NetPacket}}\&\ pkt,\ \textcolor{keywordtype}{bool}\ isServerSide);}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_net_scene}{NetScene}}*\ m\_Scene;}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00027}00027\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_net_r_p_c_8h_source_l00028}00028\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_shader_importer" kind="class" language="C++" prot="public">
+    <compoundname>Boon::ShaderImporter</compoundname>
+    <basecompoundref refid="class_boon_1_1_asset_importer" prot="public" virt="non-virtual">Boon::AssetImporter</basecompoundref>
+    <includes refid="_shader_importer_8h" local="no">Asset/Importer/ShaderImporter.h</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="class_boon_1_1_shader_importer_1a5ddf9ac7850e9789a5dc8f8b2b2f1773" prot="public" static="no">
+        <type><ref refid="class_boon_1_1_shader_asset" kindref="compound">ShaderAsset</ref></type>
+        <definition>using Boon::ShaderImporter::AssetType = ShaderAsset</definition>
+        <argsstring></argsstring>
+        <name>AssetType</name>
+        <qualifiedname>Boon::ShaderImporter::AssetType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/Importer/ShaderImporter.h" line="13" column="9" bodyfile="Asset/Importer/ShaderImporter.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_shader_importer_1a2c5a46100e34f61e06687249e0906911" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="class_boon_1_1_asset" kindref="compound">Asset</ref> *</type>
+        <definition>Asset * Boon::ShaderImporter::ImportFromFile</definition>
+        <argsstring>(const std::string &amp;filepath, const AssetMeta &amp;meta) override</argsstring>
+        <name>ImportFromFile</name>
+        <qualifiedname>Boon::ShaderImporter::ImportFromFile</qualifiedname>
+        <reimplements refid="class_boon_1_1_asset_importer_1a6cfa71d00ac7a5648d81e60eedd5fbcc">ImportFromFile</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filepath</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_boon_1_1_asset_meta" kindref="compound">AssetMeta</ref> &amp;</type>
+          <declname>meta</declname>
+        </param>
+        <briefdescription>
+<para>Import a shader asset from a combined shader source file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Parses sections marked with <computeroutput>#vert</computeroutput> and <computeroutput>#frag</computeroutput> and populates a <ref refid="class_boon_1_1_shader_asset" kindref="compound">ShaderAsset</ref>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/Importer/ShaderImporter.h" line="21" column="15" bodyfile="Asset/Importer/ShaderImporter.h" bodystart="21" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_shader_importer_1abbc0bc33cabf4a2ddec21ad138369d7f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>virtual std::vector&lt; std::string &gt; Boon::ShaderImporter::GetExtensions</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetExtensions</name>
+        <qualifiedname>Boon::ShaderImporter::GetExtensions</qualifiedname>
+        <reimplements refid="class_boon_1_1_asset_importer_1a3b752396f64119c79400173eb96502a8">GetExtensions</reimplements>
+        <briefdescription>
+<para>Get supported file extensions for this importer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Vector of extension strings (without leading dot). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/Importer/ShaderImporter.h" line="51" column="29" bodyfile="Asset/Importer/ShaderImporter.h" bodystart="51" bodyend="54"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Boon::AssetImporter</label>
+        <link refid="class_boon_1_1_asset_importer"/>
+      </node>
+      <node id="1">
+        <label>Boon::ShaderImporter</label>
+        <link refid="class_boon_1_1_shader_importer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::AssetImporter</label>
+        <link refid="class_boon_1_1_asset_importer"/>
+      </node>
+      <node id="1">
+        <label>Boon::ShaderImporter</label>
+        <link refid="class_boon_1_1_shader_importer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Asset/Importer/ShaderImporter.h" line="10" column="5" bodyfile="Asset/Importer/ShaderImporter.h" bodystart="11" bodyend="55"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_shader_importer_1a5ddf9ac7850e9789a5dc8f8b2b2f1773" prot="public" virt="non-virtual"><scope>Boon::ShaderImporter</scope><name>AssetType</name></member>
+      <member refid="class_boon_1_1_asset_importer_1a4def4aa4cad09a75392a965b5072f75c" prot="public" virt="virtual"><scope>Boon::ShaderImporter</scope><name>ExportToFile</name></member>
+      <member refid="class_boon_1_1_shader_importer_1abbc0bc33cabf4a2ddec21ad138369d7f" prot="public" virt="virtual"><scope>Boon::ShaderImporter</scope><name>GetExtensions</name></member>
+      <member refid="class_boon_1_1_shader_importer_1a2c5a46100e34f61e06687249e0906911" prot="public" virt="virtual"><scope>Boon::ShaderImporter</scope><name>ImportFromFile</name></member>
+      <member refid="class_boon_1_1_asset_importer_1a5163e210ba28c264c06a04e5cf7a4594" prot="public" virt="virtual"><scope>Boon::ShaderImporter</scope><name>~AssetImporter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

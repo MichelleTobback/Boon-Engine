@@ -1,0 +1,144 @@
+\doxysection{Boon::\+Physics\+World2D Class Reference}
+\hypertarget{class_boon_1_1_physics_world2_d}{}\label{class_boon_1_1_physics_world2_d}\index{Boon::PhysicsWorld2D@{Boon::PhysicsWorld2D}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_physics_world2_d_a7c808c11f40183e73c95b4927d55eb04}{Physics\+World2D}} ()=default
+\begin{DoxyCompactList}\small\item\em 2D physics world wrapper using Box2D. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_physics_world2_d_a6c2c4f893f6f9603e40a2f9ebb71a4c8}\label{class_boon_1_1_physics_world2_d_a6c2c4f893f6f9603e40a2f9ebb71a4c8} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Physics\+World2D} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \doxylink{class_boon_1_1_physics_world2_d}{Physics\+World2D} and release physics resources. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_physics_world2_d_a4d47d0f74829e75aa6d74453e3910a4f}\label{class_boon_1_1_physics_world2_d_a4d47d0f74829e75aa6d74453e3910a4f} 
+{\bfseries Physics\+World2D} (const Physics\+World2D \&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_physics_world2_d_a141abb8809932143666f6e23545f8fbe}\label{class_boon_1_1_physics_world2_d_a141abb8809932143666f6e23545f8fbe} 
+{\bfseries Physics\+World2D} (Physics\+World2D \&\&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_physics_world2_d_a9d8ff4915789feff8015cfd40e82e406}\label{class_boon_1_1_physics_world2_d_a9d8ff4915789feff8015cfd40e82e406} 
+\doxymbox{\hyperlink{class_boon_1_1_physics_world2_d_a7c808c11f40183e73c95b4927d55eb04}{Physics\+World2D}} \& {\bfseries operator=} (const \doxymbox{\hyperlink{class_boon_1_1_physics_world2_d_a7c808c11f40183e73c95b4927d55eb04}{Physics\+World2D}} \&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_physics_world2_d_a1c6b905c1c564065d82f5dbc26ae59dd}\label{class_boon_1_1_physics_world2_d_a1c6b905c1c564065d82f5dbc26ae59dd} 
+\doxymbox{\hyperlink{class_boon_1_1_physics_world2_d_a7c808c11f40183e73c95b4927d55eb04}{Physics\+World2D}} \& {\bfseries operator=} (\doxymbox{\hyperlink{class_boon_1_1_physics_world2_d_a7c808c11f40183e73c95b4927d55eb04}{Physics\+World2D}} \&\&other)=delete
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_physics_world2_d_ae0d47c072cf614c763d8632aa268a4a4}{Begin}} (\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \texorpdfstring{$\ast$}{*}p\+Scene)
+\begin{DoxyCompactList}\small\item\em Initialize physics runtime for the provided scene. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_physics_world2_d_a348e4866ce2e0deb799e5604654a54cc}{End}} (\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \texorpdfstring{$\ast$}{*}p\+Scene)
+\begin{DoxyCompactList}\small\item\em Tear down physics runtime for the provided scene. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_physics_world2_d_a8a04e18008b63d51f53916cdcd5da419}{Step}} (\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \texorpdfstring{$\ast$}{*}p\+Scene)
+\begin{DoxyCompactList}\small\item\em Perform physics stepping for the scene (may advance internal world). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_physics_world2_d_a2127d497b5b19923455ee0c8fe00cae6}{Update}} (\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \texorpdfstring{$\ast$}{*}p\+Scene)
+\begin{DoxyCompactList}\small\item\em Update physics-\/related runtime state for the scene. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_boon_1_1_physics_world2_d_abf16cab12b10598202d8cf24e7a1a010}{Raycast}} (const \doxymbox{\hyperlink{struct_boon_1_1_ray2_d}{Ray2D}} \&ray, \doxymbox{\hyperlink{struct_boon_1_1_hit_result2_d}{Hit\+Result2D}} \&result) const
+\begin{DoxyCompactList}\small\item\em Cast a ray into the physics world and return the first hit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_physics_world2_d_8h_source_l00012}{12}} of file \doxymbox{\hyperlink{_physics_world2_d_8h_source}{Physics\+World2\+D.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_boon_1_1_physics_world2_d_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_boon_1_1_physics_world2_d_a7c808c11f40183e73c95b4927d55eb04}\index{Boon::PhysicsWorld2D@{Boon::PhysicsWorld2D}!PhysicsWorld2D@{PhysicsWorld2D}}
+\index{PhysicsWorld2D@{PhysicsWorld2D}!Boon::PhysicsWorld2D@{Boon::PhysicsWorld2D}}
+\doxysubsubsection{\texorpdfstring{PhysicsWorld2D()}{PhysicsWorld2D()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_physics_world2_d_a7c808c11f40183e73c95b4927d55eb04} 
+Boon::\+\+Physics\+World2\+D::\+\+Physics\+World2D (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+2D physics world wrapper using Box2D. 
+
+Manages rigidbodies and physics stepping for a \doxylink{class_boon_1_1_scene}{Scene}. 
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_physics_world2_d_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_physics_world2_d_ae0d47c072cf614c763d8632aa268a4a4}\index{Boon::PhysicsWorld2D@{Boon::PhysicsWorld2D}!Begin@{Begin}}
+\index{Begin@{Begin}!Boon::PhysicsWorld2D@{Boon::PhysicsWorld2D}}
+\doxysubsubsection{\texorpdfstring{Begin()}{Begin()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_physics_world2_d_ae0d47c072cf614c763d8632aa268a4a4} 
+void Boon::\+\+Physics\+World2\+D::\+\+Begin (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \texorpdfstring{$\ast$}{*}}]{p\+Scene}{}\end{DoxyParamCaption})}
+
+
+
+Initialize physics runtime for the provided scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Scene} & \doxylink{class_boon_1_1_scene}{Scene} to begin physics for. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_physics_world2_d_a348e4866ce2e0deb799e5604654a54cc}\index{Boon::PhysicsWorld2D@{Boon::PhysicsWorld2D}!End@{End}}
+\index{End@{End}!Boon::PhysicsWorld2D@{Boon::PhysicsWorld2D}}
+\doxysubsubsection{\texorpdfstring{End()}{End()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_physics_world2_d_a348e4866ce2e0deb799e5604654a54cc} 
+void Boon::\+\+Physics\+World2\+D::\+\+End (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \texorpdfstring{$\ast$}{*}}]{p\+Scene}{}\end{DoxyParamCaption})}
+
+
+
+Tear down physics runtime for the provided scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Scene} & \doxylink{class_boon_1_1_scene}{Scene} to end physics for. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_physics_world2_d_abf16cab12b10598202d8cf24e7a1a010}\index{Boon::PhysicsWorld2D@{Boon::PhysicsWorld2D}!Raycast@{Raycast}}
+\index{Raycast@{Raycast}!Boon::PhysicsWorld2D@{Boon::PhysicsWorld2D}}
+\doxysubsubsection{\texorpdfstring{Raycast()}{Raycast()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_physics_world2_d_abf16cab12b10598202d8cf24e7a1a010} 
+bool Boon::\+\+Physics\+World2\+D::\+\+Raycast (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_boon_1_1_ray2_d}{Ray2D}} \&}]{ray}{, }\item[{\doxymbox{\hyperlink{struct_boon_1_1_hit_result2_d}{Hit\+Result2D}} \&}]{result}{}\end{DoxyParamCaption}) const}
+
+
+
+Cast a ray into the physics world and return the first hit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray} & Ray to cast in world space. \\
+\hline
+{\em result} & Output hit result populated on success. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if a hit was found, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_physics_world2_d_a8a04e18008b63d51f53916cdcd5da419}\index{Boon::PhysicsWorld2D@{Boon::PhysicsWorld2D}!Step@{Step}}
+\index{Step@{Step}!Boon::PhysicsWorld2D@{Boon::PhysicsWorld2D}}
+\doxysubsubsection{\texorpdfstring{Step()}{Step()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_physics_world2_d_a8a04e18008b63d51f53916cdcd5da419} 
+void Boon::\+\+Physics\+World2\+D::\+\+Step (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \texorpdfstring{$\ast$}{*}}]{p\+Scene}{}\end{DoxyParamCaption})}
+
+
+
+Perform physics stepping for the scene (may advance internal world). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Scene} & \doxylink{class_boon_1_1_scene}{Scene} to step physics for. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_physics_world2_d_a2127d497b5b19923455ee0c8fe00cae6}\index{Boon::PhysicsWorld2D@{Boon::PhysicsWorld2D}!Update@{Update}}
+\index{Update@{Update}!Boon::PhysicsWorld2D@{Boon::PhysicsWorld2D}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_physics_world2_d_a2127d497b5b19923455ee0c8fe00cae6} 
+void Boon::\+\+Physics\+World2\+D::\+\+Update (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \texorpdfstring{$\ast$}{*}}]{p\+Scene}{}\end{DoxyParamCaption})}
+
+
+
+Update physics-\/related runtime state for the scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Scene} & \doxylink{class_boon_1_1_scene}{Scene} to update. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Physics\+World2\+D.\+h\end{DoxyCompactItemize}

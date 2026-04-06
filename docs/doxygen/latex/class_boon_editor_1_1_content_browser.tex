@@ -1,0 +1,96 @@
+\doxysection{Boon\+Editor::\+Content\+Browser Class Reference}
+\hypertarget{class_boon_editor_1_1_content_browser}{}\label{class_boon_editor_1_1_content_browser}\index{BoonEditor::ContentBrowser@{BoonEditor::ContentBrowser}}
+Inheritance diagram for Boon\+Editor::\+Content\+Browser:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_boon_editor_1_1_content_browser}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_boon_editor_1_1_content_browser_a8b40fa0ef4e2a5db1ee10a21f83764ac}\label{class_boon_editor_1_1_content_browser_a8b40fa0ef4e2a5db1ee10a21f83764ac} 
+{\bfseries Content\+Browser} (const std::\+string \&name, \doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*}p\+Router, Asset\+Context \texorpdfstring{$\ast$}{*}p\+Context)
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_content_browser_a172596cd09c62b001c8a041e6780acdf}{Update}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Editor\+Panel} (const std::\+string \&name, \doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*}p\+Router)
+\item 
+{\bfseries Editor\+Panel} (const Editor\+Panel \&other)=delete
+\item 
+{\bfseries Editor\+Panel} (Editor\+Panel \&\&other)=delete
+\item 
+Editor\+Panel \& {\bfseries operator=} (const Editor\+Panel \&other)=delete
+\item 
+Editor\+Panel \& {\bfseries operator=} (Editor\+Panel \&\&other)=delete
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a213dbccbcaf8df25846ecd6c261afa94}{On\+Resize}} (uint32\+\_\+t width, uint32\+\_\+t height)
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_af52bce9632c058f5edfc288245c38013}{On\+Render}} ()
+\item 
+void {\bfseries Render\+UI} ()
+\item 
+bool {\bfseries Is\+Hovered} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_content_browser_a156b99bf485b2994747ffe0af1bdca60}{On\+Render\+UI}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bfseries Render\+Float3\+Control} (const std::\+string \&label, glm::\+vec3 \&vector, float reset\+Value=0.\+0f, float column\+Width=100.\+0f)
+\item 
+const std::\+string \& \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_af7c8095284f6932cd3a18bc4a3aaad27}{Get\+Name}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}}
+\begin{DoxyCompactItemize}
+\item 
+std::\+string \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a10d71879d56dfec644df8a1c3718e49e}{m\+\_\+\+Name}}
+\item 
+Editor\+Panel\+Flag \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a7c213f233755bb557917127b7720fb14}{m\+\_\+\+Flags}}
+\item 
+\doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_adea21029e134f339cbf9679f8d724beb}{m\+\_\+p\+Router}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_content_browser_8h_source_l00013}{13}} of file \doxymbox{\hyperlink{_content_browser_8h_source}{Content\+Browser.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_editor_1_1_content_browser_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_editor_1_1_content_browser_a156b99bf485b2994747ffe0af1bdca60}\index{BoonEditor::ContentBrowser@{BoonEditor::ContentBrowser}!OnRenderUI@{OnRenderUI}}
+\index{OnRenderUI@{OnRenderUI}!BoonEditor::ContentBrowser@{BoonEditor::ContentBrowser}}
+\doxysubsubsection{\texorpdfstring{OnRenderUI()}{OnRenderUI()}}
+{\footnotesize\ttfamily \label{class_boon_editor_1_1_content_browser_a156b99bf485b2994747ffe0af1bdca60} 
+virtual void Boon\+Editor::\+\+Content\+Browser::\+\+On\+Render\+UI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}.
+
+\Hypertarget{class_boon_editor_1_1_content_browser_a172596cd09c62b001c8a041e6780acdf}\index{BoonEditor::ContentBrowser@{BoonEditor::ContentBrowser}!Update@{Update}}
+\index{Update@{Update}!BoonEditor::ContentBrowser@{BoonEditor::ContentBrowser}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_boon_editor_1_1_content_browser_a172596cd09c62b001c8a041e6780acdf} 
+virtual void Boon\+Editor::\+\+Content\+Browser::\+\+Update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Content\+Browser.\+h\end{DoxyCompactItemize}

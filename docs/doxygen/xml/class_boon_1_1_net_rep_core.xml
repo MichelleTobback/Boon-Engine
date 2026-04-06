@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_net_rep_core" kind="class" language="C++" prot="public">
+    <compoundname>Boon::NetRepCore</compoundname>
+    <includes refid="_net_rep_core_8h" local="no">Networking/NetRepCore.h</includes>
+    <innerclass refid="struct_boon_1_1_net_rep_core_1_1_replicated_instance" prot="private">Boon::NetRepCore::ReplicatedInstance</innerclass>
+    <innerclass refid="struct_boon_1_1_net_rep_core_1_1_replication_state" prot="private">Boon::NetRepCore::ReplicationState</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_net_rep_core_1ad879826de6a6150188f83ea86700708e" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="class_boon_1_1_u_u_i_d" kindref="compound">UUID</ref>, ReplicationState &gt;</type>
+        <definition>std::unordered_map&lt;UUID, ReplicationState&gt; Boon::NetRepCore::m_StateCache</definition>
+        <argsstring></argsstring>
+        <name>m_StateCache</name>
+        <qualifiedname>Boon::NetRepCore::m_StateCache</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepCore.h" line="39" column="28" bodyfile="Networking/NetRepCore.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_net_rep_core_1a8ab70326cfeb7358b69f13fc217fe5b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::NetRepCore::NetRepCore</definition>
+        <argsstring>()</argsstring>
+        <name>NetRepCore</name>
+        <qualifiedname>Boon::NetRepCore::NetRepCore</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepCore.h" line="20" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_net_rep_core_1ab9060481cde49af11aa49bc92fabee29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::NetRepCore::ProcessPacket</definition>
+        <argsstring>(NetScene &amp;scene, NetPacket &amp;pkt, NetConnection *sender)</argsstring>
+        <name>ProcessPacket</name>
+        <qualifiedname>Boon::NetRepCore::ProcessPacket</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_net_scene" kindref="compound">NetScene</ref> &amp;</type>
+          <declname>scene</declname>
+        </param>
+        <param>
+          <type><ref refid="class_boon_1_1_net_packet" kindref="compound">NetPacket</ref> &amp;</type>
+          <declname>pkt</declname>
+        </param>
+        <param>
+          <type><ref refid="class_boon_1_1_net_connection" kindref="compound">NetConnection</ref> *</type>
+          <declname>sender</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepCore.h" line="22" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_net_rep_core_1a1a9143e8c5db7764a7e9f8ff2cccac60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::NetRepCore::Update</definition>
+        <argsstring>(NetScene &amp;scene)</argsstring>
+        <name>Update</name>
+        <qualifiedname>Boon::NetRepCore::Update</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_net_scene" kindref="compound">NetScene</ref> &amp;</type>
+          <declname>scene</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/NetRepCore.h" line="23" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Networking/NetRepCore.h" line="17" column="5" bodyfile="Networking/NetRepCore.h" bodystart="18" bodyend="40"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_net_rep_core_1ad879826de6a6150188f83ea86700708e" prot="private" virt="non-virtual"><scope>Boon::NetRepCore</scope><name>m_StateCache</name></member>
+      <member refid="class_boon_1_1_net_rep_core_1a8ab70326cfeb7358b69f13fc217fe5b2" prot="public" virt="non-virtual"><scope>Boon::NetRepCore</scope><name>NetRepCore</name></member>
+      <member refid="class_boon_1_1_net_rep_core_1ab9060481cde49af11aa49bc92fabee29" prot="public" virt="non-virtual"><scope>Boon::NetRepCore</scope><name>ProcessPacket</name></member>
+      <member refid="class_boon_1_1_net_rep_core_1a1a9143e8c5db7764a7e9f8ff2cccac60" prot="public" virt="non-virtual"><scope>Boon::NetRepCore</scope><name>Update</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

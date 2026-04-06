@@ -1,0 +1,277 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_uniform_buffer" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>Boon::UniformBuffer</compoundname>
+    <includes refid="_uniform_buffer_8h" local="no">Renderer/UniformBuffer.h</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_uniform_buffer_1addf36b84893e4f06b1e495fb9eb09f1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::UniformBuffer::UniformBuffer</definition>
+        <argsstring>()=default</argsstring>
+        <name>UniformBuffer</name>
+        <qualifiedname>Boon::UniformBuffer::UniformBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/UniformBuffer.h" line="10" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_uniform_buffer_1ac44fbbe659b32661aa995bef1b9bdae1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Boon::UniformBuffer::~UniformBuffer</definition>
+        <argsstring>()=default</argsstring>
+        <name>~UniformBuffer</name>
+        <qualifiedname>Boon::UniformBuffer::~UniformBuffer</qualifiedname>
+        <briefdescription>
+<para>Virtual destructor for uniform buffer implementations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/UniformBuffer.h" line="15" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_uniform_buffer_1a7d576b21294dba0448ace63bf4146ae8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::UniformBuffer::UniformBuffer</definition>
+        <argsstring>(const UniformBuffer &amp;other)=delete</argsstring>
+        <name>UniformBuffer</name>
+        <qualifiedname>Boon::UniformBuffer::UniformBuffer</qualifiedname>
+        <param>
+          <type>const UniformBuffer &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/UniformBuffer.h" line="17" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_uniform_buffer_1a788813e4fcc12ff8d1a41b0f3d51afa2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::UniformBuffer::UniformBuffer</definition>
+        <argsstring>(UniformBuffer &amp;&amp;other)=delete</argsstring>
+        <name>UniformBuffer</name>
+        <qualifiedname>Boon::UniformBuffer::UniformBuffer</qualifiedname>
+        <param>
+          <type>UniformBuffer &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/UniformBuffer.h" line="18" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_uniform_buffer_1a78d09b87522b3dffe65e8164a1be1d1d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_uniform_buffer_1addf36b84893e4f06b1e495fb9eb09f1a" kindref="member">UniformBuffer</ref> &amp;</type>
+        <definition>UniformBuffer &amp; Boon::UniformBuffer::operator=</definition>
+        <argsstring>(const UniformBuffer &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Boon::UniformBuffer::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="class_boon_1_1_uniform_buffer_1addf36b84893e4f06b1e495fb9eb09f1a" kindref="member">UniformBuffer</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/UniformBuffer.h" line="19" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_uniform_buffer_1a2f0a4182fab81d91eb1b027ad6bf3cef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_uniform_buffer_1addf36b84893e4f06b1e495fb9eb09f1a" kindref="member">UniformBuffer</ref> &amp;</type>
+        <definition>UniformBuffer &amp; Boon::UniformBuffer::operator=</definition>
+        <argsstring>(UniformBuffer &amp;&amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Boon::UniformBuffer::operator=</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_uniform_buffer_1addf36b84893e4f06b1e495fb9eb09f1a" kindref="member">UniformBuffer</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/UniformBuffer.h" line="20" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_uniform_buffer_1a88231914a73c0cb32a247f6e53cadee7" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Boon::UniformBuffer::SetData</definition>
+        <argsstring>(const void *data, uint32_t size, uint32_t offset=0)=0</argsstring>
+        <name>SetData</name>
+        <qualifiedname>Boon::UniformBuffer::SetData</qualifiedname>
+        <param>
+          <type>const void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Set a block of data in the uniform buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the source data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bytes to copy. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Byte offset within the buffer to write to. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/UniformBuffer.h" line="29" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_uniform_buffer_1a5266c47850263e4dc12fd57fc5080415" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void Boon::UniformBuffer::SetValue</definition>
+        <argsstring>(const T &amp;data, uint32_t offset=0)</argsstring>
+        <name>SetValue</name>
+        <qualifiedname>Boon::UniformBuffer::SetValue</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/UniformBuffer.h" line="32" column="6" bodyfile="Renderer/UniformBuffer.h" bodystart="32" bodyend="35"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_boon_1_1_uniform_buffer_1a063b3235b4c387a599ddb4ccce739cac" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_uniform_buffer_1addf36b84893e4f06b1e495fb9eb09f1a" kindref="member">UniformBuffer</ref> &gt;</type>
+        <definition>static std::shared_ptr&lt; UniformBuffer &gt; Boon::UniformBuffer::Create</definition>
+        <argsstring>(uint32_t size, uint32_t binding)</argsstring>
+        <name>Create</name>
+        <qualifiedname>Boon::UniformBuffer::Create</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>binding</declname>
+        </param>
+        <briefdescription>
+<para>Create a uniform buffer of given size bound to the specified binding point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size in bytes of the buffer to create. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>binding</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Binding index for shader access. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Shared pointer to the created <ref refid="class_boon_1_1_uniform_buffer" kindref="compound">UniformBuffer</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/UniformBuffer.h" line="44" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_uniform_buffer_1a04248a41f39e1f930783f062fc19c154" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_uniform_buffer_1addf36b84893e4f06b1e495fb9eb09f1a" kindref="member">UniformBuffer</ref> &gt;</type>
+        <definition>static std::shared_ptr&lt; UniformBuffer &gt; Boon::UniformBuffer::Create</definition>
+        <argsstring>(uint32_t binding)</argsstring>
+        <name>Create</name>
+        <qualifiedname>Boon::UniformBuffer::Create</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>binding</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/UniformBuffer.h" line="47" column="24" bodyfile="Renderer/UniformBuffer.h" bodystart="47" bodyend="50"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Renderer/UniformBuffer.h" line="7" column="1" bodyfile="Renderer/UniformBuffer.h" bodystart="8" bodyend="51"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_uniform_buffer_1a063b3235b4c387a599ddb4ccce739cac" prot="public" virt="non-virtual"><scope>Boon::UniformBuffer</scope><name>Create</name></member>
+      <member refid="class_boon_1_1_uniform_buffer_1a04248a41f39e1f930783f062fc19c154" prot="public" virt="non-virtual"><scope>Boon::UniformBuffer</scope><name>Create</name></member>
+      <member refid="class_boon_1_1_uniform_buffer_1a78d09b87522b3dffe65e8164a1be1d1d" prot="public" virt="non-virtual"><scope>Boon::UniformBuffer</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_uniform_buffer_1a2f0a4182fab81d91eb1b027ad6bf3cef" prot="public" virt="non-virtual"><scope>Boon::UniformBuffer</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_uniform_buffer_1a88231914a73c0cb32a247f6e53cadee7" prot="public" virt="pure-virtual"><scope>Boon::UniformBuffer</scope><name>SetData</name></member>
+      <member refid="class_boon_1_1_uniform_buffer_1a5266c47850263e4dc12fd57fc5080415" prot="public" virt="non-virtual"><scope>Boon::UniformBuffer</scope><name>SetValue</name></member>
+      <member refid="class_boon_1_1_uniform_buffer_1addf36b84893e4f06b1e495fb9eb09f1a" prot="public" virt="non-virtual"><scope>Boon::UniformBuffer</scope><name>UniformBuffer</name></member>
+      <member refid="class_boon_1_1_uniform_buffer_1a7d576b21294dba0448ace63bf4146ae8" prot="public" virt="non-virtual"><scope>Boon::UniformBuffer</scope><name>UniformBuffer</name></member>
+      <member refid="class_boon_1_1_uniform_buffer_1a788813e4fcc12ff8d1a41b0f3d51afa2" prot="public" virt="non-virtual"><scope>Boon::UniformBuffer</scope><name>UniformBuffer</name></member>
+      <member refid="class_boon_1_1_uniform_buffer_1ac44fbbe659b32661aa995bef1b9bdae1" prot="public" virt="virtual"><scope>Boon::UniformBuffer</scope><name>~UniformBuffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

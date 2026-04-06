@@ -116,6 +116,12 @@ namespace Boon
         // ---------------------------------------------------------
         // Finalize packet into raw byte stream
         // ---------------------------------------------------------
+        /**
+         * @brief Serialize the header and payload into the provided output buffer.
+         *
+         * The resulting buffer contains the header followed by the payload bytes
+         * produced by the internal BinarySerializer.
+         */
         void BuildBuffer(Buffer& output)
         {
             const Buffer& payload = m_Serializer.GetBuffer();

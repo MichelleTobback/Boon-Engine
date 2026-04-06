@@ -1,0 +1,372 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_sprite_animator_component" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::SpriteAnimatorComponent</compoundname>
+    <includes refid="_sprite_animator_component_8h" local="no">Component/SpriteAnimatorComponent.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_sprite_animator_component_1ad1b9f7075507aca48d13e602425a7cef" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Boon::SpriteAnimatorComponent::Clip</definition>
+        <argsstring></argsstring>
+        <name>Clip</name>
+        <qualifiedname>Boon::SpriteAnimatorComponent::Clip</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SpriteAnimatorComponent.h" line="24" column="5" bodyfile="Component/SpriteAnimatorComponent.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_sprite_animator_component_1a2ad867d1732cfc6903c93d9456a574a1" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_sprite_atlas" kindref="compound">SpriteAtlas</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;SpriteAtlas&gt; Boon::SpriteAnimatorComponent::Atlas</definition>
+        <argsstring></argsstring>
+        <name>Atlas</name>
+        <qualifiedname>Boon::SpriteAnimatorComponent::Atlas</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SpriteAnimatorComponent.h" line="25" column="17" bodyfile="Component/SpriteAnimatorComponent.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_sprite_animator_component_1a091d9c01c98c5fb7b986a7c069f593ea" prot="public" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_b_ref" kindref="compound">BRef</ref>&lt; <ref refid="struct_boon_1_1_sprite_renderer_component" kindref="compound">SpriteRendererComponent</ref> &gt;</type>
+        <definition>BRef&lt;SpriteRendererComponent&gt; Boon::SpriteAnimatorComponent::pRenderer</definition>
+        <argsstring></argsstring>
+        <name>pRenderer</name>
+        <qualifiedname>Boon::SpriteAnimatorComponent::pRenderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SpriteAnimatorComponent.h" line="28" column="6" bodyfile="Component/SpriteAnimatorComponent.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_sprite_animator_component_1aa2e273a9bba4decd55d46e49b5d57f33" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Boon::SpriteAnimatorComponent::m_Current</definition>
+        <argsstring></argsstring>
+        <name>m_Current</name>
+        <qualifiedname>Boon::SpriteAnimatorComponent::m_Current</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SpriteAnimatorComponent.h" line="31" column="5" bodyfile="Component/SpriteAnimatorComponent.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_sprite_animator_component_1a65d8ae6231b9ab9e81453e1e66dd056a" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Boon::SpriteAnimatorComponent::m_Timer</definition>
+        <argsstring></argsstring>
+        <name>m_Timer</name>
+        <qualifiedname>Boon::SpriteAnimatorComponent::m_Timer</qualifiedname>
+        <initializer>= 0.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SpriteAnimatorComponent.h" line="32" column="7" bodyfile="Component/SpriteAnimatorComponent.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_sprite_animator_component_1a1307958b5c72da40123e962f3891f349" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Boon::SpriteAnimatorComponent::m_Dirty</definition>
+        <argsstring></argsstring>
+        <name>m_Dirty</name>
+        <qualifiedname>Boon::SpriteAnimatorComponent::m_Dirty</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SpriteAnimatorComponent.h" line="33" column="6" bodyfile="Component/SpriteAnimatorComponent.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_boon_1_1_sprite_animator_component_1ad14af67415582943d800b1bc23967be2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::SpriteAnimatorComponent::SpriteAnimatorComponent</definition>
+        <argsstring>()=default</argsstring>
+        <name>SpriteAnimatorComponent</name>
+        <qualifiedname>Boon::SpriteAnimatorComponent::SpriteAnimatorComponent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SpriteAnimatorComponent.h" line="14" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_sprite_animator_component_1a745771a05e31846144dbc2183d46cc68" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_boon_1_1_sprite_anim_clip" kindref="compound">SpriteAnimClip</ref> &amp;</type>
+        <definition>SpriteAnimClip &amp; Boon::SpriteAnimatorComponent::GetClip</definition>
+        <argsstring>() const</argsstring>
+        <name>GetClip</name>
+        <qualifiedname>Boon::SpriteAnimatorComponent::GetClip</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SpriteAnimatorComponent.h" line="16" column="23" bodyfile="Component/SpriteAnimatorComponent.h" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_sprite_animator_component_1a8ab80b9df2395179b43b6e21f647cdd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::SpriteAnimatorComponent::Awake</definition>
+        <argsstring>(GameObject)</argsstring>
+        <name>Awake</name>
+        <qualifiedname>Boon::SpriteAnimatorComponent::Awake</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SpriteAnimatorComponent.h" line="18" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_sprite_animator_component_1a171150b38f12ba362fbfd46654778e80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::SpriteAnimatorComponent::Update</definition>
+        <argsstring>(GameObject)</argsstring>
+        <name>Update</name>
+        <qualifiedname>Boon::SpriteAnimatorComponent::Update</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SpriteAnimatorComponent.h" line="19" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_sprite_animator_component_1aef82968e5ad17e76336e5f61edd2a6f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::SpriteAnimatorComponent::SetClip</definition>
+        <argsstring>(int clip, bool restart=true)</argsstring>
+        <name>SetClip</name>
+        <qualifiedname>Boon::SpriteAnimatorComponent::SetClip</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>clip</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>restart</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SpriteAnimatorComponent.h" line="21" column="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="7">
+        <label>Boon::BClass</label>
+        <link refid="struct_boon_1_1_b_class"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>functions</edgelabel>
+        </childnode>
+        <childnode refid="17" relation="usage">
+          <edgelabel>meta</edgelabel>
+        </childnode>
+        <childnode refid="19" relation="usage">
+          <edgelabel>registerLifecycle</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>addComponent</edgelabel>
+          <edgelabel>awake</edgelabel>
+          <edgelabel>getComponent</edgelabel>
+          <edgelabel>hasComponent</edgelabel>
+          <edgelabel>removeComponent</edgelabel>
+        </childnode>
+      </node>
+      <node id="18">
+        <label>Boon::BClassMeta</label>
+        <link refid="struct_boon_1_1_b_class_meta"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>key</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Boon::BFunction</label>
+        <link refid="struct_boon_1_1_b_function"/>
+        <childnode refid="12" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>meta</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>thunk</edgelabel>
+        </childnode>
+      </node>
+      <node id="15">
+        <label>Boon::BFunctionMeta</label>
+        <link refid="struct_boon_1_1_b_function_meta"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>key</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="13">
+        <label>Boon::BFunctionParam</label>
+        <link refid="struct_boon_1_1_b_function_param"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>name</edgelabel>
+          <edgelabel>typeName</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Boon::BRef&lt; Boon::SpriteRendererComponent &gt;</label>
+        <link refid="class_boon_1_1_b_ref"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Boon::BRefBase</label>
+        <link refid="class_boon_1_1_b_ref_base"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_Object</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_Type</edgelabel>
+        </childnode>
+      </node>
+      <node id="23">
+        <label>Boon::Delegate&lt; void(Boon::BClass &amp;)&gt;</label>
+        <link refid="class_boon_1_1_delegate"/>
+      </node>
+      <node id="19">
+        <label>Boon::ECSLifecycleSystem</label>
+        <link refid="struct_boon_1_1_e_c_s_lifecycle_system"/>
+        <childnode refid="20" relation="usage">
+          <edgelabel>scene</edgelabel>
+        </childnode>
+        <childnode refid="21" relation="usage">
+          <edgelabel>map</edgelabel>
+        </childnode>
+        <childnode refid="23" relation="usage">
+          <edgelabel>SceneListenerHandle</edgelabel>
+        </childnode>
+      </node>
+      <node id="22">
+        <label>Boon::ECSLifecycleSystem::Callbacks</label>
+        <link refid="struct_boon_1_1_e_c_s_lifecycle_system_1_1_callbacks"/>
+      </node>
+      <node id="6">
+        <label>Boon::GameObject</label>
+        <link refid="class_boon_1_1_game_object"/>
+      </node>
+      <node id="20">
+        <label>Boon::Scene</label>
+        <link refid="class_boon_1_1_scene"/>
+      </node>
+      <node id="1">
+        <label>Boon::SpriteAnimatorComponent</label>
+        <link refid="struct_boon_1_1_sprite_animator_component"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>Atlas</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>pRenderer</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Boon::SpriteAtlas</label>
+        <link refid="class_boon_1_1_sprite_atlas"/>
+      </node>
+      <node id="16">
+        <label>Boon::Variant</label>
+        <link refid="class_boon_1_1_variant"/>
+      </node>
+      <node id="9">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="2">
+        <label>std::shared_ptr&lt; Boon::SpriteAtlas &gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>std::string</label>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>std::unordered_map&lt; std::type_index, Boon::ECSLifecycleSystem::Callbacks &gt;</label>
+        <childnode refid="22" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="17">
+        <label>std::vector&lt; Boon::BClassMeta &gt;</label>
+        <childnode refid="18" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>std::vector&lt; Boon::BFunction &gt;</label>
+        <childnode refid="11" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="14">
+        <label>std::vector&lt; Boon::BFunctionMeta &gt;</label>
+        <childnode refid="15" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>std::vector&lt; Boon::BFunctionParam &gt;</label>
+        <childnode refid="13" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Component/SpriteAnimatorComponent.h" line="12" column="1" bodyfile="Component/SpriteAnimatorComponent.h" bodystart="13" bodyend="34"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_sprite_animator_component_1a2ad867d1732cfc6903c93d9456a574a1" prot="public" virt="non-virtual"><scope>Boon::SpriteAnimatorComponent</scope><name>Atlas</name></member>
+      <member refid="struct_boon_1_1_sprite_animator_component_1a8ab80b9df2395179b43b6e21f647cdd1" prot="public" virt="non-virtual"><scope>Boon::SpriteAnimatorComponent</scope><name>Awake</name></member>
+      <member refid="struct_boon_1_1_sprite_animator_component_1ad1b9f7075507aca48d13e602425a7cef" prot="public" virt="non-virtual"><scope>Boon::SpriteAnimatorComponent</scope><name>Clip</name></member>
+      <member refid="struct_boon_1_1_sprite_animator_component_1a745771a05e31846144dbc2183d46cc68" prot="public" virt="non-virtual"><scope>Boon::SpriteAnimatorComponent</scope><name>GetClip</name></member>
+      <member refid="struct_boon_1_1_sprite_animator_component_1aa2e273a9bba4decd55d46e49b5d57f33" prot="private" virt="non-virtual"><scope>Boon::SpriteAnimatorComponent</scope><name>m_Current</name></member>
+      <member refid="struct_boon_1_1_sprite_animator_component_1a1307958b5c72da40123e962f3891f349" prot="private" virt="non-virtual"><scope>Boon::SpriteAnimatorComponent</scope><name>m_Dirty</name></member>
+      <member refid="struct_boon_1_1_sprite_animator_component_1a65d8ae6231b9ab9e81453e1e66dd056a" prot="private" virt="non-virtual"><scope>Boon::SpriteAnimatorComponent</scope><name>m_Timer</name></member>
+      <member refid="struct_boon_1_1_sprite_animator_component_1a091d9c01c98c5fb7b986a7c069f593ea" prot="public" virt="non-virtual"><scope>Boon::SpriteAnimatorComponent</scope><name>pRenderer</name></member>
+      <member refid="struct_boon_1_1_sprite_animator_component_1aef82968e5ad17e76336e5f61edd2a6f4" prot="public" virt="non-virtual"><scope>Boon::SpriteAnimatorComponent</scope><name>SetClip</name></member>
+      <member refid="struct_boon_1_1_sprite_animator_component_1ad14af67415582943d800b1bc23967be2" prot="public" virt="non-virtual"><scope>Boon::SpriteAnimatorComponent</scope><name>SpriteAnimatorComponent</name></member>
+      <member refid="struct_boon_1_1_sprite_animator_component_1a171150b38f12ba362fbfd46654778e80" prot="public" virt="non-virtual"><scope>Boon::SpriteAnimatorComponent</scope><name>Update</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

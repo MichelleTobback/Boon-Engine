@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_box_collider2_d" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>Boon::BoxCollider2D</compoundname>
+    <includes refid="_box_collider2_d_8h" local="no">Component/BoxCollider2D.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_box_collider2_d_1a088bc973e899c289a475e7057fc9bb0d" prot="public" static="no" mutable="no">
+        <type>glm::vec2</type>
+        <definition>glm::vec2 Boon::BoxCollider2D::Size</definition>
+        <argsstring></argsstring>
+        <name>Size</name>
+        <qualifiedname>Boon::BoxCollider2D::Size</qualifiedname>
+        <initializer>= {1.f, 1.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/BoxCollider2D.h" line="11" column="11" bodyfile="Component/BoxCollider2D.h" bodystart="11" bodyend="11"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_box_collider2_d_1aa898add56c79721eaa2ddc7bf5ad30ea" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Boon::BoxCollider2D::Density</definition>
+        <argsstring></argsstring>
+        <name>Density</name>
+        <qualifiedname>Boon::BoxCollider2D::Density</qualifiedname>
+        <initializer>= 1.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/BoxCollider2D.h" line="14" column="7" bodyfile="Component/BoxCollider2D.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_box_collider2_d_1ad07f8882effb8e88b8a916a300b7b38a" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Boon::BoxCollider2D::Friction</definition>
+        <argsstring></argsstring>
+        <name>Friction</name>
+        <qualifiedname>Boon::BoxCollider2D::Friction</qualifiedname>
+        <initializer>= 0.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/BoxCollider2D.h" line="17" column="7" bodyfile="Component/BoxCollider2D.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_box_collider2_d_1a95a85149bb2aa33c0273bb383098091d" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Boon::BoxCollider2D::Restitution</definition>
+        <argsstring></argsstring>
+        <name>Restitution</name>
+        <qualifiedname>Boon::BoxCollider2D::Restitution</qualifiedname>
+        <initializer>= 0.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/BoxCollider2D.h" line="20" column="7" bodyfile="Component/BoxCollider2D.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_box_collider2_d_1abb55a02d7c6fed3531b4706228972533" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Boon::BoxCollider2D::IsTrigger</definition>
+        <argsstring></argsstring>
+        <name>IsTrigger</name>
+        <qualifiedname>Boon::BoxCollider2D::IsTrigger</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/BoxCollider2D.h" line="23" column="6" bodyfile="Component/BoxCollider2D.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Component/BoxCollider2D.h" line="8" column="1" bodyfile="Component/BoxCollider2D.h" bodystart="9" bodyend="28"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_box_collider2_d_1aa898add56c79721eaa2ddc7bf5ad30ea" prot="public" virt="non-virtual"><scope>Boon::BoxCollider2D</scope><name>Density</name></member>
+      <member refid="struct_boon_1_1_box_collider2_d_1ad07f8882effb8e88b8a916a300b7b38a" prot="public" virt="non-virtual"><scope>Boon::BoxCollider2D</scope><name>Friction</name></member>
+      <member refid="struct_boon_1_1_box_collider2_d_1abb55a02d7c6fed3531b4706228972533" prot="public" virt="non-virtual"><scope>Boon::BoxCollider2D</scope><name>IsTrigger</name></member>
+      <member refid="struct_boon_1_1_box_collider2_d_1a95a85149bb2aa33c0273bb383098091d" prot="public" virt="non-virtual"><scope>Boon::BoxCollider2D</scope><name>Restitution</name></member>
+      <member refid="struct_boon_1_1_box_collider2_d_1a088bc973e899c289a475e7057fc9bb0d" prot="public" virt="non-virtual"><scope>Boon::BoxCollider2D</scope><name>Size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

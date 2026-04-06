@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_91d930d1464f465aaf6157311abac52e" kind="dir">
+    <compoundname>Asset/Importer</compoundname>
+    <innerfile refid="_asset_importer_8h">AssetImporter.h</innerfile>
+    <innerfile refid="_asset_importer_registry_8h">AssetImporterRegistry.h</innerfile>
+    <innerfile refid="_scene_importer_8h">SceneImporter.h</innerfile>
+    <innerfile refid="_shader_importer_8h">ShaderImporter.h</innerfile>
+    <innerfile refid="_sprite_atlas_importer_8h">SpriteAtlasImporter.h</innerfile>
+    <innerfile refid="_texture_importer_8h">TextureImporter.h</innerfile>
+    <innerfile refid="_tilemap_importer_8h">TilemapImporter.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Asset/Importer/"/>
+  </compounddef>
+</doxygen>

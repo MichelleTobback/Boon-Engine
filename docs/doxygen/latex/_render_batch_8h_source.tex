@@ -1,0 +1,85 @@
+\doxysection{Render\+Batch.\+h}
+\hypertarget{_render_batch_8h_source}{}\label{_render_batch_8h_source}\index{RenderBatch.h@{RenderBatch.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}VertexBufferLayout.h"{}}}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00007}00007\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00009}00009\ \ \ \ \ \textcolor{keyword}{enum\ class}\ PrimitiveType}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00010}00010\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00011}00011\ \ \ \ \ \ \ \ \ Triangles,}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00012}00012\ \ \ \ \ \ \ \ \ Lines}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00013}00013\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_shader}{Shader}};}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_index_buffer}{IndexBuffer}};}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_vertex_buffer}{VertexBuffer}};}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_vertex_input}{VertexInput}};}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00019}\doxymbox{\hyperlink{class_boon_1_1_render_batch}{00019}}\ \ \ \ \ \textcolor{keyword}{class\ }RenderBatch}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00020}00020\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }BatchCallback\ =\ std::function<void()>;}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00033}\doxymbox{\hyperlink{class_boon_1_1_render_batch_a83b1adc90908ad191e3e4d97c61ecaf0}{00033}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_render_batch_a83b1adc90908ad191e3e4d97c61ecaf0}{Initialize}}(uint32\_t\ maxVertices,}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_boon_1_1_vertex_buffer_layout}{VertexBufferLayout}}\&\ layout,}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::shared\_ptr<Shader>\&\ shader,}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ PrimitiveType\ primitiveType,}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<IndexBuffer>\ indexBuffer\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00039}00039\ \ \ \ \ \ \ \ \ RenderBatch()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00044}\doxymbox{\hyperlink{class_boon_1_1_render_batch_a4fa312016e2639f32372d23fed326692}{00044}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_render_batch_a4fa312016e2639f32372d23fed326692}{\string~RenderBatch}}();}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00049}\doxymbox{\hyperlink{class_boon_1_1_render_batch_ae07e5cef9ce8fb8a58e079377a1f6cb2}{00049}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_render_batch_ae07e5cef9ce8fb8a58e079377a1f6cb2}{Begin}}();}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00054}\doxymbox{\hyperlink{class_boon_1_1_render_batch_a417928fbbd06b4945978789b451ac496}{00054}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_render_batch_a417928fbbd06b4945978789b451ac496}{Flush}}();}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00059}\doxymbox{\hyperlink{class_boon_1_1_render_batch_ac841641ef201722f2c46747c250fc438}{00059}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_boon_1_1_render_batch_ac841641ef201722f2c46747c250fc438}{NextBatch}}();}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ VertexType>}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ VertexType\&\ PushVertex()}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00063}00063\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\_VertexCount\ >=\ m\_MaxVertices)}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_render_batch_ac841641ef201722f2c46747c250fc438}{NextBatch}}();}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ VertexType*\ v\ =\ \textcolor{keyword}{reinterpret\_cast<}VertexType*\textcolor{keyword}{>}(m\_BufferPtr);}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ m\_BufferPtr\ +=\ \textcolor{keyword}{sizeof}(VertexType);}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ m\_VertexCount++;}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *v;}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00071}00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ BindPreFlushCallback(BatchCallback\ cb)\ \{\ m\_PreFlushFunc\ =\ cb;\ \}}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ BindPostFlushCallback(BatchCallback\ cb)\ \{\ m\_PostFlushFunc\ =\ cb;\ \}}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ BindBeginBatchCallback(BatchCallback\ cb)\ \{\ m\_BeginBatchFunc\ =\ cb;\ \}}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ SetShader(\textcolor{keyword}{const}\ std::shared\_ptr<Shader>\&\ shader)\ \{\ m\_Shader\ =\ shader;\ \}}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ SetPrimitiveType(PrimitiveType\ type)\ \{\ m\_PrimitiveType\ =\ type;\ \}}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ uint32\_t\ GetVertexCount()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_VertexCount;\ \}}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00082}00082\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00083}00083\ \ \ \ \ \ \ \ \ std::shared\_ptr<VertexInput>\ \ m\_VertexInput;}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00084}00084\ \ \ \ \ \ \ \ \ std::shared\_ptr<VertexBuffer>\ m\_VertexBuffer;}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00085}00085\ \ \ \ \ \ \ \ \ std::shared\_ptr<IndexBuffer>\ \ m\_IndexBuffer;}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00086}00086\ \ \ \ \ \ \ \ \ std::shared\_ptr<Shader>\ \ \ \ \ \ \ m\_Shader;}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00088}00088\ \ \ \ \ \ \ \ \ uint32\_t\ m\_MaxVertices\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00089}00089\ \ \ \ \ \ \ \ \ uint32\_t\ m\_VertexCount\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00091}00091\ \ \ \ \ \ \ \ \ uint8\_t*\ m\_BufferBase\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00092}00092\ \ \ \ \ \ \ \ \ uint8\_t*\ m\_BufferPtr\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00094}00094\ \ \ \ \ \ \ \ \ PrimitiveType\ m\_PrimitiveType;}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00096}00096\ \ \ \ \ \ \ \ \ BatchCallback\ m\_PreFlushFunc;}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00097}00097\ \ \ \ \ \ \ \ \ BatchCallback\ m\_PostFlushFunc;}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00098}00098\ \ \ \ \ \ \ \ \ BatchCallback\ m\_BeginBatchFunc;}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00099}00099\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_render_batch_8h_source_l00100}00100\ \}}
+
+\end{DoxyCode}

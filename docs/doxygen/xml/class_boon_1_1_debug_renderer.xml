@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_debug_renderer" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>Boon::DebugRenderer</compoundname>
+    <basecompoundref refid="class_boon_1_1_singleton" prot="public" virt="non-virtual">Boon::Singleton&lt; DebugRenderer &gt;</basecompoundref>
+    <includes refid="_boon_2include_2_boon_debug_2_debug_renderer_8h" local="no">BoonDebug/DebugRenderer.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_debug_renderer_1af73801a69998f843f1877e5168e223b9" prot="private" static="no" mutable="no">
+        <type>std::queue&lt; <ref refid="class_boon_1_1_debug_draw_cmd" kindref="compound">DebugDrawCmd</ref> * &gt;</type>
+        <definition>std::queue&lt;DebugDrawCmd*&gt; Boon::DebugRenderer::m_pCommands</definition>
+        <argsstring></argsstring>
+        <name>m_pCommands</name>
+        <qualifiedname>Boon::DebugRenderer::m_pCommands</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/DebugRenderer.h" line="80" column="12" bodyfile="BoonDebug/DebugRenderer.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_debug_renderer_1a96cba7d980869755db63c87b012aca0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::DebugRenderer::DebugRenderer</definition>
+        <argsstring>()=default</argsstring>
+        <name>DebugRenderer</name>
+        <qualifiedname>Boon::DebugRenderer::DebugRenderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/DebugRenderer.h" line="51" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_debug_renderer_1ab654d2accf6c9931d7c0539b71331b01" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::DebugRenderer::FlushQueue</definition>
+        <argsstring>(Renderer2D &amp;renderer)</argsstring>
+        <name>FlushQueue</name>
+        <qualifiedname>Boon::DebugRenderer::FlushQueue</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_renderer2_d" kindref="compound">Renderer2D</ref> &amp;</type>
+          <declname>renderer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/DebugRenderer.h" line="53" column="6" bodyfile="BoonDebug/DebugRenderer.h" bodystart="53" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_debug_renderer_1a09b60a511dc323943c0f575c41b99307" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::DebugRenderer::BeginFrame</definition>
+        <argsstring>()</argsstring>
+        <name>BeginFrame</name>
+        <qualifiedname>Boon::DebugRenderer::BeginFrame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/DebugRenderer.h" line="64" column="6" bodyfile="BoonDebug/DebugRenderer.h" bodystart="64" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_debug_renderer_1a5a6b111575b88e24be2b99d1d3585165" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::DebugRenderer::PushCommand</definition>
+        <argsstring>(DebugDrawCmd *pCmd)</argsstring>
+        <name>PushCommand</name>
+        <qualifiedname>Boon::DebugRenderer::PushCommand</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_debug_draw_cmd" kindref="compound">DebugDrawCmd</ref> *</type>
+          <declname>pCmd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="BoonDebug/DebugRenderer.h" line="74" column="6" bodyfile="BoonDebug/DebugRenderer.h" bodystart="74" bodyend="77"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>Boon::DebugRenderer</label>
+        <link refid="class_boon_1_1_debug_renderer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Boon::Singleton&lt; DebugRenderer &gt;</label>
+        <link refid="class_boon_1_1_singleton"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>Boon::DebugRenderer</label>
+        <link refid="class_boon_1_1_debug_renderer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Boon::Singleton&lt; DebugRenderer &gt;</label>
+        <link refid="class_boon_1_1_singleton"/>
+      </node>
+    </collaborationgraph>
+    <location file="BoonDebug/DebugRenderer.h" line="48" column="1" bodyfile="BoonDebug/DebugRenderer.h" bodystart="49" bodyend="81"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_debug_renderer_1a09b60a511dc323943c0f575c41b99307" prot="public" virt="non-virtual"><scope>Boon::DebugRenderer</scope><name>BeginFrame</name></member>
+      <member refid="class_boon_1_1_debug_renderer_1a96cba7d980869755db63c87b012aca0b" prot="public" virt="non-virtual"><scope>Boon::DebugRenderer</scope><name>DebugRenderer</name></member>
+      <member refid="class_boon_1_1_debug_renderer_1ab654d2accf6c9931d7c0539b71331b01" prot="public" virt="non-virtual"><scope>Boon::DebugRenderer</scope><name>FlushQueue</name></member>
+      <member refid="class_boon_1_1_singleton_1a3119416b57e971c3d1d7c16faaa1bc6f" prot="public" virt="non-virtual"><scope>Boon::DebugRenderer</scope><name>Get</name></member>
+      <member refid="class_boon_1_1_debug_renderer_1af73801a69998f843f1877e5168e223b9" prot="private" virt="non-virtual"><scope>Boon::DebugRenderer</scope><name>m_pCommands</name></member>
+      <member refid="class_boon_1_1_singleton_1af56732dfaae558bb49cdd6d39daae84e" prot="public" virt="non-virtual"><scope>Boon::DebugRenderer</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_debug_renderer_1a5a6b111575b88e24be2b99d1d3585165" prot="public" virt="non-virtual"><scope>Boon::DebugRenderer</scope><name>PushCommand</name></member>
+      <member refid="class_boon_1_1_singleton_1a139b13372cea88f1ab221b9f8c3e28f3" prot="public" virt="non-virtual"><scope>Boon::DebugRenderer</scope><name>Singleton</name></member>
+      <member refid="class_boon_1_1_singleton_1a993950c1060d7a6711c11e736d93dd89" prot="public" virt="virtual"><scope>Boon::DebugRenderer</scope><name>~Singleton</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

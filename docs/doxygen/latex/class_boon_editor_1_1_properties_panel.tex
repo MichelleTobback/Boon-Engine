@@ -1,0 +1,100 @@
+\doxysection{Boon\+Editor::\+Properties\+Panel Class Reference}
+\hypertarget{class_boon_editor_1_1_properties_panel}{}\label{class_boon_editor_1_1_properties_panel}\index{BoonEditor::PropertiesPanel@{BoonEditor::PropertiesPanel}}
+Inheritance diagram for Boon\+Editor::\+Properties\+Panel:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_boon_editor_1_1_properties_panel}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_boon_editor_1_1_properties_panel_aa616517faa62586cb5428d1386b9bf15}\label{class_boon_editor_1_1_properties_panel_aa616517faa62586cb5428d1386b9bf15} 
+{\bfseries Properties\+Panel} (const std::\+string \&name, \doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*}p\+Router, Game\+Object\+Context \texorpdfstring{$\ast$}{*}p\+Context)
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_properties_panel_a1a369a563b3a1f98debe5bc911e768c6}{Update}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Editor\+Panel} (const std::\+string \&name, \doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*}p\+Router)
+\item 
+{\bfseries Editor\+Panel} (const Editor\+Panel \&other)=delete
+\item 
+{\bfseries Editor\+Panel} (Editor\+Panel \&\&other)=delete
+\item 
+Editor\+Panel \& {\bfseries operator=} (const Editor\+Panel \&other)=delete
+\item 
+Editor\+Panel \& {\bfseries operator=} (Editor\+Panel \&\&other)=delete
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a213dbccbcaf8df25846ecd6c261afa94}{On\+Resize}} (uint32\+\_\+t width, uint32\+\_\+t height)
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_af52bce9632c058f5edfc288245c38013}{On\+Render}} ()
+\item 
+void {\bfseries Render\+UI} ()
+\item 
+bool {\bfseries Is\+Hovered} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_properties_panel_a823fd3991c22c125d9590a024c203c01}{On\+Render\+UI}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bfseries Render\+Float3\+Control} (const std::\+string \&label, glm::\+vec3 \&vector, float reset\+Value=0.\+0f, float column\+Width=100.\+0f)
+\item 
+const std::\+string \& \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_af7c8095284f6932cd3a18bc4a3aaad27}{Get\+Name}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}}
+\begin{DoxyCompactItemize}
+\item 
+std::\+string \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a10d71879d56dfec644df8a1c3718e49e}{m\+\_\+\+Name}}
+\item 
+Editor\+Panel\+Flag \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a7c213f233755bb557917127b7720fb14}{m\+\_\+\+Flags}}
+\item 
+\doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_adea21029e134f339cbf9679f8d724beb}{m\+\_\+p\+Router}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_properties_panel_8h_source_l00014}{14}} of file \doxymbox{\hyperlink{_properties_panel_8h_source}{Properties\+Panel.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_editor_1_1_properties_panel_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_editor_1_1_properties_panel_a823fd3991c22c125d9590a024c203c01}\index{BoonEditor::PropertiesPanel@{BoonEditor::PropertiesPanel}!OnRenderUI@{OnRenderUI}}
+\index{OnRenderUI@{OnRenderUI}!BoonEditor::PropertiesPanel@{BoonEditor::PropertiesPanel}}
+\doxysubsubsection{\texorpdfstring{OnRenderUI()}{OnRenderUI()}}
+{\footnotesize\ttfamily \label{class_boon_editor_1_1_properties_panel_a823fd3991c22c125d9590a024c203c01} 
+virtual void Boon\+Editor::\+\+Properties\+Panel::\+\+On\+Render\+UI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}.
+
+\Hypertarget{class_boon_editor_1_1_properties_panel_a1a369a563b3a1f98debe5bc911e768c6}\index{BoonEditor::PropertiesPanel@{BoonEditor::PropertiesPanel}!Update@{Update}}
+\index{Update@{Update}!BoonEditor::PropertiesPanel@{BoonEditor::PropertiesPanel}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_boon_editor_1_1_properties_panel_a1a369a563b3a1f98debe5bc911e768c6} 
+virtual void Boon\+Editor::\+\+Properties\+Panel::\+\+Update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_properties_panel_8h_source_l00020}{20}} of file \doxymbox{\hyperlink{_properties_panel_8h_source}{Properties\+Panel.\+h}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Properties\+Panel.\+h\end{DoxyCompactItemize}

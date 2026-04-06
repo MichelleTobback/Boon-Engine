@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_e_c_s_lifecycle_callbacks" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::ECSLifecycleCallbacks</compoundname>
+    <includes refid="_e_c_s_lifecycle_8h" local="no">Component/ECSLifecycle.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a77641ff0598d199589a79b1a09d497fb" prot="public" static="yes" mutable="no">
+        <type>std::function&lt; void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> &amp;)&gt;</type>
+        <definition>std::function&lt;void(Scene&amp;)&gt; Boon::ECSLifecycleCallbacks&lt; T &gt;::awake</definition>
+        <argsstring></argsstring>
+        <name>awake</name>
+        <qualifiedname>Boon::ECSLifecycleCallbacks::awake</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/ECSLifecycle.h" line="12" column="30" bodyfile="Component/ECSLifecycle.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a3962bcc1313083bfe666dfa74e4cf566" prot="public" static="yes" mutable="no">
+        <type>std::function&lt; void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> &amp;)&gt;</type>
+        <definition>std::function&lt;void(Scene&amp;)&gt; Boon::ECSLifecycleCallbacks&lt; T &gt;::onEndPlay</definition>
+        <argsstring></argsstring>
+        <name>onEndPlay</name>
+        <qualifiedname>Boon::ECSLifecycleCallbacks::onEndPlay</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/ECSLifecycle.h" line="13" column="30" bodyfile="Component/ECSLifecycle.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_e_c_s_lifecycle_callbacks_1aea8e8fc3f39ebdc51a2efebcd8d69ea0" prot="public" static="yes" mutable="no">
+        <type>std::function&lt; void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> &amp;)&gt;</type>
+        <definition>std::function&lt;void(Scene&amp;)&gt; Boon::ECSLifecycleCallbacks&lt; T &gt;::update</definition>
+        <argsstring></argsstring>
+        <name>update</name>
+        <qualifiedname>Boon::ECSLifecycleCallbacks::update</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/ECSLifecycle.h" line="14" column="30" bodyfile="Component/ECSLifecycle.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a65752e1fcbb47df2a383737dfcc21cd3" prot="public" static="yes" mutable="no">
+        <type>std::function&lt; void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> &amp;)&gt;</type>
+        <definition>std::function&lt;void(Scene&amp;)&gt; Boon::ECSLifecycleCallbacks&lt; T &gt;::fixedUpdate</definition>
+        <argsstring></argsstring>
+        <name>fixedUpdate</name>
+        <qualifiedname>Boon::ECSLifecycleCallbacks::fixedUpdate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/ECSLifecycle.h" line="15" column="30" bodyfile="Component/ECSLifecycle.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_e_c_s_lifecycle_callbacks_1ad6c3c17fa149fac48e20580d42202f26" prot="public" static="yes" mutable="no">
+        <type>std::function&lt; void(<ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> &amp;)&gt;</type>
+        <definition>std::function&lt;void(Scene&amp;)&gt; Boon::ECSLifecycleCallbacks&lt; T &gt;::lateUpdate</definition>
+        <argsstring></argsstring>
+        <name>lateUpdate</name>
+        <qualifiedname>Boon::ECSLifecycleCallbacks::lateUpdate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/ECSLifecycle.h" line="16" column="30" bodyfile="Component/ECSLifecycle.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_e_c_s_lifecycle_callbacks_1ad3e5fee322bbd27ba99bb59a81097694" prot="public" static="yes" mutable="no">
+        <type>std::function&lt; void(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref> &amp;, <ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref> &amp;)&gt;</type>
+        <definition>std::function&lt;void(GameObject&amp;, GameObject&amp;)&gt; Boon::ECSLifecycleCallbacks&lt; T &gt;::onBeginOverlap</definition>
+        <argsstring></argsstring>
+        <name>onBeginOverlap</name>
+        <qualifiedname>Boon::ECSLifecycleCallbacks::onBeginOverlap</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/ECSLifecycle.h" line="17" column="30" bodyfile="Component/ECSLifecycle.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a05ea4d7dcf3f4d0f19562a6d973d3b1e" prot="public" static="yes" mutable="no">
+        <type>std::function&lt; void(<ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref> &amp;, <ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref> &amp;)&gt;</type>
+        <definition>std::function&lt;void(GameObject&amp;, GameObject&amp;)&gt; Boon::ECSLifecycleCallbacks&lt; T &gt;::onEndOverlap</definition>
+        <argsstring></argsstring>
+        <name>onEndOverlap</name>
+        <qualifiedname>Boon::ECSLifecycleCallbacks::onEndOverlap</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/ECSLifecycle.h" line="18" column="30" bodyfile="Component/ECSLifecycle.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a7851e4bb173a46408289a5a3d73e1868" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Boon::ECSLifecycleCallbacks&lt; T &gt;::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>Boon::ECSLifecycleCallbacks::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/ECSLifecycle.h" line="20" column="21" bodyfile="Component/ECSLifecycle.h" bodystart="20" bodyend="94"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Component/ECSLifecycle.h" line="10" column="5" bodyfile="Component/ECSLifecycle.h" bodystart="11" bodyend="95"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a77641ff0598d199589a79b1a09d497fb" prot="public" virt="non-virtual"><scope>Boon::ECSLifecycleCallbacks</scope><name>awake</name></member>
+      <member refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a65752e1fcbb47df2a383737dfcc21cd3" prot="public" virt="non-virtual"><scope>Boon::ECSLifecycleCallbacks</scope><name>fixedUpdate</name></member>
+      <member refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a7851e4bb173a46408289a5a3d73e1868" prot="public" virt="non-virtual"><scope>Boon::ECSLifecycleCallbacks</scope><name>Init</name></member>
+      <member refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1ad6c3c17fa149fac48e20580d42202f26" prot="public" virt="non-virtual"><scope>Boon::ECSLifecycleCallbacks</scope><name>lateUpdate</name></member>
+      <member refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1ad3e5fee322bbd27ba99bb59a81097694" prot="public" virt="non-virtual"><scope>Boon::ECSLifecycleCallbacks</scope><name>onBeginOverlap</name></member>
+      <member refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a05ea4d7dcf3f4d0f19562a6d973d3b1e" prot="public" virt="non-virtual"><scope>Boon::ECSLifecycleCallbacks</scope><name>onEndOverlap</name></member>
+      <member refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1a3962bcc1313083bfe666dfa74e4cf566" prot="public" virt="non-virtual"><scope>Boon::ECSLifecycleCallbacks</scope><name>onEndPlay</name></member>
+      <member refid="struct_boon_1_1_e_c_s_lifecycle_callbacks_1aea8e8fc3f39ebdc51a2efebcd8d69ea0" prot="public" virt="non-virtual"><scope>Boon::ECSLifecycleCallbacks</scope><name>update</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

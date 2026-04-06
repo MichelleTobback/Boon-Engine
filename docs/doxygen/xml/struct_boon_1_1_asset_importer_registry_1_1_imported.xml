@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_asset_importer_registry_1_1_imported" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::AssetImporterRegistry::Imported</compoundname>
+    <includes refid="_asset_importer_registry_8h" local="no">Asset/Importer/AssetImporterRegistry.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_asset_importer_registry_1_1_imported_1a31f3dd64feed0b1baccce75d032fcbe4" prot="public" static="no" mutable="no">
+        <type>T *</type>
+        <definition>T* Boon::AssetImporterRegistry::Imported&lt; T &gt;::asset</definition>
+        <argsstring></argsstring>
+        <name>asset</name>
+        <qualifiedname>Boon::AssetImporterRegistry::Imported::asset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/Importer/AssetImporterRegistry.h" line="25" column="15" bodyfile="Asset/Importer/AssetImporterRegistry.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_asset_importer_registry_1_1_imported_1ae5b7682db6a4d26050b2b76f2c5d4169" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_boon_1_1_asset_meta" kindref="compound">AssetMeta</ref></type>
+        <definition>AssetMeta Boon::AssetImporterRegistry::Imported&lt; T &gt;::meta</definition>
+        <argsstring></argsstring>
+        <name>meta</name>
+        <qualifiedname>Boon::AssetImporterRegistry::Imported::meta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/Importer/AssetImporterRegistry.h" line="26" column="23" bodyfile="Asset/Importer/AssetImporterRegistry.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_boon_1_1_asset_importer_registry_1_1_imported_1ac0ed2be27e8a352b507976eed8fe0b7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::AssetImporterRegistry::Imported&lt; T &gt;::Imported</definition>
+        <argsstring>()=default</argsstring>
+        <name>Imported</name>
+        <qualifiedname>Boon::AssetImporterRegistry::Imported::Imported</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/Importer/AssetImporterRegistry.h" line="21" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_asset_importer_registry_1_1_imported_1aee35903bfc513641dbb9fecd6225bab9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::AssetImporterRegistry::Imported&lt; T &gt;::Imported</definition>
+        <argsstring>(T *_asset, const AssetMeta &amp;_meta)</argsstring>
+        <name>Imported</name>
+        <qualifiedname>Boon::AssetImporterRegistry::Imported::Imported</qualifiedname>
+        <param>
+          <type>T *</type>
+          <declname>_asset</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_boon_1_1_asset_meta" kindref="compound">AssetMeta</ref> &amp;</type>
+          <declname>_meta</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/Importer/AssetImporterRegistry.h" line="22" column="13" bodyfile="Asset/Importer/AssetImporterRegistry.h" bodystart="22" bodyend="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>Boon::AssetImporterRegistry::Imported&lt; T &gt;</label>
+        <link refid="struct_boon_1_1_asset_importer_registry_1_1_imported"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>meta</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Boon::AssetMeta</label>
+        <link refid="struct_boon_1_1_asset_meta"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>uuid</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>settings</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>dependencies</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Boon::UUID</label>
+        <link refid="class_boon_1_1_u_u_i_d"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>Null</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="5">
+        <label>std::string</label>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::unordered_map&lt; std::string, std::string &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>elements</edgelabel>
+          <edgelabel>keys</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::vector&lt; Boon::UUID &gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Asset/Importer/AssetImporterRegistry.h" line="19" column="9" bodyfile="Asset/Importer/AssetImporterRegistry.h" bodystart="20" bodyend="27"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_asset_importer_registry_1_1_imported_1a31f3dd64feed0b1baccce75d032fcbe4" prot="public" virt="non-virtual"><scope>Boon::AssetImporterRegistry::Imported</scope><name>asset</name></member>
+      <member refid="struct_boon_1_1_asset_importer_registry_1_1_imported_1ac0ed2be27e8a352b507976eed8fe0b7d" prot="public" virt="non-virtual"><scope>Boon::AssetImporterRegistry::Imported</scope><name>Imported</name></member>
+      <member refid="struct_boon_1_1_asset_importer_registry_1_1_imported_1aee35903bfc513641dbb9fecd6225bab9" prot="public" virt="non-virtual"><scope>Boon::AssetImporterRegistry::Imported</scope><name>Imported</name></member>
+      <member refid="struct_boon_1_1_asset_importer_registry_1_1_imported_1ae5b7682db6a4d26050b2b76f2c5d4169" prot="public" virt="non-virtual"><scope>Boon::AssetImporterRegistry::Imported</scope><name>meta</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_b_property_meta" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::BPropertyMeta</compoundname>
+    <includes refid="_b_property_8h" local="no">Reflection/BProperty.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_b_property_meta_1a50880fdf1410775344ffd2154b4e84c0" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string Boon::BPropertyMeta::key</definition>
+        <argsstring></argsstring>
+        <name>key</name>
+        <qualifiedname>Boon::BPropertyMeta::key</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Reflection/BProperty.h" line="37" column="21" bodyfile="Reflection/BProperty.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_b_property_meta_1a54bb1a1a4c22b84990e934c875001c14" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string Boon::BPropertyMeta::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>Boon::BPropertyMeta::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Reflection/BProperty.h" line="38" column="21" bodyfile="Reflection/BProperty.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>Boon::BPropertyMeta</label>
+        <link refid="struct_boon_1_1_b_property_meta"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>key</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="2">
+        <label>std::string</label>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Reflection/BProperty.h" line="35" column="5" bodyfile="Reflection/BProperty.h" bodystart="36" bodyend="39"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_b_property_meta_1a50880fdf1410775344ffd2154b4e84c0" prot="public" virt="non-virtual"><scope>Boon::BPropertyMeta</scope><name>key</name></member>
+      <member refid="struct_boon_1_1_b_property_meta_1a54bb1a1a4c22b84990e934c875001c14" prot="public" virt="non-virtual"><scope>Boon::BPropertyMeta</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

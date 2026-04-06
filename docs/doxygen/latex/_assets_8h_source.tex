@@ -1,0 +1,40 @@
+\doxysection{Assets.\+h}
+\hypertarget{_assets_8h_source}{}\label{_assets_8h_source}\index{Assets.h@{Assets.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}AssetLibrary.h"{}}}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}TextureAsset.h"{}}}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}ShaderAsset.h"{}}}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}SpriteAtlasAsset.h"{}}}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}SceneAsset.h"{}}}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}Core/ServiceLocator.h"{}}}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00010}00010\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00011}00011\ \{}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00012}00012\ \ \ \ \ \textcolor{keyword}{namespace\ }Assets}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00013}00013\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00014}00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ AssetLibrary\&\ Get()}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00015}00015\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_boon_1_1_service_locator_a24d80f5670a222c787d4f63bdba7c03a}{ServiceLocator::Get<AssetLibrary>}}();}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ AssetRef<Texture2DAsset>\ GetTexture2D(AssetHandle\ handle)}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00020}00020\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_boon_1_1_service_locator_a24d80f5670a222c787d4f63bdba7c03a}{ServiceLocator::Get<AssetLibrary>}}().Load<Texture2DAsset>(handle);}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00022}00022\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ AssetRef<ShaderAsset>\ GetShader(AssetHandle\ handle)}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00025}00025\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_boon_1_1_service_locator_a24d80f5670a222c787d4f63bdba7c03a}{ServiceLocator::Get<AssetLibrary>}}().Load<ShaderAsset>(handle);}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00027}00027\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ AssetRef<SpriteAtlasAsset>\ GetSpriteAtlas(AssetHandle\ handle)}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00030}00030\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_boon_1_1_service_locator_a24d80f5670a222c787d4f63bdba7c03a}{ServiceLocator::Get<AssetLibrary>}}().Load<SpriteAtlasAsset>(handle);}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00032}00032\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00033}00033\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_assets_8h_source_l00034}00034\ \}}
+
+\end{DoxyCode}

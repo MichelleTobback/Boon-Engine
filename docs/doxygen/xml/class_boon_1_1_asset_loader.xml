@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_asset_loader" kind="class" language="C++" prot="public">
+    <compoundname>Boon::AssetLoader</compoundname>
+    <includes refid="_asset_loader_8h" local="no">Asset/Loader/AssetLoader.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_asset_loader_1a0513c5c9dbe317421085f2728ec58c4f" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_asset_pack_reader" kindref="compound">AssetPackReader</ref> *</type>
+        <definition>AssetPackReader* Boon::AssetLoader::m_Reader</definition>
+        <argsstring></argsstring>
+        <name>m_Reader</name>
+        <qualifiedname>Boon::AssetLoader::m_Reader</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/Loader/AssetLoader.h" line="39" column="25" bodyfile="Asset/Loader/AssetLoader.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_asset_loader_1a586dfcbc84766e0f490af76cc26bdb52" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::AssetLoader::AssetLoader</definition>
+        <argsstring>(AssetPackReader *reader)</argsstring>
+        <name>AssetLoader</name>
+        <qualifiedname>Boon::AssetLoader::AssetLoader</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_asset_pack_reader" kindref="compound">AssetPackReader</ref> *</type>
+          <declname>reader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/Loader/AssetLoader.h" line="16" column="18" bodyfile="Asset/Loader/AssetLoader.h" bodystart="16" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_asset_loader_1a15cbe9a17b9466e70ab30d50c4f0fc56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * Boon::AssetLoader::Load</definition>
+        <argsstring>(AssetHandle handle)</argsstring>
+        <name>Load</name>
+        <qualifiedname>Boon::AssetLoader::Load</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Load an asset of type T from the asset pack using its handle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="class_boon_1_1_asset" kindref="compound">Asset</ref> type to load. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle of the asset to load. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the loaded asset of type T, or nullptr on failure. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/Loader/AssetLoader.h" line="28" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_asset_loader_1adf64fc861c2edb47647ebd4eae38c1a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_asset" kindref="compound">Asset</ref> *</type>
+        <definition>Asset * Boon::AssetLoader::LoadGeneric</definition>
+        <argsstring>(AssetHandle handle)</argsstring>
+        <name>LoadGeneric</name>
+        <qualifiedname>Boon::AssetLoader::LoadGeneric</qualifiedname>
+        <param>
+          <type><ref refid="namespace_boon_1a27750f07ad6f43bf14f2368064d97a75" kindref="member">AssetHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Load an asset as the base <ref refid="class_boon_1_1_asset" kindref="compound">Asset</ref> type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle of the asset to load. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the loaded <ref refid="class_boon_1_1_asset" kindref="compound">Asset</ref>, or nullptr on failure. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Asset/Loader/AssetLoader.h" line="36" column="15"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Asset/Loader/AssetLoader.h" line="13" column="5" bodyfile="Asset/Loader/AssetLoader.h" bodystart="14" bodyend="40"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_asset_loader_1a586dfcbc84766e0f490af76cc26bdb52" prot="public" virt="non-virtual"><scope>Boon::AssetLoader</scope><name>AssetLoader</name></member>
+      <member refid="class_boon_1_1_asset_loader_1a15cbe9a17b9466e70ab30d50c4f0fc56" prot="public" virt="non-virtual"><scope>Boon::AssetLoader</scope><name>Load</name></member>
+      <member refid="class_boon_1_1_asset_loader_1adf64fc861c2edb47647ebd4eae38c1a4" prot="public" virt="non-virtual"><scope>Boon::AssetLoader</scope><name>LoadGeneric</name></member>
+      <member refid="class_boon_1_1_asset_loader_1a0513c5c9dbe317421085f2728ec58c4f" prot="private" virt="non-virtual"><scope>Boon::AssetLoader</scope><name>m_Reader</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

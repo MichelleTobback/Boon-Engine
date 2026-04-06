@@ -1,0 +1,81 @@
+\doxysection{Net\+Driver.\+h}
+\hypertarget{_net_driver_8h_source}{}\label{_net_driver_8h_source}\index{NetDriver.h@{NetDriver.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}NetPacket.h"{}}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}NetConnection.h"{}}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}NetAuthority.h"{}}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}Networking/NetworkSettings.h"{}}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00010}00010\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00011}00011\ \{}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00012}00012\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_net_scene}{NetScene}};}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{using\ }PacketCallback\ =\ std::function<void(\doxymbox{\hyperlink{class_boon_1_1_net_connection}{NetConnection}}*,\ \doxymbox{\hyperlink{class_boon_1_1_net_packet}{NetPacket}}\&)>;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{using\ }ConnectionCallback\ =\ std::function<void(\doxymbox{\hyperlink{class_boon_1_1_net_connection}{NetConnection}}*)>;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{using\ }NetDriverCallback\ =\ std::function<void(\doxymbox{\hyperlink{class_boon_1_1_net_driver}{NetDriver}}*)>;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00018}\doxymbox{\hyperlink{class_boon_1_1_net_driver}{00018}}\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_net_driver}{NetDriver}}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00019}00019\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{class_boon_1_1_net_driver}{\string~NetDriver}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Initialization}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ Initialize(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_network_settings}{NetworkSettings}}\&\ settings)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Shutdown()\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ Connect(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ host,\ uint16\_t\ port)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Tick}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Update()\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Send}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Send(\doxymbox{\hyperlink{class_boon_1_1_net_connection}{NetConnection}}*\ conn,\ \doxymbox{\hyperlink{class_boon_1_1_net_packet}{NetPacket}}\&\ pkt,\ \textcolor{keywordtype}{bool}\ reliable\ =\ \textcolor{keyword}{true})\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Broadcast(\doxymbox{\hyperlink{class_boon_1_1_net_packet}{NetPacket}}\&\ pkt,\ \textcolor{keywordtype}{bool}\ reliable\ =\ \textcolor{keyword}{true})\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SendToServer(\doxymbox{\hyperlink{class_boon_1_1_net_packet}{NetPacket}}\&\ pkt,\ \textcolor{keywordtype}{bool}\ reliable\ =\ \textcolor{keyword}{true})\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Callback\ binding}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BindOnStartupCallback(\textcolor{keyword}{const}\ NetDriverCallback\&\ fn)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BindOnShutdownCallback(\textcolor{keyword}{const}\ NetDriverCallback\&\ fn)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BindOnPacketCallback(\textcolor{keyword}{const}\ PacketCallback\&\ fn)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BindOnConnectedCallback(\textcolor{keyword}{const}\ ConnectionCallback\&\ fn)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BindOnDisconnectedCallback(\textcolor{keyword}{const}\ ConnectionCallback\&\ fn)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Scene\ (owner)}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BindScene(\textcolor{keyword}{const}\ std::shared\_ptr<NetScene>\&\ scene)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Connection\ lookup}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{class_boon_1_1_net_connection}{NetConnection}}*\ GetConnection(uint64\_t\ \textcolor{keywordtype}{id})\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ ForeachConnection(\textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{void}(\doxymbox{\hyperlink{class_boon_1_1_net_connection}{NetConnection}}*)>\&\ fn)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ uint32\_t\ GetConnectionCount()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Role}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ ENetDriverMode\ GetMode()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ uint64\_t\ GetLocalConnectionId()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ IsStandalone()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ IsClient()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ IsServer()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00074}00074\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_net_driver_8h_source_l00075}00075\ \}}
+
+\end{DoxyCode}

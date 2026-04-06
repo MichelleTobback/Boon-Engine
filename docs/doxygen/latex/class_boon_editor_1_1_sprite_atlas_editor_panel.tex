@@ -1,0 +1,151 @@
+\doxysection{Boon\+Editor::\+Sprite\+Atlas\+Editor\+Panel Class Reference}
+\hypertarget{class_boon_editor_1_1_sprite_atlas_editor_panel}{}\label{class_boon_editor_1_1_sprite_atlas_editor_panel}\index{BoonEditor::SpriteAtlasEditorPanel@{BoonEditor::SpriteAtlasEditorPanel}}
+Inheritance diagram for Boon\+Editor::\+Sprite\+Atlas\+Editor\+Panel:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5.000000cm]{class_boon_editor_1_1_sprite_atlas_editor_panel}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_boon_editor_1_1_sprite_atlas_editor_panel_afef30983ce43a24846a8a41ced9e64d5}\label{class_boon_editor_1_1_sprite_atlas_editor_panel_afef30983ce43a24846a8a41ced9e64d5} 
+{\bfseries Sprite\+Atlas\+Editor\+Panel} (const std::\+string \&name, \doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*}p\+Router)
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_sprite_atlas_editor_panel_a92c497dbb83c6d841f4659302b5b6091}{Update}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor}{Boon\+Editor::\+\+Asset\+Editor$<$ Sprite\+Atlas\+Asset $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor_a661c7b4b4743250c3b78a4cd71bae1c2}{Asset\+Editor}} (const std::\+string \&name, \doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*}p\+Router)
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor_af97fcd84c00816500344cb8b3dc9e41f}{On\+Render\+UI}} () override
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Asset\+Ref}}$<$ \doxymbox{\hyperlink{class_boon_1_1_sprite_atlas_asset}{Sprite\+Atlas\+Asset}} $>$ \& \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor_aea0a4c098ebee7817421baf34573eee5}{Get\+Asset}} ()
+\item 
+void \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor_a6061452a04631cf00300d3ba045813ea}{Set\+Asset}} (\doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Asset\+Ref}}$<$ \doxymbox{\hyperlink{class_boon_1_1_sprite_atlas_asset}{Sprite\+Atlas\+Asset}} $>$ asset)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor_base}{Boon\+Editor::\+\+Asset\+Editor\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor_base_ad0339e0cb7504025f9a00c2fbd1327fe}{Asset\+Editor\+Base}} (const std::\+string \&name, \doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*}p\+Router)
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor_base_abfdac502e798c6429ece70df971c3916}{On\+Render}} () override
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \& \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor_base_a8131c8c53b23b2514dfe5bac70cf5c0a}{Get\+Scene}} ()
+\item 
+\doxymbox{\hyperlink{class_boon_editor_1_1_viewport_panel}{Viewport\+Panel}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor_base_a1c0e6e04ec78cb1fb84cb474d8c0793c}{Get\+Viewport}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Editor\+Panel} (const std::\+string \&name, \doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*}p\+Router)
+\item 
+{\bfseries Editor\+Panel} (const Editor\+Panel \&other)=delete
+\item 
+{\bfseries Editor\+Panel} (Editor\+Panel \&\&other)=delete
+\item 
+Editor\+Panel \& {\bfseries operator=} (const Editor\+Panel \&other)=delete
+\item 
+Editor\+Panel \& {\bfseries operator=} (Editor\+Panel \&\&other)=delete
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a213dbccbcaf8df25846ecd6c261afa94}{On\+Resize}} (uint32\+\_\+t width, uint32\+\_\+t height)
+\item 
+void {\bfseries Render\+UI} ()
+\item 
+bool {\bfseries Is\+Hovered} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_boon_editor_1_1_sprite_atlas_editor_panel_a9819a32aa520b7efbef479d7f6a6c6ca}\label{class_boon_editor_1_1_sprite_atlas_editor_panel_a9819a32aa520b7efbef479d7f6a6c6ca} 
+virtual void {\bfseries Build\+Preview\+Scene} (\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \&scene) override
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_sprite_atlas_editor_panel_ad311f583a1afc987167c3add043d0008}{Render\+Toolbar}} () override
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_sprite_atlas_editor_panel_a7c954546247dfc3f71d715e5f9fe12e4}{Render\+Main\+Area}} () override
+\item 
+\Hypertarget{class_boon_editor_1_1_sprite_atlas_editor_panel_a81518dba2392d30a42dca2a4d843281e}\label{class_boon_editor_1_1_sprite_atlas_editor_panel_a81518dba2392d30a42dca2a4d843281e} 
+glm::\+vec2 {\bfseries Camera\+World\+To\+Atlas} (const glm::\+vec3 \&world)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor}{Boon\+Editor::\+\+Asset\+Editor$<$ Sprite\+Atlas\+Asset $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor_a7d936d6556e4e6f06e0787306048437f}{Set\+Context}} (Asset\+Handle handle) override
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor_ae492f5304c3592431dbb8278c82ea611}{Build\+Preview\+Scene}} (\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \&scene)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor_base}{Boon\+Editor::\+\+Asset\+Editor\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+glm::\+vec3 {\bfseries Screen\+To\+World} (const glm::\+vec2 \&mouse\+Pos)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bfseries Render\+Float3\+Control} (const std::\+string \&label, glm::\+vec3 \&vector, float reset\+Value=0.\+0f, float column\+Width=100.\+0f)
+\item 
+const std::\+string \& \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_af7c8095284f6932cd3a18bc4a3aaad27}{Get\+Name}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor}{Boon\+Editor::\+\+Asset\+Editor$<$ Sprite\+Atlas\+Asset $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_asset_ref}{Asset\+Ref}}$<$ \doxymbox{\hyperlink{class_boon_1_1_sprite_atlas_asset}{Sprite\+Atlas\+Asset}} $>$ \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor_a922bbf7299712beaa686f4a3e3ff5623}{m\+\_\+\+Asset}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}}
+\begin{DoxyCompactItemize}
+\item 
+std::\+string \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a10d71879d56dfec644df8a1c3718e49e}{m\+\_\+\+Name}}
+\item 
+Editor\+Panel\+Flag \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a7c213f233755bb557917127b7720fb14}{m\+\_\+\+Flags}}
+\item 
+\doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_adea21029e134f339cbf9679f8d724beb}{m\+\_\+p\+Router}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_sprite_atlas_editor_panel_8h_source_l00028}{28}} of file \doxymbox{\hyperlink{_sprite_atlas_editor_panel_8h_source}{Sprite\+Atlas\+Editor\+Panel.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_editor_1_1_sprite_atlas_editor_panel_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_editor_1_1_sprite_atlas_editor_panel_a7c954546247dfc3f71d715e5f9fe12e4}\index{BoonEditor::SpriteAtlasEditorPanel@{BoonEditor::SpriteAtlasEditorPanel}!RenderMainArea@{RenderMainArea}}
+\index{RenderMainArea@{RenderMainArea}!BoonEditor::SpriteAtlasEditorPanel@{BoonEditor::SpriteAtlasEditorPanel}}
+\doxysubsubsection{\texorpdfstring{RenderMainArea()}{RenderMainArea()}}
+{\footnotesize\ttfamily \label{class_boon_editor_1_1_sprite_atlas_editor_panel_a7c954546247dfc3f71d715e5f9fe12e4} 
+virtual void Boon\+Editor::\+\+Sprite\+Atlas\+Editor\+Panel::\+\+Render\+Main\+Area (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor}{Boon\+Editor::\+\+Asset\+Editor$<$ Sprite\+Atlas\+Asset $>$}}.
+
+\Hypertarget{class_boon_editor_1_1_sprite_atlas_editor_panel_ad311f583a1afc987167c3add043d0008}\index{BoonEditor::SpriteAtlasEditorPanel@{BoonEditor::SpriteAtlasEditorPanel}!RenderToolbar@{RenderToolbar}}
+\index{RenderToolbar@{RenderToolbar}!BoonEditor::SpriteAtlasEditorPanel@{BoonEditor::SpriteAtlasEditorPanel}}
+\doxysubsubsection{\texorpdfstring{RenderToolbar()}{RenderToolbar()}}
+{\footnotesize\ttfamily \label{class_boon_editor_1_1_sprite_atlas_editor_panel_ad311f583a1afc987167c3add043d0008} 
+virtual void Boon\+Editor::\+\+Sprite\+Atlas\+Editor\+Panel::\+\+Render\+Toolbar (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor}{Boon\+Editor::\+\+Asset\+Editor$<$ Sprite\+Atlas\+Asset $>$}}.
+
+\Hypertarget{class_boon_editor_1_1_sprite_atlas_editor_panel_a92c497dbb83c6d841f4659302b5b6091}\index{BoonEditor::SpriteAtlasEditorPanel@{BoonEditor::SpriteAtlasEditorPanel}!Update@{Update}}
+\index{Update@{Update}!BoonEditor::SpriteAtlasEditorPanel@{BoonEditor::SpriteAtlasEditorPanel}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_boon_editor_1_1_sprite_atlas_editor_panel_a92c497dbb83c6d841f4659302b5b6091} 
+virtual void Boon\+Editor::\+\+Sprite\+Atlas\+Editor\+Panel::\+\+Update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_boon_editor_1_1_asset_editor}{Boon\+Editor::\+\+Asset\+Editor$<$ Sprite\+Atlas\+Asset $>$}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Sprite\+Atlas\+Editor\+Panel.\+h\end{DoxyCompactItemize}

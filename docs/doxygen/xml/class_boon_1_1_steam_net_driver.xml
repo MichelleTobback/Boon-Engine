@@ -1,0 +1,952 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_steam_net_driver" kind="class" language="C++" prot="public">
+    <compoundname>Boon::SteamNetDriver</compoundname>
+    <basecompoundref refid="class_boon_1_1_net_driver" prot="public" virt="non-virtual">Boon::NetDriver</basecompoundref>
+    <includes refid="_steam_net_driver_8h" local="no">Platform/Steam/SteamNetDriver.h</includes>
+    <innerclass refid="struct_boon_1_1_steam_net_driver_1_1_driver_connection" prot="private">Boon::SteamNetDriver::DriverConnection</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_steam_net_driver_1a0117cc2c76b7ab3c8e37b7188193f033" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_boon_1_1_network_settings" kindref="compound">NetworkSettings</ref></type>
+        <definition>NetworkSettings Boon::SteamNetDriver::m_Settings</definition>
+        <argsstring></argsstring>
+        <name>m_Settings</name>
+        <qualifiedname>Boon::SteamNetDriver::m_Settings</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="67" column="25" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_steam_net_driver_1a7f05dbbe683a5114c46dd5cf71febab6" prot="private" static="no" mutable="no">
+        <type>ISteamNetworkingSockets *</type>
+        <definition>ISteamNetworkingSockets* Boon::SteamNetDriver::m_Interface</definition>
+        <argsstring></argsstring>
+        <name>m_Interface</name>
+        <qualifiedname>Boon::SteamNetDriver::m_Interface</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="72" column="33" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_steam_net_driver_1afd9a45dba882f0095fc0e73d84f9fdf7" prot="private" static="no" mutable="no">
+        <type>HSteamListenSocket</type>
+        <definition>HSteamListenSocket Boon::SteamNetDriver::m_ListenSocket</definition>
+        <argsstring></argsstring>
+        <name>m_ListenSocket</name>
+        <qualifiedname>Boon::SteamNetDriver::m_ListenSocket</qualifiedname>
+        <initializer>= k_HSteamListenSocket_Invalid</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="73" column="28" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_steam_net_driver_1ad9038ab0dee628bcd7c38693b59d5ec9" prot="private" static="no" mutable="no">
+        <type>HSteamNetPollGroup</type>
+        <definition>HSteamNetPollGroup Boon::SteamNetDriver::m_PollGroup</definition>
+        <argsstring></argsstring>
+        <name>m_PollGroup</name>
+        <qualifiedname>Boon::SteamNetDriver::m_PollGroup</qualifiedname>
+        <initializer>= k_HSteamNetPollGroup_Invalid</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="74" column="28" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_steam_net_driver_1a1acbad7cc7ee0ab14922694f4e8dba6d" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_net_scene" kindref="compound">NetScene</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;NetScene&gt; Boon::SteamNetDriver::m_Scene</definition>
+        <argsstring></argsstring>
+        <name>m_Scene</name>
+        <qualifiedname>Boon::SteamNetDriver::m_Scene</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="80" column="25" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_steam_net_driver_1ab63418a14ce996c445f19e38320ccfa6" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t Boon::SteamNetDriver::m_LocalConnectionId</definition>
+        <argsstring></argsstring>
+        <name>m_LocalConnectionId</name>
+        <qualifiedname>Boon::SteamNetDriver::m_LocalConnectionId</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="82" column="18" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_steam_net_driver_1a0d6c9351e57d28ff67b59dd189ae09f5" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; uint64_t, DriverConnection &gt;</type>
+        <definition>std::unordered_map&lt;uint64_t, DriverConnection&gt; Boon::SteamNetDriver::m_Connections</definition>
+        <argsstring></argsstring>
+        <name>m_Connections</name>
+        <qualifiedname>Boon::SteamNetDriver::m_Connections</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="93" column="28" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_steam_net_driver_1ae67f7ce849c30827c3fe5f411b9f3fe4" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; HSteamNetConnection, uint64_t &gt;</type>
+        <definition>std::unordered_map&lt;HSteamNetConnection, uint64_t&gt; Boon::SteamNetDriver::m_ReverseLookup</definition>
+        <argsstring></argsstring>
+        <name>m_ReverseLookup</name>
+        <qualifiedname>Boon::SteamNetDriver::m_ReverseLookup</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="94" column="28" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_steam_net_driver_1ab3bd1ca39b89a34a70d479918b3d20a3" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1a769c3d4488a88ad4259c799a438baec3" kindref="member">PacketCallback</ref></type>
+        <definition>PacketCallback Boon::SteamNetDriver::m_OnPacket</definition>
+        <argsstring></argsstring>
+        <name>m_OnPacket</name>
+        <qualifiedname>Boon::SteamNetDriver::m_OnPacket</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="99" column="24" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_steam_net_driver_1a1f8e6d343baf830cf2765947a051928a" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1a9bdd7d39032a5593790771bec86d8e16" kindref="member">ConnectionCallback</ref></type>
+        <definition>ConnectionCallback Boon::SteamNetDriver::m_OnConnected</definition>
+        <argsstring></argsstring>
+        <name>m_OnConnected</name>
+        <qualifiedname>Boon::SteamNetDriver::m_OnConnected</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="100" column="28" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_steam_net_driver_1a1df31e8c9cb25872e060be9bff4594e9" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1a9bdd7d39032a5593790771bec86d8e16" kindref="member">ConnectionCallback</ref></type>
+        <definition>ConnectionCallback Boon::SteamNetDriver::m_OnDisconnected</definition>
+        <argsstring></argsstring>
+        <name>m_OnDisconnected</name>
+        <qualifiedname>Boon::SteamNetDriver::m_OnDisconnected</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="101" column="28" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_steam_net_driver_1af5780190acec0bf481d5063fee26fea5" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1acef3552da596e536f162543aed41b612" kindref="member">NetDriverCallback</ref></type>
+        <definition>NetDriverCallback Boon::SteamNetDriver::m_OnStartup</definition>
+        <argsstring></argsstring>
+        <name>m_OnStartup</name>
+        <qualifiedname>Boon::SteamNetDriver::m_OnStartup</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="102" column="27" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_steam_net_driver_1af2809f79035a892c71e3143fdf5cb744" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1acef3552da596e536f162543aed41b612" kindref="member">NetDriverCallback</ref></type>
+        <definition>NetDriverCallback Boon::SteamNetDriver::m_OnShutdown</definition>
+        <argsstring></argsstring>
+        <name>m_OnShutdown</name>
+        <qualifiedname>Boon::SteamNetDriver::m_OnShutdown</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="103" column="27" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_steam_net_driver_1a0d2f53a148c6bc4a26d0e2fc7447d118" prot="private" static="yes" mutable="no">
+        <type><ref refid="class_boon_1_1_steam_net_driver_1a0a0c255dc46b820fa05c45a79dc8e166" kindref="member">SteamNetDriver</ref> *</type>
+        <definition>SteamNetDriver* Boon::SteamNetDriver::s_Instance</definition>
+        <argsstring></argsstring>
+        <name>s_Instance</name>
+        <qualifiedname>Boon::SteamNetDriver::s_Instance</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="75" column="31" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a0a0c255dc46b820fa05c45a79dc8e166" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::SteamNetDriver::SteamNetDriver</definition>
+        <argsstring>()</argsstring>
+        <name>SteamNetDriver</name>
+        <qualifiedname>Boon::SteamNetDriver::SteamNetDriver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="21" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a87de3cb646943a520df71d627017c42f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::SteamNetDriver::~SteamNetDriver</definition>
+        <argsstring>()</argsstring>
+        <name>~SteamNetDriver</name>
+        <qualifiedname>Boon::SteamNetDriver::~SteamNetDriver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="22" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1aea836a41e80ffdd81bb10f9d9bd597b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool Boon::SteamNetDriver::Initialize</definition>
+        <argsstring>(const NetworkSettings &amp;settings) override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>Boon::SteamNetDriver::Initialize</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1a08f58c9008dc40aef38b95796dc5250f">Initialize</reimplements>
+        <param>
+          <type>const <ref refid="struct_boon_1_1_network_settings" kindref="compound">NetworkSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+<para>Initialize the network driver with provided settings. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>settings</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Network configuration to apply. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true on success, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="27" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a5a0026b48b2a41caa75ade6100700f5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Boon::SteamNetDriver::Shutdown</definition>
+        <argsstring>() override</argsstring>
+        <name>Shutdown</name>
+        <qualifiedname>Boon::SteamNetDriver::Shutdown</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1a6c456bfa494fb81ab8e5cbadd56fcde3">Shutdown</reimplements>
+        <briefdescription>
+<para>Shutdown the driver and release resources. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="28" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a671b68ac833b8696597458b49640781f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Boon::SteamNetDriver::Update</definition>
+        <argsstring>() override</argsstring>
+        <name>Update</name>
+        <qualifiedname>Boon::SteamNetDriver::Update</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1ad00911d07f90fe4d219812901bc39b3d">Update</reimplements>
+        <briefdescription>
+<para>Per-frame update for the network driver. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="30" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a26c004b2352b85e62c4464992cc0ebcf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Boon::SteamNetDriver::Send</definition>
+        <argsstring>(NetConnection *conn, NetPacket &amp;pkt, bool reliable=true) override</argsstring>
+        <name>Send</name>
+        <qualifiedname>Boon::SteamNetDriver::Send</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1a86d62c89d05b8a6c370db044fa3a593c">Send</reimplements>
+        <param>
+          <type><ref refid="class_boon_1_1_net_connection" kindref="compound">NetConnection</ref> *</type>
+          <declname>conn</declname>
+        </param>
+        <param>
+          <type><ref refid="class_boon_1_1_net_packet" kindref="compound">NetPacket</ref> &amp;</type>
+          <declname>pkt</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>reliable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Send a packet to a specific connection. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>conn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Destination connection. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pkt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Packet to send. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>reliable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether to send reliably. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="32" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a62ba0f6c4faeb1965579dee7d64ed84f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Boon::SteamNetDriver::Broadcast</definition>
+        <argsstring>(NetPacket &amp;pkt, bool reliable=true) override</argsstring>
+        <name>Broadcast</name>
+        <qualifiedname>Boon::SteamNetDriver::Broadcast</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1a9c49951af013715d0f25cf06485a89ef">Broadcast</reimplements>
+        <param>
+          <type><ref refid="class_boon_1_1_net_packet" kindref="compound">NetPacket</ref> &amp;</type>
+          <declname>pkt</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>reliable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Broadcast a packet to all connected peers. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1aadc8851b2d0f8f42cd4690136caeae7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Boon::SteamNetDriver::SendToServer</definition>
+        <argsstring>(NetPacket &amp;pkt, bool reliable=true) override</argsstring>
+        <name>SendToServer</name>
+        <qualifiedname>Boon::SteamNetDriver::SendToServer</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1a24b61f3409dbc442eaad15a2c2b1af58">SendToServer</reimplements>
+        <param>
+          <type><ref refid="class_boon_1_1_net_packet" kindref="compound">NetPacket</ref> &amp;</type>
+          <declname>pkt</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>reliable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Send a packet to the connected server (client mode). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="34" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a8f6cec4260b4d99e498e644137d34458" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Boon::SteamNetDriver::BindOnStartupCallback</definition>
+        <argsstring>(const NetDriverCallback &amp;fn) override</argsstring>
+        <name>BindOnStartupCallback</name>
+        <qualifiedname>Boon::SteamNetDriver::BindOnStartupCallback</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1adb635c8f92da44a866778ef615eaa0cc">BindOnStartupCallback</reimplements>
+        <param>
+          <type>const <ref refid="namespace_boon_1acef3552da596e536f162543aed41b612" kindref="member">NetDriverCallback</ref> &amp;</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+<para>Bind a callback invoked when the driver starts up. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="36" column="22" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1ab4f1f38187d27eb55ca589d81a6a5121" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Boon::SteamNetDriver::BindOnShutdownCallback</definition>
+        <argsstring>(const NetDriverCallback &amp;fn) override</argsstring>
+        <name>BindOnShutdownCallback</name>
+        <qualifiedname>Boon::SteamNetDriver::BindOnShutdownCallback</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1ad54d0e7bd9b046ee985c64aaad3556c3">BindOnShutdownCallback</reimplements>
+        <param>
+          <type>const <ref refid="namespace_boon_1acef3552da596e536f162543aed41b612" kindref="member">NetDriverCallback</ref> &amp;</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+<para>Bind a callback invoked on shutdown. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="37" column="22" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a776cd9934d9da2e58fb247e2b8f781e3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Boon::SteamNetDriver::BindOnPacketCallback</definition>
+        <argsstring>(const PacketCallback &amp;fn) override</argsstring>
+        <name>BindOnPacketCallback</name>
+        <qualifiedname>Boon::SteamNetDriver::BindOnPacketCallback</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1a8012246ab628a89e8769101b46cb9077">BindOnPacketCallback</reimplements>
+        <param>
+          <type>const <ref refid="namespace_boon_1a769c3d4488a88ad4259c799a438baec3" kindref="member">PacketCallback</ref> &amp;</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+<para>Bind a callback invoked for incoming packets. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="38" column="22" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a40afea802767b5efaeb060b8c6c63ddd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Boon::SteamNetDriver::BindOnConnectedCallback</definition>
+        <argsstring>(const ConnectionCallback &amp;fn) override</argsstring>
+        <name>BindOnConnectedCallback</name>
+        <qualifiedname>Boon::SteamNetDriver::BindOnConnectedCallback</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1a263529535ef41923be5df92670cbed70">BindOnConnectedCallback</reimplements>
+        <param>
+          <type>const <ref refid="namespace_boon_1a9bdd7d39032a5593790771bec86d8e16" kindref="member">ConnectionCallback</ref> &amp;</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+<para>Bind a callback invoked when a connection is established. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="39" column="22" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a1f37f63216841a68eef8e65e2649d949" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Boon::SteamNetDriver::BindOnDisconnectedCallback</definition>
+        <argsstring>(const ConnectionCallback &amp;fn) override</argsstring>
+        <name>BindOnDisconnectedCallback</name>
+        <qualifiedname>Boon::SteamNetDriver::BindOnDisconnectedCallback</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1a11a5ec771869f73440bac803a3fba1b4">BindOnDisconnectedCallback</reimplements>
+        <param>
+          <type>const <ref refid="namespace_boon_1a9bdd7d39032a5593790771bec86d8e16" kindref="member">ConnectionCallback</ref> &amp;</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+<para>Bind a callback invoked when a connection is lost. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="40" column="22" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a70cad2920128cae4371993edaff82760" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void Boon::SteamNetDriver::BindScene</definition>
+        <argsstring>(const std::shared_ptr&lt; NetScene &gt; &amp;scene) override</argsstring>
+        <name>BindScene</name>
+        <qualifiedname>Boon::SteamNetDriver::BindScene</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1a4ed6a2c7f7ddb8c62d599627a29aea25">BindScene</reimplements>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="class_boon_1_1_net_scene" kindref="compound">NetScene</ref> &gt; &amp;</type>
+          <declname>scene</declname>
+        </param>
+        <briefdescription>
+<para>Bind a <ref refid="class_boon_1_1_net_scene" kindref="compound">NetScene</ref> to the driver for packet routing. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="42" column="14" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a5bd0def95cad56015a1aa96834a9babc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="class_boon_1_1_net_connection" kindref="compound">NetConnection</ref> *</type>
+        <definition>NetConnection * Boon::SteamNetDriver::GetConnection</definition>
+        <argsstring>(uint64_t id) override</argsstring>
+        <name>GetConnection</name>
+        <qualifiedname>Boon::SteamNetDriver::GetConnection</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1a3118d3b072da0f86a89b52e09651d9aa">GetConnection</reimplements>
+        <param>
+          <type>uint64_t</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Lookup a connection by its id. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="44" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1aacb10297a6d854c591958bb1bcc6973e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Boon::SteamNetDriver::ForeachConnection</definition>
+        <argsstring>(const std::function&lt; void(NetConnection *)&gt; &amp;fn) override</argsstring>
+        <name>ForeachConnection</name>
+        <qualifiedname>Boon::SteamNetDriver::ForeachConnection</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1a3d3fdccf9ca16295a69a5eb9309e5222">ForeachConnection</reimplements>
+        <param>
+          <type>const std::function&lt; void(<ref refid="class_boon_1_1_net_connection" kindref="compound">NetConnection</ref> *)&gt; &amp;</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+<para>Invoke a function for each active connection. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="45" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a7bd184feefc58ad9c9868b71a6f058d7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>uint32_t</type>
+        <definition>virtual uint32_t Boon::SteamNetDriver::GetConnectionCount</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetConnectionCount</name>
+        <qualifiedname>Boon::SteamNetDriver::GetConnectionCount</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1ac627b03144fe12bc411a5a01e100c2d5">GetConnectionCount</reimplements>
+        <briefdescription>
+<para>Get the current number of active connections. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="46" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a56d4622f9be603344966611149c887db" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool Boon::SteamNetDriver::IsStandalone</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsStandalone</name>
+        <qualifiedname>Boon::SteamNetDriver::IsStandalone</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1ab5aeeae8ce844fc7c9fbfaa2e177b9f9">IsStandalone</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="48" column="29" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a7fb90fa3de4817dfd71a7537dc1f1691" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool Boon::SteamNetDriver::IsClient</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsClient</name>
+        <qualifiedname>Boon::SteamNetDriver::IsClient</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1abe26f413ed6158f88f502fe4ec567a6d">IsClient</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="49" column="29" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a3ebf0d29bfff69ec57f01504c9fcc5f7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool Boon::SteamNetDriver::IsServer</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsServer</name>
+        <qualifiedname>Boon::SteamNetDriver::IsServer</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1a61f8055df8c824e2198bb8b2a8e2d8c4">IsServer</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="50" column="29" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a3b0f81377e64e3b177c2ed77627d44f8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="namespace_boon_1ae1adfe62e98721adc28eb2b11c48a260" kindref="member">ENetDriverMode</ref></type>
+        <definition>ENetDriverMode Boon::SteamNetDriver::GetMode</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetMode</name>
+        <qualifiedname>Boon::SteamNetDriver::GetMode</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1aa6ba3d9aed793ed85198d199bfd6daeb">GetMode</reimplements>
+        <briefdescription>
+<para>Get the driver&apos;s operating mode (client/server/standalone). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="52" column="24" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a978a3dcc41977dcf0d233d3520bc9545" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t Boon::SteamNetDriver::GetLocalConnectionId</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetLocalConnectionId</name>
+        <qualifiedname>Boon::SteamNetDriver::GetLocalConnectionId</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1ae5aa559a938fdd1885007ba5aad1c1a7">GetLocalConnectionId</reimplements>
+        <briefdescription>
+<para>Get local connection identifier used by this driver. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="53" column="18" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1ad2ef7fcc2a07823c73c6e7736638aeed" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="struct_boon_1_1_network_settings" kindref="compound">NetworkSettings</ref> &amp;</type>
+        <definition>const NetworkSettings &amp; Boon::SteamNetDriver::GetSettings</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSettings</name>
+        <qualifiedname>Boon::SteamNetDriver::GetSettings</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="55" column="31" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a92bed223898d6b4f72ed400be3af3a03" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool Boon::SteamNetDriver::Connect</definition>
+        <argsstring>(const char *host, uint16_t port) override</argsstring>
+        <name>Connect</name>
+        <qualifiedname>Boon::SteamNetDriver::Connect</qualifiedname>
+        <reimplements refid="class_boon_1_1_net_driver_1ac3a30e8523c860c1f200cab5d485a6e1">Connect</reimplements>
+        <param>
+          <type>const char *</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>Connect to a remote host (client mode). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>host</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hostname or IP string. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Port number. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if connection attempt was initiated/succeeded. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="58" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1ae0984fa69ee1f64d7da11caa714db507" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::SteamNetDriver::HandleConnectionStatusChanged</definition>
+        <argsstring>(const SteamNetConnectionStatusChangedCallback_t *info)</argsstring>
+        <name>HandleConnectionStatusChanged</name>
+        <qualifiedname>Boon::SteamNetDriver::HandleConnectionStatusChanged</qualifiedname>
+        <param>
+          <type>const SteamNetConnectionStatusChangedCallback_t *</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="64" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1aeb72938952f9316728891ba91290ab6d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Boon::SteamNetDriver::StaticOnConnectionStatusChanged</definition>
+        <argsstring>(SteamNetConnectionStatusChangedCallback_t *info)</argsstring>
+        <name>StaticOnConnectionStatusChanged</name>
+        <qualifiedname>Boon::SteamNetDriver::StaticOnConnectionStatusChanged</qualifiedname>
+        <param>
+          <type>SteamNetConnectionStatusChangedCallback_t *</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="63" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a0700abd2fcaa6fb2b7297178c6c2c530" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::SteamNetDriver::ProcessIncomingMessages</definition>
+        <argsstring>()</argsstring>
+        <name>ProcessIncomingMessages</name>
+        <qualifiedname>Boon::SteamNetDriver::ProcessIncomingMessages</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="108" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1afa0d8aa1dee8c30e33589bf2b23eeff6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::SteamNetDriver::AcceptConnection</definition>
+        <argsstring>(HSteamNetConnection hConn)</argsstring>
+        <name>AcceptConnection</name>
+        <qualifiedname>Boon::SteamNetDriver::AcceptConnection</qualifiedname>
+        <param>
+          <type>HSteamNetConnection</type>
+          <declname>hConn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="109" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1ad3ab2b4067d5d290e299e20b128bd06b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::SteamNetDriver::OnConnected</definition>
+        <argsstring>(HSteamNetConnection hConn)</argsstring>
+        <name>OnConnected</name>
+        <qualifiedname>Boon::SteamNetDriver::OnConnected</qualifiedname>
+        <param>
+          <type>HSteamNetConnection</type>
+          <declname>hConn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="110" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1a37d7eda020efdf0e5b78987a05994a15" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::SteamNetDriver::OnDisconnected</definition>
+        <argsstring>(HSteamNetConnection hConn)</argsstring>
+        <name>OnDisconnected</name>
+        <qualifiedname>Boon::SteamNetDriver::OnDisconnected</qualifiedname>
+        <param>
+          <type>HSteamNetConnection</type>
+          <declname>hConn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="111" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1ac85004c2cbd1ba28dbe61838fdaf42ef" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::SteamNetDriver::Send</definition>
+        <argsstring>(HSteamNetConnection hConn, NetPacket &amp;pkt, bool reliable=true)</argsstring>
+        <name>Send</name>
+        <qualifiedname>Boon::SteamNetDriver::Send</qualifiedname>
+        <param>
+          <type>HSteamNetConnection</type>
+          <declname>hConn</declname>
+        </param>
+        <param>
+          <type><ref refid="class_boon_1_1_net_packet" kindref="compound">NetPacket</ref> &amp;</type>
+          <declname>pkt</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>reliable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="113" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_steam_net_driver_1ad8a4a6b37b923c27f449232682d08b64" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::SteamNetDriver::UpdateConnections</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateConnections</name>
+        <qualifiedname>Boon::SteamNetDriver::UpdateConnections</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Platform/Steam/SteamNetDriver.h" line="114" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Boon::NetDriver</label>
+        <link refid="class_boon_1_1_net_driver"/>
+      </node>
+      <node id="1">
+        <label>Boon::SteamNetDriver</label>
+        <link refid="class_boon_1_1_steam_net_driver"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::NetDriver</label>
+        <link refid="class_boon_1_1_net_driver"/>
+      </node>
+      <node id="1">
+        <label>Boon::SteamNetDriver</label>
+        <link refid="class_boon_1_1_steam_net_driver"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Platform/Steam/SteamNetDriver.h" line="18" column="5" bodyfile="Platform/Steam/SteamNetDriver.h" bodystart="19" bodyend="115"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_steam_net_driver_1afa0d8aa1dee8c30e33589bf2b23eeff6" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>AcceptConnection</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a40afea802767b5efaeb060b8c6c63ddd" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>BindOnConnectedCallback</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a1f37f63216841a68eef8e65e2649d949" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>BindOnDisconnectedCallback</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a776cd9934d9da2e58fb247e2b8f781e3" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>BindOnPacketCallback</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1ab4f1f38187d27eb55ca589d81a6a5121" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>BindOnShutdownCallback</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a8f6cec4260b4d99e498e644137d34458" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>BindOnStartupCallback</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a70cad2920128cae4371993edaff82760" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>BindScene</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a62ba0f6c4faeb1965579dee7d64ed84f" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>Broadcast</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a92bed223898d6b4f72ed400be3af3a03" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>Connect</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1aacb10297a6d854c591958bb1bcc6973e" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>ForeachConnection</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a5bd0def95cad56015a1aa96834a9babc" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>GetConnection</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a7bd184feefc58ad9c9868b71a6f058d7" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>GetConnectionCount</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a978a3dcc41977dcf0d233d3520bc9545" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>GetLocalConnectionId</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a3b0f81377e64e3b177c2ed77627d44f8" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>GetMode</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1ad2ef7fcc2a07823c73c6e7736638aeed" prot="public" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>GetSettings</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1ae0984fa69ee1f64d7da11caa714db507" prot="public" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>HandleConnectionStatusChanged</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1aea836a41e80ffdd81bb10f9d9bd597b7" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>Initialize</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a7fb90fa3de4817dfd71a7537dc1f1691" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>IsClient</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a3ebf0d29bfff69ec57f01504c9fcc5f7" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>IsServer</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a56d4622f9be603344966611149c887db" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>IsStandalone</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a0d6c9351e57d28ff67b59dd189ae09f5" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>m_Connections</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a7f05dbbe683a5114c46dd5cf71febab6" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>m_Interface</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1afd9a45dba882f0095fc0e73d84f9fdf7" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>m_ListenSocket</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1ab63418a14ce996c445f19e38320ccfa6" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>m_LocalConnectionId</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a1f8e6d343baf830cf2765947a051928a" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>m_OnConnected</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a1df31e8c9cb25872e060be9bff4594e9" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>m_OnDisconnected</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1ab3bd1ca39b89a34a70d479918b3d20a3" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>m_OnPacket</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1af2809f79035a892c71e3143fdf5cb744" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>m_OnShutdown</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1af5780190acec0bf481d5063fee26fea5" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>m_OnStartup</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1ad9038ab0dee628bcd7c38693b59d5ec9" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>m_PollGroup</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1ae67f7ce849c30827c3fe5f411b9f3fe4" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>m_ReverseLookup</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a1acbad7cc7ee0ab14922694f4e8dba6d" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>m_Scene</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a0117cc2c76b7ab3c8e37b7188193f033" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>m_Settings</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1ad3ab2b4067d5d290e299e20b128bd06b" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>OnConnected</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a37d7eda020efdf0e5b78987a05994a15" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>OnDisconnected</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a0700abd2fcaa6fb2b7297178c6c2c530" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>ProcessIncomingMessages</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a0d2f53a148c6bc4a26d0e2fc7447d118" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>s_Instance</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a26c004b2352b85e62c4464992cc0ebcf" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>Send</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1ac85004c2cbd1ba28dbe61838fdaf42ef" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>Send</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1aadc8851b2d0f8f42cd4690136caeae7b" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>SendToServer</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a5a0026b48b2a41caa75ade6100700f5c" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>Shutdown</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1aeb72938952f9316728891ba91290ab6d" prot="public" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>StaticOnConnectionStatusChanged</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a0a0c255dc46b820fa05c45a79dc8e166" prot="public" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>SteamNetDriver</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a671b68ac833b8696597458b49640781f" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>Update</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1ad8a4a6b37b923c27f449232682d08b64" prot="private" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>UpdateConnections</name></member>
+      <member refid="class_boon_1_1_net_driver_1a836347a60fa97d8371a4cc8f0517d763" prot="public" virt="virtual"><scope>Boon::SteamNetDriver</scope><name>~NetDriver</name></member>
+      <member refid="class_boon_1_1_steam_net_driver_1a87de3cb646943a520df71d627017c42f" prot="public" virt="non-virtual"><scope>Boon::SteamNetDriver</scope><name>~SteamNetDriver</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

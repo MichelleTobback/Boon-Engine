@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_app_state_machine" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>Boon::AppStateMachine</compoundname>
+    <includes refid="_app_state_machine_8h" local="no">Core/AppStateMachine.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_app_state_machine_1ab9144a5cfd2675c5b14f12cd8923cad6" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_app_state" kindref="compound">AppState</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;AppState&gt; Boon::AppStateMachine::m_pState</definition>
+        <argsstring></argsstring>
+        <name>m_pState</name>
+        <qualifiedname>Boon::AppStateMachine::m_pState</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/AppStateMachine.h" line="25" column="17" bodyfile="Core/AppStateMachine.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_app_state_machine_1a97c4faed7a3ceca27d95d846b83e433f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::AppStateMachine::AppStateMachine</definition>
+        <argsstring>()</argsstring>
+        <name>AppStateMachine</name>
+        <qualifiedname>Boon::AppStateMachine::AppStateMachine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/AppStateMachine.h" line="11" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_app_state_machine_1a1442e806d18ee0b82125d1570f957b9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Boon::AppStateMachine::~AppStateMachine</definition>
+        <argsstring>()=default</argsstring>
+        <name>~AppStateMachine</name>
+        <qualifiedname>Boon::AppStateMachine::~AppStateMachine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/AppStateMachine.h" line="12" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_app_state_machine_1ab1a628ffcd784192ad914b20ce7dc22e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::AppStateMachine::AppStateMachine</definition>
+        <argsstring>(const AppStateMachine &amp;other)=delete</argsstring>
+        <name>AppStateMachine</name>
+        <qualifiedname>Boon::AppStateMachine::AppStateMachine</qualifiedname>
+        <param>
+          <type>const AppStateMachine &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/AppStateMachine.h" line="14" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_app_state_machine_1ab8e1b1e55df3e248201c184bd7cd89d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::AppStateMachine::AppStateMachine</definition>
+        <argsstring>(AppStateMachine &amp;&amp;other)=delete</argsstring>
+        <name>AppStateMachine</name>
+        <qualifiedname>Boon::AppStateMachine::AppStateMachine</qualifiedname>
+        <param>
+          <type>AppStateMachine &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/AppStateMachine.h" line="15" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_app_state_machine_1a9bd94138b3cbdcb1493b7472bfc1a1e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_app_state_machine_1a97c4faed7a3ceca27d95d846b83e433f" kindref="member">AppStateMachine</ref> &amp;</type>
+        <definition>AppStateMachine &amp; Boon::AppStateMachine::operator=</definition>
+        <argsstring>(const AppStateMachine &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Boon::AppStateMachine::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="class_boon_1_1_app_state_machine_1a97c4faed7a3ceca27d95d846b83e433f" kindref="member">AppStateMachine</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/AppStateMachine.h" line="16" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_app_state_machine_1a45054919fe6188020d4d0ac762f8c529" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_app_state_machine_1a97c4faed7a3ceca27d95d846b83e433f" kindref="member">AppStateMachine</ref> &amp;</type>
+        <definition>AppStateMachine &amp; Boon::AppStateMachine::operator=</definition>
+        <argsstring>(AppStateMachine &amp;&amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Boon::AppStateMachine::operator=</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_app_state_machine_1a97c4faed7a3ceca27d95d846b83e433f" kindref="member">AppStateMachine</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/AppStateMachine.h" line="17" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_app_state_machine_1ae79ce38a3cd0a0494f398dab4c1cfdb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::AppStateMachine::PushState</definition>
+        <argsstring>(const std::shared_ptr&lt; AppState &gt; &amp;state)</argsstring>
+        <name>PushState</name>
+        <qualifiedname>Boon::AppStateMachine::PushState</qualifiedname>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="class_boon_1_1_app_state" kindref="compound">AppState</ref> &gt; &amp;</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/AppStateMachine.h" line="19" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_app_state_machine_1a4c3a66d8a21d22b87dee4769b5b92dcc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::AppStateMachine::Shutdown</definition>
+        <argsstring>()</argsstring>
+        <name>Shutdown</name>
+        <qualifiedname>Boon::AppStateMachine::Shutdown</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/AppStateMachine.h" line="20" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_app_state_machine_1ac4371faaa4f2209189a6bb6f3cfc645e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::AppStateMachine::Update</definition>
+        <argsstring>()</argsstring>
+        <name>Update</name>
+        <qualifiedname>Boon::AppStateMachine::Update</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/AppStateMachine.h" line="22" column="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Core/AppStateMachine.h" line="8" column="1" bodyfile="Core/AppStateMachine.h" bodystart="9" bodyend="26"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_app_state_machine_1a97c4faed7a3ceca27d95d846b83e433f" prot="public" virt="non-virtual"><scope>Boon::AppStateMachine</scope><name>AppStateMachine</name></member>
+      <member refid="class_boon_1_1_app_state_machine_1ab1a628ffcd784192ad914b20ce7dc22e" prot="public" virt="non-virtual"><scope>Boon::AppStateMachine</scope><name>AppStateMachine</name></member>
+      <member refid="class_boon_1_1_app_state_machine_1ab8e1b1e55df3e248201c184bd7cd89d7" prot="public" virt="non-virtual"><scope>Boon::AppStateMachine</scope><name>AppStateMachine</name></member>
+      <member refid="class_boon_1_1_app_state_machine_1ab9144a5cfd2675c5b14f12cd8923cad6" prot="private" virt="non-virtual"><scope>Boon::AppStateMachine</scope><name>m_pState</name></member>
+      <member refid="class_boon_1_1_app_state_machine_1a9bd94138b3cbdcb1493b7472bfc1a1e1" prot="public" virt="non-virtual"><scope>Boon::AppStateMachine</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_app_state_machine_1a45054919fe6188020d4d0ac762f8c529" prot="public" virt="non-virtual"><scope>Boon::AppStateMachine</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_app_state_machine_1ae79ce38a3cd0a0494f398dab4c1cfdb3" prot="public" virt="non-virtual"><scope>Boon::AppStateMachine</scope><name>PushState</name></member>
+      <member refid="class_boon_1_1_app_state_machine_1a4c3a66d8a21d22b87dee4769b5b92dcc" prot="public" virt="non-virtual"><scope>Boon::AppStateMachine</scope><name>Shutdown</name></member>
+      <member refid="class_boon_1_1_app_state_machine_1ac4371faaa4f2209189a6bb6f3cfc645e" prot="public" virt="non-virtual"><scope>Boon::AppStateMachine</scope><name>Update</name></member>
+      <member refid="class_boon_1_1_app_state_machine_1a1442e806d18ee0b82125d1570f957b9d" prot="public" virt="virtual"><scope>Boon::AppStateMachine</scope><name>~AppStateMachine</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

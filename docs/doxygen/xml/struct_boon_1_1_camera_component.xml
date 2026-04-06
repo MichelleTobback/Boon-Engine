@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_camera_component" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>Boon::CameraComponent</compoundname>
+    <includes refid="_camera_component_8h" local="no">Component/CameraComponent.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_camera_component_1af7143d97e737b6b3af10e1251dff66d6" prot="public" static="no" mutable="no">
+        <type>Camera</type>
+        <definition>Camera Boon::CameraComponent::Camera</definition>
+        <argsstring></argsstring>
+        <name>Camera</name>
+        <qualifiedname>Boon::CameraComponent::Camera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/CameraComponent.h" line="17" column="8" bodyfile="Component/CameraComponent.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_camera_component_1a0f557520029da278b2e1e57613785904" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Boon::CameraComponent::Active</definition>
+        <argsstring></argsstring>
+        <name>Active</name>
+        <qualifiedname>Boon::CameraComponent::Active</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/CameraComponent.h" line="20" column="6" bodyfile="Component/CameraComponent.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_camera_component_1a0fe7ce57d0830d5394a484ba6bdfc173" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Boon::CameraComponent::ViewportSize</definition>
+        <argsstring></argsstring>
+        <name>ViewportSize</name>
+        <qualifiedname>Boon::CameraComponent::ViewportSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/CameraComponent.h" line="22" column="6" bodyfile="Component/CameraComponent.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_boon_1_1_camera_component_1a2a3d4946319d082f4cd6cb153312e7da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::CameraComponent::CameraComponent</definition>
+        <argsstring>(bool viewportSize=true)</argsstring>
+        <name>CameraComponent</name>
+        <qualifiedname>Boon::CameraComponent::CameraComponent</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>viewportSize</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/CameraComponent.h" line="12" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_camera_component_1a27a6faa1744e18800089df150afc89b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::CameraComponent::CameraComponent</definition>
+        <argsstring>(const Camera &amp;camera, bool viewportSize=true)</argsstring>
+        <name>CameraComponent</name>
+        <qualifiedname>Boon::CameraComponent::CameraComponent</qualifiedname>
+        <param>
+          <type>const <ref refid="struct_boon_1_1_camera_component_1af7143d97e737b6b3af10e1251dff66d6" kindref="member">Camera</ref> &amp;</type>
+          <declname>camera</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>viewportSize</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/CameraComponent.h" line="13" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="struct_boon_1_1_camera_component_1aa4773650776523fbf55baeab882a5192" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::CameraComponent::~CameraComponent</definition>
+        <argsstring>()</argsstring>
+        <name>~CameraComponent</name>
+        <qualifiedname>Boon::CameraComponent::~CameraComponent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/CameraComponent.h" line="14" column="1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::Camera</label>
+        <link refid="class_boon_1_1_camera"/>
+      </node>
+      <node id="1">
+        <label>Boon::CameraComponent</label>
+        <link refid="struct_boon_1_1_camera_component"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>Camera</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Component/CameraComponent.h" line="10" column="1" bodyfile="Component/CameraComponent.h" bodystart="11" bodyend="23"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_camera_component_1a0f557520029da278b2e1e57613785904" prot="public" virt="non-virtual"><scope>Boon::CameraComponent</scope><name>Active</name></member>
+      <member refid="struct_boon_1_1_camera_component_1af7143d97e737b6b3af10e1251dff66d6" prot="public" virt="non-virtual"><scope>Boon::CameraComponent</scope><name>Camera</name></member>
+      <member refid="struct_boon_1_1_camera_component_1a2a3d4946319d082f4cd6cb153312e7da" prot="public" virt="non-virtual"><scope>Boon::CameraComponent</scope><name>CameraComponent</name></member>
+      <member refid="struct_boon_1_1_camera_component_1a27a6faa1744e18800089df150afc89b0" prot="public" virt="non-virtual"><scope>Boon::CameraComponent</scope><name>CameraComponent</name></member>
+      <member refid="struct_boon_1_1_camera_component_1a0fe7ce57d0830d5394a484ba6bdfc173" prot="public" virt="non-virtual"><scope>Boon::CameraComponent</scope><name>ViewportSize</name></member>
+      <member refid="struct_boon_1_1_camera_component_1aa4773650776523fbf55baeab882a5192" prot="public" virt="non-virtual"><scope>Boon::CameraComponent</scope><name>~CameraComponent</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

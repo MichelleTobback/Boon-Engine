@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_u_u_i_d" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>Boon::UUID</compoundname>
+    <includes refid="_u_u_i_d_8h" local="no">Core/UUID.h</includes>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_u_u_i_d_1ab60bb64dc9d3f512f119886fcf7a8275" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="class_boon_1_1_u_u_i_d_1ad715220b40a9f711195cfa7500deb75c" kindref="member">UUID</ref></type>
+        <definition>const UUID Boon::UUID::Null</definition>
+        <argsstring></argsstring>
+        <name>Null</name>
+        <qualifiedname>Boon::UUID::Null</qualifiedname>
+        <briefdescription>
+<para>A sentinel null <ref refid="class_boon_1_1_u_u_i_d" kindref="compound">UUID</ref> value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/UUID.h" line="39" column="19" bodyfile="Core/UUID.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_u_u_i_d_1a69f596e8f18a81530a1a123db92e6e26" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t Boon::UUID::m_Uuid</definition>
+        <argsstring></argsstring>
+        <name>m_Uuid</name>
+        <qualifiedname>Boon::UUID::m_Uuid</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/UUID.h" line="42" column="10" bodyfile="Core/UUID.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_u_u_i_d_1ad715220b40a9f711195cfa7500deb75c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::UUID::UUID</definition>
+        <argsstring>()</argsstring>
+        <name>UUID</name>
+        <qualifiedname>Boon::UUID::UUID</qualifiedname>
+        <briefdescription>
+<para>Create a new (random) <ref refid="class_boon_1_1_u_u_i_d" kindref="compound">UUID</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The default constructor generates a new unique identifier. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/UUID.h" line="17" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_u_u_i_d_1a2de6113a1cfded87b95700fba65eded4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::UUID::UUID</definition>
+        <argsstring>(uint64_t uuid)</argsstring>
+        <name>UUID</name>
+        <qualifiedname>Boon::UUID::UUID</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>uuid</declname>
+        </param>
+        <briefdescription>
+<para>Construct a <ref refid="class_boon_1_1_u_u_i_d" kindref="compound">UUID</ref> from an existing 64-bit value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>uuid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Raw 64-bit identifier value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/UUID.h" line="23" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_u_u_i_d_1a18b592e3af3c5879fb2e732395fbcaa0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::UUID::IsValid</definition>
+        <argsstring>() const</argsstring>
+        <name>IsValid</name>
+        <qualifiedname>Boon::UUID::IsValid</qualifiedname>
+        <briefdescription>
+<para>Check whether the <ref refid="class_boon_1_1_u_u_i_d" kindref="compound">UUID</ref> is valid (non-null). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True when the <ref refid="class_boon_1_1_u_u_i_d" kindref="compound">UUID</ref> contains a non-zero value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/UUID.h" line="29" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_u_u_i_d_1a010ef39b225a1532ff2ffed5649c7154" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::UUID::operator uint64_t</definition>
+        <argsstring>() const</argsstring>
+        <name>operator uint64_t</name>
+        <qualifiedname>Boon::UUID::operator uint64_t</qualifiedname>
+        <briefdescription>
+<para>Convert to the underlying 64-bit representation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/UUID.h" line="34" column="1" bodyfile="Core/UUID.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>Boon::UUID</label>
+        <link refid="class_boon_1_1_u_u_i_d"/>
+        <childnode refid="1" relation="usage">
+          <edgelabel>Null</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Core/UUID.h" line="9" column="1" bodyfile="Core/UUID.h" bodystart="10" bodyend="43"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_u_u_i_d_1a18b592e3af3c5879fb2e732395fbcaa0" prot="public" virt="non-virtual"><scope>Boon::UUID</scope><name>IsValid</name></member>
+      <member refid="class_boon_1_1_u_u_i_d_1a69f596e8f18a81530a1a123db92e6e26" prot="private" virt="non-virtual"><scope>Boon::UUID</scope><name>m_Uuid</name></member>
+      <member refid="class_boon_1_1_u_u_i_d_1ab60bb64dc9d3f512f119886fcf7a8275" prot="public" virt="non-virtual"><scope>Boon::UUID</scope><name>Null</name></member>
+      <member refid="class_boon_1_1_u_u_i_d_1a010ef39b225a1532ff2ffed5649c7154" prot="public" virt="non-virtual"><scope>Boon::UUID</scope><name>operator uint64_t</name></member>
+      <member refid="class_boon_1_1_u_u_i_d_1ad715220b40a9f711195cfa7500deb75c" prot="public" virt="non-virtual"><scope>Boon::UUID</scope><name>UUID</name></member>
+      <member refid="class_boon_1_1_u_u_i_d_1a2de6113a1cfded87b95700fba65eded4" prot="public" virt="non-virtual"><scope>Boon::UUID</scope><name>UUID</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

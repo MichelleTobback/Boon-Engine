@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_9e05e33d7199ed89acd8aa6ae729d339" kind="dir">
+    <compoundname>Core</compoundname>
+    <innerfile refid="_boon_editor_8h">BoonEditor.h</innerfile>
+    <innerfile refid="_editor_camera_8h">EditorCamera.h</innerfile>
+    <innerfile refid="_editor_context_8h">EditorContext.h</innerfile>
+    <innerfile refid="_editor_object_8h">EditorObject.h</innerfile>
+    <innerfile refid="_editor_state_8h">EditorState.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Core/"/>
+  </compounddef>
+</doxygen>

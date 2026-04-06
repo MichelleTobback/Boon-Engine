@@ -1,0 +1,122 @@
+\doxysection{Steam\+Net\+Driver.\+h}
+\hypertarget{_steam_net_driver_8h_source}{}\label{_steam_net_driver_8h_source}\index{SteamNetDriver.h@{SteamNetDriver.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}Networking/NetDriver.h"{}}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}Networking/NetPacket.h"{}}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}Networking/NetConnection.h"{}}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}Networking/NetworkSettings.h"{}}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <steam/isteamnetworkingsockets.h>}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <steam/isteamnetworkingutils.h>}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00014}00014\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00015}00015\ \{}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_net_scene}{NetScene}};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00018}\doxymbox{\hyperlink{class_boon_1_1_steam_net_driver}{00018}}\ \ \ \ \ \textcolor{keyword}{class\ }SteamNetDriver\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_boon_1_1_net_driver}{NetDriver}}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00019}00019\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00021}00021\ \ \ \ \ \ \ \ \ SteamNetDriver();}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00022}00022\ \ \ \ \ \ \ \ \ \string~SteamNetDriver();}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Interface\ Implementation}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ Initialize(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_network_settings}{NetworkSettings}}\&\ settings)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Shutdown()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Update()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Send(\doxymbox{\hyperlink{class_boon_1_1_net_connection}{NetConnection}}*\ conn,\ \doxymbox{\hyperlink{class_boon_1_1_net_packet}{NetPacket}}\&\ pkt,\ \textcolor{keywordtype}{bool}\ reliable\ =\ \textcolor{keyword}{true})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Broadcast(\doxymbox{\hyperlink{class_boon_1_1_net_packet}{NetPacket}}\&\ pkt,\ \textcolor{keywordtype}{bool}\ reliable\ =\ \textcolor{keyword}{true})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SendToServer(\doxymbox{\hyperlink{class_boon_1_1_net_packet}{NetPacket}}\&\ pkt,\ \textcolor{keywordtype}{bool}\ reliable\ =\ \textcolor{keyword}{true})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BindOnStartupCallback(\textcolor{keyword}{const}\ NetDriverCallback\&\ fn)\textcolor{keyword}{\ override\ }\{\ m\_OnStartup\ =\ fn;\ \}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BindOnShutdownCallback(\textcolor{keyword}{const}\ NetDriverCallback\&\ fn)\textcolor{keyword}{\ override\ }\{\ m\_OnShutdown\ =\ fn;\ \}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BindOnPacketCallback(\textcolor{keyword}{const}\ PacketCallback\&\ fn)\textcolor{keyword}{\ override\ }\{\ m\_OnPacket\ =\ fn;\ \}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BindOnConnectedCallback(\textcolor{keyword}{const}\ ConnectionCallback\&\ fn)\textcolor{keyword}{\ override\ }\{\ m\_OnConnected\ =\ fn;\ \}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BindOnDisconnectedCallback(\textcolor{keyword}{const}\ ConnectionCallback\&\ fn)\textcolor{keyword}{\ override\ }\{\ m\_OnDisconnected\ =\ fn;\ \}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ BindScene(\textcolor{keyword}{const}\ std::shared\_ptr<NetScene>\&\ scene)\textcolor{keyword}{\ override\ }\{\ m\_Scene\ =\ scene;\ \}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_boon_1_1_net_connection}{NetConnection}}*\ GetConnection(uint64\_t\ \textcolor{keywordtype}{id})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ ForeachConnection(\textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{void}(\doxymbox{\hyperlink{class_boon_1_1_net_connection}{NetConnection}}*)>\&\ fn)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ uint32\_t\ GetConnectionCount()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ IsStandalone()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ m\_Settings.NetMode\ ==\ ENetDriverMode::Standalone;\ \}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ IsClient()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ m\_Settings.NetMode\ ==\ ENetDriverMode::Client;\ \}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ IsServer()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ m\_Settings.NetMode\ ==\ ENetDriverMode::DedicatedServer\ ||\ m\_Settings.NetMode\ ==\ ENetDriverMode::ListenServer;\ \}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00052}00052\ \ \ \ \ \ \ \ \ ENetDriverMode\ GetMode()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ m\_Settings.NetMode;\ \}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ uint64\_t\ GetLocalConnectionId()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ IsServer()\ ?\ 1\ :\ m\_LocalConnectionId;\ \}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_network_settings}{NetworkSettings}}\&\ GetSettings()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Settings;\ \}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Client\ connect}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ Connect(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ host,\ uint16\_t\ port)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Callback\ Dispatchers\ (Static\ entrypoint\ →\ instance)}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ StaticOnConnectionStatusChanged(SteamNetConnectionStatusChangedCallback\_t*\ info);}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ HandleConnectionStatusChanged(\textcolor{keyword}{const}\ SteamNetConnectionStatusChangedCallback\_t*\ info);}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00066}00066\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00067}00067\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_boon_1_1_network_settings}{NetworkSettings}}\ m\_Settings\{\};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Steam\ Networking\ Handles}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00072}00072\ \ \ \ \ \ \ \ \ ISteamNetworkingSockets*\ m\_Interface\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00073}00073\ \ \ \ \ \ \ \ \ HSteamListenSocket\ m\_ListenSocket\ =\ k\_HSteamListenSocket\_Invalid;}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00074}00074\ \ \ \ \ \ \ \ \ HSteamNetPollGroup\ m\_PollGroup\ =\ k\_HSteamNetPollGroup\_Invalid;}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ SteamNetDriver*\ s\_Instance;}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Driver\ state}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00080}00080\ \ \ \ \ \ \ \ \ std::shared\_ptr<NetScene>\ m\_Scene\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00082}00082\ \ \ \ \ \ \ \ \ uint64\_t\ m\_LocalConnectionId\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Connections}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }DriverConnection}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00088}00088\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ HSteamNetConnection\ hConn\ =\ k\_HSteamNetConnection\_Invalid;}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<NetConnection>\ conn;}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00091}00091\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00093}00093\ \ \ \ \ \ \ \ \ std::unordered\_map<uint64\_t,\ DriverConnection>\ m\_Connections;}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00094}00094\ \ \ \ \ \ \ \ \ std::unordered\_map<HSteamNetConnection,\ uint64\_t>\ m\_ReverseLookup;}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Callbacks}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00099}00099\ \ \ \ \ \ \ \ \ PacketCallback\ m\_OnPacket;}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00100}00100\ \ \ \ \ \ \ \ \ ConnectionCallback\ m\_OnConnected;}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00101}00101\ \ \ \ \ \ \ \ \ ConnectionCallback\ m\_OnDisconnected;}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00102}00102\ \ \ \ \ \ \ \ \ NetDriverCallback\ m\_OnStartup;}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00103}00103\ \ \ \ \ \ \ \ \ NetDriverCallback\ m\_OnShutdown;}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Helpers}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00108}00108\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ ProcessIncomingMessages();}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00109}00109\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ AcceptConnection(HSteamNetConnection\ hConn);}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ OnConnected(HSteamNetConnection\ hConn);}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ OnDisconnected(HSteamNetConnection\ hConn);}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Send(HSteamNetConnection\ hConn,\ \doxymbox{\hyperlink{class_boon_1_1_net_packet}{NetPacket}}\&\ pkt,\ \textcolor{keywordtype}{bool}\ reliable\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateConnections();}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00115}00115\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_steam_net_driver_8h_source_l00116}00116\ \}}
+
+\end{DoxyCode}

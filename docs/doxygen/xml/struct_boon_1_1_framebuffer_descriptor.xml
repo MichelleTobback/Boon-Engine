@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_framebuffer_descriptor" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::FramebufferDescriptor</compoundname>
+    <includes refid="_framebuffer_8h" local="no">Renderer/Framebuffer.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_framebuffer_descriptor_1a5fa5a166f395bc40e9adb678bf8f4568" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Boon::FramebufferDescriptor::Width</definition>
+        <argsstring></argsstring>
+        <name>Width</name>
+        <qualifiedname>Boon::FramebufferDescriptor::Width</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Framebuffer.h" line="43" column="10" bodyfile="Renderer/Framebuffer.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_framebuffer_descriptor_1a5f5665a21e7a6e83a26023dd3bad53ce" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Boon::FramebufferDescriptor::Height</definition>
+        <argsstring></argsstring>
+        <name>Height</name>
+        <qualifiedname>Boon::FramebufferDescriptor::Height</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Framebuffer.h" line="43" column="17" bodyfile="Renderer/Framebuffer.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_framebuffer_descriptor_1a6993da55f9ae61e46e49d7cb835dbdca" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_boon_1_1_framebuffer_attachment_descriptor" kindref="compound">FramebufferAttachmentDescriptor</ref></type>
+        <definition>FramebufferAttachmentDescriptor Boon::FramebufferDescriptor::Attachments</definition>
+        <argsstring></argsstring>
+        <name>Attachments</name>
+        <qualifiedname>Boon::FramebufferDescriptor::Attachments</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Framebuffer.h" line="44" column="33" bodyfile="Renderer/Framebuffer.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_framebuffer_descriptor_1aea76dd2a8c14536e396edccc7f931335" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Boon::FramebufferDescriptor::Samples</definition>
+        <argsstring></argsstring>
+        <name>Samples</name>
+        <qualifiedname>Boon::FramebufferDescriptor::Samples</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Framebuffer.h" line="45" column="10" bodyfile="Renderer/Framebuffer.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_framebuffer_descriptor_1ad025ce3eb53248149890090585647c2a" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Boon::FramebufferDescriptor::SwapChainTarget</definition>
+        <argsstring></argsstring>
+        <name>SwapChainTarget</name>
+        <qualifiedname>Boon::FramebufferDescriptor::SwapChainTarget</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Framebuffer.h" line="47" column="6" bodyfile="Renderer/Framebuffer.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::FramebufferAttachmentDescriptor</label>
+        <link refid="struct_boon_1_1_framebuffer_attachment_descriptor"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>Attachments</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Boon::FramebufferDescriptor</label>
+        <link refid="struct_boon_1_1_framebuffer_descriptor"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>Attachments</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Boon::FramebufferTextureDescriptor</label>
+        <link refid="struct_boon_1_1_framebuffer_texture_descriptor"/>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; Boon::FramebufferTextureDescriptor &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Renderer/Framebuffer.h" line="41" column="1" bodyfile="Renderer/Framebuffer.h" bodystart="42" bodyend="48"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_framebuffer_descriptor_1a6993da55f9ae61e46e49d7cb835dbdca" prot="public" virt="non-virtual"><scope>Boon::FramebufferDescriptor</scope><name>Attachments</name></member>
+      <member refid="struct_boon_1_1_framebuffer_descriptor_1a5f5665a21e7a6e83a26023dd3bad53ce" prot="public" virt="non-virtual"><scope>Boon::FramebufferDescriptor</scope><name>Height</name></member>
+      <member refid="struct_boon_1_1_framebuffer_descriptor_1aea76dd2a8c14536e396edccc7f931335" prot="public" virt="non-virtual"><scope>Boon::FramebufferDescriptor</scope><name>Samples</name></member>
+      <member refid="struct_boon_1_1_framebuffer_descriptor_1ad025ce3eb53248149890090585647c2a" prot="public" virt="non-virtual"><scope>Boon::FramebufferDescriptor</scope><name>SwapChainTarget</name></member>
+      <member refid="struct_boon_1_1_framebuffer_descriptor_1a5fa5a166f395bc40e9adb678bf8f4568" prot="public" virt="non-virtual"><scope>Boon::FramebufferDescriptor</scope><name>Width</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -39,6 +39,12 @@ namespace Boon
     class Variant
     {
     public:
+        /**
+         * @brief A lightweight discriminated union used to hold simple values.
+         *
+         * Supports a fixed set of scalar and vector types. Use GetType to
+         * inspect the stored type and the As*/Set* accessors to read/write values.
+         */
         Variant() : m_Type(VariantType::None) {}
 
         // ---------------------------
@@ -64,6 +70,9 @@ namespace Boon
 
         Variant(const UUID& id) { Set(id); }
 
+        /**
+         * @brief Get the currently stored VariantType.
+         */
         VariantType GetType() const { return m_Type; }
 
         // ---------------------------
@@ -128,6 +137,11 @@ namespace Boon
         // ---------------------------
         // Generic templated getter
         // ---------------------------
+        /**
+         * @brief Generic typed getter that maps T to a concrete As* accessor.
+         *
+         * Only the set of supported types in the implementation are allowed.
+         */
         template<typename T>
         T As() const
         {
@@ -160,6 +174,12 @@ namespace Boon
         // ---------------------------
         // Generic templated setter
         // ---------------------------
+        /**
+         * @brief Generic typed setter that maps T to a concrete Set* implementation.
+         *
+         * Only the supported types are accepted; unsupported types will trigger
+         * a compile-time error via static_assert.
+         */
         template<typename T>
         void Set(const T& v)
         {

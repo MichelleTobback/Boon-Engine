@@ -1,0 +1,111 @@
+\doxysection{Boon::\+UUID Class Reference}
+\hypertarget{class_boon_1_1_u_u_i_d}{}\label{class_boon_1_1_u_u_i_d}\index{Boon::UUID@{Boon::UUID}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_u_u_i_d_ad715220b40a9f711195cfa7500deb75c}{UUID}} ()
+\begin{DoxyCompactList}\small\item\em Create a new (random) \doxylink{class_boon_1_1_u_u_i_d}{UUID}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_boon_1_1_u_u_i_d_a2de6113a1cfded87b95700fba65eded4}{UUID}} (uint64\+\_\+t uuid)
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{class_boon_1_1_u_u_i_d}{UUID} from an existing 64-\/bit value. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_boon_1_1_u_u_i_d_a18b592e3af3c5879fb2e732395fbcaa0}{Is\+Valid}} () const
+\begin{DoxyCompactList}\small\item\em Check whether the \doxylink{class_boon_1_1_u_u_i_d}{UUID} is valid (non-\/null). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_boon_1_1_u_u_i_d_a010ef39b225a1532ff2ffed5649c7154}{operator uint64\+\_\+t}} () const
+\begin{DoxyCompactList}\small\item\em Convert to the underlying 64-\/bit representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const \doxymbox{\hyperlink{class_boon_1_1_u_u_i_d_ad715220b40a9f711195cfa7500deb75c}{UUID}} \doxymbox{\hyperlink{class_boon_1_1_u_u_i_d_ab60bb64dc9d3f512f119886fcf7a8275}{Null}}
+\begin{DoxyCompactList}\small\item\em A sentinel null \doxylink{class_boon_1_1_u_u_i_d}{UUID} value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_u_u_i_d_8h_source_l00009}{9}} of file \doxymbox{\hyperlink{_u_u_i_d_8h_source}{UUID.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_boon_1_1_u_u_i_d_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_boon_1_1_u_u_i_d_ad715220b40a9f711195cfa7500deb75c}\index{Boon::UUID@{Boon::UUID}!UUID@{UUID}}
+\index{UUID@{UUID}!Boon::UUID@{Boon::UUID}}
+\doxysubsubsection{\texorpdfstring{UUID()}{UUID()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_u_u_i_d_ad715220b40a9f711195cfa7500deb75c} 
+Boon::\+\+UUID::\+\+UUID (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Create a new (random) \doxylink{class_boon_1_1_u_u_i_d}{UUID}. 
+
+The default constructor generates a new unique identifier. \Hypertarget{class_boon_1_1_u_u_i_d_a2de6113a1cfded87b95700fba65eded4}\index{Boon::UUID@{Boon::UUID}!UUID@{UUID}}
+\index{UUID@{UUID}!Boon::UUID@{Boon::UUID}}
+\doxysubsubsection{\texorpdfstring{UUID()}{UUID()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_boon_1_1_u_u_i_d_a2de6113a1cfded87b95700fba65eded4} 
+Boon::\+\+UUID::\+\+UUID (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{uuid}{}\end{DoxyParamCaption})}
+
+
+
+Construct a \doxylink{class_boon_1_1_u_u_i_d}{UUID} from an existing 64-\/bit value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uuid} & Raw 64-\/bit identifier value. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_u_u_i_d_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_u_u_i_d_a18b592e3af3c5879fb2e732395fbcaa0}\index{Boon::UUID@{Boon::UUID}!IsValid@{IsValid}}
+\index{IsValid@{IsValid}!Boon::UUID@{Boon::UUID}}
+\doxysubsubsection{\texorpdfstring{IsValid()}{IsValid()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_u_u_i_d_a18b592e3af3c5879fb2e732395fbcaa0} 
+bool Boon::\+\+UUID::\+\+Is\+Valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Check whether the \doxylink{class_boon_1_1_u_u_i_d}{UUID} is valid (non-\/null). 
+
+\begin{DoxyReturn}{Returns}
+True when the \doxylink{class_boon_1_1_u_u_i_d}{UUID} contains a non-\/zero value. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_u_u_i_d_a010ef39b225a1532ff2ffed5649c7154}\index{Boon::UUID@{Boon::UUID}!operator uint64\_t@{operator uint64\_t}}
+\index{operator uint64\_t@{operator uint64\_t}!Boon::UUID@{Boon::UUID}}
+\doxysubsubsection{\texorpdfstring{operator uint64\_t()}{operator uint64\_t()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_u_u_i_d_a010ef39b225a1532ff2ffed5649c7154} 
+Boon::\+\+UUID::\+operator uint64\+\_\+t (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert to the underlying 64-\/bit representation. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_u_u_i_d_8h_source_l00034}{34}} of file \doxymbox{\hyperlink{_u_u_i_d_8h_source}{UUID.\+h}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_boon_1_1_u_u_i_d_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_boon_1_1_u_u_i_d_ab60bb64dc9d3f512f119886fcf7a8275}\index{Boon::UUID@{Boon::UUID}!Null@{Null}}
+\index{Null@{Null}!Boon::UUID@{Boon::UUID}}
+\doxysubsubsection{\texorpdfstring{Null}{Null}}
+{\footnotesize\ttfamily \label{class_boon_1_1_u_u_i_d_ab60bb64dc9d3f512f119886fcf7a8275} 
+const \doxymbox{\hyperlink{class_boon_1_1_u_u_i_d_ad715220b40a9f711195cfa7500deb75c}{UUID}} Boon::\+\+UUID::\+\+Null\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+A sentinel null \doxylink{class_boon_1_1_u_u_i_d}{UUID} value. 
+
+
+
+Definition at line \doxymbox{\hyperlink{_u_u_i_d_8h_source_l00039}{39}} of file \doxymbox{\hyperlink{_u_u_i_d_8h_source}{UUID.\+h}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+UUID.\+h\end{DoxyCompactItemize}

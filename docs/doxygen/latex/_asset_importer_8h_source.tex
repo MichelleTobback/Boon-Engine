@@ -1,0 +1,25 @@
+\doxysection{Asset\+Importer.\+h}
+\hypertarget{_asset_importer_8h_source}{}\label{_asset_importer_8h_source}\index{AssetImporter.h@{AssetImporter.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}Asset/Asset.h"{}}}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}Asset/AssetMeta.h"{}}}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00008}00008\ \textcolor{keyword}{namespace\ }Boon}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00010}\doxymbox{\hyperlink{class_boon_1_1_asset_importer}{00010}}\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_boon_1_1_asset_importer}{AssetImporter}}}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00011}00011\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00012}00012\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00013}00013\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{class_boon_1_1_asset_importer}{\string~AssetImporter}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00015}00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{class_boon_1_1_asset}{Asset}}*\ ImportFromFile(\textcolor{keyword}{const}\ std::string\&\ filePath,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_boon_1_1_asset_meta}{AssetMeta}}\&\ meta)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ ExportToFile(\textcolor{keyword}{const}\ std::string\&\ filePath,\ \doxymbox{\hyperlink{class_boon_1_1_asset}{Asset}}*\ asset)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ std::vector<std::string>\ GetExtensions()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00018}00018\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_asset_importer_8h_source_l00019}00019\ \}}
+
+\end{DoxyCode}

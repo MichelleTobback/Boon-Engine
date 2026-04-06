@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_6cca29431361e5869420d402f83d4a04" kind="dir">
+    <compoundname>Core</compoundname>
+    <innerdir refid="dir_e2d2ee252453c1de39cad3b8ce228c24">Core/Memory</innerdir>
+    <innerdir refid="dir_a7acb40b999769602f997beba2d462c0">Core/Threading</innerdir>
+    <innerfile refid="_application_8h">Application.h</innerfile>
+    <innerfile refid="_app_state_8h">AppState.h</innerfile>
+    <innerfile refid="_app_state_machine_8h">AppStateMachine.h</innerfile>
+    <innerfile refid="_assert_8h">Assert.h</innerfile>
+    <innerfile refid="_bit_flag_8h">BitFlag.h</innerfile>
+    <innerfile refid="_boon_8h">Boon.h</innerfile>
+    <innerfile refid="_command_8h">Command.h</innerfile>
+    <innerfile refid="_delegate_8h">Delegate.h</innerfile>
+    <innerfile refid="_dynamic_library_8h">DynamicLibrary.h</innerfile>
+    <innerfile refid="_observable_type_8h">ObservableType.h</innerfile>
+    <innerfile refid="_random_8h">Random.h</innerfile>
+    <innerfile refid="_service_locator_8h">ServiceLocator.h</innerfile>
+    <innerfile refid="_singleton_8h">Singleton.h</innerfile>
+    <innerfile refid="_time_8h">Time.h</innerfile>
+    <innerfile refid="_u_u_i_d_8h">UUID.h</innerfile>
+    <innerfile refid="_variant_8h">Variant.h</innerfile>
+    <innerfile refid="_window_8h">Window.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Core/"/>
+  </compounddef>
+</doxygen>

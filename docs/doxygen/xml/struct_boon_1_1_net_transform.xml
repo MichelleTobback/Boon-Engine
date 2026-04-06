@@ -1,0 +1,328 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_net_transform" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>Boon::NetTransform</compoundname>
+    <includes refid="_net_transform_8h" local="no">Networking/Components/NetTransform.h</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3b" prot="public" static="no" strong="yes">
+        <type>uint32_t</type>
+        <name>DirtyFlags</name>
+        <qualifiedname>Boon::NetTransform::DirtyFlags</qualifiedname>
+        <enumvalue id="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+          <name>None</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba05695693370a026c84acf4d674a62fd5" prot="public">
+          <name>PosX</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba7e75cf965eba430083929d0ec26c12a7" prot="public">
+          <name>PosY</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bafddb9fb1311023128eeb738f978ce061" prot="public">
+          <name>PosZ</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba84248dbe2a954d98c39ec26df4ae1e2d" prot="public">
+          <name>Rot</name>
+          <initializer>= 1 &lt;&lt; 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bab5e0c179725e7f282ffb8e6a96797b49" prot="public">
+          <name>ScaleX</name>
+          <initializer>= 1 &lt;&lt; 5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3ba3475b72c6483a5c871d245e2567c96c7" prot="public">
+          <name>ScaleY</name>
+          <initializer>= 1 &lt;&lt; 6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bab1c94ca2fbc3e78fc30069c8d0f01680" prot="public">
+          <name>All</name>
+          <initializer>= 0xFFFFFFFF</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="11" column="1" bodyfile="Networking/Components/NetTransform.h" bodystart="12" bodyend="25"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_net_transform_1a86a49979345076cab14428d7786a2c9e" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t Boon::NetTransform::QPosX</definition>
+        <argsstring></argsstring>
+        <name>QPosX</name>
+        <qualifiedname>Boon::NetTransform::QPosX</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="27" column="9" bodyfile="Networking/Components/NetTransform.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_transform_1a4fa14d42e07382b148967669220b031c" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t Boon::NetTransform::QPosY</definition>
+        <argsstring></argsstring>
+        <name>QPosY</name>
+        <qualifiedname>Boon::NetTransform::QPosY</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="27" column="15" bodyfile="Networking/Components/NetTransform.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_transform_1a20dbb7806596d48546f3e152e63b7e58" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t Boon::NetTransform::QPosZ</definition>
+        <argsstring></argsstring>
+        <name>QPosZ</name>
+        <qualifiedname>Boon::NetTransform::QPosZ</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="27" column="21" bodyfile="Networking/Components/NetTransform.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_transform_1a8f0a2b2a82a1da8810523b8d61b11620" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t Boon::NetTransform::QRotDeg</definition>
+        <argsstring></argsstring>
+        <name>QRotDeg</name>
+        <qualifiedname>Boon::NetTransform::QRotDeg</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="28" column="10" bodyfile="Networking/Components/NetTransform.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_transform_1af2574c3e7d64c702c658d445e1a63427" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t Boon::NetTransform::QScaleX</definition>
+        <argsstring></argsstring>
+        <name>QScaleX</name>
+        <qualifiedname>Boon::NetTransform::QScaleX</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="29" column="9" bodyfile="Networking/Components/NetTransform.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_transform_1a85eef532a6f42c1e050c0ce30b7762fc" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t Boon::NetTransform::QScaleY</definition>
+        <argsstring></argsstring>
+        <name>QScaleY</name>
+        <qualifiedname>Boon::NetTransform::QScaleY</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="29" column="17" bodyfile="Networking/Components/NetTransform.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_transform_1adfa23b5abaa4e757460f45a241ffa511" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t Boon::NetTransform::LastQPosX</definition>
+        <argsstring></argsstring>
+        <name>LastQPosX</name>
+        <qualifiedname>Boon::NetTransform::LastQPosX</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="31" column="9" bodyfile="Networking/Components/NetTransform.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_transform_1a4df200230c44e3ce0fe7e87d9794d12c" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t Boon::NetTransform::LastQPosY</definition>
+        <argsstring></argsstring>
+        <name>LastQPosY</name>
+        <qualifiedname>Boon::NetTransform::LastQPosY</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="31" column="19" bodyfile="Networking/Components/NetTransform.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_transform_1adb824a55b34b7d69d99e604a58373128" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t Boon::NetTransform::LastQPosZ</definition>
+        <argsstring></argsstring>
+        <name>LastQPosZ</name>
+        <qualifiedname>Boon::NetTransform::LastQPosZ</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="31" column="29" bodyfile="Networking/Components/NetTransform.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_transform_1a2890bbd2774133f00dfb6e312a9fd347" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t Boon::NetTransform::LastQRotDeg</definition>
+        <argsstring></argsstring>
+        <name>LastQRotDeg</name>
+        <qualifiedname>Boon::NetTransform::LastQRotDeg</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="32" column="10" bodyfile="Networking/Components/NetTransform.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_transform_1afc296f5d8fc341cb9e55aef778538bf3" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t Boon::NetTransform::LastQScaleX</definition>
+        <argsstring></argsstring>
+        <name>LastQScaleX</name>
+        <qualifiedname>Boon::NetTransform::LastQScaleX</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="33" column="9" bodyfile="Networking/Components/NetTransform.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_transform_1a2721941379975154defa6dcb6c10f0ac" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t Boon::NetTransform::LastQScaleY</definition>
+        <argsstring></argsstring>
+        <name>LastQScaleY</name>
+        <qualifiedname>Boon::NetTransform::LastQScaleY</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="33" column="21" bodyfile="Networking/Components/NetTransform.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Boon::NetTransform::DirtyMask</definition>
+        <argsstring></argsstring>
+        <name>DirtyMask</name>
+        <qualifiedname>Boon::NetTransform::DirtyMask</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="35" column="10" bodyfile="Networking/Components/NetTransform.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_net_transform_1ac14c308a1cf2317e4c4a6f831fe2d6d1" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3b" kindref="member">DirtyFlags</ref></type>
+        <definition>DirtyFlags Boon::NetTransform::ReplicationFlags</definition>
+        <argsstring></argsstring>
+        <name>ReplicationFlags</name>
+        <qualifiedname>Boon::NetTransform::ReplicationFlags</qualifiedname>
+        <initializer>= <ref refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3bab1c94ca2fbc3e78fc30069c8d0f01680" kindref="member">DirtyFlags::All</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="37" column="12" bodyfile="Networking/Components/NetTransform.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_boon_1_1_net_transform_1a7d58494dd76d0f533bbfd7198f766a8b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::NetTransform::LateUpdate</definition>
+        <argsstring>(GameObject gameObject)</argsstring>
+        <name>LateUpdate</name>
+        <qualifiedname>Boon::NetTransform::LateUpdate</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref></type>
+          <declname>gameObject</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Networking/Components/NetTransform.h" line="39" column="6" bodyfile="Networking/Components/NetTransform.h" bodystart="39" bodyend="92"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Networking/Components/NetTransform.h" line="9" column="1" bodyfile="Networking/Components/NetTransform.h" bodystart="10" bodyend="93"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_net_transform_1a209ddcb9e1d5e799b08727d075410d3b" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>DirtyFlags</name></member>
+      <member refid="struct_boon_1_1_net_transform_1aaf9535f4ae7f8d42b41005f4673d6dc4" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>DirtyMask</name></member>
+      <member refid="struct_boon_1_1_net_transform_1adfa23b5abaa4e757460f45a241ffa511" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>LastQPosX</name></member>
+      <member refid="struct_boon_1_1_net_transform_1a4df200230c44e3ce0fe7e87d9794d12c" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>LastQPosY</name></member>
+      <member refid="struct_boon_1_1_net_transform_1adb824a55b34b7d69d99e604a58373128" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>LastQPosZ</name></member>
+      <member refid="struct_boon_1_1_net_transform_1a2890bbd2774133f00dfb6e312a9fd347" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>LastQRotDeg</name></member>
+      <member refid="struct_boon_1_1_net_transform_1afc296f5d8fc341cb9e55aef778538bf3" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>LastQScaleX</name></member>
+      <member refid="struct_boon_1_1_net_transform_1a2721941379975154defa6dcb6c10f0ac" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>LastQScaleY</name></member>
+      <member refid="struct_boon_1_1_net_transform_1a7d58494dd76d0f533bbfd7198f766a8b" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>LateUpdate</name></member>
+      <member refid="struct_boon_1_1_net_transform_1a86a49979345076cab14428d7786a2c9e" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>QPosX</name></member>
+      <member refid="struct_boon_1_1_net_transform_1a4fa14d42e07382b148967669220b031c" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>QPosY</name></member>
+      <member refid="struct_boon_1_1_net_transform_1a20dbb7806596d48546f3e152e63b7e58" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>QPosZ</name></member>
+      <member refid="struct_boon_1_1_net_transform_1a8f0a2b2a82a1da8810523b8d61b11620" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>QRotDeg</name></member>
+      <member refid="struct_boon_1_1_net_transform_1af2574c3e7d64c702c658d445e1a63427" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>QScaleX</name></member>
+      <member refid="struct_boon_1_1_net_transform_1a85eef532a6f42c1e050c0ce30b7762fc" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>QScaleY</name></member>
+      <member refid="struct_boon_1_1_net_transform_1ac14c308a1cf2317e4c4a6f831fe2d6d1" prot="public" virt="non-virtual"><scope>Boon::NetTransform</scope><name>ReplicationFlags</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_vertex_buffer" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>Boon::VertexBuffer</compoundname>
+    <includes refid="_vertex_buffer_8h" local="no">Renderer/VertexBuffer.h</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_vertex_buffer_1a2eeeb38f5d75732c612a06ea02930021" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::VertexBuffer::VertexBuffer</definition>
+        <argsstring>()=default</argsstring>
+        <name>VertexBuffer</name>
+        <qualifiedname>Boon::VertexBuffer::VertexBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexBuffer.h" line="11" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_vertex_buffer_1a99ec99e4adb1ac263886e21317723415" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Boon::VertexBuffer::~VertexBuffer</definition>
+        <argsstring>()=default</argsstring>
+        <name>~VertexBuffer</name>
+        <qualifiedname>Boon::VertexBuffer::~VertexBuffer</qualifiedname>
+        <briefdescription>
+<para>Virtual destructor for vertex buffer implementations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexBuffer.h" line="16" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_vertex_buffer_1ac445d25de72f13498c83140d31dbbedd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::VertexBuffer::VertexBuffer</definition>
+        <argsstring>(const VertexBuffer &amp;other)=delete</argsstring>
+        <name>VertexBuffer</name>
+        <qualifiedname>Boon::VertexBuffer::VertexBuffer</qualifiedname>
+        <param>
+          <type>const VertexBuffer &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexBuffer.h" line="18" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_vertex_buffer_1a5f52e5ec07fac00225a420c488fcd105" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::VertexBuffer::VertexBuffer</definition>
+        <argsstring>(VertexBuffer &amp;&amp;other)=delete</argsstring>
+        <name>VertexBuffer</name>
+        <qualifiedname>Boon::VertexBuffer::VertexBuffer</qualifiedname>
+        <param>
+          <type>VertexBuffer &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexBuffer.h" line="19" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_vertex_buffer_1acd42e049c36cd2173fe80e2ce0b038af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_vertex_buffer_1a2eeeb38f5d75732c612a06ea02930021" kindref="member">VertexBuffer</ref> &amp;</type>
+        <definition>VertexBuffer &amp; Boon::VertexBuffer::operator=</definition>
+        <argsstring>(const VertexBuffer &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Boon::VertexBuffer::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="class_boon_1_1_vertex_buffer_1a2eeeb38f5d75732c612a06ea02930021" kindref="member">VertexBuffer</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexBuffer.h" line="20" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_vertex_buffer_1af473e1d860987ff9e0ca221ea1137933" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_vertex_buffer_1a2eeeb38f5d75732c612a06ea02930021" kindref="member">VertexBuffer</ref> &amp;</type>
+        <definition>VertexBuffer &amp; Boon::VertexBuffer::operator=</definition>
+        <argsstring>(VertexBuffer &amp;&amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Boon::VertexBuffer::operator=</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_vertex_buffer_1a2eeeb38f5d75732c612a06ea02930021" kindref="member">VertexBuffer</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexBuffer.h" line="21" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_vertex_buffer_1a14c9886a33d51a1a37b98097203b6a91" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Boon::VertexBuffer::Bind</definition>
+        <argsstring>() const =0</argsstring>
+        <name>Bind</name>
+        <qualifiedname>Boon::VertexBuffer::Bind</qualifiedname>
+        <briefdescription>
+<para>Bind the vertex buffer for use. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexBuffer.h" line="26" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_vertex_buffer_1a8219aa2c01a5bd6f6e9f2d4b7996f2ee" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Boon::VertexBuffer::Unbind</definition>
+        <argsstring>() const =0</argsstring>
+        <name>Unbind</name>
+        <qualifiedname>Boon::VertexBuffer::Unbind</qualifiedname>
+        <briefdescription>
+<para>Unbind the vertex buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexBuffer.h" line="31" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_vertex_buffer_1a923a0a6ab176b5226eb857213689c522" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Boon::VertexBuffer::SetData</definition>
+        <argsstring>(const void *data, uint32_t size)=0</argsstring>
+        <name>SetData</name>
+        <qualifiedname>Boon::VertexBuffer::SetData</qualifiedname>
+        <param>
+          <type>const void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Upload data into the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to source data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size in bytes of the data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexBuffer.h" line="39" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_vertex_buffer_1a8d1f622bbfddb9718240fdbe837d983b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const <ref refid="class_boon_1_1_vertex_buffer_layout" kindref="compound">VertexBufferLayout</ref> &amp;</type>
+        <definition>virtual const VertexBufferLayout &amp; Boon::VertexBuffer::GetLayout</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetLayout</name>
+        <qualifiedname>Boon::VertexBuffer::GetLayout</qualifiedname>
+        <briefdescription>
+<para>Get the current vertex buffer layout. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Const reference to the layout object. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexBuffer.h" line="46" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_vertex_buffer_1af620705cdccd6d0d05fb26cb55609d15" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Boon::VertexBuffer::SetLayout</definition>
+        <argsstring>(const VertexBufferLayout &amp;layout)=0</argsstring>
+        <name>SetLayout</name>
+        <qualifiedname>Boon::VertexBuffer::SetLayout</qualifiedname>
+        <param>
+          <type>const <ref refid="class_boon_1_1_vertex_buffer_layout" kindref="compound">VertexBufferLayout</ref> &amp;</type>
+          <declname>layout</declname>
+        </param>
+        <briefdescription>
+<para>Set the vertex buffer layout describing vertex attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>layout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Layout to associate with this buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexBuffer.h" line="53" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_boon_1_1_vertex_buffer_1ae357be17e781681b623e82af63d5e327" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_vertex_buffer_1a2eeeb38f5d75732c612a06ea02930021" kindref="member">VertexBuffer</ref> &gt;</type>
+        <definition>static std::shared_ptr&lt; VertexBuffer &gt; Boon::VertexBuffer::Create</definition>
+        <argsstring>(float *vertices, uint32_t size)</argsstring>
+        <name>Create</name>
+        <qualifiedname>Boon::VertexBuffer::Create</qualifiedname>
+        <param>
+          <type>float *</type>
+          <declname>vertices</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Create a vertex buffer initialized with vertex data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexBuffer.h" line="58" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_vertex_buffer_1abed079359180587211b9f62f46c00dba" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_vertex_buffer_1a2eeeb38f5d75732c612a06ea02930021" kindref="member">VertexBuffer</ref> &gt;</type>
+        <definition>static std::shared_ptr&lt; VertexBuffer &gt; Boon::VertexBuffer::Create</definition>
+        <argsstring>(uint32_t size)</argsstring>
+        <name>Create</name>
+        <qualifiedname>Boon::VertexBuffer::Create</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Create an empty vertex buffer of given size. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/VertexBuffer.h" line="63" column="24"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Renderer/VertexBuffer.h" line="8" column="1" bodyfile="Renderer/VertexBuffer.h" bodystart="9" bodyend="64"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_vertex_buffer_1a14c9886a33d51a1a37b98097203b6a91" prot="public" virt="pure-virtual"><scope>Boon::VertexBuffer</scope><name>Bind</name></member>
+      <member refid="class_boon_1_1_vertex_buffer_1ae357be17e781681b623e82af63d5e327" prot="public" virt="non-virtual"><scope>Boon::VertexBuffer</scope><name>Create</name></member>
+      <member refid="class_boon_1_1_vertex_buffer_1abed079359180587211b9f62f46c00dba" prot="public" virt="non-virtual"><scope>Boon::VertexBuffer</scope><name>Create</name></member>
+      <member refid="class_boon_1_1_vertex_buffer_1a8d1f622bbfddb9718240fdbe837d983b" prot="public" virt="pure-virtual"><scope>Boon::VertexBuffer</scope><name>GetLayout</name></member>
+      <member refid="class_boon_1_1_vertex_buffer_1acd42e049c36cd2173fe80e2ce0b038af" prot="public" virt="non-virtual"><scope>Boon::VertexBuffer</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_vertex_buffer_1af473e1d860987ff9e0ca221ea1137933" prot="public" virt="non-virtual"><scope>Boon::VertexBuffer</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_vertex_buffer_1a923a0a6ab176b5226eb857213689c522" prot="public" virt="pure-virtual"><scope>Boon::VertexBuffer</scope><name>SetData</name></member>
+      <member refid="class_boon_1_1_vertex_buffer_1af620705cdccd6d0d05fb26cb55609d15" prot="public" virt="pure-virtual"><scope>Boon::VertexBuffer</scope><name>SetLayout</name></member>
+      <member refid="class_boon_1_1_vertex_buffer_1a8219aa2c01a5bd6f6e9f2d4b7996f2ee" prot="public" virt="pure-virtual"><scope>Boon::VertexBuffer</scope><name>Unbind</name></member>
+      <member refid="class_boon_1_1_vertex_buffer_1a2eeeb38f5d75732c612a06ea02930021" prot="public" virt="non-virtual"><scope>Boon::VertexBuffer</scope><name>VertexBuffer</name></member>
+      <member refid="class_boon_1_1_vertex_buffer_1ac445d25de72f13498c83140d31dbbedd" prot="public" virt="non-virtual"><scope>Boon::VertexBuffer</scope><name>VertexBuffer</name></member>
+      <member refid="class_boon_1_1_vertex_buffer_1a5f52e5ec07fac00225a420c488fcd105" prot="public" virt="non-virtual"><scope>Boon::VertexBuffer</scope><name>VertexBuffer</name></member>
+      <member refid="class_boon_1_1_vertex_buffer_1a99ec99e4adb1ac263886e21317723415" prot="public" virt="virtual"><scope>Boon::VertexBuffer</scope><name>~VertexBuffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

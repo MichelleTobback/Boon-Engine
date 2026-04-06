@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_hazard_record" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::HazardRecord</compoundname>
+    <includes refid="_hazard_pointer_8h" local="no">Core/Threading/HazardPointer.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_hazard_record_1ae7b17e2fe7cddfc591222a669dd8a045" prot="public" static="no" mutable="no">
+        <type>std::atomic&lt; void * &gt;</type>
+        <definition>std::atomic&lt;void*&gt; Boon::HazardRecord::ptr</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <qualifiedname>Boon::HazardRecord::ptr</qualifiedname>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Threading/HazardPointer.h" line="11" column="21" bodyfile="Core/Threading/HazardPointer.h" bodystart="11" bodyend="11"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>Boon::HazardRecord</label>
+        <link refid="struct_boon_1_1_hazard_record"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::atomic&lt; void * &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="Core/Threading/HazardPointer.h" line="9" column="5" bodyfile="Core/Threading/HazardPointer.h" bodystart="10" bodyend="12"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_hazard_record_1ae7b17e2fe7cddfc591222a669dd8a045" prot="public" virt="non-virtual"><scope>Boon::HazardRecord</scope><name>ptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

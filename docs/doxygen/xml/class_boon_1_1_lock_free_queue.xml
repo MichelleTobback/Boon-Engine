@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_lock_free_queue" kind="class" language="C++" prot="public">
+    <compoundname>Boon::LockFreeQueue</compoundname>
+    <includes refid="_lock_free_queue_8h" local="no">Core/Threading/LockFreeQueue.h</includes>
+    <innerclass refid="struct_boon_1_1_lock_free_queue_1_1_node" prot="private">Boon::LockFreeQueue::Node</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_lock_free_queue_1ac7d857de90dd791e58e30583d880ec18" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; Node * &gt;</type>
+        <definition>std::atomic&lt;Node*&gt; Boon::LockFreeQueue&lt; T &gt;::m_Head</definition>
+        <argsstring></argsstring>
+        <name>m_Head</name>
+        <qualifiedname>Boon::LockFreeQueue::m_Head</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Threading/LockFreeQueue.h" line="19" column="21" bodyfile="Core/Threading/LockFreeQueue.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_lock_free_queue_1ac92791793f0eee93a552e2ceb4f0d6ca" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; Node * &gt;</type>
+        <definition>std::atomic&lt;Node*&gt; Boon::LockFreeQueue&lt; T &gt;::m_Tail</definition>
+        <argsstring></argsstring>
+        <name>m_Tail</name>
+        <qualifiedname>Boon::LockFreeQueue::m_Tail</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Threading/LockFreeQueue.h" line="20" column="21" bodyfile="Core/Threading/LockFreeQueue.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_lock_free_queue_1a51e42fa5614f3a9dd7a0c7ff704faf00" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::LockFreeQueue&lt; T &gt;::LockFreeQueue</definition>
+        <argsstring>()</argsstring>
+        <name>LockFreeQueue</name>
+        <qualifiedname>Boon::LockFreeQueue::LockFreeQueue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Threading/LockFreeQueue.h" line="23" column="9" bodyfile="Core/Threading/LockFreeQueue.h" bodystart="23" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_lock_free_queue_1a2b0f0e6b47df779a9c372d4cc5273008" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::LockFreeQueue&lt; T &gt;::~LockFreeQueue</definition>
+        <argsstring>()</argsstring>
+        <name>~LockFreeQueue</name>
+        <qualifiedname>Boon::LockFreeQueue::~LockFreeQueue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Threading/LockFreeQueue.h" line="30" column="9" bodyfile="Core/Threading/LockFreeQueue.h" bodystart="30" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_lock_free_queue_1ab188d730bbd9f5c1e25097f7b094f86a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::LockFreeQueue&lt; T &gt;::Enqueue</definition>
+        <argsstring>(T const &amp;value)</argsstring>
+        <name>Enqueue</name>
+        <qualifiedname>Boon::LockFreeQueue::Enqueue</qualifiedname>
+        <param>
+          <type>T const &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Threading/LockFreeQueue.h" line="39" column="14" bodyfile="Core/Threading/LockFreeQueue.h" bodystart="39" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_lock_free_queue_1a4f1baa583b27f1169b1ee9f898efddf2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::shared_ptr&lt; T &gt;</type>
+        <definition>std::shared_ptr&lt; T &gt; Boon::LockFreeQueue&lt; T &gt;::Dequeue</definition>
+        <argsstring>()</argsstring>
+        <name>Dequeue</name>
+        <qualifiedname>Boon::LockFreeQueue::Dequeue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Core/Threading/LockFreeQueue.h" line="66" column="25" bodyfile="Core/Threading/LockFreeQueue.h" bodystart="66" bodyend="103"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Core/Threading/LockFreeQueue.h" line="9" column="5" bodyfile="Core/Threading/LockFreeQueue.h" bodystart="10" bodyend="104"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_lock_free_queue_1a4f1baa583b27f1169b1ee9f898efddf2" prot="public" virt="non-virtual"><scope>Boon::LockFreeQueue</scope><name>Dequeue</name></member>
+      <member refid="class_boon_1_1_lock_free_queue_1ab188d730bbd9f5c1e25097f7b094f86a" prot="public" virt="non-virtual"><scope>Boon::LockFreeQueue</scope><name>Enqueue</name></member>
+      <member refid="class_boon_1_1_lock_free_queue_1a51e42fa5614f3a9dd7a0c7ff704faf00" prot="public" virt="non-virtual"><scope>Boon::LockFreeQueue</scope><name>LockFreeQueue</name></member>
+      <member refid="class_boon_1_1_lock_free_queue_1ac7d857de90dd791e58e30583d880ec18" prot="private" virt="non-virtual"><scope>Boon::LockFreeQueue</scope><name>m_Head</name></member>
+      <member refid="class_boon_1_1_lock_free_queue_1ac92791793f0eee93a552e2ceb4f0d6ca" prot="private" virt="non-virtual"><scope>Boon::LockFreeQueue</scope><name>m_Tail</name></member>
+      <member refid="class_boon_1_1_lock_free_queue_1a2b0f0e6b47df779a9c372d4cc5273008" prot="public" virt="non-virtual"><scope>Boon::LockFreeQueue</scope><name>~LockFreeQueue</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

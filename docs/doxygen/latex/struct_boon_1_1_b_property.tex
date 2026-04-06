@@ -1,0 +1,161 @@
+\doxysection{Boon::\+BProperty Struct Reference}
+\hypertarget{struct_boon_1_1_b_property}{}\label{struct_boon_1_1_b_property}\index{Boon::BProperty@{Boon::BProperty}}
+
+
+Reflection information for a single class property/\+member.  
+
+
+
+
+{\ttfamily \+\#include $<$BProperty.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{struct_boon_1_1_b_property_a7adb9b187bea435d1f9be6baabe7e315}{Has\+Meta}} (const std::\+string \&key) const
+\begin{DoxyCompactList}\small\item\em Check whether metadata with the given key exists for this property. \end{DoxyCompactList}\item 
+std::\+optional$<$ std::\+string $>$ \doxymbox{\hyperlink{struct_boon_1_1_b_property_afc4864c59edd37b4d06764b8127209f7}{Get\+Meta}} (const std::\+string \&key) const
+\begin{DoxyCompactList}\small\item\em Get the value for a metadata entry if present. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+string \doxymbox{\hyperlink{struct_boon_1_1_b_property_a8aa1a6c6ea1cbc4e2032e9580695c0ec}{name}}
+\item 
+std::\+string \doxymbox{\hyperlink{struct_boon_1_1_b_property_ab6167324a77f9277b00a61231f6fbfb2}{type\+Name}}
+\item 
+std::\+size\+\_\+t \doxymbox{\hyperlink{struct_boon_1_1_b_property_a82a5885b53b433c25ff34853f9f1d5e8}{offset}} \{\}
+\item 
+std::\+size\+\_\+t \doxymbox{\hyperlink{struct_boon_1_1_b_property_a3a5511ac5fd5dea93d059ce35cfb5ed6}{size}} \{\}
+\item 
+BType\+Id \doxymbox{\hyperlink{struct_boon_1_1_b_property_aad69dc18d7bcf182ad6ab96bbf08ab15}{type\+Id}} \{ BType\+Id::\+\+Unknown \}
+\item 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_boon_1_1_b_property_meta}{BProperty\+Meta}} $>$ \doxymbox{\hyperlink{struct_boon_1_1_b_property_a5bf333716a20e3c190a8072e49611d10}{meta}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Reflection information for a single class property/\+member. 
+
+Contains the property\textquotesingle{}s name, type name, byte offset within the instance, size and optional metadata entries. 
+
+Definition at line \doxymbox{\hyperlink{_b_property_8h_source_l00047}{47}} of file \doxymbox{\hyperlink{_b_property_8h_source}{BProperty.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{struct_boon_1_1_b_property_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_boon_1_1_b_property_afc4864c59edd37b4d06764b8127209f7}\index{Boon::BProperty@{Boon::BProperty}!GetMeta@{GetMeta}}
+\index{GetMeta@{GetMeta}!Boon::BProperty@{Boon::BProperty}}
+\doxysubsubsection{\texorpdfstring{GetMeta()}{GetMeta()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_property_afc4864c59edd37b4d06764b8127209f7} 
+std::\+optional$<$ std::\+string $>$ Boon::\+\+BProperty::\+\+Get\+Meta (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the value for a metadata entry if present. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Metadata key to retrieve. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Optional string containing the metadata value when present. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_b_property_8h_source_l00076}{76}} of file \doxymbox{\hyperlink{_b_property_8h_source}{BProperty.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_property_a7adb9b187bea435d1f9be6baabe7e315}\index{Boon::BProperty@{Boon::BProperty}!HasMeta@{HasMeta}}
+\index{HasMeta@{HasMeta}!Boon::BProperty@{Boon::BProperty}}
+\doxysubsubsection{\texorpdfstring{HasMeta()}{HasMeta()}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_property_a7adb9b187bea435d1f9be6baabe7e315} 
+bool Boon::\+\+BProperty::\+\+Has\+Meta (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check whether metadata with the given key exists for this property. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Metadata key to search for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if a metadata entry with the key exists, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_b_property_8h_source_l00062}{62}} of file \doxymbox{\hyperlink{_b_property_8h_source}{BProperty.\+h}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{struct_boon_1_1_b_property_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_boon_1_1_b_property_a5bf333716a20e3c190a8072e49611d10}\index{Boon::BProperty@{Boon::BProperty}!meta@{meta}}
+\index{meta@{meta}!Boon::BProperty@{Boon::BProperty}}
+\doxysubsubsection{\texorpdfstring{meta}{meta}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_property_a5bf333716a20e3c190a8072e49611d10} 
+std::\+vector$<$\doxymbox{\hyperlink{struct_boon_1_1_b_property_meta}{BProperty\+Meta}}$>$ Boon::\+\+BProperty::\+meta}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_property_8h_source_l00054}{54}} of file \doxymbox{\hyperlink{_b_property_8h_source}{BProperty.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_property_a8aa1a6c6ea1cbc4e2032e9580695c0ec}\index{Boon::BProperty@{Boon::BProperty}!name@{name}}
+\index{name@{name}!Boon::BProperty@{Boon::BProperty}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_property_a8aa1a6c6ea1cbc4e2032e9580695c0ec} 
+std::\+string Boon::\+\+BProperty::\+name}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_property_8h_source_l00049}{49}} of file \doxymbox{\hyperlink{_b_property_8h_source}{BProperty.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_property_a82a5885b53b433c25ff34853f9f1d5e8}\index{Boon::BProperty@{Boon::BProperty}!offset@{offset}}
+\index{offset@{offset}!Boon::BProperty@{Boon::BProperty}}
+\doxysubsubsection{\texorpdfstring{offset}{offset}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_property_a82a5885b53b433c25ff34853f9f1d5e8} 
+std::\+size\+\_\+t Boon::\+\+BProperty::\+offset \{\}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_property_8h_source_l00051}{51}} of file \doxymbox{\hyperlink{_b_property_8h_source}{BProperty.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_property_a3a5511ac5fd5dea93d059ce35cfb5ed6}\index{Boon::BProperty@{Boon::BProperty}!size@{size}}
+\index{size@{size}!Boon::BProperty@{Boon::BProperty}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_property_a3a5511ac5fd5dea93d059ce35cfb5ed6} 
+std::\+size\+\_\+t Boon::\+\+BProperty::\+size \{\}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_property_8h_source_l00052}{52}} of file \doxymbox{\hyperlink{_b_property_8h_source}{BProperty.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_property_aad69dc18d7bcf182ad6ab96bbf08ab15}\index{Boon::BProperty@{Boon::BProperty}!typeId@{typeId}}
+\index{typeId@{typeId}!Boon::BProperty@{Boon::BProperty}}
+\doxysubsubsection{\texorpdfstring{typeId}{typeId}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_property_aad69dc18d7bcf182ad6ab96bbf08ab15} 
+BType\+Id Boon::\+\+BProperty::\+type\+Id \{ BType\+Id::\+\+Unknown \}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_property_8h_source_l00053}{53}} of file \doxymbox{\hyperlink{_b_property_8h_source}{BProperty.\+h}}.
+
+\Hypertarget{struct_boon_1_1_b_property_ab6167324a77f9277b00a61231f6fbfb2}\index{Boon::BProperty@{Boon::BProperty}!typeName@{typeName}}
+\index{typeName@{typeName}!Boon::BProperty@{Boon::BProperty}}
+\doxysubsubsection{\texorpdfstring{typeName}{typeName}}
+{\footnotesize\ttfamily \label{struct_boon_1_1_b_property_ab6167324a77f9277b00a61231f6fbfb2} 
+std::\+string Boon::\+\+BProperty::\+type\+Name}
+
+
+
+Definition at line \doxymbox{\hyperlink{_b_property_8h_source_l00050}{50}} of file \doxymbox{\hyperlink{_b_property_8h_source}{BProperty.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+BProperty.\+h\end{DoxyCompactItemize}

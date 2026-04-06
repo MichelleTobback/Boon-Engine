@@ -14,6 +14,11 @@ namespace Boon
         std::unordered_map<std::string, std::string> settings;
         std::vector<AssetHandle> dependencies;
 
+        /**
+         * @brief Check whether this metadata entry describes a valid asset.
+         *
+         * @return true if uuid is valid and type is not None.
+         */
         bool IsValid() const { return uuid.IsValid() && type != AssetType::None; }
     };
 }

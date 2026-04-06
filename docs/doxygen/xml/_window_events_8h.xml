@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="_window_events_8h" kind="file" language="C++">
+    <compoundname>WindowEvents.h</compoundname>
+    <includes refid="_event_8h" local="yes">Event.h</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>Event.h</label>
+        <link refid="_event_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Event/WindowEvents.h</label>
+        <link refid="_window_events_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>stdint.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="struct_boon_1_1_window_resize_event" prot="public">Boon::WindowResizeEvent</innerclass>
+    <innerclass refid="struct_boon_1_1_window_close_event" prot="public">Boon::WindowCloseEvent</innerclass>
+    <innernamespace refid="namespace_boon">Boon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_event_8h" kindref="compound">Event.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_boon" kindref="compound">Boon</ref></highlight></codeline>
+<codeline lineno="5"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="6" refid="struct_boon_1_1_window_resize_event" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_window_resize_event_1a3c3c8bf9a6fbccc7c945c350fa1d7b67" kindref="member">WindowResizeEvent</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_i_event" kindref="compound">IEvent</ref></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="8" refid="struct_boon_1_1_window_resize_event_1a3c3c8bf9a6fbccc7c945c350fa1d7b67" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_window_resize_event_1a3c3c8bf9a6fbccc7c945c350fa1d7b67" kindref="member">WindowResizeEvent</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>width,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>height)<sp/></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="struct_boon_1_1_window_resize_event_1a8c790e42fc20ecb4ce77f87eb3722dc3" kindref="member">Width</ref>(width),<sp/><ref refid="struct_boon_1_1_window_resize_event_1afcaa053ebaaab56f23235bfd4c36b804" kindref="member">Height</ref>(height){}</highlight></codeline>
+<codeline lineno="10" refid="struct_boon_1_1_window_resize_event_1abbcd3f4ae96ff05c36f52f321ebd06c8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_window_resize_event_1abbcd3f4ae96ff05c36f52f321ebd06c8" kindref="member">~WindowResizeEvent</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="struct_boon_1_1_window_resize_event_1a5b544d4fb127894856ef67f83bef326b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1aee82d7ef047ab4695310ded9fa96793d" kindref="member">EventCategory</ref><sp/><ref refid="struct_boon_1_1_window_resize_event_1a5b544d4fb127894856ef67f83bef326b" kindref="member">GetCategory</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override</highlight></codeline>
+<codeline lineno="13"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1aee82d7ef047ab4695310ded9fa96793dae498749f3c42246d50b15c81c101d988" kindref="member">EventCategory::Application</ref><sp/>|<sp/><ref refid="namespace_boon_1aee82d7ef047ab4695310ded9fa96793dac89686a387d2b12b3c729ce35a0bcb5b" kindref="member">EventCategory::Window</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="struct_boon_1_1_window_resize_event_1afcaa053ebaaab56f23235bfd4c36b804" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_window_resize_event_1a8c790e42fc20ecb4ce77f87eb3722dc3" kindref="member">Width</ref>{},<sp/><ref refid="struct_boon_1_1_window_resize_event_1afcaa053ebaaab56f23235bfd4c36b804" kindref="member">Height</ref>{};</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="struct_boon_1_1_window_close_event" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_boon_1_1_window_close_event_1a4446963caac7e9737f50fa175c20a5f5" kindref="member">WindowCloseEvent</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_i_event" kindref="compound">IEvent</ref></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="22" refid="struct_boon_1_1_window_close_event_1a4446963caac7e9737f50fa175c20a5f5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_boon_1_1_window_close_event_1a4446963caac7e9737f50fa175c20a5f5" kindref="member">WindowCloseEvent</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="23" refid="struct_boon_1_1_window_close_event_1aabbeb11cf4d42cce7700afc402cd4c49" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="struct_boon_1_1_window_close_event_1aabbeb11cf4d42cce7700afc402cd4c49" kindref="member">~WindowCloseEvent</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="struct_boon_1_1_window_close_event_1a60607f8262996f09c0042d8726b22105" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1aee82d7ef047ab4695310ded9fa96793d" kindref="member">EventCategory</ref><sp/><ref refid="struct_boon_1_1_window_close_event_1a60607f8262996f09c0042d8726b22105" kindref="member">GetCategory</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override</highlight></codeline>
+<codeline lineno="26"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="namespace_boon_1aee82d7ef047ab4695310ded9fa96793dae498749f3c42246d50b15c81c101d988" kindref="member">EventCategory::Application</ref><sp/>|<sp/><ref refid="namespace_boon_1aee82d7ef047ab4695310ded9fa96793dac89686a387d2b12b3c729ce35a0bcb5b" kindref="member">EventCategory::Window</ref>;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="Event/WindowEvents.h"/>
+  </compounddef>
+</doxygen>

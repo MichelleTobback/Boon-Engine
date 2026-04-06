@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_hit_result2_d" kind="struct" language="C++" prot="public">
+    <compoundname>Boon::HitResult2D</compoundname>
+    <includes refid="_physics2_d_types_8h" local="no">Physics/Physics2DTypes.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_hit_result2_d_1aa0d837b3557cf475acb0b924f565e81a" prot="public" static="no" mutable="no">
+        <type><ref refid="namespace_boon_1a3c4b811809646d3ae922d1795f4ad6e5" kindref="member">GameObjectID</ref></type>
+        <definition>GameObjectID Boon::HitResult2D::gameObject</definition>
+        <argsstring></argsstring>
+        <name>gameObject</name>
+        <qualifiedname>Boon::HitResult2D::gameObject</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Physics/Physics2DTypes.h" line="16" column="14" bodyfile="Physics/Physics2DTypes.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_hit_result2_d_1aacfd03940f44c433f5a2d91d3fa999c8" prot="public" static="no" mutable="no">
+        <type>glm::vec2</type>
+        <definition>glm::vec2 Boon::HitResult2D::point</definition>
+        <argsstring></argsstring>
+        <name>point</name>
+        <qualifiedname>Boon::HitResult2D::point</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Physics/Physics2DTypes.h" line="17" column="11" bodyfile="Physics/Physics2DTypes.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_hit_result2_d_1a5f460434075617fc9956b89db2e6f7db" prot="public" static="no" mutable="no">
+        <type>glm::vec2</type>
+        <definition>glm::vec2 Boon::HitResult2D::normal</definition>
+        <argsstring></argsstring>
+        <name>normal</name>
+        <qualifiedname>Boon::HitResult2D::normal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Physics/Physics2DTypes.h" line="18" column="11" bodyfile="Physics/Physics2DTypes.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Physics/Physics2DTypes.h" line="14" column="1" bodyfile="Physics/Physics2DTypes.h" bodystart="15" bodyend="19"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_hit_result2_d_1aa0d837b3557cf475acb0b924f565e81a" prot="public" virt="non-virtual"><scope>Boon::HitResult2D</scope><name>gameObject</name></member>
+      <member refid="struct_boon_1_1_hit_result2_d_1a5f460434075617fc9956b89db2e6f7db" prot="public" virt="non-virtual"><scope>Boon::HitResult2D</scope><name>normal</name></member>
+      <member refid="struct_boon_1_1_hit_result2_d_1aacfd03940f44c433f5a2d91d3fa999c8" prot="public" virt="non-virtual"><scope>Boon::HitResult2D</scope><name>point</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

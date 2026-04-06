@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_texture2_d" kind="class" language="C++" prot="public">
+    <compoundname>Boon::Texture2D</compoundname>
+    <basecompoundref refid="class_boon_1_1_texture" prot="public" virt="non-virtual">Boon::Texture</basecompoundref>
+    <includes refid="_texture_8h" local="no">Renderer/Texture.h</includes>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_boon_1_1_texture2_d_1a83f6cb5caba69972663e2f8c0628bb33" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_texture2_d" kindref="compound">Texture2D</ref> &gt;</type>
+        <definition>static std::shared_ptr&lt; Texture2D &gt; Boon::Texture2D::Create</definition>
+        <argsstring>(const TextureDescriptor &amp;descriptor)</argsstring>
+        <name>Create</name>
+        <qualifiedname>Boon::Texture2D::Create</qualifiedname>
+        <param>
+          <type>const <ref refid="struct_boon_1_1_texture_descriptor" kindref="compound">TextureDescriptor</ref> &amp;</type>
+          <declname>descriptor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/Texture.h" line="96" column="24"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Boon::Texture</label>
+        <link refid="class_boon_1_1_texture"/>
+      </node>
+      <node id="1">
+        <label>Boon::Texture2D</label>
+        <link refid="class_boon_1_1_texture2_d"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::Texture</label>
+        <link refid="class_boon_1_1_texture"/>
+      </node>
+      <node id="1">
+        <label>Boon::Texture2D</label>
+        <link refid="class_boon_1_1_texture2_d"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Renderer/Texture.h" line="93" column="1" bodyfile="Renderer/Texture.h" bodystart="94" bodyend="97"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_texture_1abfd0f49770bba11849a2a07787e24593" prot="public" virt="pure-virtual"><scope>Boon::Texture2D</scope><name>Bind</name></member>
+      <member refid="class_boon_1_1_texture2_d_1a83f6cb5caba69972663e2f8c0628bb33" prot="public" virt="non-virtual"><scope>Boon::Texture2D</scope><name>Create</name></member>
+      <member refid="class_boon_1_1_texture_1a59ad5c9df5e6382c1c693828ef9ec8b1" prot="public" virt="pure-virtual"><scope>Boon::Texture2D</scope><name>GetDescriptor</name></member>
+      <member refid="class_boon_1_1_texture_1a10ca4b173c19ebe59ee02d65f3467092" prot="public" virt="pure-virtual"><scope>Boon::Texture2D</scope><name>GetHeight</name></member>
+      <member refid="class_boon_1_1_texture_1ad20ff37f65db0e8d116ee3ef17230a7b" prot="public" virt="pure-virtual"><scope>Boon::Texture2D</scope><name>GetRendererID</name></member>
+      <member refid="class_boon_1_1_texture_1af136013b90dec18eb52c8cd2d0db71bd" prot="public" virt="pure-virtual"><scope>Boon::Texture2D</scope><name>GetWidth</name></member>
+      <member refid="class_boon_1_1_texture_1a4669c14a68da2cd516446e285d0010b9" prot="public" virt="pure-virtual"><scope>Boon::Texture2D</scope><name>operator==</name></member>
+      <member refid="class_boon_1_1_texture_1ab4bec6803ff9065ff9aca4c8683c2b22" prot="public" virt="pure-virtual"><scope>Boon::Texture2D</scope><name>SetData</name></member>
+      <member refid="class_boon_1_1_texture_1a155844377942ae5a5296eee0c533d72e" prot="public" virt="pure-virtual"><scope>Boon::Texture2D</scope><name>SetData</name></member>
+      <member refid="class_boon_1_1_texture_1a4bec56fd47d165575715ff6b5ef4bb64" prot="public" virt="virtual"><scope>Boon::Texture2D</scope><name>~Texture</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

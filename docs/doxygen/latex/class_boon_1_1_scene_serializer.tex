@@ -1,0 +1,98 @@
+\doxysection{Boon::\+Scene\+Serializer Class Reference}
+\hypertarget{class_boon_1_1_scene_serializer}{}\label{class_boon_1_1_scene_serializer}\index{Boon::SceneSerializer@{Boon::SceneSerializer}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_scene_serializer_ad6195fa9d37801b3eec639d23aba9ca5}{Scene\+Serializer}} (\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \&scene)
+\begin{DoxyCompactList}\small\item\em Construct a serializer for the provided scene. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_scene_serializer_afa47e9629a938900c587aab2a8e9233f}{Serialize}} (const std::\+string \&dst)
+\begin{DoxyCompactList}\small\item\em Serialize the scene to the destination path. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_scene_serializer_a658c9848f3c0e9b146281ae97088d163}{Deserialize}} (const std::\+string \&src)
+\begin{DoxyCompactList}\small\item\em Deserialize scene data from the provided source path. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_scene_serializer_aa0360b5e9a85d45cb9157070b24aa304}\label{class_boon_1_1_scene_serializer_aa0360b5e9a85d45cb9157070b24aa304} 
+void {\bfseries Clear} ()
+\begin{DoxyCompactList}\small\item\em Clear serialized data /\+ internal caches used by the serializer. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_boon_1_1_scene_serializer_afedcc54e8891393500544870010fcd11}{Copy}} (\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \&from)
+\begin{DoxyCompactList}\small\item\em Copy scene contents from another scene instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_scene_serializer_8h_source_l00006}{6}} of file \doxymbox{\hyperlink{_scene_serializer_8h_source}{Scene\+Serializer.\+h}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_boon_1_1_scene_serializer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_boon_1_1_scene_serializer_ad6195fa9d37801b3eec639d23aba9ca5}\index{Boon::SceneSerializer@{Boon::SceneSerializer}!SceneSerializer@{SceneSerializer}}
+\index{SceneSerializer@{SceneSerializer}!Boon::SceneSerializer@{Boon::SceneSerializer}}
+\doxysubsubsection{\texorpdfstring{SceneSerializer()}{SceneSerializer()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_serializer_ad6195fa9d37801b3eec639d23aba9ca5} 
+Boon::\+\+Scene\+Serializer::\+\+Scene\+Serializer (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \&}]{scene}{}\end{DoxyParamCaption})}
+
+
+
+Construct a serializer for the provided scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene} & \doxylink{class_boon_1_1_scene}{Scene} instance to serialize/\+deserialize. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_scene_serializer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_scene_serializer_afedcc54e8891393500544870010fcd11}\index{Boon::SceneSerializer@{Boon::SceneSerializer}!Copy@{Copy}}
+\index{Copy@{Copy}!Boon::SceneSerializer@{Boon::SceneSerializer}}
+\doxysubsubsection{\texorpdfstring{Copy()}{Copy()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_serializer_afedcc54e8891393500544870010fcd11} 
+void Boon::\+\+Scene\+Serializer::\+\+Copy (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_scene}{Scene}} \&}]{from}{}\end{DoxyParamCaption})}
+
+
+
+Copy scene contents from another scene instance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & \doxylink{class_boon_1_1_scene}{Scene} to copy data from. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_scene_serializer_a658c9848f3c0e9b146281ae97088d163}\index{Boon::SceneSerializer@{Boon::SceneSerializer}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!Boon::SceneSerializer@{Boon::SceneSerializer}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_serializer_a658c9848f3c0e9b146281ae97088d163} 
+void Boon::\+\+Scene\+Serializer::\+\+Deserialize (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{src}{}\end{DoxyParamCaption})}
+
+
+
+Deserialize scene data from the provided source path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & Source file path to read scene data from. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_scene_serializer_afa47e9629a938900c587aab2a8e9233f}\index{Boon::SceneSerializer@{Boon::SceneSerializer}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Boon::SceneSerializer@{Boon::SceneSerializer}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_scene_serializer_afa47e9629a938900c587aab2a8e9233f} 
+void Boon::\+\+Scene\+Serializer::\+\+Serialize (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{dst}{}\end{DoxyParamCaption})}
+
+
+
+Serialize the scene to the destination path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dst} & Destination file path to write the scene representation. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Scene\+Serializer.\+h\end{DoxyCompactItemize}

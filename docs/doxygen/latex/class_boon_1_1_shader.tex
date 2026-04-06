@@ -1,0 +1,68 @@
+\doxysection{Boon::\+Shader Class Reference}
+\hypertarget{class_boon_1_1_shader}{}\label{class_boon_1_1_shader}\index{Boon::Shader@{Boon::Shader}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_boon_1_1_shader_a5944f419491a3931ca3ed2928c290ea3}\label{class_boon_1_1_shader_a5944f419491a3931ca3ed2928c290ea3} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Shader} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor for shader implementations. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_shader_a86d6ae53473e28ec22a73d80d4e9e5de}\label{class_boon_1_1_shader_a86d6ae53473e28ec22a73d80d4e9e5de} 
+{\bfseries Shader} (const Shader \&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_shader_a884e9aa9b94a760eff10c4e8b2abb7fb}\label{class_boon_1_1_shader_a884e9aa9b94a760eff10c4e8b2abb7fb} 
+{\bfseries Shader} (Shader \&\&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_shader_a0bcb6d561a521c79234cc7cea3bbdf99}\label{class_boon_1_1_shader_a0bcb6d561a521c79234cc7cea3bbdf99} 
+Shader \& {\bfseries operator=} (const Shader \&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_shader_aed88661424f599124a6685de1f14f4dd}\label{class_boon_1_1_shader_aed88661424f599124a6685de1f14f4dd} 
+Shader \& {\bfseries operator=} (Shader \&\&other)=delete
+\item 
+\Hypertarget{class_boon_1_1_shader_a338317785cb526e1fe1f040de6911c67}\label{class_boon_1_1_shader_a338317785cb526e1fe1f040de6911c67} 
+virtual void {\bfseries Bind} () const =0
+\begin{DoxyCompactList}\small\item\em Bind the shader for rendering. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_shader_a6b3eb8c569fefdba1bb521bcef776e99}\label{class_boon_1_1_shader_a6b3eb8c569fefdba1bb521bcef776e99} 
+virtual void {\bfseries Unbind} () const =0
+\begin{DoxyCompactList}\small\item\em Unbind the shader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std::\+shared\+\_\+ptr$<$ Shader $>$ \doxymbox{\hyperlink{class_boon_1_1_shader_af221e53bbc28e29af632c093d3968008}{Create}} (const std::\+string \&vertex\+Src, const std::\+string \&fragment\+Src)
+\begin{DoxyCompactList}\small\item\em Create a shader from vertex and fragment source strings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_shader_8h_source_l00008}{8}} of file \doxymbox{\hyperlink{_shader_8h_source}{Shader.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_shader_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_shader_af221e53bbc28e29af632c093d3968008}\index{Boon::Shader@{Boon::Shader}!Create@{Create}}
+\index{Create@{Create}!Boon::Shader@{Boon::Shader}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_shader_af221e53bbc28e29af632c093d3968008} 
+std::\+shared\+\_\+ptr$<$ Shader $>$ Boon::\+\+Shader::\+\+Create (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{vertex\+Src}{, }\item[{const std::\+string \&}]{fragment\+Src}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create a shader from vertex and fragment source strings. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex\+Src} & Source code for the vertex shader stage. \\
+\hline
+{\em fragment\+Src} & Source code for the fragment shader stage. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Shared pointer to a \doxylink{class_boon_1_1_shader}{Shader} instance, or nullptr on failure. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Shader.\+h\end{DoxyCompactItemize}

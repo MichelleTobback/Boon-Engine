@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="struct_boon_1_1_texture_renderer_component" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>Boon::TextureRendererComponent</compoundname>
+    <includes refid="_texture_renderer_component_8h" local="no">Component/TextureRendererComponent.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_boon_1_1_texture_renderer_component_1ac4ac7b97e490413013dee653e6e23900" prot="public" static="no" mutable="no">
+        <type>glm::vec4</type>
+        <definition>glm::vec4 Boon::TextureRendererComponent::Color</definition>
+        <argsstring></argsstring>
+        <name>Color</name>
+        <qualifiedname>Boon::TextureRendererComponent::Color</qualifiedname>
+        <initializer>{ 1.f }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TextureRendererComponent.h" line="16" column="11" bodyfile="Component/TextureRendererComponent.h" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_texture_renderer_component_1aedf3665231eaead0f9948b6e7bcbc3af" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Boon::TextureRendererComponent::Tiling</definition>
+        <argsstring></argsstring>
+        <name>Tiling</name>
+        <qualifiedname>Boon::TextureRendererComponent::Tiling</qualifiedname>
+        <initializer>{ 1.f }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TextureRendererComponent.h" line="19" column="7" bodyfile="Component/TextureRendererComponent.h" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_boon_1_1_texture_renderer_component_1a3f5c9334e19236e522ac199837ce449c" prot="public" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_asset_ref" kindref="compound">AssetRef</ref>&lt; <ref refid="class_boon_1_1_texture2_d_asset" kindref="compound">Texture2DAsset</ref> &gt;</type>
+        <definition>AssetRef&lt;Texture2DAsset&gt; Boon::TextureRendererComponent::Texture</definition>
+        <argsstring></argsstring>
+        <name>Texture</name>
+        <qualifiedname>Boon::TextureRendererComponent::Texture</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TextureRendererComponent.h" line="22" column="10" bodyfile="Component/TextureRendererComponent.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_boon_1_1_texture_renderer_component_1a7594eda577945111d656a8aa2db78196" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::TextureRendererComponent::TextureRendererComponent</definition>
+        <argsstring>()=default</argsstring>
+        <name>TextureRendererComponent</name>
+        <qualifiedname>Boon::TextureRendererComponent::TextureRendererComponent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/TextureRendererComponent.h" line="13" column="1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>Boon::AssetRef&lt; Boon::Texture2DAsset &gt;</label>
+        <link refid="class_boon_1_1_asset_ref"/>
+      </node>
+      <node id="1">
+        <label>Boon::TextureRendererComponent</label>
+        <link refid="struct_boon_1_1_texture_renderer_component"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>Texture</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Component/TextureRendererComponent.h" line="11" column="1" bodyfile="Component/TextureRendererComponent.h" bodystart="12" bodyend="23"/>
+    <listofallmembers>
+      <member refid="struct_boon_1_1_texture_renderer_component_1ac4ac7b97e490413013dee653e6e23900" prot="public" virt="non-virtual"><scope>Boon::TextureRendererComponent</scope><name>Color</name></member>
+      <member refid="struct_boon_1_1_texture_renderer_component_1a3f5c9334e19236e522ac199837ce449c" prot="public" virt="non-virtual"><scope>Boon::TextureRendererComponent</scope><name>Texture</name></member>
+      <member refid="struct_boon_1_1_texture_renderer_component_1a7594eda577945111d656a8aa2db78196" prot="public" virt="non-virtual"><scope>Boon::TextureRendererComponent</scope><name>TextureRendererComponent</name></member>
+      <member refid="struct_boon_1_1_texture_renderer_component_1aedf3665231eaead0f9948b6e7bcbc3af" prot="public" virt="non-virtual"><scope>Boon::TextureRendererComponent</scope><name>Tiling</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

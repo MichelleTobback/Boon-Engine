@@ -11,10 +11,42 @@ namespace Boon
     class Time final : public Singleton<Time>
     {
     public:
+        /**
+         * @brief Start or reset the engine time tracking.
+         *
+         * Records the current time as the start time and resets internal
+         * accumulators. Call once before running the main loop.
+         */
         void Start();
+
+        /**
+         * @brief Advance time by computing delta since last step.
+         *
+         * Updates the internal delta time and accumulators. Should be called
+         * once per frame.
+         */
         void Step();
+
+        /**
+         * @brief Wait/sleep to enforce a maximum FPS if configured.
+         *
+         * May block the calling thread to maintain frame timing.
+         */
         void Wait();
+
+        /**
+         * @brief Determine whether a fixed physics step should run.
+         *
+         * Uses the internal accumulator and fixed time step to indicate if
+         * a physics update should be executed this frame.
+         * @return True if a fixed step should be performed.
+         */
         bool FixedStep();
+
+        /**
+         * @brief Get the current time point.
+         * @return TimePoint representing the current steady clock time.
+         */
         TimePoint Now();
 
         // Delta time is in seconds

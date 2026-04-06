@@ -36,12 +36,18 @@ namespace Boon
     // ---------------------------------------------------------------------
     // Metadata and parameter info for functions
     // ---------------------------------------------------------------------
+    /**
+     * @brief Key/value metadata pair for reflected functions.
+     */
     struct BFunctionMeta
     {
         std::string key;
         std::string value;
     };
 
+    /**
+     * @brief Reflected parameter information for a function.
+     */
     struct BFunctionParam
     {
         std::string typeName;   // textual C++ type
@@ -49,6 +55,12 @@ namespace Boon
         BTypeId typeId;         // inferred from typeName
     };
 
+    /**
+     * @brief Reflection information for a callable member/function.
+     *
+     * Contains a hashed id, parameter and metadata lists and a thunk used to
+     * invoke the function on an instance with Variant arguments.
+     */
     struct BFunction
     {
         using ThunkFn = void(*)(void* /*instance*/, Variant* /*args*/, size_t /*argCount*/);

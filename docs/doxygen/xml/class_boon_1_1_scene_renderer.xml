@@ -1,0 +1,525 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_scene_renderer" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>Boon::SceneRenderer</compoundname>
+    <includes refid="_scene_renderer_8h" local="no">Renderer/SceneRenderer.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_scene_renderer_1a6fd1525f8872a4db9aa88d282602f9ff" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="class_boon_1_1_renderer2_d" kindref="compound">Renderer2D</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;Renderer2D&gt; Boon::SceneRenderer::m_pRenderer2D</definition>
+        <argsstring></argsstring>
+        <name>m_pRenderer2D</name>
+        <qualifiedname>Boon::SceneRenderer::m_pRenderer2D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="83" column="17" bodyfile="Renderer/SceneRenderer.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_scene_renderer_1a161f60500eec67e054e9c1ce0f54d77a" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_uniform_buffer" kindref="compound">UniformBuffer</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;UniformBuffer&gt; Boon::SceneRenderer::m_pCameraUniformBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_pCameraUniformBuffer</name>
+        <qualifiedname>Boon::SceneRenderer::m_pCameraUniformBuffer</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="84" column="17" bodyfile="Renderer/SceneRenderer.h" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_scene_renderer_1a94c0cf37d050683b6348b32f31c6504a" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_uniform_buffer" kindref="compound">UniformBuffer</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;UniformBuffer&gt; Boon::SceneRenderer::m_pObjectUniformBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_pObjectUniformBuffer</name>
+        <qualifiedname>Boon::SceneRenderer::m_pObjectUniformBuffer</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="85" column="17" bodyfile="Renderer/SceneRenderer.h" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_scene_renderer_1a94963120530ede57d2a7688b52fcc46e" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_framebuffer" kindref="compound">Framebuffer</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;Framebuffer&gt; Boon::SceneRenderer::m_pOutputFB</definition>
+        <argsstring></argsstring>
+        <name>m_pOutputFB</name>
+        <qualifiedname>Boon::SceneRenderer::m_pOutputFB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="86" column="17" bodyfile="Renderer/SceneRenderer.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_scene_renderer_1abc9b88e8a01f29dc281712bb8807c42e" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="class_boon_1_1_shader" kindref="compound">Shader</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;Shader&gt; Boon::SceneRenderer::m_pTilemapShader</definition>
+        <argsstring></argsstring>
+        <name>m_pTilemapShader</name>
+        <qualifiedname>Boon::SceneRenderer::m_pTilemapShader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="87" column="17" bodyfile="Renderer/SceneRenderer.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_scene_renderer_1ab24ae3b3f90041e142dbf6c800cae3c5" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_boon_1_1_u_b_data_1_1_camera" kindref="compound">UBData::Camera</ref></type>
+        <definition>UBData::Camera Boon::SceneRenderer::m_CameraData</definition>
+        <argsstring></argsstring>
+        <name>m_CameraData</name>
+        <qualifiedname>Boon::SceneRenderer::m_CameraData</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="88" column="16" bodyfile="Renderer/SceneRenderer.h" bodystart="88" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_scene_renderer_1adafbdadd329b6f1ef1bc7fead0c50824" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_boon_1_1_u_b_data_1_1_object" kindref="compound">UBData::Object</ref></type>
+        <definition>UBData::Object Boon::SceneRenderer::m_ObjectData</definition>
+        <argsstring></argsstring>
+        <name>m_ObjectData</name>
+        <qualifiedname>Boon::SceneRenderer::m_ObjectData</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="89" column="16" bodyfile="Renderer/SceneRenderer.h" bodystart="89" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_scene_renderer_1ab3bde7c096ce2cdf499f0c01955a42a7" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> *</type>
+        <definition>Scene* Boon::SceneRenderer::m_pScene</definition>
+        <argsstring></argsstring>
+        <name>m_pScene</name>
+        <qualifiedname>Boon::SceneRenderer::m_pScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="91" column="7" bodyfile="Renderer/SceneRenderer.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_scene_renderer_1ad85dc8b05a00a3265ebebc4713494b27" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Boon::SceneRenderer::m_ViewportWidth</definition>
+        <argsstring></argsstring>
+        <name>m_ViewportWidth</name>
+        <qualifiedname>Boon::SceneRenderer::m_ViewportWidth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="93" column="5" bodyfile="Renderer/SceneRenderer.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_scene_renderer_1ad949be2102625fdc86430691af973a4a" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Boon::SceneRenderer::m_ViewportHeight</definition>
+        <argsstring></argsstring>
+        <name>m_ViewportHeight</name>
+        <qualifiedname>Boon::SceneRenderer::m_ViewportHeight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="93" column="21" bodyfile="Renderer/SceneRenderer.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_scene_renderer_1a827a0531a67765658a4741d3e4eced50" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Boon::SceneRenderer::m_ViewportDirty</definition>
+        <argsstring></argsstring>
+        <name>m_ViewportDirty</name>
+        <qualifiedname>Boon::SceneRenderer::m_ViewportDirty</qualifiedname>
+        <initializer>{ false }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="94" column="6" bodyfile="Renderer/SceneRenderer.h" bodystart="94" bodyend="94"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_scene_renderer_1a3053236aed8d05ee4a4242e37ddc2992" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::SceneRenderer::SceneRenderer</definition>
+        <argsstring>(Scene *pScene, bool isSwapchainTarget=false)</argsstring>
+        <name>SceneRenderer</name>
+        <qualifiedname>Boon::SceneRenderer::SceneRenderer</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> *</type>
+          <declname>pScene</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isSwapchainTarget</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Create a <ref refid="class_boon_1_1_scene_renderer" kindref="compound">SceneRenderer</ref> for the provided scene. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pScene</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> to render. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>isSwapchainTarget</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, the renderer targets the swapchain (default false). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="24" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_renderer_1a658d989cfa9a02aac9315cd68dd6534e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::SceneRenderer::SceneRenderer</definition>
+        <argsstring>(Scene *pScene, int viewportWidth, int viewportHeight, bool isSwapchainTarget=false)</argsstring>
+        <name>SceneRenderer</name>
+        <qualifiedname>Boon::SceneRenderer::SceneRenderer</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> *</type>
+          <declname>pScene</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>viewportWidth</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>viewportHeight</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isSwapchainTarget</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Create a <ref refid="class_boon_1_1_scene_renderer" kindref="compound">SceneRenderer</ref> with an explicit viewport size. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="29" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_renderer_1a670c5882e998265a8ab418809d9535f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Boon::SceneRenderer::~SceneRenderer</definition>
+        <argsstring>()</argsstring>
+        <name>~SceneRenderer</name>
+        <qualifiedname>Boon::SceneRenderer::~SceneRenderer</qualifiedname>
+        <briefdescription>
+<para>Destroy the <ref refid="class_boon_1_1_scene_renderer" kindref="compound">SceneRenderer</ref> and release rendering resources. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="34" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_renderer_1a5fd51b54915286fe03d7bfe63f6a617a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::SceneRenderer::SceneRenderer</definition>
+        <argsstring>(const SceneRenderer &amp;other)=delete</argsstring>
+        <name>SceneRenderer</name>
+        <qualifiedname>Boon::SceneRenderer::SceneRenderer</qualifiedname>
+        <param>
+          <type>const SceneRenderer &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="36" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_renderer_1acba8b8609818410f315d1221dbda20ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Boon::SceneRenderer::SceneRenderer</definition>
+        <argsstring>(SceneRenderer &amp;&amp;other)=delete</argsstring>
+        <name>SceneRenderer</name>
+        <qualifiedname>Boon::SceneRenderer::SceneRenderer</qualifiedname>
+        <param>
+          <type>SceneRenderer &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="37" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_renderer_1a12fd19fc88c3556cb3d1f17dbccef14d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_scene_renderer_1a3053236aed8d05ee4a4242e37ddc2992" kindref="member">SceneRenderer</ref> &amp;</type>
+        <definition>SceneRenderer &amp; Boon::SceneRenderer::operator=</definition>
+        <argsstring>(const SceneRenderer &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Boon::SceneRenderer::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="class_boon_1_1_scene_renderer_1a3053236aed8d05ee4a4242e37ddc2992" kindref="member">SceneRenderer</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="38" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_renderer_1ae15f3ae4ce5c76800d93df3bdb46541a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_scene_renderer_1a3053236aed8d05ee4a4242e37ddc2992" kindref="member">SceneRenderer</ref> &amp;</type>
+        <definition>SceneRenderer &amp; Boon::SceneRenderer::operator=</definition>
+        <argsstring>(SceneRenderer &amp;&amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>Boon::SceneRenderer::operator=</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_scene_renderer_1a3053236aed8d05ee4a4242e37ddc2992" kindref="member">SceneRenderer</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="39" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_renderer_1a282ca35d13b80b90c158f161520ce121" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::SceneRenderer::Render</definition>
+        <argsstring>(Camera *camera=nullptr, TransformComponent *cameraTransform=nullptr)</argsstring>
+        <name>Render</name>
+        <qualifiedname>Boon::SceneRenderer::Render</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_camera" kindref="compound">Camera</ref> *</type>
+          <declname>camera</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type><ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref> *</type>
+          <declname>cameraTransform</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Render the current scene using the optional camera. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>camera</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional camera to use for rendering. If nullptr a default may be used. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cameraTransform</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional transform for the camera. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="47" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_renderer_1a8f95670bd40878d2eab531912c18f840" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_framebuffer" kindref="compound">Framebuffer</ref> *</type>
+        <definition>Framebuffer * Boon::SceneRenderer::GetOutputTarget</definition>
+        <argsstring>() const</argsstring>
+        <name>GetOutputTarget</name>
+        <qualifiedname>Boon::SceneRenderer::GetOutputTarget</qualifiedname>
+        <briefdescription>
+<para>Get the framebuffer used as the output target by the renderer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Pointer to the output <ref refid="class_boon_1_1_framebuffer" kindref="compound">Framebuffer</ref>, or nullptr if not set. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="54" column="13" bodyfile="Renderer/SceneRenderer.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_renderer_1a2e3003432b91afeafb12ff2949dce3d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::SceneRenderer::SetViewport</definition>
+        <argsstring>(int width, int height)</argsstring>
+        <name>SetViewport</name>
+        <qualifiedname>Boon::SceneRenderer::SetViewport</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+<para>Set the viewport size used by the renderer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="59" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_renderer_1adc594d49b33eb725ee11c889537a6fee" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::SceneRenderer::SetContext</definition>
+        <argsstring>(Scene *pScene)</argsstring>
+        <name>SetContext</name>
+        <qualifiedname>Boon::SceneRenderer::SetContext</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> *</type>
+          <declname>pScene</declname>
+        </param>
+        <briefdescription>
+<para>Set the <ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> context for this renderer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the context changes the renderer may mark internal state dirty. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="66" column="13" bodyfile="Renderer/SceneRenderer.h" bodystart="66" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_renderer_1a3036fbc1b3d9f59f7c0a9c39e3a56e1e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_renderer2_d" kindref="compound">Renderer2D</ref> *</type>
+        <definition>Renderer2D * Boon::SceneRenderer::GetRenderer2D</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRenderer2D</name>
+        <qualifiedname>Boon::SceneRenderer::GetRenderer2D</qualifiedname>
+        <briefdescription>
+<para>Access the 2D renderer used internally by the scene renderer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Pointer to the <ref refid="class_boon_1_1_renderer2_d" kindref="compound">Renderer2D</ref> instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="77" column="12"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_boon_1_1_scene_renderer_1ae004ea87f7039af3a89e96043b715efa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::SceneRenderer::BeginScene</definition>
+        <argsstring>(Camera *camera=nullptr, TransformComponent *cameraTransform=nullptr)</argsstring>
+        <name>BeginScene</name>
+        <qualifiedname>Boon::SceneRenderer::BeginScene</qualifiedname>
+        <param>
+          <type><ref refid="class_boon_1_1_camera" kindref="compound">Camera</ref> *</type>
+          <declname>camera</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type><ref refid="class_boon_1_1_transform_component" kindref="compound">TransformComponent</ref> *</type>
+          <declname>cameraTransform</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="80" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_renderer_1a8fb7ef4fcbbc2a380b15eb012bf5c5ac" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Boon::SceneRenderer::EndScene</definition>
+        <argsstring>()</argsstring>
+        <name>EndScene</name>
+        <qualifiedname>Boon::SceneRenderer::EndScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Renderer/SceneRenderer.h" line="81" column="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Renderer/SceneRenderer.h" line="16" column="1" bodyfile="Renderer/SceneRenderer.h" bodystart="17" bodyend="95"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_scene_renderer_1ae004ea87f7039af3a89e96043b715efa" prot="private" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>BeginScene</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1a8fb7ef4fcbbc2a380b15eb012bf5c5ac" prot="private" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>EndScene</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1a8f95670bd40878d2eab531912c18f840" prot="public" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>GetOutputTarget</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1a3036fbc1b3d9f59f7c0a9c39e3a56e1e" prot="public" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>GetRenderer2D</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1ab24ae3b3f90041e142dbf6c800cae3c5" prot="private" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>m_CameraData</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1adafbdadd329b6f1ef1bc7fead0c50824" prot="private" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>m_ObjectData</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1a161f60500eec67e054e9c1ce0f54d77a" prot="private" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>m_pCameraUniformBuffer</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1a94c0cf37d050683b6348b32f31c6504a" prot="private" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>m_pObjectUniformBuffer</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1a94963120530ede57d2a7688b52fcc46e" prot="private" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>m_pOutputFB</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1a6fd1525f8872a4db9aa88d282602f9ff" prot="private" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>m_pRenderer2D</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1ab3bde7c096ce2cdf499f0c01955a42a7" prot="private" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>m_pScene</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1abc9b88e8a01f29dc281712bb8807c42e" prot="private" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>m_pTilemapShader</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1a827a0531a67765658a4741d3e4eced50" prot="private" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>m_ViewportDirty</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1ad949be2102625fdc86430691af973a4a" prot="private" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>m_ViewportHeight</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1ad85dc8b05a00a3265ebebc4713494b27" prot="private" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>m_ViewportWidth</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1a12fd19fc88c3556cb3d1f17dbccef14d" prot="public" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1ae15f3ae4ce5c76800d93df3bdb46541a" prot="public" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>operator=</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1a282ca35d13b80b90c158f161520ce121" prot="public" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>Render</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1a3053236aed8d05ee4a4242e37ddc2992" prot="public" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>SceneRenderer</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1a658d989cfa9a02aac9315cd68dd6534e" prot="public" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>SceneRenderer</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1a5fd51b54915286fe03d7bfe63f6a617a" prot="public" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>SceneRenderer</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1acba8b8609818410f315d1221dbda20ea" prot="public" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>SceneRenderer</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1adc594d49b33eb725ee11c889537a6fee" prot="public" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>SetContext</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1a2e3003432b91afeafb12ff2949dce3d2" prot="public" virt="non-virtual"><scope>Boon::SceneRenderer</scope><name>SetViewport</name></member>
+      <member refid="class_boon_1_1_scene_renderer_1a670c5882e998265a8ab418809d9535f0" prot="public" virt="virtual"><scope>Boon::SceneRenderer</scope><name>~SceneRenderer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

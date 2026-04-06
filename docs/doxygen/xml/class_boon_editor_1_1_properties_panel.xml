@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_editor_1_1_properties_panel" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>BoonEditor::PropertiesPanel</compoundname>
+    <basecompoundref refid="class_boon_editor_1_1_editor_panel" prot="public" virt="non-virtual">BoonEditor::EditorPanel</basecompoundref>
+    <includes refid="_properties_panel_8h" local="no">Panels/PropertiesPanel.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_editor_1_1_properties_panel_1a83bbaa0ab317eaa4decd0ec5d61c6081" prot="private" static="no" mutable="no">
+        <type><ref refid="namespace_boon_editor_1adf2a3b6eb0b5d2b95458502e66162172" kindref="member">GameObjectContext</ref> *</type>
+        <definition>GameObjectContext* BoonEditor::PropertiesPanel::m_pContext</definition>
+        <argsstring></argsstring>
+        <name>m_pContext</name>
+        <qualifiedname>BoonEditor::PropertiesPanel::m_pContext</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/PropertiesPanel.h" line="30" column="19" bodyfile="Panels/PropertiesPanel.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_properties_panel_1aa616517faa62586cb5428d1386b9bf15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BoonEditor::PropertiesPanel::PropertiesPanel</definition>
+        <argsstring>(const std::string &amp;name, DragDropRouter *pRouter, GameObjectContext *pContext)</argsstring>
+        <name>PropertiesPanel</name>
+        <qualifiedname>BoonEditor::PropertiesPanel::PropertiesPanel</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="class_drag_drop_router" kindref="compound">DragDropRouter</ref> *</type>
+          <declname>pRouter</declname>
+        </param>
+        <param>
+          <type><ref refid="namespace_boon_editor_1adf2a3b6eb0b5d2b95458502e66162172" kindref="member">GameObjectContext</ref> *</type>
+          <declname>pContext</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/PropertiesPanel.h" line="17" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_properties_panel_1a8f3fc502b338317364c26c985c7ebd2c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual BoonEditor::PropertiesPanel::~PropertiesPanel</definition>
+        <argsstring>()=default</argsstring>
+        <name>~PropertiesPanel</name>
+        <qualifiedname>BoonEditor::PropertiesPanel::~PropertiesPanel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/PropertiesPanel.h" line="18" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_properties_panel_1a1a369a563b3a1f98debe5bc911e768c6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void BoonEditor::PropertiesPanel::Update</definition>
+        <argsstring>() override</argsstring>
+        <name>Update</name>
+        <qualifiedname>BoonEditor::PropertiesPanel::Update</qualifiedname>
+        <reimplements refid="class_boon_editor_1_1_editor_panel_1a061bb9f31c7cfe169180d1167c2faac2">Update</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/PropertiesPanel.h" line="20" column="14" bodyfile="Panels/PropertiesPanel.h" bodystart="20" bodyend="20"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_properties_panel_1a823fd3991c22c125d9590a024c203c01" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void BoonEditor::PropertiesPanel::OnRenderUI</definition>
+        <argsstring>() override</argsstring>
+        <name>OnRenderUI</name>
+        <qualifiedname>BoonEditor::PropertiesPanel::OnRenderUI</qualifiedname>
+        <reimplements refid="class_boon_editor_1_1_editor_panel_1a2348483af8910c64c3e9c6105fc5d884">OnRenderUI</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/PropertiesPanel.h" line="23" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_boon_editor_1_1_properties_panel_1afaba9682c806406227e5666455eba973" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void BoonEditor::PropertiesPanel::RenderComponentNode</definition>
+        <argsstring>(const std::string &amp;name, const std::function&lt; void(T &amp;)&gt; &amp;fn)</argsstring>
+        <name>RenderComponentNode</name>
+        <qualifiedname>BoonEditor::PropertiesPanel::RenderComponentNode</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::function&lt; void(T &amp;)&gt; &amp;</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/PropertiesPanel.h" line="27" column="6" bodyfile="Panels/PropertiesPanel.h" bodystart="34" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_editor_1_1_properties_panel_1a05bfb854a9949e564bfea22360144fcc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BoonEditor::PropertiesPanel::RenderComponentNode</definition>
+        <argsstring>(BClass *cls, const std::function&lt; void()&gt; &amp;fn=nullptr)</argsstring>
+        <name>RenderComponentNode</name>
+        <qualifiedname>BoonEditor::PropertiesPanel::RenderComponentNode</qualifiedname>
+        <param>
+          <type><ref refid="struct_boon_1_1_b_class" kindref="compound">BClass</ref> *</type>
+          <declname>cls</declname>
+        </param>
+        <param>
+          <type>const std::function&lt; void()&gt; &amp;</type>
+          <declname>fn</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Panels/PropertiesPanel.h" line="28" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>BoonEditor::EditorObject</label>
+        <link refid="class_boon_editor_1_1_editor_object"/>
+      </node>
+      <node id="2">
+        <label>BoonEditor::EditorPanel</label>
+        <link refid="class_boon_editor_1_1_editor_panel"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>BoonEditor::PropertiesPanel</label>
+        <link refid="class_boon_editor_1_1_properties_panel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>BoonEditor::EditorObject</label>
+        <link refid="class_boon_editor_1_1_editor_object"/>
+      </node>
+      <node id="2">
+        <label>BoonEditor::EditorPanel</label>
+        <link refid="class_boon_editor_1_1_editor_panel"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_Name</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_pRouter</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>BoonEditor::PropertiesPanel</label>
+        <link refid="class_boon_editor_1_1_properties_panel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>DragDropRouter</label>
+        <link refid="class_drag_drop_router"/>
+      </node>
+      <node id="5">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="4">
+        <label>std::string</label>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Panels/PropertiesPanel.h" line="14" column="1" bodyfile="Panels/PropertiesPanel.h" bodystart="15" bodyend="31"/>
+    <listofallmembers>
+      <member refid="class_boon_editor_1_1_editor_panel_1a5f5df2a84dcabc146bf036b0d0a88cfb" prot="public" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a4936722347674cc693fe7629f3a489ff" prot="public" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a4ffa536dd53e7a1d6af8b9b01aba55da" prot="public" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1af7c8095284f6932cd3a18bc4a3aaad27" prot="protected" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>GetName</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a8f01a9b23acc248451ec11f5cbc1c1f8" prot="public" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>IsHovered</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a7c213f233755bb557917127b7720fb14" prot="protected" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>m_Flags</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a10d71879d56dfec644df8a1c3718e49e" prot="protected" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>m_Name</name></member>
+      <member refid="class_boon_editor_1_1_properties_panel_1a83bbaa0ab317eaa4decd0ec5d61c6081" prot="private" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>m_pContext</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1adea21029e134f339cbf9679f8d724beb" prot="protected" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>m_pRouter</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1af52bce9632c058f5edfc288245c38013" prot="public" virt="virtual"><scope>BoonEditor::PropertiesPanel</scope><name>OnRender</name></member>
+      <member refid="class_boon_editor_1_1_properties_panel_1a823fd3991c22c125d9590a024c203c01" prot="protected" virt="virtual"><scope>BoonEditor::PropertiesPanel</scope><name>OnRenderUI</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a213dbccbcaf8df25846ecd6c261afa94" prot="public" virt="virtual"><scope>BoonEditor::PropertiesPanel</scope><name>OnResize</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a1d76135066dcb4287011b5848d50ac57" prot="public" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>operator=</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a44929889a9fc1feb5a00bc38c4a7c329" prot="public" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>operator=</name></member>
+      <member refid="class_boon_editor_1_1_properties_panel_1aa616517faa62586cb5428d1386b9bf15" prot="public" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>PropertiesPanel</name></member>
+      <member refid="class_boon_editor_1_1_properties_panel_1afaba9682c806406227e5666455eba973" prot="private" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>RenderComponentNode</name></member>
+      <member refid="class_boon_editor_1_1_properties_panel_1a05bfb854a9949e564bfea22360144fcc" prot="private" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>RenderComponentNode</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1ad56510e7633de1175a9f0d310d3cc551" prot="protected" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>RenderFloat3Control</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a020092d7f515f99b4578b145a9f603d6" prot="public" virt="non-virtual"><scope>BoonEditor::PropertiesPanel</scope><name>RenderUI</name></member>
+      <member refid="class_boon_editor_1_1_properties_panel_1a1a369a563b3a1f98debe5bc911e768c6" prot="public" virt="virtual"><scope>BoonEditor::PropertiesPanel</scope><name>Update</name></member>
+      <member refid="class_boon_editor_1_1_editor_object_1aa2f1343ed311c73939b82ac8207fd788" prot="public" virt="virtual"><scope>BoonEditor::PropertiesPanel</scope><name>~EditorObject</name></member>
+      <member refid="class_boon_editor_1_1_editor_panel_1a74638d90561c3963e6b1b47dad0f244c" prot="public" virt="virtual"><scope>BoonEditor::PropertiesPanel</scope><name>~EditorPanel</name></member>
+      <member refid="class_boon_editor_1_1_properties_panel_1a8f3fc502b338317364c26c985c7ebd2c" prot="public" virt="virtual"><scope>BoonEditor::PropertiesPanel</scope><name>~PropertiesPanel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,148 @@
+\doxysection{Boon::\+Framebuffer Class Reference}
+\hypertarget{class_boon_1_1_framebuffer}{}\label{class_boon_1_1_framebuffer}\index{Boon::Framebuffer@{Boon::Framebuffer}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_boon_1_1_framebuffer_ad28db393bce6e91e75c129b7a60e3d17}\label{class_boon_1_1_framebuffer_ad28db393bce6e91e75c129b7a60e3d17} 
+virtual void {\bfseries Bind} ()=0
+\begin{DoxyCompactList}\small\item\em Bind the framebuffer for rendering. \end{DoxyCompactList}\item 
+\Hypertarget{class_boon_1_1_framebuffer_afb3ae43a8cd14d0464b9f3be746e00e8}\label{class_boon_1_1_framebuffer_afb3ae43a8cd14d0464b9f3be746e00e8} 
+virtual void {\bfseries Unbind} ()=0
+\begin{DoxyCompactList}\small\item\em Unbind the framebuffer. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_boon_1_1_framebuffer_a312f07c65cfd8ad0ea91c83ac3ff289e}{Resize}} (uint32\+\_\+t width, uint32\+\_\+t height)=0
+\begin{DoxyCompactList}\small\item\em Resize the framebuffer and its attachments. \end{DoxyCompactList}\item 
+virtual int \doxymbox{\hyperlink{class_boon_1_1_framebuffer_a2d0c7d88dc3f7c7c72a028a02cda1552}{Read\+Pixel}} (uint32\+\_\+t attachment\+Index, int x, int y)=0
+\begin{DoxyCompactList}\small\item\em Read a pixel value from a color attachment. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_boon_1_1_framebuffer_a5aa91f21d07d37d8d782f62522375683}{Clear\+Attachment}} (uint32\+\_\+t attachment\+Index, int value)=0
+\begin{DoxyCompactList}\small\item\em Clear an attachment to a given integer value. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \doxymbox{\hyperlink{class_boon_1_1_framebuffer_a29fcbdeccfae3712cd2858d967fa9682}{Get\+Color\+Attachment\+Renderer\+ID}} (uint32\+\_\+t index=0) const =0
+\begin{DoxyCompactList}\small\item\em Get the renderer-\/specific id for a color attachment texture. \end{DoxyCompactList}\item 
+virtual const \doxymbox{\hyperlink{struct_boon_1_1_framebuffer_descriptor}{Framebuffer\+Descriptor}} \& \doxymbox{\hyperlink{class_boon_1_1_framebuffer_a0fc50928c6836b94dca2ee7ba82cb223}{Get\+Descriptor}} () const =0
+\begin{DoxyCompactList}\small\item\em Get the descriptor used to create this framebuffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_framebuffer}{Framebuffer}} $>$ \doxymbox{\hyperlink{class_boon_1_1_framebuffer_a05fe877dfccedbac5f0e86b0281051d6}{Create}} (const \doxymbox{\hyperlink{struct_boon_1_1_framebuffer_descriptor}{Framebuffer\+Descriptor}} \&spec)
+\begin{DoxyCompactList}\small\item\em Create a framebuffer matching the provided descriptor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_framebuffer_8h_source_l00050}{50}} of file \doxymbox{\hyperlink{_framebuffer_8h_source}{Framebuffer.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_framebuffer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_framebuffer_a5aa91f21d07d37d8d782f62522375683}\index{Boon::Framebuffer@{Boon::Framebuffer}!ClearAttachment@{ClearAttachment}}
+\index{ClearAttachment@{ClearAttachment}!Boon::Framebuffer@{Boon::Framebuffer}}
+\doxysubsubsection{\texorpdfstring{ClearAttachment()}{ClearAttachment()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_framebuffer_a5aa91f21d07d37d8d782f62522375683} 
+virtual void Boon::\+\+Framebuffer::\+\+Clear\+Attachment (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{attachment\+Index}{, }\item[{int}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Clear an attachment to a given integer value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em attachment\+Index} & Index of the attachment to clear. \\
+\hline
+{\em value} & Value to write into the attachment. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boon_1_1_framebuffer_a05fe877dfccedbac5f0e86b0281051d6}\index{Boon::Framebuffer@{Boon::Framebuffer}!Create@{Create}}
+\index{Create@{Create}!Boon::Framebuffer@{Boon::Framebuffer}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_framebuffer_a05fe877dfccedbac5f0e86b0281051d6} 
+std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_framebuffer}{Framebuffer}} $>$ Boon::\+\+Framebuffer::\+\+Create (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_boon_1_1_framebuffer_descriptor}{Framebuffer\+Descriptor}} \&}]{spec}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create a framebuffer matching the provided descriptor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em spec} & \doxylink{class_boon_1_1_framebuffer}{Framebuffer} creation parameters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Shared pointer to the created \doxylink{class_boon_1_1_framebuffer}{Framebuffer}. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_framebuffer_a29fcbdeccfae3712cd2858d967fa9682}\index{Boon::Framebuffer@{Boon::Framebuffer}!GetColorAttachmentRendererID@{GetColorAttachmentRendererID}}
+\index{GetColorAttachmentRendererID@{GetColorAttachmentRendererID}!Boon::Framebuffer@{Boon::Framebuffer}}
+\doxysubsubsection{\texorpdfstring{GetColorAttachmentRendererID()}{GetColorAttachmentRendererID()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_framebuffer_a29fcbdeccfae3712cd2858d967fa9682} 
+virtual uint32\+\_\+t Boon::\+\+Framebuffer::\+\+Get\+Color\+Attachment\+Renderer\+ID (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get the renderer-\/specific id for a color attachment texture. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Attachment index (default 0). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_boon_1_1_renderer}{Renderer} id for the attachment texture. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_framebuffer_a0fc50928c6836b94dca2ee7ba82cb223}\index{Boon::Framebuffer@{Boon::Framebuffer}!GetDescriptor@{GetDescriptor}}
+\index{GetDescriptor@{GetDescriptor}!Boon::Framebuffer@{Boon::Framebuffer}}
+\doxysubsubsection{\texorpdfstring{GetDescriptor()}{GetDescriptor()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_framebuffer_a0fc50928c6836b94dca2ee7ba82cb223} 
+virtual const \doxymbox{\hyperlink{struct_boon_1_1_framebuffer_descriptor}{Framebuffer\+Descriptor}} \& Boon::\+\+Framebuffer::\+\+Get\+Descriptor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get the descriptor used to create this framebuffer. 
+
+\begin{DoxyReturn}{Returns}
+Const reference to the \doxylink{struct_boon_1_1_framebuffer_descriptor}{Framebuffer\+Descriptor}. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_framebuffer_a2d0c7d88dc3f7c7c72a028a02cda1552}\index{Boon::Framebuffer@{Boon::Framebuffer}!ReadPixel@{ReadPixel}}
+\index{ReadPixel@{ReadPixel}!Boon::Framebuffer@{Boon::Framebuffer}}
+\doxysubsubsection{\texorpdfstring{ReadPixel()}{ReadPixel()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_framebuffer_a2d0c7d88dc3f7c7c72a028a02cda1552} 
+virtual int Boon::\+\+Framebuffer::\+\+Read\+Pixel (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{attachment\+Index}{, }\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Read a pixel value from a color attachment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em attachment\+Index} & Index of the attachment to read from. \\
+\hline
+{\em x} & X coordinate in pixels. \\
+\hline
+{\em y} & Y coordinate in pixels. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Integer value read from the attachment. Interpretation is format-\/dependent. 
+\end{DoxyReturn}
+\Hypertarget{class_boon_1_1_framebuffer_a312f07c65cfd8ad0ea91c83ac3ff289e}\index{Boon::Framebuffer@{Boon::Framebuffer}!Resize@{Resize}}
+\index{Resize@{Resize}!Boon::Framebuffer@{Boon::Framebuffer}}
+\doxysubsubsection{\texorpdfstring{Resize()}{Resize()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_framebuffer_a312f07c65cfd8ad0ea91c83ac3ff289e} 
+virtual void Boon::\+\+Framebuffer::\+\+Resize (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{width}{, }\item[{uint32\+\_\+t}]{height}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Resize the framebuffer and its attachments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & New width in pixels. \\
+\hline
+{\em height} & New height in pixels. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Framebuffer.\+h\end{DoxyCompactItemize}

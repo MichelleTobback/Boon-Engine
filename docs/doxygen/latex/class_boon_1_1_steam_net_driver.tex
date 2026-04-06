@@ -1,0 +1,345 @@
+\doxysection{Boon::\+Steam\+Net\+Driver Class Reference}
+\hypertarget{class_boon_1_1_steam_net_driver}{}\label{class_boon_1_1_steam_net_driver}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+Inheritance diagram for Boon::\+Steam\+Net\+Driver:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_boon_1_1_steam_net_driver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_aea836a41e80ffdd81bb10f9d9bd597b7}{Initialize}} (const \doxymbox{\hyperlink{struct_boon_1_1_network_settings}{Network\+Settings}} \&settings) override
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a5a0026b48b2a41caa75ade6100700f5c}{Shutdown}} () override
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a671b68ac833b8696597458b49640781f}{Update}} () override
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a26c004b2352b85e62c4464992cc0ebcf}{Send}} (\doxymbox{\hyperlink{class_boon_1_1_net_connection}{Net\+Connection}} \texorpdfstring{$\ast$}{*}conn, \doxymbox{\hyperlink{class_boon_1_1_net_packet}{Net\+Packet}} \&pkt, bool reliable=true) override
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a62ba0f6c4faeb1965579dee7d64ed84f}{Broadcast}} (\doxymbox{\hyperlink{class_boon_1_1_net_packet}{Net\+Packet}} \&pkt, bool reliable=true) override
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_aadc8851b2d0f8f42cd4690136caeae7b}{Send\+To\+Server}} (\doxymbox{\hyperlink{class_boon_1_1_net_packet}{Net\+Packet}} \&pkt, bool reliable=true) override
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a8f6cec4260b4d99e498e644137d34458}{Bind\+On\+Startup\+Callback}} (const Net\+Driver\+Callback \&fn) override
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_ab4f1f38187d27eb55ca589d81a6a5121}{Bind\+On\+Shutdown\+Callback}} (const Net\+Driver\+Callback \&fn) override
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a776cd9934d9da2e58fb247e2b8f781e3}{Bind\+On\+Packet\+Callback}} (const Packet\+Callback \&fn) override
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a40afea802767b5efaeb060b8c6c63ddd}{Bind\+On\+Connected\+Callback}} (const Connection\+Callback \&fn) override
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a1f37f63216841a68eef8e65e2649d949}{Bind\+On\+Disconnected\+Callback}} (const Connection\+Callback \&fn) override
+\item 
+void \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a70cad2920128cae4371993edaff82760}{Bind\+Scene}} (const std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_net_scene}{Net\+Scene}} $>$ \&scene) override
+\item 
+\doxymbox{\hyperlink{class_boon_1_1_net_connection}{Net\+Connection}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a5bd0def95cad56015a1aa96834a9babc}{Get\+Connection}} (uint64\+\_\+t id) override
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_aacb10297a6d854c591958bb1bcc6973e}{Foreach\+Connection}} (const std::\+function$<$ void(\doxymbox{\hyperlink{class_boon_1_1_net_connection}{Net\+Connection}} \texorpdfstring{$\ast$}{*})$>$ \&fn) override
+\item 
+virtual uint32\+\_\+t \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a7bd184feefc58ad9c9868b71a6f058d7}{Get\+Connection\+Count}} () const override
+\item 
+virtual bool \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a56d4622f9be603344966611149c887db}{Is\+Standalone}} () const override
+\item 
+virtual bool \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a7fb90fa3de4817dfd71a7537dc1f1691}{Is\+Client}} () const override
+\item 
+virtual bool \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a3ebf0d29bfff69ec57f01504c9fcc5f7}{Is\+Server}} () const override
+\item 
+ENet\+Driver\+Mode \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a3b0f81377e64e3b177c2ed77627d44f8}{Get\+Mode}} () const override
+\item 
+uint64\+\_\+t \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a978a3dcc41977dcf0d233d3520bc9545}{Get\+Local\+Connection\+Id}} () const override
+\item 
+const \doxymbox{\hyperlink{struct_boon_1_1_network_settings}{Network\+Settings}} \& \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_ad2ef7fcc2a07823c73c6e7736638aeed}{Get\+Settings}} () const
+\item 
+virtual bool \doxymbox{\hyperlink{class_boon_1_1_steam_net_driver_a92bed223898d6b4f72ed400be3af3a03}{Connect}} (const char \texorpdfstring{$\ast$}{*}host, uint16\+\_\+t port) override
+\item 
+\Hypertarget{class_boon_1_1_steam_net_driver_ae0984fa69ee1f64d7da11caa714db507}\label{class_boon_1_1_steam_net_driver_ae0984fa69ee1f64d7da11caa714db507} 
+void {\bfseries Handle\+Connection\+Status\+Changed} (const Steam\+Net\+Connection\+Status\+Changed\+Callback\+\_\+t \texorpdfstring{$\ast$}{*}info)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_boon_1_1_steam_net_driver_aeb72938952f9316728891ba91290ab6d}\label{class_boon_1_1_steam_net_driver_aeb72938952f9316728891ba91290ab6d} 
+static void {\bfseries Static\+On\+Connection\+Status\+Changed} (Steam\+Net\+Connection\+Status\+Changed\+Callback\+\_\+t \texorpdfstring{$\ast$}{*}info)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_steam_net_driver_8h_source_l00018}{18}} of file \doxymbox{\hyperlink{_steam_net_driver_8h_source}{Steam\+Net\+Driver.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_1_1_steam_net_driver_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_1_1_steam_net_driver_a40afea802767b5efaeb060b8c6c63ddd}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!BindOnConnectedCallback@{BindOnConnectedCallback}}
+\index{BindOnConnectedCallback@{BindOnConnectedCallback}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{BindOnConnectedCallback()}{BindOnConnectedCallback()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a40afea802767b5efaeb060b8c6c63ddd} 
+virtual void Boon::\+\+Steam\+Net\+Driver::\+\+Bind\+On\+Connected\+Callback (\begin{DoxyParamCaption}\item[{const Connection\+Callback \&}]{fn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_steam_net_driver_8h_source_l00039}{39}} of file \doxymbox{\hyperlink{_steam_net_driver_8h_source}{Steam\+Net\+Driver.\+h}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a1f37f63216841a68eef8e65e2649d949}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!BindOnDisconnectedCallback@{BindOnDisconnectedCallback}}
+\index{BindOnDisconnectedCallback@{BindOnDisconnectedCallback}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{BindOnDisconnectedCallback()}{BindOnDisconnectedCallback()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a1f37f63216841a68eef8e65e2649d949} 
+virtual void Boon::\+\+Steam\+Net\+Driver::\+\+Bind\+On\+Disconnected\+Callback (\begin{DoxyParamCaption}\item[{const Connection\+Callback \&}]{fn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_steam_net_driver_8h_source_l00040}{40}} of file \doxymbox{\hyperlink{_steam_net_driver_8h_source}{Steam\+Net\+Driver.\+h}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a776cd9934d9da2e58fb247e2b8f781e3}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!BindOnPacketCallback@{BindOnPacketCallback}}
+\index{BindOnPacketCallback@{BindOnPacketCallback}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{BindOnPacketCallback()}{BindOnPacketCallback()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a776cd9934d9da2e58fb247e2b8f781e3} 
+virtual void Boon::\+\+Steam\+Net\+Driver::\+\+Bind\+On\+Packet\+Callback (\begin{DoxyParamCaption}\item[{const Packet\+Callback \&}]{fn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_steam_net_driver_8h_source_l00038}{38}} of file \doxymbox{\hyperlink{_steam_net_driver_8h_source}{Steam\+Net\+Driver.\+h}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_ab4f1f38187d27eb55ca589d81a6a5121}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!BindOnShutdownCallback@{BindOnShutdownCallback}}
+\index{BindOnShutdownCallback@{BindOnShutdownCallback}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{BindOnShutdownCallback()}{BindOnShutdownCallback()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_ab4f1f38187d27eb55ca589d81a6a5121} 
+virtual void Boon::\+\+Steam\+Net\+Driver::\+\+Bind\+On\+Shutdown\+Callback (\begin{DoxyParamCaption}\item[{const Net\+Driver\+Callback \&}]{fn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_steam_net_driver_8h_source_l00037}{37}} of file \doxymbox{\hyperlink{_steam_net_driver_8h_source}{Steam\+Net\+Driver.\+h}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a8f6cec4260b4d99e498e644137d34458}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!BindOnStartupCallback@{BindOnStartupCallback}}
+\index{BindOnStartupCallback@{BindOnStartupCallback}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{BindOnStartupCallback()}{BindOnStartupCallback()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a8f6cec4260b4d99e498e644137d34458} 
+virtual void Boon::\+\+Steam\+Net\+Driver::\+\+Bind\+On\+Startup\+Callback (\begin{DoxyParamCaption}\item[{const Net\+Driver\+Callback \&}]{fn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_steam_net_driver_8h_source_l00036}{36}} of file \doxymbox{\hyperlink{_steam_net_driver_8h_source}{Steam\+Net\+Driver.\+h}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a70cad2920128cae4371993edaff82760}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!BindScene@{BindScene}}
+\index{BindScene@{BindScene}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{BindScene()}{BindScene()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a70cad2920128cae4371993edaff82760} 
+void Boon::\+\+Steam\+Net\+Driver::\+\+Bind\+Scene (\begin{DoxyParamCaption}\item[{const std::\+shared\+\_\+ptr$<$ \doxymbox{\hyperlink{class_boon_1_1_net_scene}{Net\+Scene}} $>$ \&}]{scene}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_steam_net_driver_8h_source_l00042}{42}} of file \doxymbox{\hyperlink{_steam_net_driver_8h_source}{Steam\+Net\+Driver.\+h}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a62ba0f6c4faeb1965579dee7d64ed84f}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!Broadcast@{Broadcast}}
+\index{Broadcast@{Broadcast}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{Broadcast()}{Broadcast()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a62ba0f6c4faeb1965579dee7d64ed84f} 
+void Boon::\+\+Steam\+Net\+Driver::\+\+Broadcast (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_net_packet}{Net\+Packet}} \&}]{pkt}{, }\item[{bool}]{reliable}{ = {\ttfamily true}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a92bed223898d6b4f72ed400be3af3a03}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!Connect@{Connect}}
+\index{Connect@{Connect}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{Connect()}{Connect()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a92bed223898d6b4f72ed400be3af3a03} 
+virtual bool Boon::\+\+Steam\+Net\+Driver::\+\+Connect (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{host}{, }\item[{uint16\+\_\+t}]{port}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_aacb10297a6d854c591958bb1bcc6973e}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!ForeachConnection@{ForeachConnection}}
+\index{ForeachConnection@{ForeachConnection}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{ForeachConnection()}{ForeachConnection()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_aacb10297a6d854c591958bb1bcc6973e} 
+virtual void Boon::\+\+Steam\+Net\+Driver::\+\+Foreach\+Connection (\begin{DoxyParamCaption}\item[{const std::\+function$<$ void(\doxymbox{\hyperlink{class_boon_1_1_net_connection}{Net\+Connection}} \texorpdfstring{$\ast$}{*})$>$ \&}]{fn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a5bd0def95cad56015a1aa96834a9babc}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!GetConnection@{GetConnection}}
+\index{GetConnection@{GetConnection}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{GetConnection()}{GetConnection()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a5bd0def95cad56015a1aa96834a9babc} 
+\doxymbox{\hyperlink{class_boon_1_1_net_connection}{Net\+Connection}} \texorpdfstring{$\ast$}{*} Boon::\+\+Steam\+Net\+Driver::\+\+Get\+Connection (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a7bd184feefc58ad9c9868b71a6f058d7}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!GetConnectionCount@{GetConnectionCount}}
+\index{GetConnectionCount@{GetConnectionCount}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{GetConnectionCount()}{GetConnectionCount()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a7bd184feefc58ad9c9868b71a6f058d7} 
+virtual uint32\+\_\+t Boon::\+\+Steam\+Net\+Driver::\+\+Get\+Connection\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a978a3dcc41977dcf0d233d3520bc9545}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!GetLocalConnectionId@{GetLocalConnectionId}}
+\index{GetLocalConnectionId@{GetLocalConnectionId}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{GetLocalConnectionId()}{GetLocalConnectionId()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a978a3dcc41977dcf0d233d3520bc9545} 
+uint64\+\_\+t Boon::\+\+Steam\+Net\+Driver::\+\+Get\+Local\+Connection\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_steam_net_driver_8h_source_l00053}{53}} of file \doxymbox{\hyperlink{_steam_net_driver_8h_source}{Steam\+Net\+Driver.\+h}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a3b0f81377e64e3b177c2ed77627d44f8}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!GetMode@{GetMode}}
+\index{GetMode@{GetMode}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{GetMode()}{GetMode()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a3b0f81377e64e3b177c2ed77627d44f8} 
+ENet\+Driver\+Mode Boon::\+\+Steam\+Net\+Driver::\+\+Get\+Mode (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_steam_net_driver_8h_source_l00052}{52}} of file \doxymbox{\hyperlink{_steam_net_driver_8h_source}{Steam\+Net\+Driver.\+h}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_ad2ef7fcc2a07823c73c6e7736638aeed}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!GetSettings@{GetSettings}}
+\index{GetSettings@{GetSettings}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{GetSettings()}{GetSettings()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_ad2ef7fcc2a07823c73c6e7736638aeed} 
+const \doxymbox{\hyperlink{struct_boon_1_1_network_settings}{Network\+Settings}} \& Boon::\+\+Steam\+Net\+Driver::\+\+Get\+Settings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_steam_net_driver_8h_source_l00055}{55}} of file \doxymbox{\hyperlink{_steam_net_driver_8h_source}{Steam\+Net\+Driver.\+h}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_aea836a41e80ffdd81bb10f9d9bd597b7}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_aea836a41e80ffdd81bb10f9d9bd597b7} 
+bool Boon::\+\+Steam\+Net\+Driver::\+\+Initialize (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{struct_boon_1_1_network_settings}{Network\+Settings}} \&}]{settings}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a7fb90fa3de4817dfd71a7537dc1f1691}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!IsClient@{IsClient}}
+\index{IsClient@{IsClient}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{IsClient()}{IsClient()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a7fb90fa3de4817dfd71a7537dc1f1691} 
+virtual bool Boon::\+\+Steam\+Net\+Driver::\+\+Is\+Client (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_steam_net_driver_8h_source_l00049}{49}} of file \doxymbox{\hyperlink{_steam_net_driver_8h_source}{Steam\+Net\+Driver.\+h}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a3ebf0d29bfff69ec57f01504c9fcc5f7}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!IsServer@{IsServer}}
+\index{IsServer@{IsServer}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{IsServer()}{IsServer()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a3ebf0d29bfff69ec57f01504c9fcc5f7} 
+virtual bool Boon::\+\+Steam\+Net\+Driver::\+\+Is\+Server (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_steam_net_driver_8h_source_l00050}{50}} of file \doxymbox{\hyperlink{_steam_net_driver_8h_source}{Steam\+Net\+Driver.\+h}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a56d4622f9be603344966611149c887db}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!IsStandalone@{IsStandalone}}
+\index{IsStandalone@{IsStandalone}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{IsStandalone()}{IsStandalone()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a56d4622f9be603344966611149c887db} 
+virtual bool Boon::\+\+Steam\+Net\+Driver::\+\+Is\+Standalone (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_steam_net_driver_8h_source_l00048}{48}} of file \doxymbox{\hyperlink{_steam_net_driver_8h_source}{Steam\+Net\+Driver.\+h}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a26c004b2352b85e62c4464992cc0ebcf}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!Send@{Send}}
+\index{Send@{Send}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{Send()}{Send()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a26c004b2352b85e62c4464992cc0ebcf} 
+void Boon::\+\+Steam\+Net\+Driver::\+\+Send (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_net_connection}{Net\+Connection}} \texorpdfstring{$\ast$}{*}}]{conn}{, }\item[{\doxymbox{\hyperlink{class_boon_1_1_net_packet}{Net\+Packet}} \&}]{pkt}{, }\item[{bool}]{reliable}{ = {\ttfamily true}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_aadc8851b2d0f8f42cd4690136caeae7b}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!SendToServer@{SendToServer}}
+\index{SendToServer@{SendToServer}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{SendToServer()}{SendToServer()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_aadc8851b2d0f8f42cd4690136caeae7b} 
+virtual void Boon::\+\+Steam\+Net\+Driver::\+\+Send\+To\+Server (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_boon_1_1_net_packet}{Net\+Packet}} \&}]{pkt}{, }\item[{bool}]{reliable}{ = {\ttfamily true}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a5a0026b48b2a41caa75ade6100700f5c}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!Shutdown@{Shutdown}}
+\index{Shutdown@{Shutdown}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{Shutdown()}{Shutdown()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a5a0026b48b2a41caa75ade6100700f5c} 
+void Boon::\+\+Steam\+Net\+Driver::\+\+Shutdown (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+\Hypertarget{class_boon_1_1_steam_net_driver_a671b68ac833b8696597458b49640781f}\index{Boon::SteamNetDriver@{Boon::SteamNetDriver}!Update@{Update}}
+\index{Update@{Update}!Boon::SteamNetDriver@{Boon::SteamNetDriver}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_boon_1_1_steam_net_driver_a671b68ac833b8696597458b49640781f} 
+void Boon::\+\+Steam\+Net\+Driver::\+\+Update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_1_1_net_driver}{Boon::\+\+Net\+Driver}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Steam\+Net\+Driver.\+h\end{DoxyCompactItemize}

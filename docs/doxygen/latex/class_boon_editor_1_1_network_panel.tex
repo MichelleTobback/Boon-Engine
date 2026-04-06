@@ -1,0 +1,89 @@
+\doxysection{Boon\+Editor::\+Network\+Panel Class Reference}
+\hypertarget{class_boon_editor_1_1_network_panel}{}\label{class_boon_editor_1_1_network_panel}\index{BoonEditor::NetworkPanel@{BoonEditor::NetworkPanel}}
+Inheritance diagram for Boon\+Editor::\+Network\+Panel:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_boon_editor_1_1_network_panel}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_boon_editor_1_1_network_panel_ac64dae8398e358b7cd2d0710a9d9be18}\label{class_boon_editor_1_1_network_panel_ac64dae8398e358b7cd2d0710a9d9be18} 
+{\bfseries Network\+Panel} (const std::\+string \&name, \doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*}p\+Router, \doxymbox{\hyperlink{struct_boon_1_1_network_settings}{Boon::\+\+Network\+Settings}} \&settings)
+\item 
+\Hypertarget{class_boon_editor_1_1_network_panel_ac00d6783396f6df28c342cf18fae040d}\label{class_boon_editor_1_1_network_panel_ac00d6783396f6df28c342cf18fae040d} 
+void {\bfseries Set\+Driver} (\doxymbox{\hyperlink{class_boon_1_1_net_driver}{Net\+Driver}} \texorpdfstring{$\ast$}{*}p\+Driver)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Editor\+Panel} (const std::\+string \&name, \doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*}p\+Router)
+\item 
+{\bfseries Editor\+Panel} (const Editor\+Panel \&other)=delete
+\item 
+{\bfseries Editor\+Panel} (Editor\+Panel \&\&other)=delete
+\item 
+Editor\+Panel \& {\bfseries operator=} (const Editor\+Panel \&other)=delete
+\item 
+Editor\+Panel \& {\bfseries operator=} (Editor\+Panel \&\&other)=delete
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a061bb9f31c7cfe169180d1167c2faac2}{Update}} () override
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a213dbccbcaf8df25846ecd6c261afa94}{On\+Resize}} (uint32\+\_\+t width, uint32\+\_\+t height)
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_af52bce9632c058f5edfc288245c38013}{On\+Render}} ()
+\item 
+void {\bfseries Render\+UI} ()
+\item 
+bool {\bfseries Is\+Hovered} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_boon_editor_1_1_network_panel_a5733a4d89400dc6cf13e6823d250cd8c}{On\+Render\+UI}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bfseries Render\+Float3\+Control} (const std::\+string \&label, glm::\+vec3 \&vector, float reset\+Value=0.\+0f, float column\+Width=100.\+0f)
+\item 
+const std::\+string \& \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_af7c8095284f6932cd3a18bc4a3aaad27}{Get\+Name}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}}
+\begin{DoxyCompactItemize}
+\item 
+std::\+string \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a10d71879d56dfec644df8a1c3718e49e}{m\+\_\+\+Name}}
+\item 
+Editor\+Panel\+Flag \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_a7c213f233755bb557917127b7720fb14}{m\+\_\+\+Flags}}
+\item 
+\doxymbox{\hyperlink{class_drag_drop_router}{Drag\+Drop\+Router}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel_adea21029e134f339cbf9679f8d724beb}{m\+\_\+p\+Router}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_network_panel_8h_source_l00015}{15}} of file \doxymbox{\hyperlink{_network_panel_8h_source}{Network\+Panel.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_boon_editor_1_1_network_panel_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_boon_editor_1_1_network_panel_a5733a4d89400dc6cf13e6823d250cd8c}\index{BoonEditor::NetworkPanel@{BoonEditor::NetworkPanel}!OnRenderUI@{OnRenderUI}}
+\index{OnRenderUI@{OnRenderUI}!BoonEditor::NetworkPanel@{BoonEditor::NetworkPanel}}
+\doxysubsubsection{\texorpdfstring{OnRenderUI()}{OnRenderUI()}}
+{\footnotesize\ttfamily \label{class_boon_editor_1_1_network_panel_a5733a4d89400dc6cf13e6823d250cd8c} 
+virtual void Boon\+Editor::\+\+Network\+Panel::\+\+On\+Render\+UI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_boon_editor_1_1_editor_panel}{Boon\+Editor::\+\+Editor\+Panel}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Network\+Panel.\+h\end{DoxyCompactItemize}

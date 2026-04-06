@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="class_boon_1_1_scene_component_1_1_iterator" kind="class" language="C++" prot="public">
+    <compoundname>Boon::SceneComponent::Iterator</compoundname>
+    <includes refid="_scene_component_8h" local="no">Component/SceneComponent.h</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="class_boon_1_1_scene_component_1_1_iterator_1a989d80375d283181c811c51894519db9" prot="public" static="no">
+        <type>std::forward_iterator_tag</type>
+        <definition>using Boon::SceneComponent::Iterator::iterator_category = std::forward_iterator_tag</definition>
+        <argsstring></argsstring>
+        <name>iterator_category</name>
+        <qualifiedname>Boon::SceneComponent::Iterator::iterator_category</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SceneComponent.h" line="13" column="1" bodyfile="Component/SceneComponent.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="class_boon_1_1_scene_component_1_1_iterator_1a1e0a1fc377d49ad523fc83fa8a7250d4" prot="public" static="no">
+        <type><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref></type>
+        <definition>using Boon::SceneComponent::Iterator::value_type = GameObject</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>Boon::SceneComponent::Iterator::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SceneComponent.h" line="14" column="1" bodyfile="Component/SceneComponent.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="class_boon_1_1_scene_component_1_1_iterator_1ab4fe3f53846f27a51527cd77d0cd3fc1" prot="public" static="no">
+        <type>std::ptrdiff_t</type>
+        <definition>using Boon::SceneComponent::Iterator::difference_type = std::ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>Boon::SceneComponent::Iterator::difference_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SceneComponent.h" line="15" column="1" bodyfile="Component/SceneComponent.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="class_boon_1_1_scene_component_1_1_iterator_1a11d551bad7a70329ae8c508a430dfc25" prot="public" static="no">
+        <type><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref> *</type>
+        <definition>using Boon::SceneComponent::Iterator::pointer = GameObject*</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>Boon::SceneComponent::Iterator::pointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SceneComponent.h" line="16" column="1" bodyfile="Component/SceneComponent.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="class_boon_1_1_scene_component_1_1_iterator_1a47e22abacfcf5cdc058e1d903bc62ced" prot="public" static="no">
+        <type><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref> &amp;</type>
+        <definition>using Boon::SceneComponent::Iterator::reference = GameObject&amp;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>Boon::SceneComponent::Iterator::reference</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SceneComponent.h" line="17" column="1" bodyfile="Component/SceneComponent.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_boon_1_1_scene_component_1_1_iterator_1a74787a481f7d34775632dec586cbfd6c" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespace_boon_1a3c4b811809646d3ae922d1795f4ad6e5" kindref="member">GameObjectID</ref> &gt;::iterator</type>
+        <definition>std::vector&lt;GameObjectID&gt;::iterator Boon::SceneComponent::Iterator::m_Iter</definition>
+        <argsstring></argsstring>
+        <name>m_Iter</name>
+        <qualifiedname>Boon::SceneComponent::Iterator::m_Iter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SceneComponent.h" line="39" column="24" bodyfile="Component/SceneComponent.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_boon_1_1_scene_component_1_1_iterator_1a4755faf1217d6b34398575c491e89106" prot="private" static="no" mutable="no">
+        <type><ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> *</type>
+        <definition>Scene* Boon::SceneComponent::Iterator::m_pScene</definition>
+        <argsstring></argsstring>
+        <name>m_pScene</name>
+        <qualifiedname>Boon::SceneComponent::Iterator::m_pScene</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SceneComponent.h" line="40" column="7" bodyfile="Component/SceneComponent.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_boon_1_1_scene_component_1_1_iterator_1a6e013306f54ac2d6c1a73fafb299a508" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Boon::SceneComponent::Iterator::Iterator</definition>
+        <argsstring>(std::vector&lt; GameObjectID &gt;::iterator it, Scene *scene)</argsstring>
+        <name>Iterator</name>
+        <qualifiedname>Boon::SceneComponent::Iterator::Iterator</qualifiedname>
+        <param>
+          <type>std::vector&lt; <ref refid="namespace_boon_1a3c4b811809646d3ae922d1795f4ad6e5" kindref="member">GameObjectID</ref> &gt;::iterator</type>
+          <declname>it</declname>
+        </param>
+        <param>
+          <type><ref refid="class_boon_1_1_scene" kindref="compound">Scene</ref> *</type>
+          <declname>scene</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SceneComponent.h" line="19" column="1" bodyfile="Component/SceneComponent.h" bodystart="19" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_component_1_1_iterator_1aeebcbd7a8df5e996d0090e728ab5c408" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_game_object" kindref="compound">GameObject</ref></type>
+        <definition>GameObject Boon::SceneComponent::Iterator::operator*</definition>
+        <argsstring>() const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>Boon::SceneComponent::Iterator::operator*</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SceneComponent.h" line="22" column="12" bodyfile="Component/SceneComponent.h" bodystart="22" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_component_1_1_iterator_1a4363038a449d08898ec2ad84dcc86395" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_boon_1_1_scene_component_1_1_iterator_1a6e013306f54ac2d6c1a73fafb299a508" kindref="member">Iterator</ref> &amp;</type>
+        <definition>Iterator &amp; Boon::SceneComponent::Iterator::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <qualifiedname>Boon::SceneComponent::Iterator::operator++</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SceneComponent.h" line="27" column="10" bodyfile="Component/SceneComponent.h" bodystart="27" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="class_boon_1_1_scene_component_1_1_iterator_1af1bc9d3ac5430915db48710d88dfd953" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Boon::SceneComponent::Iterator::operator!=</definition>
+        <argsstring>(const Iterator &amp;other) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>Boon::SceneComponent::Iterator::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="class_boon_1_1_scene_component_1_1_iterator_1a6e013306f54ac2d6c1a73fafb299a508" kindref="member">Iterator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Component/SceneComponent.h" line="33" column="6" bodyfile="Component/SceneComponent.h" bodystart="33" bodyend="36"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Component/SceneComponent.h" line="10" column="1" bodyfile="Component/SceneComponent.h" bodystart="11" bodyend="41"/>
+    <listofallmembers>
+      <member refid="class_boon_1_1_scene_component_1_1_iterator_1ab4fe3f53846f27a51527cd77d0cd3fc1" prot="public" virt="non-virtual"><scope>Boon::SceneComponent::Iterator</scope><name>difference_type</name></member>
+      <member refid="class_boon_1_1_scene_component_1_1_iterator_1a6e013306f54ac2d6c1a73fafb299a508" prot="public" virt="non-virtual"><scope>Boon::SceneComponent::Iterator</scope><name>Iterator</name></member>
+      <member refid="class_boon_1_1_scene_component_1_1_iterator_1a989d80375d283181c811c51894519db9" prot="public" virt="non-virtual"><scope>Boon::SceneComponent::Iterator</scope><name>iterator_category</name></member>
+      <member refid="class_boon_1_1_scene_component_1_1_iterator_1a74787a481f7d34775632dec586cbfd6c" prot="private" virt="non-virtual"><scope>Boon::SceneComponent::Iterator</scope><name>m_Iter</name></member>
+      <member refid="class_boon_1_1_scene_component_1_1_iterator_1a4755faf1217d6b34398575c491e89106" prot="private" virt="non-virtual"><scope>Boon::SceneComponent::Iterator</scope><name>m_pScene</name></member>
+      <member refid="class_boon_1_1_scene_component_1_1_iterator_1af1bc9d3ac5430915db48710d88dfd953" prot="public" virt="non-virtual"><scope>Boon::SceneComponent::Iterator</scope><name>operator!=</name></member>
+      <member refid="class_boon_1_1_scene_component_1_1_iterator_1aeebcbd7a8df5e996d0090e728ab5c408" prot="public" virt="non-virtual"><scope>Boon::SceneComponent::Iterator</scope><name>operator*</name></member>
+      <member refid="class_boon_1_1_scene_component_1_1_iterator_1a4363038a449d08898ec2ad84dcc86395" prot="public" virt="non-virtual"><scope>Boon::SceneComponent::Iterator</scope><name>operator++</name></member>
+      <member refid="class_boon_1_1_scene_component_1_1_iterator_1a11d551bad7a70329ae8c508a430dfc25" prot="public" virt="non-virtual"><scope>Boon::SceneComponent::Iterator</scope><name>pointer</name></member>
+      <member refid="class_boon_1_1_scene_component_1_1_iterator_1a47e22abacfcf5cdc058e1d903bc62ced" prot="public" virt="non-virtual"><scope>Boon::SceneComponent::Iterator</scope><name>reference</name></member>
+      <member refid="class_boon_1_1_scene_component_1_1_iterator_1a1e0a1fc377d49ad523fc83fa8a7250d4" prot="public" virt="non-virtual"><scope>Boon::SceneComponent::Iterator</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

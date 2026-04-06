@@ -21,6 +21,12 @@ namespace Boon
             reg.m_pCache = &m_Cache;
             reg.m_pRegistry = &m_Registry;
         }
+        /**
+         * @brief Load an asset pack from disk.
+         *
+         * @param packFile Path to the asset pack file relative to the library root.
+         * @return true if the pack was loaded (implementation-defined success), false otherwise.
+         */
         bool LoadPack(const std::string& packFile);
 
         template<typename T>
@@ -51,8 +57,17 @@ namespace Boon
             return AssetRef<T>(result->GetHandle());
         }
 
+        /**
+         * @brief Clear the internal asset cache.
+         */
         void ClearCache() { m_Cache.Clear(); }
 
+        /**
+         * @brief Check whether an asset handle corresponds to a registered asset.
+         *
+         * @param handle Asset handle to query.
+         * @return true if the registry contains metadata for the handle, false otherwise.
+         */
         bool IsValidAsset(AssetHandle handle) const
         {
             return m_Registry.Get(handle);
