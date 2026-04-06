@@ -236,7 +236,7 @@ XML_NS_MEMB_FILE_SCOPE = NO
 # Tag file
 #---------------------------------------------------------------------------
 
-GENERATE_TAGFILE       = docs/doxygen/BoonEngine.tag
+GENERATE_TAGFILE       = docs/BoonEngine.tag
 TAGFILES               =
 
 #---------------------------------------------------------------------------

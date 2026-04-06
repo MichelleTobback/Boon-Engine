@@ -81,3 +81,10 @@ generated/
 !Boon/external/**/bin
 !Boon/external/**/Debug
 !Boon/external/**/Release
+
+# --- doxygen ---
+docs/doxygen/html/
+docs/doxygen/xml/
+docs/doxygen/latex/
+docs/doxygen/BoonEngine.tag
+doxygen-warnings.log
