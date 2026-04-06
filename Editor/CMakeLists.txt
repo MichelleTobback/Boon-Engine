@@ -63,6 +63,8 @@ add_dependencies(Editor GenerateReflection)
 
 target_compile_features(Editor PRIVATE cxx_std_20)
 
+target_compile_definitions(Editor PRIVATE BOON_MODULE_NAME=Editor)
+
 target_link_libraries(Editor
     PRIVATE
         BoonEngine

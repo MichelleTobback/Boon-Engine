@@ -94,8 +94,8 @@ namespace Boon
                 int current = 0;
                 for (const nlohmann::json& entry : clipsJson)
                 {
-                    int frameId = entry.contains("duration")
-                        ? entry["duration"].get<int>()
+                    int frameId = entry.contains("idx")
+                        ? entry["idx"].get<int>()
                         : 0;
                     SpriteAnimClip& clip = pInstance->GetClip(frameId);
                     clip.Speed = entry.contains("speed") ? entry["speed"].get<float>() : 1.0f;

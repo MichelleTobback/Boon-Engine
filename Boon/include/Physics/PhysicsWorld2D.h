@@ -32,5 +32,15 @@ namespace Boon
 		void HandleEvents(Scene* pScene);
 
 		b2WorldId m_PhysicsWorldId = b2_nullWorldId;
+
+		struct RigidbodyRuntime
+		{
+			b2BodyId Body = b2_nullBodyId;
+			bool Valid = false;
+		};
+
+		RigidbodyRuntime* GetRuntime(GameObjectID id);
+
+		std::unordered_map<GameObjectID, RigidbodyRuntime> m_RigidbodyRuntime;
 	};
 }

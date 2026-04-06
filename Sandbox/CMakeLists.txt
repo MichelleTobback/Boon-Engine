@@ -8,7 +8,6 @@ boon_add_reflected_module(
     NAME SandboxGame
     OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/generated/Generated_Components.cpp
     SCAN_DIRS
-        ${CMAKE_SOURCE_DIR}/Boon/include
         ${CMAKE_CURRENT_SOURCE_DIR}/include
     MINIMAL
 )
@@ -37,6 +36,8 @@ add_library(SandboxGame SHARED
 add_dependencies(SandboxGame GenerateReflection)
 
 target_compile_features(SandboxGame PUBLIC cxx_std_20)
+
+target_compile_definitions(SandboxGame PRIVATE BOON_MODULE_NAME=SandboxGame)
 
 target_link_libraries(SandboxGame
     PRIVATE
@@ -76,5 +77,12 @@ add_custom_command(TARGET SandboxGame POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>/Runtime"
         "$<TARGET_FILE_DIR:SandboxGame>"
+    VERBATIM
+)
+
+add_custom_command(TARGET SandboxGame POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+        "$<TARGET_FILE_DIR:SandboxGame>/SandboxGame.dll"
+        "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>/Editor/SandboxGame.dll"
     VERBATIM
 )

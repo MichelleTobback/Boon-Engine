@@ -37,7 +37,19 @@ GameObject Boon::Scene::Instantiate(UUID uuid, GameObjectID id)
 
 Boon::Scene::~Scene()
 {
-	
+	if (m_Running)
+		Sleep();
+
+	while (!m_Commands.empty())
+		m_Commands.pop();
+
+	while (!m_ObjectsPendingDestroy.empty())
+		m_ObjectsPendingDestroy.pop();
+
+	m_pECSlifecycle.reset();
+
+	m_Registry.clear();
+	m_EntityMap.clear();
 }
 
 GameObject Boon::Scene::Instantiate(const glm::vec3& pos)
@@ -82,6 +94,9 @@ void Boon::Scene::Awake()
 
 void Boon::Scene::Sleep()
 {
+	if (!m_Running)
+		return;
+
 	m_pECSlifecycle->OnEndPlayAll();
 	m_Physics2D.End(this);
 	m_Running = false;
@@ -149,6 +164,8 @@ void Boon::Scene::OnEndOverlap(GameObject overlapped, GameObject other)
 
 void Boon::Scene::AwakeComponent(GameObjectID handle, const BClass* pClass)
 {
+	m_OnComponentAdded.Invoke({ handle, this }, pClass);
+
 	if (!pClass)
 		return;
 

@@ -1,20 +1,11 @@
 #include "Core/RuntimeState.h"
 
-#include <Scene/GameObject.h>
 #include <Scene/SceneManager.h>
 #include <Scene/SceneSerializer.h>
 
 #include <Asset/Assets.h>
 
 #include <Renderer/SceneRenderer.h>
-#include <Renderer/Framebuffer.h>
-#include <Renderer/Camera.h>
-
-#include <Component/CameraComponent.h>
-#include <Component/TransformComponent.h>
-#include <Component/SpriteRendererComponent.h>
-#include <Component/SpriteAnimatorComponent.h>
-#include <Component/BoxCollider2D.h>
 
 #include <Core/Application.h>
 #include <Core/ServiceLocator.h>
@@ -59,7 +50,7 @@ void Runtime::RuntimeState::OnEnter()
 	ServiceLocator::Register<NetDriver>(network);
 	StartNetwork();
 
-	AssetImporterRegistry& importer = AssetImporterRegistry::Get();
+	AssetImporterRegistry& importer = ServiceLocator::Get<AssetImporterRegistry>();
 	importer.RegisterImporter<Texture2DImporter>();
 	importer.RegisterImporter<ShaderImporter>();
 	importer.RegisterImporter<SpriteAtlasImporter>();
@@ -109,24 +100,6 @@ void Runtime::RuntimeState::OnUpdate()
 	}
 
 	sceneManager.Update();
-	
-	Input& input{ ServiceLocator::Get<Input>() };
-	if (input.IsKeyPressed(Key::Q))
-	{
-		SceneManager& sceneManager{ ServiceLocator::Get<SceneManager>() };
-		auto scenes = sceneManager.GetLoadedScenes();
-		for (int i = 0; i < scenes.size(); ++i)
-		{
-			if (scenes[i]->GetID() == sceneManager.GetActiveScene().GetID())
-			{
-				if (i < scenes.size() - 1)
-					sceneManager.SetActiveScene(scenes[i + 1]->GetID());
-				else
-					sceneManager.SetActiveScene(scenes[0]->GetID());
-				break;
-			}
-		}
-	}
 
 	OnRender();
 }
@@ -178,16 +151,12 @@ void Runtime::RuntimeState::OnConnected(NetConnection* pConnection)
 {
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	eventBus.Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Connected));
-
-	std::cout << "Connected\n";
 }
 
 void Runtime::RuntimeState::OnDisconnected(NetConnection* pConnection)
 {
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	eventBus.Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Disconnected));
-
-	std::cout << "Disconnected\n";
 }
 
 void Runtime::RuntimeState::OnPacketReceived(NetConnection* pConnection, NetPacket& packet)

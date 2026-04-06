@@ -86,7 +86,7 @@ namespace Boon
         BinarySerializer ser;
 
         uint16_t objectCount = 0;
-        ser.Write<uint16_t>(0); // placeholder, patch later
+        ser.Write<uint16_t>(0); 
 
         size_t objectCountByteOffset = 0; // always 0 since write pos starts at 0
 

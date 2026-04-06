@@ -26,12 +26,6 @@ namespace Boon
             AssetMeta meta;
         };
 
-        static AssetImporterRegistry& Get()
-        {
-            static AssetImporterRegistry inst;
-            return inst;
-        }
-
         template<typename TImporter>
         void RegisterImporter()
         {

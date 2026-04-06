@@ -37,6 +37,8 @@ add_dependencies(Runtime GenerateReflection)
 
 target_compile_features(Runtime PRIVATE cxx_std_20)
 
+target_compile_definitions(Runtime PRIVATE BOON_MODULE_NAME=Runtime)
+
 target_link_libraries(Runtime
     PRIVATE
         BoonEngine

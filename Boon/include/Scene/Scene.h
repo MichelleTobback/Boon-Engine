@@ -70,6 +70,10 @@ namespace Boon
 		inline Delegate<void(GameObject, const BClass*)>& GetOnComponentAdded() { return m_OnComponentAdded; }
 		inline Delegate<void(GameObject, const BClass*)>& GetOnComponentRemoved() { return m_OnComponentRemoved; }
 
+		inline ECSLifecycleSystem& GetECSLifecycleSystem() { return *m_pECSlifecycle; }
+
+		inline bool IsRunning() const { return m_Running; }
+
 	private:
 		friend class PhysicsWorld2D;
 		friend class GameObject;
@@ -90,11 +94,13 @@ namespace Boon
 		T& AddComponent(GameObjectID handle, TArgs&& ... args);
 		void AwakeComponent(GameObjectID handle, const BClass* pClass);
 
-		std::unordered_map<UUID, GameObjectID> m_EntityMap;
-		std::queue<UUID> m_ObjectsPendingDestroy{};
-		SceneRegistry m_Registry;
 		std::unique_ptr<ECSLifecycleSystem> m_pECSlifecycle;
 		PhysicsWorld2D m_Physics2D;
+
+		SceneRegistry m_Registry;
+
+		std::unordered_map<UUID, GameObjectID> m_EntityMap;
+		std::queue<UUID> m_ObjectsPendingDestroy{};
 
 		Delegate<void(GameObject)> m_OnGameObjectSpawned;
 		Delegate<void(GameObject)> m_OnGameObjectDestroyed;
@@ -129,10 +135,15 @@ namespace Boon
 		T& comp = m_Registry.emplace<T>(handle, std::forward<TArgs>(args)...);
 
 		const BClass* cls = BClassRegistry::Get().Find<T>();
+		//PushCommand({ SceneCommand::Type::AwakeComponent, handle, cls });
+
 		if (cls)
 		{
-			PushCommand({ SceneCommand::Type::AwakeComponent, handle, cls });
-			m_OnComponentAdded.Invoke({handle, this}, cls);
+			GameObject obj{ handle, this };
+			if (m_Running && cls->awake)
+				cls->awake(obj);
+
+			m_OnComponentAdded.Invoke(obj, cls);
 		}
 
 		return comp;

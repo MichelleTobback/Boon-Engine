@@ -3,6 +3,7 @@
 #include "Asset/AssetRef.h"
 #include <functional>
 #include "Asset/TextureAsset.h"
+#include "Core/ServiceLocator.h"
 
 using namespace Boon;
 
@@ -20,7 +21,7 @@ namespace BoonEditor
 		template<typename TAsset>
 		AssetRef<TAsset> Load(const std::string& path)
 		{
-			AssetImporterRegistry& reg = AssetImporterRegistry::Get();
+			AssetImporterRegistry& reg = ServiceLocator::Get<AssetImporterRegistry>();
 			AssetImporterRegistry::Imported<TAsset> result = reg.ImportAndLoad<TAsset>(path);
 			return AssetRef<TAsset>(result.meta.uuid);
 		}
@@ -29,7 +30,7 @@ namespace BoonEditor
 		bool Export(AssetHandle handle)
 		{
 			const std::string& path = m_HandleToPath.at(handle);
-			return AssetImporterRegistry::Get().Export<TAsset>(path, handle);
+			return ServiceLocator::Get<AssetImporterRegistry>().Export<TAsset>(path, handle);
 		}
 
 		bool Exists(AssetHandle handle) const;

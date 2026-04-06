@@ -12,6 +12,12 @@ namespace Boon
         CreateScene("empty");
     }
 
+    void SceneManager::Shutdown()
+    {
+        m_Scenes.clear();
+        m_ActiveScene = UUID::Null;
+    }
+
     Scene& SceneManager::CreateScene(const std::string& name)
     {
         auto scene = std::unique_ptr<Scene>(new Scene(name));

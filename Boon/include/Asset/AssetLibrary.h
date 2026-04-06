@@ -6,6 +6,7 @@
 #include "Asset/Loader/AssetLoader.h"
 #include "Asset/AssetRef.h"
 
+#include "Core/ServiceLocator.h"
 #include "Asset/Importer/AssetImporterRegistry.h"
 
 namespace Boon
@@ -16,7 +17,7 @@ namespace Boon
         AssetLibrary(const std::string& root)
             : m_Root(root) 
         {
-            auto& reg = AssetImporterRegistry::Get(); 
+            auto& reg = ServiceLocator::Get<AssetImporterRegistry>(); 
             reg.m_pCache = &m_Cache;
             reg.m_pRegistry = &m_Registry;
         }
@@ -60,7 +61,7 @@ namespace Boon
         template<typename T>
         AssetRef<T> Import(const std::string& filepath)
         {
-            AssetImporterRegistry::Imported<T> result = AssetImporterRegistry::Get().ImportAndLoad<T>(m_Root + filepath);
+            AssetImporterRegistry::Imported<T> result = ServiceLocator::Get<AssetImporterRegistry>().ImportAndLoad<T>(m_Root + filepath);
             m_Cache.Store(result.asset);
             m_Registry.Add(result.meta);
             return AssetRef<T>(result.meta.uuid);

@@ -12,6 +12,7 @@
 namespace fs = std::filesystem;
 
 static bool g_BoonMinimal = false;
+static bool g_BoonModule = false;
 
 // ============================================================================
 // Reflection data
@@ -397,7 +398,7 @@ static std::vector<ReflectedClass> parseSourceFiles(const std::vector<std::strin
 }
 
 // Emit Generated_Components.cpp
-static void emitGeneratedFile(const std::string& output, const std::vector<ReflectedClass>& classes, bool verbose)
+static void emitGeneratedFile(const std::string& output, const std::vector<ReflectedClass>& classes, const std::string& moduleName, bool verbose)
 {
     std::ofstream out(output);
     if (!out.is_open()) {
@@ -406,43 +407,57 @@ static void emitGeneratedFile(const std::string& output, const std::vector<Refle
     }
 
     out << "// Automatically generated. Do not modify.\n";
-    out << "#include \"Reflection/RegisterBClass.h\"\n\n";
+    out << "#include \"Reflection/RegisterBClass.h\"\n";
+    out << "#include \"Reflection/BClass.h\"\n";
     out << "#include \"Networking/NetRepRegistry.h\"\n\n";
 
     for (auto& c : classes)
     {
         out << "#include \"" << c.headerPath << "\"\n";
-        auto it = std::find_if(c.classMeta.begin(), c.classMeta.end(), [](const MetaKV& kv) {return kv.key == "Replicated" && !kv.value.empty(); });
+        auto it = std::find_if(c.classMeta.begin(), c.classMeta.end(),
+            [](const MetaKV& kv) { return kv.key == "Replicated" && !kv.value.empty(); });
+
         if (it != c.classMeta.end())
         {
             out << "#include \"" << ReplaceFilename(c.headerPath, it->value + ".h") << "\"\n";
         }
     }
 
-    out << "namespace Boon {\n";
-    out << "static struct _AutoRegisterAllClasses {\n";
-    out << "    _AutoRegisterAllClasses() {\n";
+    out << "\nnamespace Boon {\n\n";
 
-    for (auto& c : classes) {
-        out << "        // " << c.nsQualifiedName << "\n";
-        out << "        {\n";
-        out << "            BClass* cls = RegisterBClass<" << c.nsQualifiedName << ">(\"" << c.name <<"\");\n";
+    // Register function
 
-        for (auto& p : c.properties) {
+    if (g_BoonModule)
+        out << "void RegisterGeneratedClasses_" << moduleName << "(BClassRegistry& classRegistry, NetRepRegistry& netRegistry)\n";
+    else
+        out << "void RegisterGeneratedClasses(BClassRegistry& classRegistry, NetRepRegistry& netRegistry)\n";
+    out << "{\n";
+
+    for (auto& c : classes)
+    {
+        out << "    // " << c.nsQualifiedName << "\n";
+        out << "    {\n";
+        out << "        BClass* cls = RegisterBClass<" << c.nsQualifiedName << ">(classRegistry, \"" << c.name << "\");\n";
+
+        for (auto& p : c.properties)
+        {
             const std::string typeId = inferBTypeId(p.type);
-            out << "            cls->AddPropertyOffset(\"" << p.name << "\", \"" << p.type << "\", "
+            out << "        cls->AddPropertyOffset(\"" << p.name << "\", \"" << p.type << "\", "
                 << "offsetof(" << c.nsQualifiedName << ", " << p.name << "), "
                 << "sizeof(" << p.type << "), " << typeId;
 
-            if (!p.meta.empty()) {
+            if (!p.meta.empty())
+            {
                 out << ", { ";
-                for (size_t i = 0; i < p.meta.size(); ++i) {
+                for (size_t i = 0; i < p.meta.size(); ++i)
+                {
                     const auto& m = p.meta[i];
                     out << "BPropertyMeta{ \"" << m.key << "\", \"" << m.value << "\" }";
                     if (i + 1 < p.meta.size()) out << ", ";
                 }
                 out << " }";
             }
+
             out << ");\n";
         }
 
@@ -451,14 +466,13 @@ static void emitGeneratedFile(const std::string& output, const std::vector<Refle
             uint32_t id = FNV1a32Runtime(f.name);
             std::stringstream paramsInit;
 
-            // Build params initializer: { { "type", "name", BTypeId::X }, ... }
             if (!f.params.empty())
             {
                 paramsInit << "{ ";
                 for (size_t i = 0; i < f.params.size(); ++i)
                 {
                     const auto& p = f.params[i];
-                    std::string typeId = inferBTypeId(p.type); // reuse property usage
+                    std::string typeId = inferBTypeId(p.type);
                     paramsInit << "BFunctionParam{ \"" << p.type << "\", \"" << p.name << "\", " << typeId << " }";
                     if (i + 1 < f.params.size())
                         paramsInit << ", ";
@@ -466,7 +480,6 @@ static void emitGeneratedFile(const std::string& output, const std::vector<Refle
                 paramsInit << " }";
             }
 
-            // Build meta initializer: { { "key", "value" }, ... }
             std::stringstream metaInit;
             if (!f.meta.empty())
             {
@@ -481,21 +494,17 @@ static void emitGeneratedFile(const std::string& output, const std::vector<Refle
                 metaInit << " }";
             }
 
-            // Emit thunk
             std::string thunkName = c.name + "_" + f.name + "_Thunk";
-            out << "            auto " << thunkName << " = +[](void* obj, Variant* args, size_t argCount) {\n";
-            out << "                " << c.nsQualifiedName << "* self = static_cast<" << c.nsQualifiedName << "*>(obj);\n";
+            out << "        auto " << thunkName << " = +[](void* obj, Variant* args, size_t argCount) {\n";
+            out << "            " << c.nsQualifiedName << "* self = static_cast<" << c.nsQualifiedName << "*>(obj);\n";
 
-            // generate parameter unpack
             for (size_t i = 0; i < f.params.size(); ++i)
             {
                 const auto& p = f.params[i];
-                std::string typeId = inferBTypeId(p.type);
-                out << "                " << p.type << " " << p.name << " = args[" << i << "].As<" << p.type << ">();\n";
+                out << "            " << p.type << " " << p.name << " = args[" << i << "].As<" << p.type << ">();\n";
             }
 
-            // call function
-            out << "                self->" << f.name << "(";
+            out << "            self->" << f.name << "(";
             for (size_t i = 0; i < f.params.size(); ++i)
             {
                 out << f.params[i].name;
@@ -503,49 +512,82 @@ static void emitGeneratedFile(const std::string& output, const std::vector<Refle
                     out << ", ";
             }
             out << ");\n";
-            out << "            };\n";
+            out << "        };\n";
 
-            // Emit AddFunction call
-            out << "            cls->AddFunction(\n";
-            out << "                0x" << std::hex << id << "u,\n" << std::dec;
-            out << "                " << thunkName << ",\n";
+            out << "        cls->AddFunction(\n";
+            out << "            0x" << std::hex << id << "u,\n" << std::dec;
+            out << "            " << thunkName << ",\n";
 
             if (!f.meta.empty())
-                out << "                " << metaInit.str() << ",\n";
+                out << "            " << metaInit.str() << ",\n";
             else
-                out << "                {},\n";
+                out << "            {},\n";
 
             if (!f.params.empty())
-                out << "                " << paramsInit.str() << "\n";
+                out << "            " << paramsInit.str() << "\n";
             else
-                out << "                {}\n";
+                out << "            {}\n";
 
-            out << "            );\n";
+            out << "        );\n";
         }
 
-        // class metadata
-        for (auto& cm : c.classMeta) {
+        for (auto& cm : c.classMeta)
+        {
             if (cm.key == "Replicated")
             {
                 if (cm.value.empty())
-                    out << "            NetRepRegistry::Get().Register(cls);\n";
+                    out << "        netRegistry.Register(cls);\n";
                 else
-                    out << "            NetRepRegistry::Get().Register(cls, new " << cm.value << "());\n";
+                    out << "        netRegistry.Register(cls, new " << cm.value << "());\n";
             }
             else if (cm.value.empty())
-                out << "            cls->AddMeta(\"" << cm.key << "\");\n";
+            {
+                out << "        cls->AddMeta(\"" << cm.key << "\");\n";
+            }
             else
-                out << "            cls->AddMeta(\"" << cm.key << "\", \"" << cm.value << "\");\n";
+            {
+                out << "        cls->AddMeta(\"" << cm.key << "\", \"" << cm.value << "\");\n";
+            }
         }
 
-        out << "        }\n";
+        out << "    }\n";
     }
 
-    out << "    }\n";
-    out << "} _autoRegisterAllClasses;\n";
+    out << "}\n\n";
+
+    // Unregister function
+    if (g_BoonModule)
+        out << "void UnregisterGeneratedClasses_" << moduleName << "(BClassRegistry& classRegistry, NetRepRegistry& netRegistry)\n";
+    else
+        out << "void UnregisterGeneratedClasses(BClassRegistry& classRegistry, NetRepRegistry& netRegistry)\n";
+    out << "{\n";
+
+    for (auto it = classes.rbegin(); it != classes.rend(); ++it)
+    {
+        const auto& c = *it;
+
+        bool replicated = false;
+        for (auto& cm : c.classMeta)
+        {
+            if (cm.key == "Replicated")
+            {
+                replicated = true;
+                break;
+            }
+        }
+
+        if (replicated)
+            out << "    netRegistry.Unregister<" << c.nsQualifiedName << ">();\n";
+
+        out << "    classRegistry.Unregister<" << c.nsQualifiedName << ">();\n";
+    }
+
+    out << "}\n";
+
     out << "} // namespace Boon\n";
 
-    if (verbose) {
+    if (verbose)
+    {
         std::cout << "[BClassGenerator] Wrote " << classes.size()
             << " classes to " << output << "\n";
     }
@@ -557,48 +599,71 @@ static void emitGeneratedFile(const std::string& output, const std::vector<Refle
 int main(int argc, char** argv)
 {
     const std::string usage =
-        "Usage: BClassGenerator [--minimal] [--verbose] <output.cpp> <includeDir1> [includeDir2 ...]\n";
+        "Usage: BClassGenerator [--minimal] [--verbose] --module <moduleName> <output.cpp> <includeDir1> [includeDir2 ...]\n";
 
-    if (argc < 3) {
+    if (argc < 5)
+    {
         std::cout << usage;
         return 1;
     }
 
     bool verboseFlag = false;
     bool minimalFlag = false;
+    bool moduleFlag = false;
 
+    std::string moduleName;
     std::string output;
     std::vector<std::string> includeDirs;
 
-    for (int i = 1; i < argc; ++i) {
+    for (int i = 1; i < argc; ++i)
+    {
         std::string arg = argv[i];
 
-        if (arg == "--minimal") {
+        if (arg == "--minimal")
+        {
             minimalFlag = true;
         }
-        else if (arg == "--verbose") {
+        else if (arg == "--module")
+        {
+            moduleFlag = true;
+
+            if (i + 1 >= argc)
+            {
+                std::cout << usage;
+                return 1;
+            }
+
+            moduleName = argv[++i];
+        }
+        else if (arg == "--verbose")
+        {
             verboseFlag = true;
         }
-        else if (output.empty()) {
+        else if (output.empty())
+        {
             output = arg;
         }
-        else {
+        else
+        {
             includeDirs.push_back(arg);
         }
     }
 
-    if (output.empty() || includeDirs.empty()) {
+    if (!moduleFlag || moduleName.empty() || output.empty() || includeDirs.empty())
+    {
         std::cout << usage;
         return 1;
     }
 
     g_BoonMinimal = minimalFlag;
+    g_BoonModule = moduleFlag;
 
-    if (minimalFlag) {
+    if (minimalFlag)
         std::cout << "[BClassGenerator] Running in minimal mode\n";
-    }
+
+    std::cout << "[BClassGenerator] Running in module mode for target: " << moduleName << "\n";
 
     auto classes = parseSourceFiles(includeDirs, verboseFlag);
-    emitGeneratedFile(output, classes, verboseFlag);
+    emitGeneratedFile(output, classes, moduleName, verboseFlag);
     return 0;
 }

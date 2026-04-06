@@ -8,13 +8,18 @@
 #include <optional>
 #include <xhash>
 #include <stdexcept>
+#include <memory>
 #include "BProperty.h"
 #include "BFunction.h"
+#include "Core/Delegate.h"
 
 namespace Boon
 {
     struct ECSLifecycleSystem;
     class GameObject;
+
+    class BClassRegistry;
+    class NetRepRegistry;
 
     struct BClassMeta
     {
@@ -40,6 +45,7 @@ namespace Boon
         std::vector<BClassMeta> meta;
 
         using RegisterFunc = void(*)(ECSLifecycleSystem&);
+        using UnregisterFunc = void(*)();
         using CreateInstanceFn = void* (*)();
         using DestroyInstanceFn = void(*)(void*);
         using CopyInstanceFn = void (*)(void*, void*);
@@ -51,6 +57,7 @@ namespace Boon
         using RemoveComponentFn = void (*)(GameObject&);
 
         RegisterFunc registerLifecycle = nullptr;
+        UnregisterFunc unregister = nullptr;
         CreateInstanceFn createInstance = nullptr;
         DestroyInstanceFn destroyInstance = nullptr;
         CopyInstanceFn copyInstance = nullptr;
@@ -194,10 +201,6 @@ namespace Boon
         inline const std::vector<BFunction>& GetFunctions() const { return functions; }
         inline size_t GetFunctionCount() const { return functions.size(); }
 
-
-    private:
-        friend struct _AutoRegisterAllClasses;
-
         inline void AddPropertyOffset(const char* propName,
             const char* typeName,
             std::size_t offset,
@@ -220,6 +223,7 @@ namespace Boon
             meta.push_back({ key, value });
         }
 
+    private:
 
         std::vector<BProperty> properties;
     };
@@ -228,20 +232,30 @@ namespace Boon
     {
         static BClassRegistry& Get()
         {
-            static BClassRegistry instance;
-            return instance;
+            return *s_Instance;
+        }
+
+        static void SetRegistry(BClassRegistry* pRegistry)
+        {
+            s_Instance = pRegistry;
         }
 
         void Register(BClass* cls)
         {
             m_Classes[cls->type] = cls;
-            for (auto& listener : m_Listeners)
-                listener(*cls);
+
+            m_Listeners.Invoke(*cls);
         }
 
-        void AddListener(std::function<void(BClass&)> fn)
+        template<typename T>
+        void Unregister()
         {
-            m_Listeners.push_back(std::move(fn));
+            BClass* cls = Find<T>();
+            if (!cls)
+                return;
+
+            cls->unregister();
+            m_Classes.erase(cls->type);
         }
 
         BClass* Find(BClassID id)
@@ -281,8 +295,11 @@ namespace Boon
             return nullptr;
         }
 
+        Delegate<void(BClass&)>& GetListeners() { return m_Listeners; }
+
     private:
         std::unordered_map<std::type_index, BClass*> m_Classes;
-        std::vector<std::function<void(BClass&)>> m_Listeners;
+        Delegate<void(BClass&)> m_Listeners;
+        static BClassRegistry* s_Instance;
     };
 }

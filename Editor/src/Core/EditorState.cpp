@@ -48,7 +48,10 @@
 #include <Networking/NetIdentity.h>
 #include <Networking/NetDriver.h>
 #include <Networking/NetScene.h>
+#include <Networking/NetRepRegistry.h>
 #include <Platform/Steam/SteamNetDriver.h>
+
+#include <Module/ModuleLibrary.h>
 
 #include <Reflection/BClass.h>
 
@@ -66,7 +69,7 @@ void EditorState::OnEnter()
 {
 	Window& window{ Application::Get().GetWindow() };
 	AssetLibrary& assetLib{ Assets::Get() };
-	AssetImporterRegistry& importer = AssetImporterRegistry::Get();
+	AssetImporterRegistry& importer = ServiceLocator::Get<AssetImporterRegistry>();
 	importer.RegisterImporter<Texture2DImporter>();
 	importer.RegisterImporter<ShaderImporter>();
 	importer.RegisterImporter<SpriteAtlasImporter>();
@@ -127,18 +130,26 @@ void EditorState::OnEnter()
 			}
 		});
 
+	m_SelectionContext.AddOnContextChangedCallback([this](GameObject obj)
+		{
+			if (obj.GetScene() == m_pSelectedScene)
+				GetPanel<ViewportPanel>("Viewport").SetContext(&m_SceneContext);
+		});
+
+	std::shared_ptr<ModuleLibrary> moduleLib = std::make_shared<ModuleLibrary>();
+	ServiceLocator::Register<ModuleLibrary>(moduleLib);
+	ModuleContext ctx{};
+	ctx.BClasses = &BClassRegistry::Get();
+	ctx.NetReps = &NetRepRegistry::Get();
+	ctx.ServiceRegistry = ServiceLocator::GetRegistry();
+	moduleLib->LoadModule("SandboxGame.dll", ctx);
+
 	SceneSerializer serializer(scene);
 	//serializer.Serialize("Assets/scenes/Test.scene");
 	serializer.Clear();
 	serializer.Deserialize("Assets/scenes/Test.scene");
 
 	sceneManager.SetActiveScene(scene.GetID(), false);
-
-	m_SelectionContext.AddOnContextChangedCallback([this](GameObject obj)
-		{
-			if (obj.GetScene() == m_pSelectedScene)
-				GetPanel<ViewportPanel>("Viewport").SetContext(&m_SceneContext);
-		});
 }
 
 void EditorState::OnUpdate()
@@ -178,6 +189,12 @@ void EditorState::OnExit()
 	eventBus.Unsubscribe<EditorPlayStateChangeEvent>(m_StateChangedEvent);
 
 	ServiceLocator::Get<NetDriver>().Shutdown();
+
+	ModuleContext ctx{};
+	ctx.BClasses = &BClassRegistry::Get();
+	ctx.NetReps = &NetRepRegistry::Get();
+	ctx.ServiceRegistry = ServiceLocator::GetRegistry();
+	ServiceLocator::Get<ModuleLibrary>().UnloadAll(ctx);
 }
 
 void EditorState::OnRender()

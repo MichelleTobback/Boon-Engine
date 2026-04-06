@@ -1,13 +1,12 @@
 #pragma once
 #include "Core/Boon.h"
-#include <box2d/id.h>
 #include <glm/glm.hpp>
 
 namespace Boon
 {
     BCLASS()
-	struct Rigidbody2D final
-	{
+    struct Rigidbody2D final
+    {
         enum class BodyType
         {
             Static = 0,
@@ -17,8 +16,8 @@ namespace Boon
 
         enum class ForceMode
         {
-            Force,    // Continuous (applied over time)
-            Impulse   // Instantaneous (change in velocity)
+            Force,
+            Impulse
         };
 
         BPROPERTY()
@@ -27,65 +26,67 @@ namespace Boon
         BPROPERTY()
         float GravityScale = 1.f;
 
-        //BodyType Type = BodyType::Static;
         BPROPERTY()
         bool FixedRotation = false;
 
-        b2BodyId RuntimeBody = b2_nullBodyId;
+        BPROPERTY()
+        float LinearDamping = 0.0f;
 
-        // --- Velocity ---
-        glm::vec2 GetVelocity() const;
+        BPROPERTY()
+        float AngularDamping = 0.0f;
+
+        BPROPERTY()
+        float Mass = 1.0f;
+
+        // Cached state written by host physics
+        glm::vec2 Velocity{ 0.0f, 0.0f };
+        float AngularVelocity = 0.0f;
+
+        glm::vec2 Position{ 0.0f, 0.0f };
+        float Rotation = 0.0f;
+
+        bool Awake = true;
+        bool OnGround = false;
+
+        // Requests
+        glm::vec2 PendingForce{ 0.0f, 0.0f };
+        glm::vec2 PendingImpulse{ 0.0f, 0.0f };
+        float PendingTorque = 0.0f;
+
+        bool WakeRequested = false;
+
+        bool HasPendingSetVelocity = false;
+        glm::vec2 PendingSetVelocity{ 0.0f, 0.0f };
+
+        bool HasPendingSetAngularVelocity = false;
+        float PendingSetAngularVelocity = 0.0f;
+
+        bool HasPendingSetTransform = false;
+        glm::vec2 PendingSetPosition{ 0.0f, 0.0f };
+        float PendingSetRotation = 0.0f;
+
+        bool DirtyBodyDef = true;
+        bool DirtyVelocity = false;
+        bool DirtyTransform = false;
+        bool DirtyDamping = true;
+
+        glm::vec2 GetVelocity() const { return Velocity; }
         void SetVelocity(const glm::vec2& velocity);
 
-        float GetAngularVelocity() const;
+        float GetAngularVelocity() const { return AngularVelocity; }
         void SetAngularVelocity(float angularVelocity);
 
-        // --- Position / Rotation ---
+        float GetMass() const { return Mass; }
+        void SetMass(float mass) { Mass = mass; }
+
         void SetPosition(const glm::vec2& position);
         void SetRotation(float degrees);
         void SetTransform(const glm::vec2& position, float degrees);
-        void MovePosition(const glm::vec2& targetPosition);
-        void MoveRotation(float targetDegrees);
 
-        // --- Forces ---
         void AddForce(const glm::vec2& force, ForceMode mode = ForceMode::Force, bool wake = true);
-        void AddForceAtPosition(const glm::vec2& force, const glm::vec2& worldPos, ForceMode mode = ForceMode::Force, bool wake = true);
-
-        // --- Torque ---
         void AddTorque(float torque, ForceMode mode = ForceMode::Force, bool wake = true);
-
-        // --- Impulses ---
         void AddImpulse(const glm::vec2& impulse, bool wake = true);
-        void AddImpulseAtPosition(const glm::vec2& impulse, const glm::vec2& worldPos, bool wake = true);
 
-        // --- Mass & Inertia ---
-        float GetMass() const;
-        void SetMass(float mass);
-        float GetInertia() const;
-        void RecalculateMassData();
-
-        // --- Gravity & Damping ---
-        float GetGravityScale() const;
-        void SetGravityScale(float scale);
-
-        float GetLinearDamping() const;
-        void SetLinearDamping(float damping);
-
-        float GetAngularDamping() const;
-        void SetAngularDamping(float damping);
-
-        // --- Center of Mass ---
-        glm::vec2 GetCenterOfMass() const;
-        glm::vec2 GetWorldCenterOfMass() const;
-        void SetCenterOfMass(const glm::vec2& localOffset);
-
-        bool IsAwake() const;
-
-    private:
-        friend class PhysicsWorld2D;
-        bool IsValid() const;
-
-        glm::vec2 PrevPosition;
-        float PrevRotation;
-	};
+        bool IsAwake() const { return Awake; }
+    };
 }

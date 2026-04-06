@@ -6,6 +6,7 @@
 #include <Component/Rigidbody2D.h>
 #include <Component/BoxCollider2D.h>
 #include <Networking/Components/NetRigidbody2D.h>
+#include <Networking/Components/NetTransform.h>
 #include <Networking/Events/NetConnectionEvent.h>
 #include <Networking/NetScene.h>
 #include <Networking/NetDriver.h>
@@ -70,29 +71,34 @@ namespace Boon
 
 			AssetLibrary& assetLib = Assets::Get();
 			AssetRef<SpriteAtlasAsset> atlas = assetLib.Import<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa");
-
+			
 			SpriteRendererComponent& sprite = player.AddComponent<SpriteRendererComponent>();
 			sprite.SpriteAtlasHandle = atlas->GetHandle();
 			sprite.Sprite = 0;
-
+			
 			SpriteAnimatorComponent& animator = player.AddComponent<SpriteAnimatorComponent>();
 			animator.Clip = 0;
 			animator.Atlas = atlas->GetInstance();
 			animator.pRenderer = player;
-
+			
 			BoxCollider2D& col = player.AddComponent<BoxCollider2D>();
 			col.Size = { 0.8f, 1.f };
-
+			
 			Rigidbody2D& rb = player.AddComponent<Rigidbody2D>();
 			rb.Type = (int)Boon::Rigidbody2D::BodyType::Dynamic;
 			rb.GravityScale = 0.f;
 			rb.FixedRotation = true;
-
+			
 			player.AddComponent<PlayerController>();
 			player.GetComponent<NameComponent>().Name = "Player";
-
+			
 			player.GetOrAddComponent<NetIdentity>();
 			player.AddComponent<NetRigidbody2D>();
+			NetTransform& ntc = player.AddComponent<NetTransform>();
+			ntc.ReplicationFlags = NetTransform::DirtyFlags(
+				(uint32_t)NetTransform::DirtyFlags::PosX | 
+				(uint32_t)NetTransform::DirtyFlags::PosY | 
+				(uint32_t)NetTransform::DirtyFlags::Rot);
 
 			m_Instances[connectionId] = player;
 

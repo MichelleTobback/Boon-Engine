@@ -464,11 +464,11 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
         }
         if (ImGui::MenuItem("New sprite atlas"))
         {
-            AssetImporterRegistry::Get().Export<SpriteAtlasAsset>(folder->fullPath + "/new_sprite.bsa", 0u);
+            ServiceLocator::Get<AssetImporterRegistry>().Export<SpriteAtlasAsset>(folder->fullPath + "/new_sprite.bsa", 0u);
         }
         if (ImGui::MenuItem("New tilemap"))
         {
-            AssetImporterRegistry::Get().Export<TilemapAsset>(folder->fullPath + "/new_tilemap.btm", 0u);
+            ServiceLocator::Get<AssetImporterRegistry>().Export<TilemapAsset>(folder->fullPath + "/new_tilemap.btm", 0u);
         }
         ImGui::EndPopup();
     }

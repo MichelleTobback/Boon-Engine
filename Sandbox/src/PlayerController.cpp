@@ -64,6 +64,8 @@ void PlayerController::Update(GameObject gameObject)
     if (!gameObject.HasComponent<NetRigidbody2D>())
         return;
 
+    m_Owner = gameObject;
+
     NetRigidbody2D& rb = gameObject.GetComponent<NetRigidbody2D>();
     bool move = (glm::length2(rb.Velocity) > 0);
     SpriteAnimatorComponent& anim = gameObject.GetComponent<SpriteAnimatorComponent>();

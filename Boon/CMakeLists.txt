@@ -36,6 +36,8 @@ add_dependencies(BoonEngine GenerateReflection)
 
 target_compile_features(BoonEngine PUBLIC cxx_std_20)
 
+target_compile_definitions(BoonEngine PRIVATE BOON_MODULE_NAME=BoonEngine)
+
 target_include_directories(BoonEngine
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include

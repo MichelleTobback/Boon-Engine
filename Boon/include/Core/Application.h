@@ -4,6 +4,7 @@
 
 #include <string>
 #include <memory>
+#include <functional>
 
 namespace Boon
 {
@@ -41,6 +42,9 @@ namespace Boon
 		AppDesc m_Desc;
 		std::unique_ptr<AppStateMachine> m_pStateMachine;
 		std::unique_ptr<Window> m_pWindow{ nullptr };
+		std::unique_ptr<class ServiceRegistry> m_pServiceRegistry;
+		std::unique_ptr<class NetRepRegistry> m_pNetRepRegistry;
+		std::unique_ptr<class BClassRegistry> m_pClsRegistry;
 
 		uint32_t m_CurrentFrameIndex{};
 

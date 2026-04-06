@@ -16,6 +16,8 @@ namespace Boon
     public:
         SceneManager();
 
+        void Shutdown();
+
         Scene& CreateScene(const std::string& name);
 
         void UnloadScene(SceneID id);

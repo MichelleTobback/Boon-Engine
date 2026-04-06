@@ -40,6 +40,8 @@ void Boon::PhysicsWorld2D::Begin(Scene* pScene)
 
 void Boon::PhysicsWorld2D::End(Scene* pScene)
 {
+	m_RigidbodyRuntime = {};
+
 	if (b2World_IsValid(m_PhysicsWorldId))
 	{
 		b2DestroyWorld(m_PhysicsWorldId);
@@ -47,65 +49,113 @@ void Boon::PhysicsWorld2D::End(Scene* pScene)
 	}
 }
 
-void Boon::PhysicsWorld2D::Step(Scene* pScene)
+void PhysicsWorld2D::Step(Scene* pScene)
 {
 	if (!b2World_IsValid(m_PhysicsWorldId))
 		return;
 
-	pScene->ForeachGameObjectWith<Rigidbody2D, TransformComponent>([this](GameObject e)
+	pScene->ForeachGameObjectWith<Rigidbody2D, TransformComponent>(
+		[this](GameObject obj)
 		{
-			Rigidbody2D& rb = e.GetComponent<Rigidbody2D>();
-			auto& transform = e.GetTransform();
-			if (!b2Body_IsValid(rb.RuntimeBody))
+			auto id = (GameObjectID)obj;
+			auto& rb = obj.GetComponent<Rigidbody2D>();
+			auto& transform = obj.GetTransform();
+
+			auto* runtime = GetRuntime(id);
+			if (!runtime || !b2Body_IsValid(runtime->Body))
 			{
-				SpawnRigidbody(&e);
+				SpawnRigidbody(&obj);
+				runtime = GetRuntime(id);
+				if (!runtime) return;
 			}
+
+			b2BodyId body = runtime->Body;
+
+			if (rb.HasPendingSetTransform)
+			{
+				b2Body_SetTransform(
+					body,
+					{ rb.PendingSetPosition.x, rb.PendingSetPosition.y },
+					b2MakeRot(glm::radians(rb.PendingSetRotation))
+				);
+				rb.HasPendingSetTransform = false;
+			}
+
+			if (rb.HasPendingSetVelocity)
+			{
+				b2Body_SetLinearVelocity(body, { rb.PendingSetVelocity.x, rb.PendingSetVelocity.y });
+				rb.HasPendingSetVelocity = false;
+			}
+
+			if (rb.HasPendingSetAngularVelocity)
+			{
+				b2Body_SetAngularVelocity(body, rb.PendingSetAngularVelocity);
+				rb.HasPendingSetAngularVelocity = false;
+			}
+
+			if (rb.PendingForce != glm::vec2(0.0f))
+			{
+				b2Body_ApplyForceToCenter(body, { rb.PendingForce.x, rb.PendingForce.y }, rb.WakeRequested);
+				rb.PendingForce = {};
+			}
+
+			if (rb.PendingImpulse != glm::vec2(0.0f))
+			{
+				b2Body_ApplyLinearImpulseToCenter(body, { rb.PendingImpulse.x, rb.PendingImpulse.y }, rb.WakeRequested);
+				rb.PendingImpulse = {};
+			}
+
+			if (rb.PendingTorque != 0.0f)
+			{
+				b2Body_ApplyTorque(body, rb.PendingTorque, rb.WakeRequested);
+				rb.PendingTorque = 0.0f;
+			}
+
+			rb.WakeRequested = false;
 
 			if ((Rigidbody2D::BodyType)rb.Type == Rigidbody2D::BodyType::Kinematic)
 			{
-				// For kinematic: push Transform -> Box2D
 				glm::vec3 pos = transform.GetWorldPosition();
 				glm::vec3 rot = transform.GetWorldEulerRotation();
 
-				b2Body_SetTransform(rb.RuntimeBody, { pos.x, pos.y }, b2MakeRot(glm::radians(rot.z)));
-			}
-			else
-			{
-				// For dynamic/static: pull from Box2D
-				if (rb.FixedRotation)
-				{
-					b2Transform t = b2Body_GetTransform(rb.RuntimeBody);
-					float rot = glm::radians(transform.GetWorldRotation().z);
-					b2Body_SetTransform(rb.RuntimeBody, t.p, b2MakeRot(rot));
-				}
+				b2Body_SetTransform(body, { pos.x, pos.y }, b2MakeRot(glm::radians(rot.z)));
 			}
 		});
 
-	const float timeStep = Time::Get().GetFixedTimeStep();
-	const int32_t iterations = 3;
+	b2World_Step(m_PhysicsWorldId, Time::Get().GetFixedTimeStep(), 3);
 
-	b2World_Step(m_PhysicsWorldId, timeStep, iterations);
-
-	pScene->ForeachGameObjectWith<Rigidbody2D, TransformComponent>([](GameObject e)
+	pScene->ForeachGameObjectWith<Rigidbody2D, TransformComponent>(
+		[this](GameObject obj)
 		{
-			Rigidbody2D& rb = e.GetComponent<Rigidbody2D>();
-			auto& transform = e.GetTransform();
-
-			if (!b2Body_IsValid(rb.RuntimeBody))
+			auto id = (GameObjectID)obj;
+			auto* runtime = GetRuntime(id);
+			if (!runtime || !b2Body_IsValid(runtime->Body))
 				return;
 
-			if ((Rigidbody2D::BodyType)rb.Type != Rigidbody2D::BodyType::Dynamic)
-				return;
+			auto& rb = obj.GetComponent<Rigidbody2D>();
+			auto& transform = obj.GetTransform();
 
-			b2Transform t = b2Body_GetTransform(rb.RuntimeBody);
+			b2BodyId body = runtime->Body;
+			b2Transform t = b2Body_GetTransform(body);
 
-			glm::vec3 pos3 = transform.GetWorldPosition();
-			pos3.x = t.p.x;
-			pos3.y = t.p.y;
+			rb.Position = { t.p.x, t.p.y };
+			rb.Rotation = glm::degrees(b2Rot_GetAngle(t.q));
 
-			transform.SetLocalPosition(pos3);
-			if (!rb.FixedRotation)
-				transform.SetLocalRotation({ 0.f, 0.f, glm::degrees(b2Rot_GetAngle(t.q)) });
+			b2Vec2 vel = b2Body_GetLinearVelocity(body);
+			rb.Velocity = { vel.x, vel.y };
+			rb.AngularVelocity = b2Body_GetAngularVelocity(body);
+			rb.Awake = b2Body_IsAwake(body);
+
+			if ((Rigidbody2D::BodyType)rb.Type == Rigidbody2D::BodyType::Dynamic)
+			{
+				glm::vec3 pos3 = transform.GetWorldPosition();
+				pos3.x = rb.Position.x;
+				pos3.y = rb.Position.y;
+				transform.SetLocalPosition(pos3);
+
+				if (!rb.FixedRotation)
+					transform.SetLocalRotation({ 0.f, 0.f, rb.Rotation });
+			}
 		});
 
 	HandleEvents(pScene);
@@ -125,6 +175,9 @@ bool Boon::PhysicsWorld2D::Raycast(const Ray2D& ray, HitResult2D& result) const
 	b2Ray.maxFraction = 1.0f;
 
 	b2QueryFilter filter{b2DefaultQueryFilter()};
+
+	if (!b2World_IsValid(m_PhysicsWorldId))
+		return false;
 
 	b2RayResult out = b2World_CastRayClosest(m_PhysicsWorldId, b2Ray.origin, b2Ray.translation, filter);
 	if (out.hit)
@@ -180,18 +233,30 @@ void Boon::PhysicsWorld2D::HandleEvents(Scene* pScene)
 	}
 }
 
-void Boon::PhysicsWorld2D::SpawnRigidbody(GameObject* obj)
+void PhysicsWorld2D::SpawnRigidbody(GameObject* obj)
 {
+	auto id = (GameObjectID)*obj;
 	auto& transform = obj->GetComponent<TransformComponent>();
-	auto& rb2d = obj->GetComponent<Rigidbody2D>();
+	auto& rb = obj->GetComponent<Rigidbody2D>();
 
 	b2BodyDef bodyDef = b2DefaultBodyDef();
-	bodyDef.type = Rigidbody2DTypeToBox2DBody((Rigidbody2D::BodyType)rb2d.Type);
+	bodyDef.type = Rigidbody2DTypeToBox2DBody((Rigidbody2D::BodyType)rb.Type);
 	bodyDef.position = { transform.GetLocalPosition().x, transform.GetLocalPosition().y };
 	bodyDef.rotation = b2MakeRot(glm::radians(transform.GetWorldRotation().z));
-	bodyDef.userData = reinterpret_cast<void*>(static_cast<uintptr_t>((GameObjectID)*obj));
-	bodyDef.gravityScale = rb2d.GravityScale;
-	rb2d.RuntimeBody = b2CreateBody(m_PhysicsWorldId, &bodyDef);
+	bodyDef.userData = reinterpret_cast<void*>(static_cast<uintptr_t>(id));
+	bodyDef.gravityScale = rb.GravityScale;
+	bodyDef.linearDamping = rb.LinearDamping;
+	bodyDef.angularDamping = rb.AngularDamping;
+
+	RigidbodyRuntime runtime;
+	runtime.Body = b2CreateBody(m_PhysicsWorldId, &bodyDef);
+	runtime.Valid = b2Body_IsValid(runtime.Body);
+
+	b2MassData massData = b2Body_GetMassData(runtime.Body);
+	massData.mass = rb.GetMass();
+	b2Body_SetMassData(runtime.Body, massData);
+
+	m_RigidbodyRuntime[id] = runtime;
 
 	if (obj->HasComponent<BoxCollider2D>())
 	{
@@ -201,19 +266,25 @@ void Boon::PhysicsWorld2D::SpawnRigidbody(GameObject* obj)
 		shapeDef.density = bc2d.Density;
 		shapeDef.isSensor = bc2d.IsTrigger;
 		shapeDef.enableSensorEvents = true;
-
-		// Set surface material properties
 		shapeDef.material.friction = bc2d.Friction;
 		shapeDef.material.restitution = bc2d.Restitution;
 
-		// --- Create the polygon (Box2D uses half extents)
 		glm::vec3 scale = transform.GetWorldScale();
 		b2Polygon box = b2MakeBox(
 			bc2d.Size.x * scale.x * 0.5f,
 			bc2d.Size.y * scale.y * 0.5f
 		);
 
-		// --- Attach the shape
-		b2CreatePolygonShape(rb2d.RuntimeBody, &shapeDef, &box);
+		b2CreatePolygonShape(runtime.Body, &shapeDef, &box);
 	}
+
+	rb.DirtyBodyDef = false;
+}
+
+PhysicsWorld2D::RigidbodyRuntime* PhysicsWorld2D::GetRuntime(GameObjectID id)
+{
+	auto it = m_RigidbodyRuntime.find(id);
+	if (it == m_RigidbodyRuntime.end())
+		return nullptr;
+	return &it->second;
 }

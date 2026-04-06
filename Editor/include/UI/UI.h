@@ -828,7 +828,7 @@ namespace BoonEditor
                     AssetHandle hovered = *(const AssetHandle*)payload->Data;
 
                     const AssetMeta* meta =
-                        AssetImporterRegistry::Get().GetRegistry()->Get(hovered);
+                        ServiceLocator::Get<AssetImporterRegistry>().GetRegistry()->Get(hovered);
 
                     if (meta && assetType == meta->type)
                         compatible = true;
@@ -860,7 +860,7 @@ namespace BoonEditor
                 {
                     AssetHandle hovered = *(const AssetHandle*)payload->Data;
                     const AssetMeta* meta =
-                        AssetImporterRegistry::Get().GetRegistry()->Get(hovered);
+                        ServiceLocator::Get<AssetImporterRegistry>().GetRegistry()->Get(hovered);
 
                     bool compatible = (meta && assetType == meta->type);
 
@@ -900,7 +900,7 @@ namespace BoonEditor
                 ImGui::InputText("Search", filter, sizeof(filter));
                 ImGui::Separator();
 
-                const auto& all = AssetImporterRegistry::Get().GetRegistry()->GetAll();
+                const auto& all = ServiceLocator::Get<AssetImporterRegistry>().GetRegistry()->GetAll();
 
                 for (auto& it : all)
                 {

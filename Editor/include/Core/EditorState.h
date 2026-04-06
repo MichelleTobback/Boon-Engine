@@ -20,6 +20,9 @@
 namespace Boon
 {
 	class NetConnection;
+
+	class NetRepRegistry;
+	class BClassRegistry;
 }
 
 using namespace Boon;
@@ -32,7 +35,7 @@ namespace BoonEditor
 	{
 	public:
 		EditorState();
-		~EditorState();
+		virtual ~EditorState();
 
 		EditorState(const EditorState& other) = default;
 		EditorState(EditorState&& other) = default;

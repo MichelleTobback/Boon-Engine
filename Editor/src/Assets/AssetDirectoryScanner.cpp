@@ -44,7 +44,7 @@ namespace BoonEditor
 
         // Ask importer registry if this extension maps to an asset type
         auto ext = path.extension().string();
-        auto& registry = Boon::AssetImporterRegistry::Get();
+        auto& registry = Boon::ServiceLocator::Get<AssetImporterRegistry>();
         if (!registry.HasExtension(ext))
             return;
 

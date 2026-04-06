@@ -34,6 +34,6 @@ int main(int argc, char** argv)
 	desc.windowDesc.height = 600;
     desc.netDriverMode = ParseDriverModeFromArgs(argc, argv);
 	Boon::Application app{ desc };
-	app.Run(std::make_shared<EditorState>());
+    app.Run(std::make_shared<EditorState>());
 	return 0;
 }

@@ -2,11 +2,16 @@
 #include "BClass.h"
 #include "Component/ECSLifecycle.h"
 #include "Scene/GameObject.h"
+#include "Scene/SceneManager.h"
+#include "Core/ServiceLocator.h"
 
 namespace Boon
 {
+    class BClassRegistry;
+    class NetRepRegistry;
+
     template<typename T>
-    BClass* RegisterBClass(std::string name)
+    BClass* RegisterBClass(BClassRegistry& registry, std::string name)
     {
         static BClass cls(name, typeid(T));
 
@@ -22,6 +27,17 @@ namespace Boon
         cls.registerLifecycle = +[](ECSLifecycleSystem& sys)
             {
                 sys.RegisterType<T>();
+            };
+
+        cls.unregister = []()
+            {
+                auto scenes = ServiceLocator::Get<SceneManager>().GetLoadedScenes();
+                for (Scene* scene : scenes)
+                {
+                    scene->GetECSLifecycleSystem().UnregisterType<T>();
+                    scene->GetRegistry().clear<T>();
+                    scene->GetRegistry().reset(entt::type_hash<T>::value());
+                }
             };
 
         cls.createInstance = []() -> void* 
@@ -55,11 +71,13 @@ namespace Boon
                 go.template RemoveComponent<T>();
             };
 
-        BClassRegistry::Get().Register(&cls);
+        registry.Register(&cls);
         return &cls;
     }
+
+    template<typename T>
+    BClass* RegisterBClass(std::string name)
+    {
+        return RegisterBClass<T>(BClassRegistry::Get(), name);
+    }
 }
-
-#define REGISTER_BCLASS(T) \
-    extern "C" void Boon_RegisterClass_##T() { Boon::RegisterBClass<T>(); }
-

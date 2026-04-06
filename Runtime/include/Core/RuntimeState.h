@@ -11,9 +11,6 @@
 namespace Boon
 {
 	class SceneRenderer;
-
-	class Camera;
-	class TransformComponent;
 	class NetConnection;
 }
 
@@ -45,9 +42,6 @@ namespace Runtime
 
 		void OnRender();
 		std::unique_ptr<SceneRenderer> m_pRenderer;
-
-		Camera* m_pCamera;
-		TransformComponent* m_pCameraTransform;
 
 		EventListenerID m_WindowResizeEvent;
 		EventListenerID m_SceneChangedEvent;

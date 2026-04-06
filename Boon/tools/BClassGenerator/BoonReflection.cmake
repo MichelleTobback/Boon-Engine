@@ -35,7 +35,11 @@ function(boon_add_reflected_module)
     add_custom_command(
         OUTPUT "${REF_OUTPUT}"
         DEPENDS BClassGenerator ${REF_DEPENDS}
-        COMMAND $<TARGET_FILE:BClassGenerator> ${REFLECT_ARGS} "${REF_OUTPUT}" ${REF_SCAN_DIRS}
+        COMMAND $<TARGET_FILE:BClassGenerator>
+            ${REFLECT_ARGS}
+            --module "${REF_NAME}"
+            "${REF_OUTPUT}"
+            ${REF_SCAN_DIRS}
         COMMENT "Generating reflection for ${REF_NAME}"
         VERBATIM
     )

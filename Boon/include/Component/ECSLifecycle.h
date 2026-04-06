@@ -119,6 +119,7 @@ namespace Boon
         };
 
         std::unordered_map<std::type_index, Callbacks> map;
+        Delegate<void(BClass&)>::Handle SceneListenerHandle;
 
         ECSLifecycleSystem(Scene& s) : scene(s)
         {
@@ -128,11 +129,16 @@ namespace Boon
                         cls.registerLifecycle(*this);
                 });
 
-            BClassRegistry::Get().AddListener([this](BClass& cls)
+            SceneListenerHandle = BClassRegistry::Get().GetListeners().Bind([this](BClass& cls)
                 {
                     if (cls.registerLifecycle)
                         cls.registerLifecycle(*this);
                 });
+        }
+
+        ~ECSLifecycleSystem()
+        {
+            BClassRegistry::Get().GetListeners().Unbind(SceneListenerHandle);
         }
 
         template<typename T>
@@ -153,6 +159,20 @@ namespace Boon
             cb.onEndOverlap = ECSLifecycleCallbacks<T>::onEndOverlap;
 
             map.emplace(typeid(T), cb);
+        }
+
+        template<typename T>
+        void UnregisterType()
+        {
+            auto& type = typeid(T);
+
+            if (!map.contains(type))
+                return;
+
+            if (scene.IsRunning() && map[type].onEndPlay)
+                map[type].onEndPlay(scene);
+
+            map.erase(type);
         }
 
         template<typename T>

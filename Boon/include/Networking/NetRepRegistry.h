@@ -51,8 +51,12 @@ namespace Boon
     {
         static NetRepRegistry& Get()
         {
-            static NetRepRegistry instance = NetRepRegistry();
-            return instance;
+            return *s_Instance;
+        }
+
+        static void SetRegistry(NetRepRegistry* pRegistry)
+        {
+            s_Instance = pRegistry;
         }
 
         void Register(BClass* cls, IRepSerializer* pSerializer = nullptr)
@@ -117,8 +121,16 @@ namespace Boon
             m_ReplicatedClasses[cls->hash] = std::move(obj);
         }
 
+        template<typename T>
+        void Unregister()
+        {
+            m_ReplicatedClasses.erase(BClassRegistry::Get().Find<T>()->hash);
+        }
+
         ReplicatedClass& GetClass(BClassID id)
         {
+            if (!m_ReplicatedClasses.contains(id))
+                return m_Empty;
             return m_ReplicatedClasses.at(id);
         }
 
@@ -131,5 +143,8 @@ namespace Boon
 
     private:
         std::unordered_map<BClassID, ReplicatedClass> m_ReplicatedClasses;
+        ReplicatedClass m_Empty{};
+
+        static NetRepRegistry* s_Instance;
     };
 }
