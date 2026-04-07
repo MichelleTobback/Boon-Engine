@@ -97,7 +97,6 @@ void BoonEditor::ViewportPanel::OnRenderUI()
     minBound.x -= viewportOffset.x;
     minBound.y -= viewportOffset.y;
     const glm::vec2 maxBound{ minBound.x + windowSize.x, minBound.y + windowSize.y };
-    m_pToolbar->OnRender(minBound, maxBound);
 
     ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
     glm::vec2 bounds{ glm::max(glm::vec2{viewportPanelSize.x, viewportPanelSize.y}, {100.0f, 100.0f}) };
@@ -127,6 +126,10 @@ void BoonEditor::ViewportPanel::OnRenderUI()
     // === Render the viewport image ===
     uint64_t textureID = m_pRenderer->GetOutputTarget()->GetColorAttachmentRendererID();
     ImGui::Image((void*)(uintptr_t)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0,1 }, ImVec2{ 1,0 });
+
+    // Render the toolbar as an overlay on top of the viewport image so it appears inside the viewport
+    // rather than above it.
+    m_pToolbar->OnRender(minBound, maxBound);
 
     // === Overlay Toolbar (collapsible) ===
     if (m_pToolbar->GetActiveSetting() == ViewportToolbarSetting::Camera)

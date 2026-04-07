@@ -35,7 +35,7 @@ BoonEditor::ViewportToolbar::ViewportToolbar(const std::string& name, DragDropRo
 
 void BoonEditor::ViewportToolbar::OnRender(const glm::vec2& boundsMin, const glm::vec2& boundsMax)
 {
-    const float buttonSize = 16.f;
+    const float buttonSize = 12.f;
     const float edgeOffset = 8.f;
     const float spacing = 4.f;
 

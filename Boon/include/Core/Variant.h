@@ -43,8 +43,8 @@ namespace Boon
          * @brief A lightweight discriminated union used to hold simple values.
          *
          * Supports a fixed set of scalar and vector types. Use GetType to
-         * inspect the stored type and the As*/Set* accessors to read/write values.
-         */
+         * inspect the stored type and the accessors to read/write values.
+        */
         Variant() : m_Type(VariantType::None) {}
 
         // ---------------------------
