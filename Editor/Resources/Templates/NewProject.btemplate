@@ -1,0 +1,206 @@
+@@CMakeLists.txt 
+# {{PROJECT_NAME}}
+
+cmake_minimum_required(VERSION 3.20)
+project({{PROJECT_NAME}} LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+# ----------------------------------------
+# User-configurable path to Boon engine root
+# ----------------------------------------
+if (NOT BOON_ENGINE_ROOT)
+    set(BOON_ENGINE_ROOT "$ENV{BOON_ENGINE_ROOT}")
+endif()
+
+set(BOON_ENGINE_ROOT "${BOON_ENGINE_ROOT}" CACHE PATH "Path to Boon Engine root")
+
+if (NOT BOON_ENGINE_ROOT OR NOT EXISTS "${BOON_ENGINE_ROOT}/Boon/CMakeLists.txt")
+    message(FATAL_ERROR
+        "Boon Engine not found.\n"
+        "Run the setup script first, or pass -DBOON_ENGINE_ROOT=..."
+    )
+endif()
+
+# ----------------------------------------
+# Shared output helper
+# ----------------------------------------
+function(boon_set_output_dirs target subdir)
+    set_target_properties(${target} PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>/${subdir}"
+        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>/${subdir}"
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>/${subdir}"
+    )
+endfunction()
+
+# ----------------------------------------
+# Reflection generator
+# ----------------------------------------
+add_custom_target(GenerateReflection)
+
+set(BOON_BCLASSGENERATOR_EXE
+    "${BOON_ENGINE_ROOT}/bin/Debug/Tools/BClassGenerator.exe"
+)
+
+message(STATUS "BOON_BCLASSGENERATOR_EXE = ${BOON_BCLASSGENERATOR_EXE}")
+
+if (NOT EXISTS "${BOON_BCLASSGENERATOR_EXE}")
+    message(FATAL_ERROR
+        "BClassGenerator executable not found:\n"
+        "  ${BOON_BCLASSGENERATOR_EXE}"
+    )
+endif()
+
+add_executable(BClassGenerator IMPORTED GLOBAL)
+set_target_properties(BClassGenerator PROPERTIES
+    IMPORTED_LOCATION "${BOON_BCLASSGENERATOR_EXE}"
+)
+
+include(${BOON_ENGINE_ROOT}/Boon/tools/BClassGenerator/BoonReflection.cmake)
+
+# ----------------------------------------
+# Add engine
+# ----------------------------------------
+add_subdirectory(${BOON_ENGINE_ROOT}/Boon
+                 ${CMAKE_BINARY_DIR}/BoonEngine)
+
+# ----------------------------------------
+# Reflection for this game module
+# ----------------------------------------
+boon_add_reflected_module(
+    NAME {{PROJECT_NAME}}
+    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/generated/Generated_Components.cpp
+    SCAN_DIRS
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+    MINIMAL
+)
+
+# ----------------------------------------
+# Sources
+# ----------------------------------------
+file(GLOB_RECURSE GAME_SOURCES CONFIGURE_DEPENDS
+    src/*.cpp
+    generated/*.cpp
+)
+
+file(GLOB_RECURSE GAME_HEADERS CONFIGURE_DEPENDS
+    include/*.h
+    include/*.hpp
+)
+
+# ----------------------------------------
+# Game module
+# ----------------------------------------
+add_library({{PROJECT_NAME}} SHARED
+    ${GAME_SOURCES}
+    ${GAME_HEADERS}
+)
+
+target_compile_features({{PROJECT_NAME}} PUBLIC cxx_std_20)
+
+target_compile_definitions({{PROJECT_NAME}} PRIVATE BOON_MODULE_NAME={{PROJECT_NAME}})
+
+target_link_libraries({{PROJECT_NAME}}
+    PRIVATE
+        BoonEngine
+)
+
+target_include_directories({{PROJECT_NAME}}
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_compile_definitions({{PROJECT_NAME}}
+    PRIVATE
+        BOON_GAME_BUILD
+)
+
+boon_set_output_dirs({{PROJECT_NAME}} {{PROJECT_NAME}})
+
+# ----------------------------------------
+# Copy project assets
+# ----------------------------------------
+add_custom_command(TARGET {{PROJECT_NAME}} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_CURRENT_SOURCE_DIR}/Assets
+        $<TARGET_FILE_DIR:{{PROJECT_NAME}}>/Assets
+    COMMENT "Copying project assets"
+)
+
+@@src/{{PROJECT_NAME}}Api.h
+
+#pragma once
+
+#ifdef _WIN32
+#ifdef {{PROJECT_NAME}}_EXPORTS
+#define {{PROJECT_NAME_UPPER}}_API __declspec(dllexport)
+#else
+#define {{PROJECT_NAME_UPPER}}_API __declspec(dllimport)
+#endif
+#else
+#define {{PROJECT_NAME_UPPER}}_API
+#endif
+
+@@src/{{PROJECT_NAME}}Module.cpp
+
+#include "{{PROJECT_NAME}}API.h"
+#include <Module/ModuleAPI.h>
+#include <Reflection/BClass.h>
+#include <Networking/NetRepRegistry.h>
+#include <Core/ServiceLocator.h>
+
+#include <Reflection/BClassBase.h>
+
+namespace Boon
+{
+    static ModuleInfo s_ModuleInfo{
+        "   {{PROJECT_NAME}}",
+        1,
+        0
+    };
+}
+
+extern "C"
+{
+    {{PROJECT_NAME_UPPER}}_API const Boon::ModuleInfo* Boon_GetModuleInfo()
+    {
+        return &Boon::s_ModuleInfo;
+    }
+
+    {{PROJECT_NAME_UPPER}}_API bool Boon_RegisterModule(Boon::ModuleContext* ctx)
+    {
+        if (!ctx || !ctx->BClasses || !ctx->NetReps)
+            return false;
+
+        Boon::ServiceLocator::SetRegistry(ctx->ServiceRegistry);
+        Boon::BClassRegistry::SetRegistry(ctx->BClasses);
+        Boon::NetRepRegistry::SetRegistry(ctx->NetReps);
+
+        Boon::RegisterGeneratedClasses_{{PROJECT_NAME}}(*ctx->BClasses, *ctx->NetReps);
+
+        return true;
+    }
+
+    {{PROJECT_NAME_UPPER}}_API void Boon_UnregisterModule(Boon::ModuleContext* ctx)
+    {
+        if (!ctx || !ctx->BClasses || !ctx->NetReps)
+            return;
+
+        Boon::UnregisterGeneratedClasses_{{PROJECT_NAME}}(*ctx->BClasses, *ctx->NetReps);
+
+        Boon::ServiceLocator::SetRegistry(nullptr);
+        Boon::BClassRegistry::SetRegistry(nullptr);
+        Boon::NetRepRegistry::SetRegistry(nullptr);
+    }
+} 
+
+@@Assets/Scenes/Main.scene
+
+{
+    "objects": [],
+    "scene": "Main"
+}

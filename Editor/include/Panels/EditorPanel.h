@@ -1,5 +1,5 @@
 #pragma once
-#include "Core/EditorObject.h"
+#include "EditorWidget.h"
 #include "UI/DragDropRouter.h"
 
 #include <string>
@@ -14,10 +14,10 @@ namespace BoonEditor
 		Hovered = 1 < 1
 	};
 
-	class EditorPanel : public EditorObject
+	class EditorPanel : public EditorWidget
 	{
 	public:
-		EditorPanel(const std::string& name, DragDropRouter* pRouter);
+		EditorPanel(const std::string& name, EditorContext* pContext);
 		virtual ~EditorPanel() = default;
 
 		EditorPanel(const EditorPanel& other) = delete;
@@ -28,9 +28,8 @@ namespace BoonEditor
 		virtual void Update() override {};
 		virtual void OnResize(uint32_t width, uint32_t height) {}
 
-		virtual void OnRender(){}
-
-		void RenderUI();
+		// Override from EditorWidget. Children of EditorPanel should override OnRenderUI
+		virtual void RenderUI() override;
 
 		bool IsHovered() const;
 
@@ -39,9 +38,6 @@ namespace BoonEditor
 
 		bool RenderFloat3Control(const std::string& label, glm::vec3& vector, float resetValue = 0.0f, float columnWidth = 100.0f);
 
-		inline const std::string& GetName() const { return  m_Name; }
-
-		std::string m_Name;
 		EditorPanelFlag m_Flags;
 		DragDropRouter* m_pRouter;
 	};

@@ -13,7 +13,7 @@ namespace BoonEditor
     class ContentBrowser : public EditorPanel
     {
     public:
-        ContentBrowser(const std::string& name, DragDropRouter* pRouter, AssetContext* pContext);
+        ContentBrowser(const std::string& name, EditorContext* pContext, AssetContext* pAsset);
 
         virtual void Update() override;
 

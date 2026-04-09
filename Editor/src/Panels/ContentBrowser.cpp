@@ -10,8 +10,8 @@
 using namespace BoonEditor;
 namespace fs = std::filesystem;
 
-ContentBrowser::ContentBrowser(const std::string& name, DragDropRouter* pRouter, AssetContext* pContext)
-    : EditorPanel(name, pRouter), m_RootFolder("Content", ""), m_pSelectedAsset(pContext)
+ContentBrowser::ContentBrowser(const std::string& name, EditorContext* pContext, AssetContext* pAsset)
+    : EditorPanel(name, pContext), m_RootFolder("Content", ""), m_pSelectedAsset(pAsset)
 {
     memset(m_SearchBuffer, 0, sizeof(m_SearchBuffer));
     m_CurrentFolder = &m_RootFolder;

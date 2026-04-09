@@ -8,8 +8,8 @@
 #include <math.h>
 #include <imgui.h>
 
-BoonEditor::ViewportToolbar::ViewportToolbar(const std::string& name, DragDropRouter* pRouter)
-	: EditorPanel(name, pRouter)
+BoonEditor::ViewportToolbar::ViewportToolbar(const std::string& name, EditorContext* pContext)
+	: EditorPanel(name, pContext)
 {
     AssetLibrary& assetLib = ServiceLocator::Get<AssetLibrary>();
     {

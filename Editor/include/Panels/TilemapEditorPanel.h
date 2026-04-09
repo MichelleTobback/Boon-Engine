@@ -32,7 +32,7 @@ namespace BoonEditor
     class TilemapEditorPanel : public AssetEditor<TilemapAsset>
     {
     public:
-        TilemapEditorPanel(const std::string& name, DragDropRouter* pRouter);
+        TilemapEditorPanel(const std::string& name, EditorContext* pContext);
 
         virtual void Update() override;
 

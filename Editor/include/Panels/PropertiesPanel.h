@@ -14,7 +14,7 @@ namespace BoonEditor
 	class PropertiesPanel final : public EditorPanel
 	{
 	public:
-		PropertiesPanel(const std::string& name, DragDropRouter* pRouter, GameObjectContext* pContext);
+		PropertiesPanel(const std::string& name, EditorContext* pContext, GameObjectContext* pGameObject);
 		virtual ~PropertiesPanel() = default;
 
 		virtual void Update() override {}
@@ -27,7 +27,7 @@ namespace BoonEditor
 		void RenderComponentNode(const std::string& name, const std::function<void(T&)>& fn);
         void RenderComponentNode(BClass* cls, const std::function<void()>& fn = nullptr);
 
-		GameObjectContext* m_pContext;
+		GameObjectContext* m_pGameObjectContext;
 	};
 
     template<typename T>
@@ -45,7 +45,7 @@ namespace BoonEditor
             ImGuiTreeNodeFlags_FramePadding |
             ImGuiTreeNodeFlags_AllowItemOverlap;
 
-        GameObject& owner = m_pContext->Get();
+        GameObject& owner = m_pGameObjectContext->Get();
         if (owner.HasComponent<T>())
         {
             T& pComponent = owner.GetComponent<T>();

@@ -20,10 +20,10 @@ namespace BoonEditor
     class AssetEditorBase : public EditorPanel
     {
     public:
-        AssetEditorBase(const std::string& name, DragDropRouter* pRouter)
-            : EditorPanel(name, pRouter) { }
+        AssetEditorBase(const std::string& name, EditorContext* pContext)
+            : EditorPanel(name, pContext) { }
 
-        virtual void OnRender() override;
+        virtual void RenderUI() override;
 
         inline Scene& GetScene() { return *m_PrevScene->Get(); }
         inline ViewportPanel* GetViewport() const { return m_pViewport; }
@@ -39,7 +39,7 @@ namespace BoonEditor
     private:
         friend class AssetEditorPanel;
 
-        SceneContext* m_PrevScene;
+        SceneContext* m_PrevScene = nullptr;
         ViewportPanel* m_pViewport = nullptr;
     };
 
@@ -47,7 +47,7 @@ namespace BoonEditor
     class AssetEditor : public AssetEditorBase
     {
     public:
-        AssetEditor(const std::string& name, DragDropRouter* pRouter);
+        AssetEditor(const std::string& name, EditorContext* pContext);
 
         virtual void Update() override;
         virtual void OnRenderUI() override;
@@ -68,8 +68,8 @@ namespace BoonEditor
     };
 
     template<typename TAsset>
-    inline AssetEditor<TAsset>::AssetEditor(const std::string& name, DragDropRouter* pRouter)
-        : AssetEditorBase(name, pRouter){ }
+    inline AssetEditor<TAsset>::AssetEditor(const std::string& name, EditorContext* pContext)
+        : AssetEditorBase(name, pContext){ }
 
     template<typename TAsset>
     inline void AssetEditor<TAsset>::Update()

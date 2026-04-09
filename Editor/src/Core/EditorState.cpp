@@ -1,3 +1,4 @@
+#pragma once
 #include "Core/EditorState.h"
 #include "Core/EditorCamera.h"
 
@@ -9,6 +10,8 @@
 #include "Panels/TilemapEditorPanel.h"
 #include "Panels/SpriteAtlasEditorPanel.h"
 #include "Panels/AssetEditorPanel.h"
+
+#include "Tools/NewProjectDialog.h"
 
 #include "UI/EditorRenderer.h"
 
@@ -63,8 +66,8 @@
 using namespace BoonEditor;
 
 BoonEditor::EditorState::EditorState(const ProjectConfig& project)
-	: m_CurrentProject{ project }
 {
+	m_Context.m_CurrentProject = project;
 }
 
 EditorState::~EditorState() = default;
@@ -76,7 +79,7 @@ void EditorState::OnEnter()
 	Window& window{ Application::Get().GetWindow() };
 	AssetLibrary& assetLib{ Assets::Get() };
 	assetLib.AddRoot(config.EngineRoot / config.AssetsRoot); // engine assets
-	assetLib.AddRoot(m_CurrentProject.Editor.EditorResourcesRoot / config.AssetsRoot); // editor assets
+	assetLib.AddRoot(m_Context.m_CurrentProject.Editor.EditorResourcesRoot / config.AssetsRoot); // editor assets
 	AssetImporterRegistry& importer = ServiceLocator::Get<AssetImporterRegistry>();
 	importer.RegisterImporter<Texture2DImporter>();
 	importer.RegisterImporter<ShaderImporter>();
@@ -86,28 +89,30 @@ void EditorState::OnEnter()
 
 	m_NetworkSettings = Application::Get().GetDescriptor().Network;
 
-	m_PRenderer = std::make_unique<EditorRenderer>(m_CurrentProject);
+	m_PRenderer = std::make_unique<EditorRenderer>(m_Context.m_CurrentProject);
 
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 	Scene& scene = sceneManager.CreateScene("Game");
 
-	ViewportPanel& viewport = CreatePanel<ViewportPanel>("Viewport", &m_DragDrop, &m_SceneContext, &m_SelectionContext);
+	ViewportPanel& viewport = m_Context.CreateWidget<ViewportPanel>("Viewport", &m_SceneContext, &m_SelectionContext);
 	viewport.GetToolbar()->BindOnPlayCallback(std::bind(&EditorState::OnBeginPlay, this));
 	viewport.GetToolbar()->BindOnStopCallback(std::bind(&EditorState::OnStopPlay, this));
 
-	AssetEditorPanel& assetEditor = CreatePanel<AssetEditorPanel>("asset", &m_DragDrop, &viewport);
-	assetEditor.RegisterEditor(new TilemapEditorPanel("tilemap", &m_DragDrop));
-	assetEditor.RegisterEditor(new SpriteAtlasEditorPanel("sprite atlas", &m_DragDrop));
+	AssetEditorPanel& assetEditor = m_Context.CreateWidget<AssetEditorPanel>("asset", &viewport);
+	assetEditor.RegisterEditor(new TilemapEditorPanel("tilemap", &m_Context));
+	assetEditor.RegisterEditor(new SpriteAtlasEditorPanel("sprite atlas", &m_Context));
 	m_pSelectedAsset = &assetEditor.GetContext();
 
-	CreatePanel<ContentBrowser>("content", &m_DragDrop, m_pSelectedAsset);
-	CreatePanel<PropertiesPanel>("properties", &m_DragDrop, &m_SelectionContext);
-	CreatePanel<ScenePanel>("scene", &m_DragDrop,  &m_SceneContext, &m_SelectionContext);
-	CreatePanel<NetworkPanel>("network", &m_DragDrop, m_NetworkSettings);
+	m_Context.CreateWidget<ContentBrowser>("content", m_pSelectedAsset);
+	m_Context.CreateWidget<PropertiesPanel>("properties", &m_SelectionContext);
+	m_Context.CreateWidget<ScenePanel>("scene",  &m_SceneContext, &m_SelectionContext);
+	m_Context.CreateWidget<NetworkPanel>("network", m_NetworkSettings);
 
-	CreateObject<AssetDirectoryScanner>(config.AssetsRoot, 1.f);
-	CreateObject<AssetDirectoryScanner>(config.EngineRoot / config.AssetsRoot, 1.f);
-	CreateObject<AssetDirectoryScanner>(m_CurrentProject.Editor.EditorResourcesRoot / config.AssetsRoot, 1.f);
+	m_Context.CreateWidget<NewProjectDialog>("NewProject");
+
+	m_Context.CreateObject<AssetDirectoryScanner>(config.AssetsRoot, 1.f);
+	m_Context.CreateObject<AssetDirectoryScanner>(config.EngineRoot / config.AssetsRoot, 1.f);
+	m_Context.CreateObject<AssetDirectoryScanner>(m_Context.m_CurrentProject.Editor.EditorResourcesRoot / config.AssetsRoot, 1.f);
 
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	std::shared_ptr<NetDriver> network = std::make_shared<SteamNetDriver>();
@@ -143,7 +148,7 @@ void EditorState::OnEnter()
 	m_SelectionContext.AddOnContextChangedCallback([this](GameObject obj)
 		{
 			if (obj.GetScene() == m_pSelectedScene)
-				GetPanel<ViewportPanel>("Viewport").SetContext(&m_SceneContext);
+				m_Context.GetWidget<ViewportPanel>("Viewport").SetContext(&m_SceneContext);
 		});
 
 	std::shared_ptr<ModuleLibrary> moduleLib = std::make_shared<ModuleLibrary>();
@@ -182,7 +187,7 @@ void EditorState::OnUpdate()
 
 	sceneManager.Update();
 
-	for (auto& pObject : m_Objects)
+	for (auto& pObject : m_Context.m_Objects)
 	{
 		pObject->Update();
 	}
@@ -212,6 +217,19 @@ void EditorState::OnRender()
 	m_DragDrop.Clear();
 
 	ImGui::BeginMainMenuBar();
+	if (ImGui::BeginMenu("Project"))
+	{
+		if (ImGui::MenuItem("New Project"))
+		{
+			if (m_PlayState == EditorPlayState::Play)
+			{
+				OnStopPlay();
+			}
+			NewProjectDialog* pDialog = m_Context.TryGetWidget<NewProjectDialog>("NewProject");
+			if (pDialog) pDialog->Open();
+		}
+		ImGui::EndMenu();
+	}
 	if (ImGui::BeginMenu("File"))
 	{
 		if (ImGui::MenuItem("New scene"))
@@ -230,7 +248,7 @@ void EditorState::OnRender()
 			if (m_PlayState != EditorPlayState::Play)
 			{
 				SceneSerializer serializer(*m_pSelectedScene);
-				serializer.Serialize(m_CurrentProject.Runtime.AssetsRoot / "Scenes/Main.scene");
+				serializer.Serialize(m_Context.m_CurrentProject.Runtime.AssetsRoot / "Scenes/Main.scene");
 			}
 		}
 		if (ImGui::MenuItem("Open scene"))
@@ -242,7 +260,7 @@ void EditorState::OnRender()
 				m_pSelectedScene = m_SceneContext.Get();
 
 				SceneSerializer serializer(*m_SceneContext.Get());
-				serializer.Deserialize(m_CurrentProject.Runtime.AssetsRoot / "Scenes/Main.scene");
+				serializer.Deserialize(m_Context.m_CurrentProject.Runtime.AssetsRoot / "Scenes/Main.scene");
 
 				sceneManager.SetActiveScene(m_SceneContext.Get()->GetID(), false);
 			}
@@ -251,7 +269,7 @@ void EditorState::OnRender()
 	}
 	ImGui::EndMainMenuBar();
 	
-	for (auto& [name, pPanel] : m_Panels)
+	for (auto& [name, pPanel] : m_Context.m_Widgets)
 	{
 		pPanel->RenderUI();
 	}
@@ -267,7 +285,7 @@ void EditorState::OnBeginPlay()
 	m_PlayState = EditorPlayState::Play;
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 
-	GetPanel<ViewportPanel>("Viewport").SetContext(&m_SceneContext);
+	m_Context.GetWidget<ViewportPanel>("Viewport").SetContext(&m_SceneContext);
 
 	m_SceneContext.Set(&sceneManager.CreateScene("PlayScene"));
 	SceneSerializer serializer(*m_SceneContext.Get());
@@ -327,14 +345,14 @@ void EditorState::StartNetwork()
 			network.Connect(m_NetworkSettings.Ip.c_str(), m_NetworkSettings.Port);
 		}
 
-		NetworkPanel& net = GetPanel<NetworkPanel>("network");
+		NetworkPanel& net = m_Context.GetWidget<NetworkPanel>("network");
 		net.SetDriver(&network);
 	}
 }
 
 void EditorState::StopNetwork()
 {
-	NetworkPanel& net = GetPanel<NetworkPanel>("network");
+	NetworkPanel& net = m_Context.GetWidget<NetworkPanel>("network");
 	net.SetDriver(nullptr);
 
 	ServiceLocator::Get<SceneManager>().UnbindOnSceneChanged(m_BindNetSceneHandle);

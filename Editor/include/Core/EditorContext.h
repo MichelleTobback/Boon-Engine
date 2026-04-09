@@ -1,76 +1,79 @@
 #pragma once
-#include <Core/Delegate.h>
+#include <Project/ProjectConfig.h>
+#include <Panels/EditorWidget.h>
+
+#include <memory>
+#include <type_traits>
+#include <vector>
+#include <unordered_map>
 
 using namespace Boon;
 
 namespace BoonEditor
 {
-	template <typename T>
 	class EditorContext final
 	{
 	public:
-		using Signature = void(T&);
-		using Callback = std::function<Signature>;
+		template <typename T, typename ...TArgs>
+		T& CreateObject(TArgs&& ... args)
+		{
+			static_assert(std::is_base_of<EditorObject, T>::value, "T must derive from Object");
 
-		EditorContext() = default;
-		EditorContext(const T& context);
-		~EditorContext() = default;
+			auto pInstance = std::make_unique<T>(std::forward<TArgs>(args)...);
+			T& ref = *pInstance;
+			m_Objects.push_back(std::move(pInstance));
+			return ref;
+		}
 
-		T& Get();
-		const T& Get() const;
-		void Set(const T& context);
-		void AddOnContextChangedCallback(const Callback& fn);
+		template <typename T, typename... TArgs>
+		T& CreateWidget(const std::string& name, TArgs&&... args)
+		{
+			static_assert(std::is_base_of_v<EditorWidget, T>, "T must derive from EditorWidget");
 
-		bool IsValid() const;
+			auto it = m_Widgets.find(name);
+			if (it != m_Widgets.end())
+				throw std::runtime_error("Widget with name already exists: " + name);
 
-		T& overator();
-		const T& overator() const;
+			T& ref = CreateObject<T>(name, this, std::forward<TArgs>(args)...);
+			m_Widgets.emplace(name, &ref);
+			return ref;
+		}
+
+		template <typename T>
+		T& GetWidget(const std::string& name)
+		{
+			static_assert(std::is_base_of_v<EditorWidget, T>, "T must derive from EditorWidget");
+
+			auto it = m_Widgets.find(name);
+			if (it == m_Widgets.end())
+				throw std::runtime_error("Widget not found: " + name);
+
+			T* pWidget = dynamic_cast<T*>(it->second);
+			if (!pWidget)
+				throw std::runtime_error("Widget type mismatch for: " + name);
+
+			return *pWidget;
+		}
+
+		template <typename T>
+		T* TryGetWidget(const std::string& name)
+		{
+			static_assert(std::is_base_of_v<EditorWidget, T>, "T must derive from EditorWidget");
+
+			auto it = m_Widgets.find(name);
+			if (it == m_Widgets.end())
+				return nullptr;
+
+			return dynamic_cast<T*>(it->second);
+		}
+
+		inline const ProjectConfig& GetCurrentProjectConfig() const { return m_CurrentProject; }
 
 	private:
-		T m_pContext{};
-		Delegate<Signature> m_OnContextChanged;
+		friend class EditorState;
+		ProjectConfig m_CurrentProject{};
+
+		std::vector<std::unique_ptr<EditorObject>> m_Objects;
+		std::unordered_map<std::string, EditorWidget*> m_Widgets;
 	};
-
-	template<typename T>
-	inline EditorContext<T>::EditorContext(const T& context)
-		: m_pContext{ context }, m_OnContextChanged{}
-	{
-	}
-	template<typename T>
-	inline T& EditorContext<T>::Get()
-	{
-		return m_pContext;
-	}
-	template<typename T>
-	inline const T& EditorContext<T>::Get() const
-	{
-		return m_pContext;
-	}
-	template<typename T>
-	inline void EditorContext<T>::Set(const T& context)
-	{
-		m_pContext = context;
-		m_OnContextChanged.Invoke(m_pContext);
-	}
-	template<typename T>
-	inline void EditorContext<T>::AddOnContextChangedCallback(const Callback& fn)
-	{
-		m_OnContextChanged += fn;
-	}
-	template<typename T>
-	inline T& EditorContext<T>::overator()
-	{
-		return m_pContext;
-	}
-	template<typename T>
-	inline const T& EditorContext<T>::overator() const
-	{
-		return m_pContext;
-	}
-
-	template<typename T>
-	bool EditorContext<T>::IsValid() const
-	{
-		return m_pContext;
-	}
 }

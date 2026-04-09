@@ -11,8 +11,7 @@ ProjectConfig ProjectConfigFromArgs(int argc, char** argv)
 {
     std::filesystem::path path = argc > 1 
         ? argv[1] 
-        : "D:\\Projects\\BoonProjects\\WitchGame\\WitchGame.bproj";
-        //: "../../../Sandbox/Sandbox.bproj";
+        : "../../../Sandbox/Sandbox.bproj";
 
     return ProjectLoader::LoadFromFile(path).Value;
 }

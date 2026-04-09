@@ -14,8 +14,8 @@
 
 namespace BoonEditor
 {
-	SpriteAtlasEditorPanel::SpriteAtlasEditorPanel(const std::string& name, DragDropRouter* pRouter)
-		: AssetEditor(name, pRouter){ }
+	SpriteAtlasEditorPanel::SpriteAtlasEditorPanel(const std::string& name, EditorContext* pContext)
+		: AssetEditor(name, pContext){ }
 
 	void SpriteAtlasEditorPanel::BuildPreviewScene(Scene& scene)
 	{

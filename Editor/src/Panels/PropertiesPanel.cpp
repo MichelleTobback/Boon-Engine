@@ -16,21 +16,21 @@
 
 using namespace BoonEditor;
 
-BoonEditor::PropertiesPanel::PropertiesPanel(const std::string& name, DragDropRouter* pRouter, GameObjectContext* pContext)
-	: EditorPanel(name, pRouter), m_pContext{pContext}
+BoonEditor::PropertiesPanel::PropertiesPanel(const std::string& name, EditorContext* pContext, GameObjectContext* pGameObject)
+	: EditorPanel(name, pContext), m_pGameObjectContext{pGameObject}
 {
 	
 }
 
 void BoonEditor::PropertiesPanel::OnRenderUI()
 {
-	if (!m_pContext || !m_pContext->IsValid() || !m_pContext->Get().IsValid())
+	if (!m_pGameObjectContext || !m_pGameObjectContext->IsValid() || !m_pGameObjectContext->Get().IsValid())
 		return;
 
-    if (!m_pContext->Get().HasComponent<NameComponent>())
-        m_pContext->Get().AddComponent<NameComponent>();
+    if (!m_pGameObjectContext->Get().HasComponent<NameComponent>())
+        m_pGameObjectContext->Get().AddComponent<NameComponent>();
 
-    NameComponent& nameComponent{ m_pContext->Get().GetComponent<NameComponent>() };
+    NameComponent& nameComponent{ m_pGameObjectContext->Get().GetComponent<NameComponent>() };
     std::string gameObjectName{ nameComponent.Name };
     const size_t nameBufferSize{ 64 };
     char nameBuffer[nameBufferSize];
@@ -107,7 +107,7 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
     BClassRegistry& reg = BClassRegistry::Get();
     reg.ForEach([this](BClass& cls)
         {
-            if (m_pContext->Get().HasComponentByClass(&cls))
+            if (m_pGameObjectContext->Get().HasComponentByClass(&cls))
                 RenderComponentNode(&cls);
         });
 
@@ -117,12 +117,12 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
         
         BClassRegistry::Get().ForEach([this](const BClass& cls)
             {
-                if (m_pContext->Get().HasComponentByClass(&cls))
+                if (m_pGameObjectContext->Get().HasComponentByClass(&cls))
                     return;
 
                 if (ImGui::MenuItem(cls.name.c_str()))
                 {
-                    m_pContext->Get().AddComponentFromClass(&cls);
+                    m_pGameObjectContext->Get().AddComponentFromClass(&cls);
                 }
             });
 
@@ -132,7 +132,7 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
 
 inline void PropertiesPanel::RenderComponentNode(BClass* cls, const std::function<void()>& fn)
 {
-    GameObject& owner = m_pContext->Get();
+    GameObject& owner = m_pGameObjectContext->Get();
     if (!owner.HasComponentByClass(cls))
         return;
 

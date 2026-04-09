@@ -16,18 +16,18 @@
 
 using namespace BoonEditor;
 
-BoonEditor::ViewportPanel::ViewportPanel(const std::string& name, DragDropRouter* pRouter, SceneContext* pContext, GameObjectContext* pSelection)
-	: EditorPanel(name, pRouter), m_pContext{ pContext }, m_pSelectionContext{pSelection}
+BoonEditor::ViewportPanel::ViewportPanel(const std::string& name, EditorContext* pContext, SceneContext* pSceneContext, GameObjectContext* pSelection)
+	: EditorPanel(name, pContext), m_pSceneContext{ pSceneContext }, m_pSelectionContext{pSelection}
 {
 	m_Camera.SetActive(true);
-	m_pRenderer = std::make_unique<SceneRenderer>(pContext->Get());
-    m_pDebugRenderer = std::make_unique<DebugRenderer>(pContext->Get(), m_pRenderer->GetOutputTarget());
+	m_pRenderer = std::make_unique<SceneRenderer>(pSceneContext->Get());
+    m_pDebugRenderer = std::make_unique<DebugRenderer>(pSceneContext->Get(), m_pRenderer->GetOutputTarget());
 
-    m_pToolbar = std::make_unique<ViewportToolbar>(std::string(name).append("toolbar"), m_pRouter);
+    m_pToolbar = std::make_unique<ViewportToolbar>(std::string(name).append("toolbar"), &GetContext());
 
     m_Settings.DebugRenderLayers |= DebugRenderLayer::Disabled;
 
-    pContext->AddOnContextChangedCallback([this](Scene* pScene)
+    pSceneContext->AddOnContextChangedCallback([this](Scene* pScene)
         {
             m_pRenderer->SetContext(pScene);
             m_pDebugRenderer->SetContext(pScene);
@@ -62,7 +62,7 @@ void BoonEditor::ViewportPanel::Update()
 	if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)m_ViewportSize.x && mouseY < (int)m_ViewportSize.y)
 	{
 		int pixelData = m_pRenderer->GetOutputTarget()->ReadPixel(1, mouseX, mouseY);
-		m_HoveredGameObject = pixelData < 0 ? GameObject() : GameObject((GameObjectID)pixelData, m_pContext->Get());
+		m_HoveredGameObject = pixelData < 0 ? GameObject() : GameObject((GameObjectID)pixelData, m_pSceneContext->Get());
 
         if (input.IsMousePressed(Mouse::ButtonLeft))
         {
@@ -80,7 +80,7 @@ void BoonEditor::ViewportPanel::Update()
 
 void BoonEditor::ViewportPanel::SetContext(SceneContext* pContext)
 {
-    m_pContext = pContext;
+    m_pSceneContext = pContext;
     m_pRenderer->SetContext(pContext->Get());
     m_pDebugRenderer->SetContext(pContext->Get());
 }

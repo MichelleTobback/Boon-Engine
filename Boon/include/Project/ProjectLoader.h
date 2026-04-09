@@ -48,6 +48,8 @@ namespace Boon
         static TResult<ProjectConfig> LoadFromFile(const std::filesystem::path& projectFilePath);
         static void ApplyDefaults(ProjectConfig& config);
 
+        static bool SaveToFile(const std::filesystem::path& location, const ProjectConfig& projectConfig);
+
     private:
         static void ResolvePaths(ProjectConfig& config, const std::filesystem::path& projectFilePath);
         static bool Validate(const ProjectConfig& config, ProjectLoadError& outError);

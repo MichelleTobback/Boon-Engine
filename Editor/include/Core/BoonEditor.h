@@ -1,5 +1,5 @@
 #pragma once
-#include "EditorContext.h"
+#include "ObjectContext.h"
 
 #include <Scene/Scene.h>
 #include <Scene/GameObject.h>
@@ -9,9 +9,9 @@ using namespace Boon;
 
 namespace BoonEditor
 {
-	using SceneContext = EditorContext<Scene*>;
-	using GameObjectContext = EditorContext<GameObject>;
-	using AssetContext = EditorContext<AssetHandle>;
+	using SceneContext = ObjectContext<Scene*>;
+	using GameObjectContext = ObjectContext<GameObject>;
+	using AssetContext = ObjectContext<AssetHandle>;
 
 	enum class EditorPlayState
 	{

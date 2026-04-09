@@ -1,7 +1,7 @@
 #include "Panels/AssetEditor.h"
 #include "Panels/ViewportPanel.h"
 
-void BoonEditor::AssetEditorBase::OnRender()
+void BoonEditor::AssetEditorBase::RenderUI()
 {
 	ImGui::BeginChild(m_Name.c_str());
 

@@ -30,6 +30,17 @@ namespace Boon
         else
             throw std::runtime_error("Invalid DriverMode: " + value);
     }
+    void to_json(json& j, const ENetDriverMode& mode)
+    {
+        switch (mode)
+        {
+        case ENetDriverMode::Standalone:      j = "Standalone"; break;
+        case ENetDriverMode::Client:          j = "Client"; break;
+        case ENetDriverMode::ListenServer:    j = "ListenServer"; break;
+        case ENetDriverMode::DedicatedServer: j = "DedicatedServer"; break;
+        default:                              j = "Standalone"; break;
+        }
+    }
 
     void from_json(const json& j, RuntimeConfig::WindowSettings& w)
     {
@@ -40,24 +51,48 @@ namespace Boon
         if (j.contains("bResizable"))   j.at("bResizable").get_to(w.bResizable);
         if (j.contains("bBorderless"))  j.at("bBorderless").get_to(w.bBorderless);
     }
+    void to_json(json& j, const RuntimeConfig::WindowSettings& w)
+    {
+        j = json{
+            { "Title",        w.Title },
+            { "Width",        w.Width },
+            { "Height",       w.Height },
+            { "bFullscreen",  w.bFullscreen },
+            { "bResizable",   w.bResizable },
+            { "bBorderless",  w.bBorderless }
+        };
+    }
 
     void from_json(const json& j, RuntimeConfig::RenderSettings& r)
     {
         if (j.contains("bVSync"))   j.at("bVSync").get_to(r.bVSync);
         if (j.contains("Renderer")) j.at("Renderer").get_to(r.Renderer);
     }
+    void to_json(json& j, const RuntimeConfig::RenderSettings& r)
+    {
+        j = json{
+            { "bVSync",   r.bVSync },
+            { "Renderer", r.Renderer }
+        };
+    }
 
     void from_json(const json& j, NetworkSettings& n)
     {
         if (j.contains("DriverMode")) j.at("DriverMode").get_to(n.NetMode);
     }
+    void to_json(json& j, const NetworkSettings& n)
+    {
+        j = json{
+            { "DriverMode", n.NetMode }
+        };
+    }
 
     void from_json(const json& j, RuntimeConfig& r)
     {
-        if (j.contains("ProjectRoot"))       j.at("ProjectRoot").get_to(r.ProjectRoot);
+        //if (j.contains("ProjectRoot"))       j.at("ProjectRoot").get_to(r.ProjectRoot);
         if (j.contains("AssetsRoot"))        j.at("AssetsRoot").get_to(r.AssetsRoot);
-        if (j.contains("IntermediateRoot"))  j.at("IntermediateRoot").get_to(r.IntermediateRoot);
-        if (j.contains("SavedRoot"))         j.at("SavedRoot").get_to(r.SavedRoot);
+        //if (j.contains("IntermediateRoot"))  j.at("IntermediateRoot").get_to(r.IntermediateRoot);
+        //if (j.contains("SavedRoot"))         j.at("SavedRoot").get_to(r.SavedRoot);
 
         if (j.contains("StartupScene")) j.at("StartupScene").get_to(r.StartupScene);
         if (j.contains("GameModule"))   j.at("GameModule").get_to(r.GameModule);
@@ -74,10 +109,31 @@ namespace Boon
         if (j.contains("Network"))
             j.at("Network").get_to(r.Network);
     }
+    void to_json(json& j, const RuntimeConfig& r)
+    {
+        j = json{
+            //{ "ProjectRoot",      r.ProjectRoot.string() },
+            { "AssetsRoot",       r.AssetsRoot.string() },
+            //{ "IntermediateRoot", r.IntermediateRoot.string() },
+            //{ "SavedRoot",        r.SavedRoot.string() },
+            { "StartupScene",     r.StartupScene },
+            { "GameModule",       r.GameModule },
+            { "EnabledModules",   r.EnabledModules },
+            { "Window",           r.Window },
+            { "Render",           r.Render },
+            { "Network",          r.Network }
+        };
+    }
 
     void from_json(const json& j, ProjectConfig::EditorConfig& e)
     {
         
+    }
+    void to_json(json& j, const ProjectConfig::EditorConfig& e)
+    {
+        j = json{
+            //{ "EditorResourcesRoot", e.EditorResourcesRoot.string() }
+        };
     }
 
     void from_json(const json& j, ProjectConfig& p)
@@ -90,6 +146,15 @@ namespace Boon
 
         if (j.contains("Editor"))
             j.at("Editor").get_to(p.Editor);
+    }
+    void to_json(json& j, const ProjectConfig& p)
+    {
+        j = json{
+            { "Name",    p.Name },
+            { "Version", p.Version },
+            { "Runtime", p.Runtime },
+            { "Editor",  p.Editor }
+        };
     }
 
     std::filesystem::path GetExecutablePath()
@@ -190,6 +255,9 @@ namespace Boon
         if (config.Version == 0)
             config.Version = 1;
 
+        if (config.Runtime.StartupScene.empty())
+            config.Runtime.StartupScene = "Scenes/Main.scene";
+
         if (config.Runtime.AssetsRoot.empty())
             config.Runtime.AssetsRoot = "Assets";
 
@@ -204,6 +272,33 @@ namespace Boon
 
         config.Runtime.EngineRoot = s_exepath / "../Boon";
         config.Editor.EditorResourcesRoot = s_exepath;
+    }
+
+    bool ProjectLoader::SaveToFile(const std::filesystem::path& location, const ProjectConfig& projectConfig)
+    {
+        if (location.empty())
+            return false;
+        try
+        {
+            const std::filesystem::path filePath = location / (projectConfig.Name + ".bproj");
+
+            json j = projectConfig;
+
+            std::ofstream file(filePath, std::ios::out | std::ios::binary | std::ios::trunc);
+            if (!file.is_open())
+                return false;
+
+            file << j.dump(4);
+
+            if (file.fail())
+                return false;
+
+            return true;
+        }
+        catch (const std::exception&)
+        {
+            return false;
+        }
     }
 
     void ProjectLoader::ResolvePaths(ProjectConfig& config, const std::filesystem::path& projectFilePath)

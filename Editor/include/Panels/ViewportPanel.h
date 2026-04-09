@@ -25,7 +25,7 @@ namespace BoonEditor
 	class ViewportPanel final : public EditorPanel
 	{
 	public:
-		ViewportPanel(const std::string& name, DragDropRouter* pRouter, SceneContext* pContext, GameObjectContext* pSelectionContext);
+		ViewportPanel(const std::string& name, EditorContext* pContext, SceneContext* pSceneContext, GameObjectContext* pSelectionContext);
 		virtual ~ViewportPanel();
 
 		virtual void Update() override;
@@ -61,7 +61,7 @@ namespace BoonEditor
 		glm::vec2 m_ViewportImagePosition{};
 
 		GameObject m_HoveredGameObject{};
-		SceneContext* m_pContext;
+		SceneContext* m_pSceneContext;
 		GameObjectContext* m_pSelectionContext{};
 		std::unique_ptr<ViewportToolbar> m_pToolbar{};
 		std::unique_ptr<DebugRenderer> m_pDebugRenderer{};

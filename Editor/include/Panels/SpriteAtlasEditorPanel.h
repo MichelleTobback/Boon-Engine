@@ -28,7 +28,7 @@ namespace BoonEditor
     class SpriteAtlasEditorPanel : public AssetEditor<SpriteAtlasAsset>
     {
     public:
-        SpriteAtlasEditorPanel(const std::string& name, DragDropRouter* pRouter);
+        SpriteAtlasEditorPanel(const std::string& name, EditorContext* pContext);
 
         virtual void Update() override;
 

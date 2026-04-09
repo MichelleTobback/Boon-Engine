@@ -17,8 +17,8 @@
 using namespace BoonEditor;
 using namespace Boon;
 
-TilemapEditorPanel::TilemapEditorPanel(const std::string& name, DragDropRouter* pRouter)
-    : AssetEditor<TilemapAsset>(name, pRouter) {}
+TilemapEditorPanel::TilemapEditorPanel(const std::string& name, EditorContext* pContext)
+    : AssetEditor<TilemapAsset>(name, pContext) {}
 
 void TilemapEditorPanel::Update() {}
 

@@ -22,7 +22,7 @@ namespace BoonEditor
 	class ViewportToolbar final : public EditorPanel
 	{
 	public:
-		ViewportToolbar(const std::string& name, DragDropRouter* pRouter);
+		ViewportToolbar(const std::string& name, EditorContext* pContext);
 		virtual ~ViewportToolbar() = default;
 
 		ViewportToolbar(const ViewportToolbar& other) = delete;

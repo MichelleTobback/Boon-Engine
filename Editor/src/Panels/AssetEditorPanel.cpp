@@ -3,8 +3,8 @@
 #include <Asset/AssetLibrary.h>
 #include <Scene/SceneManager.h>
 
-BoonEditor::AssetEditorPanel::AssetEditorPanel(const std::string& name, DragDropRouter* pRouter, ViewportPanel* pViewport)
-    : EditorPanel(name, pRouter), m_pViewport{pViewport}
+BoonEditor::AssetEditorPanel::AssetEditorPanel(const std::string& name, EditorContext* pContext, ViewportPanel* pViewport)
+    : EditorPanel(name, pContext), m_pViewport{pViewport}
 {
 	SceneManager& scenes = ServiceLocator::Get<SceneManager>();
 	m_PreviewScene.Set(&scenes.CreateScene("asset preview"));
@@ -44,5 +44,5 @@ void BoonEditor::AssetEditorPanel::OnRenderUI()
 	if (!m_pActiveEditor)
 		return;
 
-	m_pActiveEditor->OnRender();
+	m_pActiveEditor->RenderUI();
 }
