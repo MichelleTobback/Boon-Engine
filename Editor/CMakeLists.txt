@@ -4,14 +4,20 @@ project(Editor LANGUAGES CXX)
 # --------------------------------------------------
 # Reflection for editor module
 # --------------------------------------------------
+set(EDITOR_GENERATED_CPP
+    ${CMAKE_CURRENT_SOURCE_DIR}/generated/Generated_Components.cpp
+)
+
 boon_add_reflected_module(
     NAME Editor
-    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/generated/Generated_Components.cpp
+    OUTPUT ${EDITOR_GENERATED_CPP}
     SCAN_DIRS
         ${CMAKE_SOURCE_DIR}/Boon/include
         ${CMAKE_CURRENT_SOURCE_DIR}/include
     VERBOSE
 )
+
+set_source_files_properties(${EDITOR_GENERATED_CPP} PROPERTIES GENERATED TRUE)
 
 # --------------------------------------------------
 # ImGui
@@ -43,7 +49,6 @@ target_link_libraries(imgui PUBLIC glfw)
 # --------------------------------------------------
 file(GLOB_RECURSE EDITOR_SOURCES CONFIGURE_DEPENDS
     src/*.cpp
-    generated/*.cpp
 )
 
 file(GLOB_RECURSE EDITOR_HEADERS CONFIGURE_DEPENDS
@@ -57,6 +62,7 @@ file(GLOB_RECURSE EDITOR_HEADERS CONFIGURE_DEPENDS
 add_executable(Editor
     ${EDITOR_SOURCES}
     ${EDITOR_HEADERS}
+    ${EDITOR_GENERATED_CPP}
 )
 
 add_dependencies(Editor GenerateReflection)

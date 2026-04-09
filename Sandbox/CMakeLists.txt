@@ -4,20 +4,25 @@ project(SandboxGame LANGUAGES CXX)
 # --------------------------------------------------
 # Reflection for sandbox module
 # --------------------------------------------------
+set(SANDBOX_GENERATED_CPP
+    ${CMAKE_CURRENT_SOURCE_DIR}/generated/Generated_Components.cpp
+)
+
 boon_add_reflected_module(
     NAME SandboxGame
-    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/generated/Generated_Components.cpp
+    OUTPUT ${SANDBOX_GENERATED_CPP}
     SCAN_DIRS
         ${CMAKE_CURRENT_SOURCE_DIR}/include
     MINIMAL
 )
+
+set_source_files_properties(${SANDBOX_GENERATED_CPP} PROPERTIES GENERATED TRUE)
 
 # --------------------------------------------------
 # Sources
 # --------------------------------------------------
 file(GLOB_RECURSE SANDBOX_SOURCES CONFIGURE_DEPENDS
     src/*.cpp
-    generated/*.cpp
 )
 
 file(GLOB_RECURSE SANDBOX_HEADERS CONFIGURE_DEPENDS
@@ -31,6 +36,7 @@ file(GLOB_RECURSE SANDBOX_HEADERS CONFIGURE_DEPENDS
 add_library(SandboxGame SHARED
     ${SANDBOX_SOURCES}
     ${SANDBOX_HEADERS}
+    ${SANDBOX_GENERATED_CPP}
   )
 
 add_dependencies(SandboxGame GenerateReflection)

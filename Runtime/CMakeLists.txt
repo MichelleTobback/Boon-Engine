@@ -4,20 +4,26 @@ project(Runtime LANGUAGES CXX)
 # --------------------------------------------------
 # Reflection for runtime module
 # --------------------------------------------------
+set(RUNTIME_GENERATED_CPP
+    ${CMAKE_CURRENT_SOURCE_DIR}/generated/Generated_Components.cpp
+)
+
 boon_add_reflected_module(
     NAME Runtime
-    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/generated/Generated_Components.cpp
+    OUTPUT ${RUNTIME_GENERATED_CPP}
     SCAN_DIRS
         ${CMAKE_SOURCE_DIR}/Boon/include
         ${CMAKE_CURRENT_SOURCE_DIR}/include
+    VERBOSE
 )
+
+set_source_files_properties(${RUNTIME_GENERATED_CPP} PROPERTIES GENERATED TRUE)
 
 # --------------------------------------------------
 # Sources
 # --------------------------------------------------
 file(GLOB_RECURSE RUNTIME_SOURCES CONFIGURE_DEPENDS
     src/*.cpp
-    generated/*.cpp
 )
 
 file(GLOB_RECURSE RUNTIME_HEADERS CONFIGURE_DEPENDS
@@ -31,6 +37,7 @@ file(GLOB_RECURSE RUNTIME_HEADERS CONFIGURE_DEPENDS
 add_executable(Runtime
     ${RUNTIME_SOURCES}
     ${RUNTIME_HEADERS}
+    ${RUNTIME_GENERATED_CPP}
 )
 
 add_dependencies(Runtime GenerateReflection)

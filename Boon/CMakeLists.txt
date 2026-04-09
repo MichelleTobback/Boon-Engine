@@ -4,19 +4,24 @@ project(BoonEngine LANGUAGES CXX)
 # --------------------------------------------------
 # Reflection for engine module
 # --------------------------------------------------
+set(BOON_GENERATED_CPP
+    ${CMAKE_CURRENT_SOURCE_DIR}/generated/Generated_Components.cpp
+)
+
 boon_add_reflected_module(
     NAME BoonEngine
-    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/generated/Generated_Components.cpp
+    OUTPUT ${BOON_GENERATED_CPP}
     SCAN_DIRS
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
+
+set_source_files_properties(${BOON_GENERATED_CPP} PROPERTIES GENERATED TRUE)
 
 # --------------------------------------------------
 # Sources
 # --------------------------------------------------
 file(GLOB_RECURSE ENGINE_SOURCES CONFIGURE_DEPENDS
     src/*.cpp
-    generated/*.cpp
 )
 
 file(GLOB_RECURSE ENGINE_HEADERS CONFIGURE_DEPENDS
@@ -30,6 +35,7 @@ file(GLOB_RECURSE ENGINE_HEADERS CONFIGURE_DEPENDS
 add_library(BoonEngine STATIC
     ${ENGINE_SOURCES}
     ${ENGINE_HEADERS}
+    ${BOON_GENERATED_CPP}
 )
 
 add_dependencies(BoonEngine GenerateReflection)
