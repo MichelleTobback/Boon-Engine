@@ -20,6 +20,9 @@
 #include <Platform/Steam/SteamNetDriver.h>
 #include <Networking/NetScene.h>
 #include <Networking/Events/NetConnectionEvent.h>
+#include <Networking/NetRepRegistry.h>
+
+#include <Module/ModuleLibrary.h>
 
 #include "Reflection/BClass.h"
 #include <iostream>
@@ -43,9 +46,10 @@ Runtime::RuntimeState::~RuntimeState()
 
 void Runtime::RuntimeState::OnEnter()
 {
+	const RuntimeConfig& config{ Application::Get().GetDescriptor() };
 	Window& window{ Application::Get().GetWindow() };
 
-	m_NetworkSettings.NetMode = Application::Get().GetDescriptor().netDriverMode;
+	m_NetworkSettings = config.Network;
 	std::shared_ptr<NetDriver> network = std::make_shared<SteamNetDriver>();
 	ServiceLocator::Register<NetDriver>(network);
 	StartNetwork();
@@ -58,6 +62,7 @@ void Runtime::RuntimeState::OnEnter()
 	importer.RegisterImporter<TilemapImporter>();
 
 	AssetLibrary& assets = Assets::Get();
+	assets.AddRoot(config.EngineRoot / config.AssetsRoot); // engine assets
 	assets.Import<TilemapAsset>("game/Arena/Arena-tilemap.btm");
 	assets.Import<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa");
 
@@ -76,15 +81,21 @@ void Runtime::RuntimeState::OnEnter()
 			m_pRenderer->SetContext(&scene);
 		});
 
+	std::shared_ptr<ModuleLibrary> moduleLib = std::make_shared<ModuleLibrary>();
+	ServiceLocator::Register<ModuleLibrary>(moduleLib);
+	ModuleContext ctx{};
+	ctx.BClasses = &BClassRegistry::Get();
+	ctx.NetReps = &NetRepRegistry::Get();
+	ctx.ServiceRegistry = ServiceLocator::GetRegistry();
+	moduleLib->LoadModule(config.ProjectRoot / config.IntermediateRoot / config.GameModule / (config.GameModule + ".dll"), ctx);
+
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 	Scene& scene = sceneManager.CreateScene("scene");
 	SceneSerializer serializer(scene);
-	serializer.Deserialize("Assets/scenes/Test.scene");
+	serializer.Deserialize(config.AssetsRoot / config.StartupScene);
 	m_pRenderer->SetContext(&scene);
 
 	sceneManager.SetActiveScene(scene.GetID(), true);
-
-	//m_pRenderer->SetContext(&CreateScene("Scene1", 3.f, 0.f));
 }
 
 void Runtime::RuntimeState::OnUpdate()
@@ -111,6 +122,12 @@ void Runtime::RuntimeState::OnExit()
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	eventBus.Unsubscribe<WindowResizeEvent>(m_WindowResizeEvent);
 	eventBus.Unsubscribe<SceneChangedEvent>(m_SceneChangedEvent);
+
+	ModuleContext ctx{};
+	ctx.BClasses = &BClassRegistry::Get();
+	ctx.NetReps = &NetRepRegistry::Get();
+	ctx.ServiceRegistry = ServiceLocator::GetRegistry();
+	ServiceLocator::Get<ModuleLibrary>().UnloadAll(ctx);
 }
 
 void Runtime::RuntimeState::StartNetwork()

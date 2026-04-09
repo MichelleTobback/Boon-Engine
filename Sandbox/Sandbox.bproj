@@ -1,0 +1,40 @@
+{
+  "Name": "Sandbox",
+  "Version": 1,
+
+  "Runtime": {
+    "AssetsRoot": "Assets",
+    "IntermediateRoot": "Intermediate",
+    "SavedRoot": "Saved",
+
+    "StartupScene": "Scenes/Main.scene",
+    "GameModule": "SandboxGame",
+
+    "EnabledModules": [
+      "SandboxGame"
+    ],
+
+    "Window": {
+      "Title": "Sandbox Project",
+      "Width": 1600,
+      "Height": 900,
+      "bFullscreen": false,
+      "bResizable": true,
+      "bBorderless": false
+    },
+
+    "Render": {
+      "bVSync": true,
+      "Renderer": "Default"
+    },
+
+    "Network": {
+      "DriverMode": "Client",
+      "MaxClients": 16
+    }
+  },
+
+  "Editor": {
+    
+  }
+}

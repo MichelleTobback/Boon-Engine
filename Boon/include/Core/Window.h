@@ -2,6 +2,7 @@
 #include "Core/BitFlag.h"
 #include <memory>
 #include <string>
+#include <filesystem>
 
 namespace Boon
 {
@@ -14,7 +15,7 @@ namespace Boon
 		 * Window encapsulates the platform specific window implementation and
 		 * exposes a minimal API for initialization, event polling and presentation.
 		 */
-		enum class WinConfigFlag
+		enum class WinConfigFlag : uint32_t
 		{
 			None = 0, Vsync
 		};
@@ -24,6 +25,7 @@ namespace Boon
 			uint32_t width{};
 			uint32_t height{};
 			std::string name{};
+			std::filesystem::path icon{};
 			WinConfigFlag flags{};
 		};
 

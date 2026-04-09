@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Project/ProjectConfig.h"
 #include <memory>
 
 namespace BoonEditor
@@ -7,7 +7,7 @@ namespace BoonEditor
 	class EditorRenderer final
 	{
 	public:
-		EditorRenderer();
+		EditorRenderer(const Boon::ProjectConfig& config);
 		~EditorRenderer();
 
 		EditorRenderer(const EditorRenderer& other) = delete;

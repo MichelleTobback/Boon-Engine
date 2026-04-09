@@ -93,9 +93,11 @@ set(STEAMNET_BIN_DIR "${STEAMNET_DIR}/bin")
 add_library(SteamNetworkingSockets STATIC IMPORTED GLOBAL)
 
 set_target_properties(SteamNetworkingSockets PROPERTIES
-    IMPORTED_LOCATION_DEBUG   "${STEAMNET_BIN_DIR}/Debug/GameNetworkingSockets.lib"
-    IMPORTED_LOCATION_RELEASE "${STEAMNET_BIN_DIR}/Release/GameNetworkingSockets.lib"
-    INTERFACE_INCLUDE_DIRECTORIES "${STEAMNET_INCLUDE}"
+    IMPORTED_LOCATION_DEBUG          "${STEAMNET_BIN_DIR}/Debug/GameNetworkingSockets.lib"
+    IMPORTED_LOCATION_RELEASE        "${STEAMNET_BIN_DIR}/Release/GameNetworkingSockets.lib"
+    IMPORTED_LOCATION_RELWITHDEBINFO "${STEAMNET_BIN_DIR}/Release/GameNetworkingSockets.lib"
+    IMPORTED_LOCATION_MINSIZEREL     "${STEAMNET_BIN_DIR}/Release/GameNetworkingSockets.lib"
+    INTERFACE_INCLUDE_DIRECTORIES    "${STEAMNET_INCLUDE}"
 )
 
 if (WIN32)

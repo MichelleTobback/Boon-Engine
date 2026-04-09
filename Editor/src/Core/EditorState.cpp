@@ -62,13 +62,21 @@
 
 using namespace BoonEditor;
 
-EditorState::EditorState() = default;
+BoonEditor::EditorState::EditorState(const ProjectConfig& project)
+	: m_CurrentProject{ project }
+{
+}
+
 EditorState::~EditorState() = default;
 
 void EditorState::OnEnter()
 {
+	const RuntimeConfig& config{ Application::Get().GetDescriptor() };
+
 	Window& window{ Application::Get().GetWindow() };
 	AssetLibrary& assetLib{ Assets::Get() };
+	assetLib.AddRoot(config.EngineRoot / config.AssetsRoot); // engine assets
+	assetLib.AddRoot(m_CurrentProject.Editor.EditorResourcesRoot / config.AssetsRoot); // editor assets
 	AssetImporterRegistry& importer = ServiceLocator::Get<AssetImporterRegistry>();
 	importer.RegisterImporter<Texture2DImporter>();
 	importer.RegisterImporter<ShaderImporter>();
@@ -76,9 +84,9 @@ void EditorState::OnEnter()
 	importer.RegisterImporter<SceneImporter>();
 	importer.RegisterImporter<TilemapImporter>();
 
-	m_NetworkSettings.NetMode = Application::Get().GetDescriptor().netDriverMode;
+	m_NetworkSettings = Application::Get().GetDescriptor().Network;
 
-	m_PRenderer = std::make_unique<EditorRenderer>();
+	m_PRenderer = std::make_unique<EditorRenderer>(m_CurrentProject);
 
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 	Scene& scene = sceneManager.CreateScene("Game");
@@ -97,7 +105,9 @@ void EditorState::OnEnter()
 	CreatePanel<ScenePanel>("scene", &m_DragDrop,  &m_SceneContext, &m_SelectionContext);
 	CreatePanel<NetworkPanel>("network", &m_DragDrop, m_NetworkSettings);
 
-	CreateObject<AssetDirectoryScanner>("Assets/", 1.f);
+	CreateObject<AssetDirectoryScanner>(config.AssetsRoot, 1.f);
+	CreateObject<AssetDirectoryScanner>(config.EngineRoot / config.AssetsRoot, 1.f);
+	CreateObject<AssetDirectoryScanner>(m_CurrentProject.Editor.EditorResourcesRoot / config.AssetsRoot, 1.f);
 
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	std::shared_ptr<NetDriver> network = std::make_shared<SteamNetDriver>();
@@ -142,12 +152,10 @@ void EditorState::OnEnter()
 	ctx.BClasses = &BClassRegistry::Get();
 	ctx.NetReps = &NetRepRegistry::Get();
 	ctx.ServiceRegistry = ServiceLocator::GetRegistry();
-	moduleLib->LoadModule("SandboxGame.dll", ctx);
+	moduleLib->LoadModule(config.ProjectRoot / config.IntermediateRoot / config.GameModule / (config.GameModule + ".dll"), ctx);
 
 	SceneSerializer serializer(scene);
-	//serializer.Serialize("Assets/scenes/Test.scene");
-	serializer.Clear();
-	serializer.Deserialize("Assets/scenes/Test.scene");
+	serializer.Deserialize(config.AssetsRoot / config.StartupScene);
 
 	sceneManager.SetActiveScene(scene.GetID(), false);
 }
@@ -222,7 +230,7 @@ void EditorState::OnRender()
 			if (m_PlayState != EditorPlayState::Play)
 			{
 				SceneSerializer serializer(*m_pSelectedScene);
-				serializer.Serialize("Assets/scenes/Test.scene");
+				serializer.Serialize(m_CurrentProject.Runtime.AssetsRoot / "Scenes/Main.scene");
 			}
 		}
 		if (ImGui::MenuItem("Open scene"))
@@ -234,7 +242,7 @@ void EditorState::OnRender()
 				m_pSelectedScene = m_SceneContext.Get();
 
 				SceneSerializer serializer(*m_SceneContext.Get());
-				serializer.Deserialize("Assets/scenes/Test.scene");
+				serializer.Deserialize(m_CurrentProject.Runtime.AssetsRoot / "Scenes/Main.scene");
 
 				sceneManager.SetActiveScene(m_SceneContext.Get()->GetID(), false);
 			}

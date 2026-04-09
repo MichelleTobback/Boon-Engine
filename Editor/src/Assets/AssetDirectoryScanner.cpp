@@ -5,7 +5,7 @@
 
 namespace BoonEditor
 {
-    AssetDirectoryScanner::AssetDirectoryScanner(const std::string& root, float interval)
+    AssetDirectoryScanner::AssetDirectoryScanner(const std::filesystem::path& root, float interval)
         : m_Root(root), m_Interval(interval)
     {
     }

@@ -1,39 +1,27 @@
 #include "Core/EditorState.h"
-
+#include "Project/ProjectLoader.h"
 #include <Core/Application.h>
 
+#include <iostream>
+
 using namespace BoonEditor;
+using namespace Boon;
 
-Boon::ENetDriverMode ParseDriverModeFromArgs(int argc, char** argv)
+ProjectConfig ProjectConfigFromArgs(int argc, char** argv)
 {
-    // Default
-    Boon::ENetDriverMode mode = Boon::ENetDriverMode::DedicatedServer;
+    std::filesystem::path path = argc > 1 
+        ? argv[1] 
+        : "D:\\Projects\\BoonProjects\\WitchGame\\WitchGame.bproj";
+        //: "../../../Sandbox/Sandbox.bproj";
 
-    if (argc <= 1)
-        return mode;
-
-    std::string arg = argv[1];
-
-    if (arg == "-server")
-        mode = Boon::ENetDriverMode::DedicatedServer;
-    else if (arg == "-listen")
-        mode = Boon::ENetDriverMode::ListenServer;
-    else if (arg == "-client")
-        mode = Boon::ENetDriverMode::Client;
-
-    return mode;
+    return ProjectLoader::LoadFromFile(path).Value;
 }
 
 int main(int argc, char** argv)
 {
-	Boon::Application::AppDesc desc{};
-	desc.name = "Boon Engine";
-	desc.contentDir = "Content/";
-	desc.windowDesc.name = "Boon Editor";
-	desc.windowDesc.width = 800;
-	desc.windowDesc.height = 600;
-    desc.netDriverMode = ParseDriverModeFromArgs(argc, argv);
-	Boon::Application app{ desc };
-    app.Run(std::make_shared<EditorState>());
+    ProjectConfig config = ProjectConfigFromArgs(argc, argv);
+
+	Boon::Application app{ config.Runtime };
+    app.Run(std::make_shared<EditorState>(config));
 	return 0;
 }

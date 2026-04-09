@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+#include <filesystem>
 
 namespace Boon
 {
@@ -16,13 +17,13 @@ namespace Boon
 		 * @brief Serialize the scene to the destination path.
 		 * @param dst Destination file path to write the scene representation.
 		 */
-		void Serialize(const std::string& dst);
+		void Serialize(const std::filesystem::path& dst);
 
 		/**
 		 * @brief Deserialize scene data from the provided source path.
 		 * @param src Source file path to read scene data from.
 		 */
-		void Deserialize(const std::string& src);
+		void Deserialize(const std::filesystem::path& src);
 
 		/**
 		 * @brief Clear serialized data / internal caches used by the serializer.

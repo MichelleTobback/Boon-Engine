@@ -6,6 +6,7 @@
 #include "Event/EventBus.h"
 #include "Event/WindowEvents.h"
 
+#include <stb_image.h> //icon
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <functional>
@@ -15,6 +16,7 @@ namespace Boon
 	//========================================================
 	// Impl
 	//========================================================
+
 	class Window::GlfwWindowImpl final
 	{
 	public:
@@ -50,6 +52,8 @@ namespace Boon
 
 			m_pWindow = glfwCreateWindow(static_cast<int>(m_Desc.width), static_cast<int>(m_Desc.height), m_Desc.name.c_str(), nullptr, nullptr);
 			glfwMakeContextCurrent(m_pWindow);
+
+			SetWindowIcon(m_pWindow, (Application::Get().GetDescriptor().EngineRoot / "Assets/Resources/BoonEngine.png").string().c_str());
 
 			glfwSwapInterval(1);
 
@@ -103,6 +107,27 @@ namespace Boon
 		uint32_t GetHeight() const
 		{
 			return m_Desc.height;
+		}
+
+		bool SetWindowIcon(GLFWwindow* window, const char* path)
+		{
+			int width, height, channels;
+			unsigned char* pixels = stbi_load(path, &width, &height, &channels, 4);
+			if (!pixels)
+			{
+				std::cerr << "Failed to load icon: " << path << '\n';
+				return false;
+			}
+
+			GLFWimage image;
+			image.width = width;
+			image.height = height;
+			image.pixels = pixels;
+
+			glfwSetWindowIcon(window, 1, &image);
+
+			stbi_image_free(pixels);
+			return true;
 		}
 
 	private:

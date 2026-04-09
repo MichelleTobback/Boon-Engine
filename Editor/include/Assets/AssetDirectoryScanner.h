@@ -18,7 +18,7 @@ namespace BoonEditor
     class AssetDirectoryScanner final : public EditorObject
     {
     public:
-        AssetDirectoryScanner(const std::string& root, float interval = 0.2f);
+        AssetDirectoryScanner(const std::filesystem::path& root, float interval = 0.2f);
 
         void Update();
 
@@ -28,7 +28,7 @@ namespace BoonEditor
         void ProcessFile(const std::filesystem::path& path);
 
     private:
-        std::string m_Root;
+        std::filesystem::path m_Root;
 
         float m_Interval{};
         float m_Accumulator{};

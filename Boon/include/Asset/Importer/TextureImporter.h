@@ -10,7 +10,7 @@ namespace Boon
     public:
         using AssetType = Texture2DAsset;
 
-        Asset* ImportFromFile(const std::string& filePath, const AssetMeta& meta) override
+        Asset* ImportFromFile(const std::filesystem::path& filePath, const AssetMeta& meta) override
         {
             Texture2DAsset* pResult{ nullptr };
             TextureDescriptor desc{};
@@ -19,7 +19,7 @@ namespace Boon
             stbi_set_flip_vertically_on_load(1);
             stbi_uc* data = nullptr;
             {
-                data = stbi_load(filePath.c_str(), &width, &height, &channels, 0);
+                data = stbi_load(filePath.string().c_str(), &width, &height, &channels, 0);
             }
 
             if (data)

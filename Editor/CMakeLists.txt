@@ -86,25 +86,12 @@ boon_set_output_dirs(Editor Editor)
 # --------------------------------------------------
 # Copy assets/resources
 # --------------------------------------------------
-add_custom_command(TARGET Editor POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/Boon/Assets
-        $<TARGET_FILE_DIR:Editor>/Assets
-    COMMENT "Copying Engine assets"
-)
 
 add_custom_command(TARGET Editor POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_CURRENT_SOURCE_DIR}/Resources
         $<TARGET_FILE_DIR:Editor>/Assets
     COMMENT "Copying Editor Resources..."
-)
-
-add_custom_command(TARGET Editor POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/Sandbox/Assets
-        $<TARGET_FILE_DIR:Editor>/Assets
-    COMMENT "Copying Sandbox assets"
 )
 
 set(STEAMNET_DIR     "${CMAKE_SOURCE_DIR}/Boon/external/GameNetworkingSockets")

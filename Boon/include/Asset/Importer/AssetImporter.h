@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include <filesystem>
 
 namespace Boon
 {
@@ -19,12 +20,12 @@ namespace Boon
          * @param meta Metadata describing the target asset.
          * @return Pointer to the created Asset on success, or nullptr on failure.
          */
-        virtual Asset* ImportFromFile(const std::string& filePath, const AssetMeta& meta) = 0;
+        virtual Asset* ImportFromFile(const std::filesystem::path& filePath, const AssetMeta& meta) = 0;
 
         /**
          * @brief Export an asset to a file. Default implementation returns true.
          */
-        virtual bool ExportToFile(const std::string& filePath, Asset* asset) { return true; }
+        virtual bool ExportToFile(const std::filesystem::path& filePath, Asset* asset) { return true; }
 
         /**
          * @brief Get supported file extensions for this importer.

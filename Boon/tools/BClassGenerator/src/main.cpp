@@ -655,7 +655,7 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    g_BoonMinimal = minimalFlag;
+    //g_BoonMinimal = minimalFlag;
     g_BoonModule = moduleFlag;
 
     if (minimalFlag)

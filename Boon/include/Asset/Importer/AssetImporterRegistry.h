@@ -49,7 +49,7 @@ namespace Boon
         }
 
         template<typename T>
-        Imported<T> ImportAndLoad(const std::string& filepath)
+        Imported<T> ImportAndLoad(const std::filesystem::path& filepath)
         {
             AssetMeta meta = MetaFromFile(filepath);
             if (!meta.IsValid())
@@ -68,7 +68,7 @@ namespace Boon
          * containing the loaded asset pointer and metadata.
          */
 
-        Imported<Asset> ImportAndLoad(const std::string& filepath)
+        Imported<Asset> ImportAndLoad(const std::filesystem::path& filepath)
         {
             AssetMeta meta = MetaFromFile(filepath);
             if (!meta.IsValid())
@@ -86,7 +86,7 @@ namespace Boon
         }
 
         template <typename T>
-        bool Export(const std::string& filepath, AssetHandle asset)
+        bool Export(const std::filesystem::path& filepath, AssetHandle asset)
         {
             Asset* pAsset = m_pCache->Find<Asset>(asset);
             return m_Importers[AssetTraits<T>::Type]->ExportToFile(filepath, pAsset);
@@ -105,7 +105,7 @@ namespace Boon
          * @brief Check whether an extension is supported by any registered importer.
          */
 
-        AssetMeta LoadMeta(const std::string& filepath)
+        AssetMeta LoadMeta(const std::filesystem::path& filepath)
         {
             AssetMeta meta;
             if (std::ifstream inputFile(filepath); inputFile.is_open())
@@ -118,7 +118,7 @@ namespace Boon
             }
         }
 
-        void WriteMeta(const std::string& filepath, const AssetMeta& meta)
+        void WriteMeta(const std::filesystem::path& filepath, const AssetMeta& meta)
         {
             std::filesystem::path path{ filepath };
             auto it = m_ExtentionsToType.find(path.extension().string());
@@ -141,7 +141,7 @@ namespace Boon
 
     private:
         friend class AssetLibrary;
-        AssetMeta MetaFromFile(const std::string& filepath)
+        AssetMeta MetaFromFile(const std::filesystem::path& filepath)
         {
             AssetMeta meta;
 
@@ -150,8 +150,7 @@ namespace Boon
             if (it == m_ExtentionsToType.end())
                 return meta;
 
-
-            std::filesystem::path path{ filepath + std::string(".meta") };
+            std::filesystem::path path{ filepath.string() + ".meta" };
             if (!std::filesystem::exists(path))
             {
                 if (std::ofstream outputFile(path); outputFile.is_open())

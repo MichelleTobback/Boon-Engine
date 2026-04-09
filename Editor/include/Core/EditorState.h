@@ -11,6 +11,8 @@
 #include <Renderer/SceneRenderer.h>
 #include <Scene/SceneManager.h>
 
+#include <Project/ProjectConfig.h>
+
 #include <Event/Event.h>
 
 #include <memory>
@@ -34,7 +36,7 @@ namespace BoonEditor
 	class EditorState final : public AppState
 	{
 	public:
-		EditorState();
+		EditorState(const ProjectConfig& project);
 		virtual ~EditorState();
 
 		EditorState(const EditorState& other) = default;
@@ -107,5 +109,7 @@ namespace BoonEditor
 		Delegate<void(Scene&)>::Handle m_BindNetSceneHandle;
 
 		DragDropRouter m_DragDrop{};
+
+		ProjectConfig m_CurrentProject;
 	};
 }

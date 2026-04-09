@@ -10,9 +10,9 @@ namespace Boon
             fclose(m_File);
     }
 
-    bool AssetPackReader::Open(const std::string& path)
+    bool AssetPackReader::Open(const std::filesystem::path& path)
     {
-        m_File = fopen(path.c_str(), "rb");
+        m_File = fopen(path.string().c_str(), "rb");
         if (!m_File)
             return false;
 

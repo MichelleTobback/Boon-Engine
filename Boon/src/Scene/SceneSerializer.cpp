@@ -3,6 +3,7 @@
 #include "Component/SceneComponent.h"
 #include "Asset/Asset.h"
 #include "Asset/AssetRef.h"
+#include "BoonDebug/Logger.h"
 
 #include "Scene/GameObject.h"
 #include "Reflection/BClass.h"
@@ -18,7 +19,7 @@ using namespace Boon;
 Boon::SceneSerializer::SceneSerializer(Scene& scene)
 	: m_Context(scene){}
 
-void Boon::SceneSerializer::Serialize(const std::string& dst)
+void Boon::SceneSerializer::Serialize(const std::filesystem::path& dst)
 {
     json j;
     j["scene"] = m_Context.m_Name;
@@ -166,12 +167,13 @@ void Boon::SceneSerializer::Serialize(const std::string& dst)
 }
 
 
-void Boon::SceneSerializer::Deserialize(const std::string& src)
+void Boon::SceneSerializer::Deserialize(const std::filesystem::path& src)
 {
     std::ifstream file(src);
     if (!file.is_open())
     {
-        //BOON_ERROR("Could not open scene file: {}", src);
+        BOON_LOG(std::filesystem::current_path().string());
+        BOON_LOG_ERROR("Could not open scene file: {}");
         return;
     }
 

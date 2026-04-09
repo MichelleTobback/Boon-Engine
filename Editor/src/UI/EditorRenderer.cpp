@@ -17,7 +17,7 @@ using namespace Boon;
 class EditorRenderer::EditorRendererImpl final
 {
 public:
-	EditorRendererImpl()
+	EditorRendererImpl(const ProjectConfig& config)
 	{
 		// Setup Dear ImGui context
 		IMGUI_CHECKVERSION();
@@ -29,6 +29,8 @@ public:
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
+		static std::string iniPath = (config.Editor.EditorResourcesRoot / "imgui.ini").string();
+		io.IniFilename = iniPath.c_str();
 
 		// Setup Dear ImGui style
 		ImGui::StyleColorsDark();
@@ -348,8 +350,8 @@ public:
 	}
 };
 
-EditorRenderer::EditorRenderer()
-	: m_pImpl{ std::make_unique<EditorRendererImpl>() } {}
+EditorRenderer::EditorRenderer(const ProjectConfig& config)
+	: m_pImpl{ std::make_unique<EditorRendererImpl>(config) } {}
 
 EditorRenderer::~EditorRenderer(){}
 

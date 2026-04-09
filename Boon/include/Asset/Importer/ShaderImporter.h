@@ -18,7 +18,7 @@ namespace Boon
          * Parses sections marked with `#vert` and `#frag` and populates a ShaderAsset.
          */
 
-        Asset* ImportFromFile(const std::string& filepath, const AssetMeta& meta) override
+        Asset* ImportFromFile(const std::filesystem::path& filepath, const AssetMeta& meta) override
         {
             ShaderAsset* asset{nullptr};
 

@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <memory>
 #include <vector>
+#include <filesystem>
 
 #include "Asset/Asset.h"
 #include "Core/UUID.h"
@@ -17,7 +18,7 @@ namespace Boon
         AssetPackReader() = default;
         ~AssetPackReader();
 
-        bool Open(const std::string& path);
+        bool Open(const std::filesystem::path& path);
 
         const PackedAssetEntry* GetEntry(UUID id) const
         {

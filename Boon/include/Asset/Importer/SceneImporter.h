@@ -9,7 +9,7 @@ namespace Boon
     public:
         using AssetType = SceneAsset;
 
-        Asset* ImportFromFile(const std::string& filePath, const AssetMeta& meta) override
+        Asset* ImportFromFile(const std::filesystem::path& filePath, const AssetMeta& meta) override
         {
             SceneAsset* pResult = new SceneAsset(meta.uuid);
             return pResult;

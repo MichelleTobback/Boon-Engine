@@ -39,7 +39,6 @@ namespace BoonEditor
 		void Clear();
 
 		void ForEachEntry(const std::function<void(AssetHandle, const std::string&)>& fn);
-		const std::string& GetAssetRoot() const { return m_AssetRoot; }
 
 		bool IsDirty() const { return m_Dirty; }
 		void ClearDirty() { m_Dirty = false; }

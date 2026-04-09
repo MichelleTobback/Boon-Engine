@@ -24,7 +24,7 @@ namespace Boon
         // --------------------------------------------------------------------
         // IMPORT (Supports old .bsa and new format)
         // --------------------------------------------------------------------
-        Asset* ImportFromFile(const std::string& filePath, const AssetMeta& meta) override
+        Asset* ImportFromFile(const std::filesystem::path& filePath, const AssetMeta& meta) override
         {
             SpriteAtlasAsset* pResult = nullptr;
             std::shared_ptr<SpriteAtlas> pInstance = std::make_shared<SpriteAtlas>();
@@ -129,7 +129,7 @@ namespace Boon
         // --------------------------------------------------------------------
         // EXPORT (New format only)
         // --------------------------------------------------------------------
-        bool ExportToFile(const std::string& filePath, Asset* asset) override
+        bool ExportToFile(const std::filesystem::path& filePath, Asset* asset) override
         {
             std::string texPath = "";
 

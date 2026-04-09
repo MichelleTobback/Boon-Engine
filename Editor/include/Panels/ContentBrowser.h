@@ -41,6 +41,8 @@ namespace BoonEditor
 
         AssetContext* m_pSelectedAsset;
 
+        std::filesystem::path m_root{};
+
         void BuildFolderTree();
         void BuildFoldersFromDisk(const std::string& path, FolderNode* parent);
         void AddAssetToTree(const std::string& path);

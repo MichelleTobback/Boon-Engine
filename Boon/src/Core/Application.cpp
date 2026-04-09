@@ -21,7 +21,7 @@
 
 Boon::Application* Boon::Application::s_pInstance{ nullptr };
 
-Boon::Application::Application(const AppDesc& desc)
+Boon::Application::Application(const RuntimeConfig& desc)
 	: m_Desc{desc}
 	, m_pStateMachine{std::make_unique<AppStateMachine>()}
 {
@@ -35,7 +35,15 @@ Boon::Application::~Application()
 
 void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 {
-	m_pWindow = std::make_unique<Window>(m_Desc.windowDesc);
+	Window::WindowDesc windowDesc{};
+	windowDesc.name = m_Desc.Window.Title;
+	windowDesc.width = m_Desc.Window.Width;
+	windowDesc.height = m_Desc.Window.Height;
+	uint32_t windowFlags = (uint32_t)windowDesc.flags;
+	if (m_Desc.Render.bVSync)
+		windowFlags |= (uint32_t)Window::WinConfigFlag::Vsync;
+	windowDesc.flags = (Window::WinConfigFlag)windowFlags;
+	m_pWindow = std::make_unique<Window>(windowDesc);
 	Renderer::Init();
 
 	m_pServiceRegistry = std::make_unique<ServiceRegistry>();
@@ -49,7 +57,7 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 	BOON_REGISTER_FN(BClassRegistry::Get(), NetRepRegistry::Get());
 
 	ServiceLocator::Register(std::make_shared<AssetImporterRegistry>());
-	ServiceLocator::Register(std::make_shared<AssetLibrary>("Assets/"));
+	ServiceLocator::Register(std::make_shared<AssetLibrary>(m_Desc.AssetsRoot));
 	ServiceLocator::Register(std::make_shared<EventBus>());
 	ServiceLocator::Register(std::make_shared<Input>());
 	ServiceLocator::Register(std::make_shared<SceneManager>());

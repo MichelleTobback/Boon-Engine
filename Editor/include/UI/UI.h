@@ -916,6 +916,8 @@ namespace BoonEditor
                         continue;
 
                     std::string filename = std::filesystem::path(path).filename().string();
+                    if (filename.empty())
+                        filename = "Unknown";
                     bool selected = (uuid == handle);
 
                     if (ImGui::Selectable(filename.c_str(), selected))

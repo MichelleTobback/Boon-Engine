@@ -5,6 +5,8 @@
 #include <Asset/TilemapAsset.h>
 #include <Asset/SpriteAtlasAsset.h>
 
+#include <Core/Application.h>
+
 using namespace BoonEditor;
 namespace fs = std::filesystem;
 
@@ -40,11 +42,12 @@ void ContentBrowser::BuildFolderTree()
     m_RootFolder.assets.clear();
 
     // Asset root must match AssetDirectoryScanner's root
-    std::string root = BoonEditor::AssetDatabase::Get().GetAssetRoot();
-    m_RootFolder.fullPath = root;
+    const RuntimeConfig& config{ Application::Get().GetDescriptor() };
+    m_root = (config.AssetsRoot).string();
+    m_RootFolder.fullPath = m_root.string();
 
     // 1. Build real folder structure
-    BuildFoldersFromDisk(root, &m_RootFolder);
+    BuildFoldersFromDisk(m_root.string(), &m_RootFolder);
 
     // 2. Insert only registered assets
     auto& database = AssetDatabase::Get();
@@ -73,17 +76,17 @@ void ContentBrowser::BuildFoldersFromDisk(const std::string& path, FolderNode* p
 
 void ContentBrowser::AddAssetToTree(const std::string& path)
 {
-    std::string cleanPath = path;
-
+    //std::string cleanPath = path;
+    //
     // Normalize slashes
-    std::replace(cleanPath.begin(), cleanPath.end(), '\\', '/');
+    //std::replace(cleanPath.begin(), cleanPath.end(), '\\', '/');
 
     // If path starts with "Asset/" → remove it
-    constexpr const char* prefix = "Assets/";
-    if (cleanPath.rfind(prefix, 0) == 0)
-        cleanPath = cleanPath.substr(strlen(prefix));
+    //const char* prefix = m_RootFolder.fullPath.c_str();
+    //if (cleanPath.rfind(prefix, 0) == 0)
+    //    cleanPath = cleanPath.substr(strlen(prefix));
 
-    fs::path p(cleanPath);
+    fs::path p = std::filesystem::relative(path, m_RootFolder.fullPath);
 
     FolderNode* node = &m_RootFolder;
 
@@ -106,7 +109,7 @@ void ContentBrowser::AddAssetToTree(const std::string& path)
         node = it->second;
     }
 
-    node->assets.push_back(cleanPath);
+    node->assets.push_back(p.string());
 }
 
 void ContentBrowser::CollectAssetsRecursive(FolderNode* node, std::vector<std::string>& out)
@@ -378,7 +381,7 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
             float iconX = (cellWidth - iconSize) * 0.5f;
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + iconX);
 
-            AssetHandle h = AssetDatabase::Get().GetHandle("Assets/" + assetPath);
+            AssetHandle h = AssetDatabase::Get().GetHandle(m_root.string() + "/" + assetPath);
             bool selected = m_pSelectedAsset->Get() == h;
 
             ImVec4 bgHovered = ImVec4(0.15f, 0.25f, 0.35f, 0.35f);

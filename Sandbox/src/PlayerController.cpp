@@ -89,8 +89,6 @@ void PlayerController::Update(GameObject gameObject)
         break;
     }
 
-    CheckGrounded(gameObject);
-
     if (gameObject.HasComponent<NetIdentity>() && !gameObject.GetComponent<NetIdentity>().IsOwner())
         return;
 
@@ -118,11 +116,6 @@ void PlayerController::Update(GameObject gameObject)
     {
         movement.y = -1.0f;
         m_Direction = Direction::Down;
-    }
-
-    if (m_IsGrounded && input.IsKeyPressed(Key::Space))
-    {
-        BClassRegistry::Get().Find<Boon::PlayerController>()->InvokeByName(this, "Jump");
     }
 
     // Normalize
@@ -166,26 +159,6 @@ void PlayerController::OnEndOverlap(GameObject gameObject, GameObject other)
     
 }
 
-void PlayerController::Jump_Server()
-{
-    Rigidbody2D& rb = m_Owner.GetComponent<Rigidbody2D>();
-    rb.AddForce({ 0.0f, rb.GetMass() * m_JumpForce }, Rigidbody2D::ForceMode::Impulse);
-}
-
-void PlayerController::Jump()
-{
-    NetIdentity& ni = m_Owner.GetComponent<NetIdentity>();
-    if (ni.IsAutonomousProxy() || ni.IsSimulatedProxy())
-    {
-        BClassID clsId = BClassRegistry::Get().Find<PlayerController>()->hash;
-        ni.pScene->GetRPC()->CallServer(clsId, FNV1a32("Jump_Server"), m_Owner.GetUUID(), {});
-        return;
-    }
-
-    Rigidbody2D& rb = m_Owner.GetComponent<Rigidbody2D>();
-    rb.AddForce({ 0.0f, rb.GetMass() * m_JumpForce }, Rigidbody2D::ForceMode::Impulse);
-}
-
 void PlayerController::Move_Server(glm::vec2 dir)
 {
     m_MoveInput = dir;
@@ -204,15 +177,4 @@ void PlayerController::Move(const glm::vec2& dir)
     }
 
     m_MoveInput = dir;
-}
-
-void PlayerController::CheckGrounded(GameObject gameObject)
-{
-    Ray2D ray{};
-    ray.Origin = glm::vec2(gameObject.GetTransform().GetWorldPosition()) - glm::vec2(0.f, 1.f) * 0.4f;
-    ray.Direction = glm::vec2(0.f, -1.f);
-    ray.Distance = 0.2f;
-
-    HitResult2D result{};
-    m_IsGrounded = gameObject.GetScene()->Raycast2D(ray, result);
 }
