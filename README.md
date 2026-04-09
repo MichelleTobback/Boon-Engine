@@ -5,7 +5,7 @@
 [![C++ Standard](https://img.shields.io/badge/C%2B%2B-20-brightgreen.svg)](https://isocpp.org/std/the-standard)
 [![Docs (Doxygen)](https://img.shields.io/badge/docs-Doxygen-blue.svg)](https://michelletobback.github.io/Boon-Engine/)
 
-![alt text](https://michelletobback.github.io/Boon-Engine/Boon/Assets/Resources/BoonEngine.png)
+![Boon Engine](https://github.com/MichelleTobback/Boon-Engine/Boon/Assets/Resources/BoonEngine.png)
 
 Boon Engine is a C++ game engine focused on multiplayer. It provides a modular core, editor tooling, networking primitives and runtime modules aimed at 2D multiplayer games.
 
