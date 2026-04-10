@@ -39,6 +39,12 @@ namespace Boon
         m_Scenes.erase(id);
     }
 
+    void SceneManager::UnloadAll()
+    {
+        m_ActiveScene = UUID::Null;
+        m_Scenes.clear();
+    }
+
     void SceneManager::ReloadScene(SceneID id)
     {
         if (!IsLoaded(id))

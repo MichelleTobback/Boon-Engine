@@ -40,6 +40,11 @@ namespace Boon
         void UnloadScene(SceneID id);
 
         /**
+         * @brief Unload all scenes
+         */
+        void UnloadAll();
+
+        /**
          * @brief Reload the scene identified by id from its source.
          * @param id The SceneID to reload.
          */

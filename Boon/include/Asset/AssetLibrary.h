@@ -155,6 +155,14 @@ namespace Boon
         void ClearCache() { m_Cache.Clear(); }
 
         /**
+         * @brief Clear the internal asset registry.
+         */
+        void ClearRegistry() 
+        { 
+            m_Registry.Clear(); 
+        }
+
+        /**
          * @brief Check whether an asset handle corresponds to a registered asset.
          *
          * @param handle Asset handle to query.

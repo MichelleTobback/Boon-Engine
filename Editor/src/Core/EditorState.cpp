@@ -84,6 +84,7 @@ void EditorState::OnEnter()
 
 	Window& window{ Application::Get().GetWindow() };
 	AssetLibrary& assetLib{ Assets::Get() };
+	assetLib.SetRoot(config.AssetsRoot);
 	assetLib.AddRoot(config.EngineRoot / config.AssetsRoot); // engine assets
 	assetLib.AddRoot(m_Context.m_CurrentProject.Editor.EditorResourcesRoot / config.AssetsRoot); // editor assets
 	AssetImporterRegistry& importer = ServiceLocator::Get<AssetImporterRegistry>();
@@ -217,6 +218,14 @@ void EditorState::OnExit()
 	ctx.NetReps = &NetRepRegistry::Get();
 	ctx.ServiceRegistry = ServiceLocator::GetRegistry();
 	ServiceLocator::Get<ModuleLibrary>().UnloadAll(ctx);
+
+	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
+	sceneManager.UnloadAll();
+
+	Assets::Get().ClearCache();
+	Assets::Get().ClearRegistry();
+
+	AssetDatabase::Get().Clear();
 }
 
 void EditorState::OnRender()
