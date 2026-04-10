@@ -43,7 +43,7 @@ namespace BoonEditor
 		project.Name = desc.Name;
 		project.Runtime.GameModule = desc.Name;
 		project.Runtime.EnabledModules = { desc.Name };
-		project.Runtime.ProjectRoot = desc.Location + "/" + desc.Name;
+		project.Runtime.ProjectRoot = std::filesystem::path(desc.Location) / desc.Name;
 
 		project.Runtime.Window.Title = desc.Name + " Project";
 

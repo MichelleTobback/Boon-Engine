@@ -2,6 +2,9 @@
 
 #include "Tools/ProjectGenerator.h"
 #include "Core/EditorContext.h"
+#include "Core/Application.h"
+#include "Core/AppStateMachine.h"
+#include "Core/EditorState.h"
 
 #include <imgui.h>
 #include <cstring>
@@ -148,7 +151,8 @@ void NewProjectDialog::RenderDialog()
         if (Validate())
         {
             m_PendingSettings = m_Settings;
-            ProjectGenerator::Generate(m_Settings); // move to command
+            ProjectConfig proj = ProjectGenerator::Generate(m_Settings); // move to command
+            Application::Get().GetStateMachine()->RequestStateChange(std::make_shared<EditorState>(proj));
             Close();
         }
     }

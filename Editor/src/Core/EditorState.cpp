@@ -80,7 +80,7 @@ EditorState::~EditorState() = default;
 
 void EditorState::OnEnter()
 {
-	const RuntimeConfig& config{ Application::Get().GetDescriptor() };
+	const RuntimeConfig& config{ m_Context.m_CurrentProject.Runtime };
 
 	Window& window{ Application::Get().GetWindow() };
 	AssetLibrary& assetLib{ Assets::Get() };
@@ -172,6 +172,7 @@ void EditorState::OnEnter()
 
 	sceneManager.SetActiveScene(scene.GetID(), false);
 
+	Application::Get().GetWindow().SetTitle(m_Context.m_CurrentProject.Runtime.Window.Title);
 	BOON_LOG("Project loaded {} : {}", m_Context.m_CurrentProject.Name, m_Context.m_CurrentProject.Runtime.ProjectRoot.string());
 }
 

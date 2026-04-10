@@ -74,6 +74,11 @@ namespace Boon
 		void Present();
 
 		/**
+		 * @brief Change the window title.
+		 */
+		void SetTitle(const std::string& title);
+
+		/**
 		 * @brief Get the current width of the window in pixels.
 		 * @return Window width in pixels.
 		 */

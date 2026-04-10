@@ -99,6 +99,12 @@ namespace Boon
 			glfwSwapBuffers(m_pWindow);
 		}
 
+		void SetTitle(const std::string& title)
+		{
+			m_Desc.name = title;
+			glfwSetWindowTitle(m_pWindow, title.c_str());
+		}
+
 		uint32_t GetWidth() const
 		{
 			return m_Desc.width;
@@ -187,6 +193,11 @@ namespace Boon
 	void Window::Present()
 	{
 		return m_pImpl->Present();
+	}
+
+	void Window::SetTitle(const std::string& title)
+	{
+		m_pImpl->SetTitle(title);
 	}
 
 	uint32_t Window::GetWidth() const
