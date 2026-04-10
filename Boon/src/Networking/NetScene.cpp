@@ -177,7 +177,7 @@ namespace Boon
     // -------------------------------------------------------------------------
     // Handle Server->Client Spawn
     // -------------------------------------------------------------------------
-    void NetScene::HandleSpawnPacket(NetConnection* sender, NetPacket& pkt)
+    void NetScene::HandleSpawnPacket(NetConnection*, NetPacket& pkt)
     {
         auto& s = pkt.GetSerializer();
 
@@ -190,7 +190,7 @@ namespace Boon
     // -------------------------------------------------------------------------
     // Handle Server->Client Despawn
     // -------------------------------------------------------------------------
-    void NetScene::HandleDespawnPacket(NetConnection* sender, NetPacket& pkt)
+    void NetScene::HandleDespawnPacket(NetConnection*, NetPacket& pkt)
     {
         auto& s = pkt.GetSerializer();
         UUID netId = s.Read<UUID>();
@@ -207,7 +207,7 @@ namespace Boon
     // -------------------------------------------------------------------------
     // Handle Server->Client Component add/remove
     // -------------------------------------------------------------------------
-    void NetScene::HandleComponentPacket(NetConnection* sender, NetPacket& pkt)
+    void NetScene::HandleComponentPacket(NetConnection*, NetPacket& pkt)
     {
         auto& s = pkt.GetSerializer();
         UUID netId = s.Read<UUID>();
@@ -235,7 +235,7 @@ namespace Boon
     // -------------------------------------------------------------------------
     // Handle Server->Client Load scene
     // -------------------------------------------------------------------------
-    void NetScene::HandleLoadScenePacket(NetConnection* sender, NetPacket& pkt)
+    void NetScene::HandleLoadScenePacket(NetConnection*, NetPacket& pkt)
     {
         auto& s = pkt.GetSerializer();
         SceneID sceneId = s.Read<SceneID>();
@@ -332,7 +332,7 @@ namespace Boon
             return;
 
         NetPacket pkt(ENetPacketType::InitScene);
-        pkt.Write<uint32_t>(m_DynamicOwnership.size());
+        pkt.Write<uint32_t>(static_cast<uint32_t>(m_DynamicOwnership.size()));
         for (auto& [obj, owner] : m_DynamicOwnership)
         {
             GameObject instance = m_Scene->GetGameObject(obj);
@@ -346,14 +346,14 @@ namespace Boon
                     if (instance.HasComponentByClass(&cls))
                         comps.push_back(cls.hash);
                 });
-            pkt.Write<uint32_t>(comps.size());
+            pkt.Write<uint32_t>(static_cast<uint32_t>(comps.size()));
             pkt.WriteBytes(comps.data(), comps.size() * sizeof(BClassID));
         }
 
         m_Driver->Send(conn, pkt);
     }
 
-    void NetScene::HandleClientSceneInitPacket(NetConnection* sender, NetPacket& pkt)
+    void NetScene::HandleClientSceneInitPacket(NetConnection*, NetPacket& pkt)
     {
         const uint32_t count = pkt.Read<uint32_t>();
         for (uint32_t i = 0; i < count; ++i)

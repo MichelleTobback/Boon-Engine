@@ -215,8 +215,6 @@ namespace Boon
 
         uint32_t indexOffset = 0;
 
-        const float ppu = 32.f;
-
         for (int ty = 0; ty < m_ChunkSize; ty++)
         {
             for (int tx = 0; tx < m_ChunkSize; tx++)
@@ -279,9 +277,9 @@ namespace Boon
             }
         }
 
-        chunk.VertexBuffer->SetData(verts.data(), verts.size() * sizeof(TileVertex));
+        chunk.VertexBuffer->SetData(verts.data(), static_cast<uint32_t>(verts.size() * sizeof(TileVertex)));
 
-        auto indexBuffer = IndexBuffer::Create(indices.data(), indices.size());
+        auto indexBuffer = IndexBuffer::Create(indices.data(), static_cast<uint32_t>(indices.size()));
         chunk.VertexInput->SetIndexBuffer(indexBuffer);
 
         chunk.Dirty = false;

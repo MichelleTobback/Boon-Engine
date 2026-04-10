@@ -246,7 +246,7 @@ namespace Boon
             auto it = actionMap.find(action);
             if (it == actionMap.end()) return false;
             for (auto k : it->second)
-                if (GetKeyState(k) == KeyState::Pressed)
+                if (GetKeyState((KeyCode)k) == KeyState::Pressed)
                     return true;
             return false;
         }
@@ -256,7 +256,7 @@ namespace Boon
             auto it = actionMap.find(action);
             if (it == actionMap.end()) return false;
             for (auto k : it->second)
-                if (GetKeyState(k) == KeyState::Held)
+                if (GetKeyState((KeyCode)k) == KeyState::Held)
                     return true;
             return false;
         }

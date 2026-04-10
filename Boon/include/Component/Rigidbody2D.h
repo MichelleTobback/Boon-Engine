@@ -84,7 +84,7 @@ namespace Boon
         void SetTransform(const glm::vec2& position, float degrees);
 
         void AddForce(const glm::vec2& force, ForceMode mode = ForceMode::Force, bool wake = true);
-        void AddTorque(float torque, ForceMode mode = ForceMode::Force, bool wake = true);
+        void AddTorque(float torque, bool wake = true);
         void AddImpulse(const glm::vec2& impulse, bool wake = true);
 
         bool IsAwake() const { return Awake; }

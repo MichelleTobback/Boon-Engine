@@ -25,7 +25,7 @@ namespace Boon
         /**
          * @brief Export an asset to a file. Default implementation returns true.
          */
-        virtual bool ExportToFile(const std::filesystem::path& filePath, Asset* asset) { return true; }
+        virtual bool ExportToFile(const std::filesystem::path&, Asset*) { return true; }
 
         /**
          * @brief Get supported file extensions for this importer.

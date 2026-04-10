@@ -154,7 +154,7 @@ namespace Boon
             nlohmann::json j;
 
             // Texture
-            const AssetRef<Texture2DAsset>& tex = atlas->GetTexture();
+            //const AssetRef<Texture2DAsset>& tex = atlas->GetTexture();
             j["texture"] = texPath;
 
             // ---------------------------------------

@@ -39,7 +39,7 @@ namespace Boon
 
 		uint32_t DirtyMask = 0;
 
-		void Awake(GameObject gameObject)
+		void Awake(GameObject)
 		{
 			
 		}

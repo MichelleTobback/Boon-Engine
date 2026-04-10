@@ -20,7 +20,7 @@ namespace Boon
         {
             auto& t = obj.GetComponent<NetTransform>();
 
-            ser.Write<uint8_t>(t.DirtyMask);
+            ser.Write<uint8_t>(static_cast<uint8_t>(t.DirtyMask));
 
             if (t.DirtyMask & (uint32_t)NetTransform::DirtyFlags::PosX)
                 ser.WriteBits(t.QPosX, 16);

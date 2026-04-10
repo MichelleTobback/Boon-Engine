@@ -103,7 +103,7 @@ Boon::OpenGLFramebuffer::OpenGLFramebuffer(const FramebufferDescriptor& desc)
 Boon::OpenGLFramebuffer::~OpenGLFramebuffer()
 {
 	glDeleteFramebuffers(1, &m_ID);
-	glDeleteTextures(m_ColorAttachments.size(), m_ColorAttachments.data());
+	glDeleteTextures((GLsizei)m_ColorAttachments.size(), m_ColorAttachments.data());
 	glDeleteTextures(1, &m_DepthAttachment);
 }
 
@@ -112,7 +112,7 @@ void Boon::OpenGLFramebuffer::Invalidate()
 	if (m_ID)
 	{
 		glDeleteFramebuffers(1, &m_ID);
-		glDeleteTextures(m_ColorAttachments.size(), m_ColorAttachments.data());
+		glDeleteTextures((GLsizei)m_ColorAttachments.size(), m_ColorAttachments.data());
 		glDeleteTextures(1, &m_DepthAttachment);
 
 		m_ColorAttachments.clear();
@@ -128,7 +128,7 @@ void Boon::OpenGLFramebuffer::Invalidate()
 	if (m_ColorAttachmentDescriptors.size())
 	{
 		m_ColorAttachments.resize(m_ColorAttachmentDescriptors.size());
-		Utils::CreateTextures(multisample, m_ColorAttachments.data(), m_ColorAttachments.size());
+		Utils::CreateTextures(multisample, m_ColorAttachments.data(), static_cast<uint32_t>(m_ColorAttachments.size()));
 
 		for (size_t i = 0; i < m_ColorAttachments.size(); i++)
 		{
@@ -136,10 +136,10 @@ void Boon::OpenGLFramebuffer::Invalidate()
 			switch (m_ColorAttachmentDescriptors[i].TextureFormat)
 			{
 			case FramebufferTextureFormat::RGBA8:
-				Utils::AttachColorTexture(m_ColorAttachments[i], m_Desc.Samples, GL_RGBA8, GL_RGBA, m_Desc.Width, m_Desc.Height, i);
+				Utils::AttachColorTexture(m_ColorAttachments[i], m_Desc.Samples, GL_RGBA8, GL_RGBA, m_Desc.Width, m_Desc.Height, static_cast<int>(i));
 				break;
 			case FramebufferTextureFormat::RED_INTEGER:
-				Utils::AttachColorTexture(m_ColorAttachments[i], m_Desc.Samples, GL_R32I, GL_RED_INTEGER, m_Desc.Width, m_Desc.Height, i);
+				Utils::AttachColorTexture(m_ColorAttachments[i], m_Desc.Samples, GL_R32I, GL_RED_INTEGER, m_Desc.Width, m_Desc.Height, static_cast<int>(i));
 				break;
 			}
 		}
@@ -160,7 +160,7 @@ void Boon::OpenGLFramebuffer::Invalidate()
 	if (m_ColorAttachments.size() > 1)
 	{
 		GLenum buffers[4] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
-		glDrawBuffers(m_ColorAttachments.size(), buffers);
+		glDrawBuffers((GLsizei)m_ColorAttachments.size(), buffers);
 	}
 	else if (m_ColorAttachments.empty())
 	{
@@ -204,11 +204,6 @@ void Boon::OpenGLFramebuffer::Resize(uint32_t width, uint32_t height)
 
 int Boon::OpenGLFramebuffer::ReadPixel(uint32_t attachmentIndex, int x, int y)
 {
-	if (attachmentIndex >= m_ColorAttachments.size())
-	{
-		int x{};
-	}
-
 	glBindFramebuffer(GL_READ_FRAMEBUFFER, m_ID);
 
 	glReadBuffer(GL_COLOR_ATTACHMENT0 + attachmentIndex);

@@ -30,14 +30,14 @@ namespace Boon
         static constexpr AssetType Type = AssetType::Scene;
         static constexpr bool HasMeta = false;
 
-        static SceneAsset* Load(Buffer& buffer, const AssetMeta& meta)
+        static SceneAsset* Load(Buffer&, const AssetMeta& meta)
         {
             SceneAsset* asset = new SceneAsset(meta.uuid);
 
             return asset;
         }
 
-        static Buffer Serialize(SceneAsset* asset)
+        static Buffer Serialize(SceneAsset*)
         {
             Buffer out;
 

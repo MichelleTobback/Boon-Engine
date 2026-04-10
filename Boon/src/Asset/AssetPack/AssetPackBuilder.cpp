@@ -15,7 +15,8 @@ namespace Boon
 
     bool AssetPackBuilder::Build()
     {
-        FILE* f = fopen(m_OutputPath.c_str(), "wb");
+        FILE* f{};
+        fopen_s(&f, m_OutputPath.c_str(), "wb");
         if (!f) return false;
 
         AssetPackHeader header{};

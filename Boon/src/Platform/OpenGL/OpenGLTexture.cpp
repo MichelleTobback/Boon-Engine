@@ -60,9 +60,9 @@ Boon::OpenGLTexture2D::~OpenGLTexture2D()
 	glDeleteTextures(1, &m_RendererID);
 }
 
-void Boon::OpenGLTexture2D::SetData(void* data, uint32_t size)
+void Boon::OpenGLTexture2D::SetData(void* data, uint32_t)
 {
-	uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
+	//uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
 	glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Descriptor.Width, m_Descriptor.Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 
 	if (m_Descriptor.GenerateMips)
@@ -73,7 +73,7 @@ void Boon::OpenGLTexture2D::SetData(void* data, uint32_t size)
 
 void Boon::OpenGLTexture2D::SetData(Buffer& buffer)
 {
-	uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
+	//uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
 	glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Descriptor.Width, m_Descriptor.Height, m_DataFormat, GL_UNSIGNED_BYTE, buffer.Data());
 
 	if (m_Descriptor.GenerateMips)

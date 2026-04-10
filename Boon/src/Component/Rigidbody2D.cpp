@@ -56,7 +56,7 @@ void Rigidbody2D::AddForce(const glm::vec2& force, ForceMode mode, bool wake)
         WakeRequested = true;
 }
 
-void Rigidbody2D::AddTorque(float torque, ForceMode mode, bool wake)
+void Rigidbody2D::AddTorque(float torque, bool wake)
 {
     PendingTorque += torque;
 

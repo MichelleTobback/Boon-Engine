@@ -18,7 +18,7 @@ namespace Boon
 	using SceneRegistry = entt::registry;
 	using SceneID = UUID;
 
-	class BClass;
+	struct BClass;
 	struct ECSLifecycleSystem;
 	class GameObject;
 	class Scene final

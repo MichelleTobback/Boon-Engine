@@ -10,7 +10,7 @@ Boon::Camera::Camera(float fov, float near, float far)
 	BitFlag::Set(m_Dirty, CameraFlags::PerspectiveDirty, true);
 }
 
-Boon::Camera::Camera(float size, float aspectRatio, float near, float far)
+Boon::Camera::Camera(float size, float, float near, float far)
 	: m_OrthoSize{ size }, m_Near{ near }, m_Far{ far }, m_Dirty{ true }, m_Type{ ProjectionType::Orthographic }
 {
 	BitFlag::Set(m_Dirty, CameraFlags::PerspectiveDirty, true);

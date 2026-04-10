@@ -38,7 +38,7 @@ void Boon::PhysicsWorld2D::Begin(Scene* pScene)
 	}
 }
 
-void Boon::PhysicsWorld2D::End(Scene* pScene)
+void Boon::PhysicsWorld2D::End(Scene*)
 {
 	m_RigidbodyRuntime = {};
 
@@ -161,7 +161,7 @@ void PhysicsWorld2D::Step(Scene* pScene)
 	HandleEvents(pScene);
 }
 
-void Boon::PhysicsWorld2D::Update(Scene* pScene)
+void Boon::PhysicsWorld2D::Update(Scene*)
 {
 	if (!b2World_IsValid(m_PhysicsWorldId))
 		return;

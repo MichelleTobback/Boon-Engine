@@ -141,8 +141,6 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 
 void Boon::SceneRenderer::BeginScene(Camera* camera, TransformComponent* cameraTransform)
 {
-	Scene* pScene = m_pScene;
-
 	if (!camera || !cameraTransform)
 	{
 		auto view = m_pScene->GetRegistry().view<TransformComponent, CameraComponent>();
@@ -191,7 +189,7 @@ void Boon::SceneRenderer::EndScene()
 		{
 			CameraComponent& cam = view.get<CameraComponent>(entity);
 
-			cam.Camera.SetAspectRatio(m_ViewportWidth, m_ViewportHeight);
+			cam.Camera.SetAspectRatio((float)m_ViewportWidth, (float)m_ViewportHeight);
 		}
 
 		m_ViewportDirty = false;

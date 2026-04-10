@@ -258,9 +258,9 @@ namespace Boon
         /**
          * @brief Convenience invocation by function name (hashed at runtime).
          */
-        inline bool InvokeByName(void* instance, const std::string& name, Variant* args = nullptr, size_t argCount = 0) const
+        inline bool InvokeByName(void* instance, const std::string& functionName, Variant* args = nullptr, size_t argCount = 0) const
         {
-            uint32_t id = FNV1a32(name);
+            uint32_t id = FNV1a32(functionName);
             const BFunction* fn = FindFunction(id);
             if (!fn || !fn->thunk)
                 return false;
@@ -326,8 +326,9 @@ namespace Boon
      * Provides lookup and iteration utilities and notifies listeners when
      * classes are registered.
      */
-    struct BClassRegistry
+    class BClassRegistry
     {
+    public:
         static BClassRegistry& Get()
         {
             return *s_Instance;

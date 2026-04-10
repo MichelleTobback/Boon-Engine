@@ -13,7 +13,7 @@ namespace Boon
         
     }
 
-    void NetRepCore::ProcessPacket(NetScene& scene, NetPacket& pkt, NetConnection* sender)
+    void NetRepCore::ProcessPacket(NetScene& scene, NetPacket& pkt, NetConnection*)
     {
         auto& ser = pkt.GetSerializer();
 
@@ -179,7 +179,7 @@ namespace Boon
                 {
                     ser.Write<BClassID>(dc.clsId);
                     ser.WriteBits(dc.dirtyMask, 32);
-                    uint32_t sz = dc.blob.Size();
+                    uint32_t sz = static_cast<uint32_t>(dc.blob.Size());
                     ser.Write<uint32_t>(sz);
                     ser.WriteBytes(dc.blob.Data(), sz);
                 }

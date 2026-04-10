@@ -307,7 +307,7 @@ namespace Boon
         m_Interface->SendMessageToConnection(
             hConn,
             pkt.RawData(),
-            pkt.RawSize(),
+            (uint32_t)pkt.RawSize(),
             reliable ? k_nSteamNetworkingSend_Reliable : k_nSteamNetworkingSend_Unreliable,
             nullptr
         );
@@ -390,7 +390,7 @@ namespace Boon
             m_Interface->SendMessageToConnection(
                 dc.hConn,
                 pkt.RawData(),
-                pkt.RawSize(),
+                (uint32_t)pkt.RawSize(),
                 reliable ? k_nSteamNetworkingSend_Reliable : k_nSteamNetworkingSend_Unreliable,
                 nullptr
             );
@@ -409,7 +409,7 @@ namespace Boon
         m_Interface->SendMessageToConnection(
             it->second.hConn,
             pkt.RawData(),
-            pkt.RawSize(),
+            (uint32_t)pkt.RawSize(),
             reliable ? k_nSteamNetworkingSend_Reliable : k_nSteamNetworkingSend_Unreliable,
             nullptr
         );
@@ -437,7 +437,7 @@ namespace Boon
 
     uint32_t SteamNetDriver::GetConnectionCount() const
     {
-        return m_Connections.size();
+        return (uint32_t)m_Connections.size();
     }
 
     void SteamNetDriver::UpdateConnections()
@@ -449,7 +449,7 @@ namespace Boon
             if (m_Interface->GetConnectionRealTimeStatus(connection.second.hConn, &status, 0, nullptr) == k_EResultOK)
             {
                 int ping = status.m_nPing;
-                connection.second.conn->SetPing(ping);
+                connection.second.conn->SetPing((float)ping);
             }
         }
     }

@@ -117,7 +117,7 @@ namespace Boon
          *
          * Marks the tilemap as dirty.
          */
-        inline void SetUnitSize(float pixels) { m_UnitSize = pixels; m_IsDirty = true; }
+        inline void SetUnitSize(int pixels) { m_UnitSize = (float)pixels; m_IsDirty = true; }
 
         /**
          * @brief Get the unit size in pixels.
@@ -127,22 +127,22 @@ namespace Boon
         /**
          * @brief Set the number of chunks in X direction and mark dirty.
          */
-        inline void SetChunksX(float chunks) { m_ChunksX = chunks; m_IsDirty = true; }
+        inline void SetChunksX(int chunks) { m_ChunksX = chunks; m_IsDirty = true; }
 
         /**
          * @brief Set the number of chunks in Y direction and mark dirty.
          */
-        inline void SetChunksY(float chunks) { m_ChunksY = chunks; m_IsDirty = true; }
+        inline void SetChunksY(int chunks) { m_ChunksY = chunks; m_IsDirty = true; }
 
         /**
          * @brief Get the number of chunks in X direction.
          */
-        inline float GetChunksX() const { return m_ChunksX; }
+        inline int GetChunksX() const { return m_ChunksX; }
 
         /**
          * @brief Get the number of chunks in Y direction.
          */
-        inline float GetChunksY() const { return m_ChunksY; }
+        inline int GetChunksY() const { return m_ChunksY; }
 
     private:
         void BuildChunk(TilemapChunk& chunk);

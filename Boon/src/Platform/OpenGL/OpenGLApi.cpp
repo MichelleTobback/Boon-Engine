@@ -4,7 +4,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include <iostream>
+#include "BoonDebug/Logger.h"
 
 using namespace Boon;
 
@@ -13,18 +13,101 @@ void OpenGLMessageCallback(
     unsigned type,
     unsigned id,
     unsigned severity,
-    int length,
+    int,
     const char* message,
-    const void* userParam)
+    const void*)
 {
-    std::cout << message << '\n';
+    std::string sourceStr;
+    switch (source) 
+    {
+    case GL_DEBUG_SOURCE_API:
+        sourceStr = "API";
+        break;
+
+    case GL_DEBUG_SOURCE_WINDOW_SYSTEM:
+        sourceStr = "WINDOW SYSTEM";
+        break;
+
+    case GL_DEBUG_SOURCE_SHADER_COMPILER:
+        sourceStr = "SHADER COMPILER";
+        break;
+
+    case GL_DEBUG_SOURCE_THIRD_PARTY:
+        sourceStr = "THIRD PARTY";
+        break;
+
+    case GL_DEBUG_SOURCE_APPLICATION:
+        sourceStr = "APPLICATION";
+        break;
+
+    case GL_DEBUG_SOURCE_OTHER:
+        sourceStr = "UNKNOWN";
+        break;
+
+    default:
+        sourceStr = "UNKNOWN";
+        break;
+    }
+
+    std::string typeStr;
+    switch (type) 
+    {
+    case GL_DEBUG_TYPE_ERROR:
+        typeStr = "ERROR";
+        break;
+
+    case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:
+        typeStr = "DEPRECATED BEHAVIOR";
+        break;
+
+    case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:
+        typeStr = "UDEFINED BEHAVIOR";
+        break;
+
+    case GL_DEBUG_TYPE_PORTABILITY:
+        typeStr = "PORTABILITY";
+        break;
+
+    case GL_DEBUG_TYPE_PERFORMANCE:
+        typeStr = "PERFORMANCE";
+        break;
+
+    case GL_DEBUG_TYPE_OTHER:
+        typeStr = "OTHER";
+        break;
+
+    case GL_DEBUG_TYPE_MARKER:
+        typeStr = "MARKER";
+        break;
+
+    default:
+        typeStr = "UNKNOWN";
+        break;
+    }
+
+    switch (severity) 
+    {
+    case GL_DEBUG_SEVERITY_HIGH:
+        BOON_LOG_ERROR(message);
+        break;
+
+    case GL_DEBUG_SEVERITY_MEDIUM:
+    case GL_DEBUG_SEVERITY_LOW:
+        BOON_LOG_WARN(message);
+        break;
+
+    default:
+        BOON_LOG("[OpenGL][{}] ({}) ID {} : {}", sourceStr, typeStr, id, message);
+        break;
+    }
 }
 
 void OpenGLApi::Init()
 {
     // Load OpenGL function pointers using GLAD
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        std::cerr << "Failed to initialize GLAD\n";
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) 
+    {
+        BOON_LOG_ERROR("Failed to initialize GLAD");
         return;
     }
 

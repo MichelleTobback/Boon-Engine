@@ -36,7 +36,7 @@ namespace Boon
             size_t cursor = 0;
 
             // Read texture UUID
-            uint32_t textureUUID = buffer.Read<uint32_t>(cursor);
+            uint64_t textureUUID = buffer.Read<uint64_t>(cursor);
 
             // Create atlas
             std::shared_ptr<SpriteAtlas> atlas = std::make_shared<SpriteAtlas>();
@@ -91,7 +91,7 @@ namespace Boon
             SpriteAtlas* atlas = asset->GetInstance().get();
 
             // 1. Texture
-            out.Write<uint32_t>(atlas->GetTexture().Handle());
+            out.Write<uint64_t>(atlas->GetTexture().Handle());
 
             // 2. Clips
             const auto& clips = atlas->GetClips();

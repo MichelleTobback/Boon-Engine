@@ -43,7 +43,7 @@ namespace Boon
         std::shared_ptr<Texture2D> m_RuntimeTexture = nullptr;
 
         friend class Texture2DImporter;
-        friend class AssetTraits<Texture2DAsset>;
+        friend struct AssetTraits<Texture2DAsset>;
     };
 
     template<>

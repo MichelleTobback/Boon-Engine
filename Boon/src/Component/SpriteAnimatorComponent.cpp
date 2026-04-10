@@ -13,7 +13,7 @@ void Boon::SpriteAnimatorComponent::Awake(GameObject obj)
 	pRenderer = obj;
 }
 
-void Boon::SpriteAnimatorComponent::Update(GameObject obj)
+void Boon::SpriteAnimatorComponent::Update(GameObject)
 {
 	if (!pRenderer.IsValid())
 		return;
@@ -31,7 +31,7 @@ void Boon::SpriteAnimatorComponent::Update(GameObject obj)
 		return;
 
 	if (m_Current >= clip.Frames.size())
-		m_Current = clip.Frames.size() - 1;
+		m_Current = static_cast<int>(clip.Frames.size()) - 1;
 
 	float maxTime = Atlas->GetSpriteFrame(clip.Frames[m_Current]).FrameTime;
 

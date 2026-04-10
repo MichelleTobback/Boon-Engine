@@ -32,7 +32,7 @@ namespace Boon
         // ------------------------------------------------------
         //  LOAD from AssetPack (runtime)
         // ------------------------------------------------------
-        static TilemapAsset* Load(Buffer& buffer, const AssetMeta& meta)
+        static TilemapAsset* Load(Buffer&, const AssetMeta& meta)
         {
             //size_t cursor = 0;
             //
@@ -85,7 +85,7 @@ namespace Boon
         // ------------------------------------------------------
         //  SERIALIZE into AssetPack (editor build)
         // ------------------------------------------------------
-        static Buffer Serialize(TilemapAsset* asset)
+        static Buffer Serialize(TilemapAsset*)
         {
             Buffer out;
 

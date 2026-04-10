@@ -19,7 +19,7 @@ Boon::GameObject::~GameObject()
 {
 }
 
-void Boon::GameObject::SetActive(bool active)
+void Boon::GameObject::SetActive(bool)
 {
 }
 

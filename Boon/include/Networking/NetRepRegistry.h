@@ -11,8 +11,8 @@ namespace Boon
     struct ReplicatedField
     {
         const BProperty* pProp;
-        uint32_t Offset() const { return pProp->offset; }
-        uint32_t Size() const { return pProp->size; }
+        size_t Offset() const { return pProp->offset; }
+        size_t Size() const { return pProp->size; }
 
         uint32_t Packedoffset;
     };
@@ -47,8 +47,9 @@ namespace Boon
         }
     };
 
-    struct NetRepRegistry
+    class NetRepRegistry
     {
+    public:
         static NetRepRegistry& Get()
         {
             return *s_Instance;
