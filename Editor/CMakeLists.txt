@@ -59,11 +59,12 @@ file(GLOB_RECURSE EDITOR_HEADERS CONFIGURE_DEPENDS
 # --------------------------------------------------
 # Editor executable
 # --------------------------------------------------
-add_executable(Editor
+add_executable(Editor WIN32
     ${EDITOR_SOURCES}
     ${EDITOR_HEADERS}
     ${EDITOR_GENERATED_CPP}
 )
+target_compile_definitions(Editor PRIVATE BOON_EDITOR_NO_CONSOLE)
 
 add_dependencies(Editor GenerateReflection)
 

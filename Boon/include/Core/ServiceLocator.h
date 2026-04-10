@@ -46,6 +46,12 @@ namespace Boon
             return *std::static_pointer_cast<T>(it->second);
         }
 
+        template<typename T>
+        bool Has()
+        {
+            return m_Registry.contains(typeid(T).hash_code());
+        }
+
         /**
          * @brief Unregister service of type T.
          *
@@ -113,6 +119,15 @@ namespace Boon
         static T& Get()
         {
             return GetRegistry()->Get<T>();
+        }
+
+        template<typename T>
+        static bool Has()
+        {
+            if (!GetRegistry())
+                return false;
+
+            return GetRegistry()->Has<T>();
         }
 
         /**

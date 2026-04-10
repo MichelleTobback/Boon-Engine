@@ -38,7 +38,7 @@ namespace Boon
         SteamDatagramErrMsg err;
         if (!GameNetworkingSockets_Init(nullptr, err))
         {
-            BOON_LOG_ERROR("Failed to initialize GameNetworkingSockets: " + std::string(err));
+            BOON_LOG_ERROR("Failed to initialize GameNetworkingSockets: {}", err);
         }
 
         m_Interface = SteamNetworkingSockets();
@@ -76,7 +76,7 @@ namespace Boon
             {
                 char buf[SteamNetworkingIPAddr::k_cchMaxString];
                 boundAddr.ToString(buf, sizeof(buf), true);
-                BOON_LOG("Listen socket bound as " + std::string(buf));
+                BOON_LOG("Listen socket bound as {}", std::string(buf));
             }
         }
 
@@ -150,7 +150,7 @@ namespace Boon
 
         if (!addr.ParseString((ip + ":" + std::to_string(port)).c_str()))
         {
-            BOON_LOG_ERROR("Invalid server address: " + ip + ":" + std::to_string(port));
+            BOON_LOG_ERROR("Invalid server address: {} : {} ", ip, port);
             return false;
         }
 
@@ -167,7 +167,7 @@ namespace Boon
             return false;
         }
 
-        BOON_LOG("Connecting to server at " + ip + ":" + std::to_string(port) + " ...");
+        BOON_LOG_ERROR("Connecting to server at: {} : {} ...", ip, port);
         return true;
     }
 
@@ -213,7 +213,7 @@ namespace Boon
                     m_Connections[connId] = std::move(dc);
                     m_ReverseLookup[hConn] = connId;
 
-                    BOON_LOG("Client " + std::to_string(connId) + " Connected to server");
+                    BOON_LOG("Client {} Connected to server", connId);
 
                     if (m_OnConnected)
                         m_OnConnected(m_Connections[connId].conn.get());
@@ -270,7 +270,7 @@ namespace Boon
         m_Connections[connId] = std::move(dc);
         m_ReverseLookup[hConn] = connId;
 
-        BOON_LOG("Client connected: " + std::to_string(connId));
+        BOON_LOG("Client connected: {}", connId);
 
         NetPacket assignIdPkt{ ENetPacketType::AssignID };
         assignIdPkt.Write(connId);
@@ -294,7 +294,7 @@ namespace Boon
             m_ReverseLookup.erase(hConn);
 
             if (IsServer())
-                BOON_LOG("Client " + std::to_string(id) + " disconnected");
+                BOON_LOG("Client {} disconnected", id);
         }
         if (IsClient())
             BOON_LOG("Disconnected from server");

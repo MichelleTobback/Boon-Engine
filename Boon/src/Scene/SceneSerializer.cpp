@@ -172,8 +172,7 @@ void Boon::SceneSerializer::Deserialize(const std::filesystem::path& src)
     std::ifstream file(src);
     if (!file.is_open())
     {
-        BOON_LOG(std::filesystem::current_path().string());
-        BOON_LOG_ERROR("Could not open scene file: {}");
+        BOON_LOG_ERROR("Could not open scene file: {}", src.string());
         return;
     }
 

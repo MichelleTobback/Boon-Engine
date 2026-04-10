@@ -10,6 +10,7 @@
 #include "Panels/TilemapEditorPanel.h"
 #include "Panels/SpriteAtlasEditorPanel.h"
 #include "Panels/AssetEditorPanel.h"
+#include "Panels/ConsolePanel.h"
 
 #include "Tools/NewProjectDialog.h"
 
@@ -107,6 +108,7 @@ void EditorState::OnEnter()
 	m_Context.CreateWidget<PropertiesPanel>("properties", &m_SelectionContext);
 	m_Context.CreateWidget<ScenePanel>("scene",  &m_SceneContext, &m_SelectionContext);
 	m_Context.CreateWidget<NetworkPanel>("network", m_NetworkSettings);
+	m_Context.CreateWidget<ConsolePanel>("console");
 
 	m_Context.CreateWidget<NewProjectDialog>("NewProject");
 

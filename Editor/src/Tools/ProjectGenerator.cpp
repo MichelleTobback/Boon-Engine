@@ -2,6 +2,7 @@
 #include "Project/ProjectLoader.h"
 #include "tools/TemplateProcessor.h"
 
+#include "BoonDebug/Logger.h"
 #include <fstream>
 
 #include <algorithm>
@@ -23,7 +24,11 @@ namespace BoonEditor
 			{
 				std::string log{};
 				Configure(proj, proj.Runtime.ProjectRoot / "build", log);
-				Build(proj.Runtime.ProjectRoot / "build", "Debug", log);
+
+				if (!Build(proj.Runtime.ProjectRoot / "build", "Debug", log))
+					BOON_LOG_ERROR("Build failed!");
+				else
+					BOON_LOG("Build complete");
 			});
 
 		return proj;
@@ -31,6 +36,8 @@ namespace BoonEditor
 
 	void ProjectGenerator::InitializeProject(ProjectConfig& project, const ProjectGeneratorSettings& desc)
 	{
+		BOON_LOG("Creating new Project ... ");
+
 		ProjectLoader::ApplyDefaults(project);
 
 		project.Name = desc.Name;
@@ -53,6 +60,8 @@ namespace BoonEditor
 		if (!std::filesystem::exists(templatesLoc))
 			return;
 
+		BOON_LOG("Generating project files ... ");
+
 		for (const auto& dirEntry : std::filesystem::recursive_directory_iterator(templatesLoc))
 		{
 			ProcessTemplate(dirEntry, project, desc);
@@ -63,7 +72,10 @@ namespace BoonEditor
 	{
 		std::ifstream file(from);
 		if (!file.is_open())
+		{
+			BOON_LOG_WARN("Failed to open temlate : {}, file skipped", from.string());
 			return;
+		}
 
 		std::stringstream ss;
 
@@ -71,7 +83,10 @@ namespace BoonEditor
 		std::string content{ ss.str() };
 
 		if (content.empty())
+		{
+			BOON_LOG_WARN("Failed to open temlate : {}, file skipped", from.string());
 			return;
+		}
 
 		std::string uppercaseName = desc.Name;
 		std::transform(uppercaseName.begin(), uppercaseName.end(), uppercaseName.begin(), ::toupper);
@@ -96,11 +111,15 @@ namespace BoonEditor
 
 				f.write(c.data(), static_cast<std::streamsize>(c.size()));
 
+				BOON_LOG("Generated {}", loc.string());
+
 				return true;
 			});
 	}
 	bool ProjectGenerator::Configure(const ProjectConfig& project, const std::filesystem::path& buildDir, std::string& outLog)
 	{
+		BOON_LOG("Configuring project ...");
+
 		std::string configureCmd =
 			"cmake -S \"" + project.Runtime.ProjectRoot.string() + "\" -B \"" + buildDir.string() + "\"";
 
@@ -111,6 +130,8 @@ namespace BoonEditor
 	}
 	bool ProjectGenerator::Build(const std::filesystem::path& buildDir, const std::string& config, std::string& outLog)
 	{
+		BOON_LOG("Building project ...");
+
 		std::string buildCmd =
 			"cmake --build \"" + buildDir.string() + "\" --config Debug";
 

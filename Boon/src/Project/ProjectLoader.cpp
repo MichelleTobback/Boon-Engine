@@ -1,4 +1,5 @@
 #include "Project/ProjectLoader.h"
+#include "BoonDebug/Logger.h"
 
 #include <fstream>
 #include <sstream>
@@ -125,15 +126,13 @@ namespace Boon
         };
     }
 
-    void from_json(const json& j, ProjectConfig::EditorConfig& e)
+    void from_json(const json&, ProjectConfig::EditorConfig&)
     {
         
     }
-    void to_json(json& j, const ProjectConfig::EditorConfig& e)
+    void to_json(json&, const ProjectConfig::EditorConfig&)
     {
-        j = json{
-            //{ "EditorResourcesRoot", e.EditorResourcesRoot.string() }
-        };
+       
     }
 
     void from_json(const json& j, ProjectConfig& p)
@@ -184,6 +183,7 @@ namespace Boon
             err.Code = EProjectLoadErrorCode::InvalidConfig;
             err.Message = "Project file path is empty.";
             result.Error = err;
+            BOON_LOG_ERROR("{}", err.Message);
             return result;
         }
 
@@ -193,6 +193,7 @@ namespace Boon
             err.Code = EProjectLoadErrorCode::FileNotFound;
             err.Message = "Project file does not exist: " + p.string();
             result.Error = err;
+            BOON_LOG_ERROR("{}", err.Message);
             return result;
         }
 
@@ -203,6 +204,7 @@ namespace Boon
             err.Code = EProjectLoadErrorCode::FileReadFailed;
             err.Message = "Failed to read project file: " + p.string();
             result.Error = err;
+            BOON_LOG_ERROR("{}", err.Message);
             return result;
         }
 
@@ -216,6 +218,7 @@ namespace Boon
             err.Code = EProjectLoadErrorCode::ParseFailed;
             err.Message = "Failed to parse project file '" + p.string() + "': " + parseError;
             result.Error = err;
+            BOON_LOG_ERROR("{}", err.Message);
             return result;
         }
 
@@ -226,6 +229,7 @@ namespace Boon
         if (!Validate(config, validationError))
         {
             result.Error = validationError;
+            BOON_LOG_ERROR("{}", validationError.Message);
             return result;
         }
 
@@ -233,6 +237,8 @@ namespace Boon
 
         std::filesystem::path absolute = std::filesystem::absolute(p.parent_path());
         std::filesystem::current_path(absolute);
+
+        BOON_LOG("Project loaded : {}", projectFilePath.string());
 
         return result;
     }
@@ -278,10 +284,11 @@ namespace Boon
     {
         if (location.empty())
             return false;
+
+        const std::filesystem::path filePath = location / (projectConfig.Name + ".bproj");
+
         try
         {
-            const std::filesystem::path filePath = location / (projectConfig.Name + ".bproj");
-
             json j = projectConfig;
 
             std::ofstream file(filePath, std::ios::out | std::ios::binary | std::ios::trunc);
@@ -291,12 +298,17 @@ namespace Boon
             file << j.dump(4);
 
             if (file.fail())
+            {
+                BOON_LOG_ERROR("Failed to save project file: {}", filePath.string());
                 return false;
+            }
 
+            BOON_LOG("Project .bproj file saved at: {}", filePath.string());
             return true;
         }
         catch (const std::exception&)
         {
+            BOON_LOG_ERROR("Failed to save project file: {}", filePath.string());
             return false;
         }
     }
