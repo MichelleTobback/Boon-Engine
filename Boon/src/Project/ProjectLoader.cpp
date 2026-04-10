@@ -238,8 +238,6 @@ namespace Boon
         std::filesystem::path absolute = std::filesystem::absolute(p.parent_path());
         std::filesystem::current_path(absolute);
 
-        BOON_LOG("Project loaded : {}", projectFilePath.string());
-
         return result;
     }
 

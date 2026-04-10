@@ -28,6 +28,7 @@ namespace Boon
         static void Init();
 
         void AddSink(const std::shared_ptr<ILogSink>& sink);
+        void RemoveSink(ILogSink* sink);
 
         void Log(const std::string& msg);
         void Warn(const std::string& msg);

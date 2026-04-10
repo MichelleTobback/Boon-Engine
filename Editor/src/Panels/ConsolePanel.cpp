@@ -8,9 +8,14 @@
 using namespace BoonEditor;
 
 ConsolePanel::ConsolePanel(const std::string& name, EditorContext* pContext)
-	: EditorPanel(name, pContext)
+	: EditorPanel(name, pContext), m_pSink{ std::make_shared<EditorLogSink>(this) }
 {
-	Boon::ServiceLocator::Get<Boon::Logger>().AddSink(std::make_shared<EditorLogSink>(this));
+	Boon::ServiceLocator::Get<Boon::Logger>().AddSink(m_pSink);
+}
+
+BoonEditor::ConsolePanel::~ConsolePanel()
+{
+	Boon::ServiceLocator::Get<Boon::Logger>().RemoveSink(m_pSink.get());
 }
 
 void ConsolePanel::AddMessage(const std::string& text, int level)

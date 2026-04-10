@@ -18,6 +18,11 @@ Boon::AppStateMachine::AppStateMachine()
 
 }
 
+void Boon::AppStateMachine::RequestStateChange(const std::shared_ptr<AppState>& pState)
+{
+	m_pRequestState = pState;
+}
+
 void Boon::AppStateMachine::PushState(const std::shared_ptr<AppState>& pState)
 {
 	if (m_pState)
@@ -35,4 +40,13 @@ void Boon::AppStateMachine::Shutdown()
 void Boon::AppStateMachine::Update()
 {
 	m_pState->OnUpdate();
+}
+
+void Boon::AppStateMachine::EndUpdate()
+{
+	if (m_pRequestState)
+	{
+		PushState(m_pRequestState);
+		m_pRequestState = nullptr;
+	}
 }

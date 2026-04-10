@@ -7,32 +7,10 @@
 #include <cstring>
 #include <filesystem>
 
-#include <shlobj.h>   // SHBrowseForFolder
+#include "Core/FileSystem.h"
 
 using namespace Boon;
 using namespace BoonEditor;
-
-namespace Boon
-{
-    static std::filesystem::path OpenFolderDialog()
-    {
-        BROWSEINFOW bi{};
-        bi.lpszTitle = L"Select Project Location";
-        bi.ulFlags = BIF_RETURNONLYFSDIRS | BIF_NEWDIALOGSTYLE;
-
-        PIDLIST_ABSOLUTE pidl = SHBrowseForFolderW(&bi);
-        if (!pidl)
-            return {};
-
-        wchar_t path[MAX_PATH];
-        if (!SHGetPathFromIDListW(pidl, path))
-            return {};
-
-        CoTaskMemFree(pidl);
-
-        return std::filesystem::path(path);
-    }
-}
 
 namespace
 {
@@ -145,7 +123,7 @@ void NewProjectDialog::RenderDialog()
 
     if (ImGui::Button("Browse", ImVec2(100.0f, 0.0f)))
     {
-        std::filesystem::path selected = OpenFolderDialog();
+        std::filesystem::path selected = FileSystem::OpenFolderDialog();
         if (!selected.empty())
         {
             m_Settings.Location = selected.string();

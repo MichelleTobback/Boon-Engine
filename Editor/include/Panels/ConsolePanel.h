@@ -17,6 +17,7 @@ namespace BoonEditor
 	{
 	public:
 		ConsolePanel(const std::string& name, EditorContext* pContext);
+		virtual ~ConsolePanel();
 
 		void AddMessage(const std::string& text, int level);
 		void Clear();
@@ -30,5 +31,7 @@ namespace BoonEditor
 		std::mutex m_Mutex;
 		bool m_AutoScroll{ true };
 		bool m_ScrollToBottom{ false };
+
+		std::shared_ptr<class EditorLogSink> m_pSink;
 	};
 }

@@ -47,6 +47,17 @@ void Logger::AddSink(const std::shared_ptr<ILogSink>& sink)
 	m_Sinks.push_back(sink);
 }
 
+void Boon::Logger::RemoveSink(ILogSink* sink)
+{
+	m_Sinks.erase(
+		std::remove_if(m_Sinks.begin(), m_Sinks.end(),
+			[sink](const std::shared_ptr<ILogSink>& s)
+			{
+				return s.get() == sink;
+			}),
+		m_Sinks.end());
+}
+
 void Logger::Log(const std::string& msg)
 {
 	Write(LogLevel::Info, msg);

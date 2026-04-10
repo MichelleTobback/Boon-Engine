@@ -1,6 +1,7 @@
 #pragma once
 #include "Core/EditorState.h"
 #include "Core/EditorCamera.h"
+#include "Core/AppStateMachine.h"
 
 #include "Panels/ScenePanel.h"
 #include "Panels/PropertiesPanel.h"
@@ -12,6 +13,9 @@
 #include "Panels/AssetEditorPanel.h"
 #include "Panels/ConsolePanel.h"
 
+#include <BoonDebug/Logger.h>
+
+#include "Project/ProjectLoader.h"
 #include "Tools/NewProjectDialog.h"
 
 #include "UI/EditorRenderer.h"
@@ -29,6 +33,7 @@
 #include <Core/Application.h>
 #include <Core/ServiceLocator.h>
 #include <Core/Time.h>
+#include <Core/FileSystem.h>
 
 #include <Event/EventBus.h>
 #include <Event/SceneEvents.h>
@@ -165,6 +170,8 @@ void EditorState::OnEnter()
 	serializer.Deserialize(config.AssetsRoot / config.StartupScene);
 
 	sceneManager.SetActiveScene(scene.GetID(), false);
+
+	BOON_LOG("Project loaded {} : {}", m_Context.m_CurrentProject.Name, m_Context.m_CurrentProject.Runtime.ProjectRoot.string());
 }
 
 void EditorState::OnUpdate()
@@ -230,6 +237,23 @@ void EditorState::OnRender()
 			NewProjectDialog* pDialog = m_Context.TryGetWidget<NewProjectDialog>("NewProject");
 			if (pDialog) pDialog->Open();
 		}
+		if (ImGui::MenuItem("Open Project"))
+		{
+			if (m_PlayState == EditorPlayState::Play)
+			{
+				OnStopPlay();
+			}
+			FileSystem::OpenDialogOptions options{};
+			options.filters = { FileSystem::FileFilter{ L"Boon Project", L"*.bproj" } };
+			options.title = L"Open Project";
+			FileSystem::Path projPath = FileSystem::OpenFileDialog(options);
+
+			if (!projPath.empty())
+			{
+				auto projectFile = ProjectLoader::LoadFromFile(projPath);
+				Application::Get().GetStateMachine()->RequestStateChange(std::make_shared<EditorState>(projectFile.Value));
+			}
+		}
 		ImGui::EndMenu();
 	}
 	if (ImGui::BeginMenu("File"))
@@ -249,22 +273,40 @@ void EditorState::OnRender()
 		{
 			if (m_PlayState != EditorPlayState::Play)
 			{
-				SceneSerializer serializer(*m_pSelectedScene);
-				serializer.Serialize(m_Context.m_CurrentProject.Runtime.AssetsRoot / "Scenes/Main.scene");
+				FileSystem::OpenDialogOptions options{};
+				options.filters = { FileSystem::FileFilter{ L"Boon Project", L"*.scene" } };
+				options.title = L"Save Scene";
+				options.initialPath = m_Context.m_CurrentProject.Runtime.AssetsRoot;
+				FileSystem::Path scenPath = FileSystem::OpenFileDialog(options);
+
+				if (!scenPath.empty())
+				{
+					SceneSerializer serializer(*m_pSelectedScene);
+					serializer.Serialize(scenPath);
+				}
 			}
 		}
 		if (ImGui::MenuItem("Open scene"))
 		{
 			if (m_PlayState != EditorPlayState::Play)
 			{
-				SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
-				m_SceneContext.Set(&sceneManager.CreateScene("New Scene"));
-				m_pSelectedScene = m_SceneContext.Get();
+				FileSystem::OpenDialogOptions options{};
+				options.filters = { FileSystem::FileFilter{ L"Boon Scene", L"*.scene" } };
+				options.title = L"Open Scene";
+				options.initialPath = m_Context.m_CurrentProject.Runtime.AssetsRoot;
+				FileSystem::Path scenPath = FileSystem::OpenFileDialog(options);
 
-				SceneSerializer serializer(*m_SceneContext.Get());
-				serializer.Deserialize(m_Context.m_CurrentProject.Runtime.AssetsRoot / "Scenes/Main.scene");
+				if (!scenPath.empty())
+				{
+					SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
+					m_SceneContext.Set(&sceneManager.CreateScene("New Scene"));
+					m_pSelectedScene = m_SceneContext.Get();
 
-				sceneManager.SetActiveScene(m_SceneContext.Get()->GetID(), false);
+					SceneSerializer serializer(*m_SceneContext.Get());
+					serializer.Deserialize(scenPath);
+
+					sceneManager.SetActiveScene(m_SceneContext.Get()->GetID(), false);
+				}
 			}
 		}
 		ImGui::EndMenu();

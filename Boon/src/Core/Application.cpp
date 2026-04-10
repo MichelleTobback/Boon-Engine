@@ -79,6 +79,7 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 		input.Update();
 		m_pWindow->Present();
 		time.Wait();
+		m_pStateMachine->EndUpdate();
 	}
 	ServiceLocator::Get<SceneManager>().Shutdown();
 	m_pStateMachine->Shutdown();

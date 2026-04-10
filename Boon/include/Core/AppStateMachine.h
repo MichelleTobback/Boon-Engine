@@ -16,12 +16,15 @@ namespace Boon
 		AppStateMachine& operator=(const AppStateMachine& other) = delete;
 		AppStateMachine& operator=(AppStateMachine&& other) = delete;
 
-		void PushState(const std::shared_ptr<AppState>& state);
+		void RequestStateChange(const std::shared_ptr<AppState>& pState);
+		void PushState(const std::shared_ptr<AppState>& pState);
 		void Shutdown();
 
 		void Update();
+		void EndUpdate();
 
 	private:
 		std::shared_ptr<AppState> m_pState;
+		std::shared_ptr<AppState> m_pRequestState{nullptr};
 	};
 }
