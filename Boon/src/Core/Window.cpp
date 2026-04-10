@@ -66,7 +66,7 @@ namespace Boon
 						pInstance->OnResize(w, h);
 				});
 
-			glfwSetWindowCloseCallback(m_pWindow, [](GLFWwindow* window)
+			glfwSetWindowCloseCallback(m_pWindow, [](GLFWwindow*)
 				{
 					ServiceLocator::Get<EventBus>().Post(WindowCloseEvent());
 				});

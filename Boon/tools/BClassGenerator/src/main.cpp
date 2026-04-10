@@ -437,7 +437,22 @@ static void emitGeneratedFile(const std::string& output, const std::vector<Refle
     {
         out << "    // " << c.nsQualifiedName << "\n";
         out << "    {\n";
-        out << "        BClass* cls = RegisterBClass<" << c.nsQualifiedName << ">(classRegistry, \"" << c.name << "\");\n";
+
+        const bool needsCls =
+            !c.properties.empty() ||
+            !c.functions.empty() ||
+            !c.classMeta.empty();
+
+        if (needsCls)
+        {
+            out << "        BClass* cls = RegisterBClass<" << c.nsQualifiedName
+                << ">(classRegistry, \"" << c.name << "\");\n";
+        }
+        else
+        {
+            out << "        RegisterBClass<" << c.nsQualifiedName
+                << ">(classRegistry, \"" << c.name << "\");\n";
+        }
 
         for (auto& p : c.properties)
         {
