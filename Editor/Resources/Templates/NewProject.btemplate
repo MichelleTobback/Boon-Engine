@@ -45,6 +45,9 @@ add_custom_target(GenerateReflection)
 set(BOON_BCLASSGENERATOR_EXE
     "${BOON_ENGINE_ROOT}/bin/Debug/Tools/BClassGenerator.exe"
 )
+set(PROJECT_GENERATED_CPP
+    ${CMAKE_CURRENT_SOURCE_DIR}/generated/Generated_Components.cpp
+)
 
 message(STATUS "BOON_BCLASSGENERATOR_EXE = ${BOON_BCLASSGENERATOR_EXE}")
 
@@ -84,7 +87,6 @@ boon_add_reflected_module(
 # ----------------------------------------
 file(GLOB_RECURSE GAME_SOURCES CONFIGURE_DEPENDS
     src/*.cpp
-    generated/*.cpp
 )
 
 file(GLOB_RECURSE GAME_HEADERS CONFIGURE_DEPENDS
@@ -98,6 +100,7 @@ file(GLOB_RECURSE GAME_HEADERS CONFIGURE_DEPENDS
 add_library({{PROJECT_NAME}} SHARED
     ${GAME_SOURCES}
     ${GAME_HEADERS}
+    ${PROJECT_GENERATED_CPP}
 )
 
 target_compile_features({{PROJECT_NAME}} PUBLIC cxx_std_20)

@@ -4,16 +4,27 @@
 
 #include <fstream>
 
+#include <algorithm>
+#include <future>
+
 using namespace Boon;
 
 namespace BoonEditor
 {
 	ProjectConfig ProjectGenerator::Generate(const ProjectGeneratorSettings& desc)
 	{
+		static std::future<void> sProjectBuildFuture;
 		ProjectConfig proj{};
 
 		InitializeProject(proj, desc);
 		GenerateFilesFromTemplates(desc.TemplateFolder, proj, desc);
+
+		sProjectBuildFuture = std::async(std::launch::async, [proj]()
+			{
+				std::string log{};
+				Configure(proj, proj.Runtime.ProjectRoot / "build", log);
+				Build(proj.Runtime.ProjectRoot / "build", "Debug", log);
+			});
 
 		return proj;
 	}
@@ -87,5 +98,25 @@ namespace BoonEditor
 
 				return true;
 			});
+	}
+	bool ProjectGenerator::Configure(const ProjectConfig& project, const std::filesystem::path& buildDir, std::string& outLog)
+	{
+		std::string configureCmd =
+			"cmake -S \"" + project.Runtime.ProjectRoot.string() + "\" -B \"" + buildDir.string() + "\"";
+
+		if (std::system(configureCmd.c_str()) != 0)
+			return false;
+
+		return true;
+	}
+	bool ProjectGenerator::Build(const std::filesystem::path& buildDir, const std::string& config, std::string& outLog)
+	{
+		std::string buildCmd =
+			"cmake --build \"" + buildDir.string() + "\" --config Debug";
+
+		if (std::system(buildCmd.c_str()) != 0)
+			return false;
+
+		return true;
 	}
 }
