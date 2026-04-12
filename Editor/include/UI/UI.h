@@ -1,9 +1,12 @@
 ﻿#pragma once
 #include "Reflection/BProperty.h"
 #include "Assets/AssetDatabase.h"
+#include <Core/Variant.h>
 #include <imgui.h>
+#include <imgui_internal.h>
 #include <string>
 #include <algorithm>
+#include <glm/glm.hpp>
 
 using namespace Boon;
 
@@ -12,9 +15,18 @@ namespace BoonEditor
 	class UI
 	{
 	public:
-        static bool Property(const BProperty& property, void* pInstance)
+        struct PropertyResult
         {
-            bool result = false;
+            bool Changed{ false };
+            bool Committed{ false };
+            Boon::Variant OldValue{};
+
+            operator bool() const { return Changed; }
+        };
+
+        static PropertyResult Property(const BProperty& property, void* pInstance)
+        {
+            PropertyResult result{};
             switch (property.typeId)
             {
             case BTypeId::Bool:
@@ -57,7 +69,7 @@ namespace BoonEditor
             return result;
         }
 
-        static bool BoolProperty(const BProperty& property, void* pInstance)
+        static PropertyResult BoolProperty(const BProperty& property, void* pInstance)
         {
             std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
             uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
@@ -65,15 +77,15 @@ namespace BoonEditor
             bool& field = *reinterpret_cast<bool*>(base + property.offset);
             bool temp = field;
 
-            if (UI::Checkbox(name, temp))
+            PropertyResult result = UI::Checkbox(name, temp);
+            if (result.Changed)
             {
                 field = temp;
-                return true;
             }
-            return false;
+            return result;
         }
 
-        static bool FloatProperty(const BProperty& property, void* pInstance)
+        static PropertyResult FloatProperty(const BProperty& property, void* pInstance)
         {
             std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
             uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
@@ -84,26 +96,28 @@ namespace BoonEditor
             float min = property.HasMeta("RangeMin") ? std::stof(property.GetMeta("RangeMin").value()) : 0;
             float max = property.HasMeta("RangeMax") ? std::stof(property.GetMeta("RangeMax").value()) : 100;
 
+            PropertyResult result{};
+
             if (property.HasMeta("Slider"))
             {
-                if (UI::SliderFloat(name, temp, min, max))
+                result = UI::SliderFloat(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
             else
             {
-                if (UI::DragFloat(name, temp, min, max))
+                result = UI::DragFloat(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
-            return false;
+            return result;
         }
 
-        static bool Float2Property(const BProperty& property, void* pInstance)
+        static PropertyResult Float2Property(const BProperty& property, void* pInstance)
         {
             std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
             uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
@@ -114,26 +128,28 @@ namespace BoonEditor
             float min = property.HasMeta("RangeMin") ? std::stof(property.GetMeta("RangeMin").value()) : 0;
             float max = property.HasMeta("RangeMax") ? std::stof(property.GetMeta("RangeMax").value()) : 100;
 
+            PropertyResult result{};
+
             if (property.HasMeta("Slider"))
             {
-                if (UI::SliderFloat2(name, temp, min, max))
+                result = UI::SliderFloat2(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
             else
             {
-                if (UI::DragFloat2(name, temp, min, max))
+                result = UI::DragFloat2(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
-            return false;
+            return result;
         }
 
-        static bool Float3Property(const BProperty& property, void* pInstance)
+        static PropertyResult Float3Property(const BProperty& property, void* pInstance)
         {
             std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
             uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
@@ -144,26 +160,28 @@ namespace BoonEditor
             float min = property.HasMeta("RangeMin") ? std::stof(property.GetMeta("RangeMin").value()) : 0;
             float max = property.HasMeta("RangeMax") ? std::stof(property.GetMeta("RangeMax").value()) : 100;
 
+            PropertyResult result{};
+
             if (property.HasMeta("Slider"))
             {
-                if (UI::SliderFloat3(name, temp, min, max))
+                result = UI::SliderFloat3(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
             else
             {
-                if (UI::DragFloat3(name, temp, min, max))
+                result = UI::DragFloat3(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
-            return false;
+            return result;
         }
 
-        static bool Float4Property(const BProperty& property, void* pInstance)
+        static PropertyResult Float4Property(const BProperty& property, void* pInstance)
         {
             std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
             uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
@@ -174,34 +192,36 @@ namespace BoonEditor
             float min = property.HasMeta("RangeMin") ? std::stof(property.GetMeta("RangeMin").value()) : 0;
             float max = property.HasMeta("RangeMax") ? std::stof(property.GetMeta("RangeMax").value()) : 100;
 
+            PropertyResult result{};
+
             if (property.HasMeta("ColorPicker"))
             {
-                if (UI::ColorPicker(name, temp))
+                result = UI::ColorPicker(name, temp);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
             else if (property.HasMeta("Slider"))
             {
-                if (UI::SliderFloat4(name, temp, min, max))
+                result = UI::SliderFloat4(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
             else
             {
-                if (UI::DragFloat4(name, temp, min, max))
+                result = UI::DragFloat4(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
-            return false;
+            return result;
         }
 
-        static bool IntProperty(const BProperty& property, void* pInstance)
+        static PropertyResult IntProperty(const BProperty& property, void* pInstance)
         {
             std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
             uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
@@ -212,26 +232,28 @@ namespace BoonEditor
             int min = property.HasMeta("RangeMin") ? std::stoi(property.GetMeta("RangeMin").value()) : 0;
             int max = property.HasMeta("RangeMax") ? std::stoi(property.GetMeta("RangeMax").value()) : 100;
 
+            PropertyResult result{};
+
             if (property.HasMeta("Slider"))
             {
-                if (UI::SliderInt(name, temp, min, max))
+                result = UI::SliderInt(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
             else
             {
-                if (UI::DragInt(name, temp, min, max))
+                result = UI::SliderInt(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
-            return false;
+            return result;
         }
 
-        static bool Int2Property(const BProperty& property, void* pInstance)
+        static PropertyResult Int2Property(const BProperty& property, void* pInstance)
         {
             std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
             uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
@@ -242,26 +264,28 @@ namespace BoonEditor
             int min = property.HasMeta("RangeMin") ? std::stoi(property.GetMeta("RangeMin").value()) : 0;
             int max = property.HasMeta("RangeMax") ? std::stoi(property.GetMeta("RangeMax").value()) : 100;
 
+            PropertyResult result{};
+
             if (property.HasMeta("Slider"))
             {
-                if (UI::SliderInt2(name, temp, min, max))
+                result = UI::SliderInt2(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
             else
             {
-                if (UI::DragInt2(name, temp, min, max))
+                result = UI::SliderInt2(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
-            return false;
+            return result;
         }
 
-        static bool Int3Property(const BProperty& property, void* pInstance)
+        static PropertyResult Int3Property(const BProperty& property, void* pInstance)
         {
             std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
             uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
@@ -272,26 +296,28 @@ namespace BoonEditor
             int min = property.HasMeta("RangeMin") ? std::stoi(property.GetMeta("RangeMin").value()) : 0;
             int max = property.HasMeta("RangeMax") ? std::stoi(property.GetMeta("RangeMax").value()) : 100;
 
+            PropertyResult result{};
+
             if (property.HasMeta("Slider"))
             {
-                if (UI::SliderInt3(name, temp, min, max))
+                result = UI::SliderInt3(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
             else
             {
-                if (UI::DragInt3(name, temp, min, max))
+                result = UI::SliderInt3(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
-            return false;
+            return result;
         }
 
-        static bool Int4Property(const BProperty& property, void* pInstance)
+        static PropertyResult Int4Property(const BProperty& property, void* pInstance)
         {
             std::string name = property.HasMeta("Name") ? property.GetMeta("Name").value() : property.name;
             uint8_t* base = reinterpret_cast<uint8_t*>(pInstance);
@@ -302,358 +328,225 @@ namespace BoonEditor
             int min = property.HasMeta("RangeMin") ? std::stoi(property.GetMeta("RangeMin").value()) : 0;
             int max = property.HasMeta("RangeMax") ? std::stoi(property.GetMeta("RangeMax").value()) : 100;
 
+            PropertyResult result{};
+
             if (property.HasMeta("Slider"))
             {
-                if (UI::SliderInt4(name, temp, min, max))
+                result = UI::SliderInt4(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
             else
             {
-                if (UI::DragInt4(name, temp, min, max))
+                result = UI::SliderInt4(name, temp, min, max);
+                if (result.Changed)
                 {
                     field = temp;
-                    return true;
                 }
             }
-            return false;
+            return result;
         }
 
-        static bool Checkbox(const std::string& label, bool& value)
+        static PropertyResult Checkbox(const std::string& label, bool& value)
         {
             bool result = false;
 
-            BeginProperty(label);
+            BeginProperty(label, value);
 
-            if (ImGui::Checkbox("##val", &value))
-            {
-                result = true;
-            }
+            result = ImGui::Checkbox("##val", &value);
 
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-		static bool DragFloat(const std::string& label, float& value, float min = 0.1f, float max = 1.f, float step = 0.1f)
+		static PropertyResult DragFloat(const std::string& label, float& value, float min = 0.1f, float max = 1.f, float step = 0.1f)
 		{
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::DragFloat("##val", &value, step, min, max, "%.2f");
 
-            if (ImGui::DragFloat("##val", &value, step, min, max, "%.2f"))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
 		}
 
-        static bool DragFloat2(const std::string& label, glm::vec2& value, float min = 0.1f, float max = 1.f, float step = 0.1f)
+        static PropertyResult DragFloat2(const std::string& label, glm::vec2& value, float min = 0.1f, float max = 1.f, float step = 0.1f)
         {
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::DragFloat2("##val", &value.x, step, min, max, "%.2f");
 
-            if (ImGui::DragFloat2("##val", &value.x, step, min, max, "%.2f"))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool DragFloat3(const std::string& label, glm::vec3& value, float min = 0.1f, float max = 1.f, float step = 0.1f)
+        static PropertyResult DragFloat3(const std::string& label, glm::vec3& value, float min = 0.1f, float max = 1.f, float step = 0.1f)
         {
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::DragFloat3("##val", &value.x, step, min, max, "%.2f");
 
-            if (ImGui::DragFloat3("##val", &value.x, step, min, max, "%.2f"))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool DragFloat4(const std::string& label, glm::vec4& value, float min = 0.1f, float max = 1.f, float step = 0.1f)
+        static PropertyResult DragFloat4(const std::string& label, glm::vec4& value, float min = 0.1f, float max = 1.f, float step = 0.1f)
         {
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::DragFloat4("##val", &value.x, step, min, max, "%.2f");
 
-            if (ImGui::DragFloat4("##val", &value.x, step, min, max, "%.2f"))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool DragInt(const std::string& label, int& value, int min = 0, int max = 100, float speed = 1.f)
+        static PropertyResult DragInt(const std::string& label, int& value, int min = 0, int max = 100, float speed = 1.f)
         {
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::DragInt("##val", &value, speed, min, max);
 
-            if (ImGui::DragInt("##val", &value, speed, min, max))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool DragInt2(const std::string& label, glm::ivec2& value, int min = 0, int max = 100, float speed = 1.f)
+        static PropertyResult DragInt2(const std::string& label, glm::ivec2& value, int min = 0, int max = 100, float speed = 1.f)
         {
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::DragInt2("##val", &value.x, speed, min, max);
 
-            if (ImGui::DragInt2("##val", &value.x, speed, min, max))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool DragInt3(const std::string& label, glm::ivec3& value, int min = 0, int max = 100, float speed = 1.f)
+        static PropertyResult DragInt3(const std::string& label, glm::ivec3& value, int min = 0, int max = 100, float speed = 1.f)
         {
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::DragInt3("##val", &value.x, speed, min, max);
 
-            if (ImGui::DragInt3("##val", &value.x, speed, min, max))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool DragInt4(const std::string& label, glm::ivec4& value, int min = 0, int max = 100, float speed = 1.f)
+        static PropertyResult DragInt4(const std::string& label, glm::ivec4& value, int min = 0, int max = 100, float speed = 1.f)
         {
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::DragInt4("##val", &value.x, speed, min, max);
 
-            if (ImGui::DragInt4("##val", &value.x, speed, min, max))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
         // sliders
-        static bool SliderFloat(const std::string& label, float& value, float min = 0.1f, float max = 1.f)
+        static PropertyResult SliderFloat(const std::string& label, float& value, float min = 0.1f, float max = 1.f)
         {
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::SliderFloat("##val", &value, min, max, "%.2f");
 
-            if (ImGui::SliderFloat("##val", &value, min, max, "%.2f"))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool SliderFloat2(const std::string& label, glm::vec2& value, float min = 0.1f, float max = 1.f)
+        static PropertyResult SliderFloat2(const std::string& label, glm::vec2& value, float min = 0.1f, float max = 1.f)
         {
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::SliderFloat2("##val", &value.x, min, max, "%.2f");
 
-            if (ImGui::SliderFloat2("##val", &value.x, min, max, "%.2f"))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool SliderFloat3(const std::string& label, glm::vec3& value, float min = 0.1f, float max = 1.f)
+        static PropertyResult SliderFloat3(const std::string& label, glm::vec3& value, float min = 0.1f, float max = 1.f)
         {
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::SliderFloat3("##val", &value.x, min, max, "%.2f");
 
-            if (ImGui::SliderFloat3("##val", &value.x, min, max, "%.2f"))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool SliderFloat4(const std::string& label, glm::vec4& value, float min = 0.1f, float max = 1.f)
+        static PropertyResult SliderFloat4(const std::string& label, glm::vec4& value, float min = 0.1f, float max = 1.f)
         {
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::SliderFloat4("##val", &value.x, min, max, "%.2f");
 
-            if (ImGui::SliderFloat4("##val", &value.x, min, max, "%.2f"))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool SliderInt(const std::string& label, int& value, int min = 0, int max = 100)
+        static PropertyResult SliderInt(const std::string& label, int& value, int min = 0, int max = 100)
         {
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::SliderInt("##val", &value, min, max);
 
-            if (ImGui::SliderInt("##val", &value, min, max))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool SliderInt2(const std::string& label, glm::ivec2& value, int min = 0, int max = 100)
+        static PropertyResult SliderInt2(const std::string& label, glm::ivec2& value, int min = 0, int max = 100)
         {
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::SliderInt2("##val", &value.x, min, max);
 
-            if (ImGui::SliderInt2("##val", &value.x, min, max))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool SliderInt3(const std::string& label, glm::ivec3& value, int min = 0, int max = 100)
+        static PropertyResult SliderInt3(const std::string& label, glm::ivec3& value, int min = 0, int max = 100)
         {
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::SliderInt3("##val", &value.x, min, max);
 
-            if (ImGui::SliderInt3("##val", &value.x, min, max))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool SliderInt4(const std::string& label, glm::ivec4& value, int min = 0, int max = 100)
+        static PropertyResult SliderInt4(const std::string& label, glm::ivec4& value, int min = 0, int max = 100)
         {
-            bool result = false;
+            BeginProperty(label, value);
 
-            BeginProperty(label);
+            bool result = ImGui::SliderInt4("##val", &value.x, min, max);
 
-            if (ImGui::SliderInt4("##val", &value.x, min, max))
-            {
-                result = true;
-            }
-
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool ColorPicker(const std::string& label, glm::vec3& value)
+        static PropertyResult ColorPicker(const std::string& label, glm::vec3& value)
         {
-            bool result = false;
-
-            BeginProperty(label);
+            BeginProperty(label, value);
 
             ImGuiColorEditFlags flags =
                 ImGuiColorEditFlags_DisplayRGB |
                 ImGuiColorEditFlags_AlphaPreviewHalf |
                 ImGuiColorEditFlags_AlphaBar;
 
-            if (ImGui::ColorEdit4("##val", &value.x, flags))
-            {
-                result = true;
-            }
+            bool result = ImGui::ColorEdit4("##val", &value.x, flags);
 
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool ColorPicker(const std::string& label, glm::vec4& value)
+        static PropertyResult ColorPicker(const std::string& label, glm::vec4& value)
         {
-            bool result = false;
-
-            BeginProperty(label);
+            BeginProperty(label, value);
 
             ImGuiColorEditFlags flags =
                 ImGuiColorEditFlags_DisplayRGB |
                 ImGuiColorEditFlags_AlphaPreviewHalf |
                 ImGuiColorEditFlags_AlphaBar;
 
-            if (ImGui::ColorEdit4("##val", &value.x, flags))
-            {
-                result = true;
-            }
-            EndProperty();
+            bool result = ImGui::ColorEdit4("##val", &value.x, flags);
 
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool Combo(const std::string& label, int& currentItem, const char* const items[], int count)
+        static PropertyResult Combo(const std::string& label, int& currentItem, const char* const items[], int count)
+        {
+            BeginProperty(label, currentItem);
+
+            bool result = ImGui::Combo("##val", &currentItem, items, count);
+
+            return EndProperty(label, result);
+        }
+
+        static PropertyResult Field(const std::string& label, std::string& value)
         {
             bool result = false;
 
-            BeginProperty(label);
-            if (ImGui::Combo("##val", &currentItem, items, count))
-            {
-                result = true;
-            }
-            EndProperty();
-
-            return result;
-        }
-
-        static bool Field(const std::string& label, std::string& value)
-        {
-            bool result = false;
-
-            BeginProperty(label);
+            BeginProperty(label, value);
             char buffer[256];
             strncpy(buffer, value.c_str(), sizeof(buffer));
             buffer[sizeof(buffer) - 1] = '\0';
@@ -663,30 +556,21 @@ namespace BoonEditor
                 value = buffer;
                 result = true;
             }
-            EndProperty();
-
-            return result;
+            return EndProperty(label, result);
         }
 
-        static bool Input(const std::string& label, int& value)
+        static PropertyResult Input(const std::string& label, int& value)
         {
-            bool result = false;
-
-            BeginProperty(label);
-            if (ImGui::InputInt("##val", &value))
-            {
-                result = true;
-            }
-            EndProperty();
-
-            return result;
+            BeginProperty(label, value);
+            bool result = ImGui::InputInt("##val", &value);
+            return EndProperty(label, result);
         }
 
-        static bool InputDigits(const std::string& label, int& value, int digits)
+        static PropertyResult InputDigits(const std::string& label, int& value, int digits)
         {
             bool changed = false;
 
-            BeginProperty(label);
+            BeginProperty(label, value);
 
             digits = std::clamp(digits, 1, 10);
 
@@ -764,12 +648,10 @@ namespace BoonEditor
             }
 
             ImGui::PopID();
-            EndProperty();
-
-            return changed;
+            return EndProperty(label, changed);
         }
 
-        static bool AssetRefProperty(const BProperty& property, void* pInstance)
+        static PropertyResult AssetRefProperty(const BProperty& property, void* pInstance)
         {
             std::string label = property.HasMeta("Name")
                 ? property.GetMeta("Name").value()
@@ -783,12 +665,12 @@ namespace BoonEditor
             return AssetRef(label, current, AssetPropertyType(property));
         }
 
-        static bool AssetRef(const std::string& label, AssetHandle& handle, AssetType assetType)
+        static PropertyResult AssetRef(const std::string& label, AssetHandle& handle, AssetType assetType)
         {
             
             bool changed = false;
 
-            BeginProperty(label);
+            BeginProperty(label, (uint64_t)handle);
 
             //
             // Resolve current label (filename only)
@@ -940,8 +822,7 @@ namespace BoonEditor
                 ImGui::EndPopup();
             }
 
-            EndProperty();
-            return changed;
+            return EndProperty(label, changed);
         }
 
         template<typename T>
@@ -954,7 +835,7 @@ namespace BoonEditor
             const float rowHeight = 22;
             static float listHeight = 250.0f;
 
-            BeginProperty(label);
+            BeginProperty(label, selected);
 
             ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 4.0f);
             ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(4, 4));
@@ -1138,8 +1019,7 @@ namespace BoonEditor
                 changed = true;
             }
 
-            EndProperty();
-            return changed;
+            return EndProperty(label, changed);
         }
 
         static bool Selectable(const char* id, bool selected, const glm::vec2& size = {}, float rounding = 6.0f)
@@ -1205,9 +1085,146 @@ namespace BoonEditor
             return pressed;
         }
 
+        static PropertyResult Float3Control(const std::string& label, glm::vec3& vector, float resetValue = 0.0f, float columnWidth = 100.0f)
+        {
+            PropertyResult result{};
+
+            ImGuiIO& io{ ImGui::GetIO() };
+            auto boldFont{ io.Fonts->Fonts[0] };
+
+            ImGui::PushID(label.c_str());
+
+            float panelWidth = ImGui::GetContentRegionAvail().x;
+            bool itemActive = false;
+
+            ImGui::Columns(2);
+            ImGui::SetColumnWidth(0, panelWidth * 0.3f);
+            ImGui::Text("%s", label.c_str());
+            ImGui::NextColumn();
+
+            ImGui::PushMultiItemsWidths(3, ImGui::CalcItemWidth());
+            ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
+
+            float lineHeight = ImGui::GetFontSize() + ImGui::GetStyle().FramePadding.y * 2.0f;
+            ImVec2 buttonSize = { lineHeight + 3.0f, lineHeight };
+
+            glm::vec3 original = vector;
+
+            // X
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f });
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f });
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f });
+            ImGui::PushFont(boldFont);
+
+            if (ImGui::Button("X", buttonSize))
+            {
+                result.OldValue.Set(vector);
+                vector.x = resetValue;
+                result.Changed = true;
+                result.Committed = true;
+            }
+
+            ImGui::PopFont();
+            ImGui::PopStyleColor(3);
+            ImGui::SameLine();
+
+            if (ImGui::DragFloat("##X", &vector.x, 0.1f, 0.0f, 0.0f, "%.2f"))
+                result.Changed = true;
+
+            if (ImGui::IsItemActivated() && !m_PendingPropertyEdits.contains(label))
+                m_PendingPropertyEdits[label].Value.Set(original);
+
+            if (ImGui::IsItemActive())
+                itemActive = true;
+
+            ImGui::PopItemWidth();
+            ImGui::SameLine();
+
+            // Y
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f });
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f });
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f });
+            ImGui::PushFont(boldFont);
+
+            if (ImGui::Button("Y", buttonSize))
+            {
+                result.OldValue.Set(vector);
+                vector.y = resetValue;
+                result.Changed = true;
+                result.Committed = true;
+            }
+
+            ImGui::PopFont();
+            ImGui::PopStyleColor(3);
+            ImGui::SameLine();
+
+            if (ImGui::DragFloat("##Y", &vector.y, 0.1f, 0.0f, 0.0f, "%.2f"))
+                result.Changed = true;
+
+            if (ImGui::IsItemActivated() && !m_PendingPropertyEdits.contains(label))
+                m_PendingPropertyEdits[label].Value.Set(original);
+
+            if (ImGui::IsItemActive())
+                itemActive = true;
+
+            ImGui::PopItemWidth();
+            ImGui::SameLine();
+
+            // Z
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f });
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{ 0.2f, 0.35f, 0.9f, 1.0f });
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f });
+            ImGui::PushFont(boldFont);
+
+            if (ImGui::Button("Z", buttonSize))
+            {
+                result.OldValue.Set(vector);
+                vector.z = resetValue;
+                result.Changed = true;
+                result.Committed = true;
+            }
+
+            ImGui::PopFont();
+            ImGui::PopStyleColor(3);
+            ImGui::SameLine();
+
+            if (ImGui::DragFloat("##Z", &vector.z, 0.1f, 0.0f, 0.0f, "%.2f"))
+                result.Changed = true;
+
+            if (ImGui::IsItemActivated() && !m_PendingPropertyEdits.contains(label))
+                m_PendingPropertyEdits[label].Value.Set(original);
+
+            if (ImGui::IsItemActive())
+                itemActive = true;
+
+            if (!itemActive)
+            {
+                auto it = m_PendingPropertyEdits.find(label);
+                if (it != m_PendingPropertyEdits.end())
+                {
+                    const glm::vec3 oldValue = it->second.Value.AsVec3();
+
+                    result.Changed = (vector != oldValue);
+                    result.Committed = result.Changed;
+
+                    if (result.Committed)
+                        result.OldValue = it->second.Value;
+
+                    m_PendingPropertyEdits.erase(it);
+                }
+            }
+
+            ImGui::PopItemWidth();
+            ImGui::PopStyleVar();
+            ImGui::Columns(1);
+            ImGui::PopID();
+
+            return result;
+        }
+
 
         private:
-            static void BeginProperty(const std::string& label)
+            static void BeginProperty(const std::string& label, const Boon::Variant& originalVal)
             {
                 ImGui::PushID(label.c_str());
 
@@ -1219,12 +1236,53 @@ namespace BoonEditor
                 ImGui::NextColumn();
 
                 ImGui::PushItemWidth(panelWidth * 0.65f);
+
+                auto& pending = m_PendingPropertyEdits[label];
+                if (!pending.Activated)
+                    pending.Value = originalVal;
             }
-            static void EndProperty()
+
+            static PropertyResult EndProperty(const std::string& property, bool changed)
             {
+                PropertyResult result{};
+
+                const bool isItemActivated = ImGui::IsItemActivated();
+                const bool isItemActive = ImGui::IsItemActive();
+
+                auto it = m_PendingPropertyEdits.find(property);
+                if (it != m_PendingPropertyEdits.end())
+                {
+                    auto& pending = it->second;
+
+                    if (isItemActivated)
+                    {
+                        pending.Activated = true;
+                        pending.Changed = false;
+                    }
+
+                    if (changed)
+                    {
+                        pending.Changed = true;
+                        result.Changed = true;
+                    }
+
+                    if (pending.Activated && !isItemActive)
+                    {
+                        result.Changed = pending.Changed;
+                        result.Committed = pending.Changed;
+
+                        if (result.Committed)
+                            result.OldValue = pending.Value;
+
+                        m_PendingPropertyEdits.erase(it);
+                    }
+                }
+
                 ImGui::PopItemWidth();
                 ImGui::Columns(1);
                 ImGui::PopID();
+
+                return result;
             }
 
             static AssetType AssetPropertyType(const BProperty& prop)
@@ -1275,5 +1333,14 @@ namespace BoonEditor
 
                 return lowerStr.find(lowerFilter) != std::string::npos;
             }
+
+            struct PendingPropertyState
+            {
+                Boon::Variant Value{};
+                bool Activated{ false };
+                bool Changed{ false };
+            };
+
+            static std::unordered_map<std::string, PendingPropertyState> m_PendingPropertyEdits;
 	};
 }

@@ -66,6 +66,10 @@
 
 #include <BoonDebug/DebugRenderer.h>
 
+#include <Command/EditorCommandQueue.h>
+
+#include <Input/Input.h>
+
 #include <iostream>
 #include <imgui.h>
 
@@ -203,7 +207,16 @@ void EditorState::OnUpdate()
 		pObject->Update();
 	}
 
+	Input& input = ServiceLocator::Get<Input>();
+	if (input.IsKeyHeld(Boon::Key::LeftControl)
+		&& input.IsKeyPressed(Boon::Key::Z))
+	{
+		m_Context.GetCommandQueue()->RequestUndo();
+	}
+
 	OnRender();
+
+	m_Context.GetCommandQueue()->Execute();
 }
 
 void EditorState::OnExit()

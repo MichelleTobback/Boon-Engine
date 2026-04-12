@@ -94,7 +94,7 @@ namespace Boon
          * @param propName Name of the property to find.
          * @return Pointer to the BProperty if found, otherwise nullptr.
          */
-        inline const BProperty* FindProperty(const char* propName) const {
+        inline const BProperty* FindProperty(std::string_view propName) const {
             for (auto& p : properties) if (std::string_view(p.name) == propName) return &p;
             return nullptr;
         }
@@ -102,7 +102,7 @@ namespace Boon
         /**
          * @brief Check whether a property with the given name exists.
          */
-        inline bool HasProperty(const char* propName) const {
+        inline bool HasProperty(std::string_view propName) const {
             return FindProperty(propName) != nullptr;
         }
 
@@ -134,7 +134,7 @@ namespace Boon
          * @throws std::runtime_error if the property is not found.
          */
         template<typename T>
-        inline T& GetValueRef(void* instance, const char* propName) const {
+        inline T& GetValueRef(void* instance, std::string_view propName) const {
             const BProperty* prop = FindProperty(propName);
             if (!prop)
                 throw std::runtime_error("Property not found: " + std::string(propName));
@@ -145,12 +145,18 @@ namespace Boon
          * @brief Const overload of GetValueRef for read-only access.
          */
         template<typename T>
-        inline const T& GetValueRef(const void* instance, const char* propName) const {
+        inline const T& GetValueRef(const void* instance, std::string_view propName) const {
             const BProperty* prop = FindProperty(propName);
             if (!prop)
                 throw std::runtime_error("Property not found: " + std::string(propName));
             return *reinterpret_cast<const T*>((const uint8_t*)instance + prop->offset);
         }
+
+        Variant GetValue(const void* instance, const char* propName) const;
+
+        bool IsVariant() const;
+
+        void SetValue(void* instance, const char* propName, const Variant& value) const;
 
         /**
          * @brief Access the list of properties for this class.

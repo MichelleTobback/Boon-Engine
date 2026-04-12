@@ -11,9 +11,12 @@ using namespace Boon;
 
 namespace BoonEditor
 {
+	class EditorCommandQueue;
 	class EditorContext final
 	{
 	public:
+		EditorContext();
+
 		template <typename T, typename ...TArgs>
 		T& CreateObject(TArgs&& ... args)
 		{
@@ -67,6 +70,7 @@ namespace BoonEditor
 			return dynamic_cast<T*>(it->second);
 		}
 
+		inline EditorCommandQueue* GetCommandQueue() { return m_CommandQueue.get(); }
 		inline const ProjectConfig& GetCurrentProjectConfig() const { return m_CurrentProject; }
 
 	private:
@@ -75,5 +79,6 @@ namespace BoonEditor
 
 		std::vector<std::unique_ptr<EditorObject>> m_Objects;
 		std::unordered_map<std::string, EditorWidget*> m_Widgets;
+		std::unique_ptr<EditorCommandQueue> m_CommandQueue;
 	};
 }

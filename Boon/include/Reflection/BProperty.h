@@ -80,6 +80,8 @@ namespace Boon
                     return m.value;
             return std::nullopt;
         }
+
+        bool IsVariant() const;
     };
 
 } // namespace Boon

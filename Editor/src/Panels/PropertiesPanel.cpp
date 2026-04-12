@@ -13,6 +13,9 @@
 #include "Renderer/Texture.h"
 
 #include <Core/ServiceLocator.h>
+#include <Core/EditorContext.h>
+#include <Command/EditorCommandQueue.h>
+#include <Command/PropertyCommand.h>
 
 using namespace BoonEditor;
 
@@ -41,19 +44,37 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
 
     RenderComponentNode<TransformComponent>("Transform", [this](TransformComponent& transform)
         {
+            BClassRegistry& reg = BClassRegistry::Get();
+            BClass* cls = reg.Find<TransformComponent>();
+            const BProperty* pPosProp = cls->FindProperty("m_LocalPosition");
+            void* pInstance = static_cast<void*>(&transform);
             glm::vec3 value = transform.GetLocalPosition();
-            if (RenderFloat3Control("Position", value))
+            UI::PropertyResult result = UI::Float3Control("Position", value);
+            if (result)
             {
+                if (result.Committed)
+                    GetContext().GetCommandQueue()->Push<SetComponentPropertyCommand>(
+                        m_pGameObjectContext->Get(), cls, pPosProp, result.OldValue, value);
                 transform.SetLocalPosition(value);
             }
             value = transform.GetLocalEulerRotation();
-            if (RenderFloat3Control("rotation", value))
+            const BProperty* pRotProp = cls->FindProperty("m_LocalEuler");
+            result = UI::Float3Control("rotation", value);
+            if (result)
             {
+                if (result.Committed)
+                    GetContext().GetCommandQueue()->Push<SetComponentPropertyCommand>(
+                        m_pGameObjectContext->Get(), cls, pRotProp, result.OldValue, value);
                 transform.SetLocalRotation(value);
             }
             value = transform.GetLocalScale();
-            if (RenderFloat3Control("scale", value))
+            const BProperty* pScaleProp = cls->FindProperty("m_LocalScale");
+            result = UI::Float3Control("scale", value);
+            if (result)
             {
+                if (result.Committed)
+                    GetContext().GetCommandQueue()->Push<SetComponentPropertyCommand>(
+                        m_pGameObjectContext->Get(), cls, pScaleProp, result.OldValue, value);
                 transform.SetLocalScale(value);
             }
         });
@@ -186,9 +207,22 @@ inline void PropertiesPanel::RenderComponentNode(BClass* cls, const std::functio
     if (open)
     {
         void* pInstance = owner.GetComponentByClass(cls);
-        cls->ForEachProperty([pInstance](const BProperty& prop)
+        cls->ForEachProperty([pInstance, this, owner, cls](const BProperty& prop)
             {
-                UI::Property(prop, pInstance);
+                if (prop.IsVariant())
+                {
+                    UI::PropertyResult result = UI::Property(prop, pInstance);
+                    if (result.Committed)
+                    {
+                        Variant newVal = cls->GetValue(pInstance, prop.name.c_str());
+                        GetContext().GetCommandQueue()->Push<SetComponentPropertyCommand>(
+                            owner, cls, &prop, result.OldValue, newVal);
+                    }
+                }
+                else
+                {
+                    UI::Property(prop, pInstance);
+                }
             });
 
         if (fn) fn();
