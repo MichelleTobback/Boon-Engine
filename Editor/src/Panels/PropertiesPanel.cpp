@@ -16,6 +16,7 @@
 #include <Core/EditorContext.h>
 #include <Command/EditorCommandQueue.h>
 #include <Command/PropertyCommand.h>
+#include <Command/SceneCommands.h>
 
 using namespace BoonEditor;
 
@@ -53,8 +54,8 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
             if (result)
             {
                 if (result.Committed)
-                    GetContext().GetCommandQueue()->Push<SetComponentPropertyCommand>(
-                        m_pGameObjectContext->Get(), cls, pPosProp, result.OldValue, value);
+                    GetContext().GetCommandQueue()->Push<TransformValueCommand>(m_pGameObjectContext->Get(), result.OldValue.AsVec3(), value,
+                        [](TransformComponent& transform, const glm::vec3& value) {transform.SetLocalPosition(value); });
                 transform.SetLocalPosition(value);
             }
             value = transform.GetLocalEulerRotation();
@@ -63,8 +64,8 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
             if (result)
             {
                 if (result.Committed)
-                    GetContext().GetCommandQueue()->Push<SetComponentPropertyCommand>(
-                        m_pGameObjectContext->Get(), cls, pRotProp, result.OldValue, value);
+                    GetContext().GetCommandQueue()->Push<TransformValueCommand>(m_pGameObjectContext->Get(), result.OldValue.AsVec3(), value,
+                        [](TransformComponent& transform, const glm::vec3& value) {transform.SetLocalRotation(value); });
                 transform.SetLocalRotation(value);
             }
             value = transform.GetLocalScale();
@@ -73,8 +74,8 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
             if (result)
             {
                 if (result.Committed)
-                    GetContext().GetCommandQueue()->Push<SetComponentPropertyCommand>(
-                        m_pGameObjectContext->Get(), cls, pScaleProp, result.OldValue, value);
+                    GetContext().GetCommandQueue()->Push<TransformValueCommand>(m_pGameObjectContext->Get(), result.OldValue.AsVec3(), value,
+                        [](TransformComponent& transform, const glm::vec3& value) {transform.SetLocalScale(value); });
                 transform.SetLocalScale(value);
             }
         });

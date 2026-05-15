@@ -3,20 +3,20 @@
 #include "Asset/AssetTraits.h"
 #include "Asset/AssetMeta.h"
 #include "Core/Memory/Buffer.h"
-#include "Scene/Scene.h"
 
 #include <memory>
 
 namespace Boon
 {
-    class SceneAsset : public Asset
+    class PrefabAsset : public Asset
     {
     public:
         using Type = Scene;
-        SceneAsset(AssetHandle handle)
-            : Asset(handle) { }
+        PrefabAsset(AssetHandle handle)
+            : Asset(handle) {
+        }
 
-        Scene* GetInstance()
+        std::shared_ptr<Prefab> GetInstance()
         {
             return nullptr;
         }
@@ -25,19 +25,19 @@ namespace Boon
     };
 
     template<>
-    struct AssetTraits<SceneAsset>
+    struct AssetTraits<PrefabAsset>
     {
         static constexpr AssetType Type = AssetType::Scene;
         static constexpr bool HasMeta = false;
 
-        static SceneAsset* Load(Buffer&, const AssetMeta& meta)
+        static PrefabAsset* Load(Buffer&, const AssetMeta& meta)
         {
-            SceneAsset* asset = new SceneAsset(meta.uuid);
+            PrefabAsset* asset = new PrefabAsset(meta.uuid);
 
             return asset;
         }
 
-        static Buffer Serialize(SceneAsset*)
+        static Buffer Serialize(PrefabAsset*)
         {
             Buffer out;
 

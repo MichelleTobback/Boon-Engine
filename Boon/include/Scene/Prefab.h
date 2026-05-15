@@ -1,5 +1,6 @@
 #include <Core/Memory/Buffer.h>
 #include "Reflection/BClass.h"
+#include "Scene/GameObject.h"
 
 #include <unordered_map>
 
@@ -8,21 +9,18 @@ namespace Boon
 	class Prefab final
 	{
 	public:
-		template<typename T>
-		T* GetComponent()
-		{
-			BClass* cls = BClassRegistry::Get().Find<T>();
-			if (!cls)
-				return nullptr;
-
-			auto it = m_Components.find(cls->hash);
-			if (it == m_Components.end())
-				return nullptr;
-
-			T* comp = it->second.Read<T>();
-		}
+		void ApplyTo(GameObject obj);
 
 	private:
-		std::unordered_map<uint32_t, Buffer> m_Components;
+		struct PrefabNode
+		{
+			std::unordered_map<BClass*, Buffer> Components;
+			std::vector<PrefabNode> Children;
+			GameObjectID Id{};
+		};
+
+		void ResolveNode(PrefabNode& node);
+
+		PrefabNode m_Root{};
 	};
 }
