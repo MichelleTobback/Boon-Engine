@@ -5,9 +5,7 @@
 #include <string>
 #include "Core/UUID.h"
 #include "Asset/AssetLibrary.h"
-#include "Asset/Importer/AssetImporterRegistry.h"
-
-#include <filesystem>
+#include "Assets/Importer/AssetImporterRegistry.h"
 
 namespace fs = std::filesystem;
 
@@ -18,7 +16,7 @@ namespace BoonEditor
     class AssetDirectoryScanner final : public EditorObject
     {
     public:
-        AssetDirectoryScanner(const std::filesystem::path& root, float interval = 0.2f);
+        AssetDirectoryScanner(size_t assetRootIndex, float interval);
 
         void Update();
 
@@ -28,9 +26,8 @@ namespace BoonEditor
         void ProcessFile(const std::filesystem::path& path);
 
     private:
-        std::filesystem::path m_Root;
-
-        float m_Interval{};
+        size_t m_AssetRootIndex;
+        float m_Interval;
         float m_Accumulator{};
     };
 }

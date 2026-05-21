@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Reflection/BProperty.h"
+#include <Asset/Assets.h>
 #include "Assets/AssetDatabase.h"
 #include <Core/Variant.h>
 #include <imgui.h>
@@ -709,8 +710,7 @@ namespace BoonEditor
                 {
                     AssetHandle hovered = *(const AssetHandle*)payload->Data;
 
-                    const AssetMeta* meta =
-                        ServiceLocator::Get<AssetImporterRegistry>().GetRegistry()->Get(hovered);
+                    const AssetMeta* meta = Assets::Get().GetRegistry().Get(hovered);
 
                     if (meta && assetType == meta->type)
                         compatible = true;
@@ -741,8 +741,7 @@ namespace BoonEditor
                 if (payload && payload->IsDataType("ASSET_HANDLE"))
                 {
                     AssetHandle hovered = *(const AssetHandle*)payload->Data;
-                    const AssetMeta* meta =
-                        ServiceLocator::Get<AssetImporterRegistry>().GetRegistry()->Get(hovered);
+                    const AssetMeta* meta = Assets::Get().GetRegistry().Get(hovered);
 
                     bool compatible = (meta && assetType == meta->type);
 
@@ -782,7 +781,7 @@ namespace BoonEditor
                 ImGui::InputText("Search", filter, sizeof(filter));
                 ImGui::Separator();
 
-                const auto& all = ServiceLocator::Get<AssetImporterRegistry>().GetRegistry()->GetAll();
+                const auto& all = Assets::Get().GetRegistry().GetAll();
 
                 for (auto& it : all)
                 {

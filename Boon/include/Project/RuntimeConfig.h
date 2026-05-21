@@ -13,6 +13,7 @@ namespace Boon
         std::filesystem::path ProjectRoot;
         std::filesystem::path EngineRoot;
         std::filesystem::path AssetsRoot;
+        std::filesystem::path EngineContentRoot;
         std::filesystem::path IntermediateRoot;
         std::filesystem::path SavedRoot;
 

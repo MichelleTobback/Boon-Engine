@@ -70,7 +70,7 @@ namespace Boon
 			GameObject player = m_pScene->InstantiateGameObject(connectionId);
 
 			AssetLibrary& assetLib = Assets::Get();
-			AssetRef<SpriteAtlasAsset> atlas = assetLib.Import<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa");
+			AssetRef<SpriteAtlasAsset> atlas = assetLib.Load<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa");
 			
 			SpriteRendererComponent& sprite = player.AddComponent<SpriteRendererComponent>();
 			sprite.SpriteAtlasHandle = atlas->GetHandle();

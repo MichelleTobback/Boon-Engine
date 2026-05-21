@@ -26,7 +26,13 @@ namespace Boon
             return (it != m_AssetPack.GetEntries().end()) ? &it->second : nullptr;
         }
 
+        const std::unordered_map<UUID, PackedAssetEntry>& GetEntries() const
+        {
+            return m_AssetPack.GetEntries();
+        }
+
         bool ReadAsset(AssetHandle handle, Buffer& outBuffer, AssetMeta& outMeta);
+        bool ReadAsset(const std::filesystem::path& runtimePath, Buffer& outBuffer, AssetMeta& outMeta);
 
         bool ReadBytes(uint64_t offset, uint64_t size, void* outBuffer) const;
 
@@ -37,7 +43,11 @@ namespace Boon
         }
 
     private:
+        static std::string NormalizePathKey(const std::filesystem::path& path);
+
+    private:
         FILE* m_File = nullptr;
         AssetPack m_AssetPack;
+        std::unordered_map<std::string, AssetHandle> m_RuntimePathToHandle;
     };
 }

@@ -1,135 +1,75 @@
 #pragma once
 
+#include <filesystem>
+#include <functional>
+#include <initializer_list>
 #include <memory>
 #include <vector>
-#include <filesystem>
-#include <initializer_list>
 
-#include "AssetPack/AssetCache.h"
-#include "AssetPack/AssetPackReader.h"
-#include "Asset/Loader/AssetLoader.h"
+#include "Asset/AssetManifest.h"
+#include "Asset/AssetPack/AssetCache.h"
+#include "Asset/AssetPack/AssetPackReader.h"
 #include "Asset/AssetRef.h"
-
-#include "Core/ServiceLocator.h"
-#include "Asset/Importer/AssetImporterRegistry.h"
+#include "Asset/AssetRegistry.h"
+#include "Asset/AssetTraits.h"
+#include "Asset/Loader/AssetLoaderRegistry.h"
+#include "Asset/Source/FolderAssetSource.h"
+#include "Asset/Source/IAssetSource.h"
+#include "Asset/Source/PackAssetSource.h"
 
 namespace Boon
 {
     class AssetLibrary
     {
     public:
-        explicit AssetLibrary(const std::filesystem::path& root)
+        AssetLibrary();
+        explicit AssetLibrary(const std::filesystem::path& runtimeAssetRoot);
+        explicit AssetLibrary(const std::vector<std::filesystem::path>& runtimeAssetRoots);
+        AssetLibrary(std::initializer_list<std::filesystem::path> runtimeAssetRoots);
+        ~AssetLibrary();
+
+        template<typename T>
+        void RegisterAssetType()
         {
-            InitializeImporterRegistryBindings();
-            AddRoot(root);
+            m_Loaders.Register<T>();
         }
 
-        explicit AssetLibrary(const std::vector<std::filesystem::path>& roots)
-        {
-            InitializeImporterRegistryBindings();
-            for (const auto& root : roots)
-            {
-                AddRoot(root);
-            }
-        }
+        void RegisterBuiltinAssetTypes();
 
-        AssetLibrary(std::initializer_list<std::filesystem::path> roots)
-        {
-            InitializeImporterRegistryBindings();
-            for (const auto& root : roots)
-            {
-                AddRoot(root);
-            }
-        }
+        void SetRuntimeAssetRoot(const std::filesystem::path& root);
+        void AddRuntimeAssetRoot(const std::filesystem::path& root);
+        void SetRuntimeAssetRoots(const std::vector<std::filesystem::path>& roots);
+        void ClearRuntimeAssetRoots();
 
-        /**
-         * @brief Add an asset root directory.
-         *
-         * Roots are searched in insertion order.
-         * The first root is also the default import destination.
-         */
-        void AddRoot(const std::filesystem::path& root)
-        {
-            if (root.empty())
-                return;
+        const std::filesystem::path& GetRuntimeAssetRoot() const;
+        const std::vector<std::filesystem::path>& GetRuntimeAssetRoots() const;
 
-            m_Roots.push_back(root.lexically_normal());
-        }
+        // Compatibility wrappers while old call sites are migrated.
+        void SetRoot(const std::filesystem::path& root) { SetRuntimeAssetRoot(root); }
+        void AddRoot(const std::filesystem::path& root) { AddRuntimeAssetRoot(root); }
+        void SetRoots(const std::vector<std::filesystem::path>& roots) { SetRuntimeAssetRoots(roots); }
+        void ClearRoots() { ClearRuntimeAssetRoots(); }
+        const std::filesystem::path& GetRoot() const { return GetRuntimeAssetRoot(); }
+        const std::vector<std::filesystem::path>& GetRoots() const { return GetRuntimeAssetRoots(); }
 
-        /**
-         * @brief Replace all roots with a single root.
-         */
-        void SetRoot(const std::filesystem::path& root)
-        {
-            m_Roots.clear();
-            AddRoot(root);
-        }
-
-        /**
-         * @brief Replace all roots.
-         */
-        void SetRoots(const std::vector<std::filesystem::path>& roots)
-        {
-            m_Roots.clear();
-            for (const auto& root : roots)
-            {
-                AddRoot(root);
-            }
-        }
-
-        /**
-         * @brief Remove all configured roots.
-         */
-        void ClearRoots()
-        {
-            m_Roots.clear();
-        }
-
-        /**
-         * @brief Get the primary/default root.
-         *
-         * Returns an empty path if no roots are configured.
-         */
-        const std::filesystem::path& GetRoot() const
-        {
-            static const std::filesystem::path s_EmptyPath{};
-            return m_Roots.empty() ? s_EmptyPath : m_Roots.front();
-        }
-
-        /**
-         * @brief Get all configured roots.
-         */
-        const std::vector<std::filesystem::path>& GetRoots() const
-        {
-            return m_Roots;
-        }
-
-        /**
-         * @brief Load an asset pack from disk.
-         *
-         * If packFile is relative, all roots are searched in order.
-         * If packFile is absolute, it is opened directly.
-         *
-         * @param packFile Path to the asset pack file.
-         * @return true if the pack was loaded, false otherwise.
-         */
+        bool LoadManifest(const std::filesystem::path& manifestFile);
         bool LoadPack(const std::filesystem::path& packFile);
 
         template<typename T>
-        T* Resolve(AssetHandle handle)
+        AssetRef<T> Load(const std::filesystem::path& sourceOrRuntimePath)
         {
-            if (auto cached = m_Cache.Find<T>(handle))
-                return cached;
+            const AssetManifestEntry* entry = ResolveManifestEntry(sourceOrRuntimePath);
+            if (!entry)
+                return AssetRef<T>();
 
-            if (!m_Loader)
-                return nullptr;
+            if (entry->type != AssetTraits<T>::Type)
+                return AssetRef<T>();
 
-            T* loaded = m_Loader->Load<T>(handle);
-            if (!loaded)
-                return nullptr;
+            Asset* asset = LoadFromManifestEntry(*entry, AssetTraits<T>::Type);
+            if (!asset)
+                return AssetRef<T>();
 
-            m_Cache.Store(loaded);
-            return loaded;
+            return AssetRef<T>(asset->GetHandle());
         }
 
         template<typename T>
@@ -138,120 +78,66 @@ namespace Boon
             if (auto cached = m_Cache.Find<T>(handle))
                 return AssetRef<T>(cached->GetHandle());
 
-            if (!m_Loader)
+            Asset* asset = ResolveUntyped(handle, AssetTraits<T>::Type);
+            if (!asset)
                 return AssetRef<T>();
 
-            T* result = m_Loader->Load<T>(handle);
-            if (!result)
-                return AssetRef<T>();
-
-            m_Cache.Store(result);
-            return AssetRef<T>(result->GetHandle());
+            return AssetRef<T>(asset->GetHandle());
         }
 
-        /**
-         * @brief Clear the internal asset cache.
-         */
-        void ClearCache() { m_Cache.Clear(); }
-
-        /**
-         * @brief Clear the internal asset registry.
-         */
-        void ClearRegistry() 
-        { 
-            m_Registry.Clear(); 
-        }
-
-        /**
-         * @brief Check whether an asset handle corresponds to a registered asset.
-         *
-         * @param handle Asset handle to query.
-         * @return true if the registry contains metadata for the handle, false otherwise.
-         */
-        bool IsValidAsset(AssetHandle handle) const
-        {
-            return m_Registry.Get(handle) != nullptr;
-        }
-
-        /**
-         * @brief Import an asset into the default root (first configured root).
-         *
-         */
         template<typename T>
-        AssetRef<T> Import(const std::filesystem::path& filepath)
+        T* Resolve(AssetHandle handle)
         {
-            AssetImporterRegistry::Imported<T> result =
-                ServiceLocator::Get<AssetImporterRegistry>().ImportAndLoad<T>(ResolveAgainstRoots(filepath));
-
-            if (!result.asset)
-                return AssetRef<T>();
-
-            m_Cache.Store(result.asset);
-            m_Registry.Add(result.meta);
-            return AssetRef<T>(result.meta.uuid);
+            return static_cast<T*>(ResolveUntyped(handle, AssetTraits<T>::Type));
         }
 
-        /**
-         * @brief Import an asset into a specific root index.
-         */
-        template<typename T>
-        AssetRef<T> ImportToRoot(const std::filesystem::path& filepath, size_t rootIndex)
+        Asset* ResolveUntyped(AssetHandle handle, AssetType expectedType);
+
+        const AssetMeta* GetMeta(AssetHandle handle) const;
+        bool IsValidAsset(AssetHandle handle) const;
+
+        void RegisterMeta(const AssetMeta& meta);
+        void RegisterManifestEntry(const AssetManifestEntry& entry);
+
+        const AssetManifest& GetManifest() const { return m_Manifest; }
+        AssetManifest& GetManifest() { return m_Manifest; }
+
+        AssetRegistry& GetRegistry() { return m_Registry; }
+        const AssetRegistry& GetRegistry() const { return m_Registry; }
+
+        AssetLoaderRegistry& GetLoaderRegistry() { return m_Loaders; }
+        const AssetLoaderRegistry& GetLoaderRegistry() const { return m_Loaders; }
+
+        void ClearCache();
+        void ClearRegistry();
+
+        using MissingAssetCallback = std::function<bool(const std::filesystem::path& logicalPath)>;
+
+        // Editor only: lets the editor generate a missing .basset before runtime loading.
+        // Runtime/shipping builds should not bind this.
+        void BindMissingAssetCallback(MissingAssetCallback callback)
         {
-            if (rootIndex >= m_Roots.size())
-                return AssetRef<T>();
-
-            AssetImporterRegistry::Imported<T> result =
-                ServiceLocator::Get<AssetImporterRegistry>().ImportAndLoad<T>(m_Roots[rootIndex] / filepath);
-
-            if (!result.asset)
-                return AssetRef<T>();
-
-            m_Cache.Store(result.asset);
-            m_Registry.Add(result.meta);
-            return AssetRef<T>(result.meta.uuid);
+            m_MissingAssetCallback = std::move(callback);
         }
 
-        const AssetMeta* GetMeta(AssetHandle handle) const
-        {
-            return m_Registry.Get(handle);
-        }
+        std::filesystem::path ResolveRuntimePathOnDisk(const std::filesystem::path& runtimePath) const;
 
     private:
-        void InitializeImporterRegistryBindings()
-        {
-            auto& reg = ServiceLocator::Get<AssetImporterRegistry>();
-            reg.m_pCache = &m_Cache;
-            reg.m_pRegistry = &m_Registry;
-        }
+        void BindAssetRefResolver();
 
-        const std::filesystem::path* GetPrimaryRootInternal() const
-        {
-            return m_Roots.empty() ? nullptr : &m_Roots.front();
-        }
-
-        std::filesystem::path ResolveAgainstRoots(const std::filesystem::path& path) const
-        {
-            if (path.empty())
-                return {};
-
-            if (path.is_absolute())
-                return path.lexically_normal();
-
-            for (const auto& root : m_Roots)
-            {
-                const std::filesystem::path candidate = (root / path).lexically_normal();
-                if (std::filesystem::exists(candidate))
-                    return candidate;
-            }
-
-            return {};
-        }
+        const AssetManifestEntry* ResolveManifestEntry(const std::filesystem::path& logicalOrRuntimePath);
+        Asset* LoadFromManifestEntry(const AssetManifestEntry& entry, AssetType expectedType);
+        bool EnsureRuntimeAssetExists(const AssetManifestEntry& entry);
 
     private:
         AssetCache m_Cache;
         AssetRegistry m_Registry;
-        std::unique_ptr<AssetPackReader> m_Reader;
-        std::unique_ptr<AssetLoader> m_Loader;
-        std::vector<std::filesystem::path> m_Roots;
+        AssetManifest m_Manifest;
+        AssetLoaderRegistry m_Loaders;
+
+        std::vector<std::unique_ptr<IAssetSource>> m_Sources;
+        std::vector<std::filesystem::path> m_RuntimeAssetRoots;
+
+        MissingAssetCallback m_MissingAssetCallback;
     };
 }

@@ -1,9 +1,11 @@
 #pragma once
-#include <unordered_map>
-#include <memory>
-#include "Core/UUID.h"
+
 #include "Asset/Asset.h"
-#include "Asset/AssetRef.h"
+#include "Core/UUID.h"
+
+#include <memory>
+#include <type_traits>
+#include <unordered_map>
 
 namespace Boon
 {
@@ -13,18 +15,72 @@ namespace Boon
         template<typename T>
         T* Find(AssetHandle handle)
         {
-            auto it = m_Assets.find(handle);
-            if (it == m_Assets.end())
-                return nullptr;
+            static_assert(std::is_base_of_v<Asset, T>);
 
-            T* casted = dynamic_cast<T*>(it->second.get());
-            return casted;
+            Asset* asset = FindUntyped(handle);
+            return dynamic_cast<T*>(asset);
         }
 
         template<typename T>
-        void Store(T* asset)
+        const T* Find(AssetHandle handle) const
         {
-            m_Assets[asset->GetHandle()] = std::unique_ptr<T>(asset);
+            static_assert(std::is_base_of_v<Asset, T>);
+
+            const Asset* asset = FindUntyped(handle);
+            return dynamic_cast<const T*>(asset);
+        }
+
+        Asset* FindUntyped(AssetHandle handle)
+        {
+            auto it = m_Assets.find(handle);
+            return it == m_Assets.end() ? nullptr : it->second.get();
+        }
+
+        const Asset* FindUntyped(AssetHandle handle) const
+        {
+            auto it = m_Assets.find(handle);
+            return it == m_Assets.end() ? nullptr : it->second.get();
+        }
+
+        template<typename T>
+        T* Store(std::unique_ptr<T> asset)
+        {
+            static_assert(std::is_base_of_v<Asset, T>);
+
+            if (!asset)
+                return nullptr;
+
+            AssetHandle handle = asset->GetHandle();
+            T* raw = asset.get();
+            m_Assets[handle] = std::move(asset);
+            return raw;
+        }
+
+        template<typename T>
+        T* Store(T* asset)
+        {
+            return Store(std::unique_ptr<T>(asset));
+        }
+
+        Asset* StoreUntyped(std::unique_ptr<Asset> asset)
+        {
+            if (!asset)
+                return nullptr;
+
+            AssetHandle handle = asset->GetHandle();
+            Asset* raw = asset.get();
+            m_Assets[handle] = std::move(asset);
+            return raw;
+        }
+
+        bool Contains(AssetHandle handle) const
+        {
+            return m_Assets.find(handle) != m_Assets.end();
+        }
+
+        void Remove(AssetHandle handle)
+        {
+            m_Assets.erase(handle);
         }
 
         void Clear()

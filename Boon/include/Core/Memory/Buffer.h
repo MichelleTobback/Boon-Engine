@@ -4,51 +4,49 @@
 #include <cstring>
 #include <type_traits>
 #include <string>
+#include <cassert>
 
 namespace Boon
 {
     class Buffer
     {
     public:
-        /**
-         * @brief Simple byte buffer utility for read/write operations.
-         *
-         * Supports appending raw data, writing trivially-copyable types and
-         * reading data by offset. Data is stored in an internal std::vector<uint8_t>.
-         */
         Buffer() = default;
 
         explicit Buffer(size_t size)
             : m_Data(size)
-        {}
+        {
+        }
 
         explicit Buffer(const std::vector<uint8_t>& data)
             : m_Data(data)
-        {}
+        {
+        }
 
         Buffer(const void* data, size_t size)
-            : m_Data((uint8_t*)data, (uint8_t*)data + size)
-        {}
+            : m_Data(static_cast<const uint8_t*>(data), static_cast<const uint8_t*>(data) + size)
+        {
+        }
 
-        // ---------- Write / Append ----------
         void Append(const void* data, size_t size)
         {
-            size_t start = m_Data.size();
+            if (!data || size == 0)
+                return;
+
+            const size_t start = m_Data.size();
             m_Data.resize(start + size);
             std::memcpy(m_Data.data() + start, data, size);
         }
 
         void Append(const Buffer& other)
         {
-            size_t start = m_Data.size();
-            m_Data.resize(start + other.Size());
-            std::memcpy(m_Data.data() + start, other.Data(), other.Size());
+            Append(other.Data(), other.Size());
         }
 
         template<typename T>
         void Write(const T& value)
         {
-            static_assert(std::is_trivially_copyable<T>::value,
+            static_assert(std::is_trivially_copyable_v<T>,
                 "Buffer::Write requires trivially copyable type");
 
             Append(&value, sizeof(T));
@@ -61,17 +59,18 @@ namespace Boon
 
         void WriteString(const std::string& str)
         {
-            uint32_t len = (uint32_t)str.size();
+            const uint32_t len = static_cast<uint32_t>(str.size());
             Write<uint32_t>(len);
             WriteRaw(str.data(), len);
         }
 
-        // ---------- Read ----------
         template<typename T>
         T Read(size_t& offset) const
         {
-            static_assert(std::is_trivially_copyable<T>::value,
+            static_assert(std::is_trivially_copyable_v<T>,
                 "Buffer::Read requires trivially copyable type");
+
+            assert(offset + sizeof(T) <= m_Data.size());
 
             T val{};
             std::memcpy(&val, m_Data.data() + offset, sizeof(T));
@@ -81,43 +80,50 @@ namespace Boon
 
         void ReadRaw(void* out, size_t size, size_t& offset) const
         {
+            if (size == 0)
+                return;
+
+            assert(out);
+            assert(offset + size <= m_Data.size());
+
             std::memcpy(out, m_Data.data() + offset, size);
             offset += size;
         }
 
         std::string ReadString(size_t& offset) const
         {
-            uint32_t len = Read<uint32_t>(offset);
+            const uint32_t len = Read<uint32_t>(offset);
 
             std::string str;
             str.resize(len);
 
-            ReadRaw(str.data(), len, offset);
+            if (len > 0)
+                ReadRaw(str.data(), len, offset);
+
             return str;
         }
 
-        // ---------- Utility ----------
-        /**
-         * @brief Pointer to the internal data buffer.
-         */
-        uint8_t* Data() { return m_Data.data(); }
-        const uint8_t* Data() const { return m_Data.data(); }
+        uint8_t* Data() { return m_Data.empty() ? nullptr : m_Data.data(); }
+        const uint8_t* Data() const { return m_Data.empty() ? nullptr : m_Data.data(); }
 
-        uint8_t* DataAt(uint32_t pos) { return m_Data.data() + pos; }
-        const uint8_t* DataAt(uint32_t pos) const { return m_Data.data() + pos; }
+        uint8_t* DataAt(size_t pos)
+        {
+            assert(pos <= m_Data.size());
+            return m_Data.data() + pos;
+        }
 
-        /**
-         * @brief Get the size of the buffer in bytes.
-         */
+        const uint8_t* DataAt(size_t pos) const
+        {
+            assert(pos <= m_Data.size());
+            return m_Data.data() + pos;
+        }
+
         size_t Size() const { return m_Data.size(); }
-
-        /**
-         * @brief Check whether the buffer contains no data.
-         */
         bool Empty() const { return m_Data.empty(); }
 
         void Clear() { m_Data.clear(); }
         void Reserve(size_t cap) { m_Data.reserve(cap); }
+        void Resize(size_t size) { m_Data.resize(size); }
 
         std::vector<uint8_t>& Vector() { return m_Data; }
         const std::vector<uint8_t>& Vector() const { return m_Data; }

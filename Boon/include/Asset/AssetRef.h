@@ -1,62 +1,100 @@
 #pragma once
+
 #include "Asset/Asset.h"
+#include "Asset/AssetTraits.h"
+#include "Core/UUID.h"
+
+#include <functional>
+#include <utility>
 
 namespace Boon
 {
+    class AssetRefResolver
+    {
+    public:
+        using ResolveFn = std::function<Asset*(AssetHandle, AssetType)>;
+
+        static void Bind(ResolveFn fn)
+        {
+            s_Resolve = std::move(fn);
+        }
+
+        static void Unbind()
+        {
+            s_Resolve = nullptr;
+        }
+
+        template<typename T>
+        static T* Resolve(AssetHandle handle)
+        {
+            if (!s_Resolve || !handle.IsValid())
+                return nullptr;
+
+            Asset* asset = s_Resolve(handle, AssetTraits<T>::Type);
+            return static_cast<T*>(asset);
+        }
+
+    private:
+        inline static ResolveFn s_Resolve = nullptr;
+    };
+
     template<typename T>
-    class AssetRef 
+    class AssetRef
     {
     public:
         AssetRef() = default;
-        AssetRef(AssetHandle h) : m_Handle(h) {}
 
-        AssetRef<T>& operator=(const AssetRef<T>& other)
+        explicit AssetRef(AssetHandle handle)
+            : m_Handle(handle)
         {
-            if (this == &other)
-                return *this;
-
-            m_Handle = other.m_Handle;
-            return *this;
         }
 
-        /**
-         * @brief Resolve the asset handle to a pointer to the asset.
-         *
-         * @return Pointer to the asset corresponding to the stored handle, or nullptr if not found.
-         */
-        T* Get() const;
+        T* Get() const
+        {
+            return AssetRefResolver::Resolve<T>(m_Handle);
+        }
 
         T* operator->() const { return Get(); }
         T& operator*() const { return *Get(); }
 
-        /**
-         * @brief Obtain the runtime instance held by the referenced asset.
-         *
-         * @return Shared pointer to the asset instance, or nullptr if the asset is not available.
-         */
-        auto Instance() const -> std::shared_ptr<typename T::Type>
+        auto Instance() const -> decltype(std::declval<T*>()->GetInstance())
         {
+            using ReturnType = decltype(std::declval<T*>()->GetInstance());
+
             T* asset = Get();
-            return asset ? asset->GetInstance() : nullptr;
+            if (!asset)
+                return ReturnType{};
+
+            return asset->GetInstance();
         }
 
-        /**
-         * @brief Get the underlying asset handle.
-         *
-         * @return The AssetHandle stored by this reference.
-         */
-        AssetHandle Handle() const { return m_Handle; }
+        AssetHandle Handle() const
+        {
+            return m_Handle;
+        }
 
-        /**
-         * @brief Check whether this reference contains a non-zero handle.
-         *
-         * @return true if the handle is non-zero, false otherwise.
-         */
-        bool IsValid() const { return m_Handle != 0; }
+        bool IsValid() const
+        {
+            return m_Handle.IsValid();
+        }
 
-        operator AssetHandle() const { return m_Handle; }
+        explicit operator bool() const
+        {
+            return IsValid();
+        }
+
+        operator AssetHandle() const
+        {
+            return m_Handle;
+        }
+
+        AssetRef& operator=(AssetHandle handle)
+        {
+            m_Handle = handle;
+            return *this;
+        }
 
     private:
-        AssetHandle m_Handle = 0;
+        AssetHandle m_Handle = UUID::Null;
     };
 }

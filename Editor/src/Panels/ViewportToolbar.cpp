@@ -13,22 +13,22 @@ BoonEditor::ViewportToolbar::ViewportToolbar(const std::string& name, EditorCont
 {
     AssetLibrary& assetLib = ServiceLocator::Get<AssetLibrary>();
     {
-        auto handle = assetLib.Import<Texture2DAsset>("Icons/PlayButton.png");
+        auto handle = assetLib.Load<Texture2DAsset>("Icons/PlayButton.png");
         m_pPlayIcon = handle->GetInstance();
     }
 
     {
-        auto handle = assetLib.Import<Texture2DAsset>("Icons/StopButton.png");
+        auto handle = assetLib.Load<Texture2DAsset>("Icons/StopButton.png");
         m_pStopIcon = handle->GetInstance();
     }
 
     {
-        auto handle = assetLib.Import<Texture2DAsset>("Icons/CameraSettingIcon.png");
+        auto handle = assetLib.Load<Texture2DAsset>("Icons/CameraSettingIcon.png");
         m_pCameraIcon = handle->GetInstance();
     }
 
     {
-        auto handle = assetLib.Import<Texture2DAsset>("Icons/VisibilityButton.png");
+        auto handle = assetLib.Load<Texture2DAsset>("Icons/VisibilityButton.png");
         m_pVisibilityIcon = handle->GetInstance();
     }
 }

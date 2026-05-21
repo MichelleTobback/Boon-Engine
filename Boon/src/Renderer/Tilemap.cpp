@@ -223,6 +223,9 @@ namespace Boon
                 if (tileId < 0)
                     continue;
 
+                if (!atlas->Exists(tileId))
+                    return;
+
                 const SpriteFrame& f = atlas->GetSpriteFrame(tileId);
 
                 float width = m_UnitSize;

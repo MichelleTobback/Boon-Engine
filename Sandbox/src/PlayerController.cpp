@@ -28,7 +28,7 @@ void PlayerController::Awake(GameObject gameObject)
     m_Owner = gameObject;
 
     AssetLibrary& assetLib = Assets::Get();
-    AssetRef<SpriteAtlasAsset> atlas = assetLib.Import<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa");
+    AssetRef<SpriteAtlasAsset> atlas = assetLib.Load<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa");
     gameObject.GetOrAddComponent<SpriteRendererComponent>().SpriteAtlasHandle = atlas;
 
     if (gameObject.HasComponent<NetIdentity>() && !gameObject.GetComponent<NetIdentity>().IsOwner())

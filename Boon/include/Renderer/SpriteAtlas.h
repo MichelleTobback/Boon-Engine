@@ -94,6 +94,28 @@ namespace Boon
             return id;
         }
 
+        inline bool AddSpriteFrameWithId(int stableId, const SpriteFrame& frame)
+        {
+            if (stableId < 0)
+                return false;
+
+            if ((size_t)stableId >= m_IdToIndex.size())
+                m_IdToIndex.resize((size_t)stableId + 1, -1);
+
+            if (m_IdToIndex[stableId] != -1)
+                return false;
+
+            const int index = static_cast<int>(m_Frames.size());
+
+            m_Frames.push_back(FrameEntry{ stableId, frame });
+            m_IdToIndex[stableId] = index;
+
+            if (stableId >= m_NextId)
+                m_NextId = stableId + 1;
+
+            return true;
+        }
+
         // Remove frame by stable ID
         inline void RemoveSpriteFrame(int stableId)
         {
@@ -129,9 +151,19 @@ namespace Boon
         // Modify existing frame
         inline void SetSpriteFrame(int stableId, const SpriteFrame& frame)
         {
+
             int index = m_IdToIndex[stableId];
             m_Frames[index].stableId = stableId;
             m_Frames[index].frame = frame;
+        }
+
+        inline void SetOrAddSpriteFrame(int stableId, const SpriteFrame& frame)
+        {
+            if (Exists(stableId))
+                SetSpriteFrame(stableId, frame);
+
+            else
+                AddSpriteFrameWithId(stableId, frame);
         }
 
         // Access frame by stable ID
@@ -144,6 +176,7 @@ namespace Boon
         // Access raw entries (if needed)
         std::vector<FrameEntry>& GetFrameEntries() { return m_Frames; }
         const std::vector<FrameEntry>& GetFrameEntries() const { return m_Frames; }
+        size_t GetFrameCount() const { return m_Frames.size(); }
 
         // Get all valid stable IDs
         inline std::vector<int> GetAllFrameIDs() const

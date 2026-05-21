@@ -36,9 +36,9 @@ Boon::Renderer2D::Renderer2D()
 	//shaders
 	AssetLibrary& assets{ ServiceLocator::Get<AssetLibrary>() };
 
-	AssetRef<ShaderAsset> pLineShader = assets.Import<ShaderAsset>("shaders/Line.glsl");
+	AssetRef<ShaderAsset> pLineShader = assets.Load<ShaderAsset>("shaders/Line.glsl");
 
-	AssetRef<ShaderAsset> pSpriteShader = assets.Import<ShaderAsset>("shaders/Quad.glsl");
+	AssetRef<ShaderAsset> pSpriteShader = assets.Load<ShaderAsset>("shaders/Quad.glsl");
 
 	//quads
 	uint32_t* quadIndices = new uint32_t[s_MaxIndices];

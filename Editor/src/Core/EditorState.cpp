@@ -22,11 +22,11 @@
 
 #include <Asset/Assets.h>
 #include <Asset/AssetRef.h>
-#include <Asset/Importer/TextureImporter.h>
-#include <Asset/Importer/ShaderImporter.h>
-#include <Asset/Importer/SpriteAtlasImporter.h>
-#include <Asset/Importer/SceneImporter.h>
-#include <Asset/Importer/TilemapImporter.h>
+#include <Assets/Importer/TextureImporter.h>
+#include <Assets/Importer/ShaderImporter.h>
+#include <Assets/Importer/SpriteAtlasImporter.h>
+#include <Assets/Importer/SceneImporter.h>
+#include <Assets/Importer/TilemapImporter.h>
 
 #include "Assets/AssetDirectoryScanner.h"
 
@@ -88,10 +88,30 @@ void EditorState::OnEnter()
 
 	Window& window{ Application::Get().GetWindow() };
 	AssetLibrary& assetLib{ Assets::Get() };
-	assetLib.SetRoot(config.AssetsRoot);
-	assetLib.AddRoot(config.EngineRoot / config.AssetsRoot); // engine assets
-	assetLib.AddRoot(m_Context.m_CurrentProject.Editor.EditorResourcesRoot / config.AssetsRoot); // editor assets
+	
+	const std::filesystem::path generatedRoot = config.ProjectRoot / "generated/Assets";
+	const std::filesystem::path gameRuntimeRoot = generatedRoot / "Game";
+	const std::filesystem::path engineRuntimeRoot = generatedRoot / "Engine";
+	const std::filesystem::path editorRuntimeRoot = generatedRoot / "Editor";
+
+	assetLib.SetRuntimeAssetRoot(gameRuntimeRoot);
+	assetLib.AddRuntimeAssetRoot(engineRuntimeRoot);
+	assetLib.AddRuntimeAssetRoot(editorRuntimeRoot);
+
+	assetLib.LoadManifest(gameRuntimeRoot / "AssetManifest.json");
+	assetLib.LoadManifest(engineRuntimeRoot / "AssetManifest.json");
+	assetLib.LoadManifest(editorRuntimeRoot / "AssetManifest.json");
+
+	if (!ServiceLocator::Has<AssetImporterRegistry>())
+		ServiceLocator::Register<AssetImporterRegistry>();
+
 	AssetImporterRegistry& importer = ServiceLocator::Get<AssetImporterRegistry>();
+	importer.ClearAssetRoots();
+	importer.AddAssetRoot(config.AssetsRoot, gameRuntimeRoot);
+	importer.AddAssetRoot(config.EngineContentRoot, engineRuntimeRoot);
+	importer.AddAssetRoot(m_Context.m_CurrentProject.Editor.EditorResourcesRoot, editorRuntimeRoot);
+	importer.BindToAssetLibrary(assetLib);
+
 	importer.RegisterImporter<Texture2DImporter>();
 	importer.RegisterImporter<ShaderImporter>();
 	importer.RegisterImporter<SpriteAtlasImporter>();
@@ -104,6 +124,9 @@ void EditorState::OnEnter()
 
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 	Scene& scene = sceneManager.CreateScene("Game");
+
+	m_Context.CreateObject<AssetDirectoryScanner>(0, 1.f);
+	m_Context.CreateObject<AssetDirectoryScanner>(1, 1.f);
 
 	ViewportPanel& viewport = m_Context.CreateWidget<ViewportPanel>("Viewport", &m_SceneContext, &m_SelectionContext);
 	viewport.GetToolbar()->BindOnPlayCallback(std::bind(&EditorState::OnBeginPlay, this));
@@ -122,20 +145,12 @@ void EditorState::OnEnter()
 
 	m_Context.CreateWidget<NewProjectDialog>("NewProject");
 
-	m_Context.CreateObject<AssetDirectoryScanner>(config.AssetsRoot, 1.f);
-	m_Context.CreateObject<AssetDirectoryScanner>(config.EngineRoot / config.AssetsRoot, 1.f);
-	m_Context.CreateObject<AssetDirectoryScanner>(m_Context.m_CurrentProject.Editor.EditorResourcesRoot / config.AssetsRoot, 1.f);
-
 	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	std::shared_ptr<NetDriver> network = std::make_shared<SteamNetDriver>();
 	ServiceLocator::Register<NetDriver>(network);
 
 	m_SceneContext.Set(&scene);
 	m_pSelectedScene = &scene;
-	
-	AssetRef<SpriteAtlasAsset> atlas = assetLib.Import<SpriteAtlasAsset>("game/Blue_witch/B_witch_atlas_compact.bsa");
-	assetLib.Import<TilemapAsset>("game/Arena/Arena-tilemap.btm");
-	assetLib.Import<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa");
 
 	m_SceneChangedEvent = eventBus.Subscribe<SceneChangedEvent>([this](const SceneChangedEvent& e)
 		{

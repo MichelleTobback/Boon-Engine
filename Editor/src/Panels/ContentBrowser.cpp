@@ -4,16 +4,23 @@
 
 #include <Asset/TilemapAsset.h>
 #include <Asset/SpriteAtlasAsset.h>
-
 #include <Core/Application.h>
+
+#include <algorithm>
 
 using namespace BoonEditor;
 namespace fs = std::filesystem;
 
-ContentBrowser::ContentBrowser(const std::string& name, EditorContext* pContext, AssetContext* pAsset)
-    : EditorPanel(name, pContext), m_RootFolder("Content", ""), m_pSelectedAsset(pAsset)
+ContentBrowser::ContentBrowser(
+    const std::string& name,
+    EditorContext* pContext,
+    AssetContext* pAsset)
+    : EditorPanel(name, pContext)
+    , m_RootFolder("Content", "")
+    , m_pSelectedAsset(pAsset)
 {
     memset(m_SearchBuffer, 0, sizeof(m_SearchBuffer));
+
     m_CurrentFolder = &m_RootFolder;
 
     BuildFolderTree();
@@ -30,28 +37,26 @@ void ContentBrowser::Update()
     }
 }
 
-//
-// ────────────────────────────────────────────────────────────────
-//   BUILD TREE
-// ────────────────────────────────────────────────────────────────
-//
-
 void ContentBrowser::BuildFolderTree()
 {
     m_RootFolder.children.clear();
     m_RootFolder.assets.clear();
 
-    // Asset root must match AssetDirectoryScanner's root
-    const RuntimeConfig& config{ Application::Get().GetDescriptor() };
-    m_root = (config.AssetsRoot).string();
+    const RuntimeConfig& config = Application::Get().GetDescriptor();
+
+    m_root = config.AssetsRoot;
+    m_RootFolder.name = "Content";
     m_RootFolder.fullPath = m_root.string();
 
-    // 1. Build real folder structure
+    m_CurrentFolder = &m_RootFolder;
+
+    if (!fs::exists(m_root))
+        fs::create_directories(m_root);
+
     BuildFoldersFromDisk(m_root.string(), &m_RootFolder);
 
-    // 2. Insert only registered assets
     auto& database = AssetDatabase::Get();
-    database.ForEachEntry([this](AssetHandle handle, const std::string& assetPath)
+    database.ForEachEntry([this](AssetHandle, const std::string& assetPath)
         {
             AddAssetToTree(assetPath);
         });
@@ -59,251 +64,233 @@ void ContentBrowser::BuildFolderTree()
 
 void ContentBrowser::BuildFoldersFromDisk(const std::string& path, FolderNode* parent)
 {
-    for (auto& entry : fs::directory_iterator(path))
+    if (!fs::exists(path))
+        return;
+
+    for (const auto& entry : fs::directory_iterator(path))
     {
-        if (entry.is_directory())
-        {
-            std::string name = entry.path().filename().string();
-            std::string full = entry.path().string();
+        if (!entry.is_directory())
+            continue;
 
-            FolderNode* node = new FolderNode(name, full);
-            parent->children[name] = node;
+        const fs::path fullPath = entry.path();
+        const std::string name = fullPath.filename().string();
 
-            BuildFoldersFromDisk(full, node);
-        }
+        FolderNode* node = new FolderNode(name, fullPath.string());
+        parent->children[name] = node;
+
+        BuildFoldersFromDisk(fullPath.string(), node);
     }
 }
 
 void ContentBrowser::AddAssetToTree(const std::string& path)
 {
-    //std::string cleanPath = path;
-    //
-    // Normalize slashes
-    //std::replace(cleanPath.begin(), cleanPath.end(), '\\', '/');
+    // AssetDatabase now stores logical paths, e.g. "maps/tilemap.btm"
+    // Do NOT make this relative to m_root again.
+    fs::path p = fs::path(path).lexically_normal();
 
-    // If path starts with "Asset/" → remove it
-    //const char* prefix = m_RootFolder.fullPath.c_str();
-    //if (cleanPath.rfind(prefix, 0) == 0)
-    //    cleanPath = cleanPath.substr(strlen(prefix));
-
-    fs::path p = std::filesystem::relative(path, m_RootFolder.fullPath);
+    if (p.empty())
+        return;
 
     FolderNode* node = &m_RootFolder;
 
-    // Walk through parent folders
-    fs::path parentPath = p.parent_path();
+    const fs::path parentPath = p.parent_path();
 
-    for (auto& part : parentPath)
+    for (const auto& part : parentPath)
     {
-        std::string name = part.string();
+        const std::string name = part.string();
         if (name.empty())
             continue;
 
         auto it = node->children.find(name);
         if (it == node->children.end())
-        {
-            // Disk folder not found → ignore asset (don't create fake folders)
             return;
-        }
 
         node = it->second;
     }
 
-    node->assets.push_back(p.string());
+    const std::string logicalPath = p.generic_string();
+
+    if (std::find(node->assets.begin(), node->assets.end(), logicalPath) == node->assets.end())
+        node->assets.push_back(logicalPath);
 }
 
 void ContentBrowser::CollectAssetsRecursive(FolderNode* node, std::vector<std::string>& out)
 {
-    // Add assets in this folder
-    for (auto& a : node->assets)
-        out.push_back(a);
+    for (const auto& asset : node->assets)
+        out.push_back(asset);
 
-    // Recurse into subfolders
     for (auto& [name, child] : node->children)
         CollectAssetsRecursive(child, out);
 }
-
-//
-// ────────────────────────────────────────────────────────────────
-//   UI RENDERING
-// ────────────────────────────────────────────────────────────────
-//
 
 void ContentBrowser::OnRenderUI()
 {
     ImVec2 avail = ImGui::GetContentRegionAvail();
 
-    float splitter = 4.0f;
+    if (avail.x <= 0.0f || avail.y <= 0.0f)
+        return;
 
-    if (m_HierarchyWidth < 100.f) m_HierarchyWidth = 100.f;
-    if (m_HierarchyWidth > avail.x * 0.9f) m_HierarchyWidth = avail.x * 0.9f;
+    constexpr float splitter = 4.0f;
+
+    if (m_HierarchyWidth < 100.0f)
+        m_HierarchyWidth = 100.0f;
+
+    if (m_HierarchyWidth > avail.x * 0.9f)
+        m_HierarchyWidth = avail.x * 0.9f;
 
     ImGui::BeginChild("##ContentBrowserRoot", avail, false);
 
-    //
-    // LEFT: FOLDER TREE
-    //
     ImGui::BeginChild("##HierarchyPanel", ImVec2(m_HierarchyWidth, avail.y), true);
     DrawFolderTree(&m_RootFolder);
     ImGui::EndChild();
 
-    //
-    // SPLITTER DRAG
-    //
     ImGui::SameLine(0.0f, 1.0f);
+
     ImGui::Button("##Splitter", ImVec2(splitter, avail.y));
 
-    bool hovered = ImGui::IsItemHovered();
-    bool held = ImGui::IsItemActive() && ImGui::IsMouseDown(0);
+    const bool hovered = ImGui::IsItemHovered();
+    const bool held = ImGui::IsItemActive() && ImGui::IsMouseDown(0);
 
     if (hovered || held)
         ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeEW);
 
     static bool dragging = false;
 
-    if (held) dragging = true;
-    else if (!ImGui::IsMouseDown(0)) dragging = false;
+    if (held)
+        dragging = true;
+    else if (!ImGui::IsMouseDown(0))
+        dragging = false;
 
     if (dragging)
     {
-        float mouseX = ImGui::GetIO().MousePos.x;
-        float windowX = ImGui::GetWindowPos().x;
+        const float mouseX = ImGui::GetIO().MousePos.x;
+        const float windowX = ImGui::GetWindowPos().x;
         m_HierarchyWidth = mouseX - windowX;
     }
 
-    //
-    // RIGHT: CONTENT GRID
-    //
     ImGui::SameLine();
+
     ImGui::BeginChild("##ContentPanel", ImVec2(0, avail.y), true);
 
-    //ImGui::InputText("Search", m_SearchBuffer, sizeof(m_SearchBuffer));
+    if (!m_CurrentFolder)
+        m_CurrentFolder = &m_RootFolder;
+
     DrawContentArea(m_CurrentFolder);
 
     ImGui::EndChild();
+
     ImGui::EndChild();
 }
 
-//
-// ────────────────────────────────────────────────────────────────
-//   FOLDER TREE
-// ────────────────────────────────────────────────────────────────
-//
-
 void ContentBrowser::DrawFolderTree(FolderNode* node)
 {
-    // Make the tree much more compact
-    ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(2, 2));  // smaller height
-    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(2, 1));   // reduce vertical spacing
-    ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, 10.0f);        // tighter indentation
+    ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(2, 2));
+    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(2, 1));
+    ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, 10.0f);
 
-    // Draw root
     if (node == &m_RootFolder)
     {
-        ImGui::TextUnformatted("Content");
-    }
-
-    for (auto& [name, child] : node->children)
-    {
-        bool isSelected = (child == m_CurrentFolder);
+        const bool selected = m_CurrentFolder == &m_RootFolder;
 
         ImGuiTreeNodeFlags flags =
             ImGuiTreeNodeFlags_OpenOnArrow |
             ImGuiTreeNodeFlags_SpanFullWidth |
+            ImGuiTreeNodeFlags_DefaultOpen |
             ImGuiTreeNodeFlags_FramePadding;
 
-        if (child->children.empty())
-            flags |= ImGuiTreeNodeFlags_Leaf;
-
-        if (isSelected)
+        if (selected)
             flags |= ImGuiTreeNodeFlags_Selected;
 
-        // Light hover & selected background (theme-friendly)
-        ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(0.28f, 0.28f, 0.38f, 0.35f));
-        ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.20f, 0.20f, 0.30f, 0.45f));
-
-        // We don't use Unicode icons → pure text
-        const char* label = name.c_str();
-
-        bool open = ImGui::TreeNodeEx(
-            child->name.c_str(),
-            flags,
-            "%s",
-            label
-        );
-
-        ImGui::PopStyleColor(2);
+        const bool open = ImGui::TreeNodeEx("Content", flags, "Content");
 
         if (ImGui::IsItemClicked())
-            m_CurrentFolder = child;
+            m_CurrentFolder = &m_RootFolder;
 
         if (open)
         {
-            DrawFolderTree(child);
+            for (auto& [name, child] : node->children)
+                DrawFolderTree(child);
+
             ImGui::TreePop();
         }
+
+        ImGui::PopStyleVar(3);
+        return;
+    }
+
+    const bool isSelected = node == m_CurrentFolder;
+
+    ImGuiTreeNodeFlags flags =
+        ImGuiTreeNodeFlags_OpenOnArrow |
+        ImGuiTreeNodeFlags_SpanFullWidth |
+        ImGuiTreeNodeFlags_FramePadding;
+
+    if (node->children.empty())
+        flags |= ImGuiTreeNodeFlags_Leaf;
+
+    if (isSelected)
+        flags |= ImGuiTreeNodeFlags_Selected;
+
+    ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(0.28f, 0.28f, 0.38f, 0.35f));
+    ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.20f, 0.20f, 0.30f, 0.45f));
+
+    const bool open = ImGui::TreeNodeEx(
+        node->name.c_str(),
+        flags,
+        "%s",
+        node->name.c_str());
+
+    ImGui::PopStyleColor(2);
+
+    if (ImGui::IsItemClicked())
+        m_CurrentFolder = node;
+
+    if (open)
+    {
+        for (auto& [name, child] : node->children)
+            DrawFolderTree(child);
+
+        ImGui::TreePop();
     }
 
     ImGui::PopStyleVar(3);
 }
 
-//
-// ────────────────────────────────────────────────────────────────
-//   CONTENT AREA
-// ────────────────────────────────────────────────────────────────
-//
-
 void ContentBrowser::DrawContentArea(FolderNode* folder)
 {
-    float panelWidth = ImGui::GetContentRegionAvail().x;
+    if (!folder)
+        folder = &m_RootFolder;
 
-    //
-    // ───────────────────────────────────────────────
-    //  FIXED TOP BAR (Search + Column Slider)
-    // ───────────────────────────────────────────────
-    //
-    const float topBarHeight = 28.0f;
+    const float panelWidth = ImGui::GetContentRegionAvail().x;
 
-    // Smaller padding so controls fit nicely
+    constexpr float topBarHeight = 28.0f;
+
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(4, 2));
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(4, 2));
 
-    ImGui::BeginChild("CB_TopBar", ImVec2(0, topBarHeight), true,
+    ImGui::BeginChild(
+        "CB_TopBar",
+        ImVec2(0, topBarHeight),
+        true,
         ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 
-    float totalWidth = ImGui::GetContentRegionAvail().x;
+    const float totalWidth = ImGui::GetContentRegionAvail().x;
+    const float searchWidth = totalWidth * (1.0f / 3.0f);
+    const float sliderWidth = 60.0f;
 
-    // Calculate 1/3 width for search bar
-    float searchWidth = totalWidth * (1.0f / 3.0f);
+    const float widgetHeight = ImGui::GetFrameHeight();
+    const float yOffset = (topBarHeight - widgetHeight) * 0.5f;
 
-    // Slider width stays constant
-    float sliderWidth = 60.0f;
-
-    // Center controls vertically
-    float widgetHeight = ImGui::GetFrameHeight();
-    float yOffset = (topBarHeight - widgetHeight) * 0.5f;
     ImGui::SetCursorPosY(yOffset);
 
-    //
-    // ─────────────────────────
-    //  Search bar (1/3 width)
-    // ─────────────────────────
-    //
     ImGui::TextUnformatted("search");
     ImGui::SameLine();
+
     ImGui::SetNextItemWidth(searchWidth);
     ImGui::InputText("##Search", m_SearchBuffer, sizeof(m_SearchBuffer));
 
-    //
-    // ─────────────────────────
-    //  Right-aligned slider
-    // ─────────────────────────
-    //
-
-    // Move to the right edge
-    float sliderX = totalWidth - sliderWidth;
     ImGui::SameLine();
-    ImGui::SetCursorPosX(sliderX);
+    ImGui::SetCursorPosX(std::max(ImGui::GetCursorPosX(), totalWidth - sliderWidth));
 
     static int desiredColumns = 16;
     desiredColumns = std::clamp(desiredColumns, 2, 20);
@@ -315,106 +302,101 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
 
     ImGui::PopStyleVar(2);
 
-    //
-    // ───────────────────────────────────────────────
-    //  SCROLLABLE CONTENT GRID USING IMGUI TABLES
-    // ───────────────────────────────────────────────
-    //
-
     ImGui::BeginChild("CB_Content", ImVec2(0, 0), false);
 
-    // padding around each cell
-    float padding = 8.0f;
+    constexpr float padding = 8.0f;
 
-    // Compute icon size from slider
-    float iconSize = (panelWidth / desiredColumns) - padding;
+    float iconSize = (panelWidth / static_cast<float>(desiredColumns)) - padding;
     iconSize = std::clamp(iconSize, 32.0f, 256.0f);
 
-    // Column width = icon + padding
-    float colWidth = iconSize + padding;
+    const float colWidth = iconSize + padding;
 
-    int colums = desiredColumns;
-    // If panel too small, reduce number of columns
-    while (colums > 2 && colums * colWidth > panelWidth)
-    {
-        colums--;
-    }
+    int columns = desiredColumns;
+    while (columns > 2 && columns * colWidth > panelWidth)
+        --columns;
+
+    columns = std::max(columns, 1);
 
     ImGuiTableFlags tableFlags =
         ImGuiTableFlags_NoBordersInBody |
         ImGuiTableFlags_NoPadOuterX |
-        ImGuiTableFlags_SizingFixedFit |    // ← FIX: tightly packed
+        ImGuiTableFlags_SizingFixedFit |
         ImGuiTableFlags_NoHostExtendX;
 
-    if (ImGui::BeginTable("CB_Grid", colums, tableFlags))
+    if (ImGui::BeginTable("CB_Grid", columns, tableFlags))
     {
-        for (int col = 0; col < colums; col++)
+        for (int col = 0; col < columns; ++col)
             ImGui::TableSetupColumn(nullptr, ImGuiTableColumnFlags_WidthFixed, colWidth);
 
         std::vector<std::string> displayAssets;
 
         if (m_SearchBuffer[0] != '\0')
-        {
-            // SEARCH MODE → RECURSIVE
             CollectAssetsRecursive(folder, displayAssets);
-        }
         else
-        {
-            // NORMAL MODE → ONLY DIRECT CHILDREN
             displayAssets = folder->assets;
-        }
 
         for (const std::string& assetPath : displayAssets)
         {
-            //
-            // Search filter (recursive when search bar is not empty)
-            //
-            std::string filename = std::filesystem::path(assetPath).filename().string();
+            const std::string filename = fs::path(assetPath).filename().string();
 
             ImGui::PushID(assetPath.c_str());
             ImGui::TableNextColumn();
 
-            //
-            // ICON (centered)
-            //
-            float cellWidth = ImGui::GetColumnWidth();
-            float iconX = (cellWidth - iconSize) * 0.5f;
-            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + iconX);
+            const float cellStartX = ImGui::GetCursorPosX();
+            const float cellWidth = ImGui::GetColumnWidth();
 
-            AssetHandle h = AssetDatabase::Get().GetHandle(m_root.string() + "/" + assetPath);
-            bool selected = m_pSelectedAsset->Get() == h;
+            // IMPORTANT:
+            // Use logical path. Do NOT prepend m_root.
+            AssetHandle h = AssetDatabase::Get().GetHandle(assetPath);
 
-            ImVec4 bgHovered = ImVec4(0.15f, 0.25f, 0.35f, 0.35f);
-            ImVec4 bgActive = ImVec4(0.15f, 0.25f, 0.35f, 0.50f);
-            ImVec4 bg = selected ? bgActive : ImVec4(0, 0, 0, 0);
+            const bool selected = m_pSelectedAsset && m_pSelectedAsset->Get() == h;
+
+            const ImVec4 bgHovered = ImVec4(0.15f, 0.25f, 0.35f, 0.35f);
+            const ImVec4 bgActive = ImVec4(0.15f, 0.25f, 0.35f, 0.50f);
+            const ImVec4 bg = selected ? bgActive : ImVec4(0, 0, 0, 0);
 
             ImGui::PushStyleColor(ImGuiCol_Button, bg);
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, bgHovered);
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, bgActive);
 
-            bool pressed = false;
             AssetRef<Texture2DAsset> thumbnail = AssetDatabase::Get().GetThumbnail(h);
+
+            const float iconX = cellStartX + (cellWidth - iconSize) * 0.5f;
+            ImGui::SetCursorPosX(iconX);
+
+            bool pressed = false;
+
             if (thumbnail.IsValid())
-                pressed = ImGui::ImageButton("##thumb", thumbnail->GetInstance()->GetRendererID(), ImVec2(iconSize, iconSize));
+            {
+                pressed = ImGui::ImageButton(
+                    "##thumb",
+                    thumbnail->GetInstance()->GetRendererID(),
+                    ImVec2(iconSize, iconSize));
+            }
             else
+            {
                 pressed = ImGui::Button("##thumb", ImVec2(iconSize, iconSize));
+            }
 
             ImGui::PopStyleColor(3);
 
-            if (pressed)
-            {
+            if (pressed && m_pSelectedAsset)
                 m_pSelectedAsset->Set(h);
-            }
 
-            // Drag & drop
             if (ImGui::BeginDragDropSource())
             {
                 ImGui::SetDragDropPayload("ASSET_HANDLE", &h, sizeof(AssetHandle));
 
                 if (thumbnail.IsValid())
-                    ImGui::Image(thumbnail->GetInstance()->GetRendererID(), ImVec2(iconSize * 0.5f, iconSize * 0.5f));
+                {
+                    ImGui::Image(
+                        thumbnail->GetInstance()->GetRendererID(),
+                        ImVec2(iconSize * 0.5f, iconSize * 0.5f));
+                }
                 else
-                    ImGui::Text("%s", filename.c_str());
+                {
+                    ImGui::TextUnformatted(filename.c_str());
+                }
 
                 ImGui::EndDragDropSource();
             }
@@ -422,65 +404,76 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
             if (ImGui::IsItemHovered())
                 ImGui::SetTooltip("%s", filename.c_str());
 
-            //
-            // 2-LINE CLAMPED, CENTERED LABEL
-            //
+            const float wrapWidth = iconSize;
+            const float maxTextHeight = ImGui::GetTextLineHeight() * 2.0f;
 
-            //ImGui::Dummy(ImVec2(0, 1)); // spacing
+            const float labelX = cellStartX + (cellWidth - wrapWidth) * 0.5f;
+            ImGui::SetCursorPosX(labelX);
 
-            float wrapWidth = iconSize;
-            float maxTextHeight = ImGui::GetTextLineHeight() * 2;
-
-            // Center the text-block itself (not the raw text width)
-            float textBlockX = (cellWidth - wrapWidth) * 0.5f;
-            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + textBlockX);
-
-            // Begin a constrained region that forces wrapping
-            ImGui::BeginChild("##label",
-                ImVec2(wrapWidth, maxTextHeight),
-                false,
-                ImGuiWindowFlags_NoScrollbar |
-                ImGuiWindowFlags_NoScrollWithMouse);
+            const ImVec2 labelStart = ImGui::GetCursorScreenPos();
 
             ImGui::PushTextWrapPos(ImGui::GetCursorPosX() + wrapWidth);
             ImGui::TextUnformatted(filename.c_str());
             ImGui::PopTextWrapPos();
 
-            ImGui::EndChild();
+            const ImVec2 labelEnd = ImGui::GetCursorScreenPos();
+            const float usedTextHeight = labelEnd.y - labelStart.y;
+
+            if (usedTextHeight > maxTextHeight)
+            {
+                ImGui::SetCursorScreenPos(ImVec2(
+                    labelEnd.x,
+                    labelStart.y + maxTextHeight));
+            }
+
+            ImGui::Dummy(ImVec2(cellWidth, 4.0f));
 
             ImGui::PopID();
         }
 
         ImGui::EndTable();
-
-        if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) && ImGui::IsWindowHovered())
-        {
-            m_pSelectedAsset->Set(0u);
-        }
     }
 
-    if (ImGui::BeginPopupContextItem("addasset"))
+    if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) &&
+        ImGui::IsWindowHovered() &&
+        !ImGui::IsAnyItemHovered() &&
+        m_pSelectedAsset)
+    {
+        m_pSelectedAsset->Set(0u);
+    }
+
+    if (ImGui::BeginPopupContextWindow(
+        "addasset",
+        ImGuiPopupFlags_MouseButtonRight | ImGuiPopupFlags_NoOpenOverItems))
     {
         if (ImGui::MenuItem("New folder"))
         {
-            std::filesystem::create_directory(folder->fullPath + "/new_folder");
+            fs::create_directory(fs::path(folder->fullPath) / "new_folder");
+            BuildFolderTree();
         }
+
         if (ImGui::MenuItem("New sprite atlas"))
         {
-            ServiceLocator::Get<AssetImporterRegistry>().Export<SpriteAtlasAsset>(folder->fullPath + "/new_sprite.bsa", 0u);
+            ServiceLocator::Get<AssetImporterRegistry>()
+                .Export<SpriteAtlasAsset>(
+                    fs::path(folder->fullPath) / "new_sprite.bsa",
+                    0u);
+
+            BuildFolderTree();
         }
+
         if (ImGui::MenuItem("New tilemap"))
         {
-            ServiceLocator::Get<AssetImporterRegistry>().Export<TilemapAsset>(folder->fullPath + "/new_tilemap.btm", 0u);
+            ServiceLocator::Get<AssetImporterRegistry>()
+                .Export<TilemapAsset>(
+                    fs::path(folder->fullPath) / "new_tilemap.btm",
+                    0u);
+
+            BuildFolderTree();
         }
+
         ImGui::EndPopup();
     }
 
     ImGui::EndChild();
-
 }
-
-
-
-
-

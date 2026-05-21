@@ -107,6 +107,15 @@ namespace Boon
             GetRegistry()->Register<T>(service);
         }
 
+        template<typename T>
+        static T& Register()
+        {
+            auto pRegistry = GetRegistry();
+            std::shared_ptr<T> pService = std::make_shared<T>();
+            pRegistry->Register<T>(pService);
+            return *pService;
+        }
+
         /**
          * @brief Retrieve a registered service from the global registry.
          *

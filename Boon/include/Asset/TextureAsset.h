@@ -1,7 +1,9 @@
-﻿#pragma once
+#pragma once
+
 #include "Asset/Asset.h"
-#include "Asset/AssetTraits.h"
 #include "Asset/AssetMeta.h"
+#include "Asset/AssetSerializer.h"
+#include "Asset/AssetTraits.h"
 #include "Core/Memory/Buffer.h"
 #include "Renderer/Texture.h"
 
@@ -13,14 +15,17 @@ namespace Boon
     {
     public:
         using Type = Texture2D;
-        Texture2DAsset(AssetHandle handle)
-            : Asset(handle) {
+
+        explicit Texture2DAsset(AssetHandle handle)
+            : Asset(handle)
+        {
         }
 
         std::shared_ptr<Texture2D> GetInstance()
         {
             if (!m_RuntimeTexture)
                 CreateRuntimeTexture();
+
             return m_RuntimeTexture;
         }
 
@@ -37,34 +42,33 @@ namespace Boon
         }
 
     private:
-        TextureDescriptor m_Desc;
-        Buffer m_Data;
-
+        TextureDescriptor m_Desc{};
+        Buffer m_Data{};
         std::shared_ptr<Texture2D> m_RuntimeTexture = nullptr;
 
         friend class Texture2DImporter;
-        friend struct AssetTraits<Texture2DAsset>;
+        friend struct AssetSerializer<Texture2DAsset>;
     };
 
     template<>
     struct AssetTraits<Texture2DAsset>
     {
         static constexpr AssetType Type = AssetType::Texture;
+        static constexpr const char* Name = "Texture2D";
+    };
 
+    template<>
+    struct AssetSerializer<Texture2DAsset>
+    {
         static Texture2DAsset* Load(Buffer& buffer, const AssetMeta& meta)
         {
-            Texture2DAsset* asset = new Texture2DAsset(meta.uuid);
+            auto* asset = new Texture2DAsset(meta.uuid);
 
-            // Cursor tracking
             size_t cursor = 0;
-
-            // Read descriptor
             asset->m_Desc = buffer.Read<TextureDescriptor>(cursor);
 
-            // Read number of channels (stored as uint32_t)
-            uint32_t channels = buffer.Read<uint32_t>(cursor);
+            const uint32_t channels = buffer.Read<uint32_t>(cursor);
 
-            // Determine correct format
             if (channels == 4)
                 asset->m_Desc.Format = ImageFormat::RGBA8;
             else if (channels == 3)
@@ -72,17 +76,18 @@ namespace Boon
             else
             {
                 delete asset;
-                return nullptr; // invalid texture format
+                return nullptr;
             }
 
-            // Compute pixel data size
-            size_t pixelCount = asset->m_Desc.Width * asset->m_Desc.Height * channels;
+            const size_t pixelCount =
+                static_cast<size_t>(asset->m_Desc.Width) *
+                static_cast<size_t>(asset->m_Desc.Height) *
+                static_cast<size_t>(channels);
 
-            // Allocate buffer appropriately
-            asset->m_Data.Reserve(pixelCount);
+            asset->m_Data.Resize(pixelCount);
 
-            // Read pixel bytes
-            buffer.ReadRaw(asset->m_Data.Data(), pixelCount, cursor);
+            if (pixelCount > 0)
+                buffer.ReadRaw(asset->m_Data.Data(), pixelCount, cursor);
 
             return asset;
         }
@@ -91,22 +96,16 @@ namespace Boon
         {
             Buffer out;
 
-            // Write descriptor
             out.Write(asset->m_Desc);
 
-            // Write channels based on format
             uint32_t channels = 4;
             if (asset->m_Desc.Format == ImageFormat::RGB8)
                 channels = 3;
 
             out.Write(channels);
-
-            // Write pixel data
-            out.WriteRaw(asset->GetPixelData().Data(),
-                asset->GetPixelData().Size());
+            out.WriteRaw(asset->GetPixelData().Data(), asset->GetPixelData().Size());
 
             return out;
         }
     };
-
 }

@@ -56,8 +56,10 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 
 	BOON_REGISTER_FN(BClassRegistry::Get(), NetRepRegistry::Get());
 
-	ServiceLocator::Register(std::make_shared<AssetImporterRegistry>());
-	ServiceLocator::Register(std::make_shared<AssetLibrary>(m_Desc.AssetsRoot));
+	auto assetLibrary = std::make_shared<AssetLibrary>(m_Desc.AssetsRoot);
+	assetLibrary->LoadManifest("AssetManifest.json");
+	ServiceLocator::Register(assetLibrary);
+
 	ServiceLocator::Register(std::make_shared<EventBus>());
 	ServiceLocator::Register(std::make_shared<Input>());
 	ServiceLocator::Register(std::make_shared<SceneManager>());

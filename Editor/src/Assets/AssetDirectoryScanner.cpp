@@ -5,9 +5,11 @@
 
 namespace BoonEditor
 {
-    AssetDirectoryScanner::AssetDirectoryScanner(const std::filesystem::path& root, float interval)
-        : m_Root(root), m_Interval(interval)
+    AssetDirectoryScanner::AssetDirectoryScanner(size_t assetRootIndex, float interval)
+        : m_AssetRootIndex(assetRootIndex)
+        , m_Interval(interval)
     {
+        Scan();
     }
 
     void AssetDirectoryScanner::Update()
@@ -23,7 +25,17 @@ namespace BoonEditor
 
     void AssetDirectoryScanner::Scan()
     {
-        for (auto& entry : fs::recursive_directory_iterator(m_Root))
+        auto& registry = Boon::ServiceLocator::Get<Boon::AssetImporterRegistry>();
+        const auto& roots = registry.GetAssetRoots();
+
+        if (m_AssetRootIndex >= roots.size())
+            return;
+
+        const fs::path& sourceRoot = roots[m_AssetRootIndex].sourceRoot;
+        if (!fs::exists(sourceRoot))
+            return;
+
+        for (auto& entry : fs::recursive_directory_iterator(sourceRoot))
         {
             if (!entry.is_regular_file())
                 continue;
@@ -34,21 +46,20 @@ namespace BoonEditor
 
     void AssetDirectoryScanner::ProcessFile(const fs::path& path)
     {
-        auto& database = AssetDatabase::Get();
-        // Skip .meta files
-        if (path.extension() == ".meta")
+        if (path.extension() == ".meta" || path.extension() == ".basset")
             return;
 
-        if (database.Exists(path.string()))
+        auto& registry = Boon::ServiceLocator::Get<Boon::AssetImporterRegistry>();
+        if (!registry.HasExtension(path.extension().string()))
             return;
 
-        // Ask importer registry if this extension maps to an asset type
-        auto ext = path.extension().string();
-        auto& registry = Boon::ServiceLocator::Get<AssetImporterRegistry>();
-        if (!registry.HasExtension(ext))
+        if (AssetDatabase::Get().Exists(std::filesystem::relative(path, registry.GetAssetRoots()[m_AssetRootIndex].sourceRoot).string()))
             return;
 
-        auto imported = registry.ImportAndLoad(path.string());
-        database.RegisterAsset(path.string(), imported.meta.uuid);
+        Boon::AssetMeta meta = registry.ImportFromRoot(m_AssetRootIndex, path);
+        if (!meta.IsValid())
+            return;
+
+        AssetDatabase::Get().RegisterAsset(meta.sourcePath.generic_string(), meta.uuid);
     }
 }

@@ -59,7 +59,7 @@ Boon::SceneRenderer::SceneRenderer(Scene* pScene, int viewportWidth, int viewpor
 	m_pRenderer2D = std::make_unique<Renderer2D>();
 
 	AssetLibrary& assets = ServiceLocator::Get<AssetLibrary>();
-	AssetRef<ShaderAsset> tilemapShader = assets.Import<ShaderAsset>("shaders/tilemap.glsl");
+	AssetRef<ShaderAsset> tilemapShader = assets.Load<ShaderAsset>("shaders/Tilemap.glsl");
 	m_pTilemapShader = tilemapShader.Instance();
 }
 Boon::SceneRenderer::~SceneRenderer()

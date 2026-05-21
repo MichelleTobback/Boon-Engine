@@ -1,41 +1,24 @@
 #pragma once
-#include <cstdint>
-#include <memory>
+
 #include "Asset/Asset.h"
-#include "Asset/AssetRegistry.h"
+#include "Asset/AssetMeta.h"
+#include "Asset/AssetSerializer.h"
 #include "Asset/AssetTraits.h"
-#include "Asset/AssetRef.h"
+#include "Core/Memory/Buffer.h"
 
 namespace Boon
 {
-    class AssetPackReader;
-
-    class AssetLoader
+    // Compatibility wrapper. New code should use AssetLoaderRegistry instead.
+    class AssetLoader final
     {
     public:
-        explicit AssetLoader(AssetPackReader* reader)
-            : m_Reader(reader) {
-        }
-
-        /**
-         * @brief Load an asset of type T from the asset pack using its handle.
-         *
-         * @tparam T Asset type to load.
-         * @param handle Handle of the asset to load.
-         * @return Pointer to the loaded asset of type T, or nullptr on failure.
-         */
         template<typename T>
-        T* Load(AssetHandle handle);
+        static T* Load(Buffer& payload, const AssetMeta& meta)
+        {
+            if (meta.type != AssetTraits<T>::Type)
+                return nullptr;
 
-        /**
-         * @brief Load an asset as the base Asset type.
-         *
-         * @param handle Handle of the asset to load.
-         * @return Pointer to the loaded Asset, or nullptr on failure.
-         */
-        Asset* LoadGeneric(AssetHandle handle);
-
-    private:
-        AssetPackReader* m_Reader = nullptr;
+            return AssetSerializer<T>::Load(payload, meta);
+        }
     };
 }

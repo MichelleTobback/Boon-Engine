@@ -92,7 +92,7 @@ namespace Boon
     {
         //if (j.contains("ProjectRoot"))       j.at("ProjectRoot").get_to(r.ProjectRoot);
         if (j.contains("AssetsRoot"))        j.at("AssetsRoot").get_to(r.AssetsRoot);
-        //if (j.contains("IntermediateRoot"))  j.at("IntermediateRoot").get_to(r.IntermediateRoot);
+        if (j.contains("EngineContentRoot"))  j.at("EngineContentRoot").get_to(r.EngineContentRoot);
         //if (j.contains("SavedRoot"))         j.at("SavedRoot").get_to(r.SavedRoot);
 
         if (j.contains("StartupScene")) j.at("StartupScene").get_to(r.StartupScene);
@@ -115,7 +115,7 @@ namespace Boon
         j = json{
             //{ "ProjectRoot",      r.ProjectRoot.string() },
             { "AssetsRoot",       r.AssetsRoot.string() },
-            //{ "IntermediateRoot", r.IntermediateRoot.string() },
+            { "EngineContentRoot", r.EngineContentRoot.string() },
             //{ "SavedRoot",        r.SavedRoot.string() },
             { "StartupScene",     r.StartupScene },
             { "GameModule",       r.GameModule },
@@ -263,7 +263,7 @@ namespace Boon
             config.Runtime.StartupScene = "Scenes/Main.scene";
 
         if (config.Runtime.AssetsRoot.empty())
-            config.Runtime.AssetsRoot = "Assets";
+            config.Runtime.AssetsRoot = std::filesystem::absolute("Assets");
 
         if (config.Runtime.IntermediateRoot.empty())
             config.Runtime.IntermediateRoot = GetBinRelativeToExe();
@@ -274,8 +274,10 @@ namespace Boon
         if (config.Runtime.Window.Title.empty())
             config.Runtime.Window.Title = config.Name;
 
-        config.Runtime.EngineRoot = s_exepath / "../Boon";
-        config.Editor.EditorResourcesRoot = s_exepath;
+        config.Runtime.EngineRoot = (s_exepath / "../Boon").lexically_normal();
+        config.Runtime.EngineContentRoot = (config.Runtime.EngineRoot / "Assets").lexically_normal();
+
+        config.Editor.EditorResourcesRoot = s_exepath / "Assets";
     }
 
     bool ProjectLoader::SaveToFile(const std::filesystem::path& location, const ProjectConfig& projectConfig)
@@ -327,11 +329,8 @@ namespace Boon
                 path = path.lexically_normal();
             };
 
-        //ResolveRelativeToProject(config.Runtime.AssetsRoot);
-        //ResolveRelativeToProject(config.Runtime.EngineRoot);
-        //ResolveRelativeToProject(config.Runtime.IntermediateRoot);
-        //ResolveRelativeToProject(config.Runtime.SavedRoot);
-        //ResolveRelativeToProject(config.Editor.EditorResourcesRoot);
+        ResolveRelativeToProject(config.Runtime.AssetsRoot);
+        ResolveRelativeToProject(config.Runtime.SavedRoot);
     }
 
     bool ProjectLoader::Validate(const ProjectConfig& config, ProjectLoadError& outError)

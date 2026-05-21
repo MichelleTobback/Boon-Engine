@@ -1,11 +1,11 @@
 #pragma once
+
 #include "Asset/Asset.h"
-#include "Asset/AssetTraits.h"
 #include "Asset/AssetMeta.h"
+#include "Asset/AssetSerializer.h"
+#include "Asset/AssetTraits.h"
 #include "Core/Memory/Buffer.h"
 #include "Scene/Scene.h"
-
-#include <memory>
 
 namespace Boon
 {
@@ -13,36 +13,36 @@ namespace Boon
     {
     public:
         using Type = Scene;
-        SceneAsset(AssetHandle handle)
-            : Asset(handle) { }
+
+        explicit SceneAsset(AssetHandle handle)
+            : Asset(handle)
+        {
+        }
 
         Scene* GetInstance()
         {
             return nullptr;
         }
-
-    private:
     };
 
     template<>
     struct AssetTraits<SceneAsset>
     {
         static constexpr AssetType Type = AssetType::Scene;
-        static constexpr bool HasMeta = false;
+        static constexpr const char* Name = "Scene";
+    };
 
+    template<>
+    struct AssetSerializer<SceneAsset>
+    {
         static SceneAsset* Load(Buffer&, const AssetMeta& meta)
         {
-            SceneAsset* asset = new SceneAsset(meta.uuid);
-
-            return asset;
+            return new SceneAsset(meta.uuid);
         }
 
         static Buffer Serialize(SceneAsset*)
         {
-            Buffer out;
-
-            return out;
+            return {};
         }
     };
-
 }

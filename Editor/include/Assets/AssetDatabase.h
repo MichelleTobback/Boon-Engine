@@ -1,9 +1,14 @@
 #pragma once
-#include "Asset/Importer/AssetImporterRegistry.h"
+
 #include "Asset/AssetRef.h"
-#include <functional>
 #include "Asset/TextureAsset.h"
 #include "Core/ServiceLocator.h"
+#include "Asset/AssetLibrary.h"
+#include "Assets/Importer/AssetImporterRegistry.h"
+
+#include <functional>
+#include <string>
+#include <unordered_map>
 
 using namespace Boon;
 
@@ -21,9 +26,7 @@ namespace BoonEditor
 		template<typename TAsset>
 		AssetRef<TAsset> Load(const std::string& path)
 		{
-			AssetImporterRegistry& reg = ServiceLocator::Get<AssetImporterRegistry>();
-			AssetImporterRegistry::Imported<TAsset> result = reg.ImportAndLoad<TAsset>(path);
-			return AssetRef<TAsset>(result.meta.uuid);
+			return ServiceLocator::Get<AssetLibrary>().Load<TAsset>(path);
 		}
 
 		template<typename TAsset>
@@ -51,9 +54,8 @@ namespace BoonEditor
 
 		std::unordered_map<AssetHandle, std::string> m_HandleToPath;
 		std::unordered_map<std::string, AssetHandle> m_PathToHandle;
-		std::string m_AssetRoot{"Assets/"};
 		bool m_Dirty = false;
 
-		std::unordered_map<AssetType, AssetRef<Texture2DAsset>> m_DefaultTextures;
+		mutable std::unordered_map<AssetType, AssetRef<Texture2DAsset>> m_DefaultTextures;
 	};
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include <string>
 #include <vector>
 #include <unordered_map>
 
@@ -13,7 +14,7 @@ namespace Boon
     struct AssetPackHeader
     {
         uint32_t magic = 0x424F4F4E; // "BOON"
-        uint16_t version = 1;
+        uint16_t version = 2;
         uint16_t assetCount = 0;
         uint64_t registryOffset = 0;
         uint64_t registrySize = 0;
@@ -24,8 +25,11 @@ namespace Boon
     {
         UUID id;
         AssetType type;
-        uint64_t dataOffset;
-        uint64_t dataSize;
+        uint64_t dataOffset = 0;
+        uint64_t dataSize = 0;
+
+        // Optional v2 field. Path inside the pack/runtime asset root, e.g. "textures/player.basset".
+        std::string runtimePath{};
     };
 
     class AssetPack final

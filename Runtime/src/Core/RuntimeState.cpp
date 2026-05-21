@@ -27,12 +27,6 @@
 #include "Reflection/BClass.h"
 #include <iostream>
 
-#include <Asset/Importer/SceneImporter.h>
-#include <Asset/Importer/TilemapImporter.h>
-#include <Asset/Importer/SpriteAtlasImporter.h>
-#include <Asset/Importer/TextureImporter.h>
-#include <Asset/Importer/ShaderImporter.h>
-
 using namespace Boon;
 
 Runtime::RuntimeState::RuntimeState()
@@ -54,17 +48,11 @@ void Runtime::RuntimeState::OnEnter()
 	ServiceLocator::Register<NetDriver>(network);
 	StartNetwork();
 
-	AssetImporterRegistry& importer = ServiceLocator::Get<AssetImporterRegistry>();
-	importer.RegisterImporter<Texture2DImporter>();
-	importer.RegisterImporter<ShaderImporter>();
-	importer.RegisterImporter<SpriteAtlasImporter>();
-	importer.RegisterImporter<SceneImporter>();
-	importer.RegisterImporter<TilemapImporter>();
-
 	AssetLibrary& assets = Assets::Get();
+	const std::filesystem::path assetRoot = config.ProjectRoot / "generated/Assets";
+	const std::filesystem::path gameRuntimeRoot = assetRoot / "Game";
+	const std::filesystem::path engineRuntimeRoot = assetRoot / "Engine";
 	assets.AddRoot(config.EngineRoot / config.AssetsRoot); // engine assets
-	assets.Import<TilemapAsset>("game/Arena/Arena-tilemap.btm");
-	assets.Import<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa");
 
 	m_pRenderer = std::make_unique<SceneRenderer>(nullptr, window.GetWidth(), window.GetHeight(), true);
 

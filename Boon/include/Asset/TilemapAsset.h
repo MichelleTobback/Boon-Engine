@@ -1,7 +1,10 @@
 #pragma once
+
 #include "Asset/Asset.h"
-#include "Core/Memory/Buffer.h"
 #include "Asset/AssetMeta.h"
+#include "Asset/AssetSerializer.h"
+#include "Asset/AssetTraits.h"
+#include "Core/Memory/Buffer.h"
 #include "Renderer/Tilemap.h"
 
 #include <memory>
@@ -12,112 +15,96 @@ namespace Boon
     {
     public:
         using Type = Tilemap;
-        TilemapAsset(AssetHandle handle, const std::shared_ptr<Tilemap>& pTilemap)
-            : Asset(handle), m_pTilemap(pTilemap) {
-        }
-        virtual ~TilemapAsset() = default;
 
-        inline std::shared_ptr<Tilemap> GetInstance() const { return m_pTilemap; }
+        TilemapAsset(AssetHandle handle, const std::shared_ptr<Tilemap>& tilemap)
+            : Asset(handle), m_pTilemap(tilemap)
+        {
+        }
+
+        std::shared_ptr<Tilemap> GetInstance() const
+        {
+            return m_pTilemap;
+        }
 
     private:
+        std::shared_ptr<Tilemap> m_pTilemap = nullptr;
+
         friend class TilemapImporter;
-        std::shared_ptr<Tilemap> m_pTilemap{ nullptr };
+        friend struct AssetSerializer<TilemapAsset>;
     };
 
     template<>
     struct AssetTraits<TilemapAsset>
     {
         static constexpr AssetType Type = AssetType::Tilemap;
+        static constexpr const char* Name = "Tilemap";
+    };
 
-        // ------------------------------------------------------
-        //  LOAD from AssetPack (runtime)
-        // ------------------------------------------------------
-        static TilemapAsset* Load(Buffer&, const AssetMeta& meta)
+    template<>
+    struct AssetSerializer<TilemapAsset>
+    {
+        static TilemapAsset* Load(Buffer& buffer, const AssetMeta& meta)
         {
-            //size_t cursor = 0;
-            //
-            //// Read texture UUID
-            //uint32_t textureUUID = buffer.Read<uint32_t>(cursor);
-            //
-            //// Create atlas
-            //std::shared_ptr<SpriteAtlas> atlas = std::make_shared<SpriteAtlas>();
-            //
-            //// Lazy texture reference
-            //atlas->SetTexture(AssetRef<Texture2DAsset>(textureUUID));
-            //
-            //// -------------------------
-            //// Load animation clips
-            //// -------------------------
-            //uint32_t clipCount = buffer.Read<uint32_t>(cursor);
-            //
-            //for (uint32_t i = 0; i < clipCount; i++)
-            //{
-            //    SpriteAnimClip clip;
-            //
-            //    clip.Speed = buffer.Read<float>(cursor);
-            //
-            //    uint32_t frameCount = buffer.Read<uint32_t>(cursor);
-            //    clip.Frames.resize(frameCount);
-            //
-            //    for (uint32_t f = 0; f < frameCount; f++)
-            //    {
-            //        SpriteFrame frame;
-            //
-            //        int id = buffer.Read<uint32_t>(cursor);
-            //        frame.UV.x = buffer.Read<float>(cursor);
-            //        frame.UV.y = buffer.Read<float>(cursor);
-            //        frame.Size.x = buffer.Read<float>(cursor);
-            //        frame.Size.y = buffer.Read<float>(cursor);
-            //        frame.FrameTime = buffer.Read<float>(cursor);
-            //
-            //        // Store full frame in clip
-            //        clip.Frames[f] = id;
-            //        atlas->SetSpriteFrame(frame, id);
-            //    }
-            //
-            //    clip.pAtlas = atlas.get();
-            //    atlas->AddClip(clip);
-            //}
+            size_t cursor = 0;
 
-            return new TilemapAsset(meta.uuid, nullptr);
+            const int chunksX = buffer.Read<int>(cursor);
+            const int chunksY = buffer.Read<int>(cursor);
+            const int chunkSize = buffer.Read<int>(cursor);
+
+            const AssetHandle atlasHandle = buffer.Read<AssetHandle>(cursor);
+
+            std::shared_ptr<Tilemap> tilemap = std::make_shared<Tilemap>(chunksX, chunksY, chunkSize);
+
+            tilemap->SetAtlas(AssetRef<SpriteAtlasAsset>(atlasHandle));
+
+            const int width = chunksX * chunkSize;
+            const int height = chunksY * chunkSize;
+
+            for (int y = 0; y < height; ++y)
+            {
+                for (int x = 0; x < width; ++x)
+                {
+                    const int sprite = buffer.Read<int>(cursor);
+                    tilemap->SetTile(x, y, sprite);
+                }
+            }
+
+            return new TilemapAsset(meta.uuid, tilemap);
         }
 
-        // ------------------------------------------------------
-        //  SERIALIZE into AssetPack (editor build)
-        // ------------------------------------------------------
-        static Buffer Serialize(TilemapAsset*)
+        static Buffer Serialize(TilemapAsset* asset)
         {
             Buffer out;
 
-            //SpriteAtlas* atlas = asset->GetInstance().get();
-            //
-            //// 1. Texture
-            //out.Write<uint32_t>(atlas->GetTexture().Handle());
-            //
-            //// 2. Clips
-            //const auto& clips = atlas->GetClips();
-            //out.Write<uint32_t>((uint32_t)clips.size());
-            //
-            //for (const auto& clip : clips)
-            //{
-            //    out.Write<float>(clip.Speed);
-            //    out.Write<uint32_t>((uint32_t)clip.Frames.size());
-            //
-            //    for (uint32_t id : clip.Frames)
-            //    {
-            //        const SpriteFrame& frame = atlas->GetSpriteFrame(id);
-            //
-            //        out.Write<uint32_t>(id);
-            //        out.Write<float>(frame.UV.x);
-            //        out.Write<float>(frame.UV.y);
-            //        out.Write<float>(frame.Size.x);
-            //        out.Write<float>(frame.Size.y);
-            //        out.Write<float>(frame.FrameTime);
-            //    }
-            //}
+            if (!asset)
+                return out;
+
+            std::shared_ptr<Tilemap> tilemap = asset->GetInstance();
+            if (!tilemap)
+                return out;
+
+            const int chunksX = tilemap->GetChunksX();
+            const int chunksY = tilemap->GetChunksY();
+            const int chunkSize = tilemap->GetChunkSize();
+
+            out.Write<int>(chunksX);
+            out.Write<int>(chunksY);
+            out.Write<int>(chunkSize);
+
+            out.Write<AssetHandle>(tilemap->GetAtlas().Handle());
+
+            const int width = chunksX * chunkSize;
+            const int height = chunksY * chunkSize;
+
+            for (int y = 0; y < height; ++y)
+            {
+                for (int x = 0; x < width; ++x)
+                {
+                    out.Write<int>(tilemap->GetTile(x, y));
+                }
+            }
 
             return out;
         }
     };
-
 }

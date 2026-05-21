@@ -31,16 +31,16 @@ namespace BoonEditor
 
     AssetDatabase::AssetDatabase()
     {
-        Init();
+        
     }
 
     void AssetDatabase::Init()
     {
-        m_DefaultTextures[AssetType::Texture] = Assets::Get().Import<Texture2DAsset>("Icons/Assets/texture_icon.png");
-        m_DefaultTextures[AssetType::SpriteAtlas] = Assets::Get().Import<Texture2DAsset>("Icons/Assets/sprite_atlas_icon.png");
-        m_DefaultTextures[AssetType::Tilemap] = Assets::Get().Import<Texture2DAsset>("Icons/Assets/sprite_atlas_icon.png");
-        m_DefaultTextures[AssetType::Shader] = Assets::Get().Import<Texture2DAsset>("Icons/Assets/shader_icon.png");
-        m_DefaultTextures[AssetType::Scene] = Assets::Get().Import<Texture2DAsset>("Icons/Assets/scene_icon.png");
+        m_DefaultTextures[AssetType::Texture] = Assets::Get().Load<Texture2DAsset>("Icons/Assets/texture_icon.png");
+        m_DefaultTextures[AssetType::SpriteAtlas] = Assets::Get().Load<Texture2DAsset>("Icons/Assets/sprite_atlas_icon.png");
+        m_DefaultTextures[AssetType::Tilemap] = Assets::Get().Load<Texture2DAsset>("Icons/Assets/sprite_atlas_icon.png");
+        m_DefaultTextures[AssetType::Shader] = Assets::Get().Load<Texture2DAsset>("Icons/Assets/shader_icon.png");
+        m_DefaultTextures[AssetType::Scene] = Assets::Get().Load<Texture2DAsset>("Icons/Assets/scene_icon.png");
     }
 
     void AssetDatabase::RegisterAsset(const std::string& path, AssetHandle handle)
@@ -97,12 +97,37 @@ namespace BoonEditor
             return AssetRef<Texture2DAsset>();
 
         if (meta->type == AssetType::Texture)
-            return Assets::Get().Load<Texture2DAsset>(handle);
+        {
+            const std::string& sourcePath = GetPath(handle);
+            if (!sourcePath.empty())
+                return Assets::Get().Load<Texture2DAsset>(sourcePath);
 
-        auto it = m_DefaultTextures.find(meta->type);
-        if (it == m_DefaultTextures.end())
             return AssetRef<Texture2DAsset>();
+        }
 
-        return it->second;
+        auto loadDefault = [this](AssetType type, const std::string& path) -> AssetRef<Texture2DAsset>
+            {
+                auto it = m_DefaultTextures.find(type);
+                if (it != m_DefaultTextures.end() && it->second.IsValid())
+                    return it->second;
+
+                AssetRef<Texture2DAsset> ref = Assets::Get().Load<Texture2DAsset>(path);
+                m_DefaultTextures[type] = ref;
+                return ref;
+            };
+
+        switch (meta->type)
+        {
+        case AssetType::SpriteAtlas:
+            return loadDefault(AssetType::SpriteAtlas, "Icons/Assets/sprite_atlas_icon.png");
+        case AssetType::Tilemap:
+            return loadDefault(AssetType::Tilemap, "Icons/Assets/sprite_atlas_icon.png");
+        case AssetType::Shader:
+            return loadDefault(AssetType::Shader, "Icons/Assets/shader_icon.png");
+        case AssetType::Scene:
+            return loadDefault(AssetType::Scene, "Icons/Assets/scene_icon.png");
+        default:
+            return AssetRef<Texture2DAsset>();
+        }
     }
 }

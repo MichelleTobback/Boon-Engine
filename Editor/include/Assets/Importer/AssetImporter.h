@@ -16,11 +16,15 @@ namespace Boon
         /**
          * @brief Import an asset from a source file.
          *
-         * @param filePath Path to the source file.
+         * @param sourcePath Path to the source file.
+         * @param exportPath Path to the generated .basset file.
          * @param meta Metadata describing the target asset.
          * @return Pointer to the created Asset on success, or nullptr on failure.
          */
-        virtual Asset* ImportFromFile(const std::filesystem::path& filePath, const AssetMeta& meta) = 0;
+        virtual bool ImportToBAsset(
+            const std::filesystem::path& sourcePath,
+            const std::filesystem::path& exportPath, 
+            const AssetMeta& meta) = 0;
 
         /**
          * @brief Export an asset to a file. Default implementation returns true.
