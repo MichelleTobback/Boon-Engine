@@ -1,31 +1,36 @@
+#pragma once
+
 #include "Panels/EditorPanel.h"
 #include "Core/BoonEditor.h"
 #include "Panels/AssetEditor.h"
 #include "Panels/ViewportPanel.h"
+
 #include <vector>
+#include <memory>
 
 namespace BoonEditor
 {
-	class AssetEditorPanel final : public EditorPanel
-	{
-	public:
-		AssetEditorPanel(const std::string& name, EditorContext* pContext, ViewportPanel* pViewport);
+    class AssetEditorPanel final : public EditorPanel
+    {
+    public:
+        AssetEditorPanel(const std::string& name, EditorContext* pContext, ViewportPanel* pViewport);
+        virtual ~AssetEditorPanel();
 
-		virtual void Update() override;
+        virtual void Update() override;
 
-		inline AssetContext& GetContext() { return m_Context; }
-		inline SceneContext& GetScene() { return m_PreviewScene; }
+        inline AssetContext& GetContext() { return m_Context; }
 
-		void RegisterEditor(AssetEditorBase* pEditor);
+        void RegisterEditor(AssetEditorBase* pEditor);
 
-	protected:
-		virtual void OnRenderUI() override;
+    protected:
+        virtual void OnRenderUI() override;
 
-	private:
-		AssetContext m_Context{};
-		SceneContext m_PreviewScene{};
-		std::vector<std::unique_ptr<AssetEditorBase>> m_pEditors;
-		AssetEditorBase* m_pActiveEditor{nullptr};
-		ViewportPanel* m_pViewport{nullptr};
-	};
+    private:
+        AssetContext m_Context{};
+
+        std::vector<std::unique_ptr<AssetEditorBase>> m_pEditors;
+        AssetEditorBase* m_pActiveEditor = nullptr;
+
+        ViewportPanel* m_pViewport = nullptr;
+    };
 }

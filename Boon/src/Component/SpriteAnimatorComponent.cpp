@@ -33,10 +33,10 @@ void Boon::SpriteAnimatorComponent::Update(GameObject)
 	if (m_Current >= clip.Frames.size())
 		m_Current = static_cast<int>(clip.Frames.size()) - 1;
 
-	float maxTime = Atlas->GetSpriteFrame(clip.Frames[m_Current]).FrameTime;
+	float frameTime = 1.0f / std::max(clip.FPS, 0.001f);
 
 	m_Timer += Time::Get().GetDeltaTime() * clip.Speed;
-	if (m_Timer >= maxTime)
+	if (m_Timer >= frameTime)
 	{
 		m_Timer = 0.f;
 

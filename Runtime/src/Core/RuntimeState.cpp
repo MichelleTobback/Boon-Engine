@@ -48,11 +48,16 @@ void Runtime::RuntimeState::OnEnter()
 	ServiceLocator::Register<NetDriver>(network);
 	StartNetwork();
 
-	AssetLibrary& assets = Assets::Get();
+	AssetLibrary& assetLib = Assets::Get();
 	const std::filesystem::path assetRoot = config.ProjectRoot / "generated/Assets";
 	const std::filesystem::path gameRuntimeRoot = assetRoot / "Game";
 	const std::filesystem::path engineRuntimeRoot = assetRoot / "Engine";
-	assets.AddRoot(config.EngineRoot / config.AssetsRoot); // engine assets
+
+	assetLib.SetRuntimeAssetRoot(gameRuntimeRoot);
+	assetLib.AddRuntimeAssetRoot(engineRuntimeRoot);
+
+	assetLib.LoadManifest(gameRuntimeRoot / "AssetManifest.json");
+	assetLib.LoadManifest(engineRuntimeRoot / "AssetManifest.json");
 
 	m_pRenderer = std::make_unique<SceneRenderer>(nullptr, window.GetWidth(), window.GetHeight(), true);
 

@@ -1,7 +1,9 @@
 #pragma once
+
 #include "EditorPanel.h"
 #include "Core/BoonEditor.h"
 #include "Panels/ViewportToolbar.h"
+#include "Panels/IViewportCanvasRenderer.h"
 
 #include "Core/EditorCamera.h"
 
@@ -15,57 +17,77 @@
 
 namespace Boon
 {
-	class Scene;
-	class SceneRenderer;
+    class Scene;
+    class SceneRenderer;
 }
 
 namespace BoonEditor
 {
-	class DebugRenderer;
-	class ViewportPanel final : public EditorPanel
-	{
-	public:
-		ViewportPanel(const std::string& name, EditorContext* pContext, SceneContext* pSceneContext, GameObjectContext* pSelectionContext);
-		virtual ~ViewportPanel();
+    class DebugRenderer;
 
-		virtual void Update() override;
+    class ViewportPanel final : public EditorPanel
+    {
+    public:
+        ViewportPanel(
+            const std::string& name,
+            EditorContext* pContext,
+            SceneContext* pSceneContext,
+            GameObjectContext* pSelectionContext);
 
-		inline ViewportToolbar* GetToolbar() const { return m_pToolbar.get(); }
+        virtual ~ViewportPanel();
 
-		inline EditorCamera& GetCamera() { return m_Camera; }
+        virtual void Update() override;
 
-		inline EditorViewportSettings& GetSettings() { return m_Settings; }
-		inline const EditorViewportSettings& GetSettings() const { return m_Settings; }
+        inline ViewportToolbar* GetToolbar() const { return m_pToolbar.get(); }
 
-		void SetContext(SceneContext* pContext);
+        inline EditorCamera& GetCamera() { return m_Camera; }
 
-		inline const glm::vec2& GetSize() const { return m_ViewportSize; }
-		inline const glm::vec2& GetMousePosition() const { return m_MousePosition; }
+        inline EditorViewportSettings& GetSettings() { return m_Settings; }
+        inline const EditorViewportSettings& GetSettings() const { return m_Settings; }
 
-		inline SceneRenderer* GetRenderer() const { return m_pRenderer.get(); }
+        void SetContext(SceneContext* pContext);
 
-	protected:
-		virtual void OnRenderUI() override;
+        void SetCanvasRenderer(IViewportCanvasRenderer* renderer);
+        void ClearCanvasRenderer(IViewportCanvasRenderer* renderer = nullptr);
 
-	private:
-		void CameraSettings(float posX, float posY, float maxWidth);
-		void VisibilitySettings(float posX, float posY, float maxWidth);
+        inline bool HasCanvasRenderer() const { return m_pCanvasRenderer != nullptr; }
 
-		std::unique_ptr<SceneRenderer> m_pRenderer;
-		EditorCamera m_Camera{0.f, 0.f};
+        inline const glm::vec2& GetSize() const { return m_ViewportSize; }
+        inline const glm::vec2& GetMousePosition() const { return m_MousePosition; }
 
-		bool m_ViewportFocused = false, m_ViewportHovered = false;
-		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
-		glm::vec2 m_ViewportBounds[2];
-		glm::vec2 m_MousePosition{};
-		glm::vec2 m_ViewportImagePosition{};
+        inline SceneRenderer* GetRenderer() const { return m_pRenderer.get(); }
 
-		GameObject m_HoveredGameObject{};
-		SceneContext* m_pSceneContext;
-		GameObjectContext* m_pSelectionContext{};
-		std::unique_ptr<ViewportToolbar> m_pToolbar{};
-		std::unique_ptr<DebugRenderer> m_pDebugRenderer{};
+    protected:
+        virtual void OnRenderUI() override;
 
-		EditorViewportSettings m_Settings{};
-	};
+    private:
+        void CameraSettings(float posX, float posY, float maxWidth);
+        void VisibilitySettings(float posX, float posY, float maxWidth);
+
+        ViewportCanvasContext CreateCanvasContext() const;
+
+    private:
+        std::unique_ptr<SceneRenderer> m_pRenderer;
+        EditorCamera m_Camera{ 0.0f, 0.0f };
+
+        bool m_ViewportFocused = false;
+        bool m_ViewportHovered = false;
+
+        glm::vec2 m_ViewportSize{ 0.0f, 0.0f };
+        glm::vec2 m_ViewportBounds[2];
+        glm::vec2 m_MousePosition{};
+        glm::vec2 m_ViewportImagePosition{};
+
+        GameObject m_HoveredGameObject{};
+
+        SceneContext* m_pSceneContext = nullptr;
+        GameObjectContext* m_pSelectionContext = nullptr;
+
+        std::unique_ptr<ViewportToolbar> m_pToolbar{};
+        std::unique_ptr<DebugRenderer> m_pDebugRenderer{};
+
+        EditorViewportSettings m_Settings{};
+
+        IViewportCanvasRenderer* m_pCanvasRenderer = nullptr;
+    };
 }

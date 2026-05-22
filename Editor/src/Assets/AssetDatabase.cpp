@@ -43,10 +43,11 @@ namespace BoonEditor
         m_DefaultTextures[AssetType::Scene] = Assets::Get().Load<Texture2DAsset>("Icons/Assets/scene_icon.png");
     }
 
-    void AssetDatabase::RegisterAsset(const std::string& path, AssetHandle handle)
+    void AssetDatabase::RegisterAsset(const std::string& path, AssetHandle handle, int rootIndex)
     {
         std::string cleanPath = Utils::NormalizePath(path);
-        m_HandleToPath[handle] = cleanPath;
+        m_HandleToPath[handle].Path = cleanPath;
+        m_HandleToPath[handle].Root = rootIndex;
         m_PathToHandle[cleanPath] = handle;
         m_Dirty = true;
     }
@@ -58,11 +59,11 @@ namespace BoonEditor
         return {};
     }
 
-    const std::string& AssetDatabase::GetPath(AssetHandle handle) const
+    const std::filesystem::path& AssetDatabase::GetPath(AssetHandle handle) const
     {
         static std::string empty;
         if (auto it = m_HandleToPath.find(handle); it != m_HandleToPath.end())
-            return it->second;
+            return it->second.Path;
         return empty;
     }
 
@@ -86,7 +87,7 @@ namespace BoonEditor
     {
         for (auto [handle, path] : m_HandleToPath)
         {
-            fn(handle, path);
+            fn(handle, path.Path.string());
         }
     }
 
@@ -98,7 +99,7 @@ namespace BoonEditor
 
         if (meta->type == AssetType::Texture)
         {
-            const std::string& sourcePath = GetPath(handle);
+            const std::filesystem::path& sourcePath = GetPath(handle);
             if (!sourcePath.empty())
                 return Assets::Get().Load<Texture2DAsset>(sourcePath);
 

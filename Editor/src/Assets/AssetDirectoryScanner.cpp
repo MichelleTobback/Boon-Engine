@@ -60,6 +60,6 @@ namespace BoonEditor
         if (!meta.IsValid())
             return;
 
-        AssetDatabase::Get().RegisterAsset(meta.sourcePath.generic_string(), meta.uuid);
+        AssetDatabase::Get().RegisterAsset(meta.sourcePath.generic_string(), meta.uuid, m_AssetRootIndex);
     }
 }

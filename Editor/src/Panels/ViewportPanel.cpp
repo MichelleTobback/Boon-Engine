@@ -12,22 +12,35 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <iostream>
+#include <cmath>
+#include <cfloat>
 
 using namespace BoonEditor;
 
-BoonEditor::ViewportPanel::ViewportPanel(const std::string& name, EditorContext* pContext, SceneContext* pSceneContext, GameObjectContext* pSelection)
-	: EditorPanel(name, pContext), m_pSceneContext{ pSceneContext }, m_pSelectionContext{pSelection}
+BoonEditor::ViewportPanel::ViewportPanel(
+    const std::string& name,
+    EditorContext* pContext,
+    SceneContext* pSceneContext,
+    GameObjectContext* pSelection)
+    : EditorPanel(name, pContext),
+    m_pSceneContext(pSceneContext),
+    m_pSelectionContext(pSelection)
 {
-	m_Camera.SetActive(true);
-	m_pRenderer = std::make_unique<SceneRenderer>(pSceneContext->Get());
-    m_pDebugRenderer = std::make_unique<DebugRenderer>(pSceneContext->Get(), m_pRenderer->GetOutputTarget());
+    m_Camera.SetActive(true);
 
-    m_pToolbar = std::make_unique<ViewportToolbar>(std::string(name).append("toolbar"), &GetContext());
+    m_pRenderer = std::make_unique<SceneRenderer>(pSceneContext->Get());
+    m_pDebugRenderer = std::make_unique<DebugRenderer>(
+        pSceneContext->Get(),
+        m_pRenderer->GetOutputTarget());
+
+    m_pToolbar = std::make_unique<ViewportToolbar>(
+        std::string(name).append("toolbar"),
+        &GetContext());
 
     m_Settings.DebugRenderLayers |= DebugRenderLayer::Disabled;
 
-    pSceneContext->AddOnContextChangedCallback([this](Scene* pScene)
+    pSceneContext->AddOnContextChangedCallback(
+        [this](Scene* pScene)
         {
             m_pRenderer->SetContext(pScene);
             m_pDebugRenderer->SetContext(pScene);
@@ -36,58 +49,99 @@ BoonEditor::ViewportPanel::ViewportPanel(const std::string& name, EditorContext*
 
 BoonEditor::ViewportPanel::~ViewportPanel()
 {
-    
+}
+
+ViewportCanvasContext BoonEditor::ViewportPanel::CreateCanvasContext() const
+{
+    ViewportCanvasContext context{};
+    context.Viewport = const_cast<ViewportPanel*>(this);
+    context.Size = m_ViewportSize;
+    context.MousePosition = m_MousePosition;
+    context.Hovered = m_ViewportHovered;
+    context.Focused = m_ViewportFocused;
+    return context;
+}
+
+void BoonEditor::ViewportPanel::SetCanvasRenderer(IViewportCanvasRenderer* renderer)
+{
+    m_pCanvasRenderer = renderer;
+
+    if (m_pCanvasRenderer)
+        m_pCanvasRenderer->OnViewportCanvasResize(m_ViewportSize);
+}
+
+void BoonEditor::ViewportPanel::ClearCanvasRenderer(IViewportCanvasRenderer* renderer)
+{
+    if (!renderer || m_pCanvasRenderer == renderer)
+        m_pCanvasRenderer = nullptr;
 }
 
 void BoonEditor::ViewportPanel::Update()
 {
-	if (m_ViewportHovered)
-		m_Camera.Update();
+    if (m_ViewportHovered && !m_pCanvasRenderer)
+        m_Camera.Update();
 
     Input& input = ServiceLocator::Get<Input>();
 
     float mx = ImGui::GetMousePos().x;
     float my = ImGui::GetMousePos().y;
-	
+
     mx -= m_ViewportImagePosition.x;
     my -= m_ViewportImagePosition.y;
-    glm::vec2 viewportSize = m_ViewportBounds[1] - m_ViewportBounds[0];
+
     my = m_ViewportSize.y - my;
-    int mouseX = (int)mx;
-    int mouseY = (int)my;
 
-    m_MousePosition.x = mouseX;
-    m_MousePosition.y = mouseY;
+    int mouseX = static_cast<int>(mx);
+    int mouseY = static_cast<int>(my);
 
-	if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)m_ViewportSize.x && mouseY < (int)m_ViewportSize.y)
-	{
-		int pixelData = m_pRenderer->GetOutputTarget()->ReadPixel(1, mouseX, mouseY);
-		m_HoveredGameObject = pixelData < 0 ? GameObject() : GameObject((GameObjectID)pixelData, m_pSceneContext->Get());
+    m_MousePosition.x = static_cast<float>(mouseX);
+    m_MousePosition.y = static_cast<float>(mouseY);
+
+    const bool mouseInsideViewport =
+        mouseX >= 0 &&
+        mouseY >= 0 &&
+        mouseX < static_cast<int>(m_ViewportSize.x) &&
+        mouseY < static_cast<int>(m_ViewportSize.y);
+
+    if (!m_pCanvasRenderer && mouseInsideViewport)
+    {
+        int pixelData = m_pRenderer->GetOutputTarget()->ReadPixel(1, mouseX, mouseY);
+
+        m_HoveredGameObject =
+            pixelData < 0
+            ? GameObject()
+            : GameObject(static_cast<GameObjectID>(pixelData), m_pSceneContext->Get());
 
         if (input.IsMousePressed(Mouse::ButtonLeft))
-        {
             m_pSelectionContext->Set(m_HoveredGameObject);
-        }
-	}
+    }
 
-    if (m_Camera.GetActive())
-	    m_pRenderer->Render(&m_Camera.GetCamera(), &m_Camera.GetTransform());
+    if (m_pCanvasRenderer)
+    {
+        m_pCanvasRenderer->OnViewportCanvasUpdate(CreateCanvasContext());
+    }
     else
-        m_pRenderer->Render();
+    {
+        if (m_Camera.GetActive())
+            m_pRenderer->Render(&m_Camera.GetCamera(), &m_Camera.GetTransform());
+        else
+            m_pRenderer->Render();
 
-    m_pDebugRenderer->Render(m_Settings);
+        m_pDebugRenderer->Render(m_Settings);
+    }
 }
 
 void BoonEditor::ViewportPanel::SetContext(SceneContext* pContext)
 {
     m_pSceneContext = pContext;
+
     m_pRenderer->SetContext(pContext->Get());
     m_pDebugRenderer->SetContext(pContext->Get());
 }
 
 void BoonEditor::ViewportPanel::OnRenderUI()
 {
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0.0f, 0.0f });
     ImGui::Begin("Viewport");
 
     const ImVec2 viewportOffset{ ImGui::GetCursorPos() };
@@ -96,14 +150,19 @@ void BoonEditor::ViewportPanel::OnRenderUI()
     glm::vec2 minBound{ ImGui::GetWindowPos().x, ImGui::GetWindowPos().y };
     minBound.x -= viewportOffset.x;
     minBound.y -= viewportOffset.y;
-    const glm::vec2 maxBound{ minBound.x + windowSize.x, minBound.y + windowSize.y };
+
+    const glm::vec2 maxBound{
+        minBound.x + windowSize.x,
+        minBound.y + windowSize.y
+    };
 
     ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-    glm::vec2 bounds{ glm::max(glm::vec2{viewportPanelSize.x, viewportPanelSize.y}, {100.0f, 100.0f}) };
 
-    // === Viewport bounds ===
-    auto viewportMinRegion = ImGui::GetWindowContentRegionMin();
-    auto viewportMaxRegion = ImGui::GetWindowContentRegionMax();
+    glm::vec2 bounds{
+        glm::max(
+            glm::vec2{ viewportPanelSize.x, viewportPanelSize.y },
+            glm::vec2{ 100.0f, 100.0f })
+    };
 
     m_ViewportBounds[0] = minBound;
     m_ViewportBounds[1] = maxBound;
@@ -111,27 +170,57 @@ void BoonEditor::ViewportPanel::OnRenderUI()
     m_ViewportFocused = ImGui::IsWindowFocused();
     m_ViewportHovered = ImGui::IsWindowHovered();
 
-    if ((std::abs(bounds.x - m_ViewportSize.x) > FLT_EPSILON
-        || std::abs(bounds.y - m_ViewportSize.y) > FLT_EPSILON)
-        && !ImGui::IsMouseDown(ImGuiMouseButton_Left))
+    if ((std::abs(bounds.x - m_ViewportSize.x) > FLT_EPSILON ||
+        std::abs(bounds.y - m_ViewportSize.y) > FLT_EPSILON) &&
+        !ImGui::IsMouseDown(ImGuiMouseButton_Left))
     {
         m_pRenderer->SetViewport(bounds.x, bounds.y);
         m_Camera.Resize(bounds.x, bounds.y);
+
         m_ViewportSize = { bounds.x, bounds.y };
+
+        if (m_pCanvasRenderer)
+            m_pCanvasRenderer->OnViewportCanvasResize(m_ViewportSize);
     }
 
     ImVec2 imagePos = ImGui::GetCursorScreenPos();
     m_ViewportImagePosition = { imagePos.x, imagePos.y };
 
-    // === Render the viewport image ===
-    uint64_t textureID = m_pRenderer->GetOutputTarget()->GetColorAttachmentRendererID();
-    ImGui::Image((void*)(uintptr_t)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0,1 }, ImVec2{ 1,0 });
+    if (m_pCanvasRenderer)
+    {
+        ImVec2 canvasPos = ImGui::GetCursorScreenPos();
 
-    // Render the toolbar as an overlay on top of the viewport image so it appears inside the viewport
-    // rather than above it.
+        // Reserve the viewport area so ImGui layout still behaves correctly.
+        ImGui::InvisibleButton(
+            "##viewport_asset_canvas_host",
+            ImVec2{ m_ViewportSize.x, m_ViewportSize.y }
+        );
+
+        // Reset cursor back to the viewport area before the asset editor draws.
+        ImGui::SetCursorScreenPos(canvasPos);
+
+        m_pCanvasRenderer->OnViewportCanvasRenderUI(CreateCanvasContext());
+
+        // Restore cursor to after the reserved viewport area.
+        ImGui::SetCursorScreenPos(ImVec2(
+            canvasPos.x,
+            canvasPos.y + m_ViewportSize.y
+        ));
+    }
+    else
+    {
+        uint64_t textureID = m_pRenderer->GetOutputTarget()->GetColorAttachmentRendererID();
+
+        ImGui::Image(
+            reinterpret_cast<void*>(static_cast<uintptr_t>(textureID)),
+            ImVec2{ m_ViewportSize.x, m_ViewportSize.y },
+            ImVec2{ 0.0f, 1.0f },
+            ImVec2{ 1.0f, 0.0f }
+        );
+    }
+
     m_pToolbar->OnRender(minBound, maxBound);
 
-    // === Overlay Toolbar (collapsible) ===
     if (m_pToolbar->GetActiveSetting() == ViewportToolbarSetting::Camera)
     {
         const float panelWidth = 260.0f;
@@ -150,10 +239,10 @@ void BoonEditor::ViewportPanel::OnRenderUI()
         const float panelGap = 6.0f;
         const float topMargin = 20.0f;
         const float toolbarHeight = 36.0f;
-    
+
         float panelX = maxBound.x - panelWidth - panelGap;
         float panelY = m_ViewportBounds[0].y + topMargin + toolbarHeight + panelGap;
-    
+
         VisibilitySettings(panelX, panelY, panelWidth);
     }
 
@@ -169,7 +258,9 @@ void BoonEditor::ViewportPanel::CameraSettings(float posX, float posY, float max
     ImGui::SetNextWindowSizeConstraints(ImVec2(maxWidth, 0), ImVec2(maxWidth, FLT_MAX));
     ImGui::SetNextWindowBgAlpha(0.55f);
 
-    ImGui::Begin("Camera Toolbar", nullptr,
+    ImGui::Begin(
+        "Camera Toolbar",
+        nullptr,
         ImGuiWindowFlags_NoDecoration |
         ImGuiWindowFlags_AlwaysAutoResize |
         ImGuiWindowFlags_NoSavedSettings |
@@ -181,46 +272,43 @@ void BoonEditor::ViewportPanel::CameraSettings(float posX, float posY, float max
     ImGui::Separator();
 
     Camera& camera = m_Camera.GetCamera();
-    int projectionType = (int)camera.GetProjectionType();
+
+    int projectionType = static_cast<int>(camera.GetProjectionType());
     const char* projectionTypes[] = { "Perspective", "Orthographic" };
 
     if (UI::Combo("Mode", projectionType, projectionTypes, IM_ARRAYSIZE(projectionTypes)))
-    {
-        m_Camera.SetMode((Camera::ProjectionType)projectionType);
-    }
+        m_Camera.SetMode(static_cast<Camera::ProjectionType>(projectionType));
 
     switch (camera.GetProjectionType())
     {
     case Camera::ProjectionType::Perspective:
     {
         float fov = camera.GetFov();
+
         if (UI::SliderFloat("FOV", fov, 1.0f, 180.0f))
-        {
             camera.SetFov(fov);
-        }
+
+        break;
     }
-    break;
+
     case Camera::ProjectionType::Orthographic:
     {
         float size = camera.GetSize();
+
         if (UI::SliderFloat("size", size, 1.0f, 100.0f))
-        {
             camera.SetSize(size);
-        }
+
+        break;
     }
-    break;
     }
 
     float value = camera.GetNear();
     if (UI::DragFloat("near", value))
-    {
         camera.SetNear(value);
-    }
+
     value = camera.GetFar();
     if (UI::DragFloat("far", value))
-    {
         camera.SetFar(value);
-    }
 
     ImGui::End();
 }
@@ -233,7 +321,9 @@ void BoonEditor::ViewportPanel::VisibilitySettings(float posX, float posY, float
     ImGui::SetNextWindowSizeConstraints(ImVec2(maxWidth, 0), ImVec2(maxWidth, FLT_MAX));
     ImGui::SetNextWindowBgAlpha(0.55f);
 
-    ImGui::Begin("Visibility Toolbar", nullptr,
+    ImGui::Begin(
+        "Visibility Toolbar",
+        nullptr,
         ImGuiWindowFlags_NoDecoration |
         ImGuiWindowFlags_AlwaysAutoResize |
         ImGuiWindowFlags_NoSavedSettings |
@@ -243,6 +333,7 @@ void BoonEditor::ViewportPanel::VisibilitySettings(float posX, float posY, float
 
     ImGui::TextUnformatted("Visibility Settings");
     ImGui::Separator();
+
     ImGui::TextUnformatted("Layers");
 
     bool isSet = !(m_Settings.DebugRenderLayers & DebugRenderLayer::Disabled);

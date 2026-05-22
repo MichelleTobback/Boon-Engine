@@ -69,6 +69,15 @@ namespace Boon
             for (uint32_t i = 0; i < clipCount; ++i)
             {
                 SpriteAnimClip clip{};
+
+                const uint32_t nameLength = buffer.Read<uint32_t>(cursor);
+                if (nameLength > 0)
+                {
+                    clip.Name.resize(nameLength);
+                    buffer.ReadRaw(clip.Name.data(), nameLength, cursor);
+                }
+
+                clip.FPS = buffer.Read<float>(cursor);
                 clip.Speed = buffer.Read<float>(cursor);
 
                 const uint32_t count = buffer.Read<uint32_t>(cursor);
@@ -101,6 +110,12 @@ namespace Boon
 
             for (const auto& clip : clips)
             {
+                out.Write<uint32_t>(static_cast<uint32_t>(clip.Name.size()));
+
+                if (!clip.Name.empty())
+                    out.WriteRaw(clip.Name.data(), clip.Name.size());
+
+                out.Write<float>(clip.FPS);
                 out.Write<float>(clip.Speed);
                 out.Write<uint32_t>(static_cast<uint32_t>(clip.Frames.size()));
                 out.WriteRaw(clip.Frames.data(), clip.Frames.size() * sizeof(int));

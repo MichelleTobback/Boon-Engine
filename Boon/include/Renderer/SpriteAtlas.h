@@ -1,47 +1,45 @@
 ﻿#pragma once
+
 #include "Asset/AssetRef.h"
 #include "Asset/TextureAsset.h"
 
 #include <glm/glm.hpp>
+
 #include <memory>
-#include <vector>
 #include <queue>
+#include <string>
+#include <string_view>
+#include <vector>
+#include <algorithm>
 
 namespace Boon
 {
-    // ---------------------------
-    // SpriteFrame data
-    // ---------------------------
     struct SpriteFrame
     {
-        glm::vec2 UV{0.f, 0.f};
-        glm::vec2 Size{1.f, 1.f};
-        float FrameTime;
+        glm::vec2 UV{ 0.0f, 0.0f };
+        glm::vec2 Size{ 1.0f, 1.0f };
     };
 
     class SpriteAtlas;
 
-    // ---------------------------
-    // Animation clip referencing
-    // stable frame IDs
-    // ---------------------------
     struct SpriteAnimClip
     {
+        std::string Name = "Clip";
+        float FPS = 12.0f;
         float Speed = 1.0f;
+
+        // Kept for compatibility with older code.
+        // Runtime/editor code should not rely on this.
         SpriteAtlas* pAtlas = nullptr;
 
-        // Stores STABLE IDs, NOT vector indices
+        // Stable frame IDs, not vector indices.
         std::vector<int> Frames;
     };
 
-    // ---------------------------
-    // Internal storage: each frame
-    // also carries a stable ID
-    // ---------------------------
     struct FrameEntry
     {
-        int stableId{-1};   // never changes during lifetime
-        SpriteFrame frame;  // actual data
+        int stableId = -1;
+        SpriteFrame frame;
     };
 
     class Texture2D;
@@ -57,21 +55,20 @@ namespace Boon
         SpriteAtlas& operator=(const SpriteAtlas&) = delete;
         SpriteAtlas& operator=(SpriteAtlas&&) = delete;
 
-    public:
-        // ---------------------------
-        // Texture
-        // ---------------------------
-        inline void SetTexture(const AssetRef<Texture2DAsset>& tex) { m_pTexture = tex; }
-        inline const AssetRef<Texture2DAsset>& GetTexture() const { return m_pTexture; }
-
-        // ---------------------------
-        // Frame Management (Stable IDs)
-        // ---------------------------
-
-        // Add frame, return stableId
-        inline int AddSpriteFrame(const SpriteFrame& frame)
+        void SetTexture(const AssetRef<Texture2DAsset>& texture)
         {
-            int id;
+            m_pTexture = texture;
+        }
+
+        const AssetRef<Texture2DAsset>& GetTexture() const
+        {
+            return m_pTexture;
+        }
+
+        int AddSpriteFrame(const SpriteFrame& frame)
+        {
+            int id = -1;
+
             if (!m_FreeIds.empty())
             {
                 id = m_FreeIds.front();
@@ -80,35 +77,32 @@ namespace Boon
             else
             {
                 id = m_NextId++;
-                m_IdToIndex.resize(m_NextId, -1);
+                m_IdToIndex.resize(static_cast<size_t>(m_NextId), -1);
             }
 
-            int index = (int)m_Frames.size();
+            const int index = static_cast<int>(m_Frames.size());
 
-            // Store frame
             m_Frames.push_back(FrameEntry{ id, frame });
-
-            // Map stable ID → index
-            m_IdToIndex[id] = index;
+            m_IdToIndex[static_cast<size_t>(id)] = index;
 
             return id;
         }
 
-        inline bool AddSpriteFrameWithId(int stableId, const SpriteFrame& frame)
+        bool AddSpriteFrameWithId(int stableId, const SpriteFrame& frame)
         {
             if (stableId < 0)
                 return false;
 
-            if ((size_t)stableId >= m_IdToIndex.size())
-                m_IdToIndex.resize((size_t)stableId + 1, -1);
+            if (static_cast<size_t>(stableId) >= m_IdToIndex.size())
+                m_IdToIndex.resize(static_cast<size_t>(stableId) + 1, -1);
 
-            if (m_IdToIndex[stableId] != -1)
+            if (m_IdToIndex[static_cast<size_t>(stableId)] != -1)
                 return false;
 
             const int index = static_cast<int>(m_Frames.size());
 
             m_Frames.push_back(FrameEntry{ stableId, frame });
-            m_IdToIndex[stableId] = index;
+            m_IdToIndex[static_cast<size_t>(stableId)] = index;
 
             if (stableId >= m_NextId)
                 m_NextId = stableId + 1;
@@ -116,105 +110,183 @@ namespace Boon
             return true;
         }
 
-        // Remove frame by stable ID
-        inline void RemoveSpriteFrame(int stableId)
+        void RemoveSpriteFrame(int stableId)
         {
-            int index = m_IdToIndex[stableId];
-            if (index < 0 || index >= (int)m_Frames.size())
+            if (!Exists(stableId))
                 return;
 
-            int lastIndex = (int)m_Frames.size() - 1;
+            const int index = m_IdToIndex[static_cast<size_t>(stableId)];
+            const int lastIndex = static_cast<int>(m_Frames.size()) - 1;
 
-            // swap with last
-            std::swap(m_Frames[index], m_Frames[lastIndex]);
+            if (index != lastIndex)
+            {
+                std::swap(m_Frames[index], m_Frames[lastIndex]);
 
-            // fix moved element's index
-            int movedId = m_Frames[index].stableId;
-            m_IdToIndex[movedId] = index;
+                const int movedId = m_Frames[index].stableId;
+                m_IdToIndex[static_cast<size_t>(movedId)] = index;
+            }
 
-            // shrink vector
             m_Frames.pop_back();
 
-            // free the ID
-            m_IdToIndex[stableId] = -1;
+            m_IdToIndex[static_cast<size_t>(stableId)] = -1;
             m_FreeIds.push(stableId);
+
+            // Remove deleted frame references from clips.
+            for (SpriteAnimClip& clip : m_Clips)
+            {
+                clip.Frames.erase(
+                    std::remove(clip.Frames.begin(), clip.Frames.end(), stableId),
+                    clip.Frames.end()
+                );
+            }
         }
 
-        inline bool Exists(int stableId) const
+        bool Exists(int stableId) const
         {
-            if (stableId >= m_IdToIndex.size())
+            if (stableId < 0)
                 return false;
 
-            return m_IdToIndex[stableId] > -1;
+            if (static_cast<size_t>(stableId) >= m_IdToIndex.size())
+                return false;
+
+            return m_IdToIndex[static_cast<size_t>(stableId)] != -1;
         }
 
-        // Modify existing frame
-        inline void SetSpriteFrame(int stableId, const SpriteFrame& frame)
+        void SetSpriteFrame(int stableId, const SpriteFrame& frame)
         {
+            if (!Exists(stableId))
+                return;
 
-            int index = m_IdToIndex[stableId];
+            const int index = m_IdToIndex[static_cast<size_t>(stableId)];
+
             m_Frames[index].stableId = stableId;
             m_Frames[index].frame = frame;
         }
 
-        inline void SetOrAddSpriteFrame(int stableId, const SpriteFrame& frame)
+        void SetOrAddSpriteFrame(int stableId, const SpriteFrame& frame)
         {
             if (Exists(stableId))
                 SetSpriteFrame(stableId, frame);
-
             else
                 AddSpriteFrameWithId(stableId, frame);
         }
 
-        // Access frame by stable ID
-        inline const SpriteFrame& GetSpriteFrame(int stableId) const
+        const SpriteFrame& GetSpriteFrame(int stableId) const
         {
-            int index = m_IdToIndex.at(stableId);
+            const int index = m_IdToIndex.at(static_cast<size_t>(stableId));
             return m_Frames[index].frame;
         }
 
-        // Access raw entries (if needed)
-        std::vector<FrameEntry>& GetFrameEntries() { return m_Frames; }
-        const std::vector<FrameEntry>& GetFrameEntries() const { return m_Frames; }
-        size_t GetFrameCount() const { return m_Frames.size(); }
+        SpriteFrame& GetSpriteFrameMutable(int stableId)
+        {
+            const int index = m_IdToIndex.at(static_cast<size_t>(stableId));
+            return m_Frames[index].frame;
+        }
 
-        // Get all valid stable IDs
-        inline std::vector<int> GetAllFrameIDs() const
+        std::vector<FrameEntry>& GetFrameEntries()
+        {
+            return m_Frames;
+        }
+
+        const std::vector<FrameEntry>& GetFrameEntries() const
+        {
+            return m_Frames;
+        }
+
+        size_t GetFrameCount() const
+        {
+            return m_Frames.size();
+        }
+
+        std::vector<int> GetAllFrameIDs() const
         {
             std::vector<int> ids;
             ids.reserve(m_Frames.size());
-            for (const auto& entry : m_Frames)
+
+            for (const FrameEntry& entry : m_Frames)
                 ids.push_back(entry.stableId);
+
             return ids;
         }
 
-        // ---------------------------
-        // Animation Clip Management
-        // ---------------------------
-        inline void AddClip(const SpriteAnimClip& clip) { m_Clips.push_back(clip); }
-        inline void RemoveClip(int index) { m_Clips.erase(m_Clips.begin() + index); }
-        inline const std::vector<SpriteAnimClip>& GetClips() const { return m_Clips; }
-        inline SpriteAnimClip& GetClip(int index) { return m_Clips[index]; }
+        int AddClip(const SpriteAnimClip& clip)
+        {
+            SpriteAnimClip copy = clip;
+            copy.pAtlas = this;
+
+            m_Clips.push_back(copy);
+            return static_cast<int>(m_Clips.size()) - 1;
+        }
+
+        void RemoveClip(int index)
+        {
+            if (!IsValidClip(index))
+                return;
+
+            m_Clips.erase(m_Clips.begin() + index);
+        }
+
+        bool IsValidClip(int index) const
+        {
+            return index >= 0 && index < static_cast<int>(m_Clips.size());
+        }
+
+        size_t GetClipCount() const
+        {
+            return m_Clips.size();
+        }
+
+        const std::vector<SpriteAnimClip>& GetClips() const
+        {
+            return m_Clips;
+        }
+
+        std::vector<SpriteAnimClip>& GetClips()
+        {
+            return m_Clips;
+        }
+
+        SpriteAnimClip& GetClip(int index)
+        {
+            return m_Clips[index];
+        }
+
+        const SpriteAnimClip& GetClip(int index) const
+        {
+            return m_Clips[index];
+        }
+
+        int FindClipIndex(std::string_view name) const
+        {
+            for (int i = 0; i < static_cast<int>(m_Clips.size()); ++i)
+            {
+                if (m_Clips[i].Name == name)
+                    return i;
+            }
+
+            return -1;
+        }
+
+        SpriteAnimClip* FindClip(std::string_view name)
+        {
+            const int index = FindClipIndex(name);
+            return index >= 0 ? &m_Clips[index] : nullptr;
+        }
+
+        const SpriteAnimClip* FindClip(std::string_view name) const
+        {
+            const int index = FindClipIndex(name);
+            return index >= 0 ? &m_Clips[index] : nullptr;
+        }
 
     private:
-        // ---------------------------
-        // Members
-        // ---------------------------
         AssetRef<Texture2DAsset> m_pTexture;
 
-        // Vector of frames (packed)
         std::vector<FrameEntry> m_Frames;
-
-        // stableId → vector index (size grows when needed)
         std::vector<int> m_IdToIndex;
-
-        // IDs that can be reused
         std::queue<int> m_FreeIds;
-
-        // Next ID to assign
         int m_NextId = 0;
 
-        // Animation clips
         std::vector<SpriteAnimClip> m_Clips;
     };
 }

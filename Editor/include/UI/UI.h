@@ -679,8 +679,8 @@ namespace BoonEditor
             std::string currentLabel;
             if (handle != 0 && AssetDatabase::Get().Exists(handle))
             {
-                std::string fullPath = AssetDatabase::Get().GetPath(handle);
-                currentLabel = std::filesystem::path(fullPath).filename().string();
+                const std::filesystem::path& fullPath = AssetDatabase::Get().GetPath(handle);
+                currentLabel = fullPath.filename().string();
             }
             else
             {
@@ -791,7 +791,7 @@ namespace BoonEditor
                     if (assetType != meta.type)
                         continue;
 
-                    std::string path = AssetDatabase::Get().GetPath(meta.uuid);
+                    std::string path = AssetDatabase::Get().GetPath(meta.uuid).string();
 
                     if (!ContainsCaseInsensitive(path, filter))
                         continue;

@@ -1,31 +1,30 @@
 #pragma once
+
 #include <Core/BoonEditor.h>
+
 #include "Panels/EditorPanel.h"
-#include "Renderer/SceneRenderer.h"
-#include "Core/EditorCamera.h"
+#include "Panels/IViewportCanvasRenderer.h"
 
 #include <Core/ServiceLocator.h>
 #include <Asset/AssetLibrary.h>
-#include <Scene/Scene.h>
-#include <Scene/SceneSerializer.h>
 
 #include "UI/UI.h"
-#include <vector>
+
 #include <glm/glm.hpp>
 
 namespace BoonEditor
 {
     class ViewportPanel;
 
-    class AssetEditorBase : public EditorPanel
+    class AssetEditorBase : public EditorPanel, public IViewportCanvasRenderer
     {
     public:
         AssetEditorBase(const std::string& name, EditorContext* pContext)
-            : EditorPanel(name, pContext) { }
+            : EditorPanel(name, pContext) {
+        }
 
         virtual void RenderUI() override;
 
-        inline Scene& GetScene() { return *m_PrevScene->Get(); }
         inline ViewportPanel* GetViewport() const { return m_pViewport; }
 
     protected:
@@ -34,12 +33,9 @@ namespace BoonEditor
         virtual void RenderToolbar() {}
         virtual void RenderMainArea() {}
 
-        glm::vec3 ScreenToWorld(const glm::vec2& mousePos);
-
     private:
         friend class AssetEditorPanel;
 
-        SceneContext* m_PrevScene = nullptr;
         ViewportPanel* m_pViewport = nullptr;
     };
 
@@ -60,7 +56,6 @@ namespace BoonEditor
 
         virtual void RenderToolbar() override {}
         virtual void RenderMainArea() override {}
-        virtual void BuildPreviewScene(Scene& scene) {}
 
         AssetRef<TAsset> m_Asset{};
 
@@ -69,7 +64,8 @@ namespace BoonEditor
 
     template<typename TAsset>
     inline AssetEditor<TAsset>::AssetEditor(const std::string& name, EditorContext* pContext)
-        : AssetEditorBase(name, pContext){ }
+        : AssetEditorBase(name, pContext) {
+    }
 
     template<typename TAsset>
     inline void AssetEditor<TAsset>::Update()
@@ -79,7 +75,11 @@ namespace BoonEditor
     template<typename TAsset>
     inline void AssetEditor<TAsset>::OnRenderUI()
     {
-        if (!m_Asset.IsValid()) { ImGui::Text("Invalid Asset"); return; }
+        if (!m_Asset.IsValid())
+        {
+            ImGui::Text("Invalid Asset");
+            return;
+        }
 
         RenderToolbar();
         RenderMainArea();
@@ -89,6 +89,7 @@ namespace BoonEditor
     inline bool AssetEditor<TAsset>::SetContext(AssetHandle handle)
     {
         AssetLibrary& lib = ServiceLocator::Get<AssetLibrary>();
+
         const AssetMeta* pMeta = lib.GetMeta(handle);
         if (!pMeta)
             return false;
@@ -97,9 +98,6 @@ namespace BoonEditor
             return false;
 
         m_Asset = AssetRef<TAsset>(handle);
-        SceneSerializer ser(GetScene());
-        ser.Clear();
-        BuildPreviewScene(GetScene());
         return true;
     }
 }

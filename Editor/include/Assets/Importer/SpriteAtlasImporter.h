@@ -57,7 +57,6 @@ namespace Boon
                     frame.UV.y = entry["y"];
                     frame.Size.x = entry["w"];
                     frame.Size.y = entry["h"];
-                    frame.FrameTime = entry.contains("time") ? entry["time"].get<float>() : 0.0f;
 
                     const int newId = instance->AddSpriteFrame(frame);
                     const int oldId = entry.contains("id") ? entry["id"].get<int>() : std::stoi(key);
@@ -69,18 +68,18 @@ namespace Boon
             {
                 const nlohmann::json& clipsJson = j["clips"];
 
-                for (size_t i = 0; i < clipsJson.size(); ++i)
-                    instance->AddClip(SpriteAnimClip());
-
-                int current = 0;
                 for (const nlohmann::json& entry : clipsJson)
                 {
-                    const int clipId = entry.contains("idx") ? entry["idx"].get<int>() : current;
-                    SpriteAnimClip& clip = instance->GetClip(clipId);
-                    clip.Speed = entry.contains("speed") ? entry["speed"].get<float>() : 1.0f;
+                    SpriteAnimClip clip{};
+
+                    clip.Name = entry.value("name", "Clip");
+                    clip.FPS = entry.value("fps", 12.f);
+                    clip.Speed = entry.value("speed", 1.f);
                     clip.pAtlas = instance.get();
 
-                    std::vector<int> frames = entry["frames"].get<std::vector<int>>();
+                    std::vector<int> frames =
+                        entry.value("frames", std::vector<int>{});
+
                     clip.Frames.reserve(frames.size());
 
                     for (int oldId : frames)
@@ -89,7 +88,7 @@ namespace Boon
                         clip.Frames.push_back(it == oldToNew.end() ? oldId : it->second);
                     }
 
-                    ++current;
+                    instance->AddClip(clip);
                 }
             }
 
@@ -136,7 +135,6 @@ namespace Boon
                 frameJson["y"] = entry.frame.UV.y;
                 frameJson["w"] = entry.frame.Size.x;
                 frameJson["h"] = entry.frame.Size.y;
-                frameJson["time"] = entry.frame.FrameTime;
 
                 spritesJson[std::to_string(entry.stableId)] = frameJson;
             }
@@ -144,13 +142,19 @@ namespace Boon
             j["sprites"] = spritesJson;
 
             nlohmann::json clipsJson = nlohmann::json::array();
+
             for (const SpriteAnimClip& clip : atlas->GetClips())
             {
                 nlohmann::json clipJson;
+
+                clipJson["name"] = clip.Name;
+                clipJson["fps"] = clip.FPS;
                 clipJson["speed"] = clip.Speed;
                 clipJson["frames"] = clip.Frames;
+
                 clipsJson.push_back(clipJson);
             }
+
             j["clips"] = clipsJson;
 
             std::filesystem::create_directories(filePath.parent_path());

@@ -19,9 +19,9 @@ namespace BoonEditor
 	public:
 		static AssetDatabase& Get();
 
-		void RegisterAsset(const std::string& path, AssetHandle handle);
+		void RegisterAsset(const std::string& path, AssetHandle handle, int rootIndex);
 		AssetHandle GetHandle(const std::string& path) const;
-		const std::string& GetPath(AssetHandle handle) const;
+		const std::filesystem::path& GetPath(AssetHandle handle) const;
 
 		template<typename TAsset>
 		AssetRef<TAsset> Load(const std::string& path)
@@ -32,7 +32,7 @@ namespace BoonEditor
 		template<typename TAsset>
 		bool Export(AssetHandle handle)
 		{
-			const std::string& path = m_HandleToPath.at(handle);
+			const std::filesystem::path& path = m_HandleToPath.at(handle).SourcePath();
 			return ServiceLocator::Get<AssetImporterRegistry>().Export<TAsset>(path, handle);
 		}
 
@@ -52,7 +52,40 @@ namespace BoonEditor
 		AssetDatabase();
 		void Init();
 
-		std::unordered_map<AssetHandle, std::string> m_HandleToPath;
+		struct Path
+		{
+			int Root;
+			std::filesystem::path Path;
+
+			std::filesystem::path FullPath() const 
+			{
+				if (Path.is_absolute())
+					return Path;
+
+				AssetLibrary& assetLib = ServiceLocator::Get<AssetLibrary>();
+				const auto& roots = assetLib.GetRuntimeAssetRoots();
+				if (Root >= roots.size())
+					return Path;
+
+				return roots[Root] / Path;
+			}
+
+			std::filesystem::path SourcePath() const
+			{
+				if (Path.is_absolute())
+					return Path;
+
+				AssetImporterRegistry& importer = ServiceLocator::Get<AssetImporterRegistry>();
+
+				const auto& roots = importer.GetAssetRoots();
+				if (Root >= roots.size())
+					return Path;
+
+				return roots[Root].sourceRoot / Path;
+			}
+		};
+
+		std::unordered_map<AssetHandle, Path> m_HandleToPath;
 		std::unordered_map<std::string, AssetHandle> m_PathToHandle;
 		bool m_Dirty = false;
 
