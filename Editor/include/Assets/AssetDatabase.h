@@ -6,11 +6,13 @@
 #include "Asset/AssetLibrary.h"
 #include "Assets/Importer/AssetImporterRegistry.h"
 
+#include <filesystem>
 #include <functional>
 #include <string>
 #include <unordered_map>
 
 using namespace Boon;
+namespace fs = std::filesystem;
 
 namespace BoonEditor
 {
@@ -36,6 +38,22 @@ namespace BoonEditor
 			return ServiceLocator::Get<AssetImporterRegistry>().Export<TAsset>(path, handle);
 		}
 
+		void Remove(const fs::path& path);
+		void Remove(AssetHandle asset);
+		void RemoveRecursively(const fs::path& folder);
+
+		AssetHandle Move(const fs::path& from, const fs::path& to);
+		void MoveRecursively(const fs::path& from, const fs::path& to);
+
+		//returns new handle
+		AssetHandle Copy(const fs::path& from, const fs::path& to);
+		AssetHandle Copy(AssetHandle asset, const fs::path& to);
+		std::vector<AssetHandle> CopyRecursively(const std::filesystem::path& from, const std::filesystem::path& to);
+
+		AssetHandle Rename(const std::filesystem::path& from, const std::string& newName);
+		AssetHandle Rename(AssetHandle asset, const std::string& newName);
+		void RenameFolder(const std::filesystem::path& from, const std::string& newName);
+
 		bool Exists(AssetHandle handle) const;
 		bool Exists(const std::string& path) const;
 
@@ -43,6 +61,7 @@ namespace BoonEditor
 
 		void ForEachEntry(const std::function<void(AssetHandle, const std::string&)>& fn);
 
+		void MarkDirty() { m_Dirty = true; }
 		bool IsDirty() const { return m_Dirty; }
 		void ClearDirty() { m_Dirty = false; }
 
@@ -84,6 +103,8 @@ namespace BoonEditor
 				return roots[Root].sourceRoot / Path;
 			}
 		};
+
+		void RebuildAndSaveManifestForRoot(int rootIndex);
 
 		std::unordered_map<AssetHandle, Path> m_HandleToPath;
 		std::unordered_map<std::string, AssetHandle> m_PathToHandle;

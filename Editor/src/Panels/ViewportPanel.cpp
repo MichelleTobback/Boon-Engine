@@ -148,7 +148,7 @@ void BoonEditor::ViewportPanel::OnRenderUI()
         ImGuiWindowFlags_NoScrollbar |
         ImGuiWindowFlags_NoScrollWithMouse;
 
-    ImGui::Begin("Viewport", nullptr, flags);
+    //ImGui::Begin("Viewport", nullptr, flags);
 
     constexpr float toolbarHeight = 22.0f;
 
@@ -156,7 +156,6 @@ void BoonEditor::ViewportPanel::OnRenderUI()
 
     if (fullAvail.x < 100.0f || fullAvail.y < 100.0f)
     {
-        ImGui::End();
         ImGui::PopStyleVar();
         return;
     }
@@ -300,7 +299,7 @@ void BoonEditor::ViewportPanel::OnRenderUI()
         VisibilitySettings(panelX, panelY, panelWidth);
     }
 
-    ImGui::End();
+    //ImGui::End();
     ImGui::PopStyleVar();
 }
 

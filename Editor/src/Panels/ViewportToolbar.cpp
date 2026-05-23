@@ -52,8 +52,8 @@ bool BoonEditor::ViewportToolbar::OnRender(const glm::vec2& boundsMin, const glm
         ImGuiWindowFlags_NoScrollWithMouse;
 
     //--------------------------------------------------------------
-// MIDDLE TOOLBAR (Play / Stop)
-//--------------------------------------------------------------
+    // MIDDLE TOOLBAR (Play / Stop)
+    //--------------------------------------------------------------
     {
         const float numberOfButtons = 1.0f;
 

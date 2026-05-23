@@ -8,15 +8,38 @@
 #include <Asset/TilemapAsset.h>
 #include <Asset/SpriteAtlasAsset.h>
 #include <Core/Application.h>
+#include <Core/EditorContext.h>
+#include <Command/EditorCommandQueue.h>
 
 #include <algorithm>
 #include <cstdio>
+#include <cstring>
+#include <filesystem>
+#include <functional>
+#include <string>
+#include <system_error>
+#include <vector>
 
 using namespace BoonEditor;
 namespace fs = std::filesystem;
 
 namespace
 {
+    struct FolderDragPayload
+    {
+        char Path[512]{};
+    };
+
+    constexpr const char* FolderPayloadName = "CONTENT_BROWSER_FOLDER";
+
+    enum class PendingCreateType
+    {
+        None,
+        Folder,
+        SpriteAtlas,
+        Tilemap
+    };
+
     ImU32 Col(ImGuiCol idx)
     {
         return ImGui::GetColorU32(ImGui::GetStyleColorVec4(idx));
@@ -27,11 +50,6 @@ namespace
         ImVec4 c = ImGui::GetStyleColorVec4(ImGuiCol_CheckMark);
         c.w *= alpha;
         return ImGui::GetColorU32(c);
-    }
-
-    ImU32 Surface()
-    {
-        return Col(ImGuiCol_FrameBg);
     }
 
     ImU32 SurfaceHover()
@@ -47,6 +65,65 @@ namespace
     ImU32 TextMuted()
     {
         return Col(ImGuiCol_TextDisabled);
+    }
+
+    std::string NormalizePathString(const fs::path& path)
+    {
+        return path.lexically_normal().generic_string();
+    }
+
+    bool IsSamePath(const fs::path& a, const fs::path& b)
+    {
+        std::error_code ecA;
+        std::error_code ecB;
+
+        fs::path absA = fs::weakly_canonical(a, ecA);
+        fs::path absB = fs::weakly_canonical(b, ecB);
+
+        if (ecA)
+            absA = a.lexically_normal();
+
+        if (ecB)
+            absB = b.lexically_normal();
+
+        return NormalizePathString(absA) == NormalizePathString(absB);
+    }
+
+    bool IsPathInside(const fs::path& child, const fs::path& parent)
+    {
+        std::error_code ec;
+
+        fs::path rel = fs::relative(child.lexically_normal(), parent.lexically_normal(), ec);
+
+        if (ec || rel.empty())
+            return false;
+
+        const std::string relString = rel.generic_string();
+
+        return relString != "." && !relString.starts_with("..");
+    }
+
+    bool CanMoveFolderTo(const fs::path& sourceFolder, const fs::path& destinationFolder)
+    {
+        if (sourceFolder.empty() || destinationFolder.empty())
+            return false;
+
+        if (!fs::exists(sourceFolder) || !fs::is_directory(sourceFolder))
+            return false;
+
+        if (IsSamePath(sourceFolder, destinationFolder))
+            return false;
+
+        if (IsPathInside(destinationFolder, sourceFolder))
+            return false;
+
+        const fs::path destination =
+            destinationFolder / sourceFolder.filename();
+
+        if (IsSamePath(sourceFolder, destination))
+            return false;
+
+        return true;
     }
 
     const char* GetAssetIcon(const std::string& path)
@@ -65,17 +142,87 @@ namespace
         return ICON_FA_FILE;
     }
 
-    bool IconButton(
-        const char* icon,
-        const char* tooltip,
-        ImVec2 size = ImVec2(28.0f, 28.0f))
+    const char* GetPendingCreateIcon(PendingCreateType type)
     {
-        bool pressed = ImGui::Button(icon, size);
+        switch (type)
+        {
+        case PendingCreateType::Folder:
+            return ICON_FA_FOLDER;
+        case PendingCreateType::SpriteAtlas:
+            return ICON_FA_IMAGES;
+        case PendingCreateType::Tilemap:
+            return ICON_FA_TABLE_CELLS;
+        default:
+            return ICON_FA_FILE;
+        }
+    }
 
-        if (ImGui::IsItemHovered() && tooltip)
-            ImGui::SetTooltip("%s", tooltip);
+    std::string GetPendingCreateExtension(PendingCreateType type)
+    {
+        switch (type)
+        {
+        case PendingCreateType::SpriteAtlas:
+            return ".bsa";
+        case PendingCreateType::Tilemap:
+            return ".btm";
+        default:
+            return "";
+        }
+    }
 
-        return pressed;
+    std::string SanitizeFileName(std::string name)
+    {
+        for (char& c : name)
+        {
+            switch (c)
+            {
+            case '\\':
+            case '/':
+            case ':':
+            case '*':
+            case '?':
+            case '"':
+            case '<':
+            case '>':
+            case '|':
+                c = '_';
+                break;
+            default:
+                break;
+            }
+        }
+
+        while (!name.empty() && (name.back() == ' ' || name.back() == '.'))
+            name.pop_back();
+
+        while (!name.empty() && name.front() == ' ')
+            name.erase(name.begin());
+
+        return name;
+    }
+
+    std::string MakeUniqueName(const fs::path& folder, const std::string& baseName, const std::string& extension)
+    {
+        std::string cleanBase = SanitizeFileName(baseName);
+
+        if (cleanBase.empty())
+            cleanBase = "NewAsset";
+
+        fs::path candidate = folder / (cleanBase + extension);
+
+        if (!fs::exists(candidate))
+            return cleanBase;
+
+        for (int i = 1; i < 10000; ++i)
+        {
+            std::string numbered = cleanBase + "_" + std::to_string(i);
+            candidate = folder / (numbered + extension);
+
+            if (!fs::exists(candidate))
+                return numbered;
+        }
+
+        return cleanBase + "_copy";
     }
 
     void DrawPanelTitle(const char* icon, const char* title)
@@ -102,6 +249,133 @@ namespace
         }
 
         return "..";
+    }
+
+    void DrawScaledIcon(
+        ImDrawList* drawList,
+        const char* icon,
+        const ImVec2& thumbMin,
+        const ImVec2& thumbMax,
+        float iconSize,
+        ImU32 color)
+    {
+        const float iconScale = std::clamp(iconSize / 64.0f, 1.8f, 12.5f);
+        ImFont* font = ImGui::GetFont();
+        const float fontSize = ImGui::GetFontSize() * iconScale;
+        const ImVec2 baseIconSize = ImGui::CalcTextSize(icon);
+
+        drawList->AddText(
+            font,
+            fontSize,
+            ImVec2(
+                thumbMin.x + (thumbMax.x - thumbMin.x - baseIconSize.x * iconScale) * 0.5f,
+                thumbMin.y + (thumbMax.y - thumbMin.y - ImGui::GetFontSize() * iconScale) * 0.42f),
+            color,
+            icon);
+    }
+
+    void SetFolderDragPayload(const fs::path& folderPath)
+    {
+        FolderDragPayload payload{};
+
+        const std::string path = folderPath.lexically_normal().string();
+        strcpy_s(payload.Path, sizeof(payload.Path), path.c_str());
+
+        ImGui::SetDragDropPayload(FolderPayloadName, &payload, sizeof(payload));
+    }
+
+    bool FindAssetLogicalPath(AssetHandle handle, std::string& outPath)
+    {
+        outPath.clear();
+
+        AssetDatabase::Get().ForEachEntry(
+            [&outPath, handle](AssetHandle candidate, const std::string& candidatePath)
+            {
+                if (!outPath.empty())
+                    return;
+
+                if (candidate == handle)
+                    outPath = candidatePath;
+            });
+
+        return !outPath.empty();
+    }
+
+    fs::path AssetLogicalToSourcePath(const std::string& logicalPath)
+    {
+        const auto& roots =
+            ServiceLocator::Get<AssetImporterRegistry>().GetAssetRoots();
+
+        if (roots.empty())
+            return {};
+
+        return (roots[0].sourceRoot / logicalPath).lexically_normal();
+    }
+
+    bool MoveAssetHandleToFolder(EditorCommandQueue& cmd, AssetHandle handle, const fs::path& destinationFolder)
+    {
+        std::string logicalPath;
+
+        if (!FindAssetLogicalPath(handle, logicalPath))
+            return false;
+
+        fs::path source = logicalPath;
+
+        fs::path destination =
+            destinationFolder / source.filename();
+
+        if (source == destination)
+            return false;
+
+        cmd.Push<ActionCommand>(
+            [source, destination]
+            {
+                AssetDatabase::Get().Move(source, destination);
+            });
+
+        return true;
+    }
+
+    bool MoveFolderToFolder(EditorCommandQueue& cmd, const fs::path& sourceFolder, const fs::path& destinationFolder)
+    {
+        if (!CanMoveFolderTo(sourceFolder, destinationFolder))
+            return false;
+
+        const fs::path destination =
+            destinationFolder / sourceFolder.filename();
+
+        cmd.Push<ActionCommand>([sourceFolder, destination]
+            {
+                AssetDatabase::Get().MoveRecursively(sourceFolder, destination);
+            });
+        return true;
+    }
+
+    bool AcceptContentDropToFolder(EditorCommandQueue& cmd, const fs::path& destinationFolderFull, const fs::path& destinationFolderLogical)
+    {
+        bool changed = false;
+
+        if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(FolderPayloadName))
+        {
+            const auto* data =
+                static_cast<const FolderDragPayload*>(payload->Data);
+
+            if (data && data->Path[0] != '\0')
+                changed = MoveFolderToFolder(cmd, data->Path, destinationFolderFull);
+        }
+
+        if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_HANDLE"))
+        {
+            if (payload->DataSize == sizeof(AssetHandle))
+            {
+                const AssetHandle handle =
+                    *static_cast<const AssetHandle*>(payload->Data);
+
+                changed = MoveAssetHandleToFolder(cmd, handle, destinationFolderLogical) || changed;
+            }
+        }
+
+        return changed;
     }
 }
 
@@ -133,48 +407,124 @@ void ContentBrowser::Update()
 
 void ContentBrowser::BuildFolderTree()
 {
-    m_RootFolder.children.clear();
-    m_RootFolder.assets.clear();
+    const std::string previousFolder =
+        m_CurrentFolder
+        ? NormalizePathString(m_CurrentFolder->logicalPath)
+        : std::string{};
+
+    std::function<void(FolderNode*)> deleteChildren =
+        [&](FolderNode* node)
+        {
+            if (!node)
+                return;
+
+            for (auto& [name, child] : node->children)
+            {
+                deleteChildren(child);
+                delete child;
+            }
+
+            node->children.clear();
+            node->assets.clear();
+        };
+
+    deleteChildren(&m_RootFolder);
 
     const RuntimeConfig& config = Application::Get().GetDescriptor();
 
     m_root = config.AssetsRoot;
     m_RootFolder.name = "Content";
     m_RootFolder.fullPath = m_root.string();
-
-    m_CurrentFolder = &m_RootFolder;
+    m_RootFolder.logicalPath = "";
 
     if (!fs::exists(m_root))
+    {
         fs::create_directories(m_root);
+        AssetDatabase::Get().MarkDirty();
+    }
 
     BuildFoldersFromDisk(m_root.string(), &m_RootFolder);
 
-    auto& database = AssetDatabase::Get();
-
-    database.ForEachEntry(
+    AssetDatabase::Get().ForEachEntry(
         [this](AssetHandle, const std::string& assetPath)
         {
             AddAssetToTree(assetPath);
         });
+
+    m_CurrentFolder = &m_RootFolder;
+
+    if (!previousFolder.empty())
+    {
+        std::function<FolderNode* (FolderNode*)> findByPath =
+            [&](FolderNode* node) -> FolderNode*
+            {
+                if (!node)
+                    return nullptr;
+
+                if (NormalizePathString(node->logicalPath) == previousFolder)
+                    return node;
+
+                for (auto& [name, child] : node->children)
+                {
+                    if (FolderNode* found = findByPath(child))
+                        return found;
+                }
+
+                return nullptr;
+            };
+
+        if (FolderNode* restored = findByPath(&m_RootFolder))
+            m_CurrentFolder = restored;
+    }
 }
 
-void ContentBrowser::BuildFoldersFromDisk(const std::string& path, FolderNode* parent)
+void ContentBrowser::BuildFoldersFromDisk(
+    const std::string& path,
+    FolderNode* parent)
 {
     if (!fs::exists(path))
         return;
 
+    std::vector<fs::path> folders;
+
     for (const auto& entry : fs::directory_iterator(path))
     {
-        if (!entry.is_directory())
-            continue;
+        if (entry.is_directory())
+            folders.push_back(entry.path());
+    }
 
-        const fs::path fullPath = entry.path();
-        const std::string name = fullPath.filename().string();
+    std::sort(
+        folders.begin(),
+        folders.end(),
+        [](const fs::path& a, const fs::path& b)
+        {
+            return a.filename().string() < b.filename().string();
+        });
 
-        FolderNode* node = new FolderNode(name, fullPath.string());
+    for (const auto& fullPath : folders)
+    {
+        const std::string name =
+            fullPath.filename().string();
+
+        std::string logical;
+
+        if (parent->logicalPath.empty())
+            logical = name;
+        else
+            logical =
+            (fs::path(parent->logicalPath) / name)
+            .generic_string();
+
+        FolderNode* node = new FolderNode(
+            name,
+            fullPath.string(),
+            logical);
+
         parent->children[name] = node;
 
-        BuildFoldersFromDisk(fullPath.string(), node);
+        BuildFoldersFromDisk(
+            fullPath.string(),
+            node);
     }
 }
 
@@ -187,7 +537,7 @@ void ContentBrowser::AddAssetToTree(const std::string& path)
 
     FolderNode* node = &m_RootFolder;
 
-    const fs::path parentPath = p.parent_path();
+    fs::path parentPath = p.parent_path();
 
     for (const auto& part : parentPath)
     {
@@ -204,14 +554,20 @@ void ContentBrowser::AddAssetToTree(const std::string& path)
         node = it->second;
     }
 
-    const std::string logicalPath = p.generic_string();
+    const std::string logical =
+        p.generic_string();
 
-    if (std::find(node->assets.begin(), node->assets.end(), logicalPath) == node->assets.end())
-        node->assets.push_back(logicalPath);
+    if (std::find(node->assets.begin(), node->assets.end(), logical) == node->assets.end())
+        node->assets.push_back(logical);
+
+    std::sort(node->assets.begin(), node->assets.end());
 }
 
 void ContentBrowser::CollectAssetsRecursive(FolderNode* node, std::vector<std::string>& out)
 {
+    if (!node)
+        return;
+
     for (const auto& asset : node->assets)
         out.push_back(asset);
 
@@ -349,8 +705,22 @@ void ContentBrowser::DrawFolderTree(FolderNode* node)
 
     ImGui::PopStyleColor(3);
 
-    if (ImGui::IsItemClicked())
+    if (ImGui::IsItemClicked(ImGuiMouseButton_Left) && !ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
         m_CurrentFolder = node;
+
+    if (ImGui::BeginDragDropTarget())
+    {
+        bool changed = AcceptContentDropToFolder(*GetContext().GetCommandQueue(), node->fullPath, node->logicalPath);
+
+        ImGui::EndDragDropTarget();
+
+        //if (changed)
+        //{
+        //    BuildFolderTree();
+        //    ImGui::PopStyleVar(3);
+        //    return;
+        //}
+    }
 
     if (open)
     {
@@ -370,6 +740,87 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
 
     static int desiredColumns = 10;
     desiredColumns = std::clamp(desiredColumns, 2, 20);
+
+    static PendingCreateType pendingCreateType = PendingCreateType::None;
+    static char pendingCreateName[128]{};
+    static bool focusPendingCreate = false;
+
+    bool rebuildAfterFrame = false;
+
+    auto refreshSoon = [&]()
+        {
+            //rebuildAfterFrame = true;
+        };
+
+    const auto cancelPendingCreate = [&]()
+        {
+            pendingCreateType = PendingCreateType::None;
+            std::memset(pendingCreateName, 0, sizeof(pendingCreateName));
+            focusPendingCreate = false;
+        };
+
+    const auto startPendingCreate = [&](PendingCreateType type, const char* defaultName)
+        {
+            pendingCreateType = type;
+            std::memset(pendingCreateName, 0, sizeof(pendingCreateName));
+
+            const std::string extension = GetPendingCreateExtension(type);
+            const std::string uniqueName = MakeUniqueName(folder->fullPath, defaultName, extension);
+
+            strcpy_s(pendingCreateName, sizeof(pendingCreateName), uniqueName.c_str());
+            focusPendingCreate = true;
+        };
+
+    const auto commitPendingCreate = [&]()
+        {
+            std::string name = SanitizeFileName(pendingCreateName);
+
+            if (name.empty())
+            {
+                cancelPendingCreate();
+                return;
+            }
+
+            const fs::path folderPath = folder->fullPath;
+
+            switch (pendingCreateType)
+            {
+            case PendingCreateType::Folder:
+            {
+                const std::string uniqueName = MakeUniqueName(folderPath, name, "");
+                fs::create_directories(folderPath / uniqueName);
+                AssetDatabase::Get().MarkDirty();
+                break;
+            }
+            case PendingCreateType::SpriteAtlas:
+            {
+                const std::string extension = GetPendingCreateExtension(pendingCreateType);
+                const std::string uniqueName = MakeUniqueName(folderPath, name, extension);
+
+                ServiceLocator::Get<AssetImporterRegistry>()
+                    .Export<SpriteAtlasAsset>(
+                        folderPath / (uniqueName + extension),
+                        0u);
+                break;
+            }
+            case PendingCreateType::Tilemap:
+            {
+                const std::string extension = GetPendingCreateExtension(pendingCreateType);
+                const std::string uniqueName = MakeUniqueName(folderPath, name, extension);
+
+                ServiceLocator::Get<AssetImporterRegistry>()
+                    .Export<TilemapAsset>(
+                        folderPath / (uniqueName + extension),
+                        0u);
+                break;
+            }
+            default:
+                break;
+            }
+
+            cancelPendingCreate();
+            refreshSoon();
+        };
 
     const float panelWidth = ImGui::GetContentRegionAvail().x;
 
@@ -448,7 +899,15 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
     else
         displayAssets = folder->assets;
 
-    if (displayAssets.empty())
+    const bool showFolders = m_SearchBuffer[0] == '\0';
+    const bool hasPendingCreate = pendingCreateType != PendingCreateType::None;
+
+    const bool hasContent =
+        hasPendingCreate ||
+        (showFolders && !folder->children.empty()) ||
+        !displayAssets.empty();
+
+    if (!hasContent)
     {
         ImGui::Dummy(ImVec2(0.0f, 48.0f));
 
@@ -457,7 +916,9 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
         const char* emptyText = ICON_FA_BOX_OPEN "  Empty folder";
         const ImVec2 textSize = ImGui::CalcTextSize(emptyText);
 
-        ImGui::SetCursorPosX(std::max(0.0f, (ImGui::GetContentRegionAvail().x - textSize.x) * 0.5f));
+        ImGui::SetCursorPosX(
+            std::max(0.0f, (ImGui::GetContentRegionAvail().x - textSize.x) * 0.5f));
+
         ImGui::TextUnformatted(emptyText);
 
         ImGui::PopStyleColor();
@@ -469,150 +930,392 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
         ImGuiTableFlags_SizingFixedFit |
         ImGuiTableFlags_NoHostExtendX;
 
-    if (!displayAssets.empty() && ImGui::BeginTable("##ContentGrid", columns, tableFlags))
+    if (hasContent && ImGui::BeginTable("##ContentGrid", columns, tableFlags))
     {
         for (int col = 0; col < columns; ++col)
             ImGui::TableSetupColumn(nullptr, ImGuiTableColumnFlags_WidthFixed, colWidth);
 
-        for (const std::string& assetPath : displayAssets)
+        if (hasPendingCreate)
         {
-            const std::string filename = fs::path(assetPath).filename().string();
-
-            if (m_SearchBuffer[0] != '\0')
-            {
-                std::string lowerFile = filename;
-                std::string lowerSearch = m_SearchBuffer;
-
-                std::transform(lowerFile.begin(), lowerFile.end(), lowerFile.begin(), ::tolower);
-                std::transform(lowerSearch.begin(), lowerSearch.end(), lowerSearch.begin(), ::tolower);
-
-                if (lowerFile.find(lowerSearch) == std::string::npos)
-                    continue;
-            }
-
-            ImGui::PushID(assetPath.c_str());
+            ImGui::PushID("##PendingCreateCard");
             ImGui::TableNextColumn();
 
             const float cellStartX = ImGui::GetCursorPosX();
             const float cellWidth = ImGui::GetColumnWidth();
 
-            AssetHandle h = AssetDatabase::Get().GetHandle(assetPath);
-            const bool selected = m_pSelectedAsset && m_pSelectedAsset->Get() == h;
-
-            AssetRef<Texture2DAsset> thumbnail = AssetDatabase::Get().GetThumbnail(h);
-
             const float cardWidth = iconSize;
-            const float cardHeight = iconSize + ImGui::GetTextLineHeight() * 2.4f;
-
+            const float cardHeight = iconSize + ImGui::GetTextLineHeight() * 2.8f;
             const float cardX = cellStartX + (cellWidth - cardWidth) * 0.5f;
+
             ImGui::SetCursorPosX(cardX);
 
             ImVec2 cardPos = ImGui::GetCursorScreenPos();
+            ImVec2 cardMax(cardPos.x + cardWidth, cardPos.y + cardHeight);
 
-            ImGui::InvisibleButton("##AssetCard", ImVec2(cardWidth, cardHeight));
-
-            const bool hovered = ImGui::IsItemHovered();
-            const bool pressed = ImGui::IsItemClicked();
-
-            if (pressed && m_pSelectedAsset)
-                m_pSelectedAsset->Set(h);
-
-            if (ImGui::BeginDragDropSource())
-            {
-                ImGui::SetDragDropPayload("ASSET_HANDLE", &h, sizeof(AssetHandle));
-
-                if (thumbnail.IsValid())
-                {
-                    ImGui::Image(
-                        thumbnail->GetInstance()->GetRendererID(),
-                        ImVec2(iconSize * 0.5f, iconSize * 0.5f));
-                }
-                else
-                {
-                    ImGui::Text("%s  %s", GetAssetIcon(assetPath), filename.c_str());
-                }
-
-                ImGui::EndDragDropSource();
-            }
-
-            if (hovered)
-                ImGui::SetTooltip("%s", filename.c_str());
+            ImGui::InvisibleButton("##PendingCreateHitbox", ImVec2(cardWidth, cardHeight));
 
             ImDrawList* drawList = ImGui::GetWindowDrawList();
 
-            ImVec2 cardMax(
-                cardPos.x + cardWidth,
-                cardPos.y + cardHeight);
-
-            ImU32 bg =
-                selected ? Accent(0.20f) :
-                hovered ? SurfaceHover() :
-                Surface();
-
-            ImU32 outline =
-                selected ? Accent(0.95f) :
-                hovered ? Accent(0.55f) :
-                Border();
-
-            //drawList->AddRectFilled(cardPos, cardMax, bg, 10.0f);
-
-            if (selected || hovered)
-                drawList->AddRect(cardPos, cardMax, outline, 10.0f, 0, selected ? 2.0f : 1.0f);
+            drawList->AddRect(
+                cardPos,
+                cardMax,
+                Accent(0.95f),
+                10.0f,
+                0,
+                2.0f);
 
             const float thumbPadding = 10.0f;
-            ImVec2 thumbMin(
-                cardPos.x + thumbPadding,
-                cardPos.y + thumbPadding);
+            ImVec2 thumbMin(cardPos.x + thumbPadding, cardPos.y + thumbPadding);
+            ImVec2 thumbMax(cardPos.x + cardWidth - thumbPadding, cardPos.y + cardWidth - thumbPadding);
 
-            ImVec2 thumbMax(
-                cardPos.x + cardWidth - thumbPadding,
-                cardPos.y + cardWidth - thumbPadding);
+            DrawScaledIcon(
+                drawList,
+                GetPendingCreateIcon(pendingCreateType),
+                thumbMin,
+                thumbMax,
+                iconSize,
+                Accent(1.0f));
 
-            //drawList->AddRectFilled(
-            //    thumbMin,
-            //    thumbMax,
-            //    ImGui::GetColorU32(ImGuiCol_WindowBg),
-            //    8.0f);
+            ImGui::SetCursorScreenPos(ImVec2(cardPos.x + 6.0f, thumbMax.y + 7.0f));
+            ImGui::SetNextItemWidth(cardWidth - 12.0f);
 
-            if (thumbnail.IsValid())
+            if (focusPendingCreate)
             {
-                drawList->AddImage(
-                    thumbnail->GetInstance()->GetRendererID(),
-                    thumbMin,
-                    thumbMax);
-            }
-            else
-            {
-                const char* icon = GetAssetIcon(assetPath);
-                ImVec2 iconTextSize = ImGui::CalcTextSize(icon);
-
-                drawList->AddText(
-                    ImVec2(
-                        thumbMin.x + (thumbMax.x - thumbMin.x - iconTextSize.x) * 0.5f,
-                        thumbMin.y + (thumbMax.y - thumbMin.y - iconTextSize.y) * 0.5f),
-                    selected ? Accent(1.0f) : TextMuted(),
-                    icon);
+                ImGui::SetKeyboardFocusHere();
+                focusPendingCreate = false;
             }
 
-            //drawList->AddRect(thumbMin, thumbMax, Border(), 8.0f);
+            ImGui::PushStyleColor(ImGuiCol_FrameBg, ImGui::GetStyleColorVec4(ImGuiCol_FrameBg));
+            ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 6.0f);
 
-            const float labelWidth = cardWidth - 12.0f;
-            const float labelX = cardPos.x + 6.0f;
-            const float labelY = thumbMax.y + 7.0f;
+            const bool commit = ImGui::InputText(
+                "##PendingCreateName",
+                pendingCreateName,
+                sizeof(pendingCreateName),
+                ImGuiInputTextFlags_EnterReturnsTrue |
+                ImGuiInputTextFlags_AutoSelectAll);
 
-            ImGui::SetCursorScreenPos(ImVec2(labelX, labelY));
+            const bool active = ImGui::IsItemActive();
 
-            std::string displayName = EllipsizeText(filename, labelWidth);
+            ImGui::PopStyleVar();
+            ImGui::PopStyleColor();
 
-            drawList->AddText(
-                ImVec2(labelX, labelY),
-                selected ? Col(ImGuiCol_Text) : TextMuted(),
-                displayName.c_str());
+            if (commit)
+                commitPendingCreate();
+
+            if (active && ImGui::IsKeyPressed(ImGuiKey_Escape))
+                cancelPendingCreate();
 
             ImGui::PopID();
         }
 
+        if (showFolders)
+        {
+            for (auto& [folderName, child] : folder->children)
+            {
+                ImGui::PushID(folderName.c_str());
+                ImGui::TableNextColumn();
+
+                const float cellStartX = ImGui::GetCursorPosX();
+                const float cellWidth = ImGui::GetColumnWidth();
+
+                const float cardWidth = iconSize;
+                const float cardHeight = iconSize + ImGui::GetTextLineHeight() * 2.4f;
+
+                const float cardX = cellStartX + (cellWidth - cardWidth) * 0.5f;
+                ImGui::SetCursorPosX(cardX);
+
+                ImVec2 cardPos = ImGui::GetCursorScreenPos();
+
+                ImGui::InvisibleButton(
+                    "##FolderCard",
+                    ImVec2(cardWidth, cardHeight));
+
+                const bool hovered = ImGui::IsItemHovered();
+
+                if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID))
+                {
+                    SetFolderDragPayload(child->fullPath);
+                    ImGui::Text("%s  %s", ICON_FA_FOLDER, folderName.c_str());
+                    ImGui::EndDragDropSource();
+                }
+
+                if (ImGui::BeginDragDropTarget())
+                {
+                    if (AcceptContentDropToFolder(*GetContext().GetCommandQueue(), child->fullPath, child->logicalPath))
+                        refreshSoon();
+
+                    ImGui::EndDragDropTarget();
+                }
+
+                if (hovered && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+                    m_CurrentFolder = child;
+
+                if (hovered)
+                    ImGui::SetTooltip("%s", folderName.c_str());
+
+                bool deleteFolder = false;
+
+                if (ImGui::BeginPopupContextItem("##FolderContextMenu"))
+                {
+                    if (ImGui::MenuItem(ICON_FA_FOLDER_OPEN "  Open"))
+                        m_CurrentFolder = child;
+
+                    ImGui::Separator();
+
+                    if (ImGui::MenuItem(ICON_FA_COPY "  Copy"))
+                    {
+                        m_ClipboardMode = ClipboardMode::Copy;
+                        m_ClipboardIsFolder = true;
+                        m_ClipboardPath = child->fullPath;
+                    }
+
+                    if (ImGui::MenuItem(ICON_FA_SCISSORS "  Cut"))
+                    {
+                        m_ClipboardMode = ClipboardMode::Cut;
+                        m_ClipboardIsFolder = true;
+                        m_ClipboardPath = child->fullPath;
+                    }
+
+                    ImGui::Separator();
+
+                    if (ImGui::MenuItem(ICON_FA_TRASH_CAN "  Delete Folder"))
+                        deleteFolder = true;
+
+                    ImGui::EndPopup();
+                }
+
+                ImDrawList* drawList = ImGui::GetWindowDrawList();
+
+                ImVec2 cardMax(
+                    cardPos.x + cardWidth,
+                    cardPos.y + cardHeight);
+
+                if (hovered)
+                {
+                    drawList->AddRect(
+                        cardPos,
+                        cardMax,
+                        Accent(0.55f),
+                        10.0f,
+                        0,
+                        1.0f);
+                }
+
+                const float thumbPadding = 10.0f;
+
+                ImVec2 thumbMin(
+                    cardPos.x + thumbPadding,
+                    cardPos.y + thumbPadding);
+
+                ImVec2 thumbMax(
+                    cardPos.x + cardWidth - thumbPadding,
+                    cardPos.y + cardWidth - thumbPadding);
+
+                DrawScaledIcon(
+                    drawList,
+                    ICON_FA_FOLDER,
+                    thumbMin,
+                    thumbMax,
+                    iconSize,
+                    Accent(1.0f));
+
+                const float labelWidth = cardWidth - 12.0f;
+                const float labelX = cardPos.x + 6.0f;
+                const float labelY = thumbMax.y + 7.0f;
+
+                std::string displayName =
+                    EllipsizeText(folderName, labelWidth);
+
+                drawList->AddText(
+                    ImVec2(labelX, labelY),
+                    Col(ImGuiCol_Text),
+                    displayName.c_str());
+
+                if (deleteFolder)
+                {
+                    const auto toRem = child->fullPath;
+                    GetContext().GetCommandQueue()->Push<ActionCommand>([toRem]
+                        {
+                            AssetDatabase::Get().RemoveRecursively(toRem);
+                        });
+
+                    if (m_CurrentFolder == child)
+                        m_CurrentFolder = folder;
+
+                    refreshSoon();
+                }
+
+                ImGui::PopID();
+
+                if (rebuildAfterFrame)
+                    break;
+            }
+        }
+
+        if (!rebuildAfterFrame)
+        {
+            for (const std::string& assetPath : displayAssets)
+            {
+                const std::string filename = fs::path(assetPath).filename().string();
+
+                if (m_SearchBuffer[0] != '\0')
+                {
+                    std::string lowerFile = filename;
+                    std::string lowerSearch = m_SearchBuffer;
+
+                    std::transform(lowerFile.begin(), lowerFile.end(), lowerFile.begin(), ::tolower);
+                    std::transform(lowerSearch.begin(), lowerSearch.end(), lowerSearch.begin(), ::tolower);
+
+                    if (lowerFile.find(lowerSearch) == std::string::npos)
+                        continue;
+                }
+
+                ImGui::PushID(assetPath.c_str());
+                ImGui::TableNextColumn();
+
+                const float cellStartX = ImGui::GetCursorPosX();
+                const float cellWidth = ImGui::GetColumnWidth();
+
+                AssetHandle h = AssetDatabase::Get().GetHandle(assetPath);
+                const bool selected = m_pSelectedAsset && m_pSelectedAsset->Get() == h;
+
+                AssetRef<Texture2DAsset> thumbnail = AssetDatabase::Get().GetThumbnail(h);
+
+                const float cardWidth = iconSize;
+                const float cardHeight = iconSize + ImGui::GetTextLineHeight() * 2.4f;
+
+                const float cardX = cellStartX + (cellWidth - cardWidth) * 0.5f;
+                ImGui::SetCursorPosX(cardX);
+
+                ImVec2 cardPos = ImGui::GetCursorScreenPos();
+
+                ImGui::InvisibleButton("##AssetCard", ImVec2(cardWidth, cardHeight));
+
+                const bool hovered = ImGui::IsItemHovered();
+                const bool pressed = ImGui::IsItemClicked();
+
+                if (pressed && m_pSelectedAsset)
+                    m_pSelectedAsset->Set(h);
+
+                bool deleteAsset = false;
+
+                if (ImGui::BeginPopupContextItem("##AssetContextMenu"))
+                {
+                    if (ImGui::MenuItem(ICON_FA_COPY "  Copy"))
+                    {
+                        m_ClipboardMode = ClipboardMode::Copy;
+                        m_ClipboardIsFolder = false;
+                        m_ClipboardPath = assetPath;
+                    }
+
+                    if (ImGui::MenuItem(ICON_FA_SCISSORS "  Cut"))
+                    {
+                        m_ClipboardMode = ClipboardMode::Cut;
+                        m_ClipboardIsFolder = false;
+                        m_ClipboardPath = assetPath;
+                    }
+
+                    ImGui::Separator();
+
+                    if (ImGui::MenuItem(ICON_FA_TRASH_CAN "  Delete Asset"))
+                        deleteAsset = true;
+
+                    ImGui::EndPopup();
+                }
+
+                if (ImGui::BeginDragDropSource())
+                {
+                    ImGui::SetDragDropPayload("ASSET_HANDLE", &h, sizeof(AssetHandle));
+                    ImGui::Text("%s  %s", GetAssetIcon(assetPath), filename.c_str());
+                    ImGui::EndDragDropSource();
+                }
+
+                if (hovered)
+                    ImGui::SetTooltip("%s", filename.c_str());
+
+                ImDrawList* drawList = ImGui::GetWindowDrawList();
+
+                ImVec2 cardMax(
+                    cardPos.x + cardWidth,
+                    cardPos.y + cardHeight);
+
+                ImU32 outline =
+                    selected ? Accent(0.95f) :
+                    hovered ? Accent(0.55f) :
+                    Border();
+
+                if (selected || hovered)
+                    drawList->AddRect(cardPos, cardMax, outline, 10.0f, 0, selected ? 2.0f : 1.0f);
+
+                const float thumbPadding = 10.0f;
+
+                ImVec2 thumbMin(
+                    cardPos.x + thumbPadding,
+                    cardPos.y + thumbPadding);
+
+                ImVec2 thumbMax(
+                    cardPos.x + cardWidth - thumbPadding,
+                    cardPos.y + cardWidth - thumbPadding);
+
+                if (thumbnail.IsValid())
+                {
+                    drawList->AddImage(
+                        thumbnail->GetInstance()->GetRendererID(),
+                        thumbMin,
+                        thumbMax);
+                }
+                else
+                {
+                    DrawScaledIcon(
+                        drawList,
+                        GetAssetIcon(assetPath),
+                        thumbMin,
+                        thumbMax,
+                        iconSize,
+                        selected ? Accent(1.0f) : TextMuted());
+                }
+
+                const float labelWidth = cardWidth - 12.0f;
+                const float labelX = cardPos.x + 6.0f;
+                const float labelY = thumbMax.y + 7.0f;
+
+                std::string displayName =
+                    EllipsizeText(filename, labelWidth);
+
+                drawList->AddText(
+                    ImVec2(labelX, labelY),
+                    selected ? Col(ImGuiCol_Text) : TextMuted(),
+                    displayName.c_str());
+
+                if (deleteAsset)
+                {
+                    if (m_pSelectedAsset && m_pSelectedAsset->Get() == h)
+                        m_pSelectedAsset->Set(0u);
+
+                    GetContext().GetCommandQueue()->Push<ActionCommand>([assetPath]
+                        {
+                            AssetDatabase::Get().Remove(assetPath);
+                        });
+                    refreshSoon();
+                }
+
+                ImGui::PopID();
+
+                if (rebuildAfterFrame)
+                    break;
+            }
+        }
+
         ImGui::EndTable();
+    }
+
+    if (ImGui::BeginDragDropTarget())
+    {
+        if (AcceptContentDropToFolder(*GetContext().GetCommandQueue(), folder->fullPath, folder->logicalPath))
+            refreshSoon();
+
+        ImGui::EndDragDropTarget();
     }
 
     if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) &&
@@ -629,31 +1332,72 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
         ImGuiPopupFlags_NoOpenOverItems))
     {
         if (ImGui::MenuItem(ICON_FA_FOLDER_PLUS "  New Folder"))
-        {
-            fs::create_directory(fs::path(folder->fullPath) / "new_folder");
-            BuildFolderTree();
-        }
+            startPendingCreate(PendingCreateType::Folder, "new_folder");
 
         ImGui::Separator();
 
         if (ImGui::MenuItem(ICON_FA_IMAGES "  New Sprite Atlas"))
-        {
-            ServiceLocator::Get<AssetImporterRegistry>()
-                .Export<SpriteAtlasAsset>(
-                    fs::path(folder->fullPath) / "new_sprite.bsa",
-                    0u);
-
-            BuildFolderTree();
-        }
+            startPendingCreate(PendingCreateType::SpriteAtlas, "new_sprite");
 
         if (ImGui::MenuItem(ICON_FA_TABLE_CELLS "  New Tilemap"))
-        {
-            ServiceLocator::Get<AssetImporterRegistry>()
-                .Export<TilemapAsset>(
-                    fs::path(folder->fullPath) / "new_tilemap.btm",
-                    0u);
+            startPendingCreate(PendingCreateType::Tilemap, "new_tilemap");
 
-            BuildFolderTree();
+        ImGui::Separator();
+
+        if (ImGui::MenuItem(
+            ICON_FA_PASTE "  Paste",
+            nullptr,
+            false,
+            m_ClipboardMode != ClipboardMode::None))
+        {
+            if (m_ClipboardIsFolder)
+            {
+                fs::path source = m_ClipboardPath;
+                fs::path destination = folder->fullPath / source.filename();
+
+                if (m_ClipboardMode == ClipboardMode::Copy)
+                {
+                    GetContext().GetCommandQueue()->Push<ActionCommand>([source, destination]
+                        {
+                            AssetDatabase::Get().CopyRecursively(source, destination);
+                        });
+                }
+                else if (m_ClipboardMode == ClipboardMode::Cut)
+                {
+                    GetContext().GetCommandQueue()->Push<ActionCommand>([source, destination]
+                        {
+                            AssetDatabase::Get().MoveRecursively(source, destination);
+                        });
+                }
+            }
+            else
+            {
+                const fs::path source = m_ClipboardPath;
+                const fs::path destination = folder->logicalPath / source.filename();
+
+                if (m_ClipboardMode == ClipboardMode::Copy)
+                {
+                    GetContext().GetCommandQueue()->Push<ActionCommand>([source, destination]
+                        {
+                            AssetDatabase::Get().Copy(source, destination);
+                        });
+                }
+                else if (m_ClipboardMode == ClipboardMode::Cut)
+                {
+                    GetContext().GetCommandQueue()->Push<ActionCommand>([source, destination]
+                        {
+                            AssetDatabase::Get().Move(source, destination);
+                        });
+                }
+            }
+
+            if (m_ClipboardMode == ClipboardMode::Cut)
+            {
+                m_ClipboardMode = ClipboardMode::None;
+                m_ClipboardPath.clear();
+            }
+
+            refreshSoon();
         }
 
         ImGui::EndPopup();

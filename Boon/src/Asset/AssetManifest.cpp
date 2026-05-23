@@ -46,6 +46,22 @@ namespace Boon
         Add(entry);
     }
 
+    bool AssetManifest::Remove(AssetHandle handle)
+    {
+        auto it = m_ByHandle.find(handle);
+        if (it == m_ByHandle.end())
+            return false;
+
+        if (!it->second.logicalPath.empty())
+            m_LogicalPathToHandle.erase(NormalizePathKey(it->second.logicalPath));
+
+        if (!it->second.runtimePath.empty())
+            m_RuntimePathToHandle.erase(NormalizePathKey(it->second.runtimePath));
+
+        m_ByHandle.erase(it);
+        return true;
+    }
+
     const AssetManifestEntry* AssetManifest::Get(AssetHandle handle) const
     {
         auto it = m_ByHandle.find(handle);

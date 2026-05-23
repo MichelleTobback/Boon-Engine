@@ -349,9 +349,9 @@ namespace BoonEditor
             ImGui::SameLine(120.0f);
             ImGui::Text("%d x %d tiles", chunksXCurrent * chunkSizeCurrent, chunksYCurrent * chunkSizeCurrent);
 
-            ImGui::DragInt("Chunks X", &m_ResizeChunksX, 1.0f, 1, 512);
-            ImGui::DragInt("Chunks Y", &m_ResizeChunksY, 1.0f, 1, 512);
-            ImGui::DragInt("Chunk Size", &m_ResizeChunkSize, 1.0f, 1, 256);
+            UI::DragInt("Chunks X", m_ResizeChunksX, 1, 512);
+            UI::DragInt("Chunks Y", m_ResizeChunksY, 1, 512);
+            UI::DragInt("Chunk Size", m_ResizeChunkSize, 1, 256);
 
             const bool differentSize =
                 m_ResizeChunksX != chunksXCurrent ||
@@ -380,7 +380,7 @@ namespace BoonEditor
             }
 
             float unitSize = tilemap.GetUnitSize();
-            if (ImGui::DragFloat("Unit Size", &unitSize, 0.01f, 0.001f, 256.0f))
+            if (UI::DragFloat("Unit Size", unitSize, 0.001f, 256.0f, 0.01f))
             {
                 tilemap.SetUnitSize(unitSize);
                 m_TilemapCanvasNeedsFit = true;
@@ -396,7 +396,7 @@ namespace BoonEditor
 
             const char* shapeNames[] = { "Square", "Circle" };
             int shape = static_cast<int>(m_BrushShape);
-            if (ImGui::Combo("Shape", &shape, shapeNames, IM_ARRAYSIZE(shapeNames)))
+            if (UI::Combo("Shape", shape, shapeNames, IM_ARRAYSIZE(shapeNames)))
                 m_BrushShape = static_cast<TileBrushShape>(shape);
 
             UI::SliderInt("Brush Size", m_BrushSize, 1, 31);
@@ -1118,6 +1118,8 @@ namespace BoonEditor
 
     void TilemapEditorPanel::Undo(Tilemap& tilemap)
     {
+        return; //skip for now
+
         if (m_UndoStack.empty())
             return;
 
@@ -1130,6 +1132,8 @@ namespace BoonEditor
 
     void TilemapEditorPanel::Redo(Tilemap& tilemap)
     {
+        return; //skip for now
+
         if (m_RedoStack.empty())
             return;
 

@@ -78,8 +78,7 @@ public:
 
         Application& app = Application::Get();
 
-        GLFWwindow* window =
-            static_cast<GLFWwindow*>(app.GetWindow().GetApiWindow());
+        GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetApiWindow());
 
         ImGui_ImplGlfw_InitForOpenGL(window, true);
         ImGui_ImplOpenGL3_Init("#version 410");
@@ -153,11 +152,9 @@ public:
 
         bool opt_fullscreen = opt_fullscreen_persistant;
 
-        static ImGuiDockNodeFlags dockspace_flags =
-            ImGuiDockNodeFlags_AutoHideTabBar;
+        static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_AutoHideTabBar;
 
-        ImGuiWindowFlags window_flags =
-            ImGuiWindowFlags_NoDocking;
+        ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking;
 
         if (opt_fullscreen)
         {
@@ -554,8 +551,7 @@ private:
         // ─────────────────────────────
         // Centered title
         // ─────────────────────────────
-
-        const char* title = "Boon Engine";
+        const char* title = Application::Get().GetDescriptor().Window.Title.c_str();
 
         ImGui::PushFont(m_Fonts.Title);
 

@@ -92,16 +92,32 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
 
 		ImGui::SetNextItemWidth(std::max(180.0f, ImGui::GetContentRegionAvail().x - 150.0f));
 
+		ImVec4 bg = ImGui::GetStyleColorVec4(ImGuiCol_FrameBg);
+		bg.x *= 0.65f;
+		bg.y *= 0.65f;
+		bg.z *= 0.65f;
+
+		ImGui::PushStyleColor(ImGuiCol_FrameBg, bg);
+
+		ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 6.0f);
+
 		if (ImGui::InputText("##gameObjectName", nameBuffer, sizeof(nameBuffer)))
 			nameComponent.Name = std::string(nameBuffer);
 
+		ImGui::PopStyleVar();
+		ImGui::PopStyleColor(1);
+
 		ImGui::SameLine();
+
+		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.f, 0.f, 0.f, 0.f));
 
 		if (ImGui::Button(ICON_FA_PLUS, ImVec2(30.0f, 30.0f)))
 			ImGui::OpenPopup("AddComponentPopup");
 
 		if (ImGui::IsItemHovered())
 			ImGui::SetTooltip("Add component");
+
+		ImGui::PopStyleColor();
 
 		if (ImGui::BeginPopup("AddComponentPopup"))
 		{
@@ -127,7 +143,7 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
 
 		ImGui::BeginChild("##PropertiesScroll", ImVec2(0.0f, 0.0f), false);
 
-		RenderComponentNode<TransformComponent>( "Transform", [this](TransformComponent& transform)
+		RenderComponentNode<TransformComponent>( "Transform", false, [this](TransformComponent& transform)
 			{
 				BClassRegistry& reg = BClassRegistry::Get();
 				BClass* cls = reg.Find<TransformComponent>();
@@ -193,7 +209,7 @@ void BoonEditor::PropertiesPanel::OnRenderUI()
 				}
 			}, ICON_FA_ARROWS_UP_DOWN_LEFT_RIGHT);
 
-		RenderComponentNode<CameraComponent>("Camera", [](CameraComponent& cameraComp)
+		RenderComponentNode<CameraComponent>("Camera", true, [](CameraComponent& cameraComp)
 			{
 				Camera& camera = cameraComp.Camera;
 
@@ -307,6 +323,7 @@ inline void PropertiesPanel::RenderComponentNode(
 		name,
 		icon,
 		canExpand,
+		true,
 		open,
 		[&, cls]()
 		{
@@ -359,15 +376,16 @@ void PropertiesPanel::RenderComponentNode_Internal(
 	const std::string& name,
 	const char* icon,
 	bool canExpand,
+	bool canBeRemoved,
 	bool& open,
 	const std::function<void()>& drawBody,
 	const std::function<void()>& onRemove)
 {
-	ImGui::Spacing();
+	ImGui::Dummy(ImVec2(0.0f, 2.0f));
 
-	const float headerHeight = 36.0f;
+	const float headerHeight = 32.0f;
 	const float radius = 8.0f;
-	const float buttonSize = 26.0f;
+	const float buttonSize = 28.0f;
 
 	ImVec2 min = ImGui::GetCursorScreenPos();
 	ImVec2 avail = ImGui::GetContentRegionAvail();
@@ -427,12 +445,16 @@ void PropertiesPanel::RenderComponentNode_Internal(
 	ImGui::SetCursorScreenPos(ImVec2(menuX, menuY));
 	ImGui::PushID(id.c_str());
 
-	if (ImGui::Button(ICON_FA_ELLIPSIS_VERTICAL, ImVec2(buttonSize, buttonSize)))
+	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.f, 0.f, 0.f, 0.f));
+
+	if (canBeRemoved && ImGui::Button(ICON_FA_ELLIPSIS_VERTICAL, ImVec2(buttonSize, buttonSize)))
 		ImGui::OpenPopup("ComponentSettings");
+
+	ImGui::PopStyleColor();
 
 	if (ImGui::BeginPopup("ComponentSettings"))
 	{
-		if (ImGui::MenuItem(ICON_FA_TRASH_CAN "  Remove Component"))
+		if (canBeRemoved && ImGui::MenuItem(ICON_FA_TRASH_CAN "  Remove Component"))
 			removeComponent = true;
 
 		ImGui::EndPopup();
@@ -463,14 +485,13 @@ void PropertiesPanel::RenderComponentNode_Internal(
 		ImGui::BeginGroup();
 
 		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(6.0f, 4.0f));
-		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 8.0f));
+		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 5.0f));
 
 		if (drawBody)
 			drawBody();
 
 		ImGui::PopStyleVar(2);
 
-		ImGui::Spacing();
 		ImGui::EndGroup();
 
 		ImVec2 bodyMax = ImGui::GetItemRectMax();
@@ -481,13 +502,13 @@ void PropertiesPanel::RenderComponentNode_Internal(
 			ImGui::GetColorU32(ImGuiCol_Border),
 			radius);
 
-		ImGui::SetCursorScreenPos(ImVec2(min.x, bodyMax.y + 10.0f));
+		ImGui::SetCursorScreenPos(ImVec2(min.x, bodyMax.y + 4.0f));
 		ImGui::Dummy(ImVec2(0.0f, 1.0f));
 	}
 	else
 	{
-		ImGui::SetCursorScreenPos(ImVec2(min.x, max.y));
-		ImGui::Dummy(ImVec2(0.0f, 1.0f));
+		ImGui::SetCursorScreenPos(ImVec2(min.x, max.y - 8.0f));
+		ImGui::Dummy(ImVec2(0.0f, 0.0f));
 	}
 
 	if (removeComponent && onRemove)

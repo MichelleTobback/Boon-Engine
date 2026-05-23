@@ -32,6 +32,8 @@ namespace Boon
         void Add(const AssetManifestEntry& entry);
         void Add(const AssetMeta& meta);
 
+        bool Remove(AssetHandle handle);
+
         const AssetManifestEntry* Get(AssetHandle handle) const;
         const AssetManifestEntry* GetByLogicalPath(const std::filesystem::path& path) const;
         const AssetManifestEntry* GetByRuntimePath(const std::filesystem::path& path) const;

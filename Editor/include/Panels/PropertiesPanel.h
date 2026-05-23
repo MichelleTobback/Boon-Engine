@@ -28,13 +28,14 @@ namespace BoonEditor
 
 	private:
 		template <typename T>
-		void RenderComponentNode(const std::string& name, const std::function<void(T&)>& fn, const char* icon = ICON_FA_CUBE);
+		void RenderComponentNode(const std::string& name, bool canBeRemoved, const std::function<void(T&)>& fn, const char* icon = ICON_FA_CUBE);
         void RenderComponentNode(BClass* cls, const std::function<void()>& fn = nullptr);
 		void RenderComponentNode_Internal(
 			const std::string& id,
 			const std::string& name,
 			const char* icon,
 			bool canExpand,
+			bool canBeRemoved,
 			bool& open,
 			const std::function<void()>& drawBody,
 			const std::function<void()>& onRemove);
@@ -46,6 +47,7 @@ namespace BoonEditor
 	template<typename T>
 	inline void PropertiesPanel::RenderComponentNode(
 		const std::string& displayName,
+		bool canBeRemoved,
 		const std::function<void(T&)>& fn,
 		const char* icon)
 	{
@@ -70,6 +72,7 @@ namespace BoonEditor
 			name,
 			icon,
 			canExpand,
+			canBeRemoved,
 			open,
 			[&]()
 			{

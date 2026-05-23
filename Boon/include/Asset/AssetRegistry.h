@@ -33,6 +33,14 @@ namespace Boon
         }
 
         /**
+         * @brief Unregister an asset.
+         */
+        void Remove(UUID id)
+        {
+            m_Metadata.erase(id);
+        }
+
+        /**
          * @brief Get the full metadata map.
          *
          * @return Const reference to the internal metadata map.

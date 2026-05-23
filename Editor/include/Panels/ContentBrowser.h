@@ -25,11 +25,18 @@ namespace BoonEditor
         {
             std::string name;          // Folder name only (Textures, Scripts, etc.)
             std::string fullPath;      // Full OS path
+            std::string logicalPath;   // Relative path
             std::vector<std::string> assets;          // Only assets from AssetDatabase
             std::unordered_map<std::string, FolderNode*> children;  // Real folders
 
-            FolderNode(const std::string& name = "", const std::string& full = "")
-                : name(name), fullPath(full) {
+            FolderNode(
+                const std::string& name = "",
+                const std::string& full = "",
+                const std::string& logical = "")
+                : name(name)
+                , fullPath(full)
+                , logicalPath(logical)
+            {
             }
         };
 
@@ -50,5 +57,16 @@ namespace BoonEditor
 
         void DrawFolderTree(FolderNode* node);
         void DrawContentArea(FolderNode* folder);
+
+        enum class ClipboardMode
+        {
+            None,
+            Copy,
+            Cut
+        };
+
+        ClipboardMode m_ClipboardMode = ClipboardMode::None;
+        bool m_ClipboardIsFolder = false;
+        std::string m_ClipboardPath;
     };
 }
