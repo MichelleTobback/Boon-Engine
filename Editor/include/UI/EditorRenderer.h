@@ -1,6 +1,7 @@
 #pragma once
 #include "Project/ProjectConfig.h"
 #include <memory>
+#include <functional>
 
 namespace BoonEditor
 {
@@ -17,6 +18,10 @@ namespace BoonEditor
 
 		void BeginFrame();
 		void EndFrame();
+
+		using MenuBarCallback = std::function<void()>;
+
+		void SetMenuBarCallback(const MenuBarCallback& callback);
 
 	private:
 		class EditorRendererImpl;

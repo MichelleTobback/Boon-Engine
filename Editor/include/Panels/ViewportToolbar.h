@@ -30,7 +30,7 @@ namespace BoonEditor
 		ViewportToolbar& operator=(const ViewportToolbar& other) = delete;
 		ViewportToolbar& operator=(ViewportToolbar&& other) = delete;
 
-		void OnRender(const glm::vec2& boundsMin, const glm::vec2& boundsMax);
+		bool OnRender(const glm::vec2& boundsMin, const glm::vec2& boundsMax);
 
 		void BindOnPlayCallback(const std::function<void()>& fn);
 		void BindOnPauseCallback(const std::function<void()>& fn);

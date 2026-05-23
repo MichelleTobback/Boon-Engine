@@ -82,6 +82,25 @@ namespace BoonEditor
 
         float GetZoom() const { return m_Zoom; }
         glm::vec2 GetPan() const { return m_Pan; }
+        glm::vec2 GetSize() const { return m_Size; }
+
+        void FitContent(const glm::vec2& contentMin, const glm::vec2& contentSize, float padding = 32.0f)
+        {
+            if (contentSize.x <= 0.0f || contentSize.y <= 0.0f || m_Size.x <= 1.0f || m_Size.y <= 1.0f)
+                return;
+
+            const float availableX = std::max(1.0f, m_Size.x - padding * 2.0f);
+            const float availableY = std::max(1.0f, m_Size.y - padding * 2.0f);
+
+            const float scaleX = availableX / contentSize.x;
+            const float scaleY = availableY / contentSize.y;
+
+            m_Zoom = std::clamp(std::min(scaleX, scaleY), m_MinZoom, m_MaxZoom);
+
+            const glm::vec2 contentCenter = contentMin + contentSize * 0.5f;
+            const glm::vec2 viewCenter = m_Size * 0.5f;
+            m_Pan = viewCenter - contentCenter * m_Zoom;
+        }
 
         void SetZoom(float zoom)
         {
@@ -206,7 +225,7 @@ namespace BoonEditor
                 glm::vec2 mouseBefore = ScreenToCanvas(m_MouseScreen);
 
                 float factor = io.MouseWheel > 0.0f ? 1.12f : 0.88f;
-                m_Zoom = std::clamp(m_Zoom * factor, m_MinZoom, m_MaxZoom);
+                m_Zoom = std::clamp(m_Zoom * factor, std::max(0.001f, m_MinZoom), m_MaxZoom);
 
                 m_Pan = m_MouseScreen - m_Origin - mouseBefore * m_Zoom;
             }

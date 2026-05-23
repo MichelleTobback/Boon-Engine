@@ -46,6 +46,7 @@ namespace BoonEditor
 
 	private:
 		void OnRender();
+		void RenderMenuBar();
 
 		void OnBeginPlay();
 		void OnStopPlay();

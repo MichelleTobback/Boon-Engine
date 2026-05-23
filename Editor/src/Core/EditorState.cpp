@@ -121,6 +121,7 @@ void EditorState::OnEnter()
 	m_NetworkSettings = Application::Get().GetDescriptor().Network;
 
 	m_PRenderer = std::make_unique<EditorRenderer>(m_Context.m_CurrentProject);
+	m_PRenderer->SetMenuBarCallback(std::bind(&EditorState::RenderMenuBar, this));
 
 	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 	Scene& scene = sceneManager.CreateScene("Game");
@@ -257,14 +258,42 @@ void EditorState::OnExit()
 	AssetDatabase::Get().Clear();
 }
 
-void EditorState::OnRender()
+bool TitlebarMenuButton(const char* label)
 {
-	m_PRenderer->BeginFrame();
+	ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10.0f, 4.0f));
+	ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 4.0f);
 
-	m_DragDrop.Clear();
+	// invisible normal state
+	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
 
-	ImGui::BeginMainMenuBar();
-	if (ImGui::BeginMenu("Project"))
+	// soft hover
+	ImGui::PushStyleColor(
+		ImGuiCol_ButtonHovered,
+		ImVec4(1, 1, 1, 0.08f)
+	);
+
+	// active/open state
+	ImGui::PushStyleColor(
+		ImGuiCol_ButtonActive,
+		ImVec4(0.58f, 0.36f, 0.78f, 0.22f)
+	);
+
+	bool pressed = ImGui::Button(label);
+
+	ImGui::PopStyleColor(3);
+	ImGui::PopStyleVar(2);
+
+	if (pressed)
+		ImGui::OpenPopup(label);
+
+	return ImGui::BeginPopup(label);
+}
+
+void EditorState::RenderMenuBar()
+{
+	ImGui::BeginGroup();
+
+	if (TitlebarMenuButton("Project"))
 	{
 		if (ImGui::MenuItem("New Project"))
 		{
@@ -294,7 +323,10 @@ void EditorState::OnRender()
 		}
 		ImGui::EndMenu();
 	}
-	if (ImGui::BeginMenu("File"))
+
+	ImGui::SameLine(0.0f, 4.0f);
+
+	if (TitlebarMenuButton("File"))
 	{
 		if (ImGui::MenuItem("New scene"))
 		{
@@ -349,7 +381,14 @@ void EditorState::OnRender()
 		}
 		ImGui::EndMenu();
 	}
-	ImGui::EndMainMenuBar();
+	ImGui::EndGroup();
+}
+
+void EditorState::OnRender()
+{
+	m_PRenderer->BeginFrame();
+
+	m_DragDrop.Clear();
 	
 	for (auto& [name, pPanel] : m_Context.m_Widgets)
 	{

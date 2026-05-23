@@ -19,6 +19,7 @@ ProjectConfig ProjectConfigFromArgs(int argc, char** argv)
 int Run(int argc, char** argv)
 {
     ProjectConfig config = ProjectConfigFromArgs(argc, argv);
+    config.Runtime.Window.bBorderless = true;
 
     Boon::Application app{ config.Runtime };
     app.Run(std::make_shared<EditorState>(config));

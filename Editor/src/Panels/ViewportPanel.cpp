@@ -142,26 +142,81 @@ void BoonEditor::ViewportPanel::SetContext(SceneContext* pContext)
 void BoonEditor::ViewportPanel::OnRenderUI()
 {
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0.0f, 0.0f });
-    ImGui::Begin("Viewport");
 
-    const ImVec2 viewportOffset{ ImGui::GetCursorPos() };
-    const ImVec2 windowSize{ ImGui::GetWindowSize() };
+    ImGuiWindowFlags flags =
+        ImGuiWindowFlags_NoCollapse |
+        ImGuiWindowFlags_NoScrollbar |
+        ImGuiWindowFlags_NoScrollWithMouse;
 
-    glm::vec2 minBound{ ImGui::GetWindowPos().x, ImGui::GetWindowPos().y };
-    minBound.x -= viewportOffset.x;
-    minBound.y -= viewportOffset.y;
+    ImGui::Begin("Viewport", nullptr, flags);
 
-    const glm::vec2 maxBound{
-        minBound.x + windowSize.x,
-        minBound.y + windowSize.y
-    };
+    constexpr float toolbarHeight = 22.0f;
+
+    ImVec2 fullAvail = ImGui::GetContentRegionAvail();
+
+    if (fullAvail.x < 100.0f || fullAvail.y < 100.0f)
+    {
+        ImGui::End();
+        ImGui::PopStyleVar();
+        return;
+    }
+
+    ImVec2 toolbarPos = ImGui::GetCursorScreenPos();
+    ImVec2 toolbarSize(fullAvail.x, toolbarHeight);
+
+    ImGui::InvisibleButton(
+        "##viewport_toolbar_strip_drag_area",
+        toolbarSize
+    );
+
+    ImVec2 toolbarMin = toolbarPos;
+    ImVec2 toolbarMax(
+        toolbarPos.x + toolbarSize.x,
+        toolbarPos.y + toolbarSize.y
+    );
+
+    ImDrawList* drawList = ImGui::GetWindowDrawList();
+
+    ImVec2 padding = {12.f, 5.f};
+    drawList->AddRectFilled(
+        { toolbarMin.x - padding.x, toolbarMin.y - padding.y },
+        { toolbarMax.x + padding.x, toolbarMax.y + padding.y },
+        ImGui::GetColorU32(ImGuiCol_ChildBg)
+    );
+
+    //drawList->AddLine(
+    //    ImVec2(toolbarMin.x, toolbarMax.y - 1.0f),
+    //    ImVec2(toolbarMax.x, toolbarMax.y - 1.0f),
+    //    ImGui::GetColorU32(ImGuiCol_Border)
+    //);
+
+    m_pToolbar->OnRender(
+        glm::vec2{ toolbarMin.x, toolbarMin.y },
+        glm::vec2{ toolbarMax.x, toolbarMax.y }
+    );
+
+    // ─────────────────────────────────────────────
+    // Viewport image/canvas area below toolbar
+    // ─────────────────────────────────────────────
 
     ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+    ImVec2 imagePos = ImGui::GetCursorScreenPos();
+
+    glm::vec2 minBound{
+        imagePos.x,
+        imagePos.y
+    };
+
+    glm::vec2 maxBound{
+        imagePos.x + viewportPanelSize.x,
+        imagePos.y + viewportPanelSize.y
+    };
 
     glm::vec2 bounds{
         glm::max(
             glm::vec2{ viewportPanelSize.x, viewportPanelSize.y },
-            glm::vec2{ 100.0f, 100.0f })
+            glm::vec2{ 100.0f, 100.0f }
+        )
     };
 
     m_ViewportBounds[0] = minBound;
@@ -183,53 +238,54 @@ void BoonEditor::ViewportPanel::OnRenderUI()
             m_pCanvasRenderer->OnViewportCanvasResize(m_ViewportSize);
     }
 
-    ImVec2 imagePos = ImGui::GetCursorScreenPos();
     m_ViewportImagePosition = { imagePos.x, imagePos.y };
 
     if (m_pCanvasRenderer)
     {
         ImVec2 canvasPos = ImGui::GetCursorScreenPos();
 
-        // Reserve the viewport area so ImGui layout still behaves correctly.
         ImGui::InvisibleButton(
             "##viewport_asset_canvas_host",
             ImVec2{ m_ViewportSize.x, m_ViewportSize.y }
         );
 
-        // Reset cursor back to the viewport area before the asset editor draws.
         ImGui::SetCursorScreenPos(canvasPos);
 
-        m_pCanvasRenderer->OnViewportCanvasRenderUI(CreateCanvasContext());
+        m_pCanvasRenderer->OnViewportCanvasRenderUI(
+            CreateCanvasContext()
+        );
 
-        // Restore cursor to after the reserved viewport area.
-        ImGui::SetCursorScreenPos(ImVec2(
-            canvasPos.x,
-            canvasPos.y + m_ViewportSize.y
-        ));
+        ImGui::SetCursorScreenPos(
+            ImVec2(
+                canvasPos.x,
+                canvasPos.y + m_ViewportSize.y
+            )
+        );
     }
     else
     {
-        uint64_t textureID = m_pRenderer->GetOutputTarget()->GetColorAttachmentRendererID();
+        uint64_t textureID =
+            m_pRenderer
+            ->GetOutputTarget()
+            ->GetColorAttachmentRendererID();
 
         ImGui::Image(
-            reinterpret_cast<void*>(static_cast<uintptr_t>(textureID)),
+            reinterpret_cast<void*>(
+                static_cast<uintptr_t>(textureID)
+                ),
             ImVec2{ m_ViewportSize.x, m_ViewportSize.y },
             ImVec2{ 0.0f, 1.0f },
             ImVec2{ 1.0f, 0.0f }
         );
     }
 
-    m_pToolbar->OnRender(minBound, maxBound);
-
     if (m_pToolbar->GetActiveSetting() == ViewportToolbarSetting::Camera)
     {
         const float panelWidth = 260.0f;
         const float panelGap = 6.0f;
-        const float topMargin = 20.0f;
-        const float toolbarHeight = 36.0f;
 
         float panelX = maxBound.x - panelWidth - panelGap;
-        float panelY = m_ViewportBounds[0].y + topMargin + toolbarHeight + panelGap;
+        float panelY = toolbarMax.y + panelGap;
 
         CameraSettings(panelX, panelY, panelWidth);
     }
@@ -237,11 +293,9 @@ void BoonEditor::ViewportPanel::OnRenderUI()
     {
         const float panelWidth = 260.0f;
         const float panelGap = 6.0f;
-        const float topMargin = 20.0f;
-        const float toolbarHeight = 36.0f;
 
         float panelX = maxBound.x - panelWidth - panelGap;
-        float panelY = m_ViewportBounds[0].y + topMargin + toolbarHeight + panelGap;
+        float panelY = toolbarMax.y + panelGap;
 
         VisibilitySettings(panelX, panelY, panelWidth);
     }

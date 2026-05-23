@@ -1,15 +1,17 @@
-﻿#include "Panels/TilemapEditorPanel.h"
+#include "Panels/TilemapEditorPanel.h"
 
 #include <imgui.h>
 
 #include "Assets/AssetDatabase.h"
 #include "UI/UI.h"
+#include "UI/IconsFontAwesome7.h"
 
 #include <Renderer/Texture.h>
 
 #include <algorithm>
 #include <cstdlib>
 #include <cmath>
+#include <ctime>
 
 namespace
 {
@@ -87,6 +89,34 @@ namespace
 
         return std::max(0.05f, std::min(sx, sy));
     }
+
+    bool EditorIconButton(
+        const char* icon,
+        const char* tooltip,
+        bool active = false,
+        ImVec2 size = ImVec2(28.0f, 28.0f))
+    {
+        ImGui::PushStyleColor(
+            ImGuiCol_Button,
+            active ? Accent(0.22f) : Col(ImGuiCol_Button));
+
+        ImGui::PushStyleColor(
+            ImGuiCol_ButtonHovered,
+            active ? Accent(0.32f) : Col(ImGuiCol_ButtonHovered));
+
+        ImGui::PushStyleColor(
+            ImGuiCol_ButtonActive,
+            active ? Accent(0.42f) : Col(ImGuiCol_ButtonActive));
+
+        bool pressed = ImGui::Button(icon, size);
+
+        ImGui::PopStyleColor(3);
+
+        if (ImGui::IsItemHovered() && tooltip)
+            ImGui::SetTooltip("%s", tooltip);
+
+        return pressed;
+    }
 }
 
 namespace BoonEditor
@@ -94,7 +124,9 @@ namespace BoonEditor
     TilemapEditorPanel::TilemapEditorPanel(const std::string& name, EditorContext* pContext)
         : AssetEditor<TilemapAsset>(name, pContext)
     {
-        m_TilemapCanvas.SetZoomLimits(0.f, 128.f);
+        m_TilemapCanvas.SetZoomLimits(0.02f, 128.f);
+        m_PaletteCanvas.SetZoomLimits(0.02f, 64.f);
+        std::srand(static_cast<unsigned int>(std::time(nullptr)));
     }
 
     void TilemapEditorPanel::Update()
@@ -118,42 +150,140 @@ namespace BoonEditor
         if (!m_Asset.IsValid())
             return;
 
-        ImGui::Text("Tilemap Editor");
+        constexpr ImVec2 buttonSize{ 30.0f, 30.0f };
+
+        ImGui::AlignTextToFramePadding();
+        ImGui::TextUnformatted("Tilemap Editor");
+
         ImGui::SameLine();
-        ImGui::TextDisabled("Paint tiles, configure brushes, and edit map data");
+
+        ImGui::TextDisabled("| Atlas palette + brush workflow");
 
         ImGui::Spacing();
 
-        if (EditorButton("Save##tilemap_save", false, ImVec2(72.0f, 28.0f)))
+        // ------------------------------------------------------------
+        // File
+        // ------------------------------------------------------------
+
+        if (EditorIconButton(
+            ICON_FA_FLOPPY_DISK,
+            "Save",
+            false,
+            buttonSize))
+        {
             AssetDatabase::Get().Export<TilemapAsset>(m_Asset);
+        }
 
-        ImGui::SameLine(0.0f, 16.0f);
+        ImGui::SameLine(0.0f, 4.0f);
 
-        if (EditorButton("Paint##mode_paint", m_Mode == TileBrushMode::Paint))
+        if (EditorIconButton(
+            ICON_FA_ROTATE_LEFT,
+            "Undo",
+            false,
+            buttonSize))
+        {
+            if (auto tilemap = m_Asset->GetInstance())
+                Undo(*tilemap);
+        }
+
+        ImGui::SameLine(0.0f, 4.0f);
+
+        if (EditorIconButton(
+            ICON_FA_ROTATE_RIGHT,
+            "Redo",
+            false,
+            buttonSize))
+        {
+            if (auto tilemap = m_Asset->GetInstance())
+                Redo(*tilemap);
+        }
+
+        ImGui::SameLine(0.0f, 10.0f);
+
+        ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+
+        ImGui::SameLine(0.0f, 10.0f);
+
+        // ------------------------------------------------------------
+        // Brush modes
+        // ------------------------------------------------------------
+
+        if (EditorIconButton(
+            ICON_FA_BRUSH,
+            "Paint (P)",
+            m_Mode == TileBrushMode::Paint,
+            buttonSize))
+        {
             m_Mode = TileBrushMode::Paint;
+        }
 
-        ImGui::SameLine();
+        ImGui::SameLine(0.0f, 4.0f);
 
-        if (EditorButton("Erase##mode_erase", m_Mode == TileBrushMode::Erase))
+        if (EditorIconButton(
+            ICON_FA_ERASER,
+            "Erase (E)",
+            m_Mode == TileBrushMode::Erase,
+            buttonSize))
+        {
             m_Mode = TileBrushMode::Erase;
+        }
 
-        ImGui::SameLine();
+        ImGui::SameLine(0.0f, 4.0f);
 
-        if (EditorButton("Fill##mode_fill", m_Mode == TileBrushMode::Fill))
+        if (EditorIconButton(
+            ICON_FA_FILL_DRIP,
+            "Fill (G)",
+            m_Mode == TileBrushMode::Fill,
+            buttonSize))
+        {
             m_Mode = TileBrushMode::Fill;
+        }
 
-        ImGui::SameLine();
+        ImGui::SameLine(0.0f, 4.0f);
 
-        if (EditorButton("Random##mode_random", m_Mode == TileBrushMode::Random))
+        if (EditorIconButton(
+            ICON_FA_DICE,
+            "Random Brush (R)",
+            m_Mode == TileBrushMode::Random,
+            buttonSize))
+        {
             m_Mode = TileBrushMode::Random;
+        }
 
-        ImGui::SameLine();
+        ImGui::SameLine(0.0f, 4.0f);
 
-        if (EditorButton("Pick##mode_pick", m_Mode == TileBrushMode::Eyedropper))
+        if (EditorIconButton(
+            ICON_FA_EYE_DROPPER,
+            "Eyedropper (I)",
+            m_Mode == TileBrushMode::Eyedropper,
+            buttonSize))
+        {
             m_Mode = TileBrushMode::Eyedropper;
+        }
 
-        ImGui::SameLine(0.0f, 16.0f);
-        ImGui::TextDisabled("MMB drag to pan | Wheel to zoom | Left click/drag to edit");
+        ImGui::SameLine(0.0f, 10.0f);
+
+        ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+
+        ImGui::SameLine(0.0f, 10.0f);
+
+        // ------------------------------------------------------------
+        // View
+        // ------------------------------------------------------------
+
+        if (EditorIconButton(
+            ICON_FA_EXPAND,
+            "Fit View",
+            false,
+            buttonSize))
+        {
+            m_TilemapCanvasNeedsFit = true;
+        }
+
+        ImGui::SameLine(0.0f, 12.0f);
+
+        ImGui::TextDisabled(
+            "MMB Pan  |  Wheel Zoom  |  Ctrl+Wheel Brush Size");
     }
 
     void TilemapEditorPanel::RenderMainArea()
@@ -167,90 +297,197 @@ namespace BoonEditor
 
         ImVec2 avail = ImGui::GetContentRegionAvail();
 
-        const float settingsWidth = 340.0f;
+        // Workspace layout:
+        //  - Atlas palette is a full-width strip at the top.
+        //  - All other editor sections live underneath it.
+        // This makes tile selection feel like a real tileset shelf instead of a side inspector.
+        const float spacing = ImGui::GetStyle().ItemSpacing.y;
+        const float minPaletteHeight = 170.0f;
+        const float preferredPaletteHeight = 260.0f;
+        const float maxPaletteHeight = std::max(minPaletteHeight, avail.y * 0.42f);
+        const float paletteHeight = std::min(preferredPaletteHeight, maxPaletteHeight);
+        const float settingsHeight = std::max(1.0f, avail.y - paletteHeight - spacing);
 
-        ImGui::BeginChild("##tilemap_left", ImVec2(avail.x - settingsWidth - 10.0f, avail.y), false);
-
-        BeginEditorPanel("##tile_palette_panel", ImVec2(0.0f, avail.y));
+        BeginEditorPanel("##tile_palette_panel", ImVec2(0.0f, paletteHeight));
         RenderPalette(*tilemap);
         EndEditorPanel();
 
-        ImGui::EndChild();
+        ImGui::Spacing();
 
-        ImGui::SameLine();
-
-        BeginEditorPanel("##tilemap_settings_panel", ImVec2(settingsWidth, 0.0f));
+        BeginEditorPanel("##tilemap_settings_panel", ImVec2(0.0f, settingsHeight));
         RenderToolSettings(*tilemap);
         EndEditorPanel();
     }
 
     void TilemapEditorPanel::RenderToolSettings(Tilemap& tilemap)
     {
-        SectionHeader("Tilemap");
+        HandleShortcuts(tilemap);
 
-        AssetHandle atlasHandle = tilemap.GetAtlas();
-
-        if (UI::AssetRef("Sprite Atlas", atlasHandle, AssetType::SpriteAtlas))
-            tilemap.SetAtlas(AssetRef<SpriteAtlasAsset>(atlasHandle));
-
-        int chunksX = tilemap.GetChunksX();
-        int chunksY = tilemap.GetChunksY();
-        int chunkSize = tilemap.GetChunkSize();
-
-        ImGui::TextDisabled("Map Size");
-        ImGui::Text("%d x %d tiles", chunksX * chunkSize, chunksY * chunkSize);
-
-        bool resizeChanged = false;
-        resizeChanged |= ImGui::DragInt("Chunks X", &chunksX, 1.0f, 1, 512);
-        resizeChanged |= ImGui::DragInt("Chunks Y", &chunksY, 1.0f, 1, 512);
-        resizeChanged |= ImGui::DragInt("Chunk Size", &chunkSize, 1.0f, 1, 256);
-
-        if (resizeChanged && ImGui::Button("Apply Resize"))
-            tilemap.Resize(chunksX, chunksY, chunkSize);
-
-        float unitSize = tilemap.GetUnitSize();
-        if (ImGui::DragFloat("Unit Size", &unitSize, 0.01f, 0.001f, 256.0f))
-            tilemap.SetUnitSize(unitSize);
-
-        ImGui::Checkbox("Show Grid", &m_ShowGrid);
-        ImGui::Checkbox("Show Chunks", &m_ShowChunks);
-        ImGui::Checkbox("Show Empty Tiles", &m_ShowEmptyTiles);
-
-        SectionHeader("Brush");
-
-        const char* modeNames[] =
+        if (ImGui::CollapsingHeader("Tilemap", ImGuiTreeNodeFlags_DefaultOpen))
         {
-            "Paint",
-            "Erase",
-            "Fill",
-            "Random",
-            "Eyedropper"
-        };
+            AssetHandle atlasHandle = tilemap.GetAtlas();
 
-        int mode = static_cast<int>(m_Mode);
+            if (UI::AssetRef("Sprite Atlas", atlasHandle, AssetType::SpriteAtlas))
+            {
+                tilemap.SetAtlas(AssetRef<SpriteAtlasAsset>(atlasHandle));
+                m_PaletteCanvasNeedsFit = true;
+            }
 
-        if (ImGui::Combo("Mode", &mode, modeNames, IM_ARRAYSIZE(modeNames)))
-            m_Mode = static_cast<TileBrushMode>(mode);
+            const int chunksXCurrent = tilemap.GetChunksX();
+            const int chunksYCurrent = tilemap.GetChunksY();
+            const int chunkSizeCurrent = tilemap.GetChunkSize();
 
-        const char* shapeNames[] =
+            if (!m_ResizeInitialized)
+            {
+                m_ResizeChunksX = chunksXCurrent;
+                m_ResizeChunksY = chunksYCurrent;
+                m_ResizeChunkSize = chunkSizeCurrent;
+                m_ResizeInitialized = true;
+            }
+
+            ImGui::TextDisabled("Size");
+            ImGui::SameLine(120.0f);
+            ImGui::Text("%d x %d tiles", chunksXCurrent * chunkSizeCurrent, chunksYCurrent * chunkSizeCurrent);
+
+            ImGui::DragInt("Chunks X", &m_ResizeChunksX, 1.0f, 1, 512);
+            ImGui::DragInt("Chunks Y", &m_ResizeChunksY, 1.0f, 1, 512);
+            ImGui::DragInt("Chunk Size", &m_ResizeChunkSize, 1.0f, 1, 256);
+
+            const bool differentSize =
+                m_ResizeChunksX != chunksXCurrent ||
+                m_ResizeChunksY != chunksYCurrent ||
+                m_ResizeChunkSize != chunkSizeCurrent;
+
+            if (differentSize)
+            {
+                ImGui::TextDisabled("Preview: %d x %d tiles", m_ResizeChunksX * m_ResizeChunkSize, m_ResizeChunksY * m_ResizeChunkSize);
+                ImGui::TextWrapped("Resize changes the map dimensions. Existing tiles outside the new bounds may be lost.");
+
+                if (EditorButton("Apply Resize", false, ImVec2(120.0f, 26.0f)))
+                {
+                    PushUndoState(tilemap);
+                    tilemap.Resize(m_ResizeChunksX, m_ResizeChunksY, m_ResizeChunkSize);
+                    m_TilemapCanvasNeedsFit = true;
+                }
+
+                ImGui::SameLine();
+                if (EditorButton("Reset", false, ImVec2(70.0f, 26.0f)))
+                {
+                    m_ResizeChunksX = chunksXCurrent;
+                    m_ResizeChunksY = chunksYCurrent;
+                    m_ResizeChunkSize = chunkSizeCurrent;
+                }
+            }
+
+            float unitSize = tilemap.GetUnitSize();
+            if (ImGui::DragFloat("Unit Size", &unitSize, 0.01f, 0.001f, 256.0f))
+            {
+                tilemap.SetUnitSize(unitSize);
+                m_TilemapCanvasNeedsFit = true;
+            }
+        }
+
+        if (ImGui::CollapsingHeader("Brush", ImGuiTreeNodeFlags_DefaultOpen))
         {
-            "Square",
-            "Circle"
-        };
+            const char* modeNames[] = { "Paint", "Erase", "Fill", "Random", "Eyedropper" };
+            int mode = static_cast<int>(m_Mode);
+            if (UI::Combo("Mode", mode, modeNames, IM_ARRAYSIZE(modeNames)))
+                m_Mode = static_cast<TileBrushMode>(mode);
 
-        int shape = static_cast<int>(m_BrushShape);
+            const char* shapeNames[] = { "Square", "Circle" };
+            int shape = static_cast<int>(m_BrushShape);
+            if (ImGui::Combo("Shape", &shape, shapeNames, IM_ARRAYSIZE(shapeNames)))
+                m_BrushShape = static_cast<TileBrushShape>(shape);
 
-        if (ImGui::Combo("Shape", &shape, shapeNames, IM_ARRAYSIZE(shapeNames)))
-            m_BrushShape = static_cast<TileBrushShape>(shape);
+            UI::SliderInt("Brush Size", m_BrushSize, 1, 31);
+            UI::Checkbox("Auto paint after pick", m_AutoSwitchToPaintAfterPick);
 
-        ImGui::SliderInt("Brush Size", &m_BrushSize, 1, 15);
+            RenderSelectedTilePreview(tilemap);
+        }
+
+        if (ImGui::CollapsingHeader("Viewport", ImGuiTreeNodeFlags_DefaultOpen))
+        {
+            UI::Checkbox("Grid", m_ShowGrid);
+            UI::SameLine();
+            UI::Checkbox("Chunks", m_ShowChunks);
+            UI::Checkbox("Empty tile outlines", m_ShowEmptyTiles);
+            UI::Checkbox("Brush preview", m_ShowBrushPreview);
+            UI::Checkbox("Tile coordinate overlay", m_ShowTileCoordinates);
+
+            if (EditorButton("Fit Tilemap", false, ImVec2(110.0f, 26.0f)))
+                m_TilemapCanvasNeedsFit = true;
+            ImGui::SameLine();
+            if (EditorButton("Fit Palette", false, ImVec2(110.0f, 26.0f)))
+                m_PaletteCanvasNeedsFit = true;
+        }
+
+        if (m_Mode == TileBrushMode::Random)
+            RenderRandomBrush(tilemap);
+    }
+
+    void TilemapEditorPanel::RenderSelectedTilePreview(Tilemap& tilemap)
+    {
+        std::shared_ptr<SpriteAtlas> atlas{};
+        ImTextureID textureId{};
 
         ImGui::TextDisabled("Selected Tile");
         ImGui::SameLine(120.0f);
         ImGui::Text("%d", m_SelectedTile);
 
-        if (m_Mode == TileBrushMode::Random)
-            RenderRandomBrush(tilemap);
+        if (!GetAtlasInfo(tilemap, atlas, textureId) || m_SelectedTile < 0 || !atlas->Exists(m_SelectedTile))
+        {
+            ImGui::TextDisabled("No tile selected.");
+            return;
+        }
+
+        const SpriteFrame& frame = atlas->GetSpriteFrame(m_SelectedTile);
+        ImGui::Image(textureId, ImVec2(64.0f, 64.0f), UV0(frame), UV1(frame));
+        ImGui::SameLine();
+        if (EditorButton("Clear", false, ImVec2(70.0f, 26.0f)))
+            m_SelectedTile = -1;
+    }
+
+    void TilemapEditorPanel::HandleShortcuts(Tilemap& tilemap)
+    {
+        ImGuiIO& io = ImGui::GetIO();
+        if (io.WantTextInput)
+            return;
+
+        if (io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_Z))
+        {
+            Undo(tilemap);
+            return;
+        }
+
+        if (io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_Y))
+        {
+            Redo(tilemap);
+            return;
+        }
+
+        if (ImGui::IsKeyPressed(ImGuiKey_P)) m_Mode = TileBrushMode::Paint;
+        if (ImGui::IsKeyPressed(ImGuiKey_E)) m_Mode = TileBrushMode::Erase;
+        if (ImGui::IsKeyPressed(ImGuiKey_G)) m_Mode = TileBrushMode::Fill;
+        if (ImGui::IsKeyPressed(ImGuiKey_R)) m_Mode = TileBrushMode::Random;
+        if (ImGui::IsKeyPressed(ImGuiKey_I)) m_Mode = TileBrushMode::Eyedropper;
+    }
+
+    void TilemapEditorPanel::FitTilemapCanvas(Tilemap& tilemap)
+    {
+        const float unitSize = tilemap.GetUnitSize();
+        const glm::vec2 mapSize{
+            static_cast<float>(tilemap.GetChunksX() * tilemap.GetChunkSize()) * unitSize,
+            static_cast<float>(tilemap.GetChunksY() * tilemap.GetChunkSize()) * unitSize
+        };
+
+        m_TilemapCanvas.FitContent({ 0.0f, 0.0f }, mapSize, 36.0f);
+        m_TilemapCanvasNeedsFit = false;
+    }
+
+    void TilemapEditorPanel::FitPaletteCanvas(const glm::vec2& textureSize)
+    {
+        m_PaletteCanvas.FitContent({ 0.0f, 0.0f }, textureSize, 24.0f);
+        m_PaletteCanvasNeedsFit = false;
     }
 
     void TilemapEditorPanel::RenderPalette(Tilemap& tilemap)
@@ -279,16 +516,13 @@ namespace BoonEditor
             static_cast<float>(texture->GetHeight())
         };
 
-        ImGui::TextDisabled("Selected Tile");
-        ImGui::SameLine(120.0f);
-        ImGui::Text("%d", m_SelectedTile);
-
+        ImGui::TextDisabled("Click a sprite to select it. MMB pan, wheel zoom.");
         ImGui::SameLine();
-
-        if (EditorButton("Clear##clear_selected_tile", false, ImVec2(64.0f, 24.0f)))
+        if (EditorButton("Fit", false, ImVec2(52.0f, 24.0f)))
+            m_PaletteCanvasNeedsFit = true;
+        ImGui::SameLine();
+        if (EditorButton("Clear", false, ImVec2(64.0f, 24.0f)))
             m_SelectedTile = -1;
-
-        ImGui::TextDisabled("Wheel zoom | MMB drag pan | Click sprite to select");
         ImGui::Spacing();
 
         ImVec2 canvasSize = ImGui::GetContentRegionAvail();
@@ -299,6 +533,9 @@ namespace BoonEditor
         BeginEditorPanel("##palette_atlas_canvas_region", canvasSize);
 
         m_PaletteCanvas.Begin("TilePaletteCanvas");
+
+        if (m_PaletteCanvasNeedsFit)
+            FitPaletteCanvas(textureSize);
 
         m_PaletteCanvas.DrawImage(
             textureId,
@@ -319,10 +556,11 @@ namespace BoonEditor
 
         int hoveredFrame = HitTestAtlasFrame(*atlas, mouse, textureSize);
 
-        if (m_PaletteCanvas.IsHovered() &&
-            ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+        if (m_PaletteCanvas.IsHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
         {
             m_SelectedTile = hoveredFrame;
+            if (hoveredFrame >= 0 && m_Mode == TileBrushMode::Eyedropper)
+                m_Mode = TileBrushMode::Paint;
         }
 
         for (int frameId : atlas->GetAllFrameIDs())
@@ -357,6 +595,13 @@ namespace BoonEditor
             );
         }
 
+        if (m_PaletteCanvas.IsHovered() && hoveredFrame >= 0)
+        {
+            ImGui::BeginTooltip();
+            ImGui::Text("Tile %d", hoveredFrame);
+            ImGui::EndTooltip();
+        }
+
         m_PaletteCanvas.End();
 
         EndEditorPanel();
@@ -364,13 +609,37 @@ namespace BoonEditor
 
     void TilemapEditorPanel::RenderRandomBrush(Tilemap& tilemap)
     {
-        SectionHeader("Random Brush");
+        if (!ImGui::CollapsingHeader("Random Brush", ImGuiTreeNodeFlags_DefaultOpen))
+            return;
 
         std::shared_ptr<SpriteAtlas> atlas{};
         ImTextureID textureId{};
 
         if (!GetAtlasInfo(tilemap, atlas, textureId))
             return;
+
+        if (EditorButton("Add Selected", false, ImVec2(110.0f, 26.0f)))
+        {
+            if (m_SelectedTile >= 0 && atlas->Exists(m_SelectedTile) &&
+                std::find(m_RandomBrushTiles.begin(), m_RandomBrushTiles.end(), m_SelectedTile) == m_RandomBrushTiles.end())
+            {
+                m_RandomBrushTiles.push_back(m_SelectedTile);
+                m_RandomBrushWeights.push_back(1.0f);
+            }
+        }
+
+        ImGui::SameLine();
+        if (EditorButton("Clear List", false, ImVec2(90.0f, 26.0f)))
+        {
+            m_RandomBrushTiles.clear();
+            m_RandomBrushWeights.clear();
+        }
+
+        ImGui::TextDisabled("Click atlas tiles below to toggle them in the random brush.");
+
+        const float cell = 38.0f;
+        const int columns = std::max(1, static_cast<int>(ImGui::GetContentRegionAvail().x / cell));
+        int column = 0;
 
         for (int frameId : atlas->GetAllFrameIDs())
         {
@@ -379,24 +648,14 @@ namespace BoonEditor
 
             const SpriteFrame& frame = atlas->GetSpriteFrame(frameId);
 
-            auto it = std::find(
-                m_RandomBrushTiles.begin(),
-                m_RandomBrushTiles.end(),
-                frameId
-            );
-
+            auto it = std::find(m_RandomBrushTiles.begin(), m_RandomBrushTiles.end(), frameId);
             const bool selected = it != m_RandomBrushTiles.end();
 
             ImGui::PushID(frameId);
+            ImGui::PushStyleColor(ImGuiCol_Button, selected ? Accent(0.28f) : Surface());
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, selected ? Accent(0.38f) : SurfaceHover());
 
-            ImGui::PushStyleColor(ImGuiCol_Button, selected ? Accent(0.25f) : Surface());
-
-            if (ImGui::ImageButton(
-                "##random_tile",
-                textureId,
-                ImVec2(32.0f, 32.0f),
-                UV0(frame),
-                UV1(frame)))
+            if (ImGui::ImageButton("##random_tile", textureId, ImVec2(30.0f, 30.0f), UV0(frame), UV1(frame)))
             {
                 if (!selected)
                 {
@@ -405,25 +664,34 @@ namespace BoonEditor
                 }
                 else
                 {
-                    int idx = static_cast<int>(std::distance(m_RandomBrushTiles.begin(), it));
-
+                    const int idx = static_cast<int>(std::distance(m_RandomBrushTiles.begin(), it));
                     m_RandomBrushTiles.erase(m_RandomBrushTiles.begin() + idx);
                     m_RandomBrushWeights.erase(m_RandomBrushWeights.begin() + idx);
                 }
             }
 
-            ImGui::PopStyleColor();
-
-            if (selected)
-            {
-                int idx = static_cast<int>(std::distance(m_RandomBrushTiles.begin(), it));
-
-                ImGui::SameLine();
-                ImGui::SetNextItemWidth(120.0f);
-                ImGui::SliderFloat("Weight", &m_RandomBrushWeights[idx], 0.0f, 5.0f);
-            }
-
+            ImGui::PopStyleColor(2);
             ImGui::PopID();
+
+            ++column;
+            if (column < columns)
+                ImGui::SameLine();
+            else
+                column = 0;
+        }
+
+        if (!m_RandomBrushTiles.empty())
+        {
+            SectionHeader("Weights");
+            for (size_t i = 0; i < m_RandomBrushTiles.size(); ++i)
+            {
+                ImGui::PushID(static_cast<int>(i));
+                ImGui::Text("Tile %d", m_RandomBrushTiles[i]);
+                ImGui::SameLine(90.0f);
+                ImGui::SetNextItemWidth(-1.0f);
+                ImGui::SliderFloat("##weight", &m_RandomBrushWeights[i], 0.0f, 5.0f, "%.2f");
+                ImGui::PopID();
+            }
         }
     }
 
@@ -438,7 +706,12 @@ namespace BoonEditor
             return;
         }
 
+        HandleShortcuts(tilemap);
+
         m_TilemapCanvas.Begin("TilemapViewportCanvas");
+
+        if (m_TilemapCanvasNeedsFit)
+            FitTilemapCanvas(tilemap);
 
         RenderTiles(tilemap);
 
@@ -457,13 +730,52 @@ namespace BoonEditor
             static_cast<int>(std::floor(mouse.y / unitSize))
         };
 
+        m_HoveredTile = tilemap.IsValidTile(tile.x, tile.y) ? tile : glm::ivec2{ -1, -1 };
+
         if (tilemap.IsValidTile(tile.x, tile.y))
         {
-            RenderBrushPreview(tilemap, tile);
+            if (m_ShowBrushPreview)
+                RenderBrushPreview(tilemap, tile);
             HandlePainting(tilemap, tile);
+            RenderViewportOverlay(tilemap, tile);
+        }
+        else
+        {
+            m_EditInProgress = false;
         }
 
+        if (!ImGui::IsMouseDown(ImGuiMouseButton_Left))
+            m_EditInProgress = false;
+
         m_TilemapCanvas.End();
+    }
+
+    void TilemapEditorPanel::RenderViewportOverlay(Tilemap& tilemap, const glm::ivec2& tile)
+    {
+        if (!m_ShowTileCoordinates)
+            return;
+
+        const int currentTile = tilemap.GetTile(tile.x, tile.y);
+        ImGui::SetNextWindowBgAlpha(0.82f);
+        ImVec2 mousePos = ImGui::GetMousePos();
+        ImGui::SetNextWindowPos(
+            ImVec2(mousePos.x + 16.0f, mousePos.y + 16.0f),
+            ImGuiCond_Always
+        );
+
+        ImGuiWindowFlags flags =
+            ImGuiWindowFlags_NoDecoration |
+            ImGuiWindowFlags_AlwaysAutoResize |
+            ImGuiWindowFlags_NoSavedSettings |
+            ImGuiWindowFlags_NoFocusOnAppearing |
+            ImGuiWindowFlags_NoNav;
+
+        if (ImGui::Begin("##tilemap_hover_overlay", nullptr, flags))
+        {
+            ImGui::Text("Tile: %d, %d", tile.x, tile.y);
+            ImGui::TextDisabled("Value: %d", currentTile);
+        }
+        ImGui::End();
     }
 
     void TilemapEditorPanel::RenderTiles(Tilemap& tilemap)
@@ -587,12 +899,25 @@ namespace BoonEditor
         if (!m_TilemapCanvas.IsHovered())
             return;
 
+        ImGuiIO& io = ImGui::GetIO();
+
+        if (io.KeyCtrl && io.MouseWheel != 0.0f)
+        {
+            m_BrushSize += io.MouseWheel > 0.0f ? 1 : -1;
+            m_BrushSize = std::clamp(m_BrushSize, 1, 31);
+            return;
+        }
+
         if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
         {
+            PushUndoState(tilemap);
+            m_EditInProgress = true;
+
             if (m_Mode == TileBrushMode::Eyedropper)
             {
                 m_SelectedTile = tilemap.GetTile(tile.x, tile.y);
-                m_Mode = TileBrushMode::Paint;
+                if (m_AutoSwitchToPaintAfterPick)
+                    m_Mode = TileBrushMode::Paint;
                 return;
             }
 
@@ -604,7 +929,16 @@ namespace BoonEditor
         }
 
         if (!ImGui::IsMouseDown(ImGuiMouseButton_Left))
+        {
+            m_EditInProgress = false;
             return;
+        }
+
+        if (!m_EditInProgress)
+        {
+            PushUndoState(tilemap);
+            m_EditInProgress = true;
+        }
 
         switch (m_Mode)
         {
@@ -725,6 +1059,85 @@ namespace BoonEditor
         }
 
         return m_RandomBrushTiles.back();
+    }
+
+    TilemapSnapshot TilemapEditorPanel::CaptureSnapshot(Tilemap& tilemap) const
+    {
+        TilemapSnapshot snapshot;
+        snapshot.ChunksX = tilemap.GetChunksX();
+        snapshot.ChunksY = tilemap.GetChunksY();
+        snapshot.ChunkSize = tilemap.GetChunkSize();
+        snapshot.UnitSize = tilemap.GetUnitSize();
+
+        const int width = snapshot.ChunksX * snapshot.ChunkSize;
+        const int height = snapshot.ChunksY * snapshot.ChunkSize;
+        snapshot.Tiles.reserve(static_cast<size_t>(width * height));
+
+        for (int y = 0; y < height; ++y)
+        {
+            for (int x = 0; x < width; ++x)
+                snapshot.Tiles.push_back(tilemap.GetTile(x, y));
+        }
+
+        return snapshot;
+    }
+
+    void TilemapEditorPanel::RestoreSnapshot(Tilemap& tilemap, const TilemapSnapshot& snapshot)
+    {
+        if (snapshot.ChunksX <= 0 || snapshot.ChunksY <= 0 || snapshot.ChunkSize <= 0)
+            return;
+
+        tilemap.Resize(snapshot.ChunksX, snapshot.ChunksY, snapshot.ChunkSize);
+        tilemap.SetUnitSize(snapshot.UnitSize);
+
+        const int width = snapshot.ChunksX * snapshot.ChunkSize;
+        const int height = snapshot.ChunksY * snapshot.ChunkSize;
+        const size_t expected = static_cast<size_t>(width * height);
+
+        if (snapshot.Tiles.size() < expected)
+            return;
+
+        size_t index = 0;
+        for (int y = 0; y < height; ++y)
+        {
+            for (int x = 0; x < width; ++x)
+                tilemap.SetTile(x, y, snapshot.Tiles[index++]);
+        }
+
+        m_TilemapCanvasNeedsFit = true;
+    }
+
+    void TilemapEditorPanel::PushUndoState(Tilemap& tilemap)
+    {
+        m_UndoStack.push_back(CaptureSnapshot(tilemap));
+        if (static_cast<int>(m_UndoStack.size()) > m_MaxUndoSteps)
+            m_UndoStack.erase(m_UndoStack.begin());
+
+        m_RedoStack.clear();
+    }
+
+    void TilemapEditorPanel::Undo(Tilemap& tilemap)
+    {
+        if (m_UndoStack.empty())
+            return;
+
+        m_RedoStack.push_back(CaptureSnapshot(tilemap));
+
+        TilemapSnapshot snapshot = m_UndoStack.back();
+        m_UndoStack.pop_back();
+        RestoreSnapshot(tilemap, snapshot);
+    }
+
+    void TilemapEditorPanel::Redo(Tilemap& tilemap)
+    {
+        if (m_RedoStack.empty())
+            return;
+
+        m_UndoStack.push_back(CaptureSnapshot(tilemap));
+
+        TilemapSnapshot snapshot = m_RedoStack.back();
+        m_RedoStack.pop_back();
+        RestoreSnapshot(tilemap, snapshot);
     }
 
     bool TilemapEditorPanel::GetAtlasInfo(

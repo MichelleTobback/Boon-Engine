@@ -1,9 +1,10 @@
-﻿#include "Panels/SpriteAtlasEditorPanel.h"
+#include "Panels/SpriteAtlasEditorPanel.h"
 
 #include <imgui.h>
 
 #include <Renderer/Texture.h>
 #include <UI/UI.h>
+#include <UI/IconsFontAwesome7.h>
 
 #include "Assets/AssetDatabase.h"
 
@@ -105,6 +106,120 @@ namespace
 
         ImGui::Separator();
     }
+
+    void DrawMutedHelp(const char* text)
+    {
+        ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyleColorVec4(ImGuiCol_TextDisabled));
+        ImGui::TextWrapped("%s", text);
+        ImGui::PopStyleColor();
+    }
+
+    void BeginSoftCard(const char* id, ImVec2 size = ImVec2(0.0f, 0.0f))
+    {
+        ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 10.0f);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(10.0f, 10.0f));
+
+        ImGui::BeginChild(
+            id,
+            size,
+            true,
+            ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse
+        );
+    }
+
+    void BeginSoftCard(const char* id, float height)
+    {
+        ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 10.0f);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(10.0f, 10.0f));
+
+        ImGui::BeginChild(
+            id,
+            ImVec2(0.0f, height),
+            true,
+            ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse
+        );
+    }
+
+    void EndSoftCard()
+    {
+        ImGui::EndChild();
+        ImGui::PopStyleVar(2);
+    }
+
+    void DrawSmallStat(const char* label, const char* value)
+    {
+        ImGui::BeginGroup();
+
+        ImGui::TextDisabled("%s", label);
+        ImGui::Text("%s", value);
+
+        ImGui::EndGroup();
+    }
+
+    bool Splitter(const char* id, bool vertical, float thickness, float* sizeA, float* sizeB, float minA, float minB)
+    {
+        ImGui::PushID(id);
+
+        ImVec2 cursor = ImGui::GetCursorPos();
+        ImVec2 size = vertical
+            ? ImVec2(thickness, -1.0f)
+            : ImVec2(-1.0f, thickness);
+
+        ImGui::InvisibleButton("##splitter", size);
+
+        bool active = ImGui::IsItemActive();
+        bool hovered = ImGui::IsItemHovered();
+
+        if (hovered || active)
+            ImGui::SetMouseCursor(vertical ? ImGuiMouseCursor_ResizeEW : ImGuiMouseCursor_ResizeNS);
+
+        if (active)
+        {
+            float delta = vertical ? ImGui::GetIO().MouseDelta.x : ImGui::GetIO().MouseDelta.y;
+
+            if (*sizeA + delta >= minA && *sizeB - delta >= minB)
+            {
+                *sizeA += delta;
+                *sizeB -= delta;
+            }
+        }
+
+        ImVec2 min = ImGui::GetItemRectMin();
+        ImVec2 max = ImGui::GetItemRectMax();
+
+        ImGui::GetWindowDrawList()->AddRectFilled(
+            min,
+            max,
+            ImGui::GetColorU32(hovered || active ? ImGuiCol_ButtonHovered : ImGuiCol_Border),
+            2.0f
+        );
+
+        ImGui::PopID();
+        return active;
+    }
+
+    bool EditorIconButton(
+        const char* icon,
+        const char* tooltip,
+        bool active = false,
+        ImVec2 size = ImVec2(30.0f, 30.0f))
+    {
+        ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, ImGui::GetStyle().FrameRounding);
+
+        ImGui::PushStyleColor(ImGuiCol_Button, active ? WithAlpha(ImGuiCol_CheckMark, 0.22f) : Col(ImGuiCol_Button));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, active ? WithAlpha(ImGuiCol_CheckMark, 0.30f) : Col(ImGuiCol_ButtonHovered));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, active ? WithAlpha(ImGuiCol_CheckMark, 0.38f) : Col(ImGuiCol_ButtonActive));
+
+        bool pressed = ImGui::Button(icon, size);
+
+        ImGui::PopStyleColor(3);
+        ImGui::PopStyleVar();
+
+        if (ImGui::IsItemHovered() && tooltip)
+            ImGui::SetTooltip("%s", tooltip);
+
+        return pressed;
+    }
 }
 
 namespace BoonEditor
@@ -139,27 +254,51 @@ namespace BoonEditor
         if (!atlas)
             return;
 
-        ImGui::Text("Sprite Atlas Editor");
+        constexpr ImVec2 buttonSize{ 30.0f, 30.0f };
+
+        ImGui::AlignTextToFramePadding();
+        ImGui::TextUnformatted("Sprite Atlas Editor");
+
         ImGui::SameLine();
-        ImGui::TextDisabled("Slice sprites, define frames, and build animation clips");
+        ImGui::TextDisabled("| Slice sprites, define frames, build clips");
 
         ImGui::Spacing();
 
-        if (EditorButton("Save", false, ImVec2(72.0f, 28.0f)))
+        if (EditorIconButton(ICON_FA_FLOPPY_DISK, "Save", false, buttonSize))
             AssetDatabase::Get().Export<SpriteAtlasAsset>(m_Asset);
 
-        ImGui::SameLine();
+        ImGui::SameLine(0.0f, 10.0f);
+        ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+        ImGui::SameLine(0.0f, 10.0f);
 
-        if (EditorButton("Select", m_Mode == AtlasEditorMode::Select, ImVec2(72.0f, 28.0f)))
+        if (EditorIconButton(ICON_FA_ARROW_POINTER, "Select Mode", m_Mode == AtlasEditorMode::Select, buttonSize))
             m_Mode = AtlasEditorMode::Select;
 
-        ImGui::SameLine();
+        ImGui::SameLine(0.0f, 4.0f);
 
-        if (EditorButton("Slice", m_Mode == AtlasEditorMode::Slice, ImVec2(72.0f, 28.0f)))
+        if (EditorIconButton(ICON_FA_SCISSORS, "Slice Mode", m_Mode == AtlasEditorMode::Slice, buttonSize))
             m_Mode = AtlasEditorMode::Slice;
 
-        ImGui::SameLine(0.0f, 18.0f);
-        ImGui::TextDisabled("MMB drag to pan | Mouse wheel to zoom | Drag frames into timeline");
+        ImGui::SameLine(0.0f, 10.0f);
+        ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+        UI::SameLine();
+
+        AssetHandle tex = atlas->GetTexture();
+
+        ImGui::SetNextItemWidth(260.0f);
+
+
+
+        if (UI::AssetRef("Texture", tex, AssetType::Texture))
+        {
+            atlas->SetTexture(AssetRef<Texture2DAsset>(tex));
+            m_SelectedSprite = -1;
+            m_SelectedGridCells.clear();
+            RestartPreview();
+        }
+
+        ImGui::SameLine(0.0f, 12.0f);
+        ImGui::TextDisabled("MMB Pan  |  Wheel Zoom  |  Drag frames to timeline");
     }
 
     void SpriteAtlasEditorPanel::RenderMainArea()
@@ -170,59 +309,169 @@ namespace BoonEditor
 
         AssetHandle tex = atlas->GetTexture();
 
-        BeginEditorPanel("##asset_header", ImVec2(0.0f, 58.0f));
-
-        ImGui::TextDisabled("Texture");
-        ImGui::SameLine(90.0f);
-
-        if (UI::AssetRef("##texture", tex, AssetType::Texture))
-            atlas->SetTexture(AssetRef<Texture2DAsset>(tex));
-
-        EndEditorPanel();
+        // ─────────────────────────────────────────────
+        // Asset setup header
+        // ─────────────────────────────────────────────
+        //BeginEditorPanel("##sprite_atlas_asset_header", ImVec2(0.0f, 74.0f));
+        //
+        //ImGui::Text("Texture Source");
+        //ImGui::SameLine();
+        //ImGui::TextDisabled("Choose the texture used by this atlas.");
+        //
+        //ImGui::Spacing();
+        //
+        //if (UI::AssetRef("Texture", tex, AssetType::Texture))
+        //{
+        //    atlas->SetTexture(AssetRef<Texture2DAsset>(tex));
+        //    m_SelectedSprite = -1;
+        //    m_SelectedGridCells.clear();
+        //    RestartPreview();
+        //}
+        //
+        //EndEditorPanel();
 
         if (!atlas->GetTexture().IsValid())
         {
             ImGui::Spacing();
 
-            BeginEditorPanel("##missing_texture", ImVec2(0.0f, 180.0f));
+            BeginEditorPanel("##sprite_atlas_missing_texture", ImVec2(0.0f, 180.0f));
             ImGui::Text("No texture assigned");
             ImGui::Spacing();
-            ImGui::TextDisabled("Assign a texture above to start slicing this sprite atlas.");
+            DrawMutedHelp("Assign a texture above to start slicing sprites and creating animation clips.");
             EndEditorPanel();
             return;
         }
 
-        ImGui::Spacing();
-
-        const float inspectorWidth = 340.0f;
-        const float timelineHeight = 168.0f;
-
         ImVec2 avail = ImGui::GetContentRegionAvail();
 
-        ImGui::BeginChild("##atlas_workspace", ImVec2(avail.x - inspectorWidth - 10.0f, avail.y), false);
+        const float gap = 8.0f;
+        const float splitterSize = 5.0f;
 
-        ImVec2 leftAvail = ImGui::GetContentRegionAvail();
+        static float timelineHeight = 176.0f;
 
-        BeginEditorPanel("##animation_preview_panel", ImVec2(0.0f, leftAvail.y - timelineHeight - 10.0f));
-        DrawPanelTitle("Animation Preview", atlas->IsValidClip(m_SelectedClip) ? atlas->GetClip(m_SelectedClip).Name.c_str() : "No clip selected");
+        timelineHeight = std::clamp(timelineHeight, 120.0f, std::max(120.0f, avail.y - 220.0f));
+
+        float upperHeight = avail.y - timelineHeight - splitterSize - gap;
+        upperHeight = std::max(220.0f, upperHeight);
+
+        static float inspectorRatio = 0.36f;
+
+        const float availableSplitWidth =
+            avail.x - splitterSize - gap;
+
+        const float minPreviewWidth = 260.0f;
+        const float minInspectorWidth = 280.0f;
+
+        float inspectorWidth =
+            availableSplitWidth * inspectorRatio;
+
+        inspectorWidth = std::clamp(
+            inspectorWidth,
+            minInspectorWidth,
+            std::max(minInspectorWidth, availableSplitWidth - minPreviewWidth));
+
+        float previewWidth =
+            availableSplitWidth - inspectorWidth;
+
+        previewWidth = std::clamp(
+            previewWidth,
+            minPreviewWidth,
+            std::max(minPreviewWidth, availableSplitWidth - minInspectorWidth));
+
+
+        ImGui::BeginChild(
+            "##sprite_atlas_upper_layout",
+            ImVec2(0.0f, upperHeight),
+            false,
+            ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse
+        );
+        
+        BeginEditorPanel("##sprite_atlas_preview_panel", ImVec2(previewWidth, upperHeight));
+        DrawPanelTitle(
+            "Preview",
+            atlas->IsValidClip(m_SelectedClip) ? atlas->GetClip(m_SelectedClip).Name.c_str() : "No clip selected"
+        );
         RenderAnimationPreview(*atlas);
         EndEditorPanel();
 
-        ImGui::Spacing();
+        ImGui::SameLine(0.0f, gap);
 
-        BeginEditorPanel("##timeline_panel", ImVec2(0.0f, timelineHeight));
-        RenderTimeline(*atlas);
+        float sideWidth = inspectorWidth;
+        Splitter("##preview_inspector_splitter", true, splitterSize, &previewWidth, &sideWidth, 260.0f, 280.0f);
+        inspectorWidth = sideWidth;
+
+        if (availableSplitWidth > 0.0f)
+        {
+            inspectorRatio =
+                std::clamp(inspectorWidth / availableSplitWidth, 0.20f, 0.65f);
+        }
+
+        ImGui::SameLine(0.0f, gap);
+
+        BeginEditorPanel("##sprite_atlas_side_panel", ImVec2(inspectorWidth, upperHeight));
+        DrawPanelTitle("Atlas Editor", m_Mode == AtlasEditorMode::Slice ? "Slice mode" : "Select mode");
+
+        if (ImGui::BeginTabBar("##sprite_atlas_tabs", ImGuiTabBarFlags_None))
+        {
+            if (ImGui::BeginTabItem("Sprites"))
+            {
+                ImGui::BeginChild(
+                    "##sprite_tab_scroll",
+                    ImVec2(0.0f, 0.0f),
+                    false,
+                    ImGuiWindowFlags_AlwaysVerticalScrollbar
+                );
+
+                RenderInspector(*atlas);
+
+                ImGui::EndChild();
+                ImGui::EndTabItem();
+            }
+
+            if (ImGui::BeginTabItem("Clips"))
+            {
+                ImGui::BeginChild(
+                    "##clips_tab_scroll",
+                    ImVec2(0.0f, 0.0f),
+                    false,
+                    ImGuiWindowFlags_AlwaysVerticalScrollbar
+                );
+
+                RenderClipEditor(*atlas);
+
+                ImGui::EndChild();
+                ImGui::EndTabItem();
+            }
+
+            ImGui::EndTabBar();
+        }
+
         EndEditorPanel();
 
         ImGui::EndChild();
 
-        ImGui::SameLine();
+        ImGui::Spacing();
 
-        BeginEditorPanel("##atlas_inspector", ImVec2(inspectorWidth, 0.0f));
-        RenderInspector(*atlas);
-        RenderClipEditor(*atlas);
+        float newTimelineHeight = timelineHeight;
+        float newUpperHeight = upperHeight;
+
+        Splitter(
+            "##upper_timeline_splitter",
+            false,
+            splitterSize,
+            &newUpperHeight,
+            &newTimelineHeight,
+            220.0f,
+            120.0f
+        );
+
+        timelineHeight = newTimelineHeight;
+
+        BeginEditorPanel("##sprite_atlas_timeline_panel", ImVec2(0.0f, timelineHeight));
+        RenderTimeline(*atlas);
         EndEditorPanel();
     }
+
 
     void SpriteAtlasEditorPanel::RenderAnimationPreview(SpriteAtlas& atlas)
     {
@@ -234,7 +483,12 @@ namespace BoonEditor
 
         ImVec2 avail = ImGui::GetContentRegionAvail();
 
-        ImGui::BeginChild("##animation_preview_canvas", avail, true);
+        ImGui::BeginChild(
+            "##animation_preview_canvas",
+            avail,
+            false,
+            ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse
+        );
 
         ImDrawList* drawList = ImGui::GetWindowDrawList();
 
@@ -588,25 +842,41 @@ namespace BoonEditor
 
     void SpriteAtlasEditorPanel::RenderInspector(SpriteAtlas& atlas)
     {
-        SectionHeader("Frame Inspector");
+        ImTextureID textureId{};
+        glm::vec2 textureSize{ 0.0f };
+        GetTextureInfo(atlas, textureId, textureSize);
+
+        BeginSoftCard("##sprite_summary_card", ImVec2(0.0f, 78.0f));
+        ImGui::Text("Sprites");
+        ImGui::SameLine();
+        ImGui::TextDisabled("%d frames", static_cast<int>(atlas.GetAllFrameIDs().size()));
+
+        ImGui::Spacing();
+
+        if (m_Mode == AtlasEditorMode::Select)
+            DrawMutedHelp("Select a frame in the viewport, edit its pixel rectangle, or drag it into the timeline.");
+        else
+            DrawMutedHelp("Select cells in the viewport, then create frames from the selected slice cells.");
+
+        EndSoftCard();
+
+        ImGui::Spacing();
+
+        BeginSoftCard("##frame_inspector_card", atlas.Exists(m_SelectedSprite) ? 190.0f : 96.0f);
+        ImGui::Text("Frame Inspector");
+        ImGui::Separator();
 
         if (!atlas.Exists(m_SelectedSprite))
         {
-            ImGui::TextDisabled("No frame selected.");
-            ImGui::Spacing();
-            ImGui::TextDisabled("Click a frame in the atlas preview.");
+            DrawMutedHelp("No frame selected. Click a frame in the atlas viewport to inspect it.");
         }
         else
         {
             SpriteFrame frame = atlas.GetSpriteFrame(m_SelectedSprite);
 
-            ImGui::TextDisabled("Stable ID");
-            ImGui::SameLine(120.0f);
-            ImGui::Text("%d", m_SelectedSprite);
-
-            ImTextureID textureId{};
-            glm::vec2 textureSize{ 0.0f };
-            GetTextureInfo(atlas, textureId, textureSize);
+            char idBuffer[32]{};
+            std::snprintf(idBuffer, sizeof(idBuffer), "%d", m_SelectedSprite);
+            DrawSmallStat("Stable ID", idBuffer);
 
             glm::ivec2 pixelPos = UVToPixel(frame, textureSize);
             glm::ivec2 pixelSize = SizeToPixel(frame, textureSize);
@@ -614,7 +884,7 @@ namespace BoonEditor
             bool changed = false;
 
             changed |= UI::DragInt2("Position", pixelPos, 0, 99999);
-            changed |= UI::DragInt2("Size", pixelSize, 0, 99999);
+            changed |= UI::DragInt2("Size", pixelSize, 1, 99999);
 
             if (changed)
             {
@@ -625,13 +895,12 @@ namespace BoonEditor
                 pixelSize.y = std::clamp(pixelSize.y, 1, (int)textureSize.y - pixelPos.y);
 
                 SpriteFrame updated = PixelToFrame(pixelPos, pixelSize, textureSize);
-
                 atlas.SetSpriteFrame(m_SelectedSprite, updated);
             }
 
             ImGui::Spacing();
 
-            if (EditorButton("Add Frame##inspector_add_frame", false, ImVec2(92.0f, 26.0f)))
+            if (EditorButton("Add to Clip", false, ImVec2(96.0f, 26.0f)))
                 AddSelectedFrameToCurrentClip(atlas);
 
             ImGui::SameLine();
@@ -643,14 +912,132 @@ namespace BoonEditor
             }
         }
 
+        EndSoftCard();
+
+        ImGui::Spacing();
+
+        BeginSoftCard("##sprite_browser_card", ImVec2(0.0f, 178.0f));
+        ImGui::Text("Sprite Browser");
+        ImGui::SameLine();
+        ImGui::TextDisabled("drag frames into the timeline");
+        ImGui::Separator();
+
+        if (atlas.GetAllFrameIDs().empty())
+        {
+            DrawMutedHelp("No frames have been created yet. Switch to Slice mode and create frames from the grid.");
+        }
+        else
+        {
+            ImGui::BeginChild(
+                "##sprite_frame_browser_scroll",
+                ImVec2(0.0f, 120.0f),
+                false,
+                ImGuiWindowFlags_HorizontalScrollbar
+            );
+
+            constexpr ImVec2 cardSize{ 72.0f, 96.0f };
+            constexpr ImVec2 thumbSize{ 52.0f, 52.0f };
+            constexpr float spacing = 8.0f;
+
+            ImDrawList* drawList = ImGui::GetWindowDrawList();
+            const std::vector<int> ids = atlas.GetAllFrameIDs();
+
+            for (int i = 0; i < static_cast<int>(ids.size()); ++i)
+            {
+                const int id = ids[i];
+
+                if (!atlas.Exists(id))
+                    continue;
+
+                ImGui::PushID(id);
+
+                ImVec2 pos = ImGui::GetCursorScreenPos();
+
+                ImGui::InvisibleButton("##sprite_card", cardSize);
+
+                bool hovered = ImGui::IsItemHovered();
+                bool selected = id == m_SelectedSprite;
+
+                if (ImGui::IsItemClicked())
+                    m_SelectedSprite = id;
+
+                if (ImGui::BeginDragDropSource())
+                {
+                    int payloadId = id;
+
+                    ImGui::SetDragDropPayload(
+                        "SPRITE_ATLAS_FRAME_ID",
+                        &payloadId,
+                        sizeof(int)
+                    );
+
+                    ImGui::Text("Frame id:%d", payloadId);
+                    ImGui::EndDragDropSource();
+                }
+
+                ImVec2 max(pos.x + cardSize.x, pos.y + cardSize.y);
+
+                ImU32 bg =
+                    selected ? Accent(0.22f) :
+                    hovered ? SurfaceHover() :
+                    Surface();
+
+                ImU32 border =
+                    selected || hovered ? Accent(0.95f) : Border();
+
+                drawList->AddRectFilled(pos, max, bg, ImGui::GetStyle().FrameRounding);
+                drawList->AddRect(pos, max, border, ImGui::GetStyle().FrameRounding, 0, selected ? 2.0f : 1.0f);
+
+                ImVec2 imageMin(pos.x + 10.0f, pos.y + 9.0f);
+                ImVec2 imageMax(imageMin.x + thumbSize.x, imageMin.y + thumbSize.y);
+
+                drawList->AddRectFilled(imageMin, imageMax, IM_COL32(12, 13, 14, 255), ImGui::GetStyle().FrameRounding);
+
+                const SpriteFrame& frame = atlas.GetSpriteFrame(id);
+
+                drawList->AddImage(
+                    textureId,
+                    imageMin,
+                    imageMax,
+                    ImVec2(frame.UV.x, frame.UV.y + frame.Size.y),
+                    ImVec2(frame.UV.x + frame.Size.x, frame.UV.y),
+                    IM_COL32_WHITE
+                );
+
+                drawList->AddRect(imageMin, imageMax, Border(), ImGui::GetStyle().FrameRounding);
+
+                char label[32]{};
+                std::snprintf(label, sizeof(label), "id:%d", id);
+
+                drawList->AddText(
+                    ImVec2(pos.x + 10.0f, pos.y + 68.0f),
+                    selected ? Col(ImGuiCol_Text) : TextMuted(),
+                    label
+                );
+
+                ImGui::PopID();
+
+                if (i + 1 < static_cast<int>(ids.size()))
+                    ImGui::SameLine(0.0f, spacing);
+            }
+
+            ImGui::EndChild();
+        }
+
+        EndSoftCard();
+
         if (m_Mode == AtlasEditorMode::Slice)
         {
-            SectionHeader("Slice Grid");
+            ImGui::Spacing();
+
+            BeginSoftCard("##slice_grid_card", 190.0f);
+            ImGui::Text("Slice Grid");
+            ImGui::Separator();
 
             int gridMode = static_cast<int>(m_GridMode);
             const char* modes[] = { "Cell Size", "Rows / Columns" };
 
-            if (ImGui::Combo("Grid Mode", &gridMode, modes, 2))
+            if (UI::Combo("Grid Mode", gridMode, modes, 2))
                 m_GridMode = static_cast<GridMode>(gridMode);
 
             if (m_GridMode == GridMode::Cellsize)
@@ -660,6 +1047,7 @@ namespace BoonEditor
             else
             {
                 UI::DragInt("Columns", m_Cols, 1, 4096);
+                UI::SameLine();
                 UI::DragInt("Rows", m_Rows, 1, 4096);
             }
 
@@ -675,12 +1063,27 @@ namespace BoonEditor
 
             ImGui::Spacing();
             ImGui::TextDisabled("%d selected cells", static_cast<int>(m_SelectedGridCells.size()));
+
+            EndSoftCard();
         }
     }
 
+
     void SpriteAtlasEditorPanel::RenderClipEditor(SpriteAtlas& atlas)
     {
-        SectionHeader("Animation Clips");
+        BeginSoftCard("##clip_summary_card", ImVec2(0.0f, 76.0f));
+        ImGui::Text("Animation Clips");
+        ImGui::SameLine();
+        ImGui::TextDisabled("%d clips", static_cast<int>(atlas.GetClipCount()));
+
+        ImGui::Spacing();
+        DrawMutedHelp("Create clips, edit playback settings, then drag sprite frames into the timeline below.");
+
+        EndSoftCard();
+
+        ImGui::Spacing();
+
+        BeginSoftCard("##clip_list_card", ImVec2(0.0f, 188.0f));
 
         if (EditorButton("New Clip", false, ImVec2(86.0f, 26.0f)))
         {
@@ -695,20 +1098,26 @@ namespace BoonEditor
 
         ImGui::SameLine();
 
-        if (EditorButton("Remove", false, ImVec2(78.0f, 26.0f)))
-        {
-            if (atlas.IsValidClip(m_SelectedClip))
-            {
-                atlas.RemoveClip(m_SelectedClip);
+        const bool canRemove = atlas.IsValidClip(m_SelectedClip);
 
-                if (m_SelectedClip >= static_cast<int>(atlas.GetClipCount()))
-                    m_SelectedClip = static_cast<int>(atlas.GetClipCount()) - 1;
-            }
+        if (EditorButton("Remove", false, ImVec2(78.0f, 26.0f)) && canRemove)
+        {
+            atlas.RemoveClip(m_SelectedClip);
+
+            if (m_SelectedClip >= static_cast<int>(atlas.GetClipCount()))
+                m_SelectedClip = static_cast<int>(atlas.GetClipCount()) - 1;
+
+            RestartPreview();
         }
 
         ImGui::Spacing();
 
-        ImGui::BeginChild("##clip_list", ImVec2(0.0f, 120.0f), true);
+        ImGui::BeginChild("##clip_list", ImVec2(0.0f, 116.0f), true);
+
+        if (atlas.GetClipCount() == 0)
+        {
+            DrawMutedHelp("No clips yet. Create one to start building an animation.");
+        }
 
         for (int i = 0; i < static_cast<int>(atlas.GetClipCount()); ++i)
         {
@@ -718,45 +1127,59 @@ namespace BoonEditor
                 ? "Clip " + std::to_string(i)
                 : clip.Name;
 
-            label += "  (" + std::to_string(static_cast<int>(clip.Frames.size())) + ")";
+            label += "  (" + std::to_string(static_cast<int>(clip.Frames.size())) + " frames)";
 
             if (ImGui::Selectable(label.c_str(), m_SelectedClip == i))
+            {
                 m_SelectedClip = i;
+                RestartPreview();
+            }
         }
 
         ImGui::EndChild();
+        EndSoftCard();
 
         if (!atlas.IsValidClip(m_SelectedClip))
             return;
 
         ImGui::Spacing();
 
+        BeginSoftCard("##clip_settings_card", 190.0f);
+
         SpriteAnimClip& selected = atlas.GetClip(m_SelectedClip);
+
+        ImGui::Text("Clip Settings");
+        ImGui::Separator();
 
         char nameBuffer[128]{};
         std::strncpy(nameBuffer, selected.Name.c_str(), sizeof(nameBuffer) - 1);
 
-        if (ImGui::InputText("Name", nameBuffer, sizeof(nameBuffer)))
-            selected.Name = nameBuffer;
+        if (UI::Field("Name", selected.Name))
+        {
+        }
 
         int fps = static_cast<int>(selected.FPS);
-        if (UI::DragInt("FPS", fps, 1, 30))
-        {
+        if (UI::DragInt("FPS", fps, 1, 60))
             selected.FPS = static_cast<float>(fps);
-        }
 
         UI::DragFloat("Speed", selected.Speed, 0.01f, 20.0f, 0.01f);
 
         ImGui::Spacing();
 
-        if (EditorButton("Add Frame##clip_add_frame", false, ImVec2(92.0f, 26.0f)))
+        if (EditorButton("Add Frame", false, ImVec2(92.0f, 26.0f)))
             AddSelectedFrameToCurrentClip(atlas);
 
         ImGui::SameLine();
 
         if (EditorButton("Clear", false, ImVec2(72.0f, 26.0f)))
+        {
             selected.Frames.clear();
+            RestartPreview();
+        }
+
+        EndSoftCard();
     }
+
 
     void SpriteAtlasEditorPanel::RenderTimeline(SpriteAtlas& atlas)
     {

@@ -17,7 +17,11 @@ namespace Boon
 		 */
 		enum class WinConfigFlag : uint32_t
 		{
-			None = 0, Vsync
+			None = 0, 
+			Vsync = 1, 
+			Borderless = 2,
+			Resizable = 4,
+			FullScreen = 8
 		};
 
 		struct WindowDesc

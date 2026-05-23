@@ -19,6 +19,7 @@ namespace Boon
 		void Update(GameObject);
 
 		void SetClip(int clip, bool restart = true);
+		void SetClip(std::string_view clip, bool restart = true);
 
 		BPROPERTY(RangeMin="0", RangeMax="10", Slider)
 		int Clip;

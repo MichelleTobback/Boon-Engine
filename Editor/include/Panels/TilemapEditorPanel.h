@@ -11,6 +11,7 @@
 #include <vector>
 #include <queue>
 #include <set>
+#include <string>
 
 using namespace Boon;
 
@@ -31,6 +32,15 @@ namespace BoonEditor
         Circle
     };
 
+    struct TilemapSnapshot
+    {
+        int ChunksX = 0;
+        int ChunksY = 0;
+        int ChunkSize = 0;
+        float UnitSize = 1.0f;
+        std::vector<int> Tiles;
+    };
+
     class TilemapEditorPanel final : public AssetEditor<TilemapAsset>
     {
     public:
@@ -47,6 +57,12 @@ namespace BoonEditor
         void RenderToolSettings(Tilemap& tilemap);
         void RenderPalette(Tilemap& tilemap);
         void RenderRandomBrush(Tilemap& tilemap);
+        void RenderSelectedTilePreview(Tilemap& tilemap);
+        void RenderViewportOverlay(Tilemap& tilemap, const glm::ivec2& tile);
+
+        void HandleShortcuts(Tilemap& tilemap);
+        void FitTilemapCanvas(Tilemap& tilemap);
+        void FitPaletteCanvas(const glm::vec2& textureSize);
 
         void RenderViewportTilemap(Tilemap& tilemap);
         void RenderTiles(Tilemap& tilemap);
@@ -58,6 +74,12 @@ namespace BoonEditor
         void PaintBrush(Tilemap& tilemap, const glm::ivec2& tile, int tileId);
         void FloodFill(Tilemap& tilemap, int x, int y, int newTile);
         int SelectRandomTile() const;
+
+        TilemapSnapshot CaptureSnapshot(Tilemap& tilemap) const;
+        void RestoreSnapshot(Tilemap& tilemap, const TilemapSnapshot& snapshot);
+        void PushUndoState(Tilemap& tilemap);
+        void Undo(Tilemap& tilemap);
+        void Redo(Tilemap& tilemap);
 
         bool GetAtlasInfo(Tilemap& tilemap, std::shared_ptr<SpriteAtlas>& outAtlas, ImTextureID& outTextureId) const;
 
@@ -83,8 +105,26 @@ namespace BoonEditor
         bool m_ShowGrid = true;
         bool m_ShowChunks = true;
         bool m_ShowEmptyTiles = false;
+        bool m_ShowBrushPreview = true;
+        bool m_ShowTileCoordinates = true;
+        bool m_AutoSwitchToPaintAfterPick = true;
+
+        bool m_TilemapCanvasNeedsFit = true;
+        bool m_PaletteCanvasNeedsFit = true;
+        bool m_EditInProgress = false;
+
+        bool m_ResizeInitialized = false;
+        int m_ResizeChunksX = 1;
+        int m_ResizeChunksY = 1;
+        int m_ResizeChunkSize = 16;
+
+        glm::ivec2 m_HoveredTile{ -1, -1 };
 
         std::vector<int> m_RandomBrushTiles;
         std::vector<float> m_RandomBrushWeights;
+
+        std::vector<TilemapSnapshot> m_UndoStack;
+        std::vector<TilemapSnapshot> m_RedoStack;
+        int m_MaxUndoSteps = 32;
     };
 }

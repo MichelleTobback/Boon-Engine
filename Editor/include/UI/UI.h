@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Reflection/BProperty.h"
 #include <Asset/Assets.h>
 #include "Assets/AssetDatabase.h"
@@ -7,6 +7,11 @@
 #include <imgui_internal.h>
 #include <string>
 #include <algorithm>
+#include <vector>
+#include <unordered_map>
+#include <filesystem>
+#include <cstring>
+#include <cctype>
 #include <glm/glm.hpp>
 
 using namespace Boon;
@@ -24,6 +29,36 @@ namespace BoonEditor
 
             operator bool() const { return Changed; }
         };
+
+        // Call this before the next UI::Property/DragInt/Checkbox/etc. when you want
+        // that next property to continue on the same ImGui line instead of starting
+        // a new full-width inspector row.
+        //
+        // Example:
+        // UI::DragInt("Width", width, 1, 512);
+        // UI::DragInt("Height", height, 1, 512);
+        static void SameLine(float spacing = -1.0f)
+        {
+            float regionMinX = ImGui::GetWindowContentRegionMin().x;
+            float regionMaxX = ImGui::GetWindowContentRegionMax().x;
+            float fullWidth = regionMaxX - regionMinX;
+
+            float secondPropertyX = regionMinX + fullWidth * 0.5f;
+
+            if (spacing >= 0.0f)
+                secondPropertyX += spacing;
+
+            ImGui::SameLine(secondPropertyX);
+            m_NextPropertyInline = true;
+        }
+
+        // Optional helper when you want the first property in a row to be compact too.
+        // This does not draw anything by itself; it only tells the next property to use
+        // compact inline layout.
+        static void InlineProperty()
+        {
+            m_NextPropertyInline = true;
+        }
 
         static PropertyResult Property(const BProperty& property, void* pInstance)
         {
@@ -798,7 +833,7 @@ namespace BoonEditor
 
                     std::string filename = std::filesystem::path(path).filename().string();
                     if (filename.empty())
-                        filename = "Unknown";
+                        continue;
                     bool selected = (uuid == handle);
 
                     if (ImGui::Selectable(filename.c_str(), selected))
@@ -1227,18 +1262,37 @@ namespace BoonEditor
             {
                 ImGui::PushID(label.c_str());
 
+                auto& pending = m_PendingPropertyEdits[label];
+                if (!pending.Activated)
+                    pending.Value = originalVal;
+
+                m_CurrentPropertyInline = m_NextPropertyInline;
+                m_NextPropertyInline = false;
+
+                if (m_CurrentPropertyInline)
+                {
+                    const float startX = ImGui::GetCursorPosX();
+                    const float propertyWidth = 220.0f;
+                    const float labelWidth = 80.0f;
+                    const float valueWidth = propertyWidth - labelWidth - ImGui::GetStyle().ItemInnerSpacing.x;
+
+                    ImGui::AlignTextToFramePadding();
+                    ImGui::TextUnformatted(label.c_str());
+
+                    ImGui::SameLine(startX + labelWidth);
+
+                    ImGui::PushItemWidth(valueWidth);
+                    return;
+                }
+
                 float panelWidth = ImGui::GetContentRegionAvail().x;
 
-                ImGui::Columns(2);
+                ImGui::Columns(2, nullptr, false);
                 ImGui::SetColumnWidth(0, panelWidth * 0.3f);
                 ImGui::Text("%s", label.c_str());
                 ImGui::NextColumn();
 
                 ImGui::PushItemWidth(panelWidth * 0.65f);
-
-                auto& pending = m_PendingPropertyEdits[label];
-                if (!pending.Activated)
-                    pending.Value = originalVal;
             }
 
             static PropertyResult EndProperty(const std::string& property, bool changed)
@@ -1278,8 +1332,12 @@ namespace BoonEditor
                 }
 
                 ImGui::PopItemWidth();
-                ImGui::Columns(1);
+
+                if (!m_CurrentPropertyInline)
+                    ImGui::Columns(1);
+
                 ImGui::PopID();
+                m_CurrentPropertyInline = false;
 
                 return result;
             }
@@ -1341,5 +1399,8 @@ namespace BoonEditor
             };
 
             static std::unordered_map<std::string, PendingPropertyState> m_PendingPropertyEdits;
+
+            static inline bool m_NextPropertyInline = false;
+            static inline bool m_CurrentPropertyInline = false;
 	};
 }

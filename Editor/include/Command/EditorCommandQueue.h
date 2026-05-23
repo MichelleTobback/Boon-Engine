@@ -1,3 +1,4 @@
+#pragma once
 #include "Command/EditorCommand.h"
 
 #include <memory>

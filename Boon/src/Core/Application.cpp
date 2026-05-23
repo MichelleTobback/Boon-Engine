@@ -42,6 +42,13 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 	uint32_t windowFlags = (uint32_t)windowDesc.flags;
 	if (m_Desc.Render.bVSync)
 		windowFlags |= (uint32_t)Window::WinConfigFlag::Vsync;
+	if (m_Desc.Window.bBorderless)
+		windowFlags |= (uint32_t)Window::WinConfigFlag::Borderless;
+	if (m_Desc.Window.bFullscreen)
+		windowFlags |= (uint32_t)Window::WinConfigFlag::FullScreen;
+	if (m_Desc.Window.bResizable)
+		windowFlags |= (uint32_t)Window::WinConfigFlag::Resizable;
+
 	windowDesc.flags = (Window::WinConfigFlag)windowFlags;
 	m_pWindow = std::make_unique<Window>(windowDesc);
 	Renderer::Init();

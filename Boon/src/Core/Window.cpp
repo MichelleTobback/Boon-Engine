@@ -2,6 +2,7 @@
 #include "Core/Assert.h"
 #include "Core/Application.h"
 #include "Core/ServiceLocator.h"
+#include "Core/BitFlag.h"
 
 #include "Event/EventBus.h"
 #include "Event/WindowEvents.h"
@@ -48,6 +49,11 @@ namespace Boon
 				}
 
 				glfwInitialized = true;
+			}
+
+			if (BitFlag::IsSet(m_Desc.flags, Window::WinConfigFlag::Borderless))
+			{
+				glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 			}
 
 			m_pWindow = glfwCreateWindow(static_cast<int>(m_Desc.width), static_cast<int>(m_Desc.height), m_Desc.name.c_str(), nullptr, nullptr);

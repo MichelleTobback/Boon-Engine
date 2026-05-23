@@ -66,3 +66,11 @@ void Boon::SpriteAnimatorComponent::SetClip(int clip, bool restart)
 		m_Current = 0;
 	}
 }
+
+void Boon::SpriteAnimatorComponent::SetClip(std::string_view clip, bool restart)
+{
+	if (!Atlas)
+		return;
+
+	//if (Atlas->GetClip(clip))
+}
