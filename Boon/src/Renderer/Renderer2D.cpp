@@ -3,13 +3,13 @@
 #include "Renderer/Shader.h"
 #include "Renderer/Texture.h"
 #include "Renderer/VertexData.h"
-
-#include "Core/ServiceLocator.h"
-
-#include "Asset/AssetLibrary.h"
-#include "Asset/ShaderAsset.h"
+#include "Renderer/Renderer.h"
+#include "Renderer/RenderContext.h"
+#include "Renderer/UniformBuffer.h"
+#include "Renderer/UBData.h"
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <algorithm>
 
 namespace Boon
 {
@@ -18,6 +18,36 @@ namespace Boon
 	static const uint32_t s_MaxVertices = s_MaxQuads * 4;
 	static const uint32_t s_MaxIndices = s_MaxQuads * 6;
 	static const uint32_t s_MaxTextureSlots = 32;
+
+	static float ResolveTextureSlot(
+		const std::shared_ptr<Texture2D>& texture,
+		std::array<std::shared_ptr<Texture2D>, 32>& textureSlots,
+		uint32_t& textureSlotIndex,
+		RenderBatch& quadBatch)
+	{
+		if (!texture)
+			return 0.0f;
+
+		for (uint32_t i = 1; i < textureSlotIndex; i++)
+		{
+			if (textureSlots[i] &&
+				textureSlots[i]->GetRendererID() == texture->GetRendererID())
+			{
+				return static_cast<float>(i);
+			}
+		}
+
+		if (textureSlotIndex >= 32)
+		{
+			quadBatch.NextBatch();
+		}
+
+		const float index = static_cast<float>(textureSlotIndex);
+		textureSlots[textureSlotIndex] = texture;
+		textureSlotIndex++;
+
+		return index;
+	}
 }
 
 using namespace Boon;
@@ -58,7 +88,17 @@ Boon::Renderer2D::Renderer2D(const Renderer2DCreateInfo& desc)
 		{ ShaderDataType::Int,	  "a_ID"		   }
 	};
 	auto quadIndexBuffer = IndexBuffer::Create(quadIndices, s_MaxIndices);
-	m_QuadBatch.Initialize(s_MaxVertices, quadBufferLayout, desc.pSpriteShader, PrimitiveType::Triangles, quadIndexBuffer);
+
+	PipelineDescriptor quadPipelineDesc{};
+	quadPipelineDesc.Shader = desc.pSpriteShader;
+	quadPipelineDesc.Layout = quadBufferLayout;
+	quadPipelineDesc.Primitive = PrimitiveType::Triangles;
+	quadPipelineDesc.Blend = BlendMode::Alpha;
+	quadPipelineDesc.Depth = DepthMode::ReadWrite;
+	quadPipelineDesc.Cull = CullMode::None;
+	auto quadPipeline = std::make_shared<Pipeline>(quadPipelineDesc);
+
+	m_QuadBatch.Initialize(s_MaxVertices, quadPipeline, quadIndexBuffer);
 	delete[] quadIndices;
 	m_QuadBatch.BindBeginBatchCallback([this]() {
 		m_TextureSlotIndex = 1;
@@ -73,109 +113,93 @@ Boon::Renderer2D::Renderer2D(const Renderer2DCreateInfo& desc)
 		{ ShaderDataType::Float3, "a_Position"	},
 		{ ShaderDataType::Float4, "a_Color"		}
 	};
-	m_LineBatch.Initialize(s_MaxVertices, lineBufferLayout, desc.pLineShader, PrimitiveType::Lines);
+
+	PipelineDescriptor linePipelineDesc{};
+	linePipelineDesc.Shader = desc.pLineShader;
+	linePipelineDesc.Layout = lineBufferLayout;
+	linePipelineDesc.Primitive = PrimitiveType::Lines;
+	linePipelineDesc.Blend = BlendMode::Alpha;
+	linePipelineDesc.Depth = DepthMode::ReadWrite;
+	linePipelineDesc.Cull = CullMode::None;
+	auto linePipeline = std::make_shared<Pipeline>(linePipelineDesc);
+
+	m_LineBatch.Initialize(s_MaxVertices, linePipeline);
 }
 
 Boon::Renderer2D::~Renderer2D()
 {
 }
 
-void Boon::Renderer2D::Begin()
+void Boon::Renderer2D::Begin(RenderContext&)
 {
 	m_QuadBatch.Begin();
 	m_LineBatch.Begin();
 }
 
-void Boon::Renderer2D::End()
+void Boon::Renderer2D::End(RenderContext& ctx)
 {
+	FlushRenderQueue(ctx);
+
 	m_QuadBatch.Flush();
 	m_LineBatch.Flush();
 }
 
-void Boon::Renderer2D::SubmitQuad(const glm::mat4& transform, const glm::vec4& color, int gameObjectHandle)
+void Renderer2D::SubmitQuad(const QuadRenderItem2D& item)
 {
-	constexpr size_t quadVertexCount = 4;
-	const float textureIndex = 0.0f;
-	constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
-	const float tilingFactor = 1.0f;
-
-	for (size_t i = 0; i < quadVertexCount; i++)
-	{
-		QuadVertex& vertex = m_QuadBatch.PushVertex<QuadVertex>();
-		vertex.Position = transform * m_QuadVertexPositions[i];
-		vertex.Color = color;
-		vertex.TexCoord = textureCoords[i];
-		vertex.TexIndex = textureIndex;
-		vertex.TilingFactor = tilingFactor;
-		vertex.GameObjectID = gameObjectHandle;
-	}
+	m_RenderQueue.Submit(item);
 }
 
-void Boon::Renderer2D::SubmitQuad(const glm::mat4& transform, const std::shared_ptr<Texture2D>& texture, float tilingFactor, const glm::vec4& color, int gameObjectHandle)
+void Boon::Renderer2D::SubmitQuad(const glm::mat4& transform, const std::shared_ptr<Material>& material, int gameObjectHandle)
 {
-	SubmitQuad(transform, texture, tilingFactor, color, gameObjectHandle, { 0.f, 0.f }, { 1.f, 1.f });
+	SubmitQuad(transform, material, gameObjectHandle, { 0.f, 0.f }, { 1.f, 1.f });
 }
 
-void Boon::Renderer2D::SubmitQuad(const glm::mat4& transform, const std::shared_ptr<Texture2D>& texture, float tilingFactor,
-	const glm::vec4& color, int gameObjectHandle, const glm::vec2& spriteTexCoord, const glm::vec2& spriteTexSize)
+void Boon::Renderer2D::SubmitQuad(
+	const glm::mat4& transform,
+	const std::shared_ptr<Material>& material,
+	int gameObjectHandle,
+	const glm::vec2& spriteTexCoord,
+	const glm::vec2& spriteTexSize)
 {
-	constexpr size_t quadVertexCount = 4;
+	QuadRenderItem2D item{};
+	item.Transform = transform;
+	item.UV0 = spriteTexCoord;
+	item.UV1 = spriteTexCoord + spriteTexSize;
+	item.EntityID = gameObjectHandle;
+	item.MaterialOverride = material;
 
-	glm::vec2 texCoords[quadVertexCount] = {
-		{ spriteTexCoord.x,                    spriteTexCoord.y },                     // bottom-left
-		{ spriteTexCoord.x + spriteTexSize.x,  spriteTexCoord.y },                     // bottom-right
-		{ spriteTexCoord.x + spriteTexSize.x,  spriteTexCoord.y + spriteTexSize.y },   // top-right
-		{ spriteTexCoord.x,                    spriteTexCoord.y + spriteTexSize.y }    // top-left
-	};
+	m_RenderQueue.Submit(item);
+}
 
-	float textureIndex = 0.0f;
-	bool found = false;
-	for (uint32_t i = 1; i < m_TextureSlotIndex; i++)
-	{
-		if (m_TextureSlots[i]->GetRendererID() == texture->GetRendererID())
-		{
-			textureIndex = (float)i;
-			found = true;
-			break;
-		}
-	}
-	if (!found)
-	{
-		if (m_TextureSlotIndex >= s_MaxTextureSlots)
-			m_QuadBatch.NextBatch();
+void Boon::Renderer2D::SubmitQuad(
+	const glm::mat4& transform,
+	const std::shared_ptr<Texture2D>& texture,
+	const glm::vec4& color,
+	const float tiling,
+	int gameObjectHandle,
+	const glm::vec2& spriteTexCoord,
+	const glm::vec2& spriteTexSize)
+{
+	QuadRenderItem2D item{};
+	item.Transform = transform;
+	item.UV0 = spriteTexCoord;
+	item.UV1 = spriteTexCoord + spriteTexSize;
+	item.EntityID = gameObjectHandle;
+	item.Color = color;
+	item.Texture = texture;
+	item.TilingFactor = tiling;
 
-		textureIndex = (float)m_TextureSlotIndex;
-		m_TextureSlots[m_TextureSlotIndex] = texture;
-		m_TextureSlotIndex++;
-	}
-
-	float ppu = 32.0f;
-	glm::vec2 pixelSize = spriteTexSize * glm::vec2(texture->GetWidth(), texture->GetHeight());
-	glm::vec2 worldSize = pixelSize / ppu;
-
-	glm::mat4 scaledTransform = glm::scale(transform, glm::vec3(worldSize.x, worldSize.y, 1.0f));
-
-	for (size_t i = 0; i < quadVertexCount; i++)
-	{
-		QuadVertex& vertex = m_QuadBatch.PushVertex<QuadVertex>();
-		vertex.Position = scaledTransform * m_QuadVertexPositions[i];
-		vertex.Color = color;
-		vertex.TexCoord = texCoords[i];
-		vertex.TexIndex = textureIndex;
-		vertex.TilingFactor = tilingFactor;
-		vertex.GameObjectID = gameObjectHandle;
-	}
+	m_RenderQueue.Submit(item);
 }
 
 void Boon::Renderer2D::SubmitLine(const glm::vec3& p0, const glm::vec3& p1, const glm::vec4& color)
 {
-	LineVertex& vertex0 = m_LineBatch.PushVertex<LineVertex>();
-	vertex0.Position = p0;
-	vertex0.Color = color;
+	LineRenderItem2D item{};
+	item.P0 = p0;
+	item.P1 = p1;
+	item.Color = color;
 
-	LineVertex& vertex1 = m_LineBatch.PushVertex<LineVertex>();
-	vertex1.Position = p1;
-	vertex1.Color = color;
+	m_RenderQueue.Submit(item);
 }
 
 void Boon::Renderer2D::SubmitRect(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
@@ -223,4 +247,86 @@ void Boon::Renderer2D::SubmitPolygon(const std::vector<glm::vec3>& positions, co
 	}
 
 	SubmitLine(positions.back(), positions.front(), color);
+}
+
+void Boon::Renderer2D::SubmitGeometry(const GeometryRenderItem2D& item)
+{
+	m_RenderQueue.Submit(item);
+}
+
+void Renderer2D::FlushRenderQueue(RenderContext& ctx)
+{
+	const auto& geometry = m_RenderQueue.GetGeometry();
+
+	for (const GeometryRenderItem2D& mesh : geometry)
+	{
+		if (!mesh.VertexInput || !mesh.Material)
+			continue;
+
+		auto material = mesh.Material;
+		if (!material)
+			continue;
+
+		UBData::Object objectData{};
+		objectData.World = mesh.Transform;
+		objectData.ID = mesh.EntityID;
+		ctx.ObjectUniformBuffer.SetValue(objectData);
+
+		material->Bind();
+
+		Renderer::DrawIndexed(mesh.VertexInput);
+
+		material->Unbind();
+	}
+
+	constexpr size_t quadVertexCount = 4;
+
+	std::vector<QuadRenderItem2D> quads = m_RenderQueue.GetQuads();
+	std::sort(quads.begin(), quads.end(), [](const QuadRenderItem2D& a, const QuadRenderItem2D& b)
+		{
+			if (a.SortLayer != b.SortLayer)
+				return a.SortLayer < b.SortLayer;
+
+			return a.SortOrder < b.SortOrder;
+		});
+
+	for (const QuadRenderItem2D& quad : quads)
+	{
+		glm::vec2 texCoords[quadVertexCount] =
+		{
+			{ quad.UV0.x, quad.UV0.y },
+			{ quad.UV1.x, quad.UV0.y },
+			{ quad.UV1.x, quad.UV1.y },
+			{ quad.UV0.x, quad.UV1.y }
+		};
+
+		float textureIndex = ResolveTextureSlot(quad.Texture, m_TextureSlots, m_TextureSlotIndex, m_QuadBatch);
+
+		for (size_t i = 0; i < quadVertexCount; i++)
+		{
+			QuadVertex& vertex = m_QuadBatch.PushVertex<QuadVertex>();
+
+			vertex.Position = quad.Transform * m_QuadVertexPositions[i];
+			vertex.Color = quad.Color;
+			vertex.TexCoord = texCoords[i];
+			vertex.TexIndex = textureIndex;
+			vertex.TilingFactor = quad.TilingFactor;
+			vertex.GameObjectID = quad.EntityID;
+		}
+	}
+
+	const auto& lines = m_RenderQueue.GetLines();
+
+	for (const LineRenderItem2D& line : lines)
+	{
+		LineVertex& vertex0 = m_LineBatch.PushVertex<LineVertex>();
+		vertex0.Position = line.P0;
+		vertex0.Color = line.Color;
+
+		LineVertex& vertex1 = m_LineBatch.PushVertex<LineVertex>();
+		vertex1.Position = line.P1;
+		vertex1.Color = line.Color;
+	}
+
+	m_RenderQueue.Clear();
 }

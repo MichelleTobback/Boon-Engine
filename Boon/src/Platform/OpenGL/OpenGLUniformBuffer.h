@@ -7,7 +7,7 @@ namespace Boon
 	class OpenGLUniformBuffer final : public UniformBuffer
 	{
 	public:
-		OpenGLUniformBuffer(uint32_t size, uint32_t binding);
+		OpenGLUniformBuffer(size_t size, uint32_t binding);
 		virtual ~OpenGLUniformBuffer();
 
 		OpenGLUniformBuffer(const OpenGLUniformBuffer& other) = delete;
@@ -19,6 +19,6 @@ namespace Boon
 		uint32_t m_ID;
 
 		// Inherited via UniformBuffer
-		void SetData(const void* data, uint32_t size, uint32_t offset) override;
+		void SetData(const void* data, size_t size, uint32_t offset) override;
 	};
 }

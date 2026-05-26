@@ -108,13 +108,13 @@ namespace Boon
 
         uint8_t* DataAt(size_t pos)
         {
-            assert(pos <= m_Data.size());
+            assert(pos < m_Data.size() || pos == 0);
             return m_Data.data() + pos;
         }
 
         const uint8_t* DataAt(size_t pos) const
         {
-            assert(pos <= m_Data.size());
+            assert(pos < m_Data.size() || pos == 0);
             return m_Data.data() + pos;
         }
 

@@ -26,7 +26,7 @@ namespace Boon
 		 * @param size Number of bytes to copy.
 		 * @param offset Byte offset within the buffer to write to.
 		 */
-		virtual void SetData(const void* data, uint32_t size, uint32_t offset = 0) = 0;
+		virtual void SetData(const void* data, size_t size, uint32_t offset = 0) = 0;
 
 		template <typename T>
 		void SetValue(const T& data, uint32_t offset = 0)
@@ -41,7 +41,7 @@ namespace Boon
 		 * @param binding Binding index for shader access.
 		 * @return Shared pointer to the created UniformBuffer.
 		 */
-		static std::shared_ptr<UniformBuffer> Create(uint32_t size, uint32_t binding);
+		static std::shared_ptr<UniformBuffer> Create(size_t size, uint32_t binding);
 
 		template <typename T>
 		static std::shared_ptr<UniformBuffer> Create(uint32_t binding)

@@ -4,9 +4,12 @@
 #include "Asset/TextureAsset.h"
 
 #include <glm/glm.hpp>
+#include <memory>
 
 namespace Boon
 {
+	class Material;
+
 	BCLASS(Name = "Texture renderer")
 		struct TextureRendererComponent final
 	{
@@ -20,5 +23,7 @@ namespace Boon
 
 		BPROPERTY()
 		AssetRef<Texture2DAsset> Texture;
+
+		std::shared_ptr<Material> MaterialOverride = nullptr;
 	};
 }

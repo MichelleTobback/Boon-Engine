@@ -1,6 +1,5 @@
 #include "Renderer/SceneRenderer.h"
 #include "Renderer/Renderer.h"
-
 #include "Renderer/VertexInput.h"
 #include "Renderer/Shader.h"
 #include "Renderer/UniformBuffer.h"
@@ -8,30 +7,20 @@
 #include "Renderer/Framebuffer.h"
 #include "Renderer/Texture.h"
 #include "Renderer/Renderer2D.h"
+#include "Renderer/RenderPass.h"
+#include "Renderer/Passes/RenderPass2D.h"
+#include "Renderer/Material.h"
 
 #include "Scene/Scene.h"
 
-#include "Component/TilemapRendererComponent.h"
-#include "Component/SpriteRendererComponent.h"
-#include "Component/TransformComponent.h"
-#include "Component/CameraComponent.h"
-#include "Component/TextureRendererComponent.h"
-
-#include "Core/ServiceLocator.h"
+#include <Component/TransformComponent.h>
+#include <Component/CameraComponent.h>
 
 #include "Asset/AssetLibrary.h"
 #include "Asset/ShaderAsset.h"
 #include "Asset/TextureAsset.h"
 #include "Asset/SpriteAtlasAsset.h"
 
-#ifdef BOON_WITH_EDITOR
-	#include "Component/BoxCollider2D.h"
-#endif //BOON_WITH_EDITOR
-
-//temp
-#include "Input/Input.h"
-#include "Core/Time.h"
-#include "Core/Application.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <glad/glad.h>
@@ -57,8 +46,27 @@ Boon::SceneRenderer::SceneRenderer(const SceneRendererCreateInfo& desc)
 	AssetLibrary& assetLib = *desc.AssetLib;
 	renderer2dDesc.pSpriteShader = assetLib.Load<ShaderAsset>("shaders/Quad.glsl")->GetInstance();
 	renderer2dDesc.pLineShader = assetLib.Load<ShaderAsset>("shaders/Line.glsl")->GetInstance();
-	m_pTilemapShader = assetLib.Load<ShaderAsset>("shaders/Tilemap.glsl")->GetInstance();
+
+	PipelineDescriptor tilemapDesc{};
+	tilemapDesc.Shader = assetLib.Load<ShaderAsset>("shaders/Tilemap.glsl")->GetInstance();
+	std::shared_ptr<Pipeline> tilemapPipeline = std::make_shared<Pipeline>(tilemapDesc);
+	m_pDefaultTilemapMaterial = std::make_shared<Material>(tilemapPipeline);
+
+	PipelineDescriptor quadDesc{};
+	quadDesc.Shader = assetLib.Load<ShaderAsset>("shaders/Quad.glsl")->GetInstance();
+	std::shared_ptr<Pipeline> quadPipeline = std::make_shared<Pipeline>(quadDesc);
+
+	m_pDefaultQuadMaterial = std::make_shared<Material>(quadPipeline, sizeof(QuadMaterialData));
+	QuadMaterialData quadData{};
+	quadData.Color = glm::vec4(1.0f);
+	quadData.TilingFactor = 1.0f;
+	m_pDefaultQuadMaterial->SetValue(0, quadData);
+
 	m_pRenderer2D = std::make_unique<Renderer2D>(renderer2dDesc);
+
+	m_Passes.push_back(std::make_unique<SpriteRenderPass>(m_pDefaultQuadMaterial));
+	m_Passes.push_back(std::make_unique<TextureRenderPass>(m_pDefaultQuadMaterial));
+	m_Passes.push_back(std::make_unique<TilemapRenderPass>(m_pDefaultTilemapMaterial));
 }
 Boon::SceneRenderer::~SceneRenderer()
 {
@@ -67,74 +75,17 @@ Boon::SceneRenderer::~SceneRenderer()
 
 void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTransform)
 {
-	BeginScene(camera, cameraTransform);
-	{
-		auto group = m_pScene->GetAllGameObjectsWith<TransformComponent, SpriteRendererComponent>();
-		for (auto gameObject : group)
-		{
-			auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(gameObject);
+	RenderContext context{ *m_pScene, *m_pRenderer2D, *m_pObjectUniformBuffer };
 
-			if (sprite.SpriteAtlasHandle.IsValid())
-			{
-				auto atlas = sprite.SpriteAtlasHandle.Instance();
-				const SpriteFrame& spriteUv = atlas->GetSpriteFrame(sprite.Sprite);
-				m_pRenderer2D->SubmitQuad(transform.GetWorld(), atlas->GetTexture().Instance(), sprite.Tiling, sprite.Color, (int)gameObject, spriteUv.UV, spriteUv.Size);
-			}
-			else
-				m_pRenderer2D->SubmitQuad(transform.GetWorld(), sprite.Color, (int)gameObject);
-		}
-	}
+	BeginScene(context, camera, cameraTransform);
 
-	{
-		auto group = m_pScene->GetAllGameObjectsWith<TransformComponent, TextureRendererComponent>();
-		for (auto gameObject : group)
-		{
-			auto [transform, tc] = group.get<TransformComponent, TextureRendererComponent>(gameObject);
+	for (auto& pass : m_Passes)
+		pass->Execute(context);
 
-			if (tc.Texture.IsValid())
-			{
-				m_pRenderer2D->SubmitQuad(transform.GetWorld(), tc.Texture.Instance(), tc.Tiling, tc.Color, (int)gameObject, {}, {1.f, 1.f});
-			}
-		}
-	}
-
-	{
-		auto group = m_pScene->GetAllGameObjectsWith<TransformComponent, TilemapRendererComponent>();
-		for (auto gameObject : group)
-		{
-			auto [transform, tilemap] = group.get<TransformComponent, TilemapRendererComponent>(gameObject);
-
-			if (!tilemap.tilemap.IsValid())
-				continue;
-
-			if (!tilemap.tilemap.Instance()->GetAtlas().IsValid())
-				continue;
-
-			if (!tilemap.tilemap.Instance()->GetAtlas()->GetInstance()->GetTexture().IsValid())
-				continue;
-
-			tilemap.tilemap.Instance()->RebuildDirtyChunks();
-
-			m_ObjectData.World = transform.GetWorld();
-			m_ObjectData.ID = (int)(GameObjectID)gameObject;
-			m_pObjectUniformBuffer->SetValue(m_ObjectData);
-
-			tilemap.tilemap.Instance()->GetAtlas()->GetInstance()->GetTexture()->GetInstance()->Bind();
-			m_pTilemapShader->Bind();
-
-			for (auto chunk : tilemap.tilemap.Instance()->GetChunks())
-			{
-				Renderer::DrawIndexed(chunk.VertexInput);
-			}
-
-			m_pTilemapShader->Unbind();
-		}
-	}
-
-	EndScene();
+	EndScene(context);
 }
 
-void Boon::SceneRenderer::BeginScene(Camera* camera, TransformComponent* cameraTransform)
+void Boon::SceneRenderer::BeginScene(RenderContext& ctx, Camera* camera, TransformComponent* cameraTransform)
 {
 	if (!camera || !cameraTransform)
 	{
@@ -166,12 +117,12 @@ void Boon::SceneRenderer::BeginScene(Camera* camera, TransformComponent* cameraT
 	// Clear our entity ID attachment to -1
 	m_pOutputFB->ClearAttachment(1, -1);
 
-	m_pRenderer2D->Begin();
+	m_pRenderer2D->Begin(ctx);
 }
 
-void Boon::SceneRenderer::EndScene()
+void Boon::SceneRenderer::EndScene(RenderContext& ctx)
 {
-	m_pRenderer2D->End();
+	m_pRenderer2D->End(ctx);
 
 	m_pOutputFB->Unbind();
 

@@ -6,6 +6,7 @@
 #include "Asset/AssetTraits.h"
 #include "Core/Memory/Buffer.h"
 #include "Renderer/Texture.h"
+#include "Renderer/Material.h"
 
 #include <memory>
 
@@ -34,6 +35,16 @@ namespace Boon
         const Buffer& GetPixelData() const { return m_Data; }
         const TextureDescriptor& GetDescriptor() const { return m_Desc; }
 
+        void SetDefaultMaterial(const std::shared_ptr<Material>& material)
+        {
+            m_DefaultMaterial = material;
+        }
+
+        std::shared_ptr<Material> GetDefaultMaterial() const
+        {
+            return m_DefaultMaterial;
+        }
+
     private:
         void CreateRuntimeTexture()
         {
@@ -45,6 +56,7 @@ namespace Boon
         TextureDescriptor m_Desc{};
         Buffer m_Data{};
         std::shared_ptr<Texture2D> m_RuntimeTexture = nullptr;
+        std::shared_ptr<Material> m_DefaultMaterial = nullptr;
 
         friend class Texture2DImporter;
         friend struct AssetSerializer<Texture2DAsset>;

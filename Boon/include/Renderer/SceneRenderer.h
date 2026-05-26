@@ -6,6 +6,7 @@
 
 namespace Boon
 {
+	class Material;
 	class Shader;
 	class Renderer2D;
 	class Scene;
@@ -15,6 +16,8 @@ namespace Boon
 	class EventBus;
 	class AssetLibrary;
 	class Framebuffer;
+	class RenderPass;
+	struct RenderContext;
 
 	struct SceneRendererCreateInfo
 	{
@@ -84,17 +87,24 @@ namespace Boon
 		 */
 		Renderer2D* GetRenderer2D() const;
 
+		std::shared_ptr<Material> GetDefaultQuadMaterial() const { return m_pDefaultQuadMaterial; }
+		std::shared_ptr<Material> GetDefaultTilemapMaterial() const { return m_pDefaultTilemapMaterial; }
+
 	private:
-		void BeginScene(Camera* camera = nullptr, TransformComponent* cameraTransform = nullptr);
-		void EndScene();
+		void BeginScene(RenderContext& ctx, Camera* camera = nullptr, TransformComponent* cameraTransform = nullptr);
+		void EndScene(RenderContext& ctx);
 
 		std::unique_ptr<Renderer2D> m_pRenderer2D;
 		std::shared_ptr<UniformBuffer> m_pCameraUniformBuffer{};
 		std::shared_ptr<UniformBuffer> m_pObjectUniformBuffer{};
 		std::shared_ptr<Framebuffer> m_pOutputFB;
-		std::shared_ptr<Shader> m_pTilemapShader;
 		UBData::Camera m_CameraData{};
 		UBData::Object m_ObjectData{};
+
+		std::vector<std::unique_ptr<RenderPass>> m_Passes;
+
+		std::shared_ptr<Material> m_pDefaultQuadMaterial;
+		std::shared_ptr<Material> m_pDefaultTilemapMaterial;
 
 		Scene* m_pScene;
 

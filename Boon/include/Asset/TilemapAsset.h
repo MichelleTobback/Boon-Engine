@@ -6,6 +6,7 @@
 #include "Asset/AssetTraits.h"
 #include "Core/Memory/Buffer.h"
 #include "Renderer/Tilemap.h"
+#include "Renderer/Material.h"
 
 #include <memory>
 
@@ -26,8 +27,19 @@ namespace Boon
             return m_pTilemap;
         }
 
+        void SetDefaultMaterial(const std::shared_ptr<Material>& material)
+        {
+            m_DefaultMaterial = material;
+        }
+
+        std::shared_ptr<Material> GetDefaultMaterial() const
+        {
+            return m_DefaultMaterial;
+        }
+
     private:
         std::shared_ptr<Tilemap> m_pTilemap = nullptr;
+        std::shared_ptr<Material> m_DefaultMaterial = nullptr;
 
         friend class TilemapImporter;
         friend struct AssetSerializer<TilemapAsset>;

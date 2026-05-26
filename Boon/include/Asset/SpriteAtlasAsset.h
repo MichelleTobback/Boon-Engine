@@ -8,6 +8,7 @@
 #include "Asset/TextureAsset.h"
 #include "Core/Memory/Buffer.h"
 #include "Renderer/SpriteAtlas.h"
+#include "Renderer/Material.h"
 
 #include <memory>
 
@@ -28,8 +29,19 @@ namespace Boon
             return m_pAtlas;
         }
 
+        void SetDefaultMaterial(const std::shared_ptr<Material>& material)
+        {
+            m_DefaultMaterial = material;
+        }
+
+        std::shared_ptr<Material> GetDefaultMaterial() const
+        {
+            return m_DefaultMaterial;
+        }
+
     private:
         std::shared_ptr<SpriteAtlas> m_pAtlas = nullptr;
+        std::shared_ptr<Material> m_DefaultMaterial = nullptr;
 
         friend class SpriteAtlasImporter;
         friend struct AssetSerializer<SpriteAtlasAsset>;

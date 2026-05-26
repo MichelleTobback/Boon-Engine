@@ -95,11 +95,11 @@ void BoonEditor::DebugRenderer::Render(EditorViewportSettings settings, Camera* 
 void BoonEditor::DebugRenderer::Begin()
 {
 	m_pFramebuffer->Bind();
-	m_pRenderer2D->Begin();
+	//m_pRenderer2D->Begin();
 }
 
 void BoonEditor::DebugRenderer::End()
 {
-	m_pRenderer2D->End();
+	//m_pRenderer2D->End();
 	m_pFramebuffer->Unbind();
 }

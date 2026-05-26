@@ -5,7 +5,7 @@
 
 using namespace Boon;
 
-std::shared_ptr<UniformBuffer> Boon::UniformBuffer::Create(uint32_t size, uint32_t binding)
+std::shared_ptr<UniformBuffer> Boon::UniformBuffer::Create(size_t size, uint32_t binding)
 {
 	switch (RenderAPI::GetAPI())
 	{

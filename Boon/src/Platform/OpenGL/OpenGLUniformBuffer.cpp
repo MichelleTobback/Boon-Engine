@@ -4,7 +4,7 @@
 
 using namespace Boon;
 
-Boon::OpenGLUniformBuffer::OpenGLUniformBuffer(uint32_t size, uint32_t binding)
+Boon::OpenGLUniformBuffer::OpenGLUniformBuffer(size_t size, uint32_t binding)
 {
 	glCreateBuffers(1, &m_ID);
 	glNamedBufferData(m_ID, size, nullptr, GL_DYNAMIC_DRAW);
@@ -16,7 +16,7 @@ Boon::OpenGLUniformBuffer::~OpenGLUniformBuffer()
 	glDeleteBuffers(1, &m_ID);
 }
 
-void Boon::OpenGLUniformBuffer::SetData(const void* data, uint32_t size, uint32_t offset)
+void Boon::OpenGLUniformBuffer::SetData(const void* data, size_t size, uint32_t offset)
 {
 	glNamedBufferSubData(m_ID, offset, size, data);
 }

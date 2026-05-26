@@ -5,8 +5,12 @@
 
 #include <glm/glm.hpp>
 
+#include <memory>
+
 namespace Boon
 {
+	class Material;
+
 	BCLASS(Name="Sprite renderer")
 	struct SpriteRendererComponent final
 	{
@@ -23,5 +27,7 @@ namespace Boon
 
 		BPROPERTY(Slider, RangeMin=0, RangeMax=10)
 		int Sprite;
+
+		std::shared_ptr<Material> MaterialOverride = nullptr;
 	};
 }

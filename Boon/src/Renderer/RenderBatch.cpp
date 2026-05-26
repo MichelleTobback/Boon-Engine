@@ -4,26 +4,28 @@
 #include "Renderer/IndexBuffer.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Renderer.h"
+#include "Renderer/Pipeline.h"
 
 namespace Boon
 {
-    void RenderBatch::Initialize(uint32_t maxVertices, const VertexBufferLayout& layout, const std::shared_ptr<Shader>& shader, PrimitiveType primitiveType, std::shared_ptr<IndexBuffer> indexBuffer)
+    void RenderBatch::Initialize(uint32_t maxVertices, const std::shared_ptr<Pipeline>& pipeline, std::shared_ptr<IndexBuffer> indexBuffer)
     {
         m_MaxVertices = maxVertices;
-        m_PrimitiveType = primitiveType;
         m_IndexBuffer = indexBuffer;
-        m_Shader = shader;
+        m_pPipeline = pipeline;
+
+        const PipelineDescriptor& desc = pipeline->GetDescriptor();
 
         // Create vertex input and buffers
         m_VertexInput = VertexInput::Create();
-        m_VertexBuffer = VertexBuffer::Create(maxVertices * layout.GetStride());
-        m_VertexBuffer->SetLayout(layout);
+        m_VertexBuffer = VertexBuffer::Create(maxVertices * desc.Layout.GetStride());
+        m_VertexBuffer->SetLayout(desc.Layout);
         m_VertexInput->AddVertexBuffer(m_VertexBuffer);
 
         if (m_IndexBuffer)
             m_VertexInput->SetIndexBuffer(m_IndexBuffer);
 
-        m_BufferBase = new uint8_t[maxVertices * layout.GetStride()];
+        m_BufferBase = new uint8_t[maxVertices * desc.Layout.GetStride()];
     }
 
     RenderBatch::~RenderBatch()
@@ -42,20 +44,19 @@ namespace Boon
 
     void RenderBatch::Flush()
     {
-        if (!m_Shader || m_VertexCount == 0)
+        if (!m_pPipeline || m_VertexCount == 0)
             return;
 
         if (m_PreFlushFunc)
             m_PreFlushFunc();
 
-        // Upload the vertex data to the GPU
         uint32_t dataSize = static_cast<uint32_t>(m_BufferPtr - m_BufferBase);
         if (dataSize > 0)
             m_VertexBuffer->SetData(m_BufferBase, dataSize);
 
-        m_Shader->Bind();
+        m_pPipeline->Bind();
 
-        switch (m_PrimitiveType)
+        switch (m_pPipeline->GetDescriptor().Primitive)
         {
         case PrimitiveType::Triangles:
             if (m_IndexBuffer)
@@ -77,6 +78,8 @@ namespace Boon
 
         if (m_PostFlushFunc)
             m_PostFlushFunc();
+
+        m_pPipeline->Unbind();
     }
 
     void RenderBatch::NextBatch()
