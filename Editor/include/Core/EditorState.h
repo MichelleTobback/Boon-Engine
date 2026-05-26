@@ -21,6 +21,7 @@ namespace Boon
 	class NetConnection;
 	class NetRepRegistry;
 	class BClassRegistry;
+	class ModuleLibrary;
 }
 
 using namespace Boon;
@@ -75,5 +76,7 @@ namespace BoonEditor
 
 		DragDropRouter m_DragDrop{};
 		EditorContext m_Context;
+
+		std::unique_ptr<ModuleLibrary> m_pModuleLib;
 	};
 }

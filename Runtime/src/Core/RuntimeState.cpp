@@ -87,6 +87,7 @@ void Runtime::RuntimeState::OnEnter()
 	module.BClasses = &BClassRegistry::Get();
 	module.NetReps = &NetRepRegistry::Get();
 	module.ServiceRegistry = ServiceLocator::GetRegistry();
+	module.EngineContext = &ctx;
 	moduleLib->LoadModule(config.ProjectRoot / config.IntermediateRoot / config.GameModule / (config.GameModule + ".dll"), module);
 
 	Scene& scene = sceneManager.CreateScene("scene");
@@ -130,6 +131,7 @@ void Runtime::RuntimeState::OnExit()
 	module.BClasses = &BClassRegistry::Get();
 	module.NetReps = &NetRepRegistry::Get();
 	module.ServiceRegistry = ServiceLocator::GetRegistry();
+	module.EngineContext = &ctx;
 	ServiceLocator::Get<ModuleLibrary>().UnloadAll(module);
 }
 

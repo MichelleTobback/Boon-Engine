@@ -93,6 +93,7 @@ namespace Boon
 		std::unique_ptr<class AssetLibrary> m_pAssets;
 		std::unique_ptr<class SceneManager> m_pScenes;
 		std::unique_ptr<class EventBus> m_pEventBus;
+		std::unique_ptr<class SubsystemRegistry> m_pSubsystems;
 
 		uint32_t m_CurrentFrameIndex{};
 

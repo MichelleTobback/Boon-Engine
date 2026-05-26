@@ -72,5 +72,7 @@ void Boon::SpriteAnimatorComponent::SetClip(std::string_view clip, bool restart)
 	if (!Atlas)
 		return;
 
-	//if (Atlas->GetClip(clip))
+	auto idx = Atlas->FindClipIndex(clip);
+	if (idx > -1)
+		SetClip(idx, restart);
 }

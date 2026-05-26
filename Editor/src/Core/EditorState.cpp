@@ -55,10 +55,9 @@
 #include <Networking/Components/NetTransform.h>
 #include <Networking/Events/NetConnectionEvent.h>
 #include <Networking/NetIdentity.h>
-#include <Networking/NetDriver.h>
 #include <Networking/NetScene.h>
 #include <Networking/NetRepRegistry.h>
-#include <Platform/Steam/SteamNetDriver.h>
+#include <Networking/NetworkingSubsystem.h>
 
 #include <Module/ModuleLibrary.h>
 
@@ -153,8 +152,7 @@ void EditorState::OnEnter()
 	m_Context.CreateWidget<NewProjectDialog>("NewProject");
 
 	EventBus& eventBus = *ctx.EventBus;
-	std::shared_ptr<NetDriver> network = std::make_shared<SteamNetDriver>();
-	ServiceLocator::Register<NetDriver>(network);
+	ctx.Subsystems->Register<NetworkingSubsystem>(config.Network);
 
 	m_SceneContext.Set(&scene);
 	m_pSelectedScene = &scene;
@@ -163,6 +161,7 @@ void EditorState::OnEnter()
 		{
 			Scene& scene = sceneManager.GetActiveScene();
 			m_SceneContext.Set(&scene);
+			m_SelectionContext.Set(GameObject());
 		});
 
 	m_StateChangedEvent = eventBus.Subscribe<EditorPlayStateChangeEvent>([&viewport](const EditorPlayStateChangeEvent& e)
@@ -184,14 +183,15 @@ void EditorState::OnEnter()
 				m_Context.GetWidget<ViewportPanel>("Viewport").SetContext(&m_SceneContext);
 		});
 
-	std::shared_ptr<ModuleLibrary> moduleLib = std::make_shared<ModuleLibrary>();
-	ServiceLocator::Register<ModuleLibrary>(moduleLib);
+	ctx.Subsystems->InitAll(ctx);
+
+	m_pModuleLib = std::make_unique<ModuleLibrary>();
 	ModuleContext module{};
 	module.BClasses = &BClassRegistry::Get();
 	module.NetReps = &NetRepRegistry::Get();
 	module.ServiceRegistry = ServiceLocator::GetRegistry();
 	module.EngineContext = &ctx;
-	moduleLib->LoadModule(config.ProjectRoot / config.IntermediateRoot / config.GameModule / (config.GameModule + ".dll"), module);
+	m_pModuleLib->LoadModule(config.ProjectRoot / config.IntermediateRoot / config.GameModule / (config.GameModule + ".dll"), module);
 
 	SceneSerializer serializer(scene);
 	serializer.Deserialize(config.AssetsRoot / config.StartupScene);
@@ -208,7 +208,8 @@ void EditorState::OnUpdate()
 
 	Boon::DebugRenderer::Get().BeginFrame();
 
-	ServiceLocator::Get<NetDriver>().Update();
+	if (auto* network = ctx.TryGetSubsystem<NetworkingSubsystem>())
+		network->Update();
 
 	Time& time = Boon::Time::Get();
 	SceneManager& sceneManager = *ctx.Scenes;
@@ -247,11 +248,11 @@ void EditorState::OnExit()
 {
 	EngineContext& ctx = GetContext();
 
+	m_Context.Clear();
+
 	EventBus& eventBus = *ctx.EventBus;
 	eventBus.Unsubscribe<SceneChangedEvent>(m_SceneChangedEvent);
 	eventBus.Unsubscribe<EditorPlayStateChangeEvent>(m_StateChangedEvent);
-
-	ServiceLocator::Get<NetDriver>().Shutdown();
 
 	SceneManager& sceneManager = *ctx.Scenes;
 	sceneManager.UnloadAll();
@@ -261,7 +262,8 @@ void EditorState::OnExit()
 	module.NetReps = &NetRepRegistry::Get();
 	module.ServiceRegistry = ServiceLocator::GetRegistry();
 	module.EngineContext = &ctx;
-	ServiceLocator::Get<ModuleLibrary>().UnloadAll(module);
+	m_pModuleLib->UnloadAll(module);
+	m_pModuleLib = nullptr;
 
 	AssetLibrary& assetLib = *ctx.AssetLib;
 	assetLib.ClearCache();
@@ -449,30 +451,31 @@ void EditorState::OnStopPlay()
 void EditorState::StartNetwork()
 {
 	EngineContext& ctx = GetContext();
-	NetDriver& network = ServiceLocator::Get<NetDriver>();
+	NetworkingSubsystem& network = ctx.GetSubsystem<NetworkingSubsystem>();
+	NetDriver& driver = network.GetDriver();
 
-	network.Initialize(m_NetworkSettings, ctx.EventBus);
-	if (!network.IsStandalone())
+	network.StartNetwork(m_NetworkSettings, ctx);
+	if (!driver.IsStandalone())
 	{
-		network.BindOnConnectedCallback([this](NetConnection* pConnection) {OnConnected(pConnection); });
-		network.BindOnDisconnectedCallback([this](NetConnection* pConnection) {OnDisconnected(pConnection); });
-		network.BindOnPacketCallback([this](NetConnection* pConnection, NetPacket& packet) { OnPacketReceived(pConnection, packet); });
+		driver.BindOnConnectedCallback([this](NetConnection* pConnection) {OnConnected(pConnection); });
+		driver.BindOnDisconnectedCallback([this](NetConnection* pConnection) {OnDisconnected(pConnection); });
+		driver.BindOnPacketCallback([this](NetConnection* pConnection, NetPacket& packet) { OnPacketReceived(pConnection, packet); });
 
 		m_BindNetSceneHandle = ctx.Scenes->BindOnSceneChanged([&ctx, this](Scene& e)
 			{
 				Scene& scene = ctx.Scenes->GetActiveScene();
-				auto& network = ServiceLocator::Get<NetDriver>();
-				auto pScene{ std::make_shared<NetScene>(&scene, &network, ctx.Scenes) };
-				network.BindScene(pScene);
+				auto& driver = ctx.GetSubsystem<NetworkingSubsystem>().GetDriver();
+				auto pScene{ std::make_shared<NetScene>(&scene, &driver , ctx.Scenes)};
+				driver.BindScene(pScene);
 			});
 
-		if (network.IsClient())
+		if (driver.IsClient())
 		{
-			network.Connect(m_NetworkSettings.Ip.c_str(), m_NetworkSettings.Port);
+			driver.Connect(m_NetworkSettings.Ip.c_str(), m_NetworkSettings.Port);
 		}
 
 		NetworkPanel& net = m_Context.GetWidget<NetworkPanel>("network");
-		net.SetDriver(&network);
+		net.SetDriver(&driver);
 	}
 }
 
@@ -481,10 +484,10 @@ void EditorState::StopNetwork()
 	NetworkPanel& net = m_Context.GetWidget<NetworkPanel>("network");
 	net.SetDriver(nullptr);
 
-	GetContext().Scenes->UnbindOnSceneChanged(m_BindNetSceneHandle);
-	
-	NetDriver& network = ServiceLocator::Get<NetDriver>();
-	network.Shutdown();
+	if (m_BindNetSceneHandle.IsValid())
+		GetContext().Scenes->UnbindOnSceneChanged(m_BindNetSceneHandle);
+
+	m_Context.GetEngineContext().GetSubsystem<NetworkingSubsystem>().StopNetwork();
 }
 
 void EditorState::OnConnected(NetConnection* pConnection)

@@ -192,4 +192,6 @@ See the `LICENSE` file in the repository root for licensing terms.
 Screenshots
 
 ### Editor
-![Editor Screenshot](Screenshot_2026-05-23_165238.png)
+![Editor Screenshot 1](screenshots/Editor_01.png)
+![Editor Screenshot 2](screenshots/Editor_02.png)
+![Editor Screenshot 3](screenshots/Editor_03.png)

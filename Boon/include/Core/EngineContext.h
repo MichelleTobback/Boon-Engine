@@ -1,4 +1,5 @@
 #pragma once
+#include <Core/SubsystemRegistry.h>
 
 namespace Boon
 {
@@ -15,5 +16,19 @@ namespace Boon
 		AssetLibrary* AssetLib = nullptr;
 		SceneManager* Scenes = nullptr;
 		EventBus* EventBus = nullptr;
+
+		SubsystemRegistry* Subsystems = nullptr;
+
+		template<typename T>
+		T& GetSubsystem()
+		{
+			return Subsystems->Get<T>();
+		}
+
+		template<typename T>
+		T* TryGetSubsystem()
+		{
+			return Subsystems->TryGet<T>();
+		}
 	};
 }

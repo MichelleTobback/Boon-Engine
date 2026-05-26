@@ -1,11 +1,11 @@
 #pragma once
 
 #include <Core/BoonEditor.h>
+#include <Core/EditorContext.h>
 
 #include "Panels/EditorPanel.h"
 #include "Panels/IViewportCanvasRenderer.h"
 
-#include <Core/ServiceLocator.h>
 #include <Asset/AssetLibrary.h>
 
 #include "UI/UI.h"
@@ -88,7 +88,7 @@ namespace BoonEditor
     template<typename TAsset>
     inline bool AssetEditor<TAsset>::SetContext(AssetHandle handle)
     {
-        AssetLibrary& lib = ServiceLocator::Get<AssetLibrary>();
+        AssetLibrary& lib = *GetContext().GetEngineContext().AssetLib;
 
         const AssetMeta* pMeta = lib.GetMeta(handle);
         if (!pMeta)

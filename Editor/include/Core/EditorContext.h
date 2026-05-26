@@ -18,6 +18,12 @@ namespace BoonEditor
 	public:
 		EditorContext();
 
+		void Clear()
+		{
+			m_Widgets.clear();
+			m_Objects.clear();
+		}
+
 		template <typename T, typename ...TArgs>
 		T& CreateObject(TArgs&& ... args)
 		{

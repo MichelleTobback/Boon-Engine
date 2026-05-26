@@ -2,6 +2,7 @@
 #include "Core/AppStateMachine.h"
 #include "Core/Time.h"
 #include "Core/ServiceLocator.h"
+#include <Core/SubsystemRegistry.h>
 
 #include "Asset/AssetLibrary.h"
 
@@ -37,6 +38,7 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 {
 	m_pInput = std::make_unique<Input>();
 	m_pEventBus = std::make_unique<EventBus>();
+	m_pSubsystems = std::make_unique<SubsystemRegistry>();
 
 	Window::WindowDesc windowDesc{};
 	windowDesc.name = m_Desc.Window.Title;
@@ -79,8 +81,11 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 	m_Context.Scenes = m_pScenes.get();
 	m_Context.EventBus = m_pEventBus.get();
 	m_Context.Window = m_pWindow.get();
+	m_Context.Subsystems = m_pSubsystems.get();
 
 	BOON_INIT_LOGGER();
+
+	m_pSubsystems->InitAll(m_Context);
 
 	m_pStateMachine->PushState(std::move(pState), m_Context);
 	pState = nullptr;
@@ -98,6 +103,7 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 		time.Wait();
 		m_pStateMachine->EndUpdate(m_Context);
 	}
+	m_pSubsystems->ShutdownAll(m_Context);
 	m_pScenes->Shutdown();
 	m_pStateMachine->Shutdown();
 	ServiceLocator::Shutdown();
