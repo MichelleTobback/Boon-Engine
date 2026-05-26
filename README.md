@@ -55,7 +55,7 @@ Run built binaries
 ```bash
 build/bin/Release/Editor/Editor.exe
 ```
-- Sandbox (sample runtime) — run the `Sandbox` binary from `bin/<Config>/Sandbox` after building that target.
+- Sandbox (sample runtime) â€” run the `Sandbox` binary from `bin/<Config>/Sandbox` after building that target.
 
 ---
 
@@ -155,15 +155,15 @@ animator.pRenderer = player;
 ---
 
 ## Project structure
-- `Boon/` — Engine core: headers (`include/`), sources (`src/`), subsystems and core modules
-- `Editor/` — Editor executable, UI panels, editor-only tools and resources
-- `Sandbox/` — Example game module demonstrating engine systems
-- `Runtime/` — Runtime launcher glue and lightweight runtime targets
-- `tools/` — Build-time utilities (e.g., `BClassGenerator`)
-- `docs/` — Design notes, guides and contributing information
-- `generated/` — Generated reflection/source files (created at build time)
-- `external/` — Third-party libraries (Box2D, entt, etc.)
-- `CMakeLists.txt` — Top-level build and configuration
+- `Boon/` â€” Engine core: headers (`include/`), sources (`src/`), subsystems and core modules
+- `Editor/` â€” Editor executable, UI panels, editor-only tools and resources
+- `Sandbox/` â€” Example game module demonstrating engine systems
+- `Runtime/` â€” Runtime launcher glue and lightweight runtime targets
+- `tools/` â€” Build-time utilities (e.g., `BClassGenerator`)
+- `docs/` â€” Design notes, guides and contributing information
+- `generated/` â€” Generated reflection/source files (created at build time)
+- `external/` â€” Third-party libraries (Box2D, entt, etc.)
+- `CMakeLists.txt` â€” Top-level build and configuration
 
 Refer to module docs in `docs/modules/` for per-module details.
 
@@ -183,7 +183,7 @@ See the `LICENSE` file in the repository root for licensing terms.
 ---
 
 ## Troubleshooting & tips
-- If generated reflection sources are missing, run a full configure & build — the generator runs as part of the build.
+- If generated reflection sources are missing, run a full configure & build â€” the generator runs as part of the build.
 - Use Ninja for faster incremental builds (`-G "Ninja"`).
 - On Windows, prefer building from a Developer Command Prompt or the Visual Studio toolchain matching your VS install.
 
@@ -191,3 +191,5 @@ See the `LICENSE` file in the repository root for licensing terms.
 
 Screenshots
 
+### Editor
+![Editor Screenshot](Screenshot_2026-05-23_165238.png)
