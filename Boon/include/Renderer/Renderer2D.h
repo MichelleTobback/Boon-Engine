@@ -24,6 +24,26 @@ namespace Boon
 		glm::vec3 Padding{};
 	};
 
+	struct QuadBatchKey
+	{
+		std::shared_ptr<Pipeline> Pipeline = nullptr;
+
+		bool operator==(const QuadBatchKey& other) const
+		{
+			return Pipeline.get() == other.Pipeline.get();
+		}
+	};
+
+	struct QuadBatchKeyHasher
+	{
+		size_t operator()(const QuadBatchKey& key) const
+		{
+			return std::hash<void*>{}(key.Pipeline.get());
+		}
+	};
+
+
+	class IndexBuffer;
 	class Renderer2D final
 	{
 	public:
@@ -53,20 +73,39 @@ namespace Boon
 
 		void SubmitGeometry(const GeometryRenderItem2D& item);
 
+		static bool IsCompatibleMaterial(const std::shared_ptr<Material>& material, const std::shared_ptr<Pipeline>& pipeline)
+		{
+			if (!material)
+				return true;
+
+			return material->GetPipeline() == pipeline;
+		}
+
 	private:
+		static constexpr uint32_t s_MaxTextureSlots = 32;
+		struct QuadBatchState
+		{
+			RenderBatch Batch;
+
+			std::array<std::shared_ptr<Texture2D>, s_MaxTextureSlots> TextureSlots;
+			uint32_t TextureSlotIndex = 1;
+		};
+
 		void FlushRenderQueue(RenderContext& ctx);
+		QuadBatchState& GetOrCreateQuadBatch(const std::shared_ptr<Pipeline>& pipeline);
 
 		RenderQueue2D m_RenderQueue;
 
-		glm::vec4 m_QuadVertexPositions[4];
-
-		RenderBatch m_QuadBatch{};
-		RenderBatch m_LineBatch{};
-
-		static constexpr uint32_t s_MaxTextureSlots = 32;
-		std::array<std::shared_ptr<Texture2D>, s_MaxTextureSlots> m_TextureSlots;
 		uint32_t m_TextureSlotIndex = 1; // 0 = white texture
 
-		std::shared_ptr<Material> m_pQuadMaterialTemplate;
+		glm::vec4 m_QuadVertexPositions[4];
+		std::shared_ptr<IndexBuffer> m_QuadIndexBuffer;
+		std::shared_ptr<Pipeline> m_pQuadPipeline;
+
+		std::unordered_map<QuadBatchKey, QuadBatchState, QuadBatchKeyHasher> m_QuadBatches;
+
+		std::shared_ptr<Texture2D> m_pWhiteTexture;
+
+		RenderBatch m_LineBatch{};
 	};
 }

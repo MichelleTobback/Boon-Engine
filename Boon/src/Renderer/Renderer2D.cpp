@@ -59,9 +59,9 @@ Boon::Renderer2D::Renderer2D(const Renderer2DCreateInfo& desc)
 	m_QuadVertexPositions[2] = { 0.5f,  0.5f, 0.f, 1.f, };
 	m_QuadVertexPositions[3] = { -0.5f,  0.5f, 0.f, 1.f };
 
-	m_TextureSlots[0] = Texture2D::Create(TextureDescriptor());
+	m_pWhiteTexture = Texture2D::Create(TextureDescriptor());
 	uint32_t whiteTextureData = 0xffffffff;
-	m_TextureSlots[0]->SetData(&whiteTextureData, sizeof(uint32_t));
+	m_pWhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 
 	//quads
 	uint32_t* quadIndices = new uint32_t[s_MaxIndices];
@@ -87,7 +87,7 @@ Boon::Renderer2D::Renderer2D(const Renderer2DCreateInfo& desc)
 		{ ShaderDataType::Float,  "a_TilingFactor" },
 		{ ShaderDataType::Int,	  "a_ID"		   }
 	};
-	auto quadIndexBuffer = IndexBuffer::Create(quadIndices, s_MaxIndices);
+	m_QuadIndexBuffer = IndexBuffer::Create(quadIndices, s_MaxIndices);
 
 	PipelineDescriptor quadPipelineDesc{};
 	quadPipelineDesc.Shader = desc.pSpriteShader;
@@ -96,17 +96,7 @@ Boon::Renderer2D::Renderer2D(const Renderer2DCreateInfo& desc)
 	quadPipelineDesc.Blend = BlendMode::Alpha;
 	quadPipelineDesc.Depth = DepthMode::ReadWrite;
 	quadPipelineDesc.Cull = CullMode::None;
-	auto quadPipeline = std::make_shared<Pipeline>(quadPipelineDesc);
-
-	m_QuadBatch.Initialize(s_MaxVertices, quadPipeline, quadIndexBuffer);
-	delete[] quadIndices;
-	m_QuadBatch.BindBeginBatchCallback([this]() {
-		m_TextureSlotIndex = 1;
-		});
-	m_QuadBatch.BindPreFlushCallback([this]() {
-		for (uint32_t i = 0; i < m_TextureSlotIndex; i++)
-			m_TextureSlots[i]->Bind(i);
-		});
+	m_pQuadPipeline = std::make_shared<Pipeline>(quadPipelineDesc);
 
 	//lines
 	VertexBufferLayout lineBufferLayout = {
@@ -132,7 +122,9 @@ Boon::Renderer2D::~Renderer2D()
 
 void Boon::Renderer2D::Begin(RenderContext&)
 {
-	m_QuadBatch.Begin();
+	for (auto& [key, state] : m_QuadBatches)
+		state.Batch.Begin();
+
 	m_LineBatch.Begin();
 }
 
@@ -140,7 +132,9 @@ void Boon::Renderer2D::End(RenderContext& ctx)
 {
 	FlushRenderQueue(ctx);
 
-	m_QuadBatch.Flush();
+	for (auto& [key, state] : m_QuadBatches)
+		state.Batch.Flush();
+
 	m_LineBatch.Flush();
 }
 
@@ -254,7 +248,7 @@ void Boon::Renderer2D::SubmitGeometry(const GeometryRenderItem2D& item)
 	m_RenderQueue.Submit(item);
 }
 
-void Renderer2D::FlushRenderQueue(RenderContext& ctx)
+void Boon::Renderer2D::FlushRenderQueue(RenderContext& ctx)
 {
 	const auto& geometry = m_RenderQueue.GetGeometry();
 
@@ -282,8 +276,23 @@ void Renderer2D::FlushRenderQueue(RenderContext& ctx)
 	constexpr size_t quadVertexCount = 4;
 
 	std::vector<QuadRenderItem2D> quads = m_RenderQueue.GetQuads();
-	std::sort(quads.begin(), quads.end(), [](const QuadRenderItem2D& a, const QuadRenderItem2D& b)
+	std::sort(quads.begin(), quads.end(),
+		[](const QuadRenderItem2D& a, const QuadRenderItem2D& b)
 		{
+			auto getPipeline = [](const QuadRenderItem2D& q) -> Pipeline*
+				{
+					if (q.MaterialOverride && q.MaterialOverride->GetPipeline())
+						return q.MaterialOverride->GetPipeline().get();
+
+					return nullptr;
+				};
+
+			void* pipelineA = getPipeline(a);
+			void* pipelineB = getPipeline(b);
+
+			if (pipelineA != pipelineB)
+				return pipelineA < pipelineB;
+
 			if (a.SortLayer != b.SortLayer)
 				return a.SortLayer < b.SortLayer;
 
@@ -300,17 +309,39 @@ void Renderer2D::FlushRenderQueue(RenderContext& ctx)
 			{ quad.UV0.x, quad.UV1.y }
 		};
 
-		float textureIndex = ResolveTextureSlot(quad.Texture, m_TextureSlots, m_TextureSlotIndex, m_QuadBatch);
+		glm::vec4 color = quad.Color;
+		float tilingFactor = quad.TilingFactor;
+		std::shared_ptr<Texture2D> texture = quad.Texture;
+		std::shared_ptr<Pipeline> pipeline = m_pQuadPipeline;
+
+		if (quad.MaterialOverride && quad.MaterialOverride->GetPipeline())
+			pipeline = quad.MaterialOverride->GetPipeline();
+
+		QuadBatchState& batchState = GetOrCreateQuadBatch(pipeline);
+
+		if (quad.MaterialOverride)
+		{
+			if (const auto* data = quad.MaterialOverride->GetDataAs<QuadMaterialData>())
+			{
+				color = data->Color;
+				tilingFactor = data->TilingFactor;
+			}
+
+			if (auto materialTexture = quad.MaterialOverride->GetTexture("u_Texture"))
+				texture = materialTexture;
+		}
+
+		float textureIndex = ResolveTextureSlot(texture, batchState.TextureSlots, batchState.TextureSlotIndex, batchState.Batch);
 
 		for (size_t i = 0; i < quadVertexCount; i++)
 		{
-			QuadVertex& vertex = m_QuadBatch.PushVertex<QuadVertex>();
+			QuadVertex& vertex = batchState.Batch.PushVertex<QuadVertex>();
 
 			vertex.Position = quad.Transform * m_QuadVertexPositions[i];
-			vertex.Color = quad.Color;
+			vertex.Color = color;
 			vertex.TexCoord = texCoords[i];
 			vertex.TexIndex = textureIndex;
-			vertex.TilingFactor = quad.TilingFactor;
+			vertex.TilingFactor = tilingFactor;
 			vertex.GameObjectID = quad.EntityID;
 		}
 	}
@@ -329,4 +360,38 @@ void Renderer2D::FlushRenderQueue(RenderContext& ctx)
 	}
 
 	m_RenderQueue.Clear();
+}
+
+Boon::Renderer2D::QuadBatchState& Boon::Renderer2D::GetOrCreateQuadBatch(const std::shared_ptr<Pipeline>& pipeline)
+{
+	QuadBatchKey key{};
+	key.Pipeline = pipeline ? pipeline : m_pQuadPipeline;
+
+	auto it = m_QuadBatches.find(key);
+	if (it != m_QuadBatches.end())
+		return it->second;
+
+	auto& state = m_QuadBatches[key];
+
+	state.TextureSlots[0] = m_pWhiteTexture;
+	state.TextureSlotIndex = 1;
+
+	state.Batch.Initialize(s_MaxVertices, key.Pipeline, m_QuadIndexBuffer);
+	state.Batch.Begin();
+
+	state.Batch.BindBeginBatchCallback([&state]()
+		{
+			state.TextureSlotIndex = 1;
+		});
+
+	state.Batch.BindPreFlushCallback([&state]()
+		{
+			for (uint32_t i = 0; i < state.TextureSlotIndex; i++)
+			{
+				if (state.TextureSlots[i])
+					state.TextureSlots[i]->Bind(i);
+			}
+		});
+
+	return state;
 }
