@@ -10,6 +10,7 @@ namespace Boon
 {
     using SceneChangedDelegate = Delegate<void(Scene&)>;
 
+    struct EngineContext;
     class Scene;
     class SceneManager final
     {
@@ -19,7 +20,7 @@ namespace Boon
          *
          * Responsible for creating, loading and switching scenes.
          */
-        SceneManager();
+        SceneManager(EngineContext* pEngineContext);
 
         /**
          * @brief Shutdown the scene manager and unload all scenes.
@@ -129,5 +130,7 @@ namespace Boon
         SceneID m_ActiveScene = UUID::Null;
         std::unordered_map<SceneID, std::unique_ptr<Scene>> m_Scenes;
         SceneChangedDelegate m_OnSceneChanged{};
+
+        EngineContext* m_pEngineContext = nullptr;
     };
 }

@@ -17,7 +17,7 @@ namespace BoonEditor
 	class EditorPanel : public EditorWidget
 	{
 	public:
-		EditorPanel(const std::string& name, EditorContext* pContext);
+		EditorPanel(EditorContext* pContext, const std::string& name);
 		virtual ~EditorPanel() = default;
 
 		EditorPanel(const EditorPanel& other) = delete;

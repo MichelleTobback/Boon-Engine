@@ -4,6 +4,7 @@
 
 #include "Core/ServiceLocator.h"
 #include "Core/Time.h"
+#include "Core/EngineContext.h"
 #include "Input/Input.h"
 
 #include <Component/Rigidbody2D.h>
@@ -27,7 +28,7 @@ void PlayerController::Awake(GameObject gameObject)
 {
     m_Owner = gameObject;
 
-    AssetLibrary& assetLib = Assets::Get();
+    AssetLibrary& assetLib = *gameObject.GetScene()->GetEngineContext().AssetLib;
     AssetRef<SpriteAtlasAsset> atlas = assetLib.Load<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa");
     gameObject.GetOrAddComponent<SpriteRendererComponent>().SpriteAtlasHandle = atlas;
 

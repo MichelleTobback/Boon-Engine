@@ -38,11 +38,8 @@
 
 using namespace Boon;
 
-Boon::SceneRenderer::SceneRenderer(Scene* pScene, bool isSwapchainTarget)
-	: SceneRenderer{pScene, 1080, 720, isSwapchainTarget} {}
-
-Boon::SceneRenderer::SceneRenderer(Scene* pScene, int viewportWidth, int viewportHeight, bool isSwapchainTarget)
-	: m_pScene{pScene}, m_ViewportWidth{viewportWidth}, m_ViewportHeight{viewportHeight}
+Boon::SceneRenderer::SceneRenderer(const SceneRendererCreateInfo& desc)
+	: m_pScene{desc.pScene}, m_ViewportWidth{static_cast<int>(desc.Width)}, m_ViewportHeight{ static_cast<int>(desc.Height) }
 {
 	
 	//scene
@@ -51,16 +48,17 @@ Boon::SceneRenderer::SceneRenderer(Scene* pScene, int viewportWidth, int viewpor
 
 	FramebufferDescriptor fbDesc;
 	fbDesc.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::RED_INTEGER, FramebufferTextureFormat::Depth };
-	fbDesc.Width = viewportWidth;
-	fbDesc.Height = viewportHeight;
-	fbDesc.SwapChainTarget = isSwapchainTarget;
+	fbDesc.Width = desc.Width;
+	fbDesc.Height = desc.Height;
+	fbDesc.SwapChainTarget = desc.bIsSwapchainTarget;
 	m_pOutputFB = Framebuffer::Create(fbDesc);
 
-	m_pRenderer2D = std::make_unique<Renderer2D>();
-
-	AssetLibrary& assets = ServiceLocator::Get<AssetLibrary>();
-	AssetRef<ShaderAsset> tilemapShader = assets.Load<ShaderAsset>("shaders/Tilemap.glsl");
-	m_pTilemapShader = tilemapShader.Instance();
+	Renderer2DCreateInfo renderer2dDesc{};
+	AssetLibrary& assetLib = *desc.AssetLib;
+	renderer2dDesc.pSpriteShader = assetLib.Load<ShaderAsset>("shaders/Quad.glsl")->GetInstance();
+	renderer2dDesc.pLineShader = assetLib.Load<ShaderAsset>("shaders/Line.glsl")->GetInstance();
+	m_pTilemapShader = assetLib.Load<ShaderAsset>("shaders/Tilemap.glsl")->GetInstance();
+	m_pRenderer2D = std::make_unique<Renderer2D>(renderer2dDesc);
 }
 Boon::SceneRenderer::~SceneRenderer()
 {
@@ -70,20 +68,17 @@ Boon::SceneRenderer::~SceneRenderer()
 void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTransform)
 {
 	BeginScene(camera, cameraTransform);
-
-	AssetLibrary& assetLib{ ServiceLocator::Get<AssetLibrary>() };
-
 	{
 		auto group = m_pScene->GetAllGameObjectsWith<TransformComponent, SpriteRendererComponent>();
 		for (auto gameObject : group)
 		{
 			auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(gameObject);
 
-			if (assetLib.IsValidAsset(sprite.SpriteAtlasHandle))
+			if (sprite.SpriteAtlasHandle.IsValid())
 			{
-				auto atlas = assetLib.Load<SpriteAtlasAsset>(sprite.SpriteAtlasHandle);
-				const SpriteFrame& spriteUv = atlas->GetInstance()->GetSpriteFrame(sprite.Sprite);
-				m_pRenderer2D->SubmitQuad(transform.GetWorld(), atlas->GetInstance()->GetTexture().Instance(), sprite.Tiling, sprite.Color, (int)gameObject, spriteUv.UV, spriteUv.Size);
+				auto atlas = sprite.SpriteAtlasHandle.Instance();
+				const SpriteFrame& spriteUv = atlas->GetSpriteFrame(sprite.Sprite);
+				m_pRenderer2D->SubmitQuad(transform.GetWorld(), atlas->GetTexture().Instance(), sprite.Tiling, sprite.Color, (int)gameObject, spriteUv.UV, spriteUv.Size);
 			}
 			else
 				m_pRenderer2D->SubmitQuad(transform.GetWorld(), sprite.Color, (int)gameObject);
@@ -96,7 +91,7 @@ void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTrans
 		{
 			auto [transform, tc] = group.get<TransformComponent, TextureRendererComponent>(gameObject);
 
-			if (assetLib.IsValidAsset(tc.Texture))
+			if (tc.Texture.IsValid())
 			{
 				m_pRenderer2D->SubmitQuad(transform.GetWorld(), tc.Texture.Instance(), tc.Tiling, tc.Color, (int)gameObject, {}, {1.f, 1.f});
 			}

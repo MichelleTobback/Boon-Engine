@@ -745,7 +745,7 @@ namespace BoonEditor
                 {
                     AssetHandle hovered = *(const AssetHandle*)payload->Data;
 
-                    const AssetMeta* meta = Assets::Get().GetRegistry().Get(hovered);
+                    const AssetMeta* meta = AssetDatabase::Get().GetLibrary().GetRegistry().Get(hovered);
 
                     if (meta && assetType == meta->type)
                         compatible = true;
@@ -776,7 +776,7 @@ namespace BoonEditor
                 if (payload && payload->IsDataType("ASSET_HANDLE"))
                 {
                     AssetHandle hovered = *(const AssetHandle*)payload->Data;
-                    const AssetMeta* meta = Assets::Get().GetRegistry().Get(hovered);
+                    const AssetMeta* meta = AssetDatabase::Get().GetLibrary().GetRegistry().Get(hovered);
 
                     bool compatible = (meta && assetType == meta->type);
 
@@ -816,7 +816,7 @@ namespace BoonEditor
                 ImGui::InputText("Search", filter, sizeof(filter));
                 ImGui::Separator();
 
-                const auto& all = Assets::Get().GetRegistry().GetAll();
+                const auto& all = AssetDatabase::Get().GetLibrary().GetRegistry().GetAll();
 
                 for (auto& it : all)
                 {

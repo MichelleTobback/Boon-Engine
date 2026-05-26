@@ -19,8 +19,8 @@ namespace BoonEditor
     class AssetEditorBase : public EditorPanel, public IViewportCanvasRenderer
     {
     public:
-        AssetEditorBase(const std::string& name, EditorContext* pContext)
-            : EditorPanel(name, pContext) {
+        AssetEditorBase(EditorContext* pContext, const std::string& name)
+            : EditorPanel(pContext, name) {
         }
 
         virtual void RenderUI() override;
@@ -43,7 +43,7 @@ namespace BoonEditor
     class AssetEditor : public AssetEditorBase
     {
     public:
-        AssetEditor(const std::string& name, EditorContext* pContext);
+        AssetEditor(EditorContext* pContext, const std::string& name);
 
         virtual void Update() override;
         virtual void OnRenderUI() override;
@@ -63,8 +63,8 @@ namespace BoonEditor
     };
 
     template<typename TAsset>
-    inline AssetEditor<TAsset>::AssetEditor(const std::string& name, EditorContext* pContext)
-        : AssetEditorBase(name, pContext) {
+    inline AssetEditor<TAsset>::AssetEditor(EditorContext* pContext, const std::string& name)
+        : AssetEditorBase(pContext, name) {
     }
 
     template<typename TAsset>

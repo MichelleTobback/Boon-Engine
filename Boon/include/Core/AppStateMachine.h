@@ -1,5 +1,6 @@
 #pragma once
 #include "AppState.h"
+#include <Core/EngineContext.h>
 
 #include <memory>
 
@@ -17,11 +18,11 @@ namespace Boon
 		AppStateMachine& operator=(AppStateMachine&& other) = delete;
 
 		void RequestStateChange(const std::shared_ptr<AppState>& pState);
-		void PushState(const std::shared_ptr<AppState>& pState);
+		void PushState(const std::shared_ptr<AppState>& pState, EngineContext& ctx);
 		void Shutdown();
 
 		void Update();
-		void EndUpdate();
+		void EndUpdate(EngineContext& ctx);
 
 	private:
 		std::shared_ptr<AppState> m_pState;

@@ -2,15 +2,16 @@
 #include "Core/ServiceLocator.h"
 #include "Core/Time.h"
 #include "Input/Input.h"
+#include "Core/EditorContext.h"
 
 using namespace BoonEditor;
 using namespace Boon;
 
-BoonEditor::EditorCamera::EditorCamera(float width, float height)
-    : EditorCamera(2.f, width / height, 0.1f, 10.f){}
+BoonEditor::EditorCamera::EditorCamera(EditorContext* context, float width, float height)
+    : EditorCamera(context, 2.f, width / height, 0.1f, 10.f){}
 
-BoonEditor::EditorCamera::EditorCamera(float size, float aspectRatio, float near, float far)
-    : m_OrthoCamera{ size, aspectRatio, near, far }, m_PerspCamera{}
+BoonEditor::EditorCamera::EditorCamera(EditorContext* context, float size, float aspectRatio, float near, float far)
+    : EditorObject(context), m_OrthoCamera{ size, aspectRatio, near, far }, m_PerspCamera{}
 {
     m_OrthoTransform.SetLocalPosition(0.f, 0.f, 1.f);
     m_PerspTransform.SetLocalPosition(0.f, 0.f, 1.f);
@@ -43,7 +44,7 @@ void BoonEditor::EditorCamera::Resize(float width, float height)
 
 void BoonEditor::EditorCamera::UpdatePerspectiveController()
 {
-    Input& input{ ServiceLocator::Get<Input>() };
+    Input& input{ *GetContext().GetEngineContext().Input };
 
     static glm::vec2 prevMousePos = { input.GetMouseX(), input.GetMouseY() };
     glm::vec2 mousePos = { input.GetMouseX(), input.GetMouseY() };
@@ -87,7 +88,7 @@ void BoonEditor::EditorCamera::UpdatePerspectiveController()
 
 void BoonEditor::EditorCamera::UpdateOrthographicController()
 {
-    Input& input{ ServiceLocator::Get<Input>() };
+    Input& input{ *GetContext().GetEngineContext().Input };
 
     static glm::vec2 prevMousePos = { input.GetMouseX(), input.GetMouseY() };
     glm::vec2 mousePos = { input.GetMouseX(), input.GetMouseY() };

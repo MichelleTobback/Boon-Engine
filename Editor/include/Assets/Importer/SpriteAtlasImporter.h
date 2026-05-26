@@ -18,7 +18,10 @@ namespace Boon
     public:
         using AssetType = SpriteAtlasAsset;
 
+        virtual ~SpriteAtlasImporter() = default;
+
         bool ImportToBAsset(
+            AssetLibrary& assetLib,
             const std::filesystem::path& sourcePath,
             const std::filesystem::path& exportPath,
             const AssetMeta& meta) override
@@ -32,12 +35,10 @@ namespace Boon
             nlohmann::json j;
             file >> j;
 
-            AssetLibrary& assets = ServiceLocator::Get<AssetLibrary>();
-
             const std::string texPath = j.value("texture", std::string{});
             if (!texPath.empty())
             {
-                AssetRef<Texture2DAsset> tex = assets.Load<Texture2DAsset>(texPath);
+                AssetRef<Texture2DAsset> tex = assetLib.Load<Texture2DAsset>(texPath);
                 instance->SetTexture(tex);
             }
 

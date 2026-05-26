@@ -20,6 +20,7 @@ namespace BoonEditor
 	{
 	public:
 		static AssetDatabase& Get();
+		void Init(AssetLibrary& assetLib);
 
 		void RegisterAsset(const std::string& path, AssetHandle handle, int rootIndex);
 		AssetHandle GetHandle(const std::string& path) const;
@@ -28,7 +29,7 @@ namespace BoonEditor
 		template<typename TAsset>
 		AssetRef<TAsset> Load(const std::string& path)
 		{
-			return ServiceLocator::Get<AssetLibrary>().Load<TAsset>(path);
+			return m_pAssetLib->Load<TAsset>(path);
 		}
 
 		template<typename TAsset>
@@ -67,9 +68,11 @@ namespace BoonEditor
 
 		AssetRef<Texture2DAsset> GetThumbnail(AssetHandle handle) const;
 
+		inline AssetLibrary& GetLibrary() { return *m_pAssetLib; }
+		inline const AssetLibrary& GetLibrary() const { return *m_pAssetLib; }
+
 	private:
 		AssetDatabase();
-		void Init();
 
 		struct Path
 		{
@@ -109,6 +112,7 @@ namespace BoonEditor
 		std::unordered_map<AssetHandle, Path> m_HandleToPath;
 		std::unordered_map<std::string, AssetHandle> m_PathToHandle;
 		bool m_Dirty = false;
+		AssetLibrary* m_pAssetLib = nullptr;
 
 		mutable std::unordered_map<AssetType, AssetRef<Texture2DAsset>> m_DefaultTextures;
 	};

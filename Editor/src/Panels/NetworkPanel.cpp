@@ -99,10 +99,10 @@ namespace
 }
 
 NetworkPanel::NetworkPanel(
-	const std::string& name,
 	EditorContext* pContext,
+	const std::string& name,
 	Boon::NetworkSettings& settings)
-	: EditorPanel(name, pContext)
+	: EditorPanel(pContext, name)
 	, m_Settings(settings)
 {
 }

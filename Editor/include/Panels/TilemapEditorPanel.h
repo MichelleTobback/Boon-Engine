@@ -44,7 +44,7 @@ namespace BoonEditor
     class TilemapEditorPanel final : public AssetEditor<TilemapAsset>
     {
     public:
-        TilemapEditorPanel(const std::string& name, EditorContext* pContext);
+        TilemapEditorPanel(EditorContext* pContext, const std::string& name);
 
         virtual void Update() override;
         virtual void OnViewportCanvasRenderUI(const ViewportCanvasContext& context) override;

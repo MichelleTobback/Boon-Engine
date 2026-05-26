@@ -79,13 +79,14 @@ namespace BoonEditor
         
     }
 
-    void AssetDatabase::Init()
+    void AssetDatabase::Init(AssetLibrary& assetLib)
     {
-        m_DefaultTextures[AssetType::Texture] = Assets::Get().Load<Texture2DAsset>("Icons/Assets/texture_icon.png");
-        m_DefaultTextures[AssetType::SpriteAtlas] = Assets::Get().Load<Texture2DAsset>("Icons/Assets/sprite_atlas_icon.png");
-        m_DefaultTextures[AssetType::Tilemap] = Assets::Get().Load<Texture2DAsset>("Icons/Assets/sprite_atlas_icon.png");
-        m_DefaultTextures[AssetType::Shader] = Assets::Get().Load<Texture2DAsset>("Icons/Assets/shader_icon.png");
-        m_DefaultTextures[AssetType::Scene] = Assets::Get().Load<Texture2DAsset>("Icons/Assets/scene_icon.png");
+        m_pAssetLib = &assetLib;
+        m_DefaultTextures[AssetType::Texture] = assetLib.Load<Texture2DAsset>("Icons/Assets/texture_icon.png");
+        m_DefaultTextures[AssetType::SpriteAtlas] = assetLib.Load<Texture2DAsset>("Icons/Assets/sprite_atlas_icon.png");
+        m_DefaultTextures[AssetType::Tilemap] = assetLib.Load<Texture2DAsset>("Icons/Assets/sprite_atlas_icon.png");
+        m_DefaultTextures[AssetType::Shader] = assetLib.Load<Texture2DAsset>("Icons/Assets/shader_icon.png");
+        m_DefaultTextures[AssetType::Scene] = assetLib.Load<Texture2DAsset>("Icons/Assets/scene_icon.png");
     }
 
     void AssetDatabase::RegisterAsset(const std::string& path, AssetHandle handle, int rootIndex)
@@ -106,9 +107,11 @@ namespace BoonEditor
 
     const std::filesystem::path& AssetDatabase::GetPath(AssetHandle handle) const
     {
-        static std::string empty;
+        static const std::filesystem::path empty{};
+
         if (auto it = m_HandleToPath.find(handle); it != m_HandleToPath.end())
             return it->second.Path;
+
         return empty;
     }
 
@@ -130,7 +133,7 @@ namespace BoonEditor
 
         if (std::filesystem::exists(MetaPath(sourcePath)))
             meta = ServiceLocator::Get<AssetImporterRegistry>().LoadMeta(sourcePath);
-        else if (const AssetMeta* registeredMeta = ServiceLocator::Get<AssetLibrary>().GetMeta(asset))
+        else if (const AssetMeta* registeredMeta = m_pAssetLib->GetMeta(asset))
             meta = *registeredMeta;
 
         std::error_code ec;
@@ -158,7 +161,7 @@ namespace BoonEditor
         m_PathToHandle.erase(Utils::NormalizePath(logicalPath.generic_string()));
         m_HandleToPath.erase(asset);
 
-        AssetLibrary& assets = ServiceLocator::Get<AssetLibrary>();
+        AssetLibrary& assets = *m_pAssetLib;
         assets.GetRegistry().Remove(asset);
         assets.GetManifest().Remove(asset);
         assets.ClearCache();
@@ -800,7 +803,7 @@ namespace BoonEditor
 
     AssetRef<Texture2DAsset> AssetDatabase::GetThumbnail(AssetHandle handle) const
     {
-        const AssetMeta* meta = Assets::Get().GetMeta(handle);
+        const AssetMeta* meta = m_pAssetLib->GetMeta(handle);
         if (!meta)
             return AssetRef<Texture2DAsset>();
 
@@ -808,7 +811,7 @@ namespace BoonEditor
         {
             const std::filesystem::path& sourcePath = GetPath(handle);
             if (!sourcePath.empty())
-                return Assets::Get().Load<Texture2DAsset>(sourcePath);
+                return m_pAssetLib->Load<Texture2DAsset>(sourcePath);
 
             return AssetRef<Texture2DAsset>();
         }
@@ -819,7 +822,7 @@ namespace BoonEditor
                 if (it != m_DefaultTextures.end() && it->second.IsValid())
                     return it->second;
 
-                AssetRef<Texture2DAsset> ref = Assets::Get().Load<Texture2DAsset>(path);
+                AssetRef<Texture2DAsset> ref = m_pAssetLib->Load<Texture2DAsset>(path);
                 m_DefaultTextures[type] = ref;
                 return ref;
             };
@@ -852,8 +855,7 @@ namespace BoonEditor
 
         AssetManifest manifest;
 
-        AssetLibrary& assets =
-            ServiceLocator::Get<AssetLibrary>();
+        AssetLibrary& assets = *m_pAssetLib;
 
         for (const auto& [handle, path] : m_HandleToPath)
         {

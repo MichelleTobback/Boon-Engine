@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include "Core/IWindowEventCallback.h"
 #include "KeyCodes.h"
 #include "MouseCodes.h"
 #include "GamepadCodes.h"
@@ -19,7 +20,7 @@ namespace Boon
         Released
     };
 
-    class Input
+    class Input : public IWindowEventCallback
     {
     public:
         Input();
@@ -68,10 +69,10 @@ namespace Boon
         float GetControllerAxisSensitivity(int controller) const;
 
         // GLFW callbacks (called from window)
-        void KeyCallback(int key, int action);
-        void MouseButtonCallback(int button, int action);
-        void CursorPosCallback(double xpos, double ypos);
-        void ScrollCallback(double xoffset, double yoffset);
+        virtual void KeyCallback(int key, int action) override;
+        virtual void MouseButtonCallback(int button, int action) override;
+        virtual void CursorPosCallback(double xpos, double ypos) override;
+        virtual void ScrollCallback(double xoffset, double yoffset) override;
 
     private:
         struct Impl;

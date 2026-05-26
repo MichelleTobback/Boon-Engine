@@ -12,7 +12,20 @@ namespace Boon
 	class UniformBuffer;
 	class Camera;
 	class TransformComponent;
+	class EventBus;
+	class AssetLibrary;
 	class Framebuffer;
+
+	struct SceneRendererCreateInfo
+	{
+		AssetLibrary* AssetLib = nullptr;
+		EventBus* Events = nullptr;
+		Scene* pScene = nullptr;
+		uint32_t Width = 1080;
+		uint32_t Height = 720;
+		bool bIsSwapchainTarget = false;
+	};
+
 	class SceneRenderer final
 	{
 	public:
@@ -21,12 +34,7 @@ namespace Boon
 		 *	@param pScene Pointer to the Scene to render.
 		 * @param isSwapchainTarget If true, the renderer targets the swapchain (default false).
 		 */
-		SceneRenderer(Scene* pScene, bool isSwapchainTarget = false);
-
-		/**
-		 * @brief Create a SceneRenderer with an explicit viewport size.
-		 */
-		SceneRenderer(Scene* pScene, int viewportWidth, int viewportHeight, bool isSwapchainTarget = false);
+		SceneRenderer(const SceneRendererCreateInfo& desc);
 
 		/**
 		 * @brief Destroy the SceneRenderer and release rendering resources.

@@ -17,7 +17,10 @@ namespace Boon
     public:
         using AssetType = TilemapAsset;
 
+        virtual ~TilemapImporter() = default;
+
         bool ImportToBAsset(
+            AssetLibrary& assetLib,
             const std::filesystem::path& sourcePath, 
             const std::filesystem::path& exportPath, 
             const AssetMeta& meta) override
@@ -35,8 +38,7 @@ namespace Boon
 
             std::shared_ptr<Tilemap> instance = std::make_shared<Tilemap>(chunksX, chunksY, chunkSize);
 
-            AssetLibrary& assets = ServiceLocator::Get<AssetLibrary>();
-            AssetRef<SpriteAtlasAsset> atlas = assets.Load<SpriteAtlasAsset>(j.value("atlas", std::string{}));
+            AssetRef<SpriteAtlasAsset> atlas = assetLib.Load<SpriteAtlasAsset>(j.value("atlas", std::string{}));
             instance->SetAtlas(atlas);
 
             for (const auto& entry : j["tiles"])

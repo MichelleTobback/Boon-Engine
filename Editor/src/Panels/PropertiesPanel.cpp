@@ -21,8 +21,8 @@
 
 using namespace BoonEditor;
 
-BoonEditor::PropertiesPanel::PropertiesPanel(const std::string& name, EditorContext* pContext, GameObjectContext* pGameObject)
-	: EditorPanel(name, pContext), m_pGameObjectContext{pGameObject}
+BoonEditor::PropertiesPanel::PropertiesPanel(EditorContext* pContext, const std::string& name, GameObjectContext* pGameObject)
+	: EditorPanel(pContext, name), m_pGameObjectContext{pGameObject}
 {
 	
 }

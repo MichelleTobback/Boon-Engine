@@ -53,7 +53,7 @@ bool Boon::GameObject::IsValid() const
 	if (!m_pScene)
 		return false;
 
-	if (!ServiceLocator::Get<SceneManager>().IsLoaded(m_SceneID))
+	if (!m_pScene->IsLoaded())
 		return false;
 
 	return m_pScene->GetRegistry().valid(m_Handle);

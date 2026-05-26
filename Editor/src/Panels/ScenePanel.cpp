@@ -40,11 +40,11 @@ namespace
 }
 
 ScenePanel::ScenePanel(
-	const std::string& name,
 	EditorContext* pContext,
+	const std::string& name,
 	SceneContext* pScene,
 	GameObjectContext* pSelectedGameObject)
-	: EditorPanel(name, pContext)
+	: EditorPanel(pContext, name)
 	, m_pSceneContext{ pScene }
 	, m_pSelectionContext{ pSelectedGameObject }
 {

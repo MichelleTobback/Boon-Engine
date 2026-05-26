@@ -17,8 +17,8 @@
 
 namespace Boon
 {
-    NetScene::NetScene(Scene* scene, NetDriver* driver)
-        : m_Scene(scene), m_Driver(driver), m_Replication(std::make_unique<NetRepCore>()), m_RPC(std::make_unique<NetRPC>(this))
+    NetScene::NetScene(Scene* scene, NetDriver* driver, SceneManager* sceneManager)
+        : m_Scene(scene), m_Driver(driver), m_pSceneManager{ sceneManager }, m_Replication(std::make_unique<NetRepCore>()), m_RPC(std::make_unique<NetRPC>(this))
     {
         scene->ForeachGameObjectWith<NetIdentity>([this](GameObject obj){RegisterStaticGameObject(obj); });
 
@@ -29,7 +29,7 @@ namespace Boon
             m_Scene->GetOnComponentAdded() += [this](GameObject  obj, const BClass* cls) {BroadcastComponent(obj.GetUUID(), cls->hash, true); };
             m_Scene->GetOnComponentRemoved() += [this](GameObject  obj, const BClass* cls) {BroadcastComponent(obj.GetUUID(), cls->hash, false); };
 
-            m_ClientConnectedEvent = ServiceLocator::Get<EventBus>().Subscribe<NetConnectionEvent>([this](const NetConnectionEvent& e)
+            driver->GetEventBus().Subscribe<NetConnectionEvent>([this](const NetConnectionEvent& e)
                 {
                     NetConnection con{ e.ConnectionId, GetDriver() };
                     InitClientScene(&con);
@@ -40,7 +40,7 @@ namespace Boon
     NetScene::~NetScene()
     {
         m_DynamicOwnership = {};
-        ServiceLocator::Get<EventBus>().Unsubscribe<NetConnectionEvent>(m_ClientConnectedEvent);
+        GetDriver()->GetEventBus().Unsubscribe<NetConnectionEvent>(m_ClientConnectedEvent);
     }
 
     void NetScene::Update()
@@ -240,11 +240,10 @@ namespace Boon
         auto& s = pkt.GetSerializer();
         SceneID sceneId = s.Read<SceneID>();
 
-        SceneManager& scenes = ServiceLocator::Get<SceneManager>();
-        if (!scenes.IsLoaded(sceneId))
+        if (!m_pSceneManager->IsLoaded(sceneId))
             return;
 
-        scenes.SetActiveScene(sceneId);
+        m_pSceneManager->SetActiveScene(sceneId);
     }
 
     // -------------------------------------------------------------------------

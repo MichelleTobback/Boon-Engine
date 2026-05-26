@@ -16,7 +16,7 @@ namespace BoonEditor
 	class ConsolePanel final : public EditorPanel
 	{
 	public:
-		ConsolePanel(const std::string& name, EditorContext* pContext);
+		ConsolePanel(EditorContext* pContext, const std::string& name);
 		virtual ~ConsolePanel();
 
 		void AddMessage(const std::string& text, int level);

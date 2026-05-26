@@ -10,6 +10,7 @@
 namespace Boon
 {
     class NetScene;
+    class EventBus;
 
     using PacketCallback = std::function<void(NetConnection*, NetPacket&)>;
     using ConnectionCallback = std::function<void(NetConnection*)>;
@@ -29,7 +30,7 @@ namespace Boon
          * @param settings Network configuration to apply.
          * @return true on success, false otherwise.
          */
-        virtual bool Initialize(const NetworkSettings& settings) = 0;
+        virtual bool Initialize(const NetworkSettings& settings, EventBus* eventBus) = 0;
 
         /**
          * @brief Shutdown the driver and release resources.
@@ -141,6 +142,8 @@ namespace Boon
          * @brief Get local connection identifier used by this driver.
          */
         virtual uint64_t GetLocalConnectionId() const = 0;
+
+        virtual EventBus& GetEventBus() = 0;
 
         virtual bool IsStandalone() const = 0;
         virtual bool IsClient() const = 0;

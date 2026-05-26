@@ -5,7 +5,6 @@
 #include "Asset/AssetLibrary.h"
 #include "Asset/AssetManifest.h"
 #include "Asset/AssetTraits.h"
-#include "Core/ServiceLocator.h"
 
 #include <algorithm>
 #include <cctype>
@@ -37,6 +36,7 @@ namespace Boon
                 {
                     return Import(logicalPath).IsValid();
                 });
+            m_pAssetLibrary = &assets;
         }
 
         size_t AddAssetRoot(
@@ -115,7 +115,7 @@ namespace Boon
         template<typename T>
         bool Export(const std::filesystem::path& filepath, AssetHandle asset)
         {
-            AssetLibrary& assets = ServiceLocator::Get<AssetLibrary>();
+            AssetLibrary& assets = *m_pAssetLibrary;
             T* pAsset = asset.IsValid() ? assets.Resolve<T>(asset) : nullptr;
             AssetImporter* importer = GetImporter(AssetTraits<T>::Type);
             return importer && importer->ExportToFile(filepath, pAsset);
@@ -203,15 +203,14 @@ namespace Boon
             if (!importer)
                 return {};
 
-            if (!importer->ImportToBAsset(resolved.SourcePath, resolved.OutputPath, meta))
+            if (!importer->ImportToBAsset(*m_pAssetLibrary, resolved.SourcePath, resolved.OutputPath, meta))
                 return {};
 
             WriteMeta(resolved.SourcePath, meta);
 
             m_MetaRootIndex[meta.uuid] = resolved.RootIndex;
 
-            if (ServiceLocator::Has<AssetLibrary>())
-                ServiceLocator::Get<AssetLibrary>().RegisterMeta(meta);
+            m_pAssetLibrary->RegisterMeta(meta);
 
             SaveManifestForRoot(resolved.RootIndex);
 
@@ -348,15 +347,12 @@ namespace Boon
 
         void SaveManifestForRoot(size_t rootIndex) const
         {
-            if (!ServiceLocator::Has<AssetLibrary>())
-                return;
-
             if (rootIndex >= m_Roots.size())
                 return;
 
             AssetManifest manifest{};
 
-            for (const auto& [handle, meta] : ServiceLocator::Get<AssetLibrary>().GetRegistry().GetAll())
+            for (const auto& [handle, meta] : m_pAssetLibrary->GetRegistry().GetAll())
             {
                 auto rootIt = m_MetaRootIndex.find(handle);
                 if (rootIt != m_MetaRootIndex.end() && rootIt->second != rootIndex)
@@ -389,5 +385,6 @@ namespace Boon
         std::unordered_map<std::string, AssetType> m_ExtensionsToType;
         std::unordered_map<AssetHandle, size_t> m_MetaRootIndex;
         std::vector<AssetRoot> m_Roots;
+        AssetLibrary* m_pAssetLibrary = nullptr;
     };
 }

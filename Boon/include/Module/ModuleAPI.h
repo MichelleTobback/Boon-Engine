@@ -8,12 +8,14 @@ namespace Boon
     class NetRepRegistry;
     class AssetImporterRegistry;
     class ServiceRegistry;
+    struct EngineContext;
 
     struct ModuleContext
     {
         BClassRegistry* BClasses = nullptr;
         NetRepRegistry* NetReps = nullptr;
         ServiceRegistry* ServiceRegistry = nullptr;
+        EngineContext* EngineContext = nullptr;
     };
 
     struct ModuleInfo

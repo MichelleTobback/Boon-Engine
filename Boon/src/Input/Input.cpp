@@ -1,6 +1,4 @@
 #include "Input/Input.h"
-#include "Core/Application.h"
-#include "Core/ServiceLocator.h"
 
 #include <GLFW/glfw3.h>
 #include <cstdint>
@@ -45,15 +43,7 @@ namespace Boon
         } controllers[MAX_CONTROLLERS];
 
         // -------- Constructor --------
-        Impl()
-        {
-            GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetApiWindow());
-            glfwSetKeyCallback(window, KeyCallbackStatic);
-            glfwSetMouseButtonCallback(window, MouseButtonCallbackStatic);
-            glfwSetCursorPosCallback(window, CursorPosCallbackStatic);
-            glfwSetScrollCallback(window, ScrollCallbackStatic);
-        }
-
+        Impl() = default;
         ~Impl() = default;
 
         // -------- Utility Bit Ops --------
@@ -166,27 +156,6 @@ namespace Boon
             const uint64_t mask = 1ULL << (button % 64);
             const bool pressed = (c.buttonStates[idx] & mask) != 0;
             return pressed ? KeyState::Held : KeyState::Up;
-        }
-
-        // -------- GLFW Callbacks --------
-        static void KeyCallbackStatic(GLFWwindow*, int key, int, int action, int)
-        {
-            ServiceLocator::Get<Input>().m_pImpl->KeyCallback(key, action);
-        }
-
-        static void MouseButtonCallbackStatic(GLFWwindow*, int button, int action, int)
-        {
-            ServiceLocator::Get<Input>().m_pImpl->MouseButtonCallback(button, action);
-        }
-
-        static void CursorPosCallbackStatic(GLFWwindow*, double xpos, double ypos)
-        {
-            ServiceLocator::Get<Input>().m_pImpl->CursorPosCallback(xpos, ypos);
-        }
-
-        static void ScrollCallbackStatic(GLFWwindow*, double xoffset, double yoffset)
-        {
-            ServiceLocator::Get<Input>().m_pImpl->ScrollCallback(xoffset, yoffset);
         }
 
         // -------- Event Handlers --------

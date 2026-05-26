@@ -43,13 +43,13 @@ namespace Boon
 
         cls.unregister = []()
             {
-                auto scenes = ServiceLocator::Get<SceneManager>().GetLoadedScenes();
-                for (Scene* scene : scenes)
-                {
-                    scene->GetECSLifecycleSystem().UnregisterType<T>();
-                    scene->GetRegistry().clear<T>();
-                    scene->GetRegistry().reset(entt::type_hash<T>::value());
-                }
+                //auto scenes = ServiceLocator::Get<SceneManager>().GetLoadedScenes();
+                //for (Scene* scene : scenes)
+                //{
+                //    scene->GetECSLifecycleSystem().UnregisterType<T>();
+                //    scene->GetRegistry().clear<T>();
+                //    scene->GetRegistry().reset(entt::type_hash<T>::value());
+                //}
             };
 
         cls.createInstance = []() -> void* 

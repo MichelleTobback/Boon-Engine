@@ -30,7 +30,7 @@ namespace BoonEditor
     class SpriteAtlasEditorPanel : public AssetEditor<SpriteAtlasAsset>
     {
     public:
-        SpriteAtlasEditorPanel(const std::string& name, EditorContext* pContext);
+        SpriteAtlasEditorPanel(EditorContext* pContext, const std::string& name);
 
         virtual void Update() override;
 

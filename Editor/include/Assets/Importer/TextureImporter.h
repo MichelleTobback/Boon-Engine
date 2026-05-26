@@ -13,7 +13,10 @@ namespace Boon
     public:
         using AssetType = Texture2DAsset;
 
+        virtual ~Texture2DImporter() = default;
+
         virtual bool ImportToBAsset(
+            AssetLibrary& assetLib,
             const std::filesystem::path& sourcePath, 
             const std::filesystem::path& exportPath, 
             const AssetMeta& meta) override

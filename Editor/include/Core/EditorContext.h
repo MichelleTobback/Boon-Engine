@@ -1,6 +1,7 @@
 #pragma once
 #include <Project/ProjectConfig.h>
 #include <Panels/EditorWidget.h>
+#include <Core/EngineContext.h>
 
 #include <memory>
 #include <type_traits>
@@ -22,7 +23,7 @@ namespace BoonEditor
 		{
 			static_assert(std::is_base_of<EditorObject, T>::value, "T must derive from Object");
 
-			auto pInstance = std::make_unique<T>(std::forward<TArgs>(args)...);
+			auto pInstance = std::make_unique<T>(this, std::forward<TArgs>(args)...);
 			T& ref = *pInstance;
 			m_Objects.push_back(std::move(pInstance));
 			return ref;
@@ -37,7 +38,7 @@ namespace BoonEditor
 			if (it != m_Widgets.end())
 				throw std::runtime_error("Widget with name already exists: " + name);
 
-			T& ref = CreateObject<T>(name, this, std::forward<TArgs>(args)...);
+			T& ref = CreateObject<T>(name, std::forward<TArgs>(args)...);
 			m_Widgets.emplace(name, &ref);
 			return ref;
 		}
@@ -73,10 +74,13 @@ namespace BoonEditor
 		inline EditorCommandQueue* GetCommandQueue() { return m_CommandQueue.get(); }
 		inline const ProjectConfig& GetCurrentProjectConfig() const { return m_CurrentProject; }
 
+		inline void SetEngineContext(EngineContext* ctx) { m_EngineContext = ctx; }
+		inline EngineContext& GetEngineContext() { return *m_EngineContext; }
+
 	private:
 		friend class EditorState;
 		ProjectConfig m_CurrentProject{};
-
+		EngineContext* m_EngineContext;
 		std::vector<std::unique_ptr<EditorObject>> m_Objects;
 		std::unordered_map<std::string, EditorWidget*> m_Widgets;
 		std::unique_ptr<EditorCommandQueue> m_CommandQueue;

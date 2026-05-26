@@ -74,7 +74,6 @@ namespace BoonEditor
 		Delegate<void(Scene&)>::Handle m_BindNetSceneHandle;
 
 		DragDropRouter m_DragDrop{};
-
-		EditorContext m_Context{};
+		EditorContext m_Context;
 	};
 }

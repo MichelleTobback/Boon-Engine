@@ -35,10 +35,17 @@ Boon::Application::~Application()
 
 void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 {
+	m_pInput = std::make_unique<Input>();
+	m_pEventBus = std::make_unique<EventBus>();
+
 	Window::WindowDesc windowDesc{};
 	windowDesc.name = m_Desc.Window.Title;
 	windowDesc.width = m_Desc.Window.Width;
 	windowDesc.height = m_Desc.Window.Height;
+	windowDesc.pEventBus = m_pEventBus.get();
+	windowDesc.pInput = m_pInput.get();
+	windowDesc.icon = m_Desc.EngineRoot / "Assets/Resources/BoonEngine.png";
+
 	uint32_t windowFlags = (uint32_t)windowDesc.flags;
 	if (m_Desc.Render.bVSync)
 		windowFlags |= (uint32_t)Window::WinConfigFlag::Vsync;
@@ -63,34 +70,35 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 
 	BOON_REGISTER_FN(BClassRegistry::Get(), NetRepRegistry::Get());
 
-	auto assetLibrary = std::make_shared<AssetLibrary>(m_Desc.AssetsRoot);
-	assetLibrary->LoadManifest("AssetManifest.json");
-	ServiceLocator::Register(assetLibrary);
+	m_pAssets = std::make_unique<AssetLibrary>(m_Desc.AssetsRoot);
+	m_pAssets->LoadManifest("AssetManifest.json");
+	m_pScenes = std::make_unique<SceneManager>(&m_Context);
 
-	ServiceLocator::Register(std::make_shared<EventBus>());
-	ServiceLocator::Register(std::make_shared<Input>());
-	ServiceLocator::Register(std::make_shared<SceneManager>());
+	m_Context.AssetLib = m_pAssets.get();
+	m_Context.Input = m_pInput.get();
+	m_Context.Scenes = m_pScenes.get();
+	m_Context.EventBus = m_pEventBus.get();
+	m_Context.Window = m_pWindow.get();
 
 	BOON_INIT_LOGGER();
 
-	m_pStateMachine->PushState(std::move(pState));
+	m_pStateMachine->PushState(std::move(pState), m_Context);
 	pState = nullptr;
 
 	bool quit{ false };
 	Time& time{ Time::Get() };
-	Input& input{ ServiceLocator::Get<Input>() };
 	time.Start();
 	while (!quit)
 	{
 		time.Step();
 		quit = m_pWindow->Update();
 		m_pStateMachine->Update();
-		input.Update();
+		m_pInput->Update();
 		m_pWindow->Present();
 		time.Wait();
-		m_pStateMachine->EndUpdate();
+		m_pStateMachine->EndUpdate(m_Context);
 	}
-	ServiceLocator::Get<SceneManager>().Shutdown();
+	m_pScenes->Shutdown();
 	m_pStateMachine->Shutdown();
 	ServiceLocator::Shutdown();
 	Renderer::Shutdown();

@@ -1,4 +1,5 @@
 #pragma once
+#include "Core/IWindowEventCallback.h"
 #include "Core/BitFlag.h"
 #include <memory>
 #include <string>
@@ -6,6 +7,7 @@
 
 namespace Boon
 {
+	class EventBus;
 	class Window final
 	{
 	public:
@@ -31,6 +33,8 @@ namespace Boon
 			std::string name{};
 			std::filesystem::path icon{};
 			WinConfigFlag flags{};
+			EventBus* pEventBus{nullptr};
+			IWindowEventCallback* pInput{ nullptr };
 		};
 
 		/**

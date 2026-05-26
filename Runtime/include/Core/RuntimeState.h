@@ -29,6 +29,7 @@ namespace Runtime
 		RuntimeState& operator=(const RuntimeState& other) = default;
 		RuntimeState& operator=(RuntimeState&& other) = default;
 
+	protected:
 		virtual void OnEnter() override;
 		virtual void OnUpdate() override;
 		virtual void OnExit() override;

@@ -8,7 +8,7 @@ namespace BoonEditor
     class EditorDialog : public EditorWidget
     {
     public:
-        EditorDialog(const std::string& name, EditorContext* pContext);
+        EditorDialog(EditorContext* pContext, const std::string& name);
         virtual ~EditorDialog() = default;
 
         void Open();

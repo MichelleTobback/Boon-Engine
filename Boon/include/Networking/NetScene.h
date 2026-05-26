@@ -16,6 +16,7 @@ namespace Boon
     class NetConnection;
     class NetRepCore;
     class NetRPC;
+    class SceneManager;
 
     class NetScene
     {
@@ -28,7 +29,7 @@ namespace Boon
          * @param scene Scene instance this NetScene manages.
          * @param driver Network driver used to send/receive packets.
          */
-        NetScene(Scene* scene, NetDriver* driver);
+        NetScene(Scene* scene, NetDriver* driver, SceneManager* sceneManager);
 
         /**
          * @brief Destroy the NetScene and cleanup networking resources.
@@ -140,6 +141,7 @@ namespace Boon
 
     private:
         Scene* m_Scene = nullptr;
+        SceneManager* m_pSceneManager = nullptr;
         NetDriver* m_Driver = nullptr;
         std::unique_ptr<NetRPC> m_RPC = nullptr;
         std::unique_ptr<NetRepCore> m_Replication = nullptr;

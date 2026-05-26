@@ -16,7 +16,7 @@ namespace BoonEditor
     class AssetDirectoryScanner final : public EditorObject
     {
     public:
-        AssetDirectoryScanner(size_t assetRootIndex, float interval);
+        AssetDirectoryScanner(EditorContext* context, size_t assetRootIndex, float interval);
 
         void Update();
 

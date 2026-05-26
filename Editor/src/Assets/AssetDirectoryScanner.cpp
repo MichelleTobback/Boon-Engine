@@ -5,8 +5,9 @@
 
 namespace BoonEditor
 {
-    AssetDirectoryScanner::AssetDirectoryScanner(size_t assetRootIndex, float interval)
-        : m_AssetRootIndex(assetRootIndex)
+    AssetDirectoryScanner::AssetDirectoryScanner(EditorContext* context, size_t assetRootIndex, float interval)
+        : EditorObject(context)
+        , m_AssetRootIndex(assetRootIndex)
         , m_Interval(interval)
     {
         Scan();

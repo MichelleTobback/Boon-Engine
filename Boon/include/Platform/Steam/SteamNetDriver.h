@@ -24,7 +24,7 @@ namespace Boon
         // ---------------------------------------------------------
         // Interface Implementation
         // ---------------------------------------------------------
-        bool Initialize(const NetworkSettings& settings) override;
+        bool Initialize(const NetworkSettings& settings, EventBus* eventBus) override;
         void Shutdown() override;
 
         void Update() override;
@@ -49,6 +49,8 @@ namespace Boon
         inline virtual bool IsClient() const override { return m_Settings.NetMode == ENetDriverMode::Client; }
         inline virtual bool IsServer() const override { return m_Settings.NetMode == ENetDriverMode::DedicatedServer || m_Settings.NetMode == ENetDriverMode::ListenServer; }
 
+        inline virtual EventBus& GetEventBus() { return *m_pEventBus; }
+
         ENetDriverMode GetMode() const override { return m_Settings.NetMode; }
         uint64_t GetLocalConnectionId() const override { return IsServer() ? 1 : m_LocalConnectionId; }
 
@@ -65,6 +67,7 @@ namespace Boon
 
     private:
         NetworkSettings m_Settings{};
+        EventBus* m_pEventBus = nullptr;
 
         // ---------------------------------------------------------
         // Steam Networking Handles

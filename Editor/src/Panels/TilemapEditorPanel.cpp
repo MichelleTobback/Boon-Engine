@@ -121,8 +121,8 @@ namespace
 
 namespace BoonEditor
 {
-    TilemapEditorPanel::TilemapEditorPanel(const std::string& name, EditorContext* pContext)
-        : AssetEditor<TilemapAsset>(name, pContext)
+    TilemapEditorPanel::TilemapEditorPanel(EditorContext* pContext, const std::string& name)
+        : AssetEditor<TilemapAsset>(pContext, name)
     {
         m_TilemapCanvas.SetZoomLimits(0.02f, 128.f);
         m_PaletteCanvas.SetZoomLimits(0.02f, 64.f);

@@ -22,7 +22,7 @@ namespace BoonEditor
 	class ViewportToolbar final : public EditorPanel
 	{
 	public:
-		ViewportToolbar(const std::string& name, EditorContext* pContext);
+		ViewportToolbar(EditorContext* pContext, const std::string& name);
 		virtual ~ViewportToolbar() = default;
 
 		ViewportToolbar(const ViewportToolbar& other) = delete;

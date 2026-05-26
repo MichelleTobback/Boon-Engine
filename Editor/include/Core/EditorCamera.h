@@ -10,8 +10,8 @@ namespace BoonEditor
 	class EditorCamera final : public EditorObject
 	{
 	public:
-		EditorCamera(float width, float height);
-		EditorCamera(float size, float aspectRatio, float near, float far);
+		EditorCamera(EditorContext* context, float width, float height);
+		EditorCamera(EditorContext* context, float size, float aspectRatio, float near, float far);
 		virtual ~EditorCamera();
 
 		EditorCamera(const EditorCamera& other) = default;

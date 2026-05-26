@@ -21,8 +21,8 @@ namespace
     constexpr size_t PathBufferSize = 260;
 }
 
-NewProjectDialog::NewProjectDialog(const std::string& name, EditorContext* pContext)
-    : EditorDialog("Create New Project", pContext)
+NewProjectDialog::NewProjectDialog(EditorContext* pContext, const std::string& name)
+    : EditorDialog(pContext, "Create New Project")
 {
 }
 

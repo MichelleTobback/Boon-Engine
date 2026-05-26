@@ -1,7 +1,6 @@
 #include "Core/Window.h"
 #include "Core/Assert.h"
 #include "Core/Application.h"
-#include "Core/ServiceLocator.h"
 #include "Core/BitFlag.h"
 
 #include "Event/EventBus.h"
@@ -59,7 +58,8 @@ namespace Boon
 			m_pWindow = glfwCreateWindow(static_cast<int>(m_Desc.width), static_cast<int>(m_Desc.height), m_Desc.name.c_str(), nullptr, nullptr);
 			glfwMakeContextCurrent(m_pWindow);
 
-			SetWindowIcon(m_pWindow, (Application::Get().GetDescriptor().EngineRoot / "Assets/Resources/BoonEngine.png").string().c_str());
+			if (!m_Desc.icon.empty())
+				SetWindowIcon(m_pWindow, m_Desc.icon.string().c_str());
 
 			glfwSwapInterval(1);
 
@@ -72,9 +72,48 @@ namespace Boon
 						pInstance->OnResize(w, h);
 				});
 
-			glfwSetWindowCloseCallback(m_pWindow, [](GLFWwindow*)
+			glfwSetWindowCloseCallback(m_pWindow, [](GLFWwindow* window)
 				{
-					ServiceLocator::Get<EventBus>().Post(WindowCloseEvent());
+					auto* self = static_cast<GlfwWindowImpl*>(glfwGetWindowUserPointer(window));
+
+					if (!self)
+						return;
+
+					self->GetEventBus().Post(WindowCloseEvent());
+				});
+
+			glfwSetKeyCallback(m_pWindow, [](GLFWwindow* win, int key, int scancode, int action, int mods)
+				{
+					auto* self = static_cast<GlfwWindowImpl*>(glfwGetWindowUserPointer(win));
+					if (!self || !self->m_Desc.pInput)
+						return;
+
+					self->m_Desc.pInput->KeyCallback(key, action);
+				});
+
+			glfwSetMouseButtonCallback(m_pWindow, [](GLFWwindow* win, int button, int action, int)
+				{
+					auto* self = static_cast<GlfwWindowImpl*>(glfwGetWindowUserPointer(win));
+					if (!self || !self->m_Desc.pInput)
+						return;
+
+					self->m_Desc.pInput->MouseButtonCallback(button, action);
+				});
+			glfwSetCursorPosCallback(m_pWindow, [](GLFWwindow* win, double xpos, double ypos)
+				{
+					auto* self = static_cast<GlfwWindowImpl*>(glfwGetWindowUserPointer(win));
+					if (!self || !self->m_Desc.pInput)
+						return;
+
+					self->m_Desc.pInput->CursorPosCallback(xpos, ypos);
+				});
+			glfwSetScrollCallback(m_pWindow, [](GLFWwindow* win, double xoffset, double yoffset)
+				{
+					auto* self = static_cast<GlfwWindowImpl*>(glfwGetWindowUserPointer(win));
+					if (!self || !self->m_Desc.pInput)
+						return;
+
+					self->m_Desc.pInput->ScrollCallback(xoffset, yoffset);
 				});
 		}
 
@@ -103,6 +142,11 @@ namespace Boon
 		{
 			//glFlush();
 			glfwSwapBuffers(m_pWindow);
+		}
+
+		EventBus& GetEventBus()
+		{
+			return *m_Desc.pEventBus;
 		}
 
 		void SetTitle(const std::string& title)
@@ -148,7 +192,7 @@ namespace Boon
 			m_Desc.width = width;
 			m_Desc.height = height;
 			glViewport(0, 0, width, height);
-			ServiceLocator::Get<EventBus>().Post(WindowResizeEvent(width, height));
+			GetEventBus().Post(WindowResizeEvent(width, height));
 		}
 
 		WindowDesc m_Desc;

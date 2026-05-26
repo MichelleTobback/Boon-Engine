@@ -224,8 +224,8 @@ namespace
 
 namespace BoonEditor
 {
-    SpriteAtlasEditorPanel::SpriteAtlasEditorPanel(const std::string& name, EditorContext* pContext)
-        : AssetEditor(name, pContext)
+    SpriteAtlasEditorPanel::SpriteAtlasEditorPanel(EditorContext* pContext, const std::string& name)
+        : AssetEditor(pContext, name)
     {
     }
 

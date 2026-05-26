@@ -380,10 +380,10 @@ namespace
 }
 
 ContentBrowser::ContentBrowser(
-    const std::string& name,
     EditorContext* pContext,
+    const std::string& name,
     AssetContext* pAsset)
-    : EditorPanel(name, pContext)
+    : EditorPanel(pContext, name)
     , m_RootFolder("Content", "")
     , m_pSelectedAsset(pAsset)
 {

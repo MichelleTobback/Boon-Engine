@@ -13,7 +13,7 @@ namespace BoonEditor
     class AssetEditorPanel final : public EditorPanel
     {
     public:
-        AssetEditorPanel(const std::string& name, EditorContext* pContext, ViewportPanel* pViewport);
+        AssetEditorPanel(EditorContext* pContext, const std::string& name, ViewportPanel* pViewport);
         virtual ~AssetEditorPanel();
 
         virtual void Update() override;

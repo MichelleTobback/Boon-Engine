@@ -8,10 +8,16 @@
 
 namespace Boon
 {
+	struct Renderer2DCreateInfo
+	{
+		std::shared_ptr<Shader> pSpriteShader;
+		std::shared_ptr<Shader> pLineShader;
+	};
+
 	class Renderer2D final
 	{
 	public:
-		Renderer2D();
+		Renderer2D(const Renderer2DCreateInfo& desc);
 		~Renderer2D();
 
 		void Begin();

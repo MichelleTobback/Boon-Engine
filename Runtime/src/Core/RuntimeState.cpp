@@ -40,15 +40,17 @@ Runtime::RuntimeState::~RuntimeState()
 
 void Runtime::RuntimeState::OnEnter()
 {
+	EngineContext& ctx = GetContext();
+
 	const RuntimeConfig& config{ Application::Get().GetDescriptor() };
-	Window& window{ Application::Get().GetWindow() };
+	Window& window{ *ctx.Window };
 
 	m_NetworkSettings = config.Network;
 	std::shared_ptr<NetDriver> network = std::make_shared<SteamNetDriver>();
 	ServiceLocator::Register<NetDriver>(network);
 	StartNetwork();
 
-	AssetLibrary& assetLib = Assets::Get();
+	AssetLibrary& assetLib = *ctx.AssetLib;
 	const std::filesystem::path assetRoot = config.ProjectRoot / "generated/Assets";
 	const std::filesystem::path gameRuntimeRoot = assetRoot / "Game";
 	const std::filesystem::path engineRuntimeRoot = assetRoot / "Engine";
@@ -59,30 +61,34 @@ void Runtime::RuntimeState::OnEnter()
 	assetLib.LoadManifest(gameRuntimeRoot / "AssetManifest.json");
 	assetLib.LoadManifest(engineRuntimeRoot / "AssetManifest.json");
 
-	m_pRenderer = std::make_unique<SceneRenderer>(nullptr, window.GetWidth(), window.GetHeight(), true);
+	SceneRendererCreateInfo desc{};
+	desc.Width = window.GetWidth();
+	desc.Height = window.GetHeight();
+	desc.bIsSwapchainTarget = true;
+	desc.AssetLib = ctx.AssetLib;
+	m_pRenderer = std::make_unique<SceneRenderer>(desc);
 
-	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	EventBus& eventBus = *ctx.EventBus;
+	SceneManager& sceneManager = *ctx.Scenes;
 	m_WindowResizeEvent = eventBus.Subscribe<WindowResizeEvent>([this](const WindowResizeEvent& e)
 		{
 			m_pRenderer->SetViewport(e.Width, e.Height);
 		});
 
-	m_SceneChangedEvent = eventBus.Subscribe<SceneChangedEvent>([this](const SceneChangedEvent& e)
+	m_SceneChangedEvent = eventBus.Subscribe<SceneChangedEvent>([&sceneManager, this](const SceneChangedEvent& e)
 		{
-			SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 			Scene& scene = sceneManager.GetActiveScene();
 			m_pRenderer->SetContext(&scene);
 		});
 
 	std::shared_ptr<ModuleLibrary> moduleLib = std::make_shared<ModuleLibrary>();
 	ServiceLocator::Register<ModuleLibrary>(moduleLib);
-	ModuleContext ctx{};
-	ctx.BClasses = &BClassRegistry::Get();
-	ctx.NetReps = &NetRepRegistry::Get();
-	ctx.ServiceRegistry = ServiceLocator::GetRegistry();
-	moduleLib->LoadModule(config.ProjectRoot / config.IntermediateRoot / config.GameModule / (config.GameModule + ".dll"), ctx);
+	ModuleContext module{};
+	module.BClasses = &BClassRegistry::Get();
+	module.NetReps = &NetRepRegistry::Get();
+	module.ServiceRegistry = ServiceLocator::GetRegistry();
+	moduleLib->LoadModule(config.ProjectRoot / config.IntermediateRoot / config.GameModule / (config.GameModule + ".dll"), module);
 
-	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 	Scene& scene = sceneManager.CreateScene("scene");
 	SceneSerializer serializer(scene);
 	serializer.Deserialize(config.AssetsRoot / config.StartupScene);
@@ -93,10 +99,12 @@ void Runtime::RuntimeState::OnEnter()
 
 void Runtime::RuntimeState::OnUpdate()
 {
+	EngineContext& ctx = GetContext();
+
 	ServiceLocator::Get<NetDriver>().Update();
 
 	Time& time = Boon::Time::Get();
-	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
+	SceneManager& sceneManager = *ctx.Scenes;
 
 	while (time.FixedStep())
 	{
@@ -110,35 +118,37 @@ void Runtime::RuntimeState::OnUpdate()
 
 void Runtime::RuntimeState::OnExit()
 {
-	StopNetwork();
+	EngineContext& ctx = GetContext();
 
-	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	EventBus& eventBus = *ctx.EventBus;
 	eventBus.Unsubscribe<WindowResizeEvent>(m_WindowResizeEvent);
 	eventBus.Unsubscribe<SceneChangedEvent>(m_SceneChangedEvent);
 
-	ModuleContext ctx{};
-	ctx.BClasses = &BClassRegistry::Get();
-	ctx.NetReps = &NetRepRegistry::Get();
-	ctx.ServiceRegistry = ServiceLocator::GetRegistry();
-	ServiceLocator::Get<ModuleLibrary>().UnloadAll(ctx);
+	StopNetwork();
+
+	ModuleContext module{};
+	module.BClasses = &BClassRegistry::Get();
+	module.NetReps = &NetRepRegistry::Get();
+	module.ServiceRegistry = ServiceLocator::GetRegistry();
+	ServiceLocator::Get<ModuleLibrary>().UnloadAll(module);
 }
 
 void Runtime::RuntimeState::StartNetwork()
 {
-	EventBus& eventBus = ServiceLocator::Get<EventBus>();
 	NetDriver& network = ServiceLocator::Get<NetDriver>();
 
-	network.Initialize(m_NetworkSettings);
+	network.Initialize(m_NetworkSettings, GetContext().EventBus);
 	if (!network.IsStandalone())
 	{
 		network.BindOnConnectedCallback([this](NetConnection* pConnection) {OnConnected(pConnection); });
 		network.BindOnDisconnectedCallback([this](NetConnection* pConnection) {OnDisconnected(pConnection); });
 		network.BindOnPacketCallback([this](NetConnection* pConnection, NetPacket& packet) { OnPacketReceived(pConnection, packet); });
 
-		ServiceLocator::Get<SceneManager>().BindOnSceneChanged([](Scene& scene)
+		SceneManager* scenes = GetContext().Scenes;
+		scenes->BindOnSceneChanged([&scenes](Scene& scene)
 			{
 				auto& network = ServiceLocator::Get<NetDriver>();
-				auto pScene{ std::make_shared<NetScene>(&scene, &network) };
+				auto pScene{ std::make_shared<NetScene>(&scene, &network, scenes) };
 				network.BindScene(pScene);
 			});
 
@@ -151,22 +161,19 @@ void Runtime::RuntimeState::StartNetwork()
 
 void Runtime::RuntimeState::StopNetwork()
 {
-	EventBus& eventBus = ServiceLocator::Get<EventBus>();
-	eventBus.Unsubscribe<SceneChangedEvent>(m_BindNetSceneEvent);
+	GetContext().EventBus->Unsubscribe<SceneChangedEvent>(m_BindNetSceneEvent);
 	NetDriver& network = ServiceLocator::Get<NetDriver>();
 	network.Shutdown();
 }
 
 void Runtime::RuntimeState::OnConnected(NetConnection* pConnection)
 {
-	EventBus& eventBus = ServiceLocator::Get<EventBus>();
-	eventBus.Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Connected));
+	GetContext().EventBus->Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Connected));
 }
 
 void Runtime::RuntimeState::OnDisconnected(NetConnection* pConnection)
 {
-	EventBus& eventBus = ServiceLocator::Get<EventBus>();
-	eventBus.Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Disconnected));
+	GetContext().EventBus->Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Disconnected));
 }
 
 void Runtime::RuntimeState::OnPacketReceived(NetConnection* pConnection, NetPacket& packet)

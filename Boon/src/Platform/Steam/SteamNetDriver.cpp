@@ -31,9 +31,10 @@ namespace Boon
     // Initialization
     // -------------------------------------------------------------------------
 
-    bool SteamNetDriver::Initialize(const NetworkSettings& settings)
+    bool SteamNetDriver::Initialize(const NetworkSettings& settings, EventBus* eventBus)
     {
         m_Settings = settings;
+        m_pEventBus = eventBus;
 
         SteamDatagramErrMsg err;
         if (!GameNetworkingSockets_Init(nullptr, err))

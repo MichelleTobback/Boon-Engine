@@ -2,7 +2,8 @@
 #include <UI/IconsFontAwesome7.h>
 
 #include <Core/Application.h>
-#include <Asset/Assets.h>
+
+#include <Renderer/Texture.h>
 
 #include <imgui.h>
 #include <imgui_internal.h>
@@ -43,7 +44,8 @@ public:
     };
 
 public:
-    EditorRendererImpl(const ProjectConfig& config)
+    EditorRendererImpl(const ProjectConfig& config, const std::shared_ptr<Texture2D>& icon)
+        : m_LogoTexture{icon}
     {
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
@@ -82,8 +84,6 @@ public:
 
         ImGui_ImplGlfw_InitForOpenGL(window, true);
         ImGui_ImplOpenGL3_Init("#version 410");
-
-        m_LogoTexture = Assets::Get().Load<Texture2DAsset>("Resources/BoonEngine.png");
     }
 
     ~EditorRendererImpl()
@@ -531,7 +531,7 @@ private:
         if (m_LogoTexture)
         {
             ImGui::Image(
-                (ImTextureID)(intptr_t)m_LogoTexture.Instance()->GetRendererID(),
+                (ImTextureID)(intptr_t)m_LogoTexture->GetRendererID(),
                 ImVec2(logoSize, logoSize), ImVec2(1, 1), ImVec2(0, 0)
             );
         }
@@ -872,7 +872,7 @@ private:
 private:
     Fonts m_Fonts;
     MenuBarCallback MenuBarRenderer;
-    AssetRef<Texture2DAsset> m_LogoTexture;
+    std::shared_ptr<Texture2D> m_LogoTexture;
 
     WindowDragMode m_WindowDragMode = WindowDragMode::None;
 
@@ -883,8 +883,8 @@ private:
     int m_DragStartH = 0;
 };
 
-EditorRenderer::EditorRenderer(const ProjectConfig& config)
-	: m_pImpl{ std::make_unique<EditorRendererImpl>(config) } {}
+EditorRenderer::EditorRenderer(const ProjectConfig& config, const std::shared_ptr<Texture2D>& icon)
+	: m_pImpl{ std::make_unique<EditorRendererImpl>(config, icon) } {}
 
 EditorRenderer::~EditorRenderer(){}
 

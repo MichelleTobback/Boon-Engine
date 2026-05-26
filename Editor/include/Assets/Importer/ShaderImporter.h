@@ -14,7 +14,10 @@ namespace Boon
     public:
         using AssetType = ShaderAsset;
 
+        virtual ~ShaderImporter() = default;
+
         bool ImportToBAsset(
+            AssetLibrary& assetLib,
             const std::filesystem::path& sourcePath,
             const std::filesystem::path& exportPath,
             const AssetMeta& meta) override

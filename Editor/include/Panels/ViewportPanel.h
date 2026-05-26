@@ -29,8 +29,8 @@ namespace BoonEditor
     {
     public:
         ViewportPanel(
-            const std::string& name,
             EditorContext* pContext,
+            const std::string& name,
             SceneContext* pSceneContext,
             GameObjectContext* pSelectionContext);
 
@@ -68,7 +68,7 @@ namespace BoonEditor
 
     private:
         std::unique_ptr<SceneRenderer> m_pRenderer;
-        EditorCamera m_Camera{ 0.0f, 0.0f };
+        EditorCamera m_Camera;
 
         bool m_ViewportFocused = false;
         bool m_ViewportHovered = false;

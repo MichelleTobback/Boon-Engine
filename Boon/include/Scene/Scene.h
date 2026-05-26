@@ -18,6 +18,7 @@ namespace Boon
 	using SceneRegistry = entt::registry;
 	using SceneID = UUID;
 
+	struct EngineContext;
 	struct BClass;
 	struct ECSLifecycleSystem;
 	class GameObject;
@@ -186,12 +187,22 @@ namespace Boon
 		 */
 		inline bool IsRunning() const { return m_Running; }
 
+		inline bool IsLoaded() const 
+		{
+			if (m_fnIsLoaded)
+				return m_fnIsLoaded(m_ID);
+			return false;
+		}
+
+		inline EngineContext& GetEngineContext() { return *m_pContext; }
+		inline const EngineContext& GetEngineContext() const { return *m_pContext; }
+
 	private:
 		friend class PhysicsWorld2D;
 		friend class GameObject;
 		friend class SceneManager;
 		friend class SceneSerializer;
-		explicit Scene(const std::string& name);
+		explicit Scene(const std::string& name, EngineContext* ctx);
 
 		GameObject Instantiate(UUID uuid, GameObjectID id);
 
@@ -219,6 +230,8 @@ namespace Boon
 		Delegate<void(GameObject, const BClass*)> m_OnComponentAdded;
 		Delegate<void(GameObject, const BClass*)> m_OnComponentRemoved;
 
+		std::function<bool(SceneID)> m_fnIsLoaded;
+
 		struct SceneCommand
 		{
 			enum class Type
@@ -239,6 +252,7 @@ namespace Boon
 		SceneID m_ID;
 		std::string m_Name;
 		bool m_Running{ false };
+		EngineContext* m_pContext;
 	};
 
 	template <typename T, typename ... TArgs>

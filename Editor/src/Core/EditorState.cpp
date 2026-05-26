@@ -76,6 +76,7 @@
 using namespace BoonEditor;
 
 BoonEditor::EditorState::EditorState(const ProjectConfig& project)
+	: m_Context{}
 {
 	m_Context.m_CurrentProject = project;
 }
@@ -84,10 +85,13 @@ EditorState::~EditorState() = default;
 
 void EditorState::OnEnter()
 {
-	const RuntimeConfig& config{ m_Context.m_CurrentProject.Runtime };
+	EngineContext& ctx = GetContext();
 
-	Window& window{ Application::Get().GetWindow() };
-	AssetLibrary& assetLib{ Assets::Get() };
+	const RuntimeConfig& config{ m_Context.m_CurrentProject.Runtime };
+	m_Context.SetEngineContext(&ctx);
+
+	Window& window{ *ctx.Window };
+	AssetLibrary& assetLib{ *ctx.AssetLib };
 	
 	const std::filesystem::path generatedRoot = config.ProjectRoot / "generated/Assets";
 	const std::filesystem::path gameRuntimeRoot = generatedRoot / "Game";
@@ -118,12 +122,14 @@ void EditorState::OnEnter()
 	importer.RegisterImporter<SceneImporter>();
 	importer.RegisterImporter<TilemapImporter>();
 
+	AssetDatabase::Get().Init(assetLib);
+
 	m_NetworkSettings = Application::Get().GetDescriptor().Network;
 
-	m_PRenderer = std::make_unique<EditorRenderer>(m_Context.m_CurrentProject);
+	m_PRenderer = std::make_unique<EditorRenderer>(m_Context.m_CurrentProject, assetLib.Load<Texture2DAsset>("Resources/BoonEngine.png").Instance());
 	m_PRenderer->SetMenuBarCallback(std::bind(&EditorState::RenderMenuBar, this));
 
-	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
+	SceneManager& sceneManager = *ctx.Scenes;
 	Scene& scene = sceneManager.CreateScene("Game");
 
 	m_Context.CreateObject<AssetDirectoryScanner>(0, 1.f);
@@ -134,8 +140,8 @@ void EditorState::OnEnter()
 	viewport.GetToolbar()->BindOnStopCallback(std::bind(&EditorState::OnStopPlay, this));
 
 	AssetEditorPanel& assetEditor = m_Context.CreateWidget<AssetEditorPanel>("asset", &viewport);
-	assetEditor.RegisterEditor(new TilemapEditorPanel("tilemap", &m_Context));
-	assetEditor.RegisterEditor(new SpriteAtlasEditorPanel("sprite atlas", &m_Context));
+	assetEditor.RegisterEditor(new TilemapEditorPanel(&m_Context, "tilemap"));
+	assetEditor.RegisterEditor(new SpriteAtlasEditorPanel(&m_Context, "sprite atlas"));
 	m_pSelectedAsset = &assetEditor.GetContext();
 
 	m_Context.CreateWidget<ContentBrowser>("content", m_pSelectedAsset);
@@ -146,16 +152,15 @@ void EditorState::OnEnter()
 
 	m_Context.CreateWidget<NewProjectDialog>("NewProject");
 
-	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	EventBus& eventBus = *ctx.EventBus;
 	std::shared_ptr<NetDriver> network = std::make_shared<SteamNetDriver>();
 	ServiceLocator::Register<NetDriver>(network);
 
 	m_SceneContext.Set(&scene);
 	m_pSelectedScene = &scene;
 
-	m_SceneChangedEvent = eventBus.Subscribe<SceneChangedEvent>([this](const SceneChangedEvent& e)
+	m_SceneChangedEvent = eventBus.Subscribe<SceneChangedEvent>([&sceneManager, this](const SceneChangedEvent& e)
 		{
-			SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 			Scene& scene = sceneManager.GetActiveScene();
 			m_SceneContext.Set(&scene);
 		});
@@ -181,11 +186,12 @@ void EditorState::OnEnter()
 
 	std::shared_ptr<ModuleLibrary> moduleLib = std::make_shared<ModuleLibrary>();
 	ServiceLocator::Register<ModuleLibrary>(moduleLib);
-	ModuleContext ctx{};
-	ctx.BClasses = &BClassRegistry::Get();
-	ctx.NetReps = &NetRepRegistry::Get();
-	ctx.ServiceRegistry = ServiceLocator::GetRegistry();
-	moduleLib->LoadModule(config.ProjectRoot / config.IntermediateRoot / config.GameModule / (config.GameModule + ".dll"), ctx);
+	ModuleContext module{};
+	module.BClasses = &BClassRegistry::Get();
+	module.NetReps = &NetRepRegistry::Get();
+	module.ServiceRegistry = ServiceLocator::GetRegistry();
+	module.EngineContext = &ctx;
+	moduleLib->LoadModule(config.ProjectRoot / config.IntermediateRoot / config.GameModule / (config.GameModule + ".dll"), module);
 
 	SceneSerializer serializer(scene);
 	serializer.Deserialize(config.AssetsRoot / config.StartupScene);
@@ -198,12 +204,14 @@ void EditorState::OnEnter()
 
 void EditorState::OnUpdate()
 {
+	EngineContext& ctx = GetContext();
+
 	Boon::DebugRenderer::Get().BeginFrame();
 
 	ServiceLocator::Get<NetDriver>().Update();
 
 	Time& time = Boon::Time::Get();
-	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
+	SceneManager& sceneManager = *ctx.Scenes;
 
 	switch (m_PlayState)
 	{
@@ -223,7 +231,7 @@ void EditorState::OnUpdate()
 		pObject->Update();
 	}
 
-	Input& input = ServiceLocator::Get<Input>();
+	Input& input = *ctx.Input;
 	if (input.IsKeyHeld(Boon::Key::LeftControl)
 		&& input.IsKeyPressed(Boon::Key::Z))
 	{
@@ -237,23 +245,27 @@ void EditorState::OnUpdate()
 
 void EditorState::OnExit()
 {
-	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	EngineContext& ctx = GetContext();
+
+	EventBus& eventBus = *ctx.EventBus;
 	eventBus.Unsubscribe<SceneChangedEvent>(m_SceneChangedEvent);
 	eventBus.Unsubscribe<EditorPlayStateChangeEvent>(m_StateChangedEvent);
 
 	ServiceLocator::Get<NetDriver>().Shutdown();
 
-	ModuleContext ctx{};
-	ctx.BClasses = &BClassRegistry::Get();
-	ctx.NetReps = &NetRepRegistry::Get();
-	ctx.ServiceRegistry = ServiceLocator::GetRegistry();
-	ServiceLocator::Get<ModuleLibrary>().UnloadAll(ctx);
-
-	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
+	SceneManager& sceneManager = *ctx.Scenes;
 	sceneManager.UnloadAll();
 
-	Assets::Get().ClearCache();
-	Assets::Get().ClearRegistry();
+	ModuleContext module{};
+	module.BClasses = &BClassRegistry::Get();
+	module.NetReps = &NetRepRegistry::Get();
+	module.ServiceRegistry = ServiceLocator::GetRegistry();
+	module.EngineContext = &ctx;
+	ServiceLocator::Get<ModuleLibrary>().UnloadAll(module);
+
+	AssetLibrary& assetLib = *ctx.AssetLib;
+	assetLib.ClearCache();
+	assetLib.ClearRegistry();
 
 	AssetDatabase::Get().Clear();
 }
@@ -291,6 +303,7 @@ bool TitlebarMenuButton(const char* label)
 
 void EditorState::RenderMenuBar()
 {
+	EngineContext& ctx = GetContext();
 	ImGui::BeginGroup();
 
 	if (TitlebarMenuButton("Project"))
@@ -332,7 +345,7 @@ void EditorState::RenderMenuBar()
 		{
 			if (m_PlayState != EditorPlayState::Play)
 			{
-				SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
+				SceneManager& sceneManager = *ctx.Scenes;
 				m_SceneContext.Set(&sceneManager.CreateScene("New Scene"));
 				m_pSelectedScene = m_SceneContext.Get();
 
@@ -368,7 +381,7 @@ void EditorState::RenderMenuBar()
 
 				if (!scenPath.empty())
 				{
-					SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
+					SceneManager& sceneManager = *ctx.Scenes;
 					m_SceneContext.Set(&sceneManager.CreateScene("New Scene"));
 					m_pSelectedScene = m_SceneContext.Get();
 
@@ -401,65 +414,57 @@ void EditorState::OnRender()
 
 void EditorState::OnBeginPlay()
 {
+	EngineContext& ctx = GetContext();
+
 	StartNetwork();
 
 	m_PlayState = EditorPlayState::Play;
-	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 
 	m_Context.GetWidget<ViewportPanel>("Viewport").SetContext(&m_SceneContext);
 
-	m_SceneContext.Set(&sceneManager.CreateScene("PlayScene"));
+	m_SceneContext.Set(&ctx.Scenes->CreateScene("PlayScene"));
 	SceneSerializer serializer(*m_SceneContext.Get());
 	serializer.Copy(*m_pSelectedScene);
-	sceneManager.SetActiveScene(m_SceneContext.Get()->GetID());
+	ctx.Scenes->SetActiveScene(m_SceneContext.Get()->GetID());
 	
-	EventBus& eventBus = ServiceLocator::Get<EventBus>();
-	eventBus.Post(EditorPlayStateChangeEvent(m_PlayState));
+	ctx.EventBus->Post(EditorPlayStateChangeEvent(m_PlayState));
 }
 
 void EditorState::OnStopPlay()
 {
+	EngineContext& ctx = GetContext();
+
 	StopNetwork();
 
 	m_PlayState = EditorPlayState::Edit;
-	SceneManager& sceneManager = ServiceLocator::Get<SceneManager>();
 
 	SceneID sceneId = m_SceneContext.Get()->GetID();
 	m_SceneContext.Set(m_pSelectedScene);
-	sceneManager.SetActiveScene(m_SceneContext.Get()->GetID(), false);
-	sceneManager.UnloadScene(sceneId);
+	ctx.Scenes->SetActiveScene(m_SceneContext.Get()->GetID(), false);
+	ctx.Scenes->UnloadScene(sceneId);
 
-	EventBus& eventBus = ServiceLocator::Get<EventBus>();
-	eventBus.Post(EditorPlayStateChangeEvent(m_PlayState));
+	ctx.EventBus->Post(EditorPlayStateChangeEvent(m_PlayState));
 }
 
 void EditorState::StartNetwork()
 {
-	EventBus& eventBus = ServiceLocator::Get<EventBus>();
+	EngineContext& ctx = GetContext();
 	NetDriver& network = ServiceLocator::Get<NetDriver>();
 
-	network.Initialize(m_NetworkSettings);
+	network.Initialize(m_NetworkSettings, ctx.EventBus);
 	if (!network.IsStandalone())
 	{
 		network.BindOnConnectedCallback([this](NetConnection* pConnection) {OnConnected(pConnection); });
 		network.BindOnDisconnectedCallback([this](NetConnection* pConnection) {OnDisconnected(pConnection); });
 		network.BindOnPacketCallback([this](NetConnection* pConnection, NetPacket& packet) { OnPacketReceived(pConnection, packet); });
 
-		m_BindNetSceneHandle = ServiceLocator::Get<SceneManager>().BindOnSceneChanged([](Scene& e)
+		m_BindNetSceneHandle = ctx.Scenes->BindOnSceneChanged([&ctx, this](Scene& e)
 			{
-				Scene& scene = ServiceLocator::Get<SceneManager>().GetActiveScene();
+				Scene& scene = ctx.Scenes->GetActiveScene();
 				auto& network = ServiceLocator::Get<NetDriver>();
-				auto pScene{ std::make_shared<NetScene>(&scene, &network) };
+				auto pScene{ std::make_shared<NetScene>(&scene, &network, ctx.Scenes) };
 				network.BindScene(pScene);
 			});
-
-		//m_BindNetSceneEvent = eventBus.Subscribe<SceneChangedEvent>([](Scene& e)
-		//	{
-		//		Scene& scene = ServiceLocator::Get<SceneManager>().GetActiveScene();
-		//		auto& network = ServiceLocator::Get<NetDriver>();
-		//		auto pScene{ std::make_shared<NetScene>(&scene, &network) };
-		//		network.BindScene(pScene);
-		//	});
 
 		if (network.IsClient())
 		{
@@ -476,7 +481,7 @@ void EditorState::StopNetwork()
 	NetworkPanel& net = m_Context.GetWidget<NetworkPanel>("network");
 	net.SetDriver(nullptr);
 
-	ServiceLocator::Get<SceneManager>().UnbindOnSceneChanged(m_BindNetSceneHandle);
+	GetContext().Scenes->UnbindOnSceneChanged(m_BindNetSceneHandle);
 	
 	NetDriver& network = ServiceLocator::Get<NetDriver>();
 	network.Shutdown();
@@ -484,14 +489,12 @@ void EditorState::StopNetwork()
 
 void EditorState::OnConnected(NetConnection* pConnection)
 {
-	EventBus& eventBus = ServiceLocator::Get<EventBus>();
-	eventBus.Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Connected));
+	GetContext().EventBus->Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Connected));
 }
 
 void EditorState::OnDisconnected(NetConnection* pConnection)
 {
-	EventBus& eventBus = ServiceLocator::Get<EventBus>();
-	eventBus.Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Disconnected));
+	GetContext().EventBus->Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Disconnected));
 }
 
 void EditorState::OnPacketReceived(NetConnection* pConnection, NetPacket& packet)

@@ -11,7 +11,7 @@ namespace BoonEditor
     class NewProjectDialog final : public EditorDialog
     {
     public:
-        NewProjectDialog(const std::string& name, EditorContext* pContext);
+        NewProjectDialog(EditorContext* pContext, const std::string& name);
         virtual ~NewProjectDialog() = default;
 
         std::optional<ProjectGeneratorSettings> ConsumeSettings();

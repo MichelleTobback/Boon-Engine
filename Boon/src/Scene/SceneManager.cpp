@@ -1,15 +1,14 @@
 #include "Scene/SceneManager.h"
 
 #include "Event/EventBus.h"
+#include "Core/EngineContext.h"
 #include "Event/SceneEvents.h"
-
-#include "Core/ServiceLocator.h"
-
 namespace Boon
 {
-    SceneManager::SceneManager()
+    SceneManager::SceneManager(EngineContext* pEngineContext)
+        : m_pEngineContext{ pEngineContext }
     {
-        CreateScene("empty");
+        
     }
 
     void SceneManager::Shutdown()
@@ -20,7 +19,9 @@ namespace Boon
 
     Scene& SceneManager::CreateScene(const std::string& name)
     {
-        auto scene = std::unique_ptr<Scene>(new Scene(name));
+        auto scene = std::unique_ptr<Scene>(new Scene(name, m_pEngineContext));
+
+        scene->m_fnIsLoaded = std::bind(&SceneManager::IsLoaded, this, std::placeholders::_1);
 
         SceneID id = scene->GetID();
         m_Scenes[id] = std::move(scene);
@@ -67,8 +68,7 @@ namespace Boon
 
         m_ActiveScene = id;
 
-        EventBus& eventBus = ServiceLocator::Get<EventBus>();
-        eventBus.Post(SceneChangedEvent(id));
+        m_pEngineContext->EventBus->Post(SceneChangedEvent(id));
 
         m_OnSceneChanged.Invoke(GetActiveScene());
 

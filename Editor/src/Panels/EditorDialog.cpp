@@ -2,8 +2,8 @@
 
 #include <imgui.h>
 
-BoonEditor::EditorDialog::EditorDialog(const std::string& name, EditorContext* pContext)
-    : EditorWidget(name, pContext) { }
+BoonEditor::EditorDialog::EditorDialog(EditorContext* pContext, const std::string& name)
+    : EditorWidget(pContext, name) { }
 
 void BoonEditor::EditorDialog::Open()
 {

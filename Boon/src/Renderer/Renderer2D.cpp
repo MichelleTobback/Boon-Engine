@@ -22,7 +22,7 @@ namespace Boon
 
 using namespace Boon;
 
-Boon::Renderer2D::Renderer2D()
+Boon::Renderer2D::Renderer2D(const Renderer2DCreateInfo& desc)
 {
 	m_QuadVertexPositions[0] = { -0.5f, -0.5f, 0.f, 1.f, };
 	m_QuadVertexPositions[1] = { 0.5f, -0.5f, 0.f, 1.f, };
@@ -32,13 +32,6 @@ Boon::Renderer2D::Renderer2D()
 	m_TextureSlots[0] = Texture2D::Create(TextureDescriptor());
 	uint32_t whiteTextureData = 0xffffffff;
 	m_TextureSlots[0]->SetData(&whiteTextureData, sizeof(uint32_t));
-
-	//shaders
-	AssetLibrary& assets{ ServiceLocator::Get<AssetLibrary>() };
-
-	AssetRef<ShaderAsset> pLineShader = assets.Load<ShaderAsset>("shaders/Line.glsl");
-
-	AssetRef<ShaderAsset> pSpriteShader = assets.Load<ShaderAsset>("shaders/Quad.glsl");
 
 	//quads
 	uint32_t* quadIndices = new uint32_t[s_MaxIndices];
@@ -65,7 +58,7 @@ Boon::Renderer2D::Renderer2D()
 		{ ShaderDataType::Int,	  "a_ID"		   }
 	};
 	auto quadIndexBuffer = IndexBuffer::Create(quadIndices, s_MaxIndices);
-	m_QuadBatch.Initialize(s_MaxVertices, quadBufferLayout, pSpriteShader.Get()->GetInstance(), PrimitiveType::Triangles, quadIndexBuffer);
+	m_QuadBatch.Initialize(s_MaxVertices, quadBufferLayout, desc.pSpriteShader, PrimitiveType::Triangles, quadIndexBuffer);
 	delete[] quadIndices;
 	m_QuadBatch.BindBeginBatchCallback([this]() {
 		m_TextureSlotIndex = 1;
@@ -80,7 +73,7 @@ Boon::Renderer2D::Renderer2D()
 		{ ShaderDataType::Float3, "a_Position"	},
 		{ ShaderDataType::Float4, "a_Color"		}
 	};
-	m_LineBatch.Initialize(s_MaxVertices, lineBufferLayout, pLineShader.Get()->GetInstance(), PrimitiveType::Lines);
+	m_LineBatch.Initialize(s_MaxVertices, lineBufferLayout, desc.pLineShader, PrimitiveType::Lines);
 }
 
 Boon::Renderer2D::~Renderer2D()

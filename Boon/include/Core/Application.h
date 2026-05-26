@@ -2,6 +2,7 @@
 #include "Core/Window.h"
 #include "Networking/NetAuthority.h"
 #include "Project/RuntimeConfig.h"
+#include <Core/EngineContext.h>
 #include <string>
 #include <memory>
 #include <functional>
@@ -41,6 +42,13 @@ namespace Boon
 		void Run(std::shared_ptr<AppState>&& pLayer);
 
 		/**
+		 * @brief Access the engine's context.
+		 * Contains access to the Window, AssetLibrary, SceneManager, ...
+		 * @return Reference to engine context.
+		 */
+		inline const EngineContext& GetContext() const { return m_Context; }
+
+		/**
 		 * @brief Access the application's main window.
 		 * @return Reference to the Window instance.
 		 */
@@ -72,12 +80,19 @@ namespace Boon
 		inline const RuntimeConfig& GetDescriptor() const { return m_Desc; }
 
 	private:
-		RuntimeConfig m_Desc;
 		std::unique_ptr<AppStateMachine> m_pStateMachine;
-		std::unique_ptr<Window> m_pWindow{ nullptr };
 		std::unique_ptr<class ServiceRegistry> m_pServiceRegistry;
 		std::unique_ptr<class NetRepRegistry> m_pNetRepRegistry;
 		std::unique_ptr<class BClassRegistry> m_pClsRegistry;
+
+		RuntimeConfig m_Desc;
+		EngineContext m_Context;
+
+		std::unique_ptr<class Window> m_pWindow;
+		std::unique_ptr<class Input> m_pInput;
+		std::unique_ptr<class AssetLibrary> m_pAssets;
+		std::unique_ptr<class SceneManager> m_pScenes;
+		std::unique_ptr<class EventBus> m_pEventBus;
 
 		uint32_t m_CurrentFrameIndex{};
 

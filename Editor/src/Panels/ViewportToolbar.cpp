@@ -10,9 +10,9 @@
 #include <imgui.h>
 
 BoonEditor::ViewportToolbar::ViewportToolbar(
-    const std::string& name,
-    EditorContext* pContext)
-    : EditorPanel(name, pContext)
+    EditorContext* pContext,
+    const std::string& name)
+    : EditorPanel(pContext, name)
 {
 }
 

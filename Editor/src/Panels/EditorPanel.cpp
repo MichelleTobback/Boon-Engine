@@ -8,8 +8,8 @@
 using namespace Boon;
 using namespace BoonEditor;
 
-BoonEditor::EditorPanel::EditorPanel(const std::string& name, EditorContext* pContext)
-	: EditorWidget(name, pContext)
+BoonEditor::EditorPanel::EditorPanel(EditorContext* pContext, const std::string& name)
+	: EditorWidget(pContext, name)
 {
 
 }

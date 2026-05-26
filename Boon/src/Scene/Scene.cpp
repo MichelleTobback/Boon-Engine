@@ -13,8 +13,8 @@
 
 using namespace Boon;
 
-Boon::Scene::Scene(const std::string& name)
-	: m_Name{name}
+Boon::Scene::Scene(const std::string& name, EngineContext* ctx)
+	: m_Name{name}, m_pContext{ctx}
 {
 	m_pECSlifecycle = std::make_unique<ECSLifecycleSystem>(*this);
 }

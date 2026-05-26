@@ -12,6 +12,7 @@
 #include <Networking/NetDriver.h>
 #include <Event/EventBus.h>
 #include <Core/ServiceLocator.h>
+#include <Core/EngineContext.h>
 #include "PlayerController.h"
 #include <Asset/Assets.h>
 
@@ -69,7 +70,7 @@ namespace Boon
 
 			GameObject player = m_pScene->InstantiateGameObject(connectionId);
 
-			AssetLibrary& assetLib = Assets::Get();
+			AssetLibrary& assetLib = *player.GetScene()->GetEngineContext().AssetLib;
 			AssetRef<SpriteAtlasAsset> atlas = assetLib.Load<SpriteAtlasAsset>("game/Witch/Witch-combined.bsa");
 			
 			SpriteRendererComponent& sprite = player.AddComponent<SpriteRendererComponent>();

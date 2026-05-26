@@ -6,6 +6,8 @@
 #include <Renderer/SceneRenderer.h>
 #include <Renderer/Framebuffer.h>
 
+#include <Core/EditorContext.h>
+
 #include <Core/ServiceLocator.h>
 #include <Input/Input.h>
 
@@ -18,24 +20,28 @@
 using namespace BoonEditor;
 
 BoonEditor::ViewportPanel::ViewportPanel(
-    const std::string& name,
     EditorContext* pContext,
+    const std::string& name,
     SceneContext* pSceneContext,
     GameObjectContext* pSelection)
-    : EditorPanel(name, pContext),
+    : EditorPanel(pContext, name),
     m_pSceneContext(pSceneContext),
-    m_pSelectionContext(pSelection)
+    m_pSelectionContext(pSelection),
+    m_Camera(pContext, 0, 0)
 {
     m_Camera.SetActive(true);
 
-    m_pRenderer = std::make_unique<SceneRenderer>(pSceneContext->Get());
+    SceneRendererCreateInfo rendererDesc{};
+    rendererDesc.pScene = pSceneContext->Get();
+    rendererDesc.AssetLib = pContext->GetEngineContext().AssetLib;
+    m_pRenderer = std::make_unique<SceneRenderer>(rendererDesc);
     m_pDebugRenderer = std::make_unique<DebugRenderer>(
         pSceneContext->Get(),
         m_pRenderer->GetOutputTarget());
 
     m_pToolbar = std::make_unique<ViewportToolbar>(
-        std::string(name).append("toolbar"),
-        &GetContext());
+        pContext,
+        std::string(name).append("toolbar"));
 
     m_Settings.DebugRenderLayers |= DebugRenderLayer::Disabled;
 
@@ -81,7 +87,7 @@ void BoonEditor::ViewportPanel::Update()
     if (m_ViewportHovered && !m_pCanvasRenderer)
         m_Camera.Update();
 
-    Input& input = ServiceLocator::Get<Input>();
+    Input& input = *GetContext().GetEngineContext().Input;
 
     float mx = ImGui::GetMousePos().x;
     float my = ImGui::GetMousePos().y;

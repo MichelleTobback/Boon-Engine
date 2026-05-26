@@ -3,12 +3,17 @@
 #include <memory>
 #include <functional>
 
+namespace Boon
+{
+	class Texture2D;
+}
+
 namespace BoonEditor
 {
 	class EditorRenderer final
 	{
 	public:
-		EditorRenderer(const Boon::ProjectConfig& config);
+		EditorRenderer(const Boon::ProjectConfig& config, const std::shared_ptr<Boon::Texture2D>& icon);
 		~EditorRenderer();
 
 		EditorRenderer(const EditorRenderer& other) = delete;

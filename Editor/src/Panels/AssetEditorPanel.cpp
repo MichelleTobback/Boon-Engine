@@ -4,10 +4,10 @@
 #include <Asset/AssetLibrary.h>
 
 BoonEditor::AssetEditorPanel::AssetEditorPanel(
-    const std::string& name,
     EditorContext* pContext,
+    const std::string& name,
     ViewportPanel* pViewport)
-    : EditorPanel(name, pContext),
+    : EditorPanel(pContext, name),
     m_pViewport(pViewport)
 {
     m_Context.AddOnContextChangedCallback(

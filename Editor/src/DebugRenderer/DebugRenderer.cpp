@@ -14,8 +14,10 @@
 using namespace BoonEditor;
 
 BoonEditor::DebugRenderer::DebugRenderer(Scene* pScene, Framebuffer* pFramebuffer)
-	: m_pScene{pScene}, m_pFramebuffer{pFramebuffer}, m_pRenderer2D{std::make_unique<Renderer2D>()}
+	: m_pScene{pScene}, m_pFramebuffer{pFramebuffer}
 {
+	Renderer2DCreateInfo desc{};
+	m_pRenderer2D = std::make_unique<Renderer2D>(desc);
 }
 
 BoonEditor::DebugRenderer::~DebugRenderer()

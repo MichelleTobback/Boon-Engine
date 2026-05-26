@@ -18,7 +18,7 @@ namespace BoonEditor
 	class PropertiesPanel final : public EditorPanel
 	{
 	public:
-		PropertiesPanel(const std::string& name, EditorContext* pContext, GameObjectContext* pGameObject);
+		PropertiesPanel(EditorContext* pContext, const std::string& name, GameObjectContext* pGameObject);
 		virtual ~PropertiesPanel() = default;
 
 		virtual void Update() override {}
