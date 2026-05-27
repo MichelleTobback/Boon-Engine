@@ -2,6 +2,10 @@
 
 #version 450 core
 
+// @vertex vec3 a_Position
+// @vertex vec4 a_Color
+// @vertex vec2 a_TexCoord
+
 layout(location = 0) in vec3 a_Position;
 layout(location = 1) in vec4 a_Color;
 layout(location = 2) in vec2 a_TexCoord;
@@ -38,32 +42,12 @@ void main()
 
 #version 450 core
 
-struct VertexInput
-{
-	vec4 Color;
-	vec2 TexCoord;
-};
+// @texture u_Texture 0
 
-layout (location = 0) in VertexInput Input;
-
-layout(location = 0) out vec4 o_Color;
-layout(location = 1) out int o_Id;
-
-layout (binding = 0) uniform sampler2D u_Texture;
-
-layout(std140, binding = 1) uniform Object
-{
-	mat4 u_world;
-	int u_ID;
-};
+#include "Boon/SpriteSingleFrag.glsl"
 
 void main()
 {
-	vec4 texColor = Input.Color * texture(u_Texture, Input.TexCoord);
-
-	if (texColor.a == 0.0)
-		discard;
-
-	o_Color = texColor;
-	o_Id = u_ID;
+	vec4 texColor = Boon_SampleSpriteTexture();
+	Boon_OutputSprite(texColor);
 }

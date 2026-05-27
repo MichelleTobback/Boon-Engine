@@ -14,6 +14,7 @@ namespace Boon
         Scene,
         Prefab,
         Audio,
+        Material,
 
         COUNT
     };

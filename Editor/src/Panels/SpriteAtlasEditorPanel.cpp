@@ -233,16 +233,18 @@ namespace BoonEditor
     {
     }
 
-    void SpriteAtlasEditorPanel::OnViewportCanvasRenderUI(const ViewportCanvasContext& context)
+    bool SpriteAtlasEditorPanel::OnViewportCanvasRenderUI(const ViewportCanvasContext& context)
     {
         if (!m_Asset.IsValid())
-            return;
+            return false;
 
         std::shared_ptr<SpriteAtlas> atlas = m_Asset->GetInstance();
         if (!atlas || !atlas->GetTexture().IsValid())
-            return;
+            return false;
 
         RenderAtlasCanvas(*atlas);
+
+        return true;
     }
 
     void SpriteAtlasEditorPanel::RenderToolbar()

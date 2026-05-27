@@ -34,7 +34,7 @@ namespace BoonEditor
 
         virtual void Update() override;
 
-        virtual void OnViewportCanvasRenderUI(const ViewportCanvasContext& context) override;
+        virtual bool OnViewportCanvasRenderUI(const ViewportCanvasContext& context) override;
 
     protected:
         virtual void RenderToolbar() override;

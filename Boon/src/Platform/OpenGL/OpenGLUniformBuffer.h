@@ -16,9 +16,10 @@ namespace Boon
 		OpenGLUniformBuffer& operator=(OpenGLUniformBuffer&& other) = delete;
 
 	private:
-		uint32_t m_ID;
-
-		// Inherited via UniformBuffer
 		void SetData(const void* data, size_t size, uint32_t offset) override;
+
+		uint32_t m_ID = 0;
+		size_t m_Size = 0;
+		uint32_t m_Binding = 0;
 	};
 }

@@ -1369,6 +1369,7 @@ namespace BoonEditor
                 if (name == "ShaderAsset") return AssetType::Shader;
                 if (name == "SpriteAtlasAsset") return AssetType::SpriteAtlas;
                 if (name == "TilemapAsset") return AssetType::Tilemap;
+                if (name == "MaterialAsset") return AssetType::Material;
                 // ...
 
                 return AssetType::None;

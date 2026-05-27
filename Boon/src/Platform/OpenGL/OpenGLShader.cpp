@@ -1,116 +1,121 @@
 #include "OpenGLShader.h"
+#include "BoonDebug/Logger.h"
 
 #include <glad/glad.h>
 #include <vector>
+#include <string>
 
 using namespace Boon;
 
+static void LogShaderError(const char* stage, const std::vector<GLchar>& infoLog)
+{
+    BOON_LOG_ERROR("{} shader error:\n{}", stage, infoLog.data());
+}
+
 Boon::OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
 {
-	// Create an empty vertex shader handle
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    m_ID = 0;
 
-	// Send the vertex shader source code to GL
-	// Note that std::string's .c_str is NULL character terminated.
-	const GLchar* source = vertexSrc.c_str();
-	glShaderSource(vertexShader, 1, &source, 0);
+    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 
-	// Compile the vertex shader
-	glCompileShader(vertexShader);
+    const GLchar* source = vertexSrc.c_str();
+    glShaderSource(vertexShader, 1, &source, nullptr);
+    glCompileShader(vertexShader);
 
-	GLint isCompiled = 0;
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &isCompiled);
-	if (isCompiled == GL_FALSE)
-	{
-		GLint maxLength = 0;
-		glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
+    GLint isCompiled = 0;
+    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &isCompiled);
 
-		// The maxLength includes the NULL character
-		std::vector<GLchar> infoLog(maxLength);
-		glGetShaderInfoLog(vertexShader, maxLength, &maxLength, &infoLog[0]);
+    if (isCompiled == GL_FALSE)
+    {
+        GLint maxLength = 0;
+        glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
 
-		// We don't need the shader anymore.
-		glDeleteShader(vertexShader);
-		return;
-	}
+        std::vector<GLchar> infoLog(maxLength);
+        glGetShaderInfoLog(vertexShader, maxLength, &maxLength, infoLog.data());
 
-	// Create an empty fragment shader handle
-	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+        BOON_LOG_ERROR("Vertex shader compile failed:\n{}", infoLog.data());
 
-	// Send the fragment shader source code to GL
-	// Note that std::string's .c_str is NULL character terminated.
-	source = fragmentSrc.c_str();
-	glShaderSource(fragmentShader, 1, &source, 0);
+        glDeleteShader(vertexShader);
+        return;
+    }
 
-	// Compile the fragment shader
-	glCompileShader(fragmentShader);
+    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &isCompiled);
-	if (isCompiled == GL_FALSE)
-	{
-		GLint maxLength = 0;
-		glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
+    source = fragmentSrc.c_str();
+    glShaderSource(fragmentShader, 1, &source, nullptr);
+    glCompileShader(fragmentShader);
 
-		// The maxLength includes the NULL character
-		std::vector<GLchar> infoLog(maxLength);
-		glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &infoLog[0]);
+    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &isCompiled);
 
-		// We don't need the shader anymore.
-		glDeleteShader(fragmentShader);
-		// Either of them. Don't leak shaders.
-		glDeleteShader(vertexShader);
-		return;
-	}
+    if (isCompiled == GL_FALSE)
+    {
+        GLint maxLength = 0;
+        glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
 
-	// Vertex and fragment shaders are successfully compiled.
-	// Now time to link them together into a program.
-	// Get a program object.
-	m_ID = glCreateProgram();
-	GLuint program = m_ID;
+        std::vector<GLchar> infoLog(maxLength);
+        glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, infoLog.data());
 
-	// Attach our shaders to our program
-	glAttachShader(program, vertexShader);
-	glAttachShader(program, fragmentShader);
+        BOON_LOG_ERROR("Fragment shader compile failed:\n{}", infoLog.data());
 
-	// Link our program
-	glLinkProgram(program);
+        glDeleteShader(fragmentShader);
+        glDeleteShader(vertexShader);
+        return;
+    }
 
-	// Note the different functions here: glGetProgram* instead of glGetShader*.
-	GLint isLinked = 0;
-	glGetProgramiv(program, GL_LINK_STATUS, (int*)&isLinked);
-	if (isLinked == GL_FALSE)
-	{
-		GLint maxLength = 0;
-		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+    GLuint program = glCreateProgram();
 
-		// The maxLength includes the NULL character
-		std::vector<GLchar> infoLog(maxLength);
-		glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
+    glAttachShader(program, vertexShader);
+    glAttachShader(program, fragmentShader);
+    glLinkProgram(program);
 
-		// We don't need the program anymore.
-		glDeleteProgram(program);
-		// Don't leak shaders either.
-		glDeleteShader(vertexShader);
-		glDeleteShader(fragmentShader);
-		return;
-	}
+    GLint isLinked = 0;
+    glGetProgramiv(program, GL_LINK_STATUS, &isLinked);
 
-	// Always detach shaders after a successful link.
-	glDetachShader(program, vertexShader);
-	glDetachShader(program, fragmentShader);
+    if (isLinked == GL_FALSE)
+    {
+        GLint maxLength = 0;
+        glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+
+        std::vector<GLchar> infoLog(maxLength);
+        glGetProgramInfoLog(program, maxLength, &maxLength, infoLog.data());
+
+        BOON_LOG_ERROR("Shader link failed:\n{}", infoLog.data());
+
+        glDeleteProgram(program);
+        glDeleteShader(vertexShader);
+        glDeleteShader(fragmentShader);
+
+        m_ID = 0;
+        return;
+    }
+
+    glDetachShader(program, vertexShader);
+    glDetachShader(program, fragmentShader);
+
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
+    m_ID = program;
 }
 
 Boon::OpenGLShader::~OpenGLShader()
 {
-	glDeleteProgram(m_ID);
+    if (m_ID != 0)
+        glDeleteProgram(m_ID);
 }
 
 void Boon::OpenGLShader::Bind() const
 {
-	glUseProgram(m_ID);
+    if (m_ID == 0)
+    {
+        BOON_LOG_ERROR("Trying to bind invalid OpenGL shader program.");
+        return;
+    }
+
+    glUseProgram(m_ID);
 }
 
 void Boon::OpenGLShader::Unbind() const
 {
-	glUseProgram(0);
+    glUseProgram(0);
 }

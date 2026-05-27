@@ -35,19 +35,6 @@ namespace Boon
         glm::vec4 Color{ 1.0f };
     };
 
-    struct GeometryRenderItem2D
-    {
-        glm::mat4 Transform{ 1.0f };
-
-        std::shared_ptr<VertexInput> VertexInput = nullptr;
-        std::shared_ptr<Material> Material = nullptr;
-
-        int EntityID = -1;
-
-        int SortLayer = 0;
-        float SortOrder = 0.0f;
-    };
-
     class RenderQueue2D
     {
     public:
@@ -55,7 +42,6 @@ namespace Boon
         {
             m_Quads.clear();
             m_Lines.clear();
-            m_Geometry.clear();
         }
 
         void Submit(const QuadRenderItem2D& item)
@@ -68,11 +54,6 @@ namespace Boon
             m_Lines.push_back(item);
         }
 
-        void Submit(const GeometryRenderItem2D& item)
-        {
-            m_Geometry.push_back(item);
-        }
-
         const std::vector<QuadRenderItem2D>& GetQuads() const
         {
             return m_Quads;
@@ -83,14 +64,8 @@ namespace Boon
             return m_Lines;
         }
 
-        const std::vector<GeometryRenderItem2D>& GetGeometry() const
-        {
-            return m_Geometry;
-        }
-
     private:
         std::vector<QuadRenderItem2D> m_Quads;
         std::vector<LineRenderItem2D> m_Lines;
-        std::vector<GeometryRenderItem2D> m_Geometry;
     };
 }

@@ -1,21 +1,23 @@
 #include "Reflection/BClassBase.h"
 #include "Asset/TilemapAsset.h"
+#include "Asset/MaterialAsset.h"
 #include "Asset/AssetRef.h"
 
 #include <memory>
 
 namespace Boon
 {
-	class Material;
-
 	BCLASS(Name="Tilemap renderer")
 	struct TilemapRendererComponent
 	{
 		BPROPERTY()
 		AssetRef<TilemapAsset> tilemap;
 
-		std::shared_ptr<Material> MaterialOverride = nullptr;
+		BPROPERTY()
+		AssetRef<MaterialAsset> MaterialOverride;
 
 		std::shared_ptr<Material> MaterialInstance = nullptr;
+		AssetHandle MaterialInstanceSource = 0;
+		uint32_t MaterialInstanceVersion = 0;
 	};
 }

@@ -47,6 +47,7 @@ namespace Boon
 		 * @brief Construct a vertex buffer layout from a list of Elements.
 		 */
 		VertexBufferLayout(std::initializer_list<Element> elements);
+		VertexBufferLayout(const std::vector<Element>& elements);
 
 		virtual ~VertexBufferLayout() = default;
 

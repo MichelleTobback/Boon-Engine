@@ -51,6 +51,12 @@ Boon::VertexBufferLayout::VertexBufferLayout(std::initializer_list<Element> elem
 	CalculateOffsetsAndStride();
 }
 
+Boon::VertexBufferLayout::VertexBufferLayout(const std::vector<Element>& elements)
+	: m_Elements(elements)
+{
+	CalculateOffsetsAndStride();
+}
+
 void Boon::VertexBufferLayout::CalculateOffsetsAndStride()
 {
 	size_t offset{};

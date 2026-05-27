@@ -2,6 +2,7 @@
 #include "Core/Boon.h"
 #include "Asset/Asset.h"
 #include "Asset/TextureAsset.h"
+#include "Asset/MaterialAsset.h"
 
 #include <glm/glm.hpp>
 #include <memory>
@@ -11,7 +12,7 @@ namespace Boon
 	class Material;
 
 	BCLASS(Name = "Texture renderer")
-		struct TextureRendererComponent final
+	struct TextureRendererComponent final
 	{
 		TextureRendererComponent() = default;
 
@@ -24,6 +25,11 @@ namespace Boon
 		BPROPERTY()
 		AssetRef<Texture2DAsset> Texture;
 
-		std::shared_ptr<Material> MaterialOverride = nullptr;
+		BPROPERTY()
+		AssetRef<MaterialAsset> MaterialOverride;
+
+		std::shared_ptr<Material> MaterialInstance = nullptr;
+		AssetHandle MaterialInstanceSource = 0;
+		uint32_t MaterialInstanceVersion = 0;
 	};
 }

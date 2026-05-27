@@ -133,16 +133,18 @@ namespace BoonEditor
     {
     }
 
-    void TilemapEditorPanel::OnViewportCanvasRenderUI(const ViewportCanvasContext&)
+    bool TilemapEditorPanel::OnViewportCanvasRenderUI(const ViewportCanvasContext&)
     {
         if (!m_Asset.IsValid())
-            return;
+            return false;
 
         std::shared_ptr<Tilemap> tilemap = m_Asset->GetInstance();
         if (!tilemap)
-            return;
+            return false;
 
         RenderViewportTilemap(*tilemap);
+
+        return true;
     }
 
     void TilemapEditorPanel::RenderToolbar()

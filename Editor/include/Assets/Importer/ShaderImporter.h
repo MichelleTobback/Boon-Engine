@@ -3,6 +3,7 @@
 #include "Assets/Importer/AssetImporter.h"
 #include "Asset/Runtime/BAssetFile.h"
 #include "Asset/ShaderAsset.h"
+#include "Renderer/ShaderCompiler/ShaderPreprocessor.h"
 
 #include <fstream>
 #include <sstream>
@@ -28,17 +29,28 @@ namespace Boon
 
             std::stringstream ss;
             ss << in.rdbuf();
-            std::string content = ss.str();
 
-            size_t vertPos = content.find("#vert");
-            size_t fragPos = content.find("#frag");
+            const std::string content = ss.str();
+
+            const size_t vertPos = content.find("#vert");
+            const size_t fragPos = content.find("#frag");
 
             if (vertPos == std::string::npos || fragPos == std::string::npos)
                 return false;
 
+            const std::string rawVertexSource = content.substr(vertPos + 5, fragPos - (vertPos + 5));
+
+            const std::string rawFragmentSource = content.substr(fragPos + 5);
+
+            ShaderPreprocessor preprocessor;
+
             ShaderAsset asset(meta.uuid);
-            asset.m_VertexSource = content.substr(vertPos + 5, fragPos - (vertPos + 5));
-            asset.m_FragmentSource = content.substr(fragPos + 5);
+            asset.m_VertexSource = preprocessor.ResolveIncludes(rawVertexSource, sourcePath.parent_path());
+
+            asset.m_FragmentSource = preprocessor.ResolveIncludes(rawFragmentSource, sourcePath.parent_path());
+
+            GLSLReflectionProvider reflectionProvider;
+            asset.m_Reflection = reflectionProvider.Reflect(asset.m_VertexSource, asset.m_FragmentSource);
 
             Buffer payload = AssetSerializer<ShaderAsset>::Serialize(&asset);
             return BAssetFile::Write(exportPath, meta, payload);

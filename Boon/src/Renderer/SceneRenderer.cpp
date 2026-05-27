@@ -7,6 +7,7 @@
 #include "Renderer/Framebuffer.h"
 #include "Renderer/Texture.h"
 #include "Renderer/Renderer2D.h"
+#include "Renderer/Renderer3D.h"
 #include "Renderer/RenderPass.h"
 #include "Renderer/Passes/RenderPass2D.h"
 #include "Renderer/Material.h"
@@ -24,6 +25,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <glad/glad.h>
+
+#include <algorithm>
 
 using namespace Boon;
 
@@ -47,26 +50,31 @@ Boon::SceneRenderer::SceneRenderer(const SceneRendererCreateInfo& desc)
 	renderer2dDesc.pSpriteShader = assetLib.Load<ShaderAsset>("shaders/Quad.glsl")->GetInstance();
 	renderer2dDesc.pLineShader = assetLib.Load<ShaderAsset>("shaders/Line.glsl")->GetInstance();
 
+	auto tilemapShaderAsset = assetLib.Load<ShaderAsset>("shaders/Tilemap.glsl");
 	PipelineDescriptor tilemapDesc{};
-	tilemapDesc.Shader = assetLib.Load<ShaderAsset>("shaders/Tilemap.glsl")->GetInstance();
-	std::shared_ptr<Pipeline> tilemapPipeline = std::make_shared<Pipeline>(tilemapDesc);
-	m_pDefaultTilemapMaterial = std::make_shared<Material>(tilemapPipeline);
+	tilemapDesc.Shader = tilemapShaderAsset->GetInstance();
+	tilemapDesc.Layout = tilemapShaderAsset->GetVertexLayout();
+	auto tilemapPipeline = std::make_shared<Pipeline>(tilemapDesc);
+	m_pDefaultTilemapMaterial = std::make_shared<Material>(tilemapPipeline, tilemapShaderAsset->GetMaterialLayout());
 
+	auto quadShaderAsset = assetLib.Load<ShaderAsset>("shaders/Quad.glsl");
 	PipelineDescriptor quadDesc{};
-	quadDesc.Shader = assetLib.Load<ShaderAsset>("shaders/Quad.glsl")->GetInstance();
-	std::shared_ptr<Pipeline> quadPipeline = std::make_shared<Pipeline>(quadDesc);
+	quadDesc.Shader = quadShaderAsset->GetInstance();
+	quadDesc.Layout = quadShaderAsset->GetVertexLayout();
+	auto quadPipeline = std::make_shared<Pipeline>(quadDesc);
+	m_pDefaultQuadMaterial = std::make_shared<Material>(quadPipeline, quadShaderAsset->GetMaterialLayout());
 
-	m_pDefaultQuadMaterial = std::make_shared<Material>(quadPipeline, sizeof(QuadMaterialData));
 	QuadMaterialData quadData{};
 	quadData.Color = glm::vec4(1.0f);
 	quadData.TilingFactor = 1.0f;
 	m_pDefaultQuadMaterial->SetValue(0, quadData);
 
 	m_pRenderer2D = std::make_unique<Renderer2D>(renderer2dDesc);
+	m_pRenderer3D = std::make_unique<Renderer3D>();
 
-	m_Passes.push_back(std::make_unique<SpriteRenderPass>(m_pDefaultQuadMaterial));
-	m_Passes.push_back(std::make_unique<TextureRenderPass>(m_pDefaultQuadMaterial));
-	m_Passes.push_back(std::make_unique<TilemapRenderPass>(m_pDefaultTilemapMaterial));
+	AddPass(std::make_unique<SpriteRenderPass>(m_pDefaultQuadMaterial));
+	AddPass(std::make_unique<TextureRenderPass>(m_pDefaultQuadMaterial));
+	AddPass(std::make_unique<TilemapRenderPass>(m_pDefaultTilemapMaterial));
 }
 Boon::SceneRenderer::~SceneRenderer()
 {
@@ -75,12 +83,32 @@ Boon::SceneRenderer::~SceneRenderer()
 
 void Boon::SceneRenderer::Render(Camera* camera, TransformComponent* cameraTransform)
 {
-	RenderContext context{ *m_pScene, *m_pRenderer2D, *m_pObjectUniformBuffer };
+	RenderContext context{ *m_pScene, *m_pRenderer2D, *m_pRenderer3D, *m_pObjectUniformBuffer };
+
+	if (m_bPassesDirty)
+	{
+		SortPasses();
+		m_bPassesDirty = false;
+	}
 
 	BeginScene(context, camera, cameraTransform);
 
+	RenderPhaseID currentPhase = m_Passes.front()->GetPhase();
+
 	for (auto& pass : m_Passes)
+	{
+		if (pass->GetPhase() != currentPhase)
+		{
+			m_pRenderer2D->FlushRenderQueue(context);
+			m_pRenderer3D->End(context);
+			m_pRenderer3D->Begin(context);
+
+			currentPhase = pass->GetPhase();
+		}
+
+		context.CurrentPhase = pass->GetPhase();
 		pass->Execute(context);
+	}
 
 	EndScene(context);
 }
@@ -118,11 +146,13 @@ void Boon::SceneRenderer::BeginScene(RenderContext& ctx, Camera* camera, Transfo
 	m_pOutputFB->ClearAttachment(1, -1);
 
 	m_pRenderer2D->Begin(ctx);
+	m_pRenderer3D->Begin(ctx);
 }
 
 void Boon::SceneRenderer::EndScene(RenderContext& ctx)
 {
 	m_pRenderer2D->End(ctx);
+	m_pRenderer3D->End(ctx);
 
 	m_pOutputFB->Unbind();
 
@@ -150,3 +180,24 @@ void Boon::SceneRenderer::SetViewport(int width, int height)
 }
 
 Renderer2D* Boon::SceneRenderer::GetRenderer2D() const { return m_pRenderer2D.get(); }
+
+void Boon::SceneRenderer::AddPass(std::unique_ptr<RenderPass> pass)
+{
+	if (!pass)
+		return;
+
+	m_Passes.push_back(std::move(pass));
+	m_bPassesDirty = true;
+}
+
+void Boon::SceneRenderer::SortPasses()
+{
+	std::sort(m_Passes.begin(), m_Passes.end(),
+		[](const std::unique_ptr<RenderPass>& a, const std::unique_ptr<RenderPass>& b)
+		{
+			if (a->GetPhase() != b->GetPhase())
+				return a->GetPhase() < b->GetPhase();
+
+			return a->GetOrder() < b->GetOrder();
+		});
+}

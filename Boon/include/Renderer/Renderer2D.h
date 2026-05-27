@@ -2,6 +2,7 @@
 #include "Renderer/RenderBatch.h"
 #include "Renderer/Texture.h"
 #include "Renderer/RenderQueue2D.h"
+#include "Renderer/QuadMaterialData.h"
 
 #include <array>
 #include <memory>
@@ -14,14 +15,6 @@ namespace Boon
 	{
 		std::shared_ptr<Shader> pSpriteShader;
 		std::shared_ptr<Shader> pLineShader;
-	};
-
-	struct QuadMaterialData
-	{
-		glm::vec4 Color{ 1.0f };
-		float TilingFactor = 1.0f;
-
-		glm::vec3 Padding{};
 	};
 
 	struct QuadBatchKey
@@ -53,6 +46,8 @@ namespace Boon
 		void Begin(RenderContext& ctx);
 		void End(RenderContext& ctx);
 
+		void FlushRenderQueue(RenderContext& ctx);
+
 		void SubmitQuad(const QuadRenderItem2D& item);
 		void SubmitQuad(const glm::mat4& transform, const std::shared_ptr<Material>& material, int gameObjectHandle);
 		void SubmitQuad(const glm::mat4& transform, const std::shared_ptr<Material>& material, int gameObjectHandle, const glm::vec2& spriteTexCoord, const glm::vec2& spriteTexSize);
@@ -71,8 +66,6 @@ namespace Boon
 		void SubmitRect(const glm::mat4& transform, const glm::vec2& size, const glm::vec4& color);
 		void SubmitPolygon(const std::vector<glm::vec3>& positions, const glm::vec4& color);
 
-		void SubmitGeometry(const GeometryRenderItem2D& item);
-
 		static bool IsCompatibleMaterial(const std::shared_ptr<Material>& material, const std::shared_ptr<Pipeline>& pipeline)
 		{
 			if (!material)
@@ -90,8 +83,6 @@ namespace Boon
 			std::array<std::shared_ptr<Texture2D>, s_MaxTextureSlots> TextureSlots;
 			uint32_t TextureSlotIndex = 1;
 		};
-
-		void FlushRenderQueue(RenderContext& ctx);
 		QuadBatchState& GetOrCreateQuadBatch(const std::shared_ptr<Pipeline>& pipeline);
 
 		RenderQueue2D m_RenderQueue;

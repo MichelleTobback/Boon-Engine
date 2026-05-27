@@ -6,6 +6,7 @@
 #include "Asset/TilemapAsset.h"
 #include "Asset/SceneAsset.h"
 #include "Asset/PrefabAsset.h"
+#include "Asset/MaterialAsset.h"
 
 namespace Boon
 {
@@ -56,6 +57,7 @@ namespace Boon
         RegisterAssetType<TilemapAsset>();
         RegisterAssetType<SceneAsset>();
         RegisterAssetType<PrefabAsset>();
+        RegisterAssetType<MaterialAsset>();
     }
 
     void AssetLibrary::SetRuntimeAssetRoot(const std::filesystem::path& root)

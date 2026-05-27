@@ -24,6 +24,7 @@ namespace BoonEditor
 
         virtual void OnViewportCanvasResize(const glm::vec2& size) {}
         virtual void OnViewportCanvasUpdate(const ViewportCanvasContext& context) {}
-        virtual void OnViewportCanvasRenderUI(const ViewportCanvasContext& context) {}
+        virtual bool OnViewportCanvasRenderUI(const ViewportCanvasContext& context) { return false; }
+        virtual bool CanRenderViewport() const { return true; }
     };
 }

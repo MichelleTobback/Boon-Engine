@@ -3,6 +3,7 @@
 #include "Renderer/Pipeline.h"
 #include "Renderer/Texture.h"
 #include "Renderer/UniformBuffer.h"
+#include "Renderer/ShaderCompiler/ShaderReflection.h"
 #include "Core/Memory/Buffer.h"
 
 #include <memory>
@@ -23,12 +24,14 @@ namespace Boon
 	class Material
 	{
 	public:
-		explicit Material(std::shared_ptr<Pipeline> pipeline, size_t dataSize = 0, uint32_t uniformBinding = 2)
+		explicit Material(std::shared_ptr<Pipeline> pipeline, const MaterialLayout& layout)
 			: m_Pipeline(std::move(pipeline))
-			, m_Data(dataSize)
+			, m_MaterialLayout(layout)
+			, m_Data(layout.UniformBufferSize)
+			, m_UniformBinding(layout.UniformBinding)
 		{
-			if (dataSize > 0)
-				m_UniformBuffer = UniformBuffer::Create(dataSize, uniformBinding);
+			if (layout.UniformBufferSize > 0)
+				m_UniformBuffer = UniformBuffer::Create(layout.UniformBufferSize, layout.UniformBinding);
 		}
 
 		void Bind()
@@ -58,12 +61,21 @@ namespace Boon
 		}
 
 		template<typename T>
+		void SetValue(const std::string& name, const T& value)
+		{
+			const MaterialParameter* parameter = m_MaterialLayout.FindParameter(name);
+			if (!parameter)
+				return;
+
+			SetValue(parameter->Offset, value);
+		}
+
+		template<typename T>
 		void SetValue(size_t offset, const T& value)
 		{
 			static_assert(std::is_trivially_copyable_v<T>);
 
-			if (offset + sizeof(T) > m_Data.Size())
-				m_Data.Resize(offset + sizeof(T));
+			EnsureDataSize(offset + sizeof(T));
 
 			std::memcpy(m_Data.DataAt(offset), &value, sizeof(T));
 			m_Dirty = true;
@@ -74,8 +86,7 @@ namespace Boon
 			if (!data || size == 0)
 				return;
 
-			if (offset + size > m_Data.Size())
-				m_Data.Resize(offset + size);
+			EnsureDataSize(offset + size);
 
 			std::memcpy(m_Data.DataAt(offset), data, size);
 			m_Dirty = true;
@@ -83,10 +94,13 @@ namespace Boon
 
 		void SetTexture(const std::string& name, std::shared_ptr<Texture2D> texture, uint32_t slot)
 		{
-			m_Textures[name] = MaterialTextureBinding{
-				.Texture = std::move(texture),
-				.Slot = slot
-			};
+			auto& binding = m_Textures[name];
+
+			if (binding.Texture == texture && binding.Slot == slot)
+				return;
+
+			binding.Texture = std::move(texture);
+			binding.Slot = slot;
 		}
 
 		std::shared_ptr<Texture2D> GetTexture(const std::string& name) const
@@ -109,7 +123,7 @@ namespace Boon
 
 		std::shared_ptr<Material> CreateInstance() const
 		{
-			auto instance = std::make_shared<Material>(m_Pipeline, m_Data.Size());
+			auto instance = std::make_shared<Material>(m_Pipeline, m_MaterialLayout);
 
 			instance->m_Data = m_Data;
 			instance->m_Dirty = true;
@@ -124,11 +138,25 @@ namespace Boon
 		Buffer& GetData() { return m_Data; }
 
 	private:
+		void EnsureDataSize(size_t requiredSize)
+		{
+			if (requiredSize <= m_Data.Size())
+				return;
+
+			m_Data.Resize(requiredSize);
+
+			m_UniformBuffer = UniformBuffer::Create(static_cast<uint32_t>(m_Data.Size()), m_UniformBinding);
+
+			m_Dirty = true;
+		}
+
 		std::shared_ptr<Pipeline> m_Pipeline = nullptr;
 
 		Buffer m_Data;
+		MaterialLayout m_MaterialLayout;
 		std::shared_ptr<UniformBuffer> m_UniformBuffer = nullptr;
 		bool m_Dirty = true;
+		uint32_t m_UniformBinding = 2;
 
 		std::unordered_map<std::string, MaterialTextureBinding> m_Textures;
 	};

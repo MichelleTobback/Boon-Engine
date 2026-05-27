@@ -84,7 +84,7 @@ void BoonEditor::ViewportPanel::ClearCanvasRenderer(IViewportCanvasRenderer* ren
 
 void BoonEditor::ViewportPanel::Update()
 {
-    if (m_ViewportHovered && !m_pCanvasRenderer)
+    if (m_ViewportHovered && !(m_pCanvasRenderer && m_pCanvasRenderer->CanRenderViewport()))
         m_Camera.Update();
 
     Input& input = *GetContext().GetEngineContext().Input;
@@ -122,7 +122,7 @@ void BoonEditor::ViewportPanel::Update()
             m_pSelectionContext->Set(m_HoveredGameObject);
     }
 
-    if (m_pCanvasRenderer)
+    if (m_pCanvasRenderer && m_pCanvasRenderer->CanRenderViewport())
     {
         m_pCanvasRenderer->OnViewportCanvasUpdate(CreateCanvasContext());
     }
@@ -245,7 +245,7 @@ void BoonEditor::ViewportPanel::OnRenderUI()
 
     m_ViewportImagePosition = { imagePos.x, imagePos.y };
 
-    if (m_pCanvasRenderer)
+    if (m_pCanvasRenderer && m_pCanvasRenderer->CanRenderViewport())
     {
         ImVec2 canvasPos = ImGui::GetCursorScreenPos();
 

@@ -7,6 +7,8 @@
 
 #include <Asset/TilemapAsset.h>
 #include <Asset/SpriteAtlasAsset.h>
+#include <Asset/MaterialAsset.h>
+#include <Asset/TilemapAsset.h>
 #include <Core/Application.h>
 #include <Core/EditorContext.h>
 #include <Command/EditorCommandQueue.h>
@@ -37,7 +39,8 @@ namespace
         None,
         Folder,
         SpriteAtlas,
-        Tilemap
+        Tilemap,
+        Material
     };
 
     ImU32 Col(ImGuiCol idx)
@@ -165,6 +168,8 @@ namespace
             return ".bsa";
         case PendingCreateType::Tilemap:
             return ".btm";
+        case PendingCreateType::Material:
+            return ".bmat";
         default:
             return "";
         }
@@ -797,10 +802,7 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
                 const std::string extension = GetPendingCreateExtension(pendingCreateType);
                 const std::string uniqueName = MakeUniqueName(folderPath, name, extension);
 
-                ServiceLocator::Get<AssetImporterRegistry>()
-                    .Export<SpriteAtlasAsset>(
-                        folderPath / (uniqueName + extension),
-                        0u);
+                ServiceLocator::Get<AssetImporterRegistry>().Export<SpriteAtlasAsset>(folderPath / (uniqueName + extension),0u);
                 break;
             }
             case PendingCreateType::Tilemap:
@@ -808,10 +810,15 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
                 const std::string extension = GetPendingCreateExtension(pendingCreateType);
                 const std::string uniqueName = MakeUniqueName(folderPath, name, extension);
 
-                ServiceLocator::Get<AssetImporterRegistry>()
-                    .Export<TilemapAsset>(
-                        folderPath / (uniqueName + extension),
-                        0u);
+                ServiceLocator::Get<AssetImporterRegistry>().Export<TilemapAsset>(folderPath / (uniqueName + extension), 0u);
+                break;
+            }
+            case PendingCreateType::Material:
+            {
+                const std::string extension = GetPendingCreateExtension(pendingCreateType);
+                const std::string uniqueName = MakeUniqueName(folderPath, name, extension);
+
+                ServiceLocator::Get<AssetImporterRegistry>().Export<MaterialAsset>(folderPath / (uniqueName + extension), 0u);
                 break;
             }
             default:
@@ -1341,6 +1348,9 @@ void ContentBrowser::DrawContentArea(FolderNode* folder)
 
         if (ImGui::MenuItem(ICON_FA_TABLE_CELLS "  New Tilemap"))
             startPendingCreate(PendingCreateType::Tilemap, "new_tilemap");
+
+        if (ImGui::MenuItem(ICON_FA_TABLE_CELLS "  New Material"))
+            startPendingCreate(PendingCreateType::Material, "new_material");
 
         ImGui::Separator();
 

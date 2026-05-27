@@ -9,6 +9,7 @@ namespace Boon
 	class Material;
 	class Shader;
 	class Renderer2D;
+	class Renderer3D;
 	class Scene;
 	class UniformBuffer;
 	class Camera;
@@ -90,11 +91,15 @@ namespace Boon
 		std::shared_ptr<Material> GetDefaultQuadMaterial() const { return m_pDefaultQuadMaterial; }
 		std::shared_ptr<Material> GetDefaultTilemapMaterial() const { return m_pDefaultTilemapMaterial; }
 
+		void AddPass(std::unique_ptr<RenderPass> pass);
+		void SortPasses();
+
 	private:
 		void BeginScene(RenderContext& ctx, Camera* camera = nullptr, TransformComponent* cameraTransform = nullptr);
 		void EndScene(RenderContext& ctx);
 
 		std::unique_ptr<Renderer2D> m_pRenderer2D;
+		std::unique_ptr<Renderer3D> m_pRenderer3D;
 		std::shared_ptr<UniformBuffer> m_pCameraUniformBuffer{};
 		std::shared_ptr<UniformBuffer> m_pObjectUniformBuffer{};
 		std::shared_ptr<Framebuffer> m_pOutputFB;
@@ -102,6 +107,7 @@ namespace Boon
 		UBData::Object m_ObjectData{};
 
 		std::vector<std::unique_ptr<RenderPass>> m_Passes;
+		bool m_bPassesDirty = false;
 
 		std::shared_ptr<Material> m_pDefaultQuadMaterial;
 		std::shared_ptr<Material> m_pDefaultTilemapMaterial;

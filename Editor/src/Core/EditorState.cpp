@@ -10,6 +10,7 @@
 #include "Panels/ContentBrowser.h"
 #include "Panels/TilemapEditorPanel.h"
 #include "Panels/SpriteAtlasEditorPanel.h"
+#include "Panels/MaterialEditorPanel.h"
 #include "Panels/AssetEditorPanel.h"
 #include "Panels/ConsolePanel.h"
 
@@ -27,6 +28,7 @@
 #include <Assets/Importer/SpriteAtlasImporter.h>
 #include <Assets/Importer/SceneImporter.h>
 #include <Assets/Importer/TilemapImporter.h>
+#include <Assets/Importer/MaterialImporter.h>
 
 #include "Assets/AssetDirectoryScanner.h"
 
@@ -120,6 +122,7 @@ void EditorState::OnEnter()
 	importer.RegisterImporter<SpriteAtlasImporter>();
 	importer.RegisterImporter<SceneImporter>();
 	importer.RegisterImporter<TilemapImporter>();
+	importer.RegisterImporter<MaterialImporter>();
 
 	AssetDatabase::Get().Init(assetLib);
 
@@ -141,6 +144,7 @@ void EditorState::OnEnter()
 	AssetEditorPanel& assetEditor = m_Context.CreateWidget<AssetEditorPanel>("asset", &viewport);
 	assetEditor.RegisterEditor(new TilemapEditorPanel(&m_Context, "tilemap"));
 	assetEditor.RegisterEditor(new SpriteAtlasEditorPanel(&m_Context, "sprite atlas"));
+	assetEditor.RegisterEditor(new MaterialEditorPanel(&m_Context, "material"));
 	m_pSelectedAsset = &assetEditor.GetContext();
 
 	m_Context.CreateWidget<ContentBrowser>("content", m_pSelectedAsset);

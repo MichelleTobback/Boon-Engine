@@ -19,11 +19,18 @@ namespace Boon
 
 		void Execute(RenderContext& context) override;
 
-	private:
-		std::shared_ptr<Material> GetOrCreateMaterial(uint64_t gameObjectHandle);
+		RenderPhaseID GetPhase() const override
+		{
+			return RenderPhases::Opaque;
+		}
 
+		int GetOrder() const override
+		{
+			return 100;
+		}
+
+	private:
 		std::shared_ptr<Material> m_pMaterial;
-		std::unordered_map<uint64_t, std::shared_ptr<Material>> m_MaterialCache;
 	};
 
 	class TextureRenderPass final : public RenderPass
@@ -35,11 +42,19 @@ namespace Boon
 
 		void Execute(RenderContext& context) override;
 
+		RenderPhaseID GetPhase() const override
+		{
+			return RenderPhases::Opaque;
+		}
+
+		int GetOrder() const override
+		{
+			return 200;
+		}
+
 	private:
-		std::shared_ptr<Material> GetOrCreateMaterial(uint64_t gameObjectHandle);
 
 		std::shared_ptr<Material> m_pMaterial;
-		std::unordered_map<uint64_t, std::shared_ptr<Material>> m_MaterialCache;
 	};
 
 	class TilemapRenderPass final : public RenderPass
@@ -52,11 +67,17 @@ namespace Boon
 
 		void Execute(RenderContext& context) override;
 
-	private:
-		std::shared_ptr<Material> GetOrCreateMaterial(const std::shared_ptr<Texture2D>& texture);
+		RenderPhaseID GetPhase() const override
+		{
+			return RenderPhases::Opaque;
+		}
+
+		int GetOrder() const override
+		{
+			return 0;
+		}
 
 	private:
 		std::shared_ptr<Material> m_pMaterial;
-		std::unordered_map<uint32_t, std::shared_ptr<Material>> m_MaterialCache;
 	};
 }

@@ -243,36 +243,8 @@ void Boon::Renderer2D::SubmitPolygon(const std::vector<glm::vec3>& positions, co
 	SubmitLine(positions.back(), positions.front(), color);
 }
 
-void Boon::Renderer2D::SubmitGeometry(const GeometryRenderItem2D& item)
-{
-	m_RenderQueue.Submit(item);
-}
-
 void Boon::Renderer2D::FlushRenderQueue(RenderContext& ctx)
 {
-	const auto& geometry = m_RenderQueue.GetGeometry();
-
-	for (const GeometryRenderItem2D& mesh : geometry)
-	{
-		if (!mesh.VertexInput || !mesh.Material)
-			continue;
-
-		auto material = mesh.Material;
-		if (!material)
-			continue;
-
-		UBData::Object objectData{};
-		objectData.World = mesh.Transform;
-		objectData.ID = mesh.EntityID;
-		ctx.ObjectUniformBuffer.SetValue(objectData);
-
-		material->Bind();
-
-		Renderer::DrawIndexed(mesh.VertexInput);
-
-		material->Unbind();
-	}
-
 	constexpr size_t quadVertexCount = 4;
 
 	std::vector<QuadRenderItem2D> quads = m_RenderQueue.GetQuads();
