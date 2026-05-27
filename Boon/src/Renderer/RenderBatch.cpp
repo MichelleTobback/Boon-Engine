@@ -4,17 +4,17 @@
 #include "Renderer/IndexBuffer.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Renderer.h"
-#include "Renderer/Pipeline.h"
+#include "Renderer/Material.h"
 
 namespace Boon
 {
-    void RenderBatch::Initialize(uint32_t maxVertices, const std::shared_ptr<Pipeline>& pipeline, std::shared_ptr<IndexBuffer> indexBuffer)
+    void RenderBatch::Initialize(uint32_t maxVertices, const std::shared_ptr<Material>& material, std::shared_ptr<IndexBuffer> indexBuffer)
     {
         m_MaxVertices = maxVertices;
         m_IndexBuffer = indexBuffer;
-        m_pPipeline = pipeline;
+        m_pMaterial = material;
 
-        const PipelineDescriptor& desc = pipeline->GetDescriptor();
+        const PipelineDescriptor& desc = m_pMaterial->GetPipeline()->GetDescriptor();
 
         // Create vertex input and buffers
         m_VertexInput = VertexInput::Create();
@@ -44,7 +44,7 @@ namespace Boon
 
     void RenderBatch::Flush()
     {
-        if (!m_pPipeline || m_VertexCount == 0)
+        if (!m_pMaterial || m_VertexCount == 0)
             return;
 
         if (m_PreFlushFunc)
@@ -54,9 +54,9 @@ namespace Boon
         if (dataSize > 0)
             m_VertexBuffer->SetData(m_BufferBase, dataSize);
 
-        m_pPipeline->Bind();
+        m_pMaterial->Bind();
 
-        switch (m_pPipeline->GetDescriptor().Primitive)
+        switch (m_pMaterial->GetPipeline()->GetDescriptor().Primitive)
         {
         case PrimitiveType::Triangles:
             if (m_IndexBuffer)
@@ -79,7 +79,7 @@ namespace Boon
         if (m_PostFlushFunc)
             m_PostFlushFunc();
 
-        m_pPipeline->Unbind();
+        m_pMaterial->Unbind();
     }
 
     void RenderBatch::NextBatch()

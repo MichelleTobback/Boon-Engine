@@ -12,6 +12,7 @@
 #include "Core/Memory/Buffer.h"
 
 #include "Renderer/Material.h"
+#include "Renderer/MaterialFactory.h"
 #include "Renderer/Pipeline.h"
 
 #include <memory>
@@ -113,33 +114,35 @@ namespace Boon
 
 		std::shared_ptr<Material> CreateMaterial() const
 		{
-			if (!m_ShaderHandle)
+			if (!m_ShaderHandle.IsValid())
 				return nullptr;
 
 			AssetRef<ShaderAsset> shaderRef{ m_ShaderHandle };
 			if (!shaderRef.IsValid())
 				return nullptr;
 
-			auto shaderAsset = shaderRef.Get();
-			auto shader = shaderRef.Instance();
+			ShaderAsset* shaderAsset = shaderRef.Get();
+			if (!shaderAsset)
+				return nullptr;
 
-			PipelineDescriptor desc{};
-			desc.Shader = shader;
-			desc.Layout = shaderAsset->GetVertexLayout();
-			desc.Primitive = m_Primitive;
-			desc.Blend = m_Blend;
-			desc.Depth = m_Depth;
-			desc.Cull = m_Cull;
+			auto material = MaterialFactory::CreateFromShaderAsset(
+				*shaderAsset,
+				m_Blend,
+				m_Depth,
+				m_Cull,
+				m_Primitive);
 
-			auto pipeline = std::make_shared<Pipeline>(desc);
-
-			auto material = std::make_shared<Material>(pipeline, shaderAsset->GetMaterialLayout());
+			if (!material)
+				return nullptr;
 
 			if (!m_Data.Empty())
 				material->SetRaw(0, m_Data.Data(), m_Data.Size());
 
 			for (const TextureBinding& binding : m_Textures)
 			{
+				if (!binding.TextureHandle.IsValid())
+					continue;
+
 				AssetRef<Texture2DAsset> textureRef{ binding.TextureHandle };
 				if (textureRef.IsValid())
 					material->SetTexture(binding.Name, textureRef.Instance(), binding.Slot);

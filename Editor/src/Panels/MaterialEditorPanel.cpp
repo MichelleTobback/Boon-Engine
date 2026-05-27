@@ -3,6 +3,9 @@
 #include <imgui.h>
 
 #include "Assets/AssetDatabase.h"
+#include "Assets/Importer/AssetImporterRegistry.h"
+
+#include <Core/ServiceLocator.h>
 
 #include <UI/UI.h>
 #include <UI/IconsFontAwesome7.h>
@@ -23,74 +26,76 @@ namespace
 		ImGui::Spacing();
 		ImGui::TextDisabled("%s", title);
 		ImGui::Separator();
+		ImGui::Spacing();
 	}
 
-	void BeginEditorPanel(const char* id, ImVec2 size = ImVec2(0.0f, 0.0f))
+	void BeginPanel(const char* id, ImVec2 size = ImVec2(0.0f, 0.0f))
 	{
 		ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, ImGui::GetStyle().WindowRounding);
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(10.0f, 10.0f));
 		ImGui::BeginChild(id, size, true);
 	}
 
-	void EndEditorPanel()
+	void EndPanel()
 	{
 		ImGui::EndChild();
 		ImGui::PopStyleVar(2);
 	}
 
-	bool EditorButton(const char* label, bool active = false, ImVec2 size = ImVec2(78.0f, 26.0f))
+	bool ToolbarButton(const char* label, ImVec2 size = ImVec2(92.0f, 28.0f))
 	{
-		ImGui::PushStyleColor(ImGuiCol_Button, active ? ImGui::GetColorU32(ImGuiCol_FrameBgActive) : ImGui::GetColorU32(ImGuiCol_Button));
-		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImGui::GetColorU32(ImGuiCol_ButtonHovered));
-		ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImGui::GetColorU32(ImGuiCol_ButtonActive));
-
-		bool pressed = ImGui::Button(label, size);
-
-		ImGui::PopStyleColor(3);
-		return pressed;
+		return ImGui::Button(label, size);
 	}
 
-	const char* PrimitiveToString(PrimitiveType value)
+	const char* PrimitiveToString(Boon::PrimitiveType value)
 	{
 		switch (value)
 		{
-		case PrimitiveType::Lines: return "Lines";
-		case PrimitiveType::Triangles:
+		case Boon::PrimitiveType::Lines: return "Lines";
+		case Boon::PrimitiveType::Triangles:
 		default: return "Triangles";
 		}
 	}
 
-	const char* BlendToString(BlendMode value)
+	const char* BlendToString(Boon::BlendMode value)
 	{
 		switch (value)
 		{
-		case BlendMode::None: return "None";
-		case BlendMode::Additive: return "Additive";
-		case BlendMode::Alpha:
+		case Boon::BlendMode::None: return "None";
+		case Boon::BlendMode::Additive: return "Additive";
+		case Boon::BlendMode::Alpha:
 		default: return "Alpha";
 		}
 	}
 
-	const char* DepthToString(DepthMode value)
+	const char* DepthToString(Boon::DepthMode value)
 	{
 		switch (value)
 		{
-		case DepthMode::Disabled: return "Disabled";
-		case DepthMode::Read: return "Read";
-		case DepthMode::ReadWrite:
+		case Boon::DepthMode::Disabled: return "Disabled";
+		case Boon::DepthMode::Read: return "Read";
+		case Boon::DepthMode::ReadWrite:
 		default: return "ReadWrite";
 		}
 	}
 
-	const char* CullToString(CullMode value)
+	const char* CullToString(Boon::CullMode value)
 	{
 		switch (value)
 		{
-		case CullMode::Back: return "Back";
-		case CullMode::Front: return "Front";
-		case CullMode::None:
+		case Boon::CullMode::Back: return "Back";
+		case Boon::CullMode::Front: return "Front";
+		case Boon::CullMode::None:
 		default: return "None";
 		}
+	}
+
+	void TextMuted(const char* fmt, ...)
+	{
+		va_list args;
+		va_start(args, fmt);
+		ImGui::TextColoredV(ImGui::GetStyleColorVec4(ImGuiCol_TextDisabled), fmt, args);
+		va_end(args);
 	}
 }
 
@@ -114,12 +119,18 @@ namespace BoonEditor
 		ImGui::TextUnformatted("Material Editor");
 
 		ImGui::SameLine();
-		ImGui::TextDisabled("| Shader, pipeline state, textures, data");
+		TextMuted("| Shader, pipeline state, textures and material data");
 
-		ImGui::Spacing();
+		ImGui::SameLine(ImGui::GetContentRegionAvail().x - 110.0f);
 
-		if (EditorButton(ICON_FA_FLOPPY_DISK " Save", false, ImVec2(92.0f, 28.0f)))
+		if (ToolbarButton(ICON_FA_FLOPPY_DISK " Save"))
+		{
 			AssetDatabase::Get().Export<MaterialAsset>(m_Asset);
+
+			const auto& path = AssetDatabase::Get().GetPath(m_Asset);
+			if (!path.empty())
+				ServiceLocator::Get<AssetImporterRegistry>().Import(path);
+		}
 	}
 
 	void MaterialEditorPanel::RenderMainArea()
@@ -131,28 +142,23 @@ namespace BoonEditor
 		if (!material)
 			return;
 
-		ImVec2 avail = ImGui::GetContentRegionAvail();
+		const ImVec2 avail = ImGui::GetContentRegionAvail();
 
 		const float gap = 8.0f;
-		const float leftWidth = std::max(320.0f, avail.x * 0.45f);
-		const float rightWidth = avail.x - leftWidth - gap;
+		const float leftWidth = std::max(340.0f, avail.x * 0.42f);
+		const float rightWidth = std::max(280.0f, avail.x - leftWidth - gap);
 
-		BeginEditorPanel("##material_pipeline_panel", ImVec2(leftWidth, 0.0f));
+		BeginPanel("##material_left_panel", ImVec2(leftWidth, 0.0f));
+		RenderMaterialPreview(*material);
 		RenderPipelineSettings(*material);
-		EndEditorPanel();
+		EndPanel();
 
 		ImGui::SameLine(0.0f, gap);
 
-		BeginEditorPanel("##material_data_panel", ImVec2(rightWidth, 0.0f));
-
-		BeginEditorPanel("##material_preview_panel", ImVec2(0.0f, 220.0f));
-		RenderMaterialPreview(*material);
-		EndEditorPanel();
-
+		BeginPanel("##material_right_panel", ImVec2(rightWidth, 0.0f));
 		RenderMaterialData(*material);
 		RenderTextureBindings(*material);
-
-		EndEditorPanel();
+		EndPanel();
 	}
 
 	void MaterialEditorPanel::RenderPipelineSettings(MaterialAsset& material)
@@ -160,25 +166,19 @@ namespace BoonEditor
 		SectionHeader("Pipeline");
 
 		AssetHandle shader = material.GetShader();
-
 		if (UI::AssetRef("Shader", shader, AssetType::Shader))
 			material.SetShader(shader);
-
-		ImGui::Spacing();
 
 		int primitive = static_cast<int>(material.GetPrimitiveType());
 		const char* primitiveItems[] = { "Triangles", "Lines" };
 
-		if (ImGui::Combo("Primitive", &primitive, primitiveItems, 2))
-		{
-			material.SetPrimitiveType(
-				primitive == 1 ? PrimitiveType::Lines : PrimitiveType::Triangles);
-		}
+		if (UI::Combo("Primitive", primitive, primitiveItems, 2))
+			material.SetPrimitiveType(primitive == 1 ? PrimitiveType::Lines : PrimitiveType::Triangles);
 
 		int blend = static_cast<int>(material.GetBlendMode());
 		const char* blendItems[] = { "None", "Alpha", "Additive" };
 
-		if (ImGui::Combo("Blend", &blend, blendItems, 3))
+		if (UI::Combo("Blend", blend, blendItems, 3))
 		{
 			switch (blend)
 			{
@@ -192,7 +192,7 @@ namespace BoonEditor
 		int depth = static_cast<int>(material.GetDepthMode());
 		const char* depthItems[] = { "Disabled", "Read", "ReadWrite" };
 
-		if (ImGui::Combo("Depth", &depth, depthItems, 3))
+		if (UI::Combo("Depth", depth, depthItems, 3))
 		{
 			switch (depth)
 			{
@@ -206,7 +206,7 @@ namespace BoonEditor
 		int cull = static_cast<int>(material.GetCullMode());
 		const char* cullItems[] = { "None", "Back", "Front" };
 
-		if (ImGui::Combo("Cull", &cull, cullItems, 3))
+		if (UI::Combo("Cull", cull, cullItems, 3))
 		{
 			switch (cull)
 			{
@@ -218,11 +218,11 @@ namespace BoonEditor
 		}
 
 		ImGui::Spacing();
-		ImGui::TextDisabled("Current");
-		ImGui::Text("Primitive: %s", PrimitiveToString(material.GetPrimitiveType()));
-		ImGui::Text("Blend: %s", BlendToString(material.GetBlendMode()));
-		ImGui::Text("Depth: %s", DepthToString(material.GetDepthMode()));
-		ImGui::Text("Cull: %s", CullToString(material.GetCullMode()));
+		TextMuted("Current: %s / %s / %s / %s",
+			PrimitiveToString(material.GetPrimitiveType()),
+			BlendToString(material.GetBlendMode()),
+			DepthToString(material.GetDepthMode()),
+			CullToString(material.GetCullMode()));
 	}
 
 	void MaterialEditorPanel::RenderMaterialData(MaterialAsset& material)
@@ -233,7 +233,9 @@ namespace BoonEditor
 
 		if (data.Empty())
 		{
-			if (EditorButton("Create Quad Data", false, ImVec2(140.0f, 28.0f)))
+			TextMuted("No material data stored.");
+
+			if (ImGui::Button(ICON_FA_PLUS " Create Quad Data", ImVec2(-1.0f, 28.0f)))
 			{
 				QuadMaterialData quadData{};
 				quadData.Color = glm::vec4(1.0f);
@@ -245,7 +247,6 @@ namespace BoonEditor
 				material.SetData(buffer);
 			}
 
-			ImGui::TextDisabled("No material data stored.");
 			return;
 		}
 
@@ -256,19 +257,22 @@ namespace BoonEditor
 
 			bool changed = false;
 
-			changed |= ImGui::ColorEdit4("Color", &quadData.Color.x);
-			changed |= ImGui::DragFloat("Tiling", &quadData.TilingFactor, 0.01f, 0.0f, 100.0f);
+			changed |= UI::ColorPicker("Color", quadData.Color).Changed;
+			changed |= UI::DragFloat("Tiling", quadData.TilingFactor, 0.0f, 100.0f, 0.01f).Changed;
 
 			if (changed)
 			{
 				std::memcpy(data.Data(), &quadData, sizeof(QuadMaterialData));
 				material.SetData(data);
 			}
+
+			return;
 		}
-		else
-		{
-			ImGui::TextDisabled("Raw data size: %llu bytes", static_cast<unsigned long long>(data.Size()));
-		}
+
+		TextMuted("Raw data size: %llu bytes", static_cast<unsigned long long>(data.Size()));
+
+		if (ImGui::Button(ICON_FA_TRASH " Clear Data", ImVec2(-1.0f, 28.0f)))
+			material.SetData(Buffer{});
 	}
 
 	void MaterialEditorPanel::RenderTextureBindings(MaterialAsset& material)
@@ -278,7 +282,10 @@ namespace BoonEditor
 		const auto& textures = material.GetTextures();
 
 		if (textures.empty())
-			ImGui::TextDisabled("No texture bindings.");
+		{
+			TextMuted("No texture bindings.");
+			ImGui::Spacing();
+		}
 
 		for (int i = 0; i < static_cast<int>(textures.size()); ++i)
 		{
@@ -286,55 +293,48 @@ namespace BoonEditor
 
 			ImGui::PushID(i);
 
+			BeginPanel("##texture_binding", ImVec2(0.0f, 92.0f));
+
 			ImGui::Text("Binding %d", i);
-			ImGui::TextDisabled("Name: %s | Slot: %u", binding.Name.c_str(), binding.Slot);
+			TextMuted("Name: %s | Slot: %u", binding.Name.c_str(), binding.Slot);
 
 			AssetHandle textureHandle = binding.TextureHandle;
 
-			// This requires a SetTextureBinding/ReplaceTextureBinding function on MaterialAsset.
 			if (UI::AssetRef("Texture", textureHandle, AssetType::Texture))
 			{
 				material.SetTextureBinding(
-					i,
+					static_cast<size_t>(i),
 					binding.Name,
 					textureHandle,
 					binding.Slot);
 			}
 
-			ImGui::Separator();
+			EndPanel();
+
 			ImGui::PopID();
+			ImGui::Spacing();
 		}
 
-		ImGui::Spacing();
-
-		if (EditorButton("Add Texture", false, ImVec2(112.0f, 28.0f)))
-		{
+		if (ImGui::Button(ICON_FA_PLUS " Add Texture", ImVec2(-1.0f, 28.0f)))
 			material.AddTexture("u_Texture", AssetHandle{}, 0);
-		}
 	}
 
-	void BoonEditor::MaterialEditorPanel::RenderMaterialPreview(MaterialAsset& material)
+	void MaterialEditorPanel::RenderMaterialPreview(MaterialAsset& material)
 	{
-		ImGui::BeginChild(
-			"##material_preview_viewport",
-			ImGui::GetContentRegionAvail(),
-			false,
-			ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse
-		);
+		SectionHeader("Preview");
+
+		const float previewHeight = 240.0f;
+
+		ImVec2 min = ImGui::GetCursorScreenPos();
+		ImVec2 size = ImVec2(ImGui::GetContentRegionAvail().x, previewHeight);
+		ImVec2 max = ImVec2(min.x + size.x, min.y + size.y);
+
+		ImGui::InvisibleButton("##material_preview_area", size);
 
 		ImDrawList* drawList = ImGui::GetWindowDrawList();
 
-		ImVec2 min = ImGui::GetCursorScreenPos();
-		ImVec2 size = ImGui::GetContentRegionAvail();
-		ImVec2 max(min.x + size.x, min.y + size.y);
-
 		drawList->AddRectFilled(min, max, ImGui::GetColorU32(ImGuiCol_FrameBg), 8.0f);
-
-		ImVec2 center(min.x + size.x * 0.5f, min.y + size.y * 0.5f);
-		float previewSize = std::min(size.x, size.y) * 0.45f;
-
-		ImVec2 quadMin(center.x - previewSize, center.y - previewSize);
-		ImVec2 quadMax(center.x + previewSize, center.y + previewSize);
+		drawList->AddRect(min, max, ImGui::GetColorU32(ImGuiCol_Border), 8.0f);
 
 		glm::vec4 color{ 1.0f };
 		float tiling = 1.0f;
@@ -350,22 +350,27 @@ namespace BoonEditor
 			tiling = quadData.TilingFactor;
 		}
 
+		ImVec2 center = ImVec2(min.x + size.x * 0.5f, min.y + size.y * 0.55f);
+		float quadSize = std::min(size.x, size.y) * 0.35f;
+
+		ImVec2 quadMin = ImVec2(center.x - quadSize, center.y - quadSize);
+		ImVec2 quadMax = ImVec2(center.x + quadSize, center.y + quadSize);
+
 		ImU32 tint = ImGui::ColorConvertFloat4ToU32(
-			ImVec4(color.r, color.g, color.b, color.a)
-		);
+			ImVec4(color.r, color.g, color.b, color.a));
 
 		std::shared_ptr<Texture2D> texture = nullptr;
 
 		for (const auto& binding : material.GetTextures())
 		{
-			if (binding.Name == "u_Texture" && binding.TextureHandle)
+			if (binding.TextureHandle)
 			{
 				AssetRef<Texture2DAsset> texRef(binding.TextureHandle);
-
 				if (texRef.IsValid())
+				{
 					texture = texRef.Instance();
-
-				break;
+					break;
+				}
 			}
 		}
 
@@ -379,8 +384,7 @@ namespace BoonEditor
 				quadMax,
 				ImVec2(0.0f, tiling),
 				ImVec2(tiling, 0.0f),
-				tint
-			);
+				tint);
 		}
 		else
 		{
@@ -392,10 +396,17 @@ namespace BoonEditor
 		drawList->AddText(
 			ImVec2(min.x + 12.0f, min.y + 12.0f),
 			ImGui::GetColorU32(ImGuiCol_TextDisabled),
-			"Material Preview"
-		);
+			"Material Preview");
 
-		ImGui::Dummy(size);
-		ImGui::EndChild();
+		if (!texture)
+		{
+			const char* label = "No texture";
+			ImVec2 textSize = ImGui::CalcTextSize(label);
+
+			drawList->AddText(
+				ImVec2(center.x - textSize.x * 0.5f, quadMax.y + 12.0f),
+				ImGui::GetColorU32(ImGuiCol_TextDisabled),
+				label);
+		}
 	}
 }

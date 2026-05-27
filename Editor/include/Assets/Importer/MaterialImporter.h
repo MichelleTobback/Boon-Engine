@@ -5,13 +5,12 @@
 #include "Asset/AssetLibrary.h"
 #include "Asset/Runtime/BAssetFile.h"
 #include "Asset/MaterialAsset.h"
-#include "Asset/ShaderAsset.h"
-#include "Asset/TextureAsset.h"
 
 #include "Core/Memory/Buffer.h"
 
 #include <filesystem>
 #include <fstream>
+#include <cstring>
 #include <nlohmann/json.hpp>
 
 namespace Boon
@@ -20,8 +19,6 @@ namespace Boon
 	{
 	public:
 		using AssetType = MaterialAsset;
-
-		virtual ~MaterialImporter() = default;
 
 		bool ImportToBAsset(
 			AssetLibrary& assetLib,
@@ -38,12 +35,7 @@ namespace Boon
 
 			MaterialAsset asset(meta.uuid);
 
-			const std::string shaderPath = j.value("shader", std::string{});
-			if (!shaderPath.empty())
-			{
-				auto shader = assetLib.Load<ShaderAsset>(shaderPath);
-				asset.SetShader(shader.Handle());
-			}
+			asset.SetShader(AssetHandle(j.value("shaderHandle", uint64_t{ 0 })));
 
 			asset.SetPrimitiveType(StringToPrimitive(j.value("primitive", "Triangles")));
 			asset.SetBlendMode(StringToBlend(j.value("blend", "Alpha")));
@@ -55,10 +47,7 @@ namespace Boon
 				Buffer data;
 
 				for (const auto& value : j["data"])
-				{
-					const float f = value.get<float>();
-					data.Write<float>(f);
-				}
+					data.Write<float>(value.get<float>());
 
 				asset.SetData(data);
 			}
@@ -68,14 +57,11 @@ namespace Boon
 				for (const auto& tex : j["textures"])
 				{
 					const std::string name = tex.value("name", std::string{});
-					const std::string path = tex.value("path", std::string{});
+					const AssetHandle textureHandle = AssetHandle(tex.value("textureHandle", uint64_t{ 0 }));
 					const uint32_t slot = tex.value("slot", 0u);
 
-					if (name.empty() || path.empty())
-						continue;
-
-					auto texture = assetLib.Load<Texture2DAsset>(path);
-					asset.AddTexture(name, texture.Handle(), slot);
+					if (!name.empty())
+						asset.AddTexture(name, textureHandle, slot);
 				}
 			}
 
@@ -87,55 +73,34 @@ namespace Boon
 		{
 			nlohmann::json j;
 
-			if (MaterialAsset* material = dynamic_cast<MaterialAsset*>(asset))
+			auto* material = dynamic_cast<MaterialAsset*>(asset);
+			if (!material)
+				return false;
+
+			j["shaderHandle"] = static_cast<uint64_t>(material->GetShader());
+			j["primitive"] = PrimitiveToString(material->GetPrimitiveType());
+			j["blend"] = BlendToString(material->GetBlendMode());
+			j["depth"] = DepthToString(material->GetDepthMode());
+			j["cull"] = CullToString(material->GetCullMode());
+
+			j["data"] = nlohmann::json::array();
+
+			const Buffer& data = material->GetData();
+			for (size_t offset = 0; offset + sizeof(float) <= data.Size(); offset += sizeof(float))
 			{
-				j["shader"] = "";
-				j["primitive"] = PrimitiveToString(material->GetPrimitiveType());
-				j["blend"] = BlendToString(material->GetBlendMode());
-				j["depth"] = DepthToString(material->GetDepthMode());
-				j["cull"] = CullToString(material->GetCullMode());
-
-				j["data"] = nlohmann::json::array();
-
-				const Buffer& data = material->GetData();
-				for (size_t offset = 0; offset + sizeof(float) <= data.Size(); offset += sizeof(float))
-				{
-					float value = 0.0f;
-					std::memcpy(&value, data.DataAt(offset), sizeof(float));
-					j["data"].push_back(value);
-				}
-
-				j["textures"] = nlohmann::json::array();
-
-				for (const auto& binding : material->GetTextures())
-				{
-					j["textures"].push_back({
-						{ "name", binding.Name },
-						{ "path", "" },
-						{ "slot", binding.Slot }
-						});
-				}
+				float value = 0.0f;
+				std::memcpy(&value, data.DataAt(offset), sizeof(float));
+				j["data"].push_back(value);
 			}
-			else
+
+			j["textures"] = nlohmann::json::array();
+
+			for (const auto& binding : material->GetTextures())
 			{
-				j["shader"] = "shaders/Quad.glsl";
-				j["primitive"] = "Triangles";
-				j["blend"] = "Alpha";
-				j["depth"] = "ReadWrite";
-				j["cull"] = "None";
-
-				j["data"] = {
-					1.0f, 1.0f, 1.0f, 1.0f,
-					1.0f,
-					0.0f, 0.0f, 0.0f
-				};
-
-				j["textures"] = nlohmann::json::array({
-					{
-						{ "name", "u_Texture" },
-						{ "path", "" },
-						{ "slot", 0 }
-					}
+				j["textures"].push_back({
+					{ "name", binding.Name },
+					{ "textureHandle", static_cast<uint64_t>(binding.TextureHandle) },
+					{ "slot", binding.Slot }
 					});
 			}
 

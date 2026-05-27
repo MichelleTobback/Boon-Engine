@@ -6,7 +6,7 @@
 
 namespace Boon
 {
-    class Pipeline;
+    class Material;
     class IndexBuffer;
     class VertexBuffer;
     class VertexInput;
@@ -23,7 +23,7 @@ namespace Boon
          * @param indexBuffer Optional index buffer for indexed rendering.
          */
         void Initialize(uint32_t maxVertices,
-            const std::shared_ptr<Pipeline>& pipeline,
+            const std::shared_ptr<Material>& material,
             std::shared_ptr<IndexBuffer> indexBuffer = nullptr);
 
         RenderBatch() = default;
@@ -64,7 +64,7 @@ namespace Boon
         inline void BindPostFlushCallback(BatchCallback cb) { m_PostFlushFunc = cb; }
         inline void BindBeginBatchCallback(BatchCallback cb) { m_BeginBatchFunc = cb; }
 
-        inline void SetPipeline(const std::shared_ptr<Pipeline>& pipeline) { m_pPipeline = pipeline; }
+        inline void SetMaterial(const std::shared_ptr<Material>& material) { m_pMaterial = material; }
 
         inline uint32_t GetVertexCount() const { return m_VertexCount; }
 
@@ -72,7 +72,7 @@ namespace Boon
         std::shared_ptr<VertexInput>  m_VertexInput;
         std::shared_ptr<VertexBuffer> m_VertexBuffer;
         std::shared_ptr<IndexBuffer>  m_IndexBuffer;
-        std::shared_ptr<Pipeline> m_pPipeline;
+        std::shared_ptr<Material> m_pMaterial;
 
         uint32_t m_MaxVertices = 0;
         uint32_t m_VertexCount = 0;

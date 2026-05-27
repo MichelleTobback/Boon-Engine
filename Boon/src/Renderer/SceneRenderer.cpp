@@ -11,6 +11,7 @@
 #include "Renderer/RenderPass.h"
 #include "Renderer/Passes/RenderPass2D.h"
 #include "Renderer/Material.h"
+#include "Renderer/MaterialFactory.h"
 
 #include "Scene/Scene.h"
 
@@ -45,29 +46,24 @@ Boon::SceneRenderer::SceneRenderer(const SceneRendererCreateInfo& desc)
 	fbDesc.SwapChainTarget = desc.bIsSwapchainTarget;
 	m_pOutputFB = Framebuffer::Create(fbDesc);
 
-	Renderer2DCreateInfo renderer2dDesc{};
 	AssetLibrary& assetLib = *desc.AssetLib;
-	renderer2dDesc.pSpriteShader = assetLib.Load<ShaderAsset>("shaders/Quad.glsl")->GetInstance();
-	renderer2dDesc.pLineShader = assetLib.Load<ShaderAsset>("shaders/Line.glsl")->GetInstance();
 
-	auto tilemapShaderAsset = assetLib.Load<ShaderAsset>("shaders/Tilemap.glsl");
-	PipelineDescriptor tilemapDesc{};
-	tilemapDesc.Shader = tilemapShaderAsset->GetInstance();
-	tilemapDesc.Layout = tilemapShaderAsset->GetVertexLayout();
-	auto tilemapPipeline = std::make_shared<Pipeline>(tilemapDesc);
-	m_pDefaultTilemapMaterial = std::make_shared<Material>(tilemapPipeline, tilemapShaderAsset->GetMaterialLayout());
+	auto quadShader = assetLib.Load<ShaderAsset>("shaders/Quad.glsl");
+	auto tilemapShader = assetLib.Load<ShaderAsset>("shaders/Tilemap.glsl");
+	auto lineShader = assetLib.Load<ShaderAsset>("shaders/Line.glsl");
 
-	auto quadShaderAsset = assetLib.Load<ShaderAsset>("shaders/Quad.glsl");
-	PipelineDescriptor quadDesc{};
-	quadDesc.Shader = quadShaderAsset->GetInstance();
-	quadDesc.Layout = quadShaderAsset->GetVertexLayout();
-	auto quadPipeline = std::make_shared<Pipeline>(quadDesc);
-	m_pDefaultQuadMaterial = std::make_shared<Material>(quadPipeline, quadShaderAsset->GetMaterialLayout());
+	Renderer2DCreateInfo renderer2dDesc{};
 
-	QuadMaterialData quadData{};
-	quadData.Color = glm::vec4(1.0f);
-	quadData.TilingFactor = 1.0f;
-	m_pDefaultQuadMaterial->SetValue(0, quadData);
+	if (quadShader.IsValid())
+		m_pDefaultQuadMaterial = MaterialFactory::CreateFromShaderAsset(*quadShader.Get());
+
+	renderer2dDesc.pSpriteMaterial = m_pDefaultQuadMaterial;
+
+	if (tilemapShader.IsValid())
+		m_pDefaultTilemapMaterial = MaterialFactory::CreateFromShaderAsset(*tilemapShader.Get());
+
+	if (lineShader.IsValid())
+		renderer2dDesc.pLineMaterial = MaterialFactory::CreateFromShaderAsset(*lineShader.Get(), BlendMode::Alpha, DepthMode::ReadWrite, CullMode::None, PrimitiveType::Lines);
 
 	m_pRenderer2D = std::make_unique<Renderer2D>(renderer2dDesc);
 	m_pRenderer3D = std::make_unique<Renderer3D>();
