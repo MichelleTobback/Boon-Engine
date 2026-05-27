@@ -59,6 +59,7 @@ void ConsolePanel::OnRenderUI()
 			std::vector<std::string> lines;
 
 			size_t start = 0;
+
 			while (start <= text.size())
 			{
 				size_t end = text.find('\n', start);
@@ -118,8 +119,10 @@ void ConsolePanel::OnRenderUI()
 			{
 			case 1:
 				return ImGui::GetColorU32(ImVec4(1.0f, 0.72f, 0.28f, 1.0f));
+
 			case 2:
 				return ImGui::GetColorU32(ImVec4(1.0f, 0.38f, 0.42f, 1.0f));
+
 			default:
 				return Accent(0.95f);
 			}
@@ -131,8 +134,10 @@ void ConsolePanel::OnRenderUI()
 			{
 			case 1:
 				return ImGui::GetColorU32(ImVec4(1.0f, 0.72f, 0.28f, 0.14f));
+
 			case 2:
 				return ImGui::GetColorU32(ImVec4(1.0f, 0.25f, 0.32f, 0.16f));
+
 			default:
 				return Accent(0.12f);
 			}
@@ -175,20 +180,8 @@ void ConsolePanel::OnRenderUI()
 			ImGui::SetClipboardText(out.c_str());
 		};
 
-	size_t messageCount = 0;
-	{
-		std::scoped_lock lock(m_Mutex);
-		messageCount = m_Messages.size();
-	}
-
-	bool canCopySelection =
-		s_HasSelection &&
-		s_SelectionStart >= 0 &&
-		s_SelectionEnd >= 0;
-
-	bool copySelectionPressed = false;
-
 	std::vector<ConsoleMessage> messages;
+
 	{
 		std::scoped_lock lock(m_Mutex);
 		messages = m_Messages;
@@ -217,187 +210,129 @@ void ConsolePanel::OnRenderUI()
 		}
 	}
 
-	ImVec4 cardBg = ImGui::GetStyleColorVec4(ImGuiCol_ChildBg);
-	cardBg.x *= 0.72f;
-	cardBg.y *= 0.72f;
-	cardBg.z *= 0.72f;
-
-	ImGui::PushStyleColor(ImGuiCol_ChildBg, cardBg);
-	ImGui::PushStyleColor(ImGuiCol_Border, ImGui::GetStyleColorVec4(ImGuiCol_Border));
-
-	ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, ImGui::GetStyle().WindowRounding);
-	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
 
 	if (ImGui::BeginChild(
-		"##ConsoleCard",
-		ImVec2(0.0f, 0.0f),
+		"##ConsoleRoot",
+		ImVec2(0, 0),
 		true,
-		ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse))
+		ImGuiWindowFlags_NoScrollbar))
 	{
-		ImDrawList* cardDrawList = ImGui::GetWindowDrawList();
+		const float toolbarHeight = 42.0f;
 
-		const ImVec2 cardMin = ImGui::GetWindowPos();
-		const float cardWidth = ImGui::GetWindowWidth();
-		const float headerHeight = 44.0f;
+		ImDrawList* drawList = ImGui::GetWindowDrawList();
 
-		ImVec4 headerBg = ImGui::GetStyleColorVec4(ImGuiCol_Header);
+		ImVec2 winPos = ImGui::GetWindowPos();
+		ImVec2 winSize = ImGui::GetWindowSize();
 
-		cardDrawList->AddRectFilled(
-			cardMin,
-			ImVec2(cardMin.x + cardWidth, cardMin.y + headerHeight),
-			ImGui::GetColorU32(headerBg),
+		drawList->AddRectFilled(
+			winPos,
+			ImVec2(winPos.x + winSize.x, winPos.y + toolbarHeight),
+			ImGui::GetColorU32(ImGuiCol_TitleBg),
 			ImGui::GetStyle().WindowRounding,
 			ImDrawFlags_RoundCornersTop);
 
-		cardDrawList->AddLine(
-			ImVec2(cardMin.x, cardMin.y + headerHeight),
-			ImVec2(cardMin.x + cardWidth, cardMin.y + headerHeight),
-			ImGui::GetColorU32(ImGuiCol_Border));
-
 		ImGui::SetCursorPos(ImVec2(10.0f, 8.0f));
 
-		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(8.0f, 5.0f));
-		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(6.0f, 6.0f));
-
-		ImGui::AlignTextToFramePadding();
-		ImGui::Text("%s  Console", ICON_FA_TERMINAL);
+		ImGui::Text("%s Console", ICON_FA_TERMINAL);
 
 		ImGui::SameLine();
-		ImGui::TextDisabled("| %zu messages", messageCount);
+		ImGui::TextDisabled("| %zu messages", messages.size());
 
 		ImGui::SameLine();
 
-		const float rightWidth = 310.0f;
-		const float cursorX = ImGui::GetCursorPosX();
-		const float availableX = ImGui::GetContentRegionAvail().x;
-
-		if (availableX > rightWidth)
-			ImGui::SetCursorPosX(cursorX + availableX - rightWidth);
-
-		if (ImGui::Button(ICON_FA_TRASH_CAN, ImVec2(30.0f, 28.0f)))
+		if (ImGui::Button(ICON_FA_TRASH_CAN))
 		{
 			Clear();
+
 			s_HasSelection = false;
 			s_SelectionStart = -1;
 			s_SelectionEnd = -1;
 		}
 
-		if (ImGui::IsItemHovered())
-			ImGui::SetTooltip("Clear console");
-
 		ImGui::SameLine();
 
-		if (ImGui::Button(ICON_FA_COPY, ImVec2(30.0f, 28.0f)))
+		if (ImGui::Button(ICON_FA_COPY))
 		{
 			std::string allText;
 
+			for (const auto& msg : messages)
 			{
-				std::scoped_lock lock(m_Mutex);
-
-				for (const auto& msg : m_Messages)
-				{
-					const char* prefix = GetPrefixForLevel(msg.Level);
-
-					allText += "[";
-					allText += prefix;
-					allText += "] ";
-					allText += msg.Text;
-					allText += '\n';
-				}
+				allText += "[";
+				allText += GetPrefixForLevel(msg.Level);
+				allText += "] ";
+				allText += msg.Text;
+				allText += '\n';
 			}
 
 			ImGui::SetClipboardText(allText.c_str());
 		}
 
-		if (ImGui::IsItemHovered())
-			ImGui::SetTooltip("Copy all");
-
 		ImGui::SameLine();
 
-		if (!canCopySelection)
+		if (!s_HasSelection)
 			ImGui::BeginDisabled();
 
-		if (ImGui::Button(ICON_FA_CLIPBOARD, ImVec2(30.0f, 28.0f)))
-			copySelectionPressed = true;
+		if (ImGui::Button(ICON_FA_CLIPBOARD))
+		{
+			AppendSelectedLinesToClipboard(
+				renderLines,
+				s_SelectionStart,
+				s_SelectionEnd);
+		}
 
-		if (ImGui::IsItemHovered())
-			ImGui::SetTooltip("Copy selection");
-
-		if (!canCopySelection)
+		if (!s_HasSelection)
 			ImGui::EndDisabled();
 
-		ImGui::SameLine(0.0f, 10.0f);
+		ImGui::SameLine();
 		ImGui::Checkbox("Auto-scroll", &m_AutoScroll);
 
-		ImGui::PopStyleVar(2);
-
-		if (copySelectionPressed && canCopySelection)
-			AppendSelectedLinesToClipboard(renderLines, s_SelectionStart, s_SelectionEnd);
-
-		ImGui::SetCursorPos(ImVec2(0.0f, headerHeight));
+		ImGui::SetCursorPos(ImVec2(0.0f, toolbarHeight));
 
 		if (ImGui::BeginChild(
-			"ConsoleRegion",
-			ImVec2(0.0f, 0.0f),
+			"##ConsoleScroll",
+			ImVec2(0, 0),
 			false,
 			ImGuiWindowFlags_HorizontalScrollbar))
 		{
-			ImDrawList* drawList = ImGui::GetWindowDrawList();
 			ImGuiIO& io = ImGui::GetIO();
+			ImDrawList* dl = ImGui::GetWindowDrawList();
 
-			const ImVec2 avail = ImGui::GetContentRegionAvail();
-			const float scrollX = ImGui::GetScrollX();
-			const float scrollY = ImGui::GetScrollY();
+			const float lineHeight =
+				ImGui::GetTextLineHeightWithSpacing() + 4.0f;
 
-			const float lineHeight = ImGui::GetTextLineHeightWithSpacing() + 4.0f;
+			const float badgeWidth = 78.0f;
 			const float rowPaddingX = 8.0f;
-			const float badgeWidth = 76.0f;
-			const float badgeHeight = ImGui::GetTextLineHeight() + 6.0f;
-			const float badgeOffsetY = (lineHeight - badgeHeight) * 0.5f;
-			const float textOffsetY = (lineHeight - ImGui::GetTextLineHeight()) * 0.5f;
-			const float textStartX = rowPaddingX + badgeWidth + 10.0f;
+			const float textStartX = rowPaddingX + badgeWidth + 12.0f;
 
 			float longestLineWidth = 0.0f;
 
 			for (const auto& line : renderLines)
 			{
-				std::string displayText;
-
-				if (!line.IsContinuation)
-				{
-					displayText += line.Prefix;
-					displayText += " ";
-				}
-				else
-				{
-					displayText += "       ";
-				}
-
-				displayText += line.Text;
-
 				longestLineWidth =
-					std::max(longestLineWidth, ImGui::CalcTextSize(displayText.c_str()).x);
+					std::max(
+						longestLineWidth,
+						ImGui::CalcTextSize(line.Text.c_str()).x);
 			}
 
-			const float contentHeight =
-				renderLines.empty()
-				? avail.y
-				: static_cast<float>(renderLines.size()) * lineHeight;
+			const float canvasWidth =
+				textStartX + longestLineWidth + 40.0f;
 
-			const float contentWidth =
-				std::max(avail.x, textStartX + longestLineWidth + 20.0f);
+			const float canvasHeight =
+				std::max(
+					ImGui::GetContentRegionAvail().y,
+					lineHeight * static_cast<float>(renderLines.size()));
 
 			ImGui::InvisibleButton(
-				"ConsoleCanvas",
-				ImVec2(contentWidth, contentHeight),
+				"##ConsoleCanvas",
+				ImVec2(canvasWidth, canvasHeight),
 				ImGuiButtonFlags_MouseButtonLeft);
 
-			const bool canvasHovered = ImGui::IsItemHovered();
 			const ImVec2 canvasMin = ImGui::GetItemRectMin();
 
 			auto MouseToLineIndex = [&](const ImVec2& mousePos) -> int
 				{
-					float localY = mousePos.y - canvasMin.y + scrollY;
+					float localY = mousePos.y - canvasMin.y;
 
 					if (localY < 0.0f)
 						return -1;
@@ -410,7 +345,8 @@ void ConsolePanel::OnRenderUI()
 					return idx;
 				};
 
-			if (canvasHovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+			if (ImGui::IsItemHovered() &&
+				ImGui::IsMouseClicked(ImGuiMouseButton_Left))
 			{
 				int clickedLine = MouseToLineIndex(io.MousePos);
 
@@ -420,13 +356,6 @@ void ConsolePanel::OnRenderUI()
 					s_IsDraggingSelection = true;
 					s_SelectionStart = clickedLine;
 					s_SelectionEnd = clickedLine;
-				}
-				else
-				{
-					s_HasSelection = false;
-					s_IsDraggingSelection = false;
-					s_SelectionStart = -1;
-					s_SelectionEnd = -1;
 				}
 			}
 
@@ -445,112 +374,102 @@ void ConsolePanel::OnRenderUI()
 				}
 			}
 
-			if (s_HasSelection &&
-				(ImGui::IsWindowHovered(ImGuiHoveredFlags_ChildWindows) ||
-					ImGui::IsWindowFocused(ImGuiFocusedFlags_ChildWindows)) &&
-				ImGui::IsKeyChordPressed(ImGuiMod_Ctrl | ImGuiKey_C))
-			{
-				AppendSelectedLinesToClipboard(renderLines, s_SelectionStart, s_SelectionEnd);
-			}
-
-			int visibleStart =
-				std::max(0, static_cast<int>(scrollY / lineHeight));
-
-			int visibleEnd =
-				std::min(
-					static_cast<int>(renderLines.size()),
-					static_cast<int>((scrollY + avail.y) / lineHeight) + 2);
-
 			int selStart = s_SelectionStart;
 			int selEnd = s_SelectionEnd;
 
-			if (s_HasSelection && selStart >= 0 && selEnd >= 0)
+			if (s_HasSelection)
 				NormalizeSelection(selStart, selEnd);
 
-			for (int i = visibleStart; i < visibleEnd; ++i)
+			for (int i = 0; i < static_cast<int>(renderLines.size()); ++i)
 			{
 				const auto& line = renderLines[i];
 
-				const float y = canvasMin.y + i * lineHeight - scrollY;
-				const float rowMinX = canvasMin.x - scrollX;
-				const float rowMaxX = rowMinX + contentWidth;
+				const float y = canvasMin.y + i * lineHeight;
 
-				const ImVec2 rowMin(rowMinX, y);
-				const ImVec2 rowMax(rowMaxX, y + lineHeight);
+				const ImVec2 rowMin(canvasMin.x, y);
+				const ImVec2 rowMax(canvasMin.x + canvasWidth, y + lineHeight);
 
 				if ((i % 2) == 0)
 				{
-					ImVec4 stripe = ImGui::GetStyleColorVec4(ImGuiCol_Text);
+					ImVec4 stripe =
+						ImGui::GetStyleColorVec4(ImGuiCol_Text);
+
 					stripe.w = 0.025f;
 
-					drawList->AddRectFilled(
+					dl->AddRectFilled(
 						rowMin,
 						rowMax,
 						ImGui::GetColorU32(stripe));
 				}
 
-				if (s_HasSelection && i >= selStart && i <= selEnd)
+				if (s_HasSelection &&
+					i >= selStart &&
+					i <= selEnd)
 				{
-					ImVec4 base = ImGui::GetStyleColorVec4(ImGuiCol_ButtonActive);
-					base.w = 0.35f;
+					ImVec4 sel =
+						ImGui::GetStyleColorVec4(ImGuiCol_ButtonActive);
 
-					drawList->AddRectFilled(
+					sel.w = 0.35f;
+
+					dl->AddRectFilled(
 						rowMin,
 						rowMax,
-						ImGui::GetColorU32(base));
+						ImGui::GetColorU32(sel));
 				}
-
-				const ImU32 badgeTextColor = GetPrefixColorForLevel(line.Level);
-				const ImU32 badgeBgColor = GetBadgeBgForLevel(line.Level);
-
-				const float badgeX = rowMinX + rowPaddingX;
-				const float badgeY = y + badgeOffsetY;
-
-				const ImVec2 badgeMin(badgeX, badgeY);
-				const ImVec2 badgeMax(badgeX + badgeWidth, badgeY + badgeHeight);
 
 				if (!line.IsContinuation)
 				{
-					drawList->AddRectFilled(badgeMin, badgeMax, badgeBgColor, 6.0f);
-					drawList->AddRect(badgeMin, badgeMax, badgeTextColor, 6.0f, 0, 1.0f);
+					const ImU32 badgeText =
+						GetPrefixColorForLevel(line.Level);
 
-					std::string badgeText =
+					const ImU32 badgeBg =
+						GetBadgeBgForLevel(line.Level);
+
+					ImVec2 badgeMin(
+						canvasMin.x + rowPaddingX,
+						y + 2.0f);
+
+					ImVec2 badgeMax(
+						badgeMin.x + badgeWidth,
+						badgeMin.y + ImGui::GetTextLineHeight() + 6.0f);
+
+					dl->AddRectFilled(
+						badgeMin,
+						badgeMax,
+						badgeBg,
+						6.0f);
+
+					dl->AddRect(
+						badgeMin,
+						badgeMax,
+						badgeText,
+						6.0f);
+
+					std::string badge =
 						std::string(GetIconForLevel(line.Level)) +
 						" " +
 						line.Prefix;
 
-					ImVec2 prefixSize =
-						ImGui::CalcTextSize(badgeText.c_str());
+					ImVec2 textSize =
+						ImGui::CalcTextSize(badge.c_str());
 
-					ImVec2 prefixPos(
-						badgeX + (badgeWidth - prefixSize.x) * 0.5f,
-						badgeY + (badgeHeight - prefixSize.y) * 0.5f);
-
-					drawList->AddText(
-						prefixPos,
-						badgeTextColor,
-						badgeText.c_str());
+					dl->AddText(
+						ImVec2(
+							badgeMin.x + (badgeWidth - textSize.x) * 0.5f,
+							badgeMin.y + 3.0f),
+						badgeText,
+						badge.c_str());
 				}
 
-				const ImU32 textColor =
-					line.Level == 2
-					? ImGui::GetColorU32(ImVec4(1.0f, 0.86f, 0.86f, 1.0f))
-					: line.Level == 1
-					? ImGui::GetColorU32(ImVec4(1.0f, 0.94f, 0.76f, 1.0f))
-					: ImGui::GetColorU32(ImGuiCol_Text);
-
-				ImVec2 textPos(rowMinX + textStartX, y + textOffsetY);
-
-				drawList->AddText(
-					textPos,
-					textColor,
+				dl->AddText(
+					ImVec2(canvasMin.x + textStartX, y + 3.0f),
+					ImGui::GetColorU32(ImGuiCol_Text),
 					line.Text.c_str());
 			}
 
-			if (m_AutoScroll &&
-				(m_ScrollToBottom || ImGui::GetScrollY() >= ImGui::GetScrollMaxY()))
+			if (m_AutoScroll && m_ScrollToBottom)
 			{
-				ImGui::SetScrollY(ImGui::GetScrollMaxY());
+				ImGui::SetScrollHereY(1.0f);
 				m_ScrollToBottom = false;
 			}
 		}
@@ -560,6 +479,5 @@ void ConsolePanel::OnRenderUI()
 
 	ImGui::EndChild();
 
-	ImGui::PopStyleVar(2);
-	ImGui::PopStyleColor(2);
+	ImGui::PopStyleVar();
 }

@@ -1,7 +1,9 @@
 #pragma once
 #include <Core/AppState.h>
-
+#include <Core/EngineContext.h>
+#include <Core/Delegate.h>
 #include <Event/Event.h>
+#include <Scene/Scene.h>
 
 #include <Networking/NetworkSettings.h>
 #include <Networking/NetPacket.h>
@@ -12,6 +14,7 @@ namespace Boon
 {
 	class SceneRenderer;
 	class NetConnection;
+	class ModuleLibrary;
 }
 
 using namespace Boon;
@@ -46,8 +49,10 @@ namespace Runtime
 
 		EventListenerID m_WindowResizeEvent;
 		EventListenerID m_SceneChangedEvent;
-		EventListenerID m_BindNetSceneEvent;
+
+		Delegate<void(Scene&)>::Handle m_BindNetSceneHandle;
 
 		Boon::NetworkSettings m_NetworkSettings;
+		std::unique_ptr<ModuleLibrary> m_pModuleLib;
 	};
 }

@@ -18,6 +18,7 @@
 
 #include "Project/ProjectLoader.h"
 #include "Tools/NewProjectDialog.h"
+#include "Tools/PackageBuildDialog.h"
 
 #include "UI/EditorRenderer.h"
 
@@ -154,6 +155,7 @@ void EditorState::OnEnter()
 	m_Context.CreateWidget<ConsolePanel>("console");
 
 	m_Context.CreateWidget<NewProjectDialog>("NewProject");
+	m_Context.CreateWidget<PackageBuildDialog>("PackageBuild");
 
 	EventBus& eventBus = *ctx.EventBus;
 	ctx.Subsystems->Register<NetworkingSubsystem>(config.Network);
@@ -397,6 +399,20 @@ void EditorState::RenderMenuBar()
 					sceneManager.SetActiveScene(m_SceneContext.Get()->GetID(), false);
 				}
 			}
+		}
+		ImGui::EndMenu();
+	}
+	ImGui::SameLine(0.0f, 4.0f);
+	if (TitlebarMenuButton("Build"))
+	{
+		if (ImGui::MenuItem("Package Build"))
+		{
+			if (m_PlayState == EditorPlayState::Play)
+			{
+				OnStopPlay();
+			}
+			PackageBuildDialog* pDialog = m_Context.TryGetWidget<PackageBuildDialog>("PackageBuild");
+			if (pDialog) pDialog->Open();
 		}
 		ImGui::EndMenu();
 	}

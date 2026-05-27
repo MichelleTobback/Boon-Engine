@@ -1,7 +1,7 @@
 #include "Tools/ProjectGenerator.h"
 #include "Project/ProjectLoader.h"
 #include "tools/TemplateProcessor.h"
-
+#include "Utils/ProcessRunner.h"
 #include "BoonDebug/Logger.h"
 #include <fstream>
 
@@ -120,11 +120,25 @@ namespace BoonEditor
 	{
 		BOON_LOG("Configuring project ...");
 
-		std::string configureCmd =
-			"cmake -S \"" + project.Runtime.ProjectRoot.string() + "\" -B \"" + buildDir.string() + "\"";
+		const std::filesystem::path engineRoot = project.Runtime.EngineRoot;
 
-		if (std::system(configureCmd.c_str()) != 0)
+		std::string configureCmd =
+			"cmake -S \"" + project.Runtime.ProjectRoot.string() +
+			"\" -B \"" + buildDir.string() +
+			"\" -DBOON_ENGINE_ROOT:PATH=\"" + engineRoot.string() + "\"";
+
+		ProcessResult result = ProcessRunner::Run(
+			"\"" + configureCmd+ "\"",
+			[](const std::string& chunk)
+			{
+				BOON_LOG(chunk);
+			});
+
+		if (result.ExitCode != 0)
+		{
+			BOON_LOG_ERROR(result.Output);
 			return false;
+		}
 
 		return true;
 	}
@@ -135,8 +149,18 @@ namespace BoonEditor
 		std::string buildCmd =
 			"cmake --build \"" + buildDir.string() + "\" --config Debug";
 
-		if (std::system(buildCmd.c_str()) != 0)
+		ProcessResult result = ProcessRunner::Run(
+			"\"" + buildCmd + "\"",
+			[](const std::string& chunk)
+			{
+				BOON_LOG(chunk);
+			});
+
+		if (result.ExitCode != 0)
+		{
+			BOON_LOG_ERROR(result.Output);
 			return false;
+		}
 
 		return true;
 	}

@@ -12,6 +12,7 @@ namespace BoonEditor
 		std::string Name;
 		std::string Location;
 		std::string TemplateFolder;
+		std::filesystem::path EngineRoot;
 	};
 
 	class ProjectGenerator final

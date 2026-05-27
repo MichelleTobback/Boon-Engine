@@ -1,7 +1,6 @@
-@@CMakeLists.txt 
-# {{PROJECT_NAME}}
-
+@@CMakeLists.txt
 cmake_minimum_required(VERSION 3.20)
+
 project({{PROJECT_NAME}} LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -10,25 +9,19 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-# ----------------------------------------
-# User-configurable path to Boon engine root
-# ----------------------------------------
-if (NOT BOON_ENGINE_ROOT)
+if(NOT BOON_ENGINE_ROOT)
     set(BOON_ENGINE_ROOT "$ENV{BOON_ENGINE_ROOT}")
 endif()
 
 set(BOON_ENGINE_ROOT "${BOON_ENGINE_ROOT}" CACHE PATH "Path to Boon Engine root")
 
-if (NOT BOON_ENGINE_ROOT OR NOT EXISTS "${BOON_ENGINE_ROOT}/Boon/CMakeLists.txt")
+if(NOT BOON_ENGINE_ROOT OR NOT EXISTS "${BOON_ENGINE_ROOT}/Boon/CMakeLists.txt")
     message(FATAL_ERROR
         "Boon Engine not found.\n"
         "Run the setup script first, or pass -DBOON_ENGINE_ROOT=..."
     )
 endif()
 
-# ----------------------------------------
-# Shared output helper
-# ----------------------------------------
 function(boon_set_output_dirs target subdir)
     set_target_properties(${target} PROPERTIES
         ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>/${subdir}"
@@ -37,21 +30,17 @@ function(boon_set_output_dirs target subdir)
     )
 endfunction()
 
-# ----------------------------------------
-# Reflection generator
-# ----------------------------------------
 add_custom_target(GenerateReflection)
 
 set(BOON_BCLASSGENERATOR_EXE
     "${BOON_ENGINE_ROOT}/bin/Debug/Tools/BClassGenerator.exe"
 )
+
 set(PROJECT_GENERATED_CPP
     ${CMAKE_CURRENT_SOURCE_DIR}/generated/Generated_Components.cpp
 )
 
-message(STATUS "BOON_BCLASSGENERATOR_EXE = ${BOON_BCLASSGENERATOR_EXE}")
-
-if (NOT EXISTS "${BOON_BCLASSGENERATOR_EXE}")
+if(NOT EXISTS "${BOON_BCLASSGENERATOR_EXE}")
     message(FATAL_ERROR
         "BClassGenerator executable not found:\n"
         "  ${BOON_BCLASSGENERATOR_EXE}"
@@ -59,32 +48,28 @@ if (NOT EXISTS "${BOON_BCLASSGENERATOR_EXE}")
 endif()
 
 add_executable(BClassGenerator IMPORTED GLOBAL)
+
 set_target_properties(BClassGenerator PROPERTIES
     IMPORTED_LOCATION "${BOON_BCLASSGENERATOR_EXE}"
 )
 
 include(${BOON_ENGINE_ROOT}/Boon/tools/BClassGenerator/BoonReflection.cmake)
 
-# ----------------------------------------
-# Add engine
-# ----------------------------------------
-add_subdirectory(${BOON_ENGINE_ROOT}/Boon
-                 ${CMAKE_BINARY_DIR}/BoonEngine)
+add_subdirectory(
+    ${BOON_ENGINE_ROOT}/Boon
+    ${CMAKE_BINARY_DIR}/BoonEngine
+)
 
-# ----------------------------------------
-# Reflection for this game module
-# ----------------------------------------
 boon_add_reflected_module(
     NAME {{PROJECT_NAME}}
-    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/generated/Generated_Components.cpp
+    OUTPUT ${PROJECT_GENERATED_CPP}
     SCAN_DIRS
         ${CMAKE_CURRENT_SOURCE_DIR}/src
     MINIMAL
 )
 
-# ----------------------------------------
-# Sources
-# ----------------------------------------
+set_source_files_properties(${PROJECT_GENERATED_CPP} PROPERTIES GENERATED TRUE)
+
 file(GLOB_RECURSE GAME_SOURCES CONFIGURE_DEPENDS
     src/*.cpp
 )
@@ -94,18 +79,36 @@ file(GLOB_RECURSE GAME_HEADERS CONFIGURE_DEPENDS
     include/*.hpp
 )
 
-# ----------------------------------------
-# Game module
-# ----------------------------------------
-add_library({{PROJECT_NAME}} SHARED
+option(BOON_BUILD_GAME_SHARED "Build game module as shared library" ON)
+
+set(GAME_LIBRARY_TYPE STATIC)
+
+if(BOON_BUILD_GAME_SHARED)
+    set(GAME_LIBRARY_TYPE SHARED)
+endif()
+
+add_library({{PROJECT_NAME}} ${GAME_LIBRARY_TYPE}
     ${GAME_SOURCES}
     ${GAME_HEADERS}
     ${PROJECT_GENERATED_CPP}
 )
 
+if(BOON_BUILD_GAME_SHARED)
+    target_compile_definitions({{PROJECT_NAME}}
+        PUBLIC
+            BOON_BUILD_GAME_SHARED
+        PRIVATE
+            {{PROJECT_NAME_UPPER}}_EXPORTS
+    )
+endif()
+
 target_compile_features({{PROJECT_NAME}} PUBLIC cxx_std_20)
 
-target_compile_definitions({{PROJECT_NAME}} PRIVATE BOON_MODULE_NAME={{PROJECT_NAME}})
+target_compile_definitions({{PROJECT_NAME}}
+    PRIVATE
+        BOON_MODULE_NAME={{PROJECT_NAME}}
+        BOON_GAME_BUILD
+)
 
 target_link_libraries({{PROJECT_NAME}}
     PRIVATE
@@ -117,16 +120,8 @@ target_include_directories({{PROJECT_NAME}}
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_compile_definitions({{PROJECT_NAME}}
-    PRIVATE
-        BOON_GAME_BUILD
-)
-
 boon_set_output_dirs({{PROJECT_NAME}} {{PROJECT_NAME}})
 
-# ----------------------------------------
-# Copy project assets
-# ----------------------------------------
 add_custom_command(TARGET {{PROJECT_NAME}} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_CURRENT_SOURCE_DIR}/Assets
@@ -134,34 +129,36 @@ add_custom_command(TARGET {{PROJECT_NAME}} POST_BUILD
     COMMENT "Copying project assets"
 )
 
-@@src/{{PROJECT_NAME}}Api.h
-
+@@include/{{PROJECT_NAME}}API.h
 #pragma once
 
-#ifdef _WIN32
-#ifdef {{PROJECT_NAME}}_EXPORTS
-#define {{PROJECT_NAME_UPPER}}_API __declspec(dllexport)
+#if defined(BOON_BUILD_GAME_SHARED)
+
+    #if defined({{PROJECT_NAME_UPPER}}_EXPORTS)
+        #define {{PROJECT_NAME_UPPER}}_API __declspec(dllexport)
+    #else
+        #define {{PROJECT_NAME_UPPER}}_API __declspec(dllimport)
+    #endif
+
 #else
-#define {{PROJECT_NAME_UPPER}}_API __declspec(dllimport)
-#endif
-#else
-#define {{PROJECT_NAME_UPPER}}_API
+
+    #define {{PROJECT_NAME_UPPER}}_API
+
 #endif
 
 @@src/{{PROJECT_NAME}}Module.cpp
-
 #include "{{PROJECT_NAME}}API.h"
+
 #include <Module/ModuleAPI.h>
 #include <Reflection/BClass.h>
+#include <Reflection/BClassBase.h>
 #include <Networking/NetRepRegistry.h>
 #include <Core/ServiceLocator.h>
-
-#include <Reflection/BClassBase.h>
 
 namespace Boon
 {
     static ModuleInfo s_ModuleInfo{
-        "   {{PROJECT_NAME}}",
+        "{{PROJECT_NAME}}",
         1,
         0
     };
@@ -199,10 +196,9 @@ extern "C"
         Boon::BClassRegistry::SetRegistry(nullptr);
         Boon::NetRepRegistry::SetRegistry(nullptr);
     }
-} 
+}
 
 @@Assets/Scenes/Main.scene
-
 {
     "objects": [],
     "scene": "Main"

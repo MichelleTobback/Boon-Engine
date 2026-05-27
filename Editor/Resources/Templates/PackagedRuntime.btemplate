@@ -1,0 +1,345 @@
+@@GeneratedMain.cpp
+#include <memory>
+
+#include <Core/Application.h>
+
+#include "GeneratedRuntimeConfig.h"
+#include "GeneratedPackagedState.h"
+
+int main(int argc, char** argv)
+{
+	Boon::RuntimeConfig config = BoonGenerated::CreateRuntimeConfig();
+
+	Boon::Application app(config);
+	app.Run(std::make_shared<BoonGenerated::GeneratedPackagedState>());
+
+	return 0;
+}
+
+@@GeneratedRuntimeConfig.h
+#pragma once
+
+#include <Project/RuntimeConfig.h>
+
+namespace BoonGenerated
+{
+	Boon::RuntimeConfig CreateRuntimeConfig();
+}
+
+@@GeneratedRuntimeConfig.cpp
+#include "GeneratedRuntimeConfig.h"
+
+#include <filesystem>
+
+namespace BoonGenerated
+{
+	Boon::RuntimeConfig CreateRuntimeConfig()
+	{
+		Boon::RuntimeConfig config{};
+
+		config.ProjectRoot = std::filesystem::current_path();
+		config.EngineRoot = std::filesystem::current_path();
+
+		config.AssetsRoot = "Assets/Game";
+		config.EngineContentRoot = "Assets/Engine";
+		config.SavedRoot = "Saved";
+
+		config.StartupScene = "{{STARTUP_SCENE}}";
+		config.GameModule = "{{GAME_MODULE}}";
+
+		config.Window.Title = "{{GAME_NAME}}";
+		config.Window.Width = {{WINDOW_WIDTH}};
+		config.Window.Height = {{WINDOW_HEIGHT}};
+		config.Window.bResizable = {{WINDOW_RESIZABLE}};
+		config.Window.bFullscreen = {{WINDOW_FULLSCREEN}};
+
+		return config;
+	}
+}
+
+@@GeneratedPackagedState.h
+#pragma once
+
+#include <Core/AppState.h>
+#include <Core/EngineContext.h>
+#include <Core/Delegate.h>
+#include <Event/Event.h>
+#include <Scene/Scene.h>
+
+#include <memory>
+
+namespace Boon
+{
+	class SceneRenderer;
+}
+
+namespace BoonGenerated
+{
+	class GeneratedPackagedState final : public Boon::AppState
+	{
+	public:
+		GeneratedPackagedState();
+		~GeneratedPackagedState() override;
+
+	protected:
+		void OnEnter() override;
+		void OnUpdate() override;
+		void OnExit() override;
+
+	private:
+		void LoadAssets();
+		void CreateRenderer();
+		void BindEvents();
+		void LoadStartupScene();
+		void Render();
+
+{{STATE_PRIVATE_DECLARATIONS}}
+
+	private:
+		std::unique_ptr<Boon::SceneRenderer> m_pRenderer;
+
+		Boon::EventListenerID m_WindowResizeEvent{};
+		Boon::EventListenerID m_SceneChangedEvent{};
+
+{{STATE_PRIVATE_MEMBERS}}
+	};
+}
+
+@@GeneratedPackagedState.cpp
+#include "GeneratedPackagedState.h"
+
+#include <Scene/SceneManager.h>
+#include <Scene/SceneSerializer.h>
+
+#include <Asset/Assets.h>
+
+#include <Renderer/SceneRenderer.h>
+
+#include <Core/Application.h>
+#include <Core/EngineContext.h>
+#include <Core/ServiceLocator.h>
+#include <Core/Time.h>
+
+#include <Event/EventBus.h>
+#include <Event/WindowEvents.h>
+#include <Event/SceneEvents.h>
+
+{{MODULE_INCLUDES}}
+
+namespace BoonGenerated
+{
+	GeneratedPackagedState::GeneratedPackagedState(){}
+	GeneratedPackagedState::~GeneratedPackagedState(){}
+
+	void GeneratedPackagedState::OnEnter()
+	{
+		LoadAssets();
+		CreateRenderer();
+		BindEvents();
+
+{{MODULE_ON_ENTER}}
+
+		LoadStartupScene();
+	}
+
+	void GeneratedPackagedState::OnUpdate()
+	{
+		Boon::EngineContext& ctx = GetContext();
+
+{{MODULE_ON_UPDATE}}
+
+		Boon::Time& time = Boon::Time::Get();
+		Boon::SceneManager& sceneManager = *ctx.Scenes;
+
+		while (time.FixedStep())
+			sceneManager.FixedUpdate();
+
+		sceneManager.Update();
+
+		Render();
+	}
+
+	void GeneratedPackagedState::OnExit()
+	{
+		Boon::EngineContext& ctx = GetContext();
+
+		if (ctx.EventBus)
+		{
+			ctx.EventBus->Unsubscribe<Boon::WindowResizeEvent>(m_WindowResizeEvent);
+			ctx.EventBus->Unsubscribe<Boon::SceneChangedEvent>(m_SceneChangedEvent);
+		}
+
+{{MODULE_ON_EXIT}}
+
+		if (ctx.Scenes)
+			ctx.Scenes->UnloadAll();
+
+		if (ctx.AssetLib)
+		{
+			ctx.AssetLib->ClearCache();
+			ctx.AssetLib->ClearRegistry();
+		}
+
+		m_pRenderer = nullptr;
+	}
+
+	void GeneratedPackagedState::LoadAssets()
+	{
+		Boon::EngineContext& ctx = GetContext();
+		const Boon::RuntimeConfig& config = Boon::Application::Get().GetDescriptor();
+
+		Boon::AssetLibrary& assetLib = *ctx.AssetLib;
+
+		const std::filesystem::path gameRuntimeRoot = config.ProjectRoot / config.AssetsRoot;
+		const std::filesystem::path engineRuntimeRoot = config.ProjectRoot / config.EngineContentRoot;
+
+		assetLib.SetRuntimeAssetRoot(gameRuntimeRoot);
+		assetLib.AddRuntimeAssetRoot(engineRuntimeRoot);
+
+		assetLib.LoadManifest(gameRuntimeRoot / "AssetManifest.json");
+		assetLib.LoadManifest(engineRuntimeRoot / "AssetManifest.json");
+	}
+
+	void GeneratedPackagedState::CreateRenderer()
+	{
+		Boon::EngineContext& ctx = GetContext();
+		Boon::Window& window = *ctx.Window;
+
+		Boon::SceneRendererCreateInfo desc{};
+		desc.Width = window.GetWidth();
+		desc.Height = window.GetHeight();
+		desc.bIsSwapchainTarget = true;
+		desc.AssetLib = ctx.AssetLib;
+
+		m_pRenderer = std::make_unique<Boon::SceneRenderer>(desc);
+	}
+
+	void GeneratedPackagedState::BindEvents()
+	{
+		Boon::EngineContext& ctx = GetContext();
+
+		Boon::EventBus& eventBus = *ctx.EventBus;
+		Boon::SceneManager& sceneManager = *ctx.Scenes;
+
+		m_WindowResizeEvent =
+			eventBus.Subscribe<Boon::WindowResizeEvent>(
+				[this](const Boon::WindowResizeEvent& e)
+				{
+					if (m_pRenderer)
+						m_pRenderer->SetViewport(e.Width, e.Height);
+				});
+
+		m_SceneChangedEvent =
+			eventBus.Subscribe<Boon::SceneChangedEvent>(
+				[&sceneManager, this](const Boon::SceneChangedEvent& e)
+				{
+					if (!m_pRenderer)
+						return;
+
+					Boon::Scene& scene = sceneManager.GetActiveScene();
+					m_pRenderer->SetContext(&scene);
+				});
+	}
+
+	void GeneratedPackagedState::LoadStartupScene()
+	{
+		Boon::EngineContext& ctx = GetContext();
+		const Boon::RuntimeConfig& config = Boon::Application::Get().GetDescriptor();
+
+		Boon::SceneManager& sceneManager = *ctx.Scenes;
+
+		Boon::Scene& scene = sceneManager.CreateScene("Main");
+		Boon::SceneSerializer serializer(scene);
+
+		serializer.Deserialize(config.ProjectRoot / config.AssetsRoot / config.StartupScene);
+
+		if (m_pRenderer)
+			m_pRenderer->SetContext(&scene);
+
+		sceneManager.SetActiveScene(scene.GetID(), true);
+	}
+
+	void GeneratedPackagedState::Render()
+	{
+		if (m_pRenderer)
+			m_pRenderer->Render();
+	}
+
+{{MODULE_FUNCTIONS}}
+}
+
+@@CMakeLists.txt
+cmake_minimum_required(VERSION 3.20)
+
+project({{TARGET_NAME}} LANGUAGES CXX)
+
+if(NOT DEFINED BOON_ENGINE_ROOT)
+	message(FATAL_ERROR "BOON_ENGINE_ROOT is not set")
+endif()
+
+if(NOT DEFINED GAME_PROJECT_ROOT)
+	message(FATAL_ERROR "GAME_PROJECT_ROOT is not set")
+endif()
+
+set(PACKAGE_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/..")
+
+function(boon_set_output_dirs target subdir)
+	set_target_properties(${target} PROPERTIES
+		ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin/$<CONFIG>/${subdir}"
+		LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin/$<CONFIG>/${subdir}"
+		RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin/$<CONFIG>/${subdir}"
+	)
+endfunction()
+
+if(NOT TARGET GenerateReflection)
+	add_custom_target(GenerateReflection)
+endif()
+
+if(NOT TARGET BClassGenerator)
+	set(BOON_BCLASSGENERATOR_EXE
+		"${BOON_ENGINE_ROOT}/bin/Debug/Tools/BClassGenerator.exe"
+	)
+
+	add_executable(BClassGenerator IMPORTED GLOBAL)
+
+	set_target_properties(BClassGenerator PROPERTIES
+		IMPORTED_LOCATION "${BOON_BCLASSGENERATOR_EXE}"
+	)
+endif()
+
+include(${BOON_ENGINE_ROOT}/Boon/tools/BClassGenerator/BoonReflection.cmake)
+
+add_subdirectory(${BOON_ENGINE_ROOT}/Boon ${CMAKE_BINARY_DIR}/BoonEngine)
+
+set(BOON_BUILD_GAME_SHARED OFF CACHE BOOL "" FORCE)
+add_subdirectory(${GAME_PROJECT_ROOT} ${CMAKE_BINARY_DIR}/GameProject)
+
+add_executable({{TARGET_NAME}}
+	GeneratedMain.cpp
+	GeneratedRuntimeConfig.cpp
+	GeneratedPackagedState.cpp
+)
+
+target_compile_features({{TARGET_NAME}} PRIVATE cxx_std_20)
+
+target_compile_definitions({{TARGET_NAME}} PRIVATE
+	BOON_MODULE_NAME={{GAME_PROJECT_TARGET}}
+)
+
+target_include_directories({{TARGET_NAME}} PRIVATE
+	${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+target_link_libraries({{TARGET_NAME}} PRIVATE
+	BoonEngine
+	{{GAME_PROJECT_TARGET}}
+{{MODULE_LINK_TARGETS}}
+)
+
+set_target_properties({{TARGET_NAME}} PROPERTIES
+	RUNTIME_OUTPUT_DIRECTORY "${PACKAGE_OUTPUT_DIR}"
+	RUNTIME_OUTPUT_DIRECTORY_DEBUG "${PACKAGE_OUTPUT_DIR}"
+	RUNTIME_OUTPUT_DIRECTORY_RELEASE "${PACKAGE_OUTPUT_DIR}"
+	RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${PACKAGE_OUTPUT_DIR}"
+	RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${PACKAGE_OUTPUT_DIR}"
+)
