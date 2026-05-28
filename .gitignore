@@ -31,6 +31,9 @@
 *.out
 *.app
 
+*.zip
+*.rar
+
 # Build directories
 [Dd]ebug/
 [Dd]ebugPublic/
