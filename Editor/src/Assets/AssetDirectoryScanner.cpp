@@ -1,5 +1,6 @@
 ﻿#include "Assets/AssetDirectoryScanner.h"
 #include "Assets/AssetDatabase.h"
+#include "Core/EditorContext.h"
 
 #include <Core/Time.h>
 
@@ -15,7 +16,8 @@ namespace BoonEditor
 
     void AssetDirectoryScanner::Update()
     {
-        m_Accumulator += Time::Get().GetDeltaTime();
+        Time& time = *GetContext().GetEngineContext().Time;
+        m_Accumulator += time.GetDeltaTime();
 
         if (m_Accumulator >= m_Interval)
         {

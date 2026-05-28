@@ -18,6 +18,7 @@ namespace Boon
 	using SceneRegistry = entt::registry;
 	using SceneID = UUID;
 
+	class Time;
 	struct EngineContext;
 	struct BClass;
 	struct ECSLifecycleSystem;
@@ -196,6 +197,8 @@ namespace Boon
 
 		inline EngineContext& GetEngineContext() { return *m_pContext; }
 		inline const EngineContext& GetEngineContext() const { return *m_pContext; }
+
+		const Time& GetTime() const;
 
 	private:
 		friend class PhysicsWorld2D;

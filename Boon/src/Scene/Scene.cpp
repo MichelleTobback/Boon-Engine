@@ -5,7 +5,7 @@
 #include "Component/NameComponent.h"
 #include "Component/ECSLifecycle.h"
 
-#include "Core/Time.h"
+#include "Core/EngineContext.h"
 
 #include "Physics/Physics2D.h"
 
@@ -225,4 +225,9 @@ void Boon::Scene::DestroyGameObject(GameObject object)
 {
 	m_ObjectsPendingDestroy.push(object.GetUUID());
 	m_OnGameObjectDestroyed.Invoke(object);
+}
+
+const Time& Boon::Scene::GetTime() const
+{
+	return *m_pContext->Time;
 }

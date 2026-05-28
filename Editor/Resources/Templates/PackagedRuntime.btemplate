@@ -145,10 +145,9 @@ namespace BoonGenerated
 	void GeneratedPackagedState::OnUpdate()
 	{
 		Boon::EngineContext& ctx = GetContext();
-
 {{MODULE_ON_UPDATE}}
 
-		Boon::Time& time = Boon::Time::Get();
+		Boon::Time& time = *ctx.Time;
 		Boon::SceneManager& sceneManager = *ctx.Scenes;
 
 		while (time.FixedStep())

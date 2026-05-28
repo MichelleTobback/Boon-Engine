@@ -13,7 +13,7 @@ void Boon::SpriteAnimatorComponent::Awake(GameObject obj)
 	pRenderer = obj;
 }
 
-void Boon::SpriteAnimatorComponent::Update(GameObject)
+void Boon::SpriteAnimatorComponent::Update(GameObject obj)
 {
 	if (!pRenderer.IsValid())
 		return;
@@ -35,7 +35,7 @@ void Boon::SpriteAnimatorComponent::Update(GameObject)
 
 	float frameTime = 1.0f / std::max(clip.FPS, 0.001f);
 
-	m_Timer += Time::Get().GetDeltaTime() * clip.Speed;
+	m_Timer += obj.GetScene()->GetTime().GetDeltaTime() * clip.Speed;
 	if (m_Timer >= frameTime)
 	{
 		m_Timer = 0.f;

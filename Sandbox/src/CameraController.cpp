@@ -13,7 +13,8 @@ void Boon::CameraController::Update(GameObject gameObject)
     if (!m_Target.IsValid())
         return;
 
-    float dt = Time::Get().GetDeltaTime();
+
+    float dt = gameObject.GetScene()->GetTime().GetDeltaTime();
     if (dt <= 0.0f)
         return; // avoid divide-by-zero & weird spikes
 

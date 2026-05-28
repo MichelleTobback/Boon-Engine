@@ -104,7 +104,7 @@ void Runtime::RuntimeState::OnUpdate()
 
 	ctx.GetSubsystem<NetworkingSubsystem>().Update();
 
-	Time& time = Boon::Time::Get();
+	Time& time = *ctx.Time;
 	SceneManager& sceneManager = *ctx.Scenes;
 
 	while (time.FixedStep())

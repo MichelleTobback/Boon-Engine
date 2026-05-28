@@ -8,6 +8,7 @@ namespace Boon
 	class AssetLibrary;
 	class SceneManager;
 	class EventBus;
+	class Time;
 
 	struct EngineContext
 	{
@@ -16,6 +17,7 @@ namespace Boon
 		AssetLibrary* AssetLib = nullptr;
 		SceneManager* Scenes = nullptr;
 		EventBus* EventBus = nullptr;
+		Time* Time = nullptr;
 
 		SubsystemRegistry* Subsystems = nullptr;
 

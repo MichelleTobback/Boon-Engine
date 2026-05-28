@@ -8,7 +8,7 @@ namespace Boon
     using Clock = std::chrono::steady_clock;
     using TimePoint = std::chrono::time_point<Clock>;
 
-    class Time final : public Singleton<Time>
+    class Time final
     {
     public:
         /**

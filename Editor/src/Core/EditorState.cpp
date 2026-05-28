@@ -217,7 +217,7 @@ void EditorState::OnUpdate()
 	if (auto* network = ctx.TryGetSubsystem<NetworkingSubsystem>())
 		network->Update();
 
-	Time& time = Boon::Time::Get();
+	Time& time = *ctx.Time;
 	SceneManager& sceneManager = *ctx.Scenes;
 
 	switch (m_PlayState)

@@ -45,6 +45,7 @@ void BoonEditor::EditorCamera::Resize(float width, float height)
 void BoonEditor::EditorCamera::UpdatePerspectiveController()
 {
     Input& input{ *GetContext().GetEngineContext().Input };
+    Time& time{ *GetContext().GetEngineContext().Time };
 
     static glm::vec2 prevMousePos = { input.GetMouseX(), input.GetMouseY() };
     glm::vec2 mousePos = { input.GetMouseX(), input.GetMouseY() };
@@ -56,7 +57,7 @@ void BoonEditor::EditorCamera::UpdatePerspectiveController()
         glm::vec3 upVector = m_PerspTransform.GetUp();
         const float moveSpeed = input.IsKeyHeld(Key::LeftShift) ? 5.f : 1.6f;
         const float rotateSpeed = 15.0f;
-        const float dt = Time::Get().GetDeltaTime();
+        const float dt = time.GetDeltaTime();
 
         // Movement
         if (input.IsKeyHeld(Key::W))
@@ -89,6 +90,7 @@ void BoonEditor::EditorCamera::UpdatePerspectiveController()
 void BoonEditor::EditorCamera::UpdateOrthographicController()
 {
     Input& input{ *GetContext().GetEngineContext().Input };
+    Time& time{ *GetContext().GetEngineContext().Time };
 
     static glm::vec2 prevMousePos = { input.GetMouseX(), input.GetMouseY() };
     glm::vec2 mousePos = { input.GetMouseX(), input.GetMouseY() };
@@ -100,7 +102,7 @@ void BoonEditor::EditorCamera::UpdateOrthographicController()
         glm::vec3 upVector = m_OrthoTransform.GetUp();
         const float moveSpeed = input.IsKeyHeld(Key::LeftShift) ? 0.9f : 0.4f;
         const float rotateSpeed = 15.0f;
-        const float dt = Time::Get().GetDeltaTime();
+        const float dt = time.GetDeltaTime();
 
         float size = m_OrthoCamera.GetSize();
 

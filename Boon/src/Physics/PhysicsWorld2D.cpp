@@ -6,6 +6,7 @@
 #include "Component/Rigidbody2D.h"
 #include "Component/BoxCollider2D.h"
 
+#include "Core/EngineContext.h"
 #include "Core/Time.h"
 
 #include <iostream>
@@ -122,7 +123,8 @@ void PhysicsWorld2D::Step(Scene* pScene)
 			}
 		});
 
-	b2World_Step(m_PhysicsWorldId, Time::Get().GetFixedTimeStep(), 3);
+	Time& time = *pScene->GetEngineContext().Time;
+	b2World_Step(m_PhysicsWorldId, time.GetFixedTimeStep(), 3);
 
 	pScene->ForeachGameObjectWith<Rigidbody2D, TransformComponent>(
 		[this](GameObject obj)

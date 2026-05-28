@@ -134,7 +134,7 @@ void PlayerController::FixedUpdate(GameObject gameObject)
     TransformComponent& tc = gameObject.GetTransform();
     Rigidbody2D& rb = gameObject.GetComponent<Rigidbody2D>();
 
-    const float dt = Time::Get().GetFixedTimeStep();
+    const float dt = gameObject.GetScene()->GetTime().GetFixedTimeStep();
     glm::vec2 currentVel = rb.GetVelocity();
 
     if (m_MoveInput != glm::vec2(0.0f))
