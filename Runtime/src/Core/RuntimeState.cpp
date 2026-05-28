@@ -80,15 +80,16 @@ void Runtime::RuntimeState::OnEnter()
 			m_pRenderer->SetContext(&scene);
 		});
 
-	ctx.Subsystems->InitAll(ctx);
-
-	m_pModuleLib = std::make_unique<ModuleLibrary>();
+	m_pModuleLib = std::make_unique<ModuleLibrary>(config.ProjectRoot);
+	m_pModuleLib->LoadManifest(config.ProjectRoot / "generated" / "ModuleManifest.json");
 	ModuleContext module{};
 	module.BClasses = &BClassRegistry::Get();
 	module.NetReps = &NetRepRegistry::Get();
 	module.ServiceRegistry = ServiceLocator::GetRegistry();
 	module.EngineContext = &ctx;
-	m_pModuleLib->LoadModule(config.ProjectRoot / config.IntermediateRoot / config.GameModule / (config.GameModule + ".dll"), module);
+	m_pModuleLib->LoadStartupModules(module);
+
+	ctx.Subsystems->InitAll(ctx);
 
 	Scene& scene = sceneManager.CreateScene("scene");
 	SceneSerializer serializer(scene);
@@ -101,8 +102,6 @@ void Runtime::RuntimeState::OnEnter()
 void Runtime::RuntimeState::OnUpdate()
 {
 	EngineContext& ctx = GetContext();
-
-	ctx.GetSubsystem<NetworkingSubsystem>().Update();
 
 	Time& time = *ctx.Time;
 	SceneManager& sceneManager = *ctx.Scenes;

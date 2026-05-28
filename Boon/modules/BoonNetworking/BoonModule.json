@@ -1,0 +1,31 @@
+{
+  "name": "BoonNetworking",
+  "type": "Runtime",
+  "output": "STATIC",
+  "moduleInstance": "BoonNetworkingModule",
+
+  "publicDependencies": [
+    "BoonEngine"
+  ],
+
+  "publicIncludePaths": [
+    "include"
+  ],
+
+  "privateIncludePaths": [
+    "src"
+  ],
+
+  "publicDefinitions": [
+    "BOON_WITH_NETWORKING=1"
+  ],
+
+  "publicSystemLibraries": [
+    "ws2_32",
+    "crypt32"
+  ],
+
+  "thirdParty": [
+    "SteamNetworkingSockets"
+  ]
+}

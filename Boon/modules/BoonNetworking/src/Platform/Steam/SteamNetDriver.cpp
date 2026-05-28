@@ -454,4 +454,9 @@ namespace Boon
             }
         }
     }
+
+    std::unique_ptr<NetDriver> NetDriver::Create()
+    {
+        return std::make_unique<SteamNetDriver>();
+    }
 }

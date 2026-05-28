@@ -54,15 +54,11 @@
 #include <Component/BoxCollider2D.h>
 #include <Component/Rigidbody2D.h>
 
-#include <Networking/Components/NetRigidbody2D.h>
-#include <Networking/Components/NetTransform.h>
-#include <Networking/Events/NetConnectionEvent.h>
-#include <Networking/NetIdentity.h>
-#include <Networking/NetScene.h>
 #include <Networking/NetRepRegistry.h>
 #include <Networking/NetworkingSubsystem.h>
 
 #include <Module/ModuleLibrary.h>
+#include <Module/ModuleManifest.h>
 
 #include <Reflection/BClass.h>
 
@@ -127,8 +123,6 @@ void EditorState::OnEnter()
 
 	AssetDatabase::Get().Init(assetLib);
 
-	m_NetworkSettings = Application::Get().GetDescriptor().Network;
-
 	m_PRenderer = std::make_unique<EditorRenderer>(m_Context.m_CurrentProject, assetLib.Load<Texture2DAsset>("Resources/BoonEngine.png").Instance());
 	m_PRenderer->SetMenuBarCallback(std::bind(&EditorState::RenderMenuBar, this));
 
@@ -151,14 +145,13 @@ void EditorState::OnEnter()
 	m_Context.CreateWidget<ContentBrowser>("content", m_pSelectedAsset);
 	m_Context.CreateWidget<PropertiesPanel>("properties", &m_SelectionContext);
 	m_Context.CreateWidget<ScenePanel>("scene",  &m_SceneContext, &m_SelectionContext);
-	m_Context.CreateWidget<NetworkPanel>("network", m_NetworkSettings);
+	m_Context.CreateWidget<NetworkPanel>("network");
 	m_Context.CreateWidget<ConsolePanel>("console");
 
 	m_Context.CreateWidget<NewProjectDialog>("NewProject");
 	m_Context.CreateWidget<PackageBuildDialog>("PackageBuild");
 
 	EventBus& eventBus = *ctx.EventBus;
-	ctx.Subsystems->Register<NetworkingSubsystem>(config.Network);
 
 	m_SceneContext.Set(&scene);
 	m_pSelectedScene = &scene;
@@ -189,15 +182,16 @@ void EditorState::OnEnter()
 				m_Context.GetWidget<ViewportPanel>("Viewport").SetContext(&m_SceneContext);
 		});
 
-	ctx.Subsystems->InitAll(ctx);
-
-	m_pModuleLib = std::make_unique<ModuleLibrary>();
+	m_pModuleLib = std::make_unique<ModuleLibrary>(config.ProjectRoot);
+	m_pModuleLib->LoadManifest(config.ProjectRoot / "generated" / "ModuleManifest.json");
 	ModuleContext module{};
 	module.BClasses = &BClassRegistry::Get();
 	module.NetReps = &NetRepRegistry::Get();
 	module.ServiceRegistry = ServiceLocator::GetRegistry();
 	module.EngineContext = &ctx;
-	m_pModuleLib->LoadModule(config.ProjectRoot / config.IntermediateRoot / config.GameModule / (config.GameModule + ".dll"), module);
+	m_pModuleLib->LoadStartupModules(module);
+
+	ctx.Subsystems->InitAll(ctx);
 
 	SceneSerializer serializer(scene);
 	serializer.Deserialize(config.AssetsRoot / config.StartupScene);
@@ -211,11 +205,7 @@ void EditorState::OnEnter()
 void EditorState::OnUpdate()
 {
 	EngineContext& ctx = GetContext();
-
 	Boon::DebugRenderer::Get().BeginFrame();
-
-	if (auto* network = ctx.TryGetSubsystem<NetworkingSubsystem>())
-		network->Update();
 
 	Time& time = *ctx.Time;
 	SceneManager& sceneManager = *ctx.Scenes;
@@ -471,56 +461,17 @@ void EditorState::OnStopPlay()
 void EditorState::StartNetwork()
 {
 	EngineContext& ctx = GetContext();
-	NetworkingSubsystem& network = ctx.GetSubsystem<NetworkingSubsystem>();
-	NetDriver& driver = network.GetDriver();
-
-	network.StartNetwork(m_NetworkSettings, ctx);
-	if (!driver.IsStandalone())
+	if (NetworkingSubsystem* network = ctx.TryGetSubsystem<NetworkingSubsystem>())
 	{
-		driver.BindOnConnectedCallback([this](NetConnection* pConnection) {OnConnected(pConnection); });
-		driver.BindOnDisconnectedCallback([this](NetConnection* pConnection) {OnDisconnected(pConnection); });
-		driver.BindOnPacketCallback([this](NetConnection* pConnection, NetPacket& packet) { OnPacketReceived(pConnection, packet); });
-
-		m_BindNetSceneHandle = ctx.Scenes->BindOnSceneChanged([&ctx, this](Scene& e)
-			{
-				Scene& scene = ctx.Scenes->GetActiveScene();
-				auto& driver = ctx.GetSubsystem<NetworkingSubsystem>().GetDriver();
-				auto pScene{ std::make_shared<NetScene>(&scene, &driver , ctx.Scenes)};
-				driver.BindScene(pScene);
-			});
-
-		if (driver.IsClient())
-		{
-			driver.Connect(m_NetworkSettings.Ip.c_str(), m_NetworkSettings.Port);
-		}
-
-		NetworkPanel& net = m_Context.GetWidget<NetworkPanel>("network");
-		net.SetDriver(&driver);
+		network->StartNetwork(Application::Get().GetDescriptor().Network, ctx);
 	}
 }
 
 void EditorState::StopNetwork()
 {
-	NetworkPanel& net = m_Context.GetWidget<NetworkPanel>("network");
-	net.SetDriver(nullptr);
-
-	if (m_BindNetSceneHandle.IsValid())
-		GetContext().Scenes->UnbindOnSceneChanged(m_BindNetSceneHandle);
-
-	m_Context.GetEngineContext().GetSubsystem<NetworkingSubsystem>().StopNetwork();
-}
-
-void EditorState::OnConnected(NetConnection* pConnection)
-{
-	GetContext().EventBus->Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Connected));
-}
-
-void EditorState::OnDisconnected(NetConnection* pConnection)
-{
-	GetContext().EventBus->Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Disconnected));
-}
-
-void EditorState::OnPacketReceived(NetConnection* pConnection, NetPacket& packet)
-{
-
+	EngineContext& ctx = GetContext();
+	if (NetworkingSubsystem* network = ctx.TryGetSubsystem<NetworkingSubsystem>())
+	{
+		network->StopNetwork();
+	}
 }

@@ -18,22 +18,18 @@
 
 namespace Boon
 {
-	class NetConnection;
-	class NetRepRegistry;
 	class BClassRegistry;
 	class ModuleLibrary;
 }
-
-using namespace Boon;
 
 namespace BoonEditor
 {
 	class EditorRenderer;
 	class EditorCamera;
-	class EditorState final : public AppState
+	class EditorState final : public Boon::AppState
 	{
 	public:
-		EditorState(const ProjectConfig& project);
+		EditorState(const Boon::ProjectConfig& project);
 		virtual ~EditorState();
 
 		EditorState(const EditorState& other) = default;
@@ -55,28 +51,20 @@ namespace BoonEditor
 		void StartNetwork();
 		void StopNetwork();
 
-		void OnConnected(NetConnection* pConnection);
-		void OnDisconnected(NetConnection* pConnection);
-		void OnPacketReceived(NetConnection* pConnection, NetPacket& packet);
-
-		Boon::NetworkSettings m_NetworkSettings;
-
 		std::unique_ptr<EditorRenderer> m_PRenderer;
 		GameObjectContext m_SelectionContext{};
 		SceneContext m_SceneContext{};
 		AssetContext* m_pSelectedAsset{};
-		Scene* m_pSelectedScene;
+		Boon::Scene* m_pSelectedScene;
 
 		EditorPlayState m_PlayState{ EditorPlayState::Edit };
 
-		EventListenerID m_SceneChangedEvent{};
-		EventListenerID m_StateChangedEvent{};
-		EventListenerID m_BindNetSceneEvent{};
-		Delegate<void(Scene&)>::Handle m_BindNetSceneHandle;
+		Boon::EventListenerID m_SceneChangedEvent{};
+		Boon::EventListenerID m_StateChangedEvent{};
 
 		DragDropRouter m_DragDrop{};
 		EditorContext m_Context;
 
-		std::unique_ptr<ModuleLibrary> m_pModuleLib;
+		std::unique_ptr<Boon::ModuleLibrary> m_pModuleLib;
 	};
 }

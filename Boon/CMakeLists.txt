@@ -1,3 +1,5 @@
+# Boon/CMakeLists.txt
+
 cmake_minimum_required(VERSION 3.20)
 project(BoonEngine LANGUAGES CXX)
 
@@ -52,10 +54,8 @@ target_include_directories(BoonEngine
 )
 
 # --------------------------------------------------
-# External dependencies
+# Header-only dependencies
 # --------------------------------------------------
-
-# Header-only
 target_include_directories(BoonEngine
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/external/glm
@@ -64,19 +64,14 @@ target_include_directories(BoonEngine
         ${CMAKE_CURRENT_SOURCE_DIR}/external/box2d/include
 )
 
-# glad
+# --------------------------------------------------
+# External dependencies
+# --------------------------------------------------
 add_subdirectory(external/glad)
-
-# glfw
 add_subdirectory(external/glfw)
-
-# EnTT
 add_subdirectory(external/entt)
-
-# Box2D
 add_subdirectory(external/box2d)
 
-# OpenGL
 find_package(OpenGL REQUIRED)
 
 target_link_libraries(BoonEngine
@@ -88,34 +83,6 @@ target_link_libraries(BoonEngine
     PRIVATE
         box2d
 )
-
-# --------------------------------------------------
-# SteamNetworkingSockets prebuilt import
-# --------------------------------------------------
-set(STEAMNET_DIR     "${CMAKE_CURRENT_SOURCE_DIR}/external/GameNetworkingSockets")
-set(STEAMNET_INCLUDE "${STEAMNET_DIR}/include")
-set(STEAMNET_BIN_DIR "${STEAMNET_DIR}/bin")
-
-add_library(SteamNetworkingSockets STATIC IMPORTED GLOBAL)
-
-set_target_properties(SteamNetworkingSockets PROPERTIES
-    IMPORTED_LOCATION_DEBUG          "${STEAMNET_BIN_DIR}/Debug/GameNetworkingSockets.lib"
-    IMPORTED_LOCATION_RELEASE        "${STEAMNET_BIN_DIR}/Release/GameNetworkingSockets.lib"
-    IMPORTED_LOCATION_RELWITHDEBINFO "${STEAMNET_BIN_DIR}/Release/GameNetworkingSockets.lib"
-    IMPORTED_LOCATION_MINSIZEREL     "${STEAMNET_BIN_DIR}/Release/GameNetworkingSockets.lib"
-    INTERFACE_INCLUDE_DIRECTORIES    "${STEAMNET_INCLUDE}"
-)
-
-if (WIN32)
-    target_compile_definitions(SteamNetworkingSockets INTERFACE WIN32_LEAN_AND_MEAN NOMINMAX)
-endif()
-
-target_link_libraries(BoonEngine PUBLIC SteamNetworkingSockets)
-
-if (WIN32)
-    target_link_libraries(BoonEngine PUBLIC ws2_32 crypt32)
-endif()
-
 
 # --------------------------------------------------
 # Platform defines
@@ -152,14 +119,11 @@ add_custom_command(TARGET BoonEngine POST_BUILD
     COMMENT "Copying Boon Engine Resources..."
 )
 
-# --------------------------------------------------
-# Copy SteamNetworkingSockets runtime dll
-# --------------------------------------------------
-if (WIN32)
-    add_custom_command(TARGET BoonEngine POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "$<IF:$<CONFIG:Debug>,${STEAMNET_BIN_DIR}/Debug/GameNetworkingSockets.dll,${STEAMNET_BIN_DIR}/Release/GameNetworkingSockets.dll>"
-            "$<TARGET_FILE_DIR:BoonEngine>"
-        COMMENT "Copying SteamNetworkingSockets.dll"
-    )
-endif()
+function(boon_add_engine_modules)
+    if(NOT TARGET BoonStaticModules)
+        add_subdirectory(
+            "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/modules/generated"
+            "${CMAKE_BINARY_DIR}/BoonModules"
+        )
+    endif()
+endfunction()

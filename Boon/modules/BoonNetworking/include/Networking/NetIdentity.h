@@ -1,6 +1,6 @@
 #pragma once
 #include "Core/UUID.h"
-#include "NetAuthority.h"
+#include "Networking/NetAuthority.h"
 #include "Core/Boon.h"
 
 #include <functional>

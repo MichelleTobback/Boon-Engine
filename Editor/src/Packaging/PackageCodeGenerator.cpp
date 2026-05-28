@@ -7,6 +7,8 @@
 #include <fstream>
 #include <sstream>
 
+using namespace Boon;
+
 namespace BoonEditor
 {
 	static std::string BoolLiteral(bool value)

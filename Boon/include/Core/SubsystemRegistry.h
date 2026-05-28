@@ -6,6 +6,8 @@
 #include <unordered_map>
 #include <vector>
 #include <cassert>
+#include <algorithm>
+#include <type_traits>
 
 namespace Boon
 {
@@ -19,13 +21,39 @@ namespace Boon
         {
             static_assert(std::is_base_of_v<ISubsystem, T>);
 
+            const std::type_index type = typeid(T);
+
             auto subsystem = std::make_unique<T>(std::forward<Args>(args)...);
             T& ref = *subsystem;
 
-            m_Subsystems[typeid(T)] = std::move(subsystem);
-            m_Order.push_back(typeid(T));
+            const bool alreadyRegistered = m_Subsystems.contains(type);
+
+            m_Subsystems[type] = std::move(subsystem);
+
+            if (!alreadyRegistered)
+                m_Order.push_back(type);
 
             return ref;
+        }
+
+        template<typename T>
+        bool Unregister(EngineContext& ctx)
+        {
+            static_assert(std::is_base_of_v<ISubsystem, T>);
+
+            const std::type_index type = typeid(T);
+
+            auto it = m_Subsystems.find(type);
+            if (it == m_Subsystems.end())
+                return false;
+
+            it->second->OnShutdown(ctx);
+
+            m_Subsystems.erase(it);
+
+            std::erase(m_Order, type);
+
+            return true;
         }
 
         template<typename T>
@@ -63,6 +91,17 @@ namespace Boon
             for (auto it = m_Order.rbegin(); it != m_Order.rend(); ++it)
                 m_Subsystems[*it]->OnShutdown(ctx);
 
+            Clear();
+        }
+
+        void UpdateAll(EngineContext& ctx)
+        {
+            for (auto type : m_Order)
+                m_Subsystems[type]->Update(ctx);
+        }
+
+        void Clear()
+        {
             m_Subsystems.clear();
             m_Order.clear();
         }

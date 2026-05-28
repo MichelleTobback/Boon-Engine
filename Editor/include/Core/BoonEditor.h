@@ -5,13 +5,11 @@
 #include <Scene/GameObject.h>
 #include <Asset/Asset.h>
 
-using namespace Boon;
-
 namespace BoonEditor
 {
-	using SceneContext = ObjectContext<Scene*>;
-	using GameObjectContext = ObjectContext<GameObject>;
-	using AssetContext = ObjectContext<AssetHandle>;
+	using SceneContext = ObjectContext<Boon::Scene*>;
+	using GameObjectContext = ObjectContext<Boon::GameObject>;
+	using AssetContext = ObjectContext<Boon::AssetHandle>;
 
 	enum class EditorPlayState
 	{

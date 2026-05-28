@@ -8,8 +8,6 @@
 #include <vector>
 #include <unordered_map>
 
-using namespace Boon;
-
 namespace BoonEditor
 {
 	class EditorCommandQueue;
@@ -78,15 +76,15 @@ namespace BoonEditor
 		}
 
 		inline EditorCommandQueue* GetCommandQueue() { return m_CommandQueue.get(); }
-		inline const ProjectConfig& GetCurrentProjectConfig() const { return m_CurrentProject; }
+		inline const Boon::ProjectConfig& GetCurrentProjectConfig() const { return m_CurrentProject; }
 
-		inline void SetEngineContext(EngineContext* ctx) { m_EngineContext = ctx; }
-		inline EngineContext& GetEngineContext() { return *m_EngineContext; }
+		inline void SetEngineContext(Boon::EngineContext* ctx) { m_EngineContext = ctx; }
+		inline Boon::EngineContext& GetEngineContext() { return *m_EngineContext; }
 
 	private:
 		friend class EditorState;
-		ProjectConfig m_CurrentProject{};
-		EngineContext* m_EngineContext;
+		Boon::ProjectConfig m_CurrentProject{};
+		Boon::EngineContext* m_EngineContext;
 		std::vector<std::unique_ptr<EditorObject>> m_Objects;
 		std::unordered_map<std::string, EditorWidget*> m_Widgets;
 		std::unique_ptr<EditorCommandQueue> m_CommandQueue;

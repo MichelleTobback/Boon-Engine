@@ -5,24 +5,23 @@
 #include <iostream>
 
 using namespace BoonEditor;
-using namespace Boon;
 
-ProjectConfig ProjectConfigFromArgs(int argc, char** argv)
+Boon::ProjectConfig ProjectConfigFromArgs(int argc, char** argv)
 {
     std::filesystem::path path = argc > 1 
         ? argv[1] 
         : "../../../Sandbox/Sandbox.bproj";
 
-    return ProjectLoader::LoadFromFile(path).Value;
+    return Boon::ProjectLoader::LoadFromFile(path).Value;
 }
 
 int Run(int argc, char** argv)
 {
-    ProjectConfig config = ProjectConfigFromArgs(argc, argv);
+    Boon::ProjectConfig config = ProjectConfigFromArgs(argc, argv);
     config.Runtime.Window.bBorderless = true;
 
     Boon::Application app{ config.Runtime };
-    app.Run(std::make_shared<EditorState>(config));
+    app.Run(std::make_shared<BoonEditor::EditorState>(config));
     return 0;
 }
 

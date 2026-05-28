@@ -5,7 +5,7 @@
 #include "NetIdentity.h"
 #include "Reflection/BProperty.h"
 #include "Reflection/BClass.h"
-#include "NetRepRegistry.h"
+#include "Networking/NetRepRegistry.h"
 
 #include <unordered_map>
 #include <vector>

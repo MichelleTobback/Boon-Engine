@@ -3,7 +3,7 @@
 #include <cctype>
 #include <utility>
 
-using namespace BoonEditor;
+using namespace Boon;
 
 void TemplateContext::Set(std::string key, std::string value)
 {

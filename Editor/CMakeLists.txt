@@ -75,6 +75,8 @@ target_compile_definitions(Editor PRIVATE BOON_MODULE_NAME=Editor)
 target_link_libraries(Editor
     PRIVATE
         BoonEngine
+        BoonStaticModules
+        BoonToolsCommon
         imgui
 )
 
@@ -100,19 +102,3 @@ add_custom_command(TARGET Editor POST_BUILD
         $<TARGET_FILE_DIR:Editor>/Assets
     COMMENT "Copying Editor Resources..."
 )
-
-set(STEAMNET_DIR     "${CMAKE_SOURCE_DIR}/Boon/external/GameNetworkingSockets")
-set(STEAMNET_BIN_DIR "${STEAMNET_DIR}/bin")
-
-if (WIN32)
-    add_custom_command(TARGET Editor POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${STEAMNET_BIN_DIR}/$<CONFIG>/GameNetworkingSockets.dll"
-            "${STEAMNET_BIN_DIR}/$<CONFIG>/libcrypto-3-x64.dll"
-            "$<$<CONFIG:Debug>:${STEAMNET_BIN_DIR}/Debug/libprotobufd.dll>"
-            "$<$<CONFIG:Release>:${STEAMNET_BIN_DIR}/Release/libprotobuf.dll>"
-            "${STEAMNET_BIN_DIR}/$<CONFIG>/abseil_dll.dll"
-            "$<TARGET_FILE_DIR:Editor>"
-        VERBATIM
-    )
-endif()

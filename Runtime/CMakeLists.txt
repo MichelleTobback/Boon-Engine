@@ -49,6 +49,7 @@ target_compile_definitions(Runtime PRIVATE BOON_MODULE_NAME=Runtime)
 target_link_libraries(Runtime
     PRIVATE
         BoonEngine
+        BoonStaticModules
 )
 
 target_include_directories(Runtime

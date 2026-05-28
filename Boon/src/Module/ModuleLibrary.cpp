@@ -1,215 +1,357 @@
 #include "Module/ModuleLibrary.h"
-
+#include "Module/ModuleManifestLoader.h"
+#include "Module/ModuleInstance.h"
 #include "Core/DynamicLibrary.h"
 
 #include <algorithm>
-#include <chrono>
 #include <filesystem>
+#include <iostream>
 
 namespace Boon
 {
-	ModuleLibrary::ModuleLibrary()
-	{
-	}
+    ModuleLibrary::ModuleLibrary(const std::filesystem::path& projectRoot)
+        : m_ProjectRoot{projectRoot}
+    {
+    }
 
-	ModuleLibrary::~ModuleLibrary()
-	{
-	}
+    ModuleLibrary::~ModuleLibrary()
+    {
+    }
 
-	bool ModuleLibrary::LoadModule(const std::filesystem::path& dllPath, ModuleContext& ctx)
-	{
-		++m_ReloadCounter;
-		return LoadModuleInternal(dllPath, ctx, m_ReloadCounter);
-	}
+    bool ModuleLibrary::LoadManifest(const std::filesystem::path& manifestPath)
+    {
+        if (!ModuleManifestLoader::Load(manifestPath, m_Manifest))
+        {
+            std::cerr << "Failed to load module manifest: "
+                << manifestPath << "\n";
+            return false;
+        }
 
-	bool ModuleLibrary::ReloadModule(const std::filesystem::path& dllPath, ModuleContext& ctx)
-	{
-		auto it = std::find_if(
-			m_Modules.begin(),
-			m_Modules.end(),
-			[&](const LoadedModule& module)
-			{
-				return std::filesystem::equivalent(module.OriginalPath, dllPath);
-			});
+        return true;
+    }
 
-		if (it != m_Modules.end())
-			return ReloadModule(it->Name, ctx);
+    bool ModuleLibrary::LoadStartupModules(ModuleContext& ctx)
+    {
+        bool result = true;
 
-		return LoadModule(dllPath, ctx);
-	}
+        if (m_Manifest.GameModule.LoadOnStartup)
+        {
+            if (!LoadModule(m_Manifest.GameModule.Name, ctx))
+                result = false;
+        }
 
-	bool ModuleLibrary::ReloadModule(const std::string& name, ModuleContext& ctx)
-	{
-		auto it = std::find_if(
-			m_Modules.begin(),
-			m_Modules.end(),
-			[&](const LoadedModule& module)
-			{
-				return module.Name == name;
-			});
+        for (const ModuleManifestEntry& entry : m_Manifest.DynamicModules)
+        {
+            if (!entry.LoadOnStartup)
+                continue;
 
-		if (it == m_Modules.end())
-			return false;
+            if (!LoadModule(entry.Name, ctx))
+                result = false;
+        }
 
-		const std::filesystem::path originalPath = it->OriginalPath;
+        return result;
+    }
 
-		if (!UnloadModule(name, ctx))
-			return false;
+    bool ModuleLibrary::LoadModule(const std::string& name, ModuleContext& ctx)
+    {
+        const ModuleManifestEntry* entry = FindManifestEntry(name);
 
-		++m_ReloadCounter;
-		return LoadModuleInternal(originalPath, ctx, m_ReloadCounter);
-	}
+        if (!entry)
+        {
+            std::cerr << "Module not found in manifest: " << name << "\n";
+            return false;
+        }
 
-	bool ModuleLibrary::UnloadModule(const std::string& name, ModuleContext& ctx)
-	{
-		auto it = std::find_if(
-			m_Modules.begin(),
-			m_Modules.end(),
-			[&](const LoadedModule& module)
-			{
-				return module.Name == name;
-			});
+        return LoadModuleFromEntry(*entry, ctx);
+    }
 
-		if (it == m_Modules.end())
-			return false;
+    bool ModuleLibrary::ReloadModule(const std::string& name, ModuleContext& ctx)
+    {
+        auto it = std::find_if(
+            m_Modules.begin(),
+            m_Modules.end(),
+            [&](const LoadedModule& module)
+            {
+                return module.Name == name;
+            });
 
-		if (it->UnregisterFn)
-			it->UnregisterFn(&ctx);
+        if (it == m_Modules.end())
+        {
+            std::cerr << "Cannot reload unloaded module: " << name << "\n";
+            return false;
+        }
 
-		if (it->Library)
-			it->Library->Unload();
+        const std::filesystem::path originalPath = it->OriginalPath;
 
-		DeleteLoadedCopy(it->LoadedPath);
+        if (!UnloadModule(name, ctx))
+            return false;
 
-		m_Modules.erase(it);
-		return true;
-	}
+        ++m_ReloadCounter;
+        return LoadModuleInternal(originalPath, ctx, m_ReloadCounter);
+    }
 
-	void ModuleLibrary::UnloadAll(ModuleContext& ctx)
-	{
-		for (auto it = m_Modules.rbegin(); it != m_Modules.rend(); ++it)
-		{
-			if (it->UnregisterFn)
-				it->UnregisterFn(&ctx);
+    bool ModuleLibrary::UnloadModule(const std::string& name, ModuleContext& ctx)
+    {
+        auto it = std::find_if(
+            m_Modules.begin(),
+            m_Modules.end(),
+            [&](const LoadedModule& module)
+            {
+                return module.Name == name;
+            });
 
-			if (it->Library)
-				it->Library->Unload();
+        if (it == m_Modules.end())
+            return false;
 
-			DeleteLoadedCopy(it->LoadedPath);
-		}
+        if (it->UnregisterFn)
+            it->UnregisterFn(&ctx, it->Instance);
 
-		m_Modules.clear();
-	}
+        it->Instance = nullptr;
 
-	bool ModuleLibrary::LoadModuleInternal(
-		const std::filesystem::path& originalPath,
-		ModuleContext& ctx,
-		uint64_t reloadGeneration)
-	{
-		if (!std::filesystem::exists(originalPath))
-			return false;
+        if (it->Library)
+            it->Library->Unload();
 
-		const std::filesystem::path loadedPath =
-			MakeHotReloadCopyPath(originalPath, reloadGeneration);
+        DeleteLoadedCopy(it->LoadedPath);
 
-		if (!CopyModuleForHotReload(originalPath, loadedPath))
-			return false;
+        m_Modules.erase(it);
+        return true;
+    }
 
-		auto lib = std::make_unique<DynamicLibrary>();
+    void ModuleLibrary::UnloadAll(ModuleContext& ctx)
+    {
+        for (auto it = m_Modules.rbegin(); it != m_Modules.rend(); ++it)
+        {
+            if (it->UnregisterFn)
+                it->UnregisterFn(&ctx, it->Instance);
 
-		if (!lib->Load(loadedPath))
-		{
-			DeleteLoadedCopy(loadedPath);
-			return false;
-		}
+            it->Instance = nullptr;
 
-		auto getInfo =
-			reinterpret_cast<GetModuleInfoFn>(
-				lib->GetSymbol("Boon_GetModuleInfo"));
+            if (it->Library)
+                it->Library->Unload();
 
-		auto reg =
-			reinterpret_cast<RegisterModuleFn>(
-				lib->GetSymbol("Boon_RegisterModule"));
+            DeleteLoadedCopy(it->LoadedPath);
+        }
 
-		auto unreg =
-			reinterpret_cast<UnregisterModuleFn>(
-				lib->GetSymbol("Boon_UnregisterModule"));
+        m_Modules.clear();
+    }
 
-		if (!getInfo || !reg || !unreg)
-		{
-			lib->Unload();
-			DeleteLoadedCopy(loadedPath);
-			return false;
-		}
+    const ModuleManifestEntry* ModuleLibrary::FindManifestEntry(const std::string& name) const
+    {
+        if (m_Manifest.GameModule.Name == name)
+            return &m_Manifest.GameModule;
 
-		const ModuleInfo* info = getInfo();
+        auto dynamicIt = std::find_if(
+            m_Manifest.DynamicModules.begin(),
+            m_Manifest.DynamicModules.end(),
+            [&](const ModuleManifestEntry& entry)
+            {
+                return entry.Name == name;
+            });
 
-		if (!info || !info->Name || std::string(info->Name).empty())
-		{
-			lib->Unload();
-			DeleteLoadedCopy(loadedPath);
-			return false;
-		}
+        if (dynamicIt != m_Manifest.DynamicModules.end())
+            return &(*dynamicIt);
 
-		if (!reg(&ctx))
-		{
-			lib->Unload();
-			DeleteLoadedCopy(loadedPath);
-			return false;
-		}
+        auto staticIt = std::find_if(
+            m_Manifest.StaticModules.begin(),
+            m_Manifest.StaticModules.end(),
+            [&](const ModuleManifestEntry& entry)
+            {
+                return entry.Name == name;
+            });
 
-		LoadedModule mod{};
-		mod.Name = info->Name;
-		mod.OriginalPath = originalPath;
-		mod.LoadedPath = loadedPath;
-		mod.Library = std::move(lib);
-		mod.GetInfoFn = getInfo;
-		mod.RegisterFn = reg;
-		mod.UnregisterFn = unreg;
-		mod.ReloadGeneration = reloadGeneration;
+        if (staticIt != m_Manifest.StaticModules.end())
+            return &(*staticIt);
 
-		m_Modules.push_back(std::move(mod));
-		return true;
-	}
+        return nullptr;
+    }
 
-	std::filesystem::path ModuleLibrary::MakeHotReloadCopyPath(
-		const std::filesystem::path& originalPath,
-		uint64_t generation) const
-	{
-		const std::filesystem::path dir =
-			originalPath.parent_path() / ".hotreload";
+    bool ModuleLibrary::LoadModuleFromEntry(const ModuleManifestEntry& entry, ModuleContext& ctx)
+    {
+        if (entry.Type != ModuleBinaryType::Shared)
+        {
+            std::cerr << "Cannot dynamically load static module: "
+                << entry.Name << "\n";
+            return false;
+        }
 
-		const std::string stem = originalPath.stem().string();
-		const std::string ext = originalPath.extension().string();
+        const std::filesystem::path path = ResolveModulePath(entry);
 
-		return dir / (stem + ".loaded." + std::to_string(generation) + ext);
-	}
+        ++m_ReloadCounter;
+        return LoadModuleInternal(path, ctx, m_ReloadCounter);
+    }
 
-	bool ModuleLibrary::CopyModuleForHotReload(
-		const std::filesystem::path& originalPath,
-		const std::filesystem::path& copyPath) const
-	{
-		std::error_code ec;
+    std::filesystem::path ModuleLibrary::ResolveModulePath(const ModuleManifestEntry& entry) const
+    {
+#ifdef NDEBUG
+        const std::string config = "Release";
+#else
+        const std::string config = "Debug";
+#endif
 
-		std::filesystem::create_directories(copyPath.parent_path(), ec);
-		if (ec)
-			return false;
+#ifdef _WIN32
+        const std::string extension = ".dll";
+#elif __APPLE__
+        const std::string extension = ".dylib";
+#else
+        const std::string extension = ".so";
+#endif
 
-		std::filesystem::copy_file(
-			originalPath,
-			copyPath,
-			std::filesystem::copy_options::overwrite_existing,
-			ec);
+        return m_ProjectRoot / entry.Directory / config / entry.Subdirectory / (entry.Name + extension);
+    }
 
-		return !ec;
-	}
+    bool ModuleLibrary::LoadModuleInternal(
+        const std::filesystem::path& originalPath,
+        ModuleContext& ctx,
+        uint64_t reloadGeneration)
+    {
+        if (!std::filesystem::exists(originalPath))
+        {
+            std::cerr << "Module DLL does not exist: "
+                << originalPath << "\n";
+            return false;
+        }
 
-	void ModuleLibrary::DeleteLoadedCopy(const std::filesystem::path& path) const
-	{
-		if (path.empty())
-			return;
+        const std::filesystem::path loadedPath =
+            MakeHotReloadCopyPath(originalPath, reloadGeneration);
 
-		std::error_code ec;
-		std::filesystem::remove(path, ec);
-	}
+        if (!CopyModuleForHotReload(originalPath, loadedPath))
+        {
+            std::cerr << "Failed to copy module for hot reload: "
+                << originalPath << "\n";
+            return false;
+        }
+
+        auto lib = std::make_unique<DynamicLibrary>();
+
+        if (!lib->Load(loadedPath))
+        {
+            std::cerr << "Failed to load dynamic library: "
+                << loadedPath << "\n";
+
+            DeleteLoadedCopy(loadedPath);
+            return false;
+        }
+
+        auto getInfo =
+            reinterpret_cast<GetModuleInfoFn>(
+                lib->GetSymbol("Boon_GetModuleInfo"));
+
+        auto reg =
+            reinterpret_cast<RegisterModuleFn>(
+                lib->GetSymbol("Boon_RegisterModule"));
+
+        auto unreg =
+            reinterpret_cast<UnregisterModuleFn>(
+                lib->GetSymbol("Boon_UnregisterModule"));
+
+        if (!getInfo || !reg || !unreg)
+        {
+            std::cerr << "Module missing required symbols: "
+                << loadedPath << "\n";
+
+            lib->Unload();
+            DeleteLoadedCopy(loadedPath);
+            return false;
+        }
+
+        const ModuleInfo* info = getInfo();
+
+        if (!info || !info->Name || std::string(info->Name).empty())
+        {
+            std::cerr << "Module returned invalid ModuleInfo: "
+                << loadedPath << "\n";
+
+            lib->Unload();
+            DeleteLoadedCopy(loadedPath);
+            return false;
+        }
+
+        const std::string moduleName = info->Name;
+
+        auto existingIt = std::find_if(
+            m_Modules.begin(),
+            m_Modules.end(),
+            [&](const LoadedModule& module)
+            {
+                return module.Name == moduleName;
+            });
+
+        if (existingIt != m_Modules.end())
+        {
+            std::cerr << "Module already loaded: "
+                << moduleName << "\n";
+
+            lib->Unload();
+            DeleteLoadedCopy(loadedPath);
+            return false;
+        }
+
+        const ModuleRegistration registration = reg(&ctx);
+
+        if (!registration.Success)
+        {
+            std::cerr << "Module registration failed: "
+                << moduleName << "\n";
+
+            lib->Unload();
+            DeleteLoadedCopy(loadedPath);
+            return false;
+        }
+
+        LoadedModule mod{};
+        mod.Name = moduleName;
+        mod.OriginalPath = originalPath;
+        mod.LoadedPath = loadedPath;
+        mod.Library = std::move(lib);
+        mod.GetInfoFn = getInfo;
+        mod.RegisterFn = reg;
+        mod.UnregisterFn = unreg;
+        mod.Instance = registration.Instance;
+        mod.ReloadGeneration = reloadGeneration;
+
+        m_Modules.push_back(std::move(mod));
+        return true;
+    }
+
+    std::filesystem::path ModuleLibrary::MakeHotReloadCopyPath(
+        const std::filesystem::path& originalPath,
+        uint64_t generation) const
+    {
+        const std::filesystem::path dir =
+            originalPath.parent_path() / ".hotreload";
+
+        const std::string stem = originalPath.stem().string();
+        const std::string ext = originalPath.extension().string();
+
+        return dir / (stem + ".loaded." + std::to_string(generation) + ext);
+    }
+
+    bool ModuleLibrary::CopyModuleForHotReload(
+        const std::filesystem::path& originalPath,
+        const std::filesystem::path& copyPath) const
+    {
+        std::error_code ec;
+
+        std::filesystem::create_directories(copyPath.parent_path(), ec);
+
+        if (ec)
+            return false;
+
+        std::filesystem::copy_file(
+            originalPath,
+            copyPath,
+            std::filesystem::copy_options::overwrite_existing,
+            ec);
+
+        return !ec;
+    }
+
+    void ModuleLibrary::DeleteLoadedCopy(const std::filesystem::path& path) const
+    {
+        if (path.empty())
+            return;
+
+        std::error_code ec;
+        std::filesystem::remove(path, ec);
+    }
 }

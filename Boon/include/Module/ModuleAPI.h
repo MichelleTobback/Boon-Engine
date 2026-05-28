@@ -1,22 +1,9 @@
 #pragma once
-
-#include <string>
+#include "Module/ModuleContext.h"
 
 namespace Boon
 {
-    class BClassRegistry;
-    class NetRepRegistry;
-    class AssetImporterRegistry;
-    class ServiceRegistry;
-    struct EngineContext;
-
-    struct ModuleContext
-    {
-        BClassRegistry* BClasses = nullptr;
-        NetRepRegistry* NetReps = nullptr;
-        ServiceRegistry* ServiceRegistry = nullptr;
-        EngineContext* EngineContext = nullptr;
-    };
+    class ModuleInstance;
 
     struct ModuleInfo
     {
@@ -25,7 +12,19 @@ namespace Boon
         int VersionMinor = 0;
     };
 
+    struct ModuleRegistration
+    {
+        bool Success = false;
+        ModuleInstance* Instance = nullptr;
+    };
+
     using GetModuleInfoFn = const ModuleInfo* (*)();
-    using RegisterModuleFn = bool (*)(ModuleContext*);
-    using UnregisterModuleFn = void (*)(ModuleContext*);
+    using RegisterModuleFn = ModuleRegistration(*)(ModuleContext*);
+    using UnregisterModuleFn = void (*)(ModuleContext*, ModuleInstance*);
 }
+
+#ifdef _WIN32
+    #define BOON_MODULE_EXPORT extern "C" __declspec(dllexport)
+#else
+    #define BOON_MODULE_EXPORT extern "C" __attribute__((visibility("default")))
+#endif

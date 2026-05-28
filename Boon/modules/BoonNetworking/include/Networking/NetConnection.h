@@ -1,5 +1,5 @@
 #pragma once
-#include "NetAuthority.h"
+#include "Networking/NetAuthority.h"
 #include <cstdint>
 
 namespace Boon

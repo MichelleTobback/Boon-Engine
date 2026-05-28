@@ -1,66 +1,83 @@
 #pragma once
 
 #include "Module/ModuleAPI.h"
+#include "Module/ModuleManifest.h"
 
 #include <filesystem>
 #include <memory>
 #include <string>
 #include <vector>
+#include <optional>
 
 namespace Boon
 {
-	class DynamicLibrary;
+    class DynamicLibrary;
 
-	class ModuleLibrary
-	{
-	public:
-		struct LoadedModule
-		{
-			std::string Name;
+    class ModuleLibrary
+    {
+    public:
+        struct LoadedModule
+        {
+            std::string Name;
 
-			std::filesystem::path OriginalPath;
-			std::filesystem::path LoadedPath;
+            std::filesystem::path OriginalPath;
+            std::filesystem::path LoadedPath;
 
-			std::unique_ptr<DynamicLibrary> Library;
+            std::unique_ptr<DynamicLibrary> Library;
 
-			GetModuleInfoFn GetInfoFn = nullptr;
-			RegisterModuleFn RegisterFn = nullptr;
-			UnregisterModuleFn UnregisterFn = nullptr;
+            GetModuleInfoFn GetInfoFn = nullptr;
+            RegisterModuleFn RegisterFn = nullptr;
+            UnregisterModuleFn UnregisterFn = nullptr;
 
-			uint64_t ReloadGeneration = 0;
-		};
+            ModuleInstance* Instance = nullptr;
 
-	public:
-		ModuleLibrary();
-		~ModuleLibrary();
+            uint64_t ReloadGeneration = 0;
+        };
 
-		bool LoadModule(const std::filesystem::path& dllPath, ModuleContext& ctx);
-		bool UnloadModule(const std::string& name, ModuleContext& ctx);
-		bool ReloadModule(const std::string& name, ModuleContext& ctx);
-		bool ReloadModule(const std::filesystem::path& dllPath, ModuleContext& ctx);
+    public:
+        ModuleLibrary(const std::filesystem::path& projectRoot);
+        ~ModuleLibrary();
 
-		void UnloadAll(ModuleContext& ctx);
+        bool LoadManifest(const std::filesystem::path& manifestPath);
 
-		const std::vector<LoadedModule>& GetModules() const { return m_Modules; }
+        bool LoadStartupModules(ModuleContext& ctx);
 
-	private:
-		bool LoadModuleInternal(
-			const std::filesystem::path& originalPath,
-			ModuleContext& ctx,
-			uint64_t reloadGeneration);
+        bool LoadModule(const std::string& name, ModuleContext& ctx);
+        bool UnloadModule(const std::string& name, ModuleContext& ctx);
+        bool ReloadModule(const std::string& name, ModuleContext& ctx);
 
-		std::filesystem::path MakeHotReloadCopyPath(
-			const std::filesystem::path& originalPath,
-			uint64_t generation) const;
+        void UnloadAll(ModuleContext& ctx);
 
-		bool CopyModuleForHotReload(
-			const std::filesystem::path& originalPath,
-			const std::filesystem::path& copyPath) const;
+        const std::vector<LoadedModule>& GetModules() const { return m_Modules; }
+        const ModuleManifest& GetManifest() const { return m_Manifest; }
 
-		void DeleteLoadedCopy(const std::filesystem::path& path) const;
+    private:
+        const ModuleManifestEntry* FindManifestEntry(const std::string& name) const;
 
-	private:
-		std::vector<LoadedModule> m_Modules;
-		uint64_t m_ReloadCounter = 0;
-	};
+        bool LoadModuleFromEntry(const ModuleManifestEntry& entry, ModuleContext& ctx);
+
+        bool LoadModuleInternal(
+            const std::filesystem::path& originalPath,
+            ModuleContext& ctx,
+            uint64_t reloadGeneration);
+
+        std::filesystem::path ResolveModulePath(const ModuleManifestEntry& entry) const;
+
+        std::filesystem::path MakeHotReloadCopyPath(
+            const std::filesystem::path& originalPath,
+            uint64_t generation) const;
+
+        bool CopyModuleForHotReload(
+            const std::filesystem::path& originalPath,
+            const std::filesystem::path& copyPath) const;
+
+        void DeleteLoadedCopy(const std::filesystem::path& path) const;
+
+    private:
+        std::filesystem::path m_ProjectRoot;
+        ModuleManifest m_Manifest;
+
+        std::vector<LoadedModule> m_Modules;
+        uint64_t m_ReloadCounter = 0;
+    };
 }

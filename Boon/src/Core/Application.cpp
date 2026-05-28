@@ -14,6 +14,8 @@
 
 #include "Scene/SceneManager.h"
 
+#include "Module/StaticModules.h"
+
 #include "BoonDebug/Logger.h"
 
 #include <Reflection/BClassBase.h>
@@ -87,6 +89,13 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 
 	BOON_INIT_LOGGER();
 
+	ModuleContext moduleContext{};
+	moduleContext.BClasses = m_pClsRegistry.get();
+	moduleContext.NetReps = m_pNetRepRegistry.get();
+	moduleContext.ServiceRegistry = m_pServiceRegistry.get();
+	moduleContext.EngineContext = &m_Context;
+	RegisterStaticModules(moduleContext);
+
 	m_pSubsystems->InitAll(m_Context);
 
 	m_pStateMachine->PushState(std::move(pState), m_Context);
@@ -99,6 +108,7 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 	{
 		time.Step();
 		quit = m_pWindow->Update();
+		m_pSubsystems->UpdateAll(m_Context);
 		m_pStateMachine->Update();
 		m_pInput->Update();
 		m_pWindow->Present();
@@ -108,6 +118,9 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 	m_pSubsystems->ShutdownAll(m_Context);
 	m_pScenes->Shutdown();
 	m_pStateMachine->Shutdown();
+
+	UnregisterStaticModules(moduleContext);
+
 	ServiceLocator::Shutdown();
 	Renderer::Shutdown();
 	m_pWindow->Destroy();

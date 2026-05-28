@@ -1,8 +1,6 @@
 #pragma once
 #include <Core/Delegate.h>
 
-using namespace Boon;
-
 namespace BoonEditor
 {
 	template <typename T>
@@ -28,7 +26,7 @@ namespace BoonEditor
 
 	private:
 		T m_pContext{};
-		Delegate<Signature> m_OnContextChanged;
+		Boon::Delegate<Signature> m_OnContextChanged;
 	};
 
 	template<typename T>

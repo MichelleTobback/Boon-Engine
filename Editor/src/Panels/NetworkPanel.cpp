@@ -3,8 +3,13 @@
 
 #include <UI/IconsFontAwesome7.h>
 
+#include <Networking/NetworkingSubsystem.h>
+
 #include <sstream>
 #include <Networking/NetDriver.h>
+#include <Core/EditorContext.h>
+#include <Core/EngineContext.h>
+#include <Core/Application.h>
 
 using namespace BoonEditor;
 using namespace Boon;
@@ -98,13 +103,10 @@ namespace
 	}
 }
 
-NetworkPanel::NetworkPanel(
-	EditorContext* pContext,
-	const std::string& name,
-	Boon::NetworkSettings& settings)
+NetworkPanel::NetworkPanel(EditorContext* pContext, const std::string& name)
 	: EditorPanel(pContext, name)
-	, m_Settings(settings)
 {
+	
 }
 
 void NetworkPanel::SetDriver(NetDriver* pDriver)
@@ -114,6 +116,13 @@ void NetworkPanel::SetDriver(NetDriver* pDriver)
 
 void BoonEditor::NetworkPanel::OnRenderUI()
 {
+	NetworkingSubsystem* netSubsystem = GetContext().GetEngineContext().TryGetSubsystem<NetworkingSubsystem>();
+
+	if (!netSubsystem)
+	{
+		return;
+	}
+
 	static std::vector<const char*> modes =
 	{
 		"Standalone",
@@ -165,8 +174,11 @@ void BoonEditor::NetworkPanel::OnRenderUI()
 
 		ImGui::SameLine();
 
+		NetworkSettings& settings = netSubsystem->GetSettings();
+		NetDriver& driver = netSubsystem->GetDriver();
+
 		const char* modeText =
-			modes[std::clamp(static_cast<int>(m_Settings.NetMode), 0, static_cast<int>(modes.size()) - 1)];
+			modes[std::clamp(static_cast<int>(settings.NetMode), 0, static_cast<int>(modes.size()) - 1)];
 
 		ImGui::TextDisabled("| %s", modeText);
 
@@ -182,16 +194,16 @@ void BoonEditor::NetworkPanel::OnRenderUI()
 		ImGui::TextDisabled("%s  Settings", ICON_FA_SLIDERS);
 		ImGui::Separator();
 
-		int current = static_cast<int>(m_Settings.NetMode);
+		int current = static_cast<int>(settings.NetMode);
 
 		if (UI::Combo("Net mode", current, modes.data(), static_cast<int>(modes.size())))
-			m_Settings.NetMode = static_cast<ENetDriverMode>(current);
+			settings.NetMode = static_cast<ENetDriverMode>(current);
 
-		UI::Field("IP", m_Settings.Ip);
+		UI::Field("IP", settings.Ip);
 
-		int port = static_cast<int>(m_Settings.Port);
+		int port = static_cast<int>(settings.Port);
 		if (UI::InputDigits("Port", port, 5))
-			m_Settings.Port = static_cast<uint32_t>(port);
+			settings.Port = static_cast<uint32_t>(port);
 
 		ImGui::EndGroup();
 
@@ -201,12 +213,13 @@ void BoonEditor::NetworkPanel::OnRenderUI()
 		ImGui::TextDisabled("%s  Runtime", ICON_FA_SIGNAL);
 		ImGui::Separator();
 
-		if (!m_pDriver)
-		{
-			DrawStatusPill(ICON_FA_POWER_OFF, "Driver inactive", false);
-			ImGui::TextDisabled("No active network driver is assigned.");
-		}
-		else if (m_pDriver->IsServer())
+		//if (!m_pDriver)
+		//{
+		//	DrawStatusPill(ICON_FA_POWER_OFF, "Driver inactive", false);
+		//	ImGui::TextDisabled("No active network driver is assigned.");
+		//}
+		//else if (m_pDriver->IsServer())
+		if (driver.IsServer())
 		{
 			DrawStatusPill(ICON_FA_SERVER, "Running", true);
 
@@ -214,7 +227,7 @@ void BoonEditor::NetworkPanel::OnRenderUI()
 
 			int connectionCount = 0;
 
-			m_pDriver->ForeachConnection(
+			driver.ForeachConnection(
 				[&connectionCount](NetConnection* pConnection)
 				{
 					++connectionCount;
@@ -238,9 +251,9 @@ void BoonEditor::NetworkPanel::OnRenderUI()
 			if (connectionCount == 0)
 				ImGui::TextDisabled("No clients connected.");
 		}
-		else if (m_pDriver->IsClient())
+		else if (driver.IsClient())
 		{
-			if (m_pDriver->GetConnectionCount() == 0)
+			if (driver.GetConnectionCount() == 0)
 			{
 				DrawStatusPill(ICON_FA_PLUG_CIRCLE_XMARK, "Not connected", false);
 				ImGui::TextDisabled("Client mode is active, but no server connection exists.");
@@ -250,7 +263,7 @@ void BoonEditor::NetworkPanel::OnRenderUI()
 				DrawStatusPill(ICON_FA_PLUG_CIRCLE_CHECK, "Connected", true);
 
 				NetConnection* connection =
-					m_pDriver->GetConnection(m_pDriver->GetLocalConnectionId());
+					driver.GetConnection(driver.GetLocalConnectionId());
 
 				if (connection)
 				{

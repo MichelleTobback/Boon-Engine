@@ -6,7 +6,7 @@
 #include <string_view>
 #include <unordered_map>
 
-namespace BoonEditor
+namespace Boon
 {
     class TemplateContext
     {

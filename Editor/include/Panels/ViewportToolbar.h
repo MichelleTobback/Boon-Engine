@@ -53,9 +53,9 @@ namespace BoonEditor
 		EditorPlayState m_PlayState{ EditorPlayState::Edit };
 		ViewportToolbarSetting m_ActiveSetting{};
 
-		std::shared_ptr<Texture2D> m_pPlayIcon;
-		std::shared_ptr<Texture2D> m_pStopIcon;
-		std::shared_ptr<Texture2D> m_pCameraIcon;
-		std::shared_ptr<Texture2D> m_pVisibilityIcon;
+		std::shared_ptr<Boon::Texture2D> m_pPlayIcon;
+		std::shared_ptr<Boon::Texture2D> m_pStopIcon;
+		std::shared_ptr<Boon::Texture2D> m_pCameraIcon;
+		std::shared_ptr<Boon::Texture2D> m_pVisibilityIcon;
 	};
 }

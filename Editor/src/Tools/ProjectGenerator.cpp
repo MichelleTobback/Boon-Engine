@@ -1,6 +1,6 @@
 #include "Tools/ProjectGenerator.h"
 #include "Project/ProjectLoader.h"
-#include "tools/TemplateProcessor.h"
+#include "Tools/TemplateProcessor.h"
 #include "Utils/ProcessRunner.h"
 #include "BoonDebug/Logger.h"
 #include <fstream>

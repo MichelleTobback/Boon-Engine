@@ -15,7 +15,7 @@ namespace BoonEditor
 	class NetworkPanel final : public EditorPanel
 	{
 	public:
-		NetworkPanel(EditorContext* pContext, const std::string& name, Boon::NetworkSettings& settings);
+		NetworkPanel(EditorContext* pContext, const std::string& name);
 
 		void SetDriver(NetDriver* pDriver);
 
@@ -23,7 +23,6 @@ namespace BoonEditor
 		virtual void OnRenderUI() override;
 
 	private:
-		Boon::NetworkSettings& m_Settings;
 		NetDriver* m_pDriver{nullptr};
 	};
 }
