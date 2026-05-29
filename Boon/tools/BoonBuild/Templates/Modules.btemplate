@@ -76,7 +76,7 @@ namespace Boon
 		for (StaticLoadedModule& module : s_StaticModules)
 		{
 			if (module.Instance)
-				module.Instance->OnStart(context);
+                module.Instance->OnStart(context);
 		}
 	}
 

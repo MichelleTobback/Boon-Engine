@@ -99,10 +99,10 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 
 	m_pSubsystems->InitAll(m_Context);
 
-	StartStaticModules(moduleContext);
-
 	m_pStateMachine->PushState(std::move(pState), m_Context);
 	pState = nullptr;
+
+	StartStaticModules(moduleContext);
 
 	bool quit{ false };
 	Time& time{ *m_pTime };
@@ -118,11 +118,12 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 		time.Wait();
 		m_pStateMachine->EndUpdate(m_Context);
 	}
+	StopStaticModules(moduleContext);
+
 	m_pSubsystems->ShutdownAll(m_Context);
 	m_pScenes->Shutdown();
 	m_pStateMachine->Shutdown();
 
-	StopStaticModules(moduleContext);
 	UnregisterStaticModules(moduleContext);
 
 	ServiceLocator::Shutdown();

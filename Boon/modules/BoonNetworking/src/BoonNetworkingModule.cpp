@@ -2,6 +2,7 @@
 #include "Networking/NetworkingSubsystem.h"
 #include "Core/EngineContext.h"
 #include "Module/ModuleLibrary.h"
+#include "BoonDebug/Logger.h"
 
 namespace Boon
 {
@@ -10,6 +11,7 @@ namespace Boon
     public:
         bool OnInitialize(ModuleContext& ctx) override
         {
+            BOON_LOG("BoonNetworkModule::OnInitialize");
             ctx.EngineContext->Subsystems->Register<NetworkingSubsystem>(NetworkSettings{});
 
             return true;
