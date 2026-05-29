@@ -253,12 +253,18 @@ namespace Boon
          */
         void Invoke(Args... args) const
         {
-            const IndexType* active = m_ActiveSlots.data();
-            const std::size_t count = m_ActiveSlots.size();
+            const auto activeSlots = m_ActiveSlots;
 
-            for (std::size_t i = 0; i < count; ++i)
+            for (IndexType slotIndex : activeSlots)
             {
-                const Slot& slot = m_Slots[active[i]];
+                if (slotIndex >= m_Slots.size())
+                    continue;
+
+                const Slot& slot = m_Slots[slotIndex];
+
+                if (!slot.active)
+                    continue;
+
                 slot.function(args...);
             }
         }

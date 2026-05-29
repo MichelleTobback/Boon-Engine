@@ -48,9 +48,6 @@ namespace BoonEditor
 		void OnBeginPlay();
 		void OnStopPlay();
 
-		void StartNetwork();
-		void StopNetwork();
-
 		std::unique_ptr<EditorRenderer> m_PRenderer;
 		GameObjectContext m_SelectionContext{};
 		SceneContext m_SceneContext{};

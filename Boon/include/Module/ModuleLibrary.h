@@ -42,6 +42,9 @@ namespace Boon
 
         bool LoadStartupModules(ModuleContext& ctx);
 
+        void StartAll(ModuleContext& ctx);
+        void StopAll(ModuleContext& ctx);
+
         bool LoadModule(const std::string& name, ModuleContext& ctx);
         bool UnloadModule(const std::string& name, ModuleContext& ctx);
         bool ReloadModule(const std::string& name, ModuleContext& ctx);

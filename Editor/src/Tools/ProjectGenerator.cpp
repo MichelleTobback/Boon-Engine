@@ -3,165 +3,287 @@
 #include "Tools/TemplateProcessor.h"
 #include "Utils/ProcessRunner.h"
 #include "BoonDebug/Logger.h"
-#include <fstream>
 
 #include <algorithm>
+#include <fstream>
 #include <future>
+#include <sstream>
 
 using namespace Boon;
 
 namespace BoonEditor
 {
-	ProjectConfig ProjectGenerator::Generate(const ProjectGeneratorSettings& desc)
-	{
-		static std::future<void> sProjectBuildFuture;
-		ProjectConfig proj{};
+    namespace
+    {
+        static std::string Quote(const std::filesystem::path& path)
+        {
+            return "\"" + path.string() + "\"";
+        }
 
-		InitializeProject(proj, desc);
-		GenerateFilesFromTemplates(desc.TemplateFolder, proj, desc);
+        static std::filesystem::path GetRepoRootFromEngineRoot(const std::filesystem::path& engineRoot)
+        {
+            // If EngineRoot points to .../Boon-Engine/Boon, return .../Boon-Engine
+            if (std::filesystem::exists(engineRoot / "tools" / "BClassGenerator" / "BoonReflection.cmake"))
+                return engineRoot.parent_path();
 
-		sProjectBuildFuture = std::async(std::launch::async, [proj]()
-			{
-				std::string log{};
-				Configure(proj, proj.Runtime.ProjectRoot / "build", log);
+            // If EngineRoot already points to .../Boon-Engine
+            return engineRoot;
+        }
 
-				if (!Build(proj.Runtime.ProjectRoot / "build", "Debug", log))
-					BOON_LOG_ERROR("Build failed!");
-				else
-					BOON_LOG("Build complete");
-			});
+        static std::filesystem::path GetBoonBuildExe(const std::filesystem::path& repoRoot)
+        {
+            return repoRoot / "bin" / "Debug" / "Tools" / "BoonBuild.exe";
+        }
+    }
 
-		return proj;
-	}
+    ProjectConfig ProjectGenerator::Generate(const ProjectGeneratorSettings& desc)
+    {
+        static std::future<void> sProjectBuildFuture;
 
-	void ProjectGenerator::InitializeProject(ProjectConfig& project, const ProjectGeneratorSettings& desc)
-	{
-		BOON_LOG("Creating new Project ... ");
+        ProjectConfig project{};
 
-		ProjectLoader::ApplyDefaults(project);
+        InitializeProject(project, desc);
+        GenerateFilesFromTemplates(desc.TemplateFolder, project, desc);
 
-		project.Name = desc.Name;
-		project.Runtime.GameModule = desc.Name;
-		project.Runtime.EnabledModules = { desc.Name };
-		project.Runtime.ProjectRoot = std::filesystem::path(desc.Location) / desc.Name;
+        sProjectBuildFuture = std::async(std::launch::async, [project]()
+            {
+                std::string log{};
 
-		project.Runtime.Window.Title = desc.Name + " Project";
+                if (!GenerateBoonBuildProject(project, log))
+                {
+                    BOON_LOG_ERROR("BoonBuild project generation failed!");
+                    return;
+                }
 
-		std::filesystem::path location = desc.Location + "/" + project.Name;
+                if (!Configure(project, project.Runtime.ProjectRoot / "build", log))
+                {
+                    BOON_LOG_ERROR("CMake configure failed!");
+                    return;
+                }
 
-		std::filesystem::create_directories(location);
-		std::filesystem::create_directories(location / "Assets");
+                if (!Build(project.Runtime.ProjectRoot / "build", "Debug", log))
+                {
+                    BOON_LOG_ERROR("Build failed!");
+                    return;
+                }
 
-		ProjectLoader::SaveToFile(location, project);
-	}
+                BOON_LOG("Build complete");
+            });
 
-	void ProjectGenerator::GenerateFilesFromTemplates(const std::filesystem::path& templatesLoc, const ProjectConfig& project, const ProjectGeneratorSettings& desc)
-	{
-		if (!std::filesystem::exists(templatesLoc))
-			return;
+        return project;
+    }
 
-		BOON_LOG("Generating project files ... ");
+    void ProjectGenerator::InitializeProject(ProjectConfig& project, const ProjectGeneratorSettings& desc)
+    {
+        BOON_LOG("Creating new Project ...");
 
-		for (const auto& dirEntry : std::filesystem::recursive_directory_iterator(templatesLoc))
-		{
-			ProcessTemplate(dirEntry, project, desc);
-		}
-	}
+        ProjectLoader::ApplyDefaults(project);
 
-	void ProjectGenerator::ProcessTemplate(const std::filesystem::path& from, const ProjectConfig& project, const ProjectGeneratorSettings& desc)
-	{
-		std::ifstream file(from);
-		if (!file.is_open())
-		{
-			BOON_LOG_WARN("Failed to open temlate : {}, file skipped", from.string());
-			return;
-		}
+        project.Name = desc.Name;
+        project.Runtime.GameModule = desc.Name;
+        project.Runtime.EnabledModules = { desc.Name };
+        project.Runtime.ProjectRoot = std::filesystem::path(desc.Location) / desc.Name;
 
-		std::stringstream ss;
+        project.Runtime.Window.Title = desc.Name + " Project";
 
-		ss << file.rdbuf();
-		std::string content{ ss.str() };
+        const std::filesystem::path location = project.Runtime.ProjectRoot;
 
-		if (content.empty())
-		{
-			BOON_LOG_WARN("Failed to open temlate : {}, file skipped", from.string());
-			return;
-		}
+        std::filesystem::create_directories(location);
+        std::filesystem::create_directories(location / "Assets");
+        std::filesystem::create_directories(location / "src");
+        std::filesystem::create_directories(location / "include");
+        std::filesystem::create_directories(location / "generated");
 
-		std::string uppercaseName = desc.Name;
-		std::transform(uppercaseName.begin(), uppercaseName.end(), uppercaseName.begin(), ::toupper);
+        ProjectLoader::SaveToFile(location, project);
+    }
 
-		std::string lowercaseName = desc.Name;
-		std::transform(lowercaseName.begin(), lowercaseName.end(), lowercaseName.begin(), ::tolower);
+    void ProjectGenerator::GenerateFilesFromTemplates(
+        const std::filesystem::path& templatesLoc,
+        const ProjectConfig& project,
+        const ProjectGeneratorSettings& desc)
+    {
+        if (!std::filesystem::exists(templatesLoc))
+            return;
 
-		TemplateContext context{};
-		context.Set("PROJECT_NAME", desc.Name);
-		context.Set("PROJECT_NAME_UPPER", uppercaseName);
-		context.Set("PROJECT_NAME_LOWER", lowercaseName);
-		context.Set("PROJECT_ROOT", project.Runtime.ProjectRoot.string());
-		context.Set("BOON_ENGINE_VERSION", std::to_string(project.Version));
-		TemplateProcessor::ProcessTemplateBlocks(content, "@@", context, [project](const std::filesystem::path& path, std::string_view c)->bool
-			{
-				std::filesystem::path loc = project.Runtime.ProjectRoot / path;
-				std::filesystem::create_directories(loc.parent_path());
+        BOON_LOG("Generating project files ...");
 
-				std::ofstream f(loc, std::ios::out | std::ios::binary | std::ios::trunc);
-				if (!f.is_open())
-					return false;
+        if (templatesLoc.has_extension())
+        {
+            ProcessTemplate(templatesLoc, project, desc);
+            return;
+        }
 
-				f.write(c.data(), static_cast<std::streamsize>(c.size()));
+        for (const auto& dirEntry : std::filesystem::recursive_directory_iterator(templatesLoc))
+        {
+            if (!dirEntry.is_regular_file())
+                continue;
 
-				BOON_LOG("Generated {}", loc.string());
+            ProcessTemplate(dirEntry.path(), project, desc);
+        }
+    }
 
-				return true;
-			});
-	}
-	bool ProjectGenerator::Configure(const ProjectConfig& project, const std::filesystem::path& buildDir, std::string& outLog)
-	{
-		BOON_LOG("Configuring project ...");
+    void ProjectGenerator::ProcessTemplate(
+        const std::filesystem::path& from,
+        const ProjectConfig& project,
+        const ProjectGeneratorSettings& desc)
+    {
+        std::ifstream file(from, std::ios::binary);
 
-		const std::filesystem::path engineRoot = project.Runtime.EngineRoot;
+        if (!file.is_open())
+        {
+            BOON_LOG_WARN("Failed to open template: {}, file skipped", from.string());
+            return;
+        }
 
-		std::string configureCmd =
-			"cmake -S \"" + project.Runtime.ProjectRoot.string() +
-			"\" -B \"" + buildDir.string() +
-			"\" -DBOON_ENGINE_ROOT:PATH=\"" + engineRoot.string() + "\"";
+        std::stringstream ss;
+        ss << file.rdbuf();
 
-		ProcessResult result = ProcessRunner::Run(
-			"\"" + configureCmd+ "\"",
-			[](const std::string& chunk)
-			{
-				BOON_LOG(chunk);
-			});
+        std::string content = ss.str();
 
-		if (result.ExitCode != 0)
-		{
-			BOON_LOG_ERROR(result.Output);
-			return false;
-		}
+        if (content.empty())
+        {
+            BOON_LOG_WARN("Template is empty: {}, file skipped", from.string());
+            return;
+        }
 
-		return true;
-	}
-	bool ProjectGenerator::Build(const std::filesystem::path& buildDir, const std::string& config, std::string& outLog)
-	{
-		BOON_LOG("Building project ...");
+        std::string uppercaseName = desc.Name;
+        std::transform(uppercaseName.begin(), uppercaseName.end(), uppercaseName.begin(), ::toupper);
 
-		std::string buildCmd =
-			"cmake --build \"" + buildDir.string() + "\" --config Debug";
+        std::string lowercaseName = desc.Name;
+        std::transform(lowercaseName.begin(), lowercaseName.end(), lowercaseName.begin(), ::tolower);
 
-		ProcessResult result = ProcessRunner::Run(
-			"\"" + buildCmd + "\"",
-			[](const std::string& chunk)
-			{
-				BOON_LOG(chunk);
-			});
+        const std::filesystem::path repoRoot = GetRepoRootFromEngineRoot(project.Runtime.EngineRoot);
 
-		if (result.ExitCode != 0)
-		{
-			BOON_LOG_ERROR(result.Output);
-			return false;
-		}
+        TemplateContext context{};
+        context.Set("PROJECT_NAME", desc.Name);
+        context.Set("PROJECT_NAME_UPPER", uppercaseName);
+        context.Set("PROJECT_NAME_LOWER", lowercaseName);
+        context.Set("PROJECT_ROOT", project.Runtime.ProjectRoot.string());
+        context.Set("BOON_REPO_ROOT", repoRoot.string());
+        context.Set("BOON_ENGINE_ROOT", (repoRoot / "Boon").string());
+        context.Set("BOON_ENGINE_VERSION", std::to_string(project.Version));
 
-		return true;
-	}
+        TemplateProcessor::ProcessTemplateBlocks(
+            content,
+            "@@",
+            context,
+            [project](const std::filesystem::path& path, std::string_view c) -> bool
+            {
+                const std::filesystem::path loc = project.Runtime.ProjectRoot / path;
+
+                std::filesystem::create_directories(loc.parent_path());
+
+                std::ofstream f(loc, std::ios::out | std::ios::binary | std::ios::trunc);
+
+                if (!f.is_open())
+                {
+                    BOON_LOG_ERROR("Failed to write generated file: {}", loc.string());
+                    return false;
+                }
+
+                f.write(c.data(), static_cast<std::streamsize>(c.size()));
+
+                BOON_LOG("Generated {}", loc.string());
+
+                return true;
+            });
+    }
+
+    bool ProjectGenerator::GenerateBoonBuildProject(const ProjectConfig& project, std::string& outLog)
+    {
+        BOON_LOG("Running BoonBuild project generation ...");
+
+        const std::filesystem::path repoRoot = GetRepoRootFromEngineRoot(project.Runtime.EngineRoot);
+        const std::filesystem::path boonBuildExe = GetBoonBuildExe(repoRoot);
+
+        if (!std::filesystem::exists(boonBuildExe))
+        {
+            BOON_LOG_ERROR("BoonBuild.exe not found: {}", boonBuildExe.string());
+            return false;
+        }
+
+        const std::string command =
+            Quote(boonBuildExe) + " " +
+            Quote(project.Runtime.ProjectRoot);
+
+        ProcessResult result = ProcessRunner::Run(
+            command,
+            [](const std::string& chunk)
+            {
+                BOON_LOG(chunk);
+            });
+
+        outLog += result.Output;
+
+        if (result.ExitCode != 0)
+        {
+            BOON_LOG_ERROR(result.Output);
+            return false;
+        }
+
+        return true;
+    }
+
+    bool ProjectGenerator::Configure(
+        const ProjectConfig& project,
+        const std::filesystem::path& buildDir,
+        std::string& outLog)
+    {
+        BOON_LOG("Configuring project ...");
+
+        const std::filesystem::path repoRoot = GetRepoRootFromEngineRoot(project.Runtime.EngineRoot);
+
+        const std::string command =
+            "cmake -S " + Quote(project.Runtime.ProjectRoot) +
+            " -B " + Quote(buildDir) +
+            " -G Ninja" +
+            " -DCMAKE_BUILD_TYPE=Debug" +
+            " -DBOON_REPO_ROOT:PATH=" + Quote(repoRoot);
+
+        ProcessResult result = ProcessRunner::Run(
+            command,
+            [](const std::string& chunk)
+            {
+                BOON_LOG(chunk);
+            });
+
+        outLog += result.Output;
+
+        if (result.ExitCode != 0)
+        {
+            BOON_LOG_ERROR(result.Output);
+            return false;
+        }
+
+        return true;
+    }
+
+    bool ProjectGenerator::Build(
+        const std::filesystem::path& buildDir,
+        const std::string& config,
+        std::string& outLog)
+    {
+        BOON_LOG("Building project ...");
+
+        const std::string command =
+            "cmake --build " + Quote(buildDir) +
+            " --config " + config;
+
+        ProcessResult result = ProcessRunner::Run(
+            command,
+            [](const std::string& chunk)
+            {
+                BOON_LOG(chunk);
+            });
+
+        outLog += result.Output;
+
+        if (result.ExitCode != 0)
+        {
+            BOON_LOG_ERROR(result.Output);
+            return false;
+        }
+
+        return true;
+    }
 }

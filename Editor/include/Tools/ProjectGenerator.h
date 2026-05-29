@@ -27,5 +27,6 @@ namespace BoonEditor
 
 		static bool Configure(const ProjectConfig& project, const std::filesystem::path& buildDir, std::string& outLog);
 		static bool Build(const std::filesystem::path& buildDir, const std::string& config, std::string& outLog);
+		static bool GenerateBoonBuildProject(const Boon::ProjectConfig& project, std::string& outLog);
 	};
 }

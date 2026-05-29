@@ -113,8 +113,6 @@ extern "C"
                 DestroyModuleInstance(instance);
                 return { false, nullptr };
             }
-
-            instance->OnStart(*context);
         }
 
         return { true, instance };
@@ -129,7 +127,6 @@ extern "C"
 
         if (instance)
         {
-            instance->OnStop(*context);
             instance->OnShutdown(*context);
             DestroyModuleInstance(instance);
         }

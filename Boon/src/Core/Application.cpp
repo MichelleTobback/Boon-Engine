@@ -85,6 +85,7 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 	m_Context.EventBus = m_pEventBus.get();
 	m_Context.Window = m_pWindow.get();
 	m_Context.Time = m_pTime.get();
+	m_Context.ProjectConfig = &m_Desc;
 	m_Context.Subsystems = m_pSubsystems.get();
 
 	BOON_INIT_LOGGER();

@@ -9,6 +9,7 @@ namespace Boon
 	class SceneManager;
 	class EventBus;
 	class Time;
+	struct RuntimeConfig;
 
 	struct EngineContext
 	{
@@ -18,6 +19,7 @@ namespace Boon
 		SceneManager* Scenes = nullptr;
 		EventBus* EventBus = nullptr;
 		Time* Time = nullptr;
+		RuntimeConfig* ProjectConfig = nullptr;
 
 		SubsystemRegistry* Subsystems = nullptr;
 

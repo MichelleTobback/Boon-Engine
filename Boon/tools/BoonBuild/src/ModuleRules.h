@@ -21,5 +21,6 @@ namespace BoonBuild
         std::vector<std::string> PrivateDefinitions;
         std::vector<std::string> SystemLibraries;
         std::vector<std::string> ThirdParty;
+        std::vector<std::string> ModuleDependencies;
     };
 }

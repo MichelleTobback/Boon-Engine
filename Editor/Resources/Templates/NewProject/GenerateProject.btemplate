@@ -1,0 +1,139 @@
+@@GenerateProject.bat
+@echo off
+setlocal
+
+cd /d "%~dp0"
+
+echo ========================================
+echo WitchGame Build Pipeline
+echo ========================================
+echo.
+
+REM --------------------------------------------------
+REM Visual Studio environment
+REM --------------------------------------------------
+
+set VS_DEV_CMD=C:\Program Files\Microsoft Visual Studio\18\Community\Common7\Tools\VsDevCmd.bat
+
+if not exist "%VS_DEV_CMD%" (
+    echo ERROR: Could not find VsDevCmd.bat
+    echo %VS_DEV_CMD%
+    echo.
+    pause
+    exit /b 1
+)
+
+call "%VS_DEV_CMD%" -arch=x64 -host_arch=x64
+
+if errorlevel 1 (
+    echo.
+    echo Failed to initialize MSVC environment.
+    echo.
+    pause
+    exit /b 1
+)
+
+REM --------------------------------------------------
+REM Engine repo
+REM --------------------------------------------------
+
+if not defined BOON_REPO_ROOT (
+    set BOON_REPO_ROOT=D:\Projects\BoonEngine\Boon-Engine
+)
+
+set BOONBUILD_EXE=%BOON_REPO_ROOT%\bin\Debug\Tools\BoonBuild.exe
+
+echo BOON_REPO_ROOT = %BOON_REPO_ROOT%
+echo BOONBUILD_EXE  = %BOONBUILD_EXE%
+echo PROJECT_ROOT   = %CD%
+echo.
+
+REM --------------------------------------------------
+REM Verify BoonBuild
+REM --------------------------------------------------
+
+if not exist "%BOONBUILD_EXE%" (
+    echo ERROR: BoonBuild.exe not found:
+    echo %BOONBUILD_EXE%
+    echo.
+    pause
+    exit /b 1
+)
+
+REM --------------------------------------------------
+REM Generate project
+REM --------------------------------------------------
+
+echo ========================================
+echo Generating project
+echo ========================================
+echo.
+
+"%BOONBUILD_EXE%" "%CD%"
+
+if errorlevel 1 (
+    echo.
+    echo ========================================
+    echo Project generation FAILED
+    echo ========================================
+    echo.
+    pause
+    exit /b 1
+)
+
+REM --------------------------------------------------
+REM Configure CMake
+REM --------------------------------------------------
+
+echo.
+echo ========================================
+echo Configuring CMake
+echo ========================================
+echo.
+
+cmake ^
+    -S . ^
+    -B out/build/x64-Debug ^
+    -G Ninja ^
+    -DCMAKE_BUILD_TYPE=Debug ^
+    -DBOON_REPO_ROOT="%BOON_REPO_ROOT%"
+
+if errorlevel 1 (
+    echo.
+    echo ========================================
+    echo CMake configure FAILED
+    echo ========================================
+    echo.
+    pause
+    exit /b 1
+)
+
+REM --------------------------------------------------
+REM Build
+REM --------------------------------------------------
+
+echo.
+echo ========================================
+echo Building project
+echo ========================================
+echo.
+
+cmake --build out/build/x64-Debug
+
+if errorlevel 1 (
+    echo.
+    echo ========================================
+    echo Build FAILED
+    echo ========================================
+    echo.
+    pause
+    exit /b 1
+)
+
+echo.
+echo ========================================
+echo Build SUCCESS
+echo ========================================
+echo.
+
+pause

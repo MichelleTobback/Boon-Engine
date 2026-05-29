@@ -149,6 +149,8 @@ namespace Boon
         virtual bool IsClient() const = 0;
         virtual bool IsServer() const = 0;
 
+        virtual bool IsRunning() const = 0;
+
         static std::unique_ptr<NetDriver> Create();
     };
 }

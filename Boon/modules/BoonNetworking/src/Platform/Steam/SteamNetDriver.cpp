@@ -123,6 +123,11 @@ namespace Boon
         m_LocalConnectionId = 0;
         s_Instance = nullptr;
         m_Scene = nullptr;
+
+        m_OnStartup = nullptr;
+        m_OnDisconnected = nullptr;
+        m_OnShutdown = nullptr;
+        m_OnPacket = nullptr;
     }
 
     // -------------------------------------------------------------------------

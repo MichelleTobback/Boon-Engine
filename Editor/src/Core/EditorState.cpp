@@ -428,7 +428,12 @@ void EditorState::OnBeginPlay()
 {
 	EngineContext& ctx = GetContext();
 
-	StartNetwork();
+	ModuleContext module{};
+	module.BClasses = &BClassRegistry::Get();
+	module.NetReps = &NetRepRegistry::Get();
+	module.ServiceRegistry = ServiceLocator::GetRegistry();
+	module.EngineContext = &ctx;
+	m_pModuleLib->StartAll(module);
 
 	m_PlayState = EditorPlayState::Play;
 
@@ -446,7 +451,12 @@ void EditorState::OnStopPlay()
 {
 	EngineContext& ctx = GetContext();
 
-	StopNetwork();
+	ModuleContext module{};
+	module.BClasses = &BClassRegistry::Get();
+	module.NetReps = &NetRepRegistry::Get();
+	module.ServiceRegistry = ServiceLocator::GetRegistry();
+	module.EngineContext = &ctx;
+	m_pModuleLib->StopAll(module);
 
 	m_PlayState = EditorPlayState::Edit;
 
@@ -456,22 +466,4 @@ void EditorState::OnStopPlay()
 	ctx.Scenes->UnloadScene(sceneId);
 
 	ctx.EventBus->Post(EditorPlayStateChangeEvent(m_PlayState));
-}
-
-void EditorState::StartNetwork()
-{
-	EngineContext& ctx = GetContext();
-	if (NetworkingSubsystem* network = ctx.TryGetSubsystem<NetworkingSubsystem>())
-	{
-		network->StartNetwork(Application::Get().GetDescriptor().Network, ctx);
-	}
-}
-
-void EditorState::StopNetwork()
-{
-	EngineContext& ctx = GetContext();
-	if (NetworkingSubsystem* network = ctx.TryGetSubsystem<NetworkingSubsystem>())
-	{
-		network->StopNetwork();
-	}
 }

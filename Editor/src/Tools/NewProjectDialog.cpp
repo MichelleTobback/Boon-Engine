@@ -146,7 +146,7 @@ void NewProjectDialog::RenderDialog()
     if (ImGui::Button("Create", ImVec2(120.0f, 0.0f)))
     {
         if (m_Settings.TemplateFolder == "Default")
-            m_Settings.TemplateFolder = (GetContext().GetCurrentProjectConfig().Editor.EditorResourcesRoot / "Templates").string();
+            m_Settings.TemplateFolder = (GetContext().GetCurrentProjectConfig().Editor.EditorResourcesRoot / "Templates" / "NewProject").string();
 
         if (Validate())
         {

@@ -1,0 +1,31 @@
+@@include/{{PROJECT_NAME}}Instance.h
+#pragma once
+
+#include <Module/ModuleInstance.h>
+
+class {{PROJECT_NAME}}Instance final : public Boon::ModuleInstance
+{
+public:
+    bool OnInitialize(Boon::ModuleContext& context) override;
+    void OnShutdown(Boon::ModuleContext& context) override;
+};
+
+@@src/{{PROJECT_NAME}}Instance.cpp
+#include "{{PROJECT_NAME}}Instance.h"
+
+bool {{PROJECT_NAME}}Instance::OnInitialize(Boon::ModuleContext&)
+{
+    return true;
+}
+
+void {{PROJECT_NAME}}Instance::OnShutdown(Boon::ModuleContext&)
+{
+}
+
+BOON_IMPLEMENT_MODULE_INSTANCE({{PROJECT_NAME}}Instance)
+
+@@Assets/Scenes/Main.scene
+{
+    "objects": [],
+    "scene": "Main"
+}

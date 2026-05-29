@@ -5,6 +5,7 @@
 #include "ProjectRulesReader.h"
 #include "ProjectTemplateBuilder.h"
 #include "TemplateFileGenerator.h"
+#include "ModuleDependencyGraph.h"
 
 #include "Tools/TemplateProcessor.h"
 
@@ -60,6 +61,17 @@ namespace BoonBuild
 
         if (!rulesReader.ReadAllModules(modulesDir, modules))
             return false;
+
+        std::vector<ModuleRules> sortedModules;
+        std::string dependencyError;
+
+        if (!ModuleDependencyGraph::Sort(modules, sortedModules, dependencyError))
+        {
+            std::cerr << dependencyError << "\n";
+            return false;
+        }
+
+        modules = std::move(sortedModules);
 
         std::filesystem::create_directories(generatedDir);
 

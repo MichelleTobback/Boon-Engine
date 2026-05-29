@@ -118,11 +118,6 @@ void BoonEditor::NetworkPanel::OnRenderUI()
 {
 	NetworkingSubsystem* netSubsystem = GetContext().GetEngineContext().TryGetSubsystem<NetworkingSubsystem>();
 
-	if (!netSubsystem)
-	{
-		return;
-	}
-
 	static std::vector<const char*> modes =
 	{
 		"Standalone",
@@ -174,8 +169,7 @@ void BoonEditor::NetworkPanel::OnRenderUI()
 
 		ImGui::SameLine();
 
-		NetworkSettings& settings = netSubsystem->GetSettings();
-		NetDriver& driver = netSubsystem->GetDriver();
+		NetworkSettings& settings = GetContext().GetEngineContext().ProjectConfig->Network;
 
 		const char* modeText =
 			modes[std::clamp(static_cast<int>(settings.NetMode), 0, static_cast<int>(modes.size()) - 1)];
@@ -213,14 +207,19 @@ void BoonEditor::NetworkPanel::OnRenderUI()
 		ImGui::TextDisabled("%s  Runtime", ICON_FA_SIGNAL);
 		ImGui::Separator();
 
-		//if (!m_pDriver)
-		//{
-		//	DrawStatusPill(ICON_FA_POWER_OFF, "Driver inactive", false);
-		//	ImGui::TextDisabled("No active network driver is assigned.");
-		//}
-		//else if (m_pDriver->IsServer())
-		if (driver.IsServer())
+		if (!netSubsystem)
 		{
+			DrawStatusPill(ICON_FA_POWER_OFF, "Driver inactive", false);
+			ImGui::TextDisabled("No active network driver is assigned.");
+		}
+		if (!netSubsystem->GetDriver().IsRunning())
+		{
+			DrawStatusPill(ICON_FA_POWER_OFF, "Driver inactive", false);
+		}
+		else if (netSubsystem->GetDriver().IsServer())
+		{
+			NetDriver& driver = netSubsystem->GetDriver();
+
 			DrawStatusPill(ICON_FA_SERVER, "Running", true);
 
 			ImGui::Spacing();
@@ -251,8 +250,10 @@ void BoonEditor::NetworkPanel::OnRenderUI()
 			if (connectionCount == 0)
 				ImGui::TextDisabled("No clients connected.");
 		}
-		else if (driver.IsClient())
+		else if (netSubsystem->GetDriver().IsClient())
 		{
+			NetDriver& driver = netSubsystem->GetDriver();
+
 			if (driver.GetConnectionCount() == 0)
 			{
 				DrawStatusPill(ICON_FA_PLUG_CIRCLE_XMARK, "Not connected", false);

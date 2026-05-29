@@ -29,7 +29,7 @@ namespace Boon
             m_Scene->GetOnComponentAdded() += [this](GameObject  obj, const BClass* cls) {BroadcastComponent(obj.GetUUID(), cls->hash, true); };
             m_Scene->GetOnComponentRemoved() += [this](GameObject  obj, const BClass* cls) {BroadcastComponent(obj.GetUUID(), cls->hash, false); };
 
-            driver->GetEventBus().Subscribe<NetConnectionEvent>([this](const NetConnectionEvent& e)
+            m_ClientConnectedEvent = driver->GetEventBus().Subscribe<NetConnectionEvent>([this](const NetConnectionEvent& e)
                 {
                     NetConnection con{ e.ConnectionId, GetDriver() };
                     InitClientScene(&con);

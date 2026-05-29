@@ -25,6 +25,10 @@ void NetworkingSubsystem::OnShutdown(EngineContext&)
 void NetworkingSubsystem::StartNetwork(NetworkSettings settings, EngineContext& ctx)
 {
     m_Settings = settings;
+
+    if (m_Driver->IsRunning())
+        return;
+
     m_Driver->Initialize(settings, ctx.EventBus);
 
 	if (!m_Driver->IsStandalone())
@@ -33,13 +37,22 @@ void NetworkingSubsystem::StartNetwork(NetworkSettings settings, EngineContext& 
 		m_Driver->BindOnDisconnectedCallback([this](NetConnection* pConnection) {OnDisconnected(pConnection); });
 		m_Driver->BindOnPacketCallback([this](NetConnection* pConnection, NetPacket& packet) { OnPacketReceived(pConnection, packet); });
 
-		m_BindNetSceneHandle = ctx.Scenes->BindOnSceneChanged([&ctx, this](Scene& e)
-			{
-				Scene& scene = ctx.Scenes->GetActiveScene();
-				auto& driver = ctx.GetSubsystem<NetworkingSubsystem>().GetDriver();
-				auto pScene{ std::make_shared<NetScene>(&scene, &driver , ctx.Scenes) };
-				driver.BindScene(pScene);
-			});
+        m_BindNetSceneHandle = ctx.Scenes->BindOnSceneChanged([](Scene& scene)
+            {
+                EngineContext& engine = scene.GetEngineContext();
+
+                if (!engine.Scenes)
+                    return;
+
+                NetworkingSubsystem* net = engine.TryGetSubsystem<NetworkingSubsystem>();
+                if (!net)
+                    return;
+
+                NetDriver& driver = net->GetDriver();
+
+                auto netScene = std::make_shared<NetScene>(&scene, &driver, engine.Scenes);
+                driver.BindScene(netScene);
+            });
 
 		if (m_Driver->IsClient())
 		{
@@ -53,13 +66,13 @@ void NetworkingSubsystem::StopNetwork()
     if (m_BindNetSceneHandle.IsValid())
         m_pEngineContext->Scenes->UnbindOnSceneChanged(m_BindNetSceneHandle);
 
-    if (m_Driver)
+    if (m_Driver && m_Driver->IsRunning())
         m_Driver->Shutdown();
 }
 
 void NetworkingSubsystem::Update(EngineContext& ctx)
 {
-    if (m_Driver)
+    if (m_Driver && m_Driver->IsRunning())
         m_Driver->Update();
 }
 

@@ -7,6 +7,10 @@
 #include <filesystem>
 #include <iostream>
 
+#ifdef _WIN32
+    #include <Windows.h>
+#endif
+
 namespace Boon
 {
     ModuleLibrary::ModuleLibrary(const std::filesystem::path& projectRoot)
@@ -50,6 +54,24 @@ namespace Boon
         }
 
         return result;
+    }
+
+    void ModuleLibrary::StartAll(ModuleContext& ctx)
+    {
+        for (const auto& module : m_Modules)
+        {
+            if (module.Instance)
+                module.Instance->OnStart(ctx);
+        }
+    }
+
+    void ModuleLibrary::StopAll(ModuleContext& ctx)
+    {
+        for (const auto& module : m_Modules)
+        {
+            if (module.Instance)
+                module.Instance->OnStop(ctx);
+        }
     }
 
     bool ModuleLibrary::LoadModule(const std::string& name, ModuleContext& ctx)
@@ -119,6 +141,8 @@ namespace Boon
 
     void ModuleLibrary::UnloadAll(ModuleContext& ctx)
     {
+        StopAll(ctx);
+
         for (auto it = m_Modules.rbegin(); it != m_Modules.rend(); ++it)
         {
             if (it->UnregisterFn)
@@ -323,7 +347,18 @@ namespace Boon
         const std::string stem = originalPath.stem().string();
         const std::string ext = originalPath.extension().string();
 
-        return dir / (stem + ".loaded." + std::to_string(generation) + ext);
+#ifdef _WIN32
+        const uint32_t processId = static_cast<uint32_t>(::GetCurrentProcessId());
+#else
+        const uint32_t processId = static_cast<uint32_t>(::getpid());
+#endif
+
+        return dir / (
+            stem +
+            ".pid" + std::to_string(processId) +
+            ".loaded." + std::to_string(generation) +
+            ext
+            );
     }
 
     bool ModuleLibrary::CopyModuleForHotReload(

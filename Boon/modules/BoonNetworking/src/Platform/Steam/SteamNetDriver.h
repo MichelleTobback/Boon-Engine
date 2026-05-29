@@ -59,6 +59,8 @@ namespace Boon
         // Client connect
         virtual bool Connect(const char* host, uint16_t port) override;
 
+        virtual bool IsRunning() const override { return s_Instance; }
+
         // ---------------------------------------------------------
         // Callback Dispatchers (Static entrypoint → instance)
         // ---------------------------------------------------------

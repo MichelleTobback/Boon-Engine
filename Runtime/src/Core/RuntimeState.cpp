@@ -17,9 +17,6 @@
 #include <Event/WindowEvents.h>
 #include <Event/SceneEvents.h>
 
-#include <Networking/NetworkingSubsystem.h>
-#include <Networking/NetScene.h>
-#include <Networking/Events/NetConnectionEvent.h>
 #include <Networking/NetRepRegistry.h>
 
 #include <Module/ModuleLibrary.h>
@@ -44,10 +41,6 @@ void Runtime::RuntimeState::OnEnter()
 
 	const RuntimeConfig& config{ Application::Get().GetDescriptor() };
 	Window& window{ *ctx.Window };
-
-	m_NetworkSettings = config.Network;
-	ctx.Subsystems->Register<NetworkingSubsystem>(m_NetworkSettings);
-	StartNetwork();
 
 	AssetLibrary& assetLib = *ctx.AssetLib;
 	const std::filesystem::path assetRoot = config.ProjectRoot / "generated/Assets";
@@ -91,6 +84,8 @@ void Runtime::RuntimeState::OnEnter()
 
 	ctx.Subsystems->InitAll(ctx);
 
+	m_pModuleLib->StartAll(module);
+
 	Scene& scene = sceneManager.CreateScene("scene");
 	SceneSerializer serializer(scene);
 	serializer.Deserialize(config.AssetsRoot / config.StartupScene);
@@ -124,8 +119,6 @@ void Runtime::RuntimeState::OnExit()
 	eventBus.Unsubscribe<WindowResizeEvent>(m_WindowResizeEvent);
 	eventBus.Unsubscribe<SceneChangedEvent>(m_SceneChangedEvent);
 
-	StopNetwork();
-
 	SceneManager& sceneManager = *ctx.Scenes;
 	sceneManager.UnloadAll();
 
@@ -140,59 +133,6 @@ void Runtime::RuntimeState::OnExit()
 	AssetLibrary& assetLib = *ctx.AssetLib;
 	assetLib.ClearCache();
 	assetLib.ClearRegistry();
-}
-
-void Runtime::RuntimeState::StartNetwork()
-{
-	EngineContext& ctx = GetContext();
-	NetworkingSubsystem& network = ctx.GetSubsystem<NetworkingSubsystem>();
-	NetDriver& driver = network.GetDriver();
-
-	network.StartNetwork(m_NetworkSettings, ctx);
-	if (!driver.IsStandalone())
-	{
-		driver.BindOnConnectedCallback([this](NetConnection* pConnection) {OnConnected(pConnection); });
-		driver.BindOnDisconnectedCallback([this](NetConnection* pConnection) {OnDisconnected(pConnection); });
-		driver.BindOnPacketCallback([this](NetConnection* pConnection, NetPacket& packet) { OnPacketReceived(pConnection, packet); });
-
-		m_BindNetSceneHandle = ctx.Scenes->BindOnSceneChanged([&ctx, this](Scene& e)
-			{
-				Scene& scene = ctx.Scenes->GetActiveScene();
-				auto& driver = ctx.GetSubsystem<NetworkingSubsystem>().GetDriver();
-				auto pScene{ std::make_shared<NetScene>(&scene, &driver , ctx.Scenes) };
-				driver.BindScene(pScene);
-			});
-
-		if (driver.IsClient())
-		{
-			driver.Connect(m_NetworkSettings.Ip.c_str(), m_NetworkSettings.Port);
-		}
-	}
-}
-
-void Runtime::RuntimeState::StopNetwork()
-{
-	EngineContext& ctx = GetContext();
-
-	if (m_BindNetSceneHandle.IsValid())
-		GetContext().Scenes->UnbindOnSceneChanged(m_BindNetSceneHandle);
-
-	ctx.GetSubsystem<NetworkingSubsystem>().StopNetwork();
-}
-
-void Runtime::RuntimeState::OnConnected(NetConnection* pConnection)
-{
-	GetContext().EventBus->Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Connected));
-}
-
-void Runtime::RuntimeState::OnDisconnected(NetConnection* pConnection)
-{
-	GetContext().EventBus->Post(Boon::NetConnectionEvent(pConnection->GetId(), Boon::ENetConnectionState::Disconnected));
-}
-
-void Runtime::RuntimeState::OnPacketReceived(NetConnection* pConnection, NetPacket& packet)
-{
-
 }
 
 void Runtime::RuntimeState::OnRender()
