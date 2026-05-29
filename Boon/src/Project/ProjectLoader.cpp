@@ -7,6 +7,11 @@
 
 #include <windows.h>
 
+#ifndef _WIN32
+    #include <unistd.h>
+#endif
+#include <cstdlib>
+
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
@@ -92,7 +97,7 @@ namespace Boon
     {
         //if (j.contains("ProjectRoot"))       j.at("ProjectRoot").get_to(r.ProjectRoot);
         if (j.contains("AssetsRoot"))        j.at("AssetsRoot").get_to(r.AssetsRoot);
-        if (j.contains("EngineContentRoot"))  j.at("EngineContentRoot").get_to(r.EngineContentRoot);
+        //if (j.contains("EngineContentRoot"))  j.at("EngineContentRoot").get_to(r.EngineContentRoot);
         //if (j.contains("SavedRoot"))         j.at("SavedRoot").get_to(r.SavedRoot);
 
         if (j.contains("StartupScene")) j.at("StartupScene").get_to(r.StartupScene);
@@ -115,7 +120,7 @@ namespace Boon
         j = json{
             //{ "ProjectRoot",      r.ProjectRoot.string() },
             { "AssetsRoot",       r.AssetsRoot.string() },
-            { "EngineContentRoot", r.EngineContentRoot.string() },
+            // "EngineContentRoot", r.EngineContentRoot.string() },
             //{ "SavedRoot",        r.SavedRoot.string() },
             { "StartupScene",     r.StartupScene },
             { "GameModule",       r.GameModule },
@@ -158,9 +163,89 @@ namespace Boon
 
     std::filesystem::path GetExecutablePath()
     {
+#ifdef _WIN32
         wchar_t buffer[MAX_PATH];
         GetModuleFileNameW(nullptr, buffer, MAX_PATH);
         return std::filesystem::path(buffer);
+#else
+        char buffer[4096];
+        ssize_t count = readlink("/proc/self/exe", buffer, sizeof(buffer) - 1);
+        if (count <= 0)
+            return {};
+
+        buffer[count] = '\0';
+        return std::filesystem::path(buffer);
+#endif
+    }
+
+    static std::filesystem::path GetEnvPath(const char* name)
+    {
+        const char* value = std::getenv(name);
+        if (!value || !*value)
+            return {};
+
+        return std::filesystem::path(value);
+    }
+
+    static std::filesystem::path ResolveSdkRoot()
+    {
+        if (auto sdk = GetEnvPath("BOON_SDK_ROOT"); !sdk.empty())
+            return sdk.lexically_normal();
+
+        if (auto engine = GetEnvPath("BOON_ENGINE_ROOT"); !engine.empty())
+            return engine.lexically_normal();
+
+        return {};
+    }
+
+    static std::filesystem::path ResolveInstallRoot()
+    {
+        if (auto install = GetEnvPath("BOON_INSTALL_ROOT"); !install.empty())
+            return install.lexically_normal();
+
+        if (auto engine = GetEnvPath("BOON_ENGINE_ROOT"); !engine.empty())
+            return engine.lexically_normal();
+
+        return {};
+    }
+
+    static std::filesystem::path ResolveEditorResourcesRoot()
+    {
+        const std::filesystem::path exeDir = GetExecutablePath().parent_path();
+
+        const std::filesystem::path installedEditorAssets = exeDir / "Assets";
+        if (std::filesystem::exists(installedEditorAssets))
+            return installedEditorAssets.lexically_normal();
+
+        const std::filesystem::path installRoot = ResolveInstallRoot();
+
+        if (!installRoot.empty())
+        {
+            const std::filesystem::path installEditorAssets =
+                installRoot / "Editor" / "Assets";
+
+            if (std::filesystem::exists(installEditorAssets))
+                return installEditorAssets.lexically_normal();
+        }
+
+        const std::filesystem::path sourceEditorAssets =
+            exeDir / ".." / ".." / ".." / "Editor" / "Assets";
+
+        if (std::filesystem::exists(sourceEditorAssets))
+            return sourceEditorAssets.lexically_normal();
+
+        return installedEditorAssets.lexically_normal();
+    }
+
+    static std::filesystem::path ResolveEngineContentRoot()
+    {
+        const std::filesystem::path sdkRoot = ResolveSdkRoot();
+
+        if (!sdkRoot.empty())
+            return (sdkRoot / "Boon" / "Assets").lexically_normal();
+
+        const std::filesystem::path exeDir = GetExecutablePath().parent_path();
+        return (exeDir / ".." / ".." / ".." / "Boon" / "Assets").lexically_normal();
     }
 
     TResult<ProjectConfig> ProjectLoader::LoadFromFile(const std::filesystem::path& projectFilePath)
@@ -274,10 +359,15 @@ namespace Boon
         if (config.Runtime.Window.Title.empty())
             config.Runtime.Window.Title = config.Name;
 
-        config.Runtime.EngineRoot = (s_exepath / "../Boon").lexically_normal();
-        config.Runtime.EngineContentRoot = (config.Runtime.EngineRoot / "Assets").lexically_normal();
+        const std::filesystem::path sdkRoot = ResolveSdkRoot();
 
-        config.Editor.EditorResourcesRoot = s_exepath / "Assets";
+        if (!sdkRoot.empty())
+            config.Runtime.EngineRoot = (sdkRoot / "Boon").lexically_normal();
+        else
+            config.Runtime.EngineRoot = (s_exepath / ".." / ".." / ".." / "Boon").lexically_normal();
+
+        config.Runtime.EngineContentRoot = ResolveEngineContentRoot();
+        config.Editor.EditorResourcesRoot = ResolveEditorResourcesRoot();
     }
 
     bool ProjectLoader::SaveToFile(const std::filesystem::path& location, const ProjectConfig& projectConfig)

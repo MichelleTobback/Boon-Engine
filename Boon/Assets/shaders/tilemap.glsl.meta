@@ -1,4 +1,8 @@
 {
+    "dependencies": [],
+    "runtimePath": "Assets/Tilemap_14998446311549633941.basset",
+    "settings": {},
+    "sourcePath": "shaders/Tilemap.glsl",
     "type": 2,
     "uuid": 14998446311549633941
 }

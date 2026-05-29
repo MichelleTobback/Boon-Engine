@@ -11,6 +11,8 @@
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
 
+#include <BoonDebug/Logger.h>
+
 // TEMPORARY
 #include <GLFW/glfw3.h>
 
@@ -264,6 +266,42 @@ public:
     }
 
 private:
+    static std::string ToUtf8Path(const std::filesystem::path& path)
+    {
+        const auto u8 = path.u8string();
+        return std::string(u8.begin(), u8.end());
+    }
+
+    static ImFont* LoadFontOrDefault(
+        ImGuiIO& io,
+        const std::filesystem::path& path,
+        float size,
+        const ImFontConfig* config = nullptr,
+        const ImWchar* ranges = nullptr)
+    {
+        const std::string pathUtf8 = ToUtf8Path(path);
+
+        if (!std::filesystem::exists(path))
+        {
+            BOON_LOG_ERROR("Missing font: {}", path.string());
+            return io.Fonts->AddFontDefault();
+        }
+
+        ImFont* font = io.Fonts->AddFontFromFileTTF(
+            pathUtf8.c_str(),
+            size,
+            config,
+            ranges);
+
+        if (!font)
+        {
+            BOON_LOG_ERROR("Failed to load font: {}", pathUtf8);
+            return io.Fonts->AddFontDefault();
+        }
+
+        return font;
+    }
+
     void LoadFonts(ImGuiIO& io, const ProjectConfig& config)
     {
         constexpr float baseFontSize = 15.0f;
@@ -272,17 +310,12 @@ private:
         const auto fontsRoot =
             config.Editor.EditorResourcesRoot / "Fonts";
 
-        // ------------------------------------------------------------
-        // Main font
-        // ------------------------------------------------------------
+        BOON_LOG("FontsRoot = {}", fontsRoot.string());
 
-        m_Fonts.Regular = io.Fonts->AddFontFromFileTTF(
-            (fontsRoot / "Inter-Regular.ttf").string().c_str(),
+        m_Fonts.Regular = LoadFontOrDefault(
+            io,
+            fontsRoot / "Inter-Regular.ttf",
             baseFontSize);
-
-        // ------------------------------------------------------------
-        // Merge icons INTO regular font
-        // ------------------------------------------------------------
 
         static constexpr ImWchar iconRanges[] =
         {
@@ -295,32 +328,31 @@ private:
         iconConfig.MergeMode = true;
         iconConfig.PixelSnapH = true;
 
-        ImFont* iconFont = io.Fonts->AddFontFromFileTTF(
-            (fontsRoot / "Font Awesome 7 Free-Solid-900.otf").string().c_str(),
+        LoadFontOrDefault(
+            io,
+            fontsRoot / "Font Awesome 7 Free-Solid-900.otf",
             iconFontSize,
             &iconConfig,
             iconRanges);
 
-        IM_ASSERT(iconFont && "Failed to load Font Awesome icon font");
-
-        // ------------------------------------------------------------
-        // Other fonts
-        // ------------------------------------------------------------
-
-        m_Fonts.Medium = io.Fonts->AddFontFromFileTTF(
-            (fontsRoot / "Inter-Medium.ttf").string().c_str(),
+        m_Fonts.Medium = LoadFontOrDefault(
+            io,
+            fontsRoot / "Inter-Medium.ttf",
             baseFontSize);
 
-        m_Fonts.Title = io.Fonts->AddFontFromFileTTF(
-            (fontsRoot / "Inter-SemiBold.ttf").string().c_str(),
+        m_Fonts.Title = LoadFontOrDefault(
+            io,
+            fontsRoot / "Inter-SemiBold.ttf",
             baseFontSize);
 
-        m_Fonts.Small = io.Fonts->AddFontFromFileTTF(
-            (fontsRoot / "Inter-Regular.ttf").string().c_str(),
+        m_Fonts.Small = LoadFontOrDefault(
+            io,
+            fontsRoot / "Inter-Regular.ttf",
             baseFontSize);
 
-        m_Fonts.Mono = io.Fonts->AddFontFromFileTTF(
-            (fontsRoot / "JetBrainsMono-Regular.ttf").string().c_str(),
+        m_Fonts.Mono = LoadFontOrDefault(
+            io,
+            fontsRoot / "JetBrainsMono-Regular.ttf",
             baseFontSize);
 
         if (m_Fonts.Regular)

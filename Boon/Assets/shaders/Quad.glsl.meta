@@ -1,4 +1,8 @@
 {
+    "dependencies": [],
+    "runtimePath": "Assets/Quad_1618430124875277533.basset",
+    "settings": {},
+    "sourcePath": "shaders/Quad.glsl",
     "type": 2,
     "uuid": 1618430124875277533
 }

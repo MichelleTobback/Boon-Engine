@@ -1,4 +1,8 @@
 {
+    "dependencies": [],
+    "runtimePath": "Assets/Line_16944261312327632522.basset",
+    "settings": {},
+    "sourcePath": "shaders/Line.glsl",
     "type": 2,
     "uuid": 16944261312327632522
 }
