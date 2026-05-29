@@ -16,7 +16,12 @@
             "binaryDir": "${sourceDir}/out/build/Windows-Debug",
             "cacheVariables": {
                 "BOON_BUILD_PROFILE": "Windows-Debug",
+                "BOON_PLATFORM_ANDROID": "OFF",
+                "BOON_PLATFORM_LINUX": "OFF",
+                "BOON_PLATFORM_WEB": "OFF",
+                "BOON_PLATFORM_WINDOWS": "ON",
                 "BOON_REPO_ROOT": "D:/Projects/BoonEngine/Boon-Engine",
+                "BOON_SDK_ROOT": "D:/Projects/BoonEngine/Boon-Engine",
                 "CMAKE_BUILD_TYPE": "Debug"
             },
             "displayName": "Windows-Debug",
@@ -27,7 +32,12 @@
             "binaryDir": "${sourceDir}/out/build/Windows-Release",
             "cacheVariables": {
                 "BOON_BUILD_PROFILE": "Windows-Release",
+                "BOON_PLATFORM_ANDROID": "OFF",
+                "BOON_PLATFORM_LINUX": "OFF",
+                "BOON_PLATFORM_WEB": "OFF",
+                "BOON_PLATFORM_WINDOWS": "ON",
                 "BOON_REPO_ROOT": "D:/Projects/BoonEngine/Boon-Engine",
+                "BOON_SDK_ROOT": "D:/Projects/BoonEngine/Boon-Engine",
                 "CMAKE_BUILD_TYPE": "Release"
             },
             "displayName": "Windows-Release",

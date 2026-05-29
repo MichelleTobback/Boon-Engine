@@ -10,46 +10,40 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # ----------------------------------------
-# Boon paths
+# Boon SDK path
 # ----------------------------------------
-if(NOT BOON_REPO_ROOT)
-    if(DEFINED ENV{BOON_REPO_ROOT})
-        set(BOON_REPO_ROOT "$ENV{BOON_REPO_ROOT}")
+if(NOT BOON_SDK_ROOT)
+    if(DEFINED ENV{BOON_SDK_ROOT})
+        set(BOON_SDK_ROOT "$ENV{BOON_SDK_ROOT}")
     elseif(DEFINED ENV{BOON_ENGINE_ROOT})
-        set(BOON_REPO_ROOT "$ENV{BOON_ENGINE_ROOT}")
+        set(BOON_SDK_ROOT "$ENV{BOON_ENGINE_ROOT}")
     endif()
 endif()
 
-set(BOON_REPO_ROOT
-    "${BOON_REPO_ROOT}"
+set(BOON_SDK_ROOT
+    "${BOON_SDK_ROOT}"
     CACHE PATH
-    "Path to Boon repository root"
+    "Path to Boon SDK root"
 )
 
-if(NOT BOON_REPO_ROOT OR NOT EXISTS "${BOON_REPO_ROOT}/Boon/CMakeLists.txt")
+# If BOON_SDK_ROOT points directly to .../Boon, normalize back to repo/sdk root.
+if(EXISTS "${BOON_SDK_ROOT}/tools/BClassGenerator/BoonReflection.cmake")
+    get_filename_component(BOON_SDK_ROOT "${BOON_SDK_ROOT}/.." ABSOLUTE)
+    set(BOON_SDK_ROOT "${BOON_SDK_ROOT}" CACHE PATH "Path to Boon SDK root" FORCE)
+endif()
+
+if(NOT BOON_SDK_ROOT OR NOT EXISTS "${BOON_SDK_ROOT}/Boon/CMakeLists.txt")
     message(FATAL_ERROR
-        "Boon repository not found.\n"
-        "Pass -DBOON_REPO_ROOT=<path>"
+        "Boon SDK not found.\n"
+        "BOON_SDK_ROOT = ${BOON_SDK_ROOT}\n"
+        "Expected: ${BOON_SDK_ROOT}/Boon/CMakeLists.txt"
     )
 endif()
 
-set(BOON_ENGINE_ROOT
-    "${BOON_REPO_ROOT}/Boon"
-    CACHE PATH
-    "Path to Boon engine root"
-    FORCE
-)
+set(BOON_REPO_ROOT "${BOON_SDK_ROOT}" CACHE PATH "Compatibility alias" FORCE)
+set(BOON_ENGINE_ROOT "${BOON_SDK_ROOT}/Boon" CACHE PATH "Path to Boon engine root" FORCE)
+set(BOON_CMAKE_DIR "${BOON_ENGINE_ROOT}/cmake" CACHE PATH "Path to Boon CMake helper directory" FORCE)
 
-set(BOON_CMAKE_DIR
-    "${BOON_ENGINE_ROOT}/cmake"
-    CACHE PATH
-    "Path to Boon cmake helpers"
-    FORCE
-)
-
-# ----------------------------------------
-# Shared output helper
-# ----------------------------------------
 function(boon_set_output_dirs target subdir)
     set_target_properties(${target} PROPERTIES
         ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>/${subdir}"
@@ -58,16 +52,26 @@ function(boon_set_output_dirs target subdir)
     )
 endfunction()
 
-# ----------------------------------------
-# Reflection
-# ----------------------------------------
 if(NOT TARGET GenerateReflection)
     add_custom_target(GenerateReflection)
 endif()
 
+# Source/dev layout:
 set(BOON_BCLASSGENERATOR_EXE
-    "${BOON_REPO_ROOT}/bin/Debug/Tools/BClassGenerator.exe"
+    "${BOON_SDK_ROOT}/bin/Debug/Tools/BClassGenerator.exe"
+    CACHE FILEPATH
+    "Path to BClassGenerator executable"
 )
+
+# Installed layout fallback:
+if(NOT EXISTS "${BOON_BCLASSGENERATOR_EXE}" AND DEFINED ENV{BOON_INSTALL_ROOT})
+    set(BOON_BCLASSGENERATOR_EXE
+        "$ENV{BOON_INSTALL_ROOT}/Tools/BClassGenerator.exe"
+        CACHE FILEPATH
+        "Path to BClassGenerator executable"
+        FORCE
+    )
+endif()
 
 if(NOT EXISTS "${BOON_BCLASSGENERATOR_EXE}")
     message(FATAL_ERROR
@@ -78,7 +82,6 @@ endif()
 
 if(NOT TARGET BClassGenerator)
     add_executable(BClassGenerator IMPORTED GLOBAL)
-
     set_target_properties(BClassGenerator PROPERTIES
         IMPORTED_LOCATION "${BOON_BCLASSGENERATOR_EXE}"
     )
@@ -86,9 +89,6 @@ endif()
 
 include("${BOON_ENGINE_ROOT}/tools/BClassGenerator/BoonReflection.cmake")
 
-# ----------------------------------------
-# Engine
-# ----------------------------------------
 if(NOT TARGET BoonEngine)
     add_subdirectory(
         "${BOON_ENGINE_ROOT}"
@@ -96,14 +96,8 @@ if(NOT TARGET BoonEngine)
     )
 endif()
 
-# ----------------------------------------
-# Generated Engine Modules
-# ----------------------------------------
 boon_add_engine_modules()
 
-# ----------------------------------------
-# Generated Project
-# ----------------------------------------
 add_subdirectory(
     "${CMAKE_CURRENT_LIST_DIR}/generated"
     "${CMAKE_BINARY_DIR}/{{PROJECT_NAME}}_Generated"
@@ -143,6 +137,18 @@ add_subdirectory(
 
         "Windows-Release": {
             "platform": "Windows",
+            "configuration": "Release",
+            "generator": "Ninja"
+        },
+
+        "Linux-Debug": {
+            "platform": "Linux",
+            "configuration": "Debug",
+            "generator": "Ninja"
+        },
+
+        "Linux-Release": {
+            "platform": "Linux",
             "configuration": "Release",
             "generator": "Ninja"
         }

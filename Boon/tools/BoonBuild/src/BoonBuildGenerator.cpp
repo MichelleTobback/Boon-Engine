@@ -208,35 +208,28 @@ namespace BoonBuild
         const std::filesystem::path& projectRoot,
         const std::string& profileName) const
     {
-        const char* repoRootEnv = std::getenv("BOON_REPO_ROOT");
-        const char* engineRootEnv = std::getenv("BOON_ENGINE_ROOT");
+        std::filesystem::path sdkRoot = ResolveSdkRoot();
 
-        std::filesystem::path repoRoot;
-
-        if (repoRootEnv && *repoRootEnv)
-            repoRoot = repoRootEnv;
-        else if (engineRootEnv && *engineRootEnv)
-            repoRoot = engineRootEnv;
-        else
+        if (sdkRoot.empty())
         {
-            std::cerr << "BOON_REPO_ROOT is not set.\n";
-            std::cerr << "Set it to your Boon repository root, for example:\n";
-            std::cerr << "  D:/Projects/BoonEngine/Boon-Engine\n";
+            std::cerr << "BOON_SDK_ROOT is not set.\n";
             return false;
         }
 
-        repoRoot = std::filesystem::absolute(repoRoot);
+        sdkRoot = std::filesystem::absolute(sdkRoot);
 
         if (std::filesystem::exists(
-            repoRoot / "tools" / "BClassGenerator" / "BoonReflection.cmake"))
+            sdkRoot / "tools" / "BClassGenerator" / "BoonReflection.cmake"))
         {
-            repoRoot = repoRoot.parent_path();
+            sdkRoot = sdkRoot.parent_path();
         }
 
-        if (!LooksLikeRepoRoot(repoRoot))
+        if (!std::filesystem::exists(sdkRoot / "Boon" / "CMakeLists.txt"))
         {
-            std::cerr << "Invalid BOON_REPO_ROOT:\n"
-                << repoRoot << "\n";
+            std::cerr << "Invalid BOON_SDK_ROOT:\n"
+                << sdkRoot << "\n";
+            std::cerr << "Expected:\n"
+                << (sdkRoot / "Boon" / "CMakeLists.txt") << "\n";
             return false;
         }
 
@@ -256,11 +249,18 @@ namespace BoonBuild
 
         CMakePresetsGenerator presetGenerator;
 
-        if (!presetGenerator.Generate(projectRoot, repoRoot, allProfiles))
+        if (!presetGenerator.Generate(projectRoot, sdkRoot, allProfiles))
             return false;
 
         const std::filesystem::path templatesDir =
-            repoRoot / "Boon" / "tools" / "BoonBuild" / "Templates";
+            sdkRoot / "Boon" / "tools" / "BoonBuild" / "Templates";
+
+        if (!std::filesystem::exists(templatesDir / "Project.btemplate"))
+        {
+            std::cerr << "Project template not found:\n"
+                << (templatesDir / "Project.btemplate") << "\n";
+            return false;
+        }
 
         ProjectRulesReader rulesReader;
         ProjectTemplateBuilder templateBuilder;
@@ -303,6 +303,10 @@ namespace BoonBuild
         context.Set("BUILD_GENERATOR", profile.Generator);
         context.Set("PLATFORM_COMPILE_DEFINITION", ToCompileDefinition(profile.Platform));
 
+        context.Set("BOON_SDK_ROOT", sdkRoot.string());
+        context.Set("BOON_REPO_ROOT", sdkRoot.string());
+        context.Set("BOON_ENGINE_ROOT", (sdkRoot / "Boon").string());
+
         if (!templateGenerator.Generate(
             templatesDir / "Project.btemplate",
             projectRoot,
@@ -318,5 +322,28 @@ namespace BoonBuild
             << ".\n";
 
         return true;
+    }
+
+    std::filesystem::path BoonBuildGenerator::ResolveSdkRoot()
+    {
+        if (const char* sdk = std::getenv("BOON_SDK_ROOT"))
+        {
+            if (*sdk)
+                return std::filesystem::path(sdk);
+        }
+
+        if (const char* engine = std::getenv("BOON_ENGINE_ROOT"))
+        {
+            if (*engine)
+                return std::filesystem::path(engine);
+        }
+
+        if (const char* repo = std::getenv("BOON_REPO_ROOT"))
+        {
+            if (*repo)
+                return std::filesystem::path(repo);
+        }
+
+        return {};
     }
 }

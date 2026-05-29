@@ -6,8 +6,7 @@ project(BoonToolsCommon LANGUAGES CXX)
 
 add_library(BoonToolsCommon STATIC
     src/TemplateProcessor.cpp
-    "include/Tools/TemplateProcessor.h"
-)
+    src/ProcessRunner.cpp)
 
 target_compile_features(BoonToolsCommon PUBLIC cxx_std_20)
 

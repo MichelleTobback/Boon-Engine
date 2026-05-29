@@ -10,6 +10,6 @@ namespace BoonBuild
     class CMakePresetsGenerator
     {
     public:
-        bool Generate(const std::filesystem::path& root, const std::filesystem::path& repoRoot, const std::vector<BuildProfile>& profiles) const;
+        bool Generate(const std::filesystem::path& root, const std::filesystem::path& sdkRoot, const std::vector<BuildProfile>& profiles) const;
     };
 }

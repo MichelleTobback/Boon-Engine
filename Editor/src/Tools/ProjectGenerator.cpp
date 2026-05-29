@@ -1,10 +1,12 @@
 #include "Tools/ProjectGenerator.h"
+
 #include "Project/ProjectLoader.h"
 #include "Tools/TemplateProcessor.h"
-#include "Utils/ProcessRunner.h"
+#include "Process/ProcessRunner.h"
 #include "BoonDebug/Logger.h"
 
 #include <algorithm>
+#include <cstdlib>
 #include <fstream>
 #include <future>
 #include <sstream>
@@ -20,19 +22,116 @@ namespace BoonEditor
             return "\"" + path.string() + "\"";
         }
 
-        static std::filesystem::path GetRepoRootFromEngineRoot(const std::filesystem::path& engineRoot)
+        static std::string QuoteArg(const std::string& value)
         {
-            // If EngineRoot points to .../Boon-Engine/Boon, return .../Boon-Engine
-            if (std::filesystem::exists(engineRoot / "tools" / "BClassGenerator" / "BoonReflection.cmake"))
-                return engineRoot.parent_path();
-
-            // If EngineRoot already points to .../Boon-Engine
-            return engineRoot;
+            return "\"" + value + "\"";
         }
 
-        static std::filesystem::path GetBoonBuildExe(const std::filesystem::path& repoRoot)
+        static std::filesystem::path GetEnvPath(const char* name)
         {
-            return repoRoot / "bin" / "Debug" / "Tools" / "BoonBuild.exe";
+            const char* value = std::getenv(name);
+
+            if (!value || !*value)
+                return {};
+
+            return std::filesystem::path(value);
+        }
+
+        static bool IsSourceRepoRoot(const std::filesystem::path& root)
+        {
+            return std::filesystem::exists(root / "Boon" / "CMakeLists.txt")
+                && std::filesystem::exists(root / "Boon" / "tools");
+        }
+
+        static bool IsInnerBoonRoot(const std::filesystem::path& root)
+        {
+            return std::filesystem::exists(root / "tools" / "BClassGenerator" / "BoonReflection.cmake");
+        }
+
+        static std::filesystem::path NormalizeSdkRoot(std::filesystem::path root)
+        {
+            if (root.empty())
+                return {};
+
+            root = std::filesystem::absolute(root);
+
+            if (IsInnerBoonRoot(root))
+                return root.parent_path();
+
+            return root;
+        }
+
+        static std::filesystem::path ResolveSdkRoot(const ProjectConfig& project)
+        {
+            if (!project.Runtime.EngineRoot.empty())
+                return NormalizeSdkRoot(project.Runtime.EngineRoot);
+
+            if (auto sdkRoot = GetEnvPath("BOON_SDK_ROOT"); !sdkRoot.empty())
+                return NormalizeSdkRoot(sdkRoot);
+
+            if (auto engineRoot = GetEnvPath("BOON_ENGINE_ROOT"); !engineRoot.empty())
+                return NormalizeSdkRoot(engineRoot);
+
+            if (auto installRoot = GetEnvPath("BOON_INSTALL_ROOT"); !installRoot.empty())
+            {
+                const auto sdk = installRoot / "SDK";
+
+                if (std::filesystem::exists(sdk / "Boon" / "CMakeLists.txt"))
+                    return NormalizeSdkRoot(sdk);
+
+                return NormalizeSdkRoot(installRoot);
+            }
+
+            return {};
+        }
+
+        static std::filesystem::path ResolveInstallRoot(const ProjectConfig& project)
+        {
+            if (auto installRoot = GetEnvPath("BOON_INSTALL_ROOT"); !installRoot.empty())
+                return std::filesystem::absolute(installRoot);
+
+            if (auto sdkRoot = GetEnvPath("BOON_SDK_ROOT"); !sdkRoot.empty())
+                return std::filesystem::absolute(sdkRoot);
+
+            if (auto engineRoot = GetEnvPath("BOON_ENGINE_ROOT"); !engineRoot.empty())
+                return NormalizeSdkRoot(engineRoot);
+
+            if (!project.Runtime.EngineRoot.empty())
+                return NormalizeSdkRoot(project.Runtime.EngineRoot);
+
+            return {};
+        }
+
+        static std::filesystem::path GetBoonBuildExe(const ProjectConfig& project)
+        {
+            const auto installRoot = ResolveInstallRoot(project);
+            const auto sdkRoot = ResolveSdkRoot(project);
+
+#ifdef _WIN32
+            constexpr const char* exeName = "BoonBuild.exe";
+#else
+            constexpr const char* exeName = "BoonBuild";
+#endif
+
+            const std::filesystem::path installedTool =
+                installRoot / "Tools" / exeName;
+
+            if (std::filesystem::exists(installedTool))
+                return installedTool;
+
+            const std::filesystem::path sourceTool =
+                sdkRoot / "bin" / "Debug" / "Tools" / exeName;
+
+            if (std::filesystem::exists(sourceTool))
+                return sourceTool;
+
+            const std::filesystem::path fallbackTool =
+                installRoot / "bin" / "Debug" / "Tools" / exeName;
+
+            if (std::filesystem::exists(fallbackTool))
+                return fallbackTool;
+
+            return installedTool;
         }
     }
 
@@ -45,30 +144,37 @@ namespace BoonEditor
         InitializeProject(project, desc);
         GenerateFilesFromTemplates(desc.TemplateFolder, project, desc);
 
-        sProjectBuildFuture = std::async(std::launch::async, [project]()
-            {
-                std::string log{};
+        if (desc.BuildAfterGenerate)
+        {
+            const std::string profile = desc.BuildProfile.empty()
+                ? "Windows-Debug"
+                : desc.BuildProfile;
 
-                if (!GenerateBoonBuildProject(project, log))
+            sProjectBuildFuture = std::async(std::launch::async, [project, profile]()
                 {
-                    BOON_LOG_ERROR("BoonBuild project generation failed!");
-                    return;
-                }
+                    std::string log{};
 
-                if (!Configure(project, project.Runtime.ProjectRoot / "build", log))
-                {
-                    BOON_LOG_ERROR("CMake configure failed!");
-                    return;
-                }
+                    if (!GenerateBoonBuildProject(project, profile, log))
+                    {
+                        BOON_LOG_ERROR("BoonBuild project generation failed!");
+                        return;
+                    }
 
-                if (!Build(project.Runtime.ProjectRoot / "build", "Debug", log))
-                {
-                    BOON_LOG_ERROR("Build failed!");
-                    return;
-                }
+                    if (!Configure(project, profile, log))
+                    {
+                        BOON_LOG_ERROR("CMake configure failed!");
+                        return;
+                    }
 
-                BOON_LOG("Build complete");
-            });
+                    if (!Build(project, profile, log))
+                    {
+                        BOON_LOG_ERROR("Build failed!");
+                        return;
+                    }
+
+                    BOON_LOG("Build complete");
+                });
+        }
 
         return project;
     }
@@ -84,6 +190,12 @@ namespace BoonEditor
         project.Runtime.EnabledModules = { desc.Name };
         project.Runtime.ProjectRoot = std::filesystem::path(desc.Location) / desc.Name;
 
+        const std::filesystem::path sdkRoot =
+            desc.EngineRoot.empty()
+            ? ResolveSdkRoot(project)
+            : NormalizeSdkRoot(desc.EngineRoot);
+
+        project.Runtime.EngineRoot = sdkRoot;
         project.Runtime.Window.Title = desc.Name + " Project";
 
         const std::filesystem::path location = project.Runtime.ProjectRoot;
@@ -147,20 +259,35 @@ namespace BoonEditor
         }
 
         std::string uppercaseName = desc.Name;
-        std::transform(uppercaseName.begin(), uppercaseName.end(), uppercaseName.begin(), ::toupper);
+        std::transform(
+            uppercaseName.begin(),
+            uppercaseName.end(),
+            uppercaseName.begin(),
+            [](unsigned char c) { return static_cast<char>(std::toupper(c)); });
 
         std::string lowercaseName = desc.Name;
-        std::transform(lowercaseName.begin(), lowercaseName.end(), lowercaseName.begin(), ::tolower);
+        std::transform(
+            lowercaseName.begin(),
+            lowercaseName.end(),
+            lowercaseName.begin(),
+            [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
 
-        const std::filesystem::path repoRoot = GetRepoRootFromEngineRoot(project.Runtime.EngineRoot);
+        const std::filesystem::path sdkRoot = ResolveSdkRoot(project);
+        const std::filesystem::path installRoot = ResolveInstallRoot(project);
 
         TemplateContext context{};
         context.Set("PROJECT_NAME", desc.Name);
         context.Set("PROJECT_NAME_UPPER", uppercaseName);
         context.Set("PROJECT_NAME_LOWER", lowercaseName);
         context.Set("PROJECT_ROOT", project.Runtime.ProjectRoot.string());
-        context.Set("BOON_REPO_ROOT", repoRoot.string());
-        context.Set("BOON_ENGINE_ROOT", (repoRoot / "Boon").string());
+
+        context.Set("BOON_INSTALL_ROOT", installRoot.string());
+        context.Set("BOON_SDK_ROOT", sdkRoot.string());
+
+        // Backward-compatible names for current CMake/BoonBuild code.
+        context.Set("BOON_REPO_ROOT", sdkRoot.string());
+        context.Set("BOON_ENGINE_ROOT", (sdkRoot / "Boon").string());
+
         context.Set("BOON_ENGINE_VERSION", std::to_string(project.Version));
 
         TemplateProcessor::ProcessTemplateBlocks(
@@ -189,22 +316,32 @@ namespace BoonEditor
             });
     }
 
-    bool ProjectGenerator::GenerateBoonBuildProject(const ProjectConfig& project, std::string& outLog)
+    bool ProjectGenerator::GenerateBoonBuildProject(
+        const ProjectConfig& project,
+        const std::string& profile,
+        std::string& outLog)
     {
         BOON_LOG("Running BoonBuild project generation ...");
 
-        const std::filesystem::path repoRoot = GetRepoRootFromEngineRoot(project.Runtime.EngineRoot);
-        const std::filesystem::path boonBuildExe = GetBoonBuildExe(repoRoot);
+        const std::filesystem::path sdkRoot = ResolveSdkRoot(project);
+        const std::filesystem::path boonBuildExe = GetBoonBuildExe(project);
+
+        if (sdkRoot.empty() || !std::filesystem::exists(sdkRoot / "Boon" / "CMakeLists.txt"))
+        {
+            BOON_LOG_ERROR("Invalid BOON_SDK_ROOT: {}", sdkRoot.string());
+            return false;
+        }
 
         if (!std::filesystem::exists(boonBuildExe))
         {
-            BOON_LOG_ERROR("BoonBuild.exe not found: {}", boonBuildExe.string());
+            BOON_LOG_ERROR("BoonBuild executable not found: {}", boonBuildExe.string());
             return false;
         }
 
         const std::string command =
             Quote(boonBuildExe) + " " +
-            Quote(project.Runtime.ProjectRoot);
+            Quote(project.Runtime.ProjectRoot) +
+            " --profile " + QuoteArg(profile);
 
         ProcessResult result = ProcessRunner::Run(
             command,
@@ -226,26 +363,21 @@ namespace BoonEditor
 
     bool ProjectGenerator::Configure(
         const ProjectConfig& project,
-        const std::filesystem::path& buildDir,
+        const std::string& profile,
         std::string& outLog)
     {
-        BOON_LOG("Configuring project ...");
-
-        const std::filesystem::path repoRoot = GetRepoRootFromEngineRoot(project.Runtime.EngineRoot);
+        BOON_LOG("Configuring project preset {} ...", profile);
 
         const std::string command =
-            "cmake -S " + Quote(project.Runtime.ProjectRoot) +
-            " -B " + Quote(buildDir) +
-            " -G Ninja" +
-            " -DCMAKE_BUILD_TYPE=Debug" +
-            " -DBOON_REPO_ROOT:PATH=" + Quote(repoRoot);
+            "cmake --preset " + QuoteArg(profile);
 
         ProcessResult result = ProcessRunner::Run(
             command,
             [](const std::string& chunk)
             {
                 BOON_LOG(chunk);
-            });
+            },
+            project.Runtime.ProjectRoot);
 
         outLog += result.Output;
 
@@ -259,22 +391,22 @@ namespace BoonEditor
     }
 
     bool ProjectGenerator::Build(
-        const std::filesystem::path& buildDir,
-        const std::string& config,
+        const ProjectConfig& project,
+        const std::string& profile,
         std::string& outLog)
     {
-        BOON_LOG("Building project ...");
+        BOON_LOG("Building project preset {} ...", profile);
 
         const std::string command =
-            "cmake --build " + Quote(buildDir) +
-            " --config " + config;
+            "cmake --build --preset " + QuoteArg(profile);
 
         ProcessResult result = ProcessRunner::Run(
             command,
             [](const std::string& chunk)
             {
                 BOON_LOG(chunk);
-            });
+            },
+            project.Runtime.ProjectRoot);
 
         outLog += result.Output;
 

@@ -4,9 +4,9 @@ setlocal
 
 cd /d "%~dp0"
 
-set PROFILE=%~1
+set "PROFILE=%~1"
 if "%PROFILE%"=="" (
-    set PROFILE=Windows-Debug
+    set "PROFILE=Windows-Debug"
 )
 
 echo.
@@ -18,79 +18,120 @@ echo Profile : %PROFILE%
 echo ========================================
 echo.
 
-rem --------------------------------------------------
-rem Resolve engine/repo root
-rem --------------------------------------------------
+echo [Setup] Finding C++ compiler...
 
-if defined BOON_REPO_ROOT (
-    set "BOON_REPO_ROOT_RESOLVED=%BOON_REPO_ROOT%"
+where cl >nul 2>nul
+if not errorlevel 1 (
+    echo Found cl.exe in current environment.
+    goto :compiler_found
+)
+
+set "VS_DEV_CMD="
+
+set "VSWHERE=%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe"
+
+if exist "%VSWHERE%" (
+    for /f "usebackq tokens=*" %%i in (`"%VSWHERE%" -latest -products * -property installationPath`) do (
+        if exist "%%i\Common7\Tools\VsDevCmd.bat" (
+            set "VS_DEV_CMD=%%i\Common7\Tools\VsDevCmd.bat"
+        )
+    )
+)
+
+if "%VS_DEV_CMD%"=="" (
+    if exist "C:\Program Files\Microsoft Visual Studio\18\Community\Common7\Tools\VsDevCmd.bat" (
+        set "VS_DEV_CMD=C:\Program Files\Microsoft Visual Studio\18\Community\Common7\Tools\VsDevCmd.bat"
+    )
+)
+
+if "%VS_DEV_CMD%"=="" (
+    if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat" (
+        set "VS_DEV_CMD=C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat"
+    )
+)
+
+if "%VS_DEV_CMD%"=="" (
+    if exist "C:\Program Files\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" (
+        set "VS_DEV_CMD=C:\Program Files\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat"
+    )
+)
+
+if not "%VS_DEV_CMD%"=="" (
+    echo Using:
+    echo   %VS_DEV_CMD%
+    call "%VS_DEV_CMD%" -arch=x64 -host_arch=x64
+)
+
+where cl >nul 2>nul
+if not errorlevel 1 (
+    echo Found cl.exe after Visual Studio environment setup.
+    goto :compiler_found
+)
+
+echo ERROR: No MSVC C++ compiler found.
+echo.
+echo Could not locate VsDevCmd.bat automatically.
+echo Try running this from a Visual Studio Developer Command Prompt.
+pause
+exit /b 1
+
+:compiler_found
+
+if defined BOON_INSTALL_ROOT (
+    set "BOON_INSTALL_ROOT_RESOLVED=%BOON_INSTALL_ROOT%"
 ) else if defined BOON_ENGINE_ROOT (
-    set "BOON_REPO_ROOT_RESOLVED=%BOON_ENGINE_ROOT%"
+    set "BOON_INSTALL_ROOT_RESOLVED=%BOON_ENGINE_ROOT%"
 ) else (
-    echo ERROR: Could not find Boon engine installation.
-    echo.
-    echo Run the engine setup script first:
-    echo   ^<Boon-Engine^>\scripts\Setup.bat
-    echo.
+    echo ERROR: Could not find Boon installation.
+    echo Run Boon setup first.
     pause
     exit /b 1
 )
 
-if exist "%BOON_REPO_ROOT_RESOLVED%\tools\BClassGenerator\BoonReflection.cmake" (
-    for %%I in ("%BOON_REPO_ROOT_RESOLVED%\..") do set "BOON_REPO_ROOT_RESOLVED=%%~fI"
+if defined BOON_SDK_ROOT (
+    set "BOON_SDK_ROOT_RESOLVED=%BOON_SDK_ROOT%"
+) else if defined BOON_ENGINE_ROOT (
+    set "BOON_SDK_ROOT_RESOLVED=%BOON_ENGINE_ROOT%"
+) else (
+    set "BOON_SDK_ROOT_RESOLVED=%BOON_INSTALL_ROOT_RESOLVED%"
 )
 
-if not exist "%BOON_REPO_ROOT_RESOLVED%\Boon\CMakeLists.txt" (
-    echo ERROR: Invalid Boon repository root:
-    echo   %BOON_REPO_ROOT_RESOLVED%
-    echo.
-    echo Expected:
-    echo   %BOON_REPO_ROOT_RESOLVED%\Boon\CMakeLists.txt
-    echo.
-    echo Run the engine setup script again.
-    pause
-    exit /b 1
-)
-
-set "BOONBUILD_EXE=%BOON_REPO_ROOT_RESOLVED%\bin\Debug\Tools\BoonBuild.exe"
+set "BOONBUILD_EXE=%BOON_INSTALL_ROOT_RESOLVED%\Tools\BoonBuild.exe"
 
 if not exist "%BOONBUILD_EXE%" (
-    echo ERROR: BoonBuild.exe not found:
-    echo   %BOONBUILD_EXE%
-    echo.
-    echo Build the engine/tools first:
-    echo   ^<Boon-Engine^>\scripts\GenerateProject.bat Windows-Debug
-    echo.
+    set "BOONBUILD_EXE=%BOON_INSTALL_ROOT_RESOLVED%\bin\Debug\Tools\BoonBuild.exe"
+)
+
+if not exist "%BOONBUILD_EXE%" (
+    echo ERROR: BoonBuild.exe not found.
+    echo Tried:
+    echo   %BOON_INSTALL_ROOT_RESOLVED%\Tools\BoonBuild.exe
+    echo   %BOON_INSTALL_ROOT_RESOLVED%\bin\Debug\Tools\BoonBuild.exe
     pause
     exit /b 1
 )
 
-echo Engine : %BOON_REPO_ROOT_RESOLVED%
-echo Tool   : %BOONBUILD_EXE%
+echo SDK  : %BOON_SDK_ROOT_RESOLVED%
+echo Tool : %BOONBUILD_EXE%
 echo.
 
 echo [1/3] Running BoonBuild...
-"%BOONBUILD_EXE%" "%CD%" --profile %PROFILE%
-
+"%BOONBUILD_EXE%" "%CD%" --profile "%PROFILE%"
 if errorlevel 1 goto :error
 
 echo.
 echo [2/3] Configuring CMake preset...
-cmake --preset %PROFILE%
-
+cmake --preset "%PROFILE%"
 if errorlevel 1 goto :error
 
 echo.
 echo [3/3] Building project...
-cmake --build --preset %PROFILE%
-
+cmake --build --preset "%PROFILE%"
 if errorlevel 1 goto :error
 
 echo.
 echo ========================================
 echo Build Complete
-echo ========================================
-echo Profile : %PROFILE%
 echo ========================================
 pause
 exit /b 0
@@ -100,7 +141,101 @@ echo.
 echo ========================================
 echo BUILD FAILED
 echo ========================================
-echo Profile : %PROFILE%
-echo ========================================
 pause
 exit /b 1
+
+@@generate_project.sh
+#!/usr/bin/env bash
+set -e
+
+cd "$(dirname "$0")"
+
+PROFILE="${1:-Linux-Debug}"
+
+echo
+echo "========================================"
+echo "Boon Project Build Pipeline"
+echo "========================================"
+echo "Project : $(pwd)"
+echo "Profile : $PROFILE"
+echo "========================================"
+echo
+
+echo "[Setup] Checking build tools..."
+
+if ! command -v cmake >/dev/null 2>&1; then
+    echo "ERROR: cmake not found."
+    echo "Install it with:"
+    echo "  sudo apt install cmake"
+    exit 1
+fi
+
+if ! command -v ninja >/dev/null 2>&1; then
+    echo "ERROR: ninja not found."
+    echo "Install it with:"
+    echo "  sudo apt install ninja-build"
+    exit 1
+fi
+
+if command -v c++ >/dev/null 2>&1; then
+    echo "Found C++ compiler: $(command -v c++)"
+elif command -v clang++ >/dev/null 2>&1; then
+    export CXX="$(command -v clang++)"
+    echo "Found C++ compiler: $CXX"
+elif command -v g++ >/dev/null 2>&1; then
+    export CXX="$(command -v g++)"
+    echo "Found C++ compiler: $CXX"
+else
+    echo "ERROR: no C++ compiler found."
+    echo "Install one with:"
+    echo "  sudo apt install g++"
+    echo "or:"
+    echo "  sudo apt install clang"
+    exit 1
+fi
+
+BOON_INSTALL_ROOT_RESOLVED="${BOON_INSTALL_ROOT:-${BOON_ENGINE_ROOT:-}}"
+BOON_SDK_ROOT_RESOLVED="${BOON_SDK_ROOT:-${BOON_ENGINE_ROOT:-$BOON_INSTALL_ROOT_RESOLVED}}"
+
+if [ -z "$BOON_INSTALL_ROOT_RESOLVED" ]; then
+    echo "ERROR: Could not find Boon installation."
+    echo "Set one of:"
+    echo "  BOON_INSTALL_ROOT"
+    echo "  BOON_ENGINE_ROOT"
+    exit 1
+fi
+
+BOONBUILD_EXE="$BOON_INSTALL_ROOT_RESOLVED/Tools/BoonBuild"
+
+if [ ! -f "$BOONBUILD_EXE" ]; then
+    BOONBUILD_EXE="$BOON_INSTALL_ROOT_RESOLVED/bin/Debug/Tools/BoonBuild"
+fi
+
+if [ ! -f "$BOONBUILD_EXE" ]; then
+    echo "ERROR: BoonBuild not found."
+    echo "Tried:"
+    echo "  $BOON_INSTALL_ROOT_RESOLVED/Tools/BoonBuild"
+    echo "  $BOON_INSTALL_ROOT_RESOLVED/bin/Debug/Tools/BoonBuild"
+    exit 1
+fi
+
+echo
+echo "SDK  : $BOON_SDK_ROOT_RESOLVED"
+echo "Tool : $BOONBUILD_EXE"
+echo
+
+echo "[1/3] Running BoonBuild..."
+"$BOONBUILD_EXE" "$(pwd)" --profile "$PROFILE"
+
+echo
+echo "[2/3] Configuring CMake preset..."
+cmake --preset "$PROFILE"
+
+echo
+echo "[3/3] Building project..."
+cmake --build --preset "$PROFILE"
+
+echo
+echo "========================================"
+echo "Build Complete"
+echo "========================================"
