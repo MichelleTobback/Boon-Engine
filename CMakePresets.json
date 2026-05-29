@@ -1,0 +1,39 @@
+{
+    "buildPresets": [
+        {
+            "configuration": "Debug",
+            "configurePreset": "Windows-Debug",
+            "name": "Windows-Debug"
+        },
+        {
+            "configuration": "Release",
+            "configurePreset": "Windows-Release",
+            "name": "Windows-Release"
+        }
+    ],
+    "configurePresets": [
+        {
+            "binaryDir": "${sourceDir}/out/build/Windows-Debug",
+            "cacheVariables": {
+                "BOON_BUILD_PROFILE": "Windows-Debug",
+                "BOON_REPO_ROOT": "D:/Projects/BoonEngine/Boon-Engine",
+                "CMAKE_BUILD_TYPE": "Debug"
+            },
+            "displayName": "Windows-Debug",
+            "generator": "Ninja",
+            "name": "Windows-Debug"
+        },
+        {
+            "binaryDir": "${sourceDir}/out/build/Windows-Release",
+            "cacheVariables": {
+                "BOON_BUILD_PROFILE": "Windows-Release",
+                "BOON_REPO_ROOT": "D:/Projects/BoonEngine/Boon-Engine",
+                "CMAKE_BUILD_TYPE": "Release"
+            },
+            "displayName": "Windows-Release",
+            "generator": "Ninja",
+            "name": "Windows-Release"
+        }
+    ],
+    "version": 6
+}

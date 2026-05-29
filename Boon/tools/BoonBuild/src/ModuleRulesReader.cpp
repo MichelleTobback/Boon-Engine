@@ -49,6 +49,7 @@ namespace BoonBuild
         outRules.SystemLibraries = ReadStringArray(j, "systemLibraries");
         outRules.ThirdParty = ReadStringArray(j, "thirdParty");
         outRules.ModuleDependencies = ReadStringArray(j, "moduleDependencies");
+        outRules.Platforms = ReadStringArray(j, "platforms");
 
         return !outRules.Name.empty();
     }

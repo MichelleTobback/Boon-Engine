@@ -263,7 +263,7 @@ namespace Boon
             config.Runtime.StartupScene = "Scenes/Main.scene";
 
         if (config.Runtime.AssetsRoot.empty())
-            config.Runtime.AssetsRoot = std::filesystem::absolute("Assets");
+            config.Runtime.AssetsRoot = "Assets";
 
         if (config.Runtime.IntermediateRoot.empty())
             config.Runtime.IntermediateRoot = GetBinRelativeToExe();

@@ -4,136 +4,103 @@ setlocal
 
 cd /d "%~dp0"
 
+set PROFILE=%~1
+if "%PROFILE%"=="" (
+    set PROFILE=Windows-Debug
+)
+
+echo.
 echo ========================================
-echo WitchGame Build Pipeline
+echo Boon Project Build Pipeline
+echo ========================================
+echo Project : %CD%
+echo Profile : %PROFILE%
 echo ========================================
 echo.
 
-REM --------------------------------------------------
-REM Visual Studio environment
-REM --------------------------------------------------
+rem --------------------------------------------------
+rem Resolve engine/repo root
+rem --------------------------------------------------
 
-set VS_DEV_CMD=C:\Program Files\Microsoft Visual Studio\18\Community\Common7\Tools\VsDevCmd.bat
-
-if not exist "%VS_DEV_CMD%" (
-    echo ERROR: Could not find VsDevCmd.bat
-    echo %VS_DEV_CMD%
+if defined BOON_REPO_ROOT (
+    set "BOON_REPO_ROOT_RESOLVED=%BOON_REPO_ROOT%"
+) else if defined BOON_ENGINE_ROOT (
+    set "BOON_REPO_ROOT_RESOLVED=%BOON_ENGINE_ROOT%"
+) else (
+    echo ERROR: Could not find Boon engine installation.
+    echo.
+    echo Run the engine setup script first:
+    echo   ^<Boon-Engine^>\scripts\Setup.bat
     echo.
     pause
     exit /b 1
 )
 
-call "%VS_DEV_CMD%" -arch=x64 -host_arch=x64
+if exist "%BOON_REPO_ROOT_RESOLVED%\tools\BClassGenerator\BoonReflection.cmake" (
+    for %%I in ("%BOON_REPO_ROOT_RESOLVED%\..") do set "BOON_REPO_ROOT_RESOLVED=%%~fI"
+)
 
-if errorlevel 1 (
+if not exist "%BOON_REPO_ROOT_RESOLVED%\Boon\CMakeLists.txt" (
+    echo ERROR: Invalid Boon repository root:
+    echo   %BOON_REPO_ROOT_RESOLVED%
     echo.
-    echo Failed to initialize MSVC environment.
+    echo Expected:
+    echo   %BOON_REPO_ROOT_RESOLVED%\Boon\CMakeLists.txt
     echo.
+    echo Run the engine setup script again.
     pause
     exit /b 1
 )
 
-REM --------------------------------------------------
-REM Engine repo
-REM --------------------------------------------------
-
-if not defined BOON_REPO_ROOT (
-    set BOON_REPO_ROOT=D:\Projects\BoonEngine\Boon-Engine
-)
-
-set BOONBUILD_EXE=%BOON_REPO_ROOT%\bin\Debug\Tools\BoonBuild.exe
-
-echo BOON_REPO_ROOT = %BOON_REPO_ROOT%
-echo BOONBUILD_EXE  = %BOONBUILD_EXE%
-echo PROJECT_ROOT   = %CD%
-echo.
-
-REM --------------------------------------------------
-REM Verify BoonBuild
-REM --------------------------------------------------
+set "BOONBUILD_EXE=%BOON_REPO_ROOT_RESOLVED%\bin\Debug\Tools\BoonBuild.exe"
 
 if not exist "%BOONBUILD_EXE%" (
     echo ERROR: BoonBuild.exe not found:
-    echo %BOONBUILD_EXE%
+    echo   %BOONBUILD_EXE%
+    echo.
+    echo Build the engine/tools first:
+    echo   ^<Boon-Engine^>\scripts\GenerateProject.bat Windows-Debug
     echo.
     pause
     exit /b 1
 )
 
-REM --------------------------------------------------
-REM Generate project
-REM --------------------------------------------------
-
-echo ========================================
-echo Generating project
-echo ========================================
+echo Engine : %BOON_REPO_ROOT_RESOLVED%
+echo Tool   : %BOONBUILD_EXE%
 echo.
 
-"%BOONBUILD_EXE%" "%CD%"
+echo [1/3] Running BoonBuild...
+"%BOONBUILD_EXE%" "%CD%" --profile %PROFILE%
 
-if errorlevel 1 (
-    echo.
-    echo ========================================
-    echo Project generation FAILED
-    echo ========================================
-    echo.
-    pause
-    exit /b 1
-)
+if errorlevel 1 goto :error
 
-REM --------------------------------------------------
-REM Configure CMake
-REM --------------------------------------------------
+echo.
+echo [2/3] Configuring CMake preset...
+cmake --preset %PROFILE%
+
+if errorlevel 1 goto :error
+
+echo.
+echo [3/3] Building project...
+cmake --build --preset %PROFILE%
+
+if errorlevel 1 goto :error
 
 echo.
 echo ========================================
-echo Configuring CMake
+echo Build Complete
 echo ========================================
-echo.
-
-cmake ^
-    -S . ^
-    -B out/build/x64-Debug ^
-    -G Ninja ^
-    -DCMAKE_BUILD_TYPE=Debug ^
-    -DBOON_REPO_ROOT="%BOON_REPO_ROOT%"
-
-if errorlevel 1 (
-    echo.
-    echo ========================================
-    echo CMake configure FAILED
-    echo ========================================
-    echo.
-    pause
-    exit /b 1
-)
-
-REM --------------------------------------------------
-REM Build
-REM --------------------------------------------------
-
-echo.
+echo Profile : %PROFILE%
 echo ========================================
-echo Building project
-echo ========================================
-echo.
-
-cmake --build out/build/x64-Debug
-
-if errorlevel 1 (
-    echo.
-    echo ========================================
-    echo Build FAILED
-    echo ========================================
-    echo.
-    pause
-    exit /b 1
-)
-
-echo.
-echo ========================================
-echo Build SUCCESS
-echo ========================================
-echo.
-
 pause
+exit /b 0
+
+:error
+echo.
+echo ========================================
+echo BUILD FAILED
+echo ========================================
+echo Profile : %PROFILE%
+echo ========================================
+pause
+exit /b 1

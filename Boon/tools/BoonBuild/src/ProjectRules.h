@@ -11,6 +11,7 @@ namespace BoonBuild
         std::string Output = "SHARED";
         std::string SourceDir = ".";
         std::string ModuleInstance;
+        std::string Platform = "Windows";
 
         bool Reflection = true;
         bool MinimalReflection = true;

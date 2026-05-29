@@ -129,3 +129,22 @@ add_subdirectory(
         "generated"
     ]
 }
+
+@@BuildProfiles.json
+{
+    "defaultProfile": "Windows-Debug",
+
+    "profiles": {
+        "Windows-Debug": {
+            "platform": "Windows",
+            "configuration": "Debug",
+            "generator": "Ninja"
+        },
+
+        "Windows-Release": {
+            "platform": "Windows",
+            "configuration": "Release",
+            "generator": "Ninja"
+        }
+    }
+}

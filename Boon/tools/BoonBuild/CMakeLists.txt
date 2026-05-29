@@ -53,6 +53,8 @@ add_executable(BoonBuild
     src/ProjectRulesReader.cpp
     src/ProjectTemplateBuilder.cpp
     src/ModuleDependencyGraph.cpp
+    src/BuildProfileReader.cpp
+    src/CMakePresetsGenerator.cpp
 
     src/ModuleRules.h
     src/ModuleRulesReader.h
@@ -68,7 +70,12 @@ add_executable(BoonBuild
     src/BoonBuildGenerator.h
     src/BuildLog.h
     src/ModuleDependencyGraph.h
- "src/ModuleDependencyGraph.h" "src/ModuleDependencyGraph.cpp")
+
+    src/BuildPlatform.h
+    src/BuildProfile.h
+    src/BuildProfileReader.h
+    src/CMakePresetsGenerator.h
+)
 
 set_target_properties(BoonBuild PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${BOON_WORKSPACE_ROOT}/bin/$<CONFIG>/Tools"

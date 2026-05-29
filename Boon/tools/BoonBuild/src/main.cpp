@@ -7,14 +7,25 @@ int main(int argc, char** argv)
 {
     std::filesystem::path engineRoot;
 
-    if (argc >= 2)
-        engineRoot = std::filesystem::absolute(argv[1]);
-    else
-        engineRoot = std::filesystem::current_path();
+    std::string profileName;
+
+    for (int i = 1; i < argc; ++i)
+    {
+        std::string arg = argv[i];
+
+        if (arg == "--profile" && i + 1 < argc)
+        {
+            profileName = argv[++i];
+        }
+        else
+        {
+            engineRoot = arg;
+        }
+    }
 
     BoonBuild::BoonBuildGenerator generator;
 
-    if (!generator.Generate(engineRoot))
+    if (!generator.Generate(engineRoot, profileName))
     {
         std::cerr << "BoonBuild failed.\n";
         return 1;

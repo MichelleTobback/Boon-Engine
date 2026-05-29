@@ -22,5 +22,6 @@ namespace BoonBuild
         std::vector<std::string> SystemLibraries;
         std::vector<std::string> ThirdParty;
         std::vector<std::string> ModuleDependencies;
+        std::vector<std::string> Platforms;
     };
 }

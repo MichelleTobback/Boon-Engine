@@ -41,6 +41,11 @@ add_library(${MODULE_TARGET} {{OUTPUT_TYPE}}
 
 target_compile_features(${MODULE_TARGET} PUBLIC cxx_std_20)
 
+target_compile_definitions(${MODULE_TARGET}
+    PUBLIC
+        {{PLATFORM_COMPILE_DEFINITION}}
+)
+
 {{COMPILE_DEFINITIONS_BLOCK}}
 
 {{INCLUDE_DIRECTORIES_BLOCK}}

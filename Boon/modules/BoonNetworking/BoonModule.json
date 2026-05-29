@@ -27,5 +27,9 @@
 
   "thirdParty": [
     "SteamNetworkingSockets"
+  ],
+
+  "platforms": [
+    "Windows"
   ]
 }
