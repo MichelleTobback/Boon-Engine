@@ -55,7 +55,6 @@
 #include <Component/Rigidbody2D.h>
 
 #include <Networking/NetRepRegistry.h>
-#include <Networking/NetworkingSubsystem.h>
 
 #include <Module/ModuleLibrary.h>
 #include <Module/ModuleManifest.h>

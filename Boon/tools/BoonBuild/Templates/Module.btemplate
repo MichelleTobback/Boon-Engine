@@ -135,19 +135,24 @@ extern "C"
     }
 }
 
+#ifdef BOON_BUILD_GAME_SHARED
+
 BOON_MODULE_EXPORT const Boon::ModuleInfo* Boon_GetModuleInfo()
 {
-    return {{MODULE_NAME}}_GetModuleInfo();
+    return {{PROJECT_NAME}}_GetModuleInfo();
 }
 
-BOON_MODULE_EXPORT Boon::ModuleRegistration Boon_RegisterModule(Boon::ModuleContext* context)
+BOON_MODULE_EXPORT Boon::ModuleRegistration Boon_RegisterModule(
+    Boon::ModuleContext* context)
 {
-    return {{MODULE_NAME}}_RegisterModule(context);
+    return {{PROJECT_NAME}}_RegisterModule(context);
 }
 
 BOON_MODULE_EXPORT void Boon_UnregisterModule(
     Boon::ModuleContext* context,
     Boon::ModuleInstance* instance)
 {
-    {{MODULE_NAME}}_UnregisterModule(context, instance);
+    {{PROJECT_NAME}}_UnregisterModule(context, instance);
 }
+
+#endif

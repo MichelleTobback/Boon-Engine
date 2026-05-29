@@ -40,8 +40,6 @@ namespace BoonEditor
 		RenderGeneralSettings();
 
 
-		RenderModuleSettings();
-
 		std::string step;
 		{
 			std::scoped_lock lock(m_StateMutex);
@@ -65,19 +63,11 @@ namespace BoonEditor
 		if (UI::Field("Template", templatePath))
 			m_TemplatePath = templatePath;
 
+		UI::Field("Build Profile", m_BuildProfileName);
+
 		UI::Checkbox("Generate Code", m_GenerateCode);
 		UI::Checkbox("Copy Assets", m_CopyAssets);
 		UI::Checkbox("Run Build", m_RunBuild);
-	}
-
-	void PackageBuildDialog::RenderModuleSettings()
-	{
-		ImGui::Spacing();
-		ImGui::TextDisabled("Modules");
-		ImGui::Separator();
-
-		UI::Checkbox("Audio", m_BuildAudio);
-		UI::Checkbox("Networking", m_BuildNetworking);
 	}
 
 	void PackageBuildDialog::RenderProgress()
@@ -182,29 +172,10 @@ namespace BoonEditor
 		config.Window.bResizable = true;
 		config.Window.bFullscreen = false;
 
+		// Modules are no longer selected manually here.
+		// BoonBuild reads the active project's BuildRules.json and generates only
+		// the engine/game modules requested by that project for this build profile.
 		PackageModuleSet modules{};
-
-		if (m_BuildAudio)
-		{
-			modules.Modules.push_back({
-				.Name = "Audio",
-				.Include = "Audio/AudioModule.h",
-				.LinkTarget = "BoonAudio",
-				.RegisterCode = "BoonAudio::RegisterAudioModule();",
-				.BuiltIn = true
-				});
-		}
-
-		if (m_BuildNetworking)
-		{
-			modules.Modules.push_back({
-				.Name = "Networking",
-				.Include = "Networking/NetworkingModule.h",
-				.LinkTarget = "BoonNetworking",
-				.RegisterCode = "BoonNetworking::RegisterNetworkingModule();",
-				.BuiltIn = true
-				});
-		}
 
 		PackageBuildSettings settings{};
 		settings.TemplatePath = m_TemplatePath.is_absolute()
@@ -215,12 +186,18 @@ namespace BoonEditor
 		settings.GeneratedRoot = m_GeneratedRoot;
 		settings.CopyAssets = m_CopyAssets;
 		settings.GenerateCode = m_GenerateCode;
+		settings.BuildProfileName = m_BuildProfileName;
+		settings.BuildConfiguration =
+			m_BuildProfileName.find("Debug") != std::string::npos
+			? "Debug"
+			: "Release";
 
 		settings.GameAssetsSource = config.ProjectRoot / "generated" / "Assets" / "Game";
 		settings.EngineAssetsSource = config.ProjectRoot / "generated" / "Assets" / "Engine";
 		settings.ProjectRoot = config.ProjectRoot;
 		settings.WorkspaceRoot = prj.Runtime.EngineRoot;
-		settings.WorkspaceRoot = settings.WorkspaceRoot.parent_path().parent_path().parent_path();
+		if (settings.WorkspaceRoot.filename() == "Boon")
+			settings.WorkspaceRoot = settings.WorkspaceRoot.parent_path();
 
 		m_IsBuilding = true;
 

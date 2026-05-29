@@ -4,7 +4,9 @@
 
 namespace BoonBuild
 {
-    ProjectTemplateData ProjectTemplateBuilder::BuildProjectData(const ProjectRules& project) const
+    ProjectTemplateData ProjectTemplateBuilder::BuildProjectData(
+        const ProjectRules& project,
+        const std::vector<ModuleRules>& selectedEngineModules) const
     {
         ProjectTemplateData data;
 
@@ -18,12 +20,22 @@ namespace BoonBuild
         data.IncludeDirectoriesBlock = MakeIncludeDirectoriesBlock(project);
         data.LinkLibrariesBlock = MakeLinkLibrariesBlock(project);
         data.AssetCopyBlock = MakeAssetCopyBlock(project);
+        data.ProjectEngineModulesBlock = MakeProjectEngineModulesBlock(selectedEngineModules);
+
+        const std::vector<std::string> staticModuleNames =
+            MakeProjectStaticModuleNames(project, selectedEngineModules);
+
+        data.ProjectStaticModuleDeclarations =
+            MakeProjectStaticModuleDeclarations(staticModuleNames);
+
+        data.ProjectStaticModuleRegisterCalls =
+            MakeProjectStaticModuleRegisterCalls(staticModuleNames);
 
         data.GeneratedReflectionDeclarations = MakeGeneratedReflectionDeclarations(project);
         data.RegisterReflectionCall = MakeRegisterReflectionCall(project);
         data.UnregisterReflectionCall = MakeUnregisterReflectionCall(project);
 
-        data.StaticModuleManifestEntries = MakeStaticModuleManifestEntries(project);
+        data.StaticModuleManifestEntries = MakeStaticModuleManifestEntries(project, selectedEngineModules);
         data.DynamicModuleManifestEntries = MakeDynamicModuleManifestEntries(project);
 
         data.CreateModuleInstanceBody = MakeCreateModuleInstanceBody(project);
@@ -131,9 +143,7 @@ namespace BoonBuild
         std::stringstream ss;
 
         ss << "set(GAME_STATIC_MODULE_TARGETS)\n\n";
-
-        for (const auto& module : project.EngineModules)
-            ss << "list(APPEND GAME_STATIC_MODULE_TARGETS " << module << ")\n";
+        ss << "list(APPEND GAME_STATIC_MODULE_TARGETS ${BOON_PROJECT_ENGINE_MODULES})\n";
 
         for (const auto& module : project.GameModules)
             ss << "list(APPEND GAME_STATIC_MODULE_TARGETS " << module << ")\n";
@@ -177,6 +187,87 @@ namespace BoonBuild
             ss << "        VERBATIM\n";
             ss << "    )\n";
             ss << "endif()\n\n";
+        }
+
+        return ss.str();
+    }
+
+    std::string ProjectTemplateBuilder::MakeProjectEngineModulesBlock(const std::vector<ModuleRules>& selectedEngineModules)
+    {
+        std::stringstream ss;
+
+        ss << "set(BOON_PROJECT_ENGINE_MODULES\n";
+
+        for (const ModuleRules& module : selectedEngineModules)
+            ss << "    " << module.Name << "\n";
+
+        ss << ")";
+
+        return ss.str();
+    }
+
+    std::vector<std::string> ProjectTemplateBuilder::MakeProjectStaticModuleNames(
+        const ProjectRules& project,
+        const std::vector<ModuleRules>& selectedEngineModules)
+    {
+        std::vector<std::string> names;
+
+        for (const ModuleRules& module : selectedEngineModules)
+        {
+            if (module.Output == "STATIC")
+                names.push_back(module.Name);
+        }
+
+        for (const std::string& module : project.GameModules)
+            names.push_back(module);
+
+        names.push_back(project.Name);
+
+        return names;
+    }
+
+    std::string ProjectTemplateBuilder::MakeProjectStaticModuleDeclarations(
+        const std::vector<std::string>& moduleNames)
+    {
+        std::stringstream ss;
+
+        for (const std::string& moduleName : moduleNames)
+        {
+            ss << "    const Boon::ModuleInfo* " << moduleName << "_GetModuleInfo();\n";
+            ss << "    Boon::ModuleRegistration " << moduleName
+                << "_RegisterModule(Boon::ModuleContext*);\n";
+            ss << "    void " << moduleName
+                << "_UnregisterModule(Boon::ModuleContext*, Boon::ModuleInstance*);\n\n";
+        }
+
+        return ss.str();
+    }
+
+    std::string ProjectTemplateBuilder::MakeProjectStaticModuleRegisterCalls(
+        const std::vector<std::string>& moduleNames)
+    {
+        std::stringstream ss;
+
+        for (const std::string& moduleName : moduleNames)
+        {
+            ss << "        {\n";
+            ss << "            const Boon::ModuleInfo* info = "
+                << moduleName << "_GetModuleInfo();\n";
+            ss << "            Boon::ModuleRegistration registration = "
+                << moduleName << "_RegisterModule(&context);\n\n";
+            ss << "            if (!registration.Success)\n";
+            ss << "            {\n";
+            ss << "                result = false;\n";
+            ss << "            }\n";
+            ss << "            else\n";
+            ss << "            {\n";
+            ss << "                s_StaticModules.push_back({\n";
+            ss << "                    info,\n";
+            ss << "                    registration.Instance,\n";
+            ss << "                    &" << moduleName << "_UnregisterModule\n";
+            ss << "                });\n";
+            ss << "            }\n";
+            ss << "        }\n\n";
         }
 
         return ss.str();
@@ -236,7 +327,9 @@ namespace BoonBuild
         return ss.str();
     }
 
-    std::string ProjectTemplateBuilder::MakeStaticModuleManifestEntries(const ProjectRules& project)
+    std::string ProjectTemplateBuilder::MakeStaticModuleManifestEntries(
+        const ProjectRules& project,
+        const std::vector<ModuleRules>& selectedEngineModules)
     {
         std::stringstream ss;
 
@@ -255,8 +348,8 @@ namespace BoonBuild
                 first = false;
             };
 
-        for (const auto& module : project.EngineModules)
-            addModule(module);
+        for (const ModuleRules& module : selectedEngineModules)
+            addModule(module.Name);
 
         for (const auto& module : project.GameModules)
             addModule(module);

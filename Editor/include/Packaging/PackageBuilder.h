@@ -19,6 +19,9 @@ namespace BoonEditor
 		std::filesystem::path GameAssetsSource;
 		std::filesystem::path EngineAssetsSource;
 
+		std::string BuildProfileName;
+		std::string BuildConfiguration = "Release";
+
 		bool CopyAssets = true;
 		bool GenerateCode = true;
 	};

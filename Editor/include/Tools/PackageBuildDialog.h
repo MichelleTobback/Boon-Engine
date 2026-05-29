@@ -25,7 +25,6 @@ namespace BoonEditor
 
 	private:
 		void RenderGeneralSettings();
-		void RenderModuleSettings();
 		void RenderActions();
 		
 		void RenderProgress();
@@ -39,12 +38,11 @@ namespace BoonEditor
 		std::filesystem::path m_OutputRoot = "Build/Packages/Windows";
 		std::filesystem::path m_TemplatePath = "Templates/PackagedRuntime.btemplate";
 		std::filesystem::path m_GeneratedRoot;
+		std::string m_BuildProfileName = "Windows-Release";
 
 		bool m_CopyAssets = true;
 		bool m_GenerateCode = true;
 
-		bool m_BuildAudio = true;
-		bool m_BuildNetworking = false;
 
 		std::string m_Status;
 

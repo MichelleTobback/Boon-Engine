@@ -18,7 +18,6 @@
 #include <Event/SceneEvents.h>
 
 #include <Networking/NetRepRegistry.h>
-
 #include <Module/ModuleLibrary.h>
 
 #include "Reflection/BClass.h"

@@ -5,9 +5,6 @@
 #include "Panels/EditorPanel.h"
 #include "UI/DragDropRouter.h"
 
-#include "Networking/NetworkSettings.h"
-#include <Networking/NetPacket.h>
-
 #include <Core/AppState.h>
 #include <Renderer/SceneRenderer.h>
 #include <Scene/SceneManager.h>

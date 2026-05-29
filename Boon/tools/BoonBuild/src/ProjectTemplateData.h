@@ -17,6 +17,11 @@ namespace BoonBuild
         std::string LinkLibrariesBlock;
         std::string AssetCopyBlock;
 
+        std::string ProjectEngineModulesBlock;
+
+        std::string ProjectStaticModuleDeclarations;
+        std::string ProjectStaticModuleRegisterCalls;
+
         std::string GeneratedReflectionDeclarations;
         std::string RegisterReflectionCall;
         std::string UnregisterReflectionCall;

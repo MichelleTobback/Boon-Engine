@@ -53,6 +53,8 @@ namespace BoonGenerated
 		config.Window.bResizable = {{WINDOW_RESIZABLE}};
 		config.Window.bFullscreen = {{WINDOW_FULLSCREEN}};
 
+		config.Network.NetMode = {{NET_NETMODE}};
+
 		return config;
 	}
 }
@@ -71,6 +73,7 @@ namespace BoonGenerated
 namespace Boon
 {
 	class SceneRenderer;
+	struct ModuleContext;
 }
 
 namespace BoonGenerated
@@ -90,6 +93,7 @@ namespace BoonGenerated
 		void LoadAssets();
 		void CreateRenderer();
 		void BindEvents();
+		void CreateModuleContext(Boon::ModuleContext& module);
 		void LoadStartupScene();
 		void Render();
 
@@ -124,20 +128,33 @@ namespace BoonGenerated
 #include <Event/WindowEvents.h>
 #include <Event/SceneEvents.h>
 
+#include <Module/ModuleContext.h>
+#include <Reflection/BClass.h>
+
+#include <Networking/NetRepRegistry.h>
+
 {{MODULE_INCLUDES}}
 
 namespace BoonGenerated
 {
-	GeneratedPackagedState::GeneratedPackagedState(){}
-	GeneratedPackagedState::~GeneratedPackagedState(){}
+	GeneratedPackagedState::GeneratedPackagedState() {}
+	GeneratedPackagedState::~GeneratedPackagedState() {}
 
 	void GeneratedPackagedState::OnEnter()
 	{
+		Boon::EngineContext& ctx = GetContext();
+
 		LoadAssets();
 		CreateRenderer();
 		BindEvents();
 
+		Boon::ModuleContext module{};
+		CreateModuleContext(module);
+
 {{MODULE_ON_ENTER}}
+
+		if (ctx.Subsystems)
+			ctx.Subsystems->InitAll(ctx);
 
 		LoadStartupScene();
 	}
@@ -145,6 +162,7 @@ namespace BoonGenerated
 	void GeneratedPackagedState::OnUpdate()
 	{
 		Boon::EngineContext& ctx = GetContext();
+
 {{MODULE_ON_UPDATE}}
 
 		Boon::Time& time = *ctx.Time;
@@ -168,10 +186,13 @@ namespace BoonGenerated
 			ctx.EventBus->Unsubscribe<Boon::SceneChangedEvent>(m_SceneChangedEvent);
 		}
 
-{{MODULE_ON_EXIT}}
-
 		if (ctx.Scenes)
 			ctx.Scenes->UnloadAll();
+
+		Boon::ModuleContext module{};
+		CreateModuleContext(module);
+
+{{MODULE_ON_EXIT}}
 
 		if (ctx.AssetLib)
 		{
@@ -240,6 +261,16 @@ namespace BoonGenerated
 				});
 	}
 
+	void GeneratedPackagedState::CreateModuleContext(Boon::ModuleContext& module)
+	{
+		Boon::EngineContext& ctx = GetContext();
+
+		module.BClasses = &Boon::BClassRegistry::Get();
+		module.NetReps = &Boon::NetRepRegistry::Get();
+		module.ServiceRegistry = Boon::ServiceLocator::GetRegistry();
+		module.EngineContext = &ctx;
+	}
+
 	void GeneratedPackagedState::LoadStartupScene()
 	{
 		Boon::EngineContext& ctx = GetContext();
@@ -272,15 +303,41 @@ cmake_minimum_required(VERSION 3.20)
 
 project({{TARGET_NAME}} LANGUAGES CXX)
 
-if(NOT DEFINED BOON_ENGINE_ROOT)
-	message(FATAL_ERROR "BOON_ENGINE_ROOT is not set")
+if(NOT DEFINED BOON_REPO_ROOT)
+	if(DEFINED BOON_SDK_ROOT)
+		set(BOON_REPO_ROOT "${BOON_SDK_ROOT}")
+	elseif(DEFINED BOON_ENGINE_ROOT)
+		set(BOON_REPO_ROOT "${BOON_ENGINE_ROOT}")
+	endif()
 endif()
+
+if(EXISTS "${BOON_REPO_ROOT}/tools/BClassGenerator/BoonReflection.cmake")
+	get_filename_component(BOON_REPO_ROOT "${BOON_REPO_ROOT}/.." ABSOLUTE)
+endif()
+
+if(NOT EXISTS "${BOON_REPO_ROOT}/Boon/CMakeLists.txt")
+	message(FATAL_ERROR "BOON_REPO_ROOT is invalid: ${BOON_REPO_ROOT}")
+endif()
+
+get_filename_component(BOON_REPO_ROOT "${BOON_REPO_ROOT}" ABSOLUTE)
+
+set(BOON_SDK_ROOT "${BOON_REPO_ROOT}" CACHE PATH "Boon SDK root" FORCE)
+set(BOON_ENGINE_ROOT "${BOON_REPO_ROOT}/Boon" CACHE PATH "Boon engine root" FORCE)
+set(BOON_CMAKE_DIR "${BOON_ENGINE_ROOT}/cmake" CACHE PATH "Boon cmake root" FORCE)
 
 if(NOT DEFINED GAME_PROJECT_ROOT)
 	message(FATAL_ERROR "GAME_PROJECT_ROOT is not set")
 endif()
 
-set(PACKAGE_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/..")
+get_filename_component(GAME_PROJECT_ROOT "${GAME_PROJECT_ROOT}" ABSOLUTE)
+
+get_filename_component(
+	PACKAGE_OUTPUT_DIR
+	"${CMAKE_CURRENT_SOURCE_DIR}/.."
+	ABSOLUTE
+)
+
+message(STATUS "Package output dir: ${PACKAGE_OUTPUT_DIR}")
 
 function(boon_set_output_dirs target subdir)
 	set_target_properties(${target} PROPERTIES
@@ -296,7 +353,7 @@ endif()
 
 if(NOT TARGET BClassGenerator)
 	set(BOON_BCLASSGENERATOR_EXE
-		"${BOON_ENGINE_ROOT}/bin/Debug/Tools/BClassGenerator.exe"
+		"${BOON_SDK_ROOT}/bin/Debug/Tools/BClassGenerator.exe"
 	)
 
 	add_executable(BClassGenerator IMPORTED GLOBAL)
@@ -306,12 +363,49 @@ if(NOT TARGET BClassGenerator)
 	)
 endif()
 
-include(${BOON_ENGINE_ROOT}/Boon/tools/BClassGenerator/BoonReflection.cmake)
+include("${BOON_ENGINE_ROOT}/tools/BClassGenerator/BoonReflection.cmake")
 
-add_subdirectory(${BOON_ENGINE_ROOT}/Boon ${CMAKE_BINARY_DIR}/BoonEngine)
+add_subdirectory("${BOON_ENGINE_ROOT}" "${CMAKE_BINARY_DIR}/BoonEngine")
+
+set(BOON_PROJECT_ENGINE_MODULES_FILE
+	"${GAME_PROJECT_ROOT}/generated/EngineModules.cmake"
+)
+
+if(NOT EXISTS "${BOON_PROJECT_ENGINE_MODULES_FILE}")
+	message(FATAL_ERROR
+		"Missing project engine module selection file: ${BOON_PROJECT_ENGINE_MODULES_FILE}\n"
+		"Run BoonBuild for the project before packaging."
+	)
+endif()
+
+include("${BOON_PROJECT_ENGINE_MODULES_FILE}")
+
+if(COMMAND boon_add_project_engine_modules)
+	boon_add_project_engine_modules()
+else()
+	foreach(engine_module IN LISTS BOON_PROJECT_ENGINE_MODULES)
+		include("${BOON_ENGINE_ROOT}/modules/generated/${engine_module}/${engine_module}.cmake")
+	endforeach()
+endif()
+
+set(BOON_PACKAGED_MODULE_TARGETS)
+
+foreach(engine_module IN LISTS BOON_PROJECT_ENGINE_MODULES)
+	if(TARGET ${engine_module})
+		list(APPEND BOON_PACKAGED_MODULE_TARGETS ${engine_module})
+	else()
+		message(FATAL_ERROR
+			"Project requested engine module '${engine_module}', but no CMake target was created for it."
+		)
+	endif()
+endforeach()
 
 set(BOON_BUILD_GAME_SHARED OFF CACHE BOOL "" FORCE)
-add_subdirectory(${GAME_PROJECT_ROOT} ${CMAKE_BINARY_DIR}/GameProject)
+
+add_subdirectory(
+	"${GAME_PROJECT_ROOT}/generated"
+	"${CMAKE_BINARY_DIR}/GameProject"
+)
 
 add_executable({{TARGET_NAME}}
 	GeneratedMain.cpp
@@ -326,13 +420,37 @@ target_compile_definitions({{TARGET_NAME}} PRIVATE
 )
 
 target_include_directories({{TARGET_NAME}} PRIVATE
-	${CMAKE_CURRENT_SOURCE_DIR}
+	"${CMAKE_CURRENT_SOURCE_DIR}"
+)
+
+add_library(BoonPackagedStaticModules STATIC
+    "${GAME_PROJECT_ROOT}/generated/StaticModules.cpp"
+)
+
+target_include_directories(BoonPackagedStaticModules
+	PRIVATE
+		"${BOON_ENGINE_ROOT}/include"
+)
+
+target_link_libraries(BoonPackagedStaticModules
+	PUBLIC
+		BoonEngine
+		{{GAME_PROJECT_TARGET}}
+		${BOON_PACKAGED_MODULE_TARGETS}
+)
+
+target_link_libraries(BoonPackagedStaticModules
+    PUBLIC
+        BoonEngine
+        {{GAME_PROJECT_TARGET}}
+        ${BOON_PACKAGED_MODULE_TARGETS}
 )
 
 target_link_libraries({{TARGET_NAME}} PRIVATE
-	BoonEngine
-	{{GAME_PROJECT_TARGET}}
-{{MODULE_LINK_TARGETS}}
+    BoonEngine
+    BoonPackagedStaticModules
+    {{GAME_PROJECT_TARGET}}
+    ${BOON_PACKAGED_MODULE_TARGETS}
 )
 
 set_target_properties({{TARGET_NAME}} PROPERTIES
@@ -342,3 +460,26 @@ set_target_properties({{TARGET_NAME}} PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${PACKAGE_OUTPUT_DIR}"
 	RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${PACKAGE_OUTPUT_DIR}"
 )
+
+get_property(
+	BOON_PACKAGE_RUNTIME_DEPENDENCIES
+	GLOBAL PROPERTY BOON_PACKAGE_RUNTIME_DEPENDENCIES
+)
+
+foreach(runtime_dependency IN LISTS BOON_PACKAGE_RUNTIME_DEPENDENCIES)
+	add_custom_command(TARGET {{TARGET_NAME}} POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different
+			"${runtime_dependency}"
+			"${PACKAGE_OUTPUT_DIR}"
+		COMMAND_EXPAND_LISTS
+		VERBATIM
+	)
+endforeach()
+
+if(UNIX AND NOT APPLE)
+	set_target_properties({{TARGET_NAME}} PROPERTIES
+		BUILD_RPATH "$ORIGIN"
+		INSTALL_RPATH "$ORIGIN"
+	)
+endif()
+

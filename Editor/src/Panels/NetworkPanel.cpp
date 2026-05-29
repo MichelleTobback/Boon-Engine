@@ -3,10 +3,12 @@
 
 #include <UI/IconsFontAwesome7.h>
 
+#ifdef BOON_WITH_NETWORKING
 #include <Networking/NetworkingSubsystem.h>
+#include <Networking/NetDriver.h>
+#endif
 
 #include <sstream>
-#include <Networking/NetDriver.h>
 #include <Core/EditorContext.h>
 #include <Core/EngineContext.h>
 #include <Core/Application.h>
@@ -109,13 +111,9 @@ NetworkPanel::NetworkPanel(EditorContext* pContext, const std::string& name)
 	
 }
 
-void NetworkPanel::SetDriver(NetDriver* pDriver)
-{
-	m_pDriver = pDriver;
-}
-
 void BoonEditor::NetworkPanel::OnRenderUI()
 {
+#ifdef BOON_WITH_NETWORKING
 	NetworkingSubsystem* netSubsystem = GetContext().GetEngineContext().TryGetSubsystem<NetworkingSubsystem>();
 
 	static std::vector<const char*> modes =
@@ -286,4 +284,5 @@ void BoonEditor::NetworkPanel::OnRenderUI()
 
 	ImGui::PopStyleVar(2);
 	ImGui::PopStyleColor(2);
+#endif
 }

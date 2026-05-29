@@ -44,6 +44,7 @@ namespace BoonBuild
         outRules.Reflection = j.value("reflection", true);
         outRules.MinimalReflection = j.value("minimalReflection", true);
         outRules.ModuleInstance = j.value("moduleInstance", "");
+        outRules.Platform = j.value("platform", "");
 
         outRules.EngineModules = ReadStringArray(j, "engineModules");
         outRules.GameModules = ReadStringArray(j, "gameModules");
@@ -56,6 +57,10 @@ namespace BoonBuild
 
         outRules.PublicDependencies = ReadStringArray(j, "publicDependencies");
         outRules.PrivateDependencies = ReadStringArray(j, "privateDependencies");
+
+        // Backwards-compatible alias used by the new-project template.
+        if (outRules.PrivateDependencies.empty())
+            outRules.PrivateDependencies = ReadStringArray(j, "dependencies");
 
         outRules.AssetDirectories = ReadStringArray(j, "assetDirectories");
 

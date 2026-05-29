@@ -17,12 +17,12 @@ namespace BoonEditor
 	public:
 		NetworkPanel(EditorContext* pContext, const std::string& name);
 
-		void SetDriver(NetDriver* pDriver);
-
 	protected:
 		virtual void OnRenderUI() override;
 
 	private:
+#ifdef BOON_WITH_NETWORKING
 		NetDriver* m_pDriver{nullptr};
+#endif
 	};
 }

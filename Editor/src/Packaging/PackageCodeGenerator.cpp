@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <fstream>
 #include <sstream>
+#include <vector>
 
 using namespace Boon;
 
@@ -53,30 +54,6 @@ namespace BoonEditor
 		return value;
 	}
 
-	static std::string ToCMakePath(const std::filesystem::path& path)
-	{
-		std::string value = path.string();
-		for (char& c : value)
-		{
-			if (c == '\\')
-				c = '/';
-		}
-		return value;
-	}
-
-	static std::string BuildModuleIncludes(const PackageModuleSet& modules)
-	{
-		std::string result;
-
-		for (const PackageModule& module : modules.Modules)
-		{
-			if (!module.Include.empty())
-				result += "#include \"" + module.Include + "\"\n";
-		}
-
-		return result;
-	}
-
 	static std::string BuildModuleRegisterCode(const PackageModuleSet& modules)
 	{
 		std::string result;
@@ -104,6 +81,58 @@ namespace BoonEditor
 		}
 
 		return result;
+	}
+
+	static std::vector<std::string> BuildStaticModuleNames(
+		const PackageModuleSet& modules,
+		const std::string& gameProjectTarget)
+	{
+		std::vector<std::string> result;
+
+		for (const PackageModule& module : modules.Modules)
+		{
+			const std::string name = SanitizeIdentifier(
+				module.LinkTarget.empty() ? module.Name : module.LinkTarget);
+
+			if (name.empty())
+				continue;
+
+			result.push_back(name);
+		}
+
+		result.push_back(gameProjectTarget);
+		return result;
+	}
+
+	static std::string NetMode(ENetDriverMode mode)
+	{
+		switch (mode)
+		{
+		case ENetDriverMode::ListenServer:
+			return "Boon::ENetDriverMode::ListenServer";
+		case ENetDriverMode::DedicatedServer:
+			return "Boon::ENetDriverMode::DedicatedServer";
+		case ENetDriverMode::Client:
+			return "Boon::ENetDriverMode::Client";
+		}
+		return "Boon::ENetDriverMode::Standalone";
+	}
+
+	static std::string BuildPackageStaticModuleDeclarations(
+		const std::vector<std::string>& moduleNames)
+	{
+		std::stringstream ss;
+
+		for (const std::string& moduleName : moduleNames)
+		{
+			ss << "\tconst Boon::ModuleInfo* " << moduleName << "_GetModuleInfo();\n";
+			ss << "\tBoon::ModuleRegistration " << moduleName
+				<< "_RegisterModule(Boon::ModuleContext*);\n";
+			ss << "\tvoid " << moduleName
+				<< "_UnregisterModule(Boon::ModuleContext*, Boon::ModuleInstance*);\n\n";
+		}
+
+		return ss.str();
 	}
 
 	bool PackageCodeGenerator::Generate(
@@ -140,6 +169,8 @@ namespace BoonEditor
 		context.Set("WINDOW_HEIGHT", std::to_string(config.Window.Height));
 		context.Set("WINDOW_RESIZABLE", BoolLiteral(config.Window.bResizable));
 		context.Set("WINDOW_FULLSCREEN", BoolLiteral(config.Window.bFullscreen));
+
+		context.Set("NET_NETMODE", NetMode(config.Network.NetMode));
 
 		context.Set("MODULE_REGISTER_CODE", BuildModuleRegisterCode(modules));
 		context.Set("MODULE_LINK_TARGETS", BuildModuleLinkTargets(modules));
