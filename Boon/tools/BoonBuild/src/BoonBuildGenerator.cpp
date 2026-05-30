@@ -225,8 +225,6 @@ namespace BoonBuild
                 context.Set("GENERATED_REFLECTION_DECLARATIONS", data.GeneratedReflectionDeclarations);
                 context.Set("REGISTER_REFLECTION_CALL", data.RegisterReflectionCall);
                 context.Set("UNREGISTER_REFLECTION_CALL", data.UnregisterReflectionCall);
-                context.Set("CREATE_MODULE_INSTANCE_BODY", data.CreateModuleInstanceBody);
-                context.Set("DESTROY_MODULE_INSTANCE_BODY", data.DestroyModuleInstanceBody);
                 context.Set("PLATFORM_COMPILE_DEFINITION", ToCompileDefinition(platform));
 
                 if (!templateGenerator.Generate(

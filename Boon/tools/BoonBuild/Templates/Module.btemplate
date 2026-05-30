@@ -72,17 +72,17 @@ namespace Boon
 {{GENERATED_REFLECTION_DECLARATIONS}}
 }
 
-extern Boon::ModuleInstance* Boon_CreateUserModuleInstance();
-extern void Boon_DestroyUserModuleInstance(Boon::ModuleInstance* instance);
+extern Boon::ModuleInstance* {{MODULE_NAME}}_CreateUserModuleInstance();
+extern void {{MODULE_NAME}}_DestroyUserModuleInstance(Boon::ModuleInstance* instance);
 
 static Boon::ModuleInstance* CreateModuleInstance()
 {
-{{CREATE_MODULE_INSTANCE_BODY}}
+    return {{MODULE_NAME}}_CreateUserModuleInstance();
 }
 
 static void DestroyModuleInstance(Boon::ModuleInstance* instance)
 {
-{{DESTROY_MODULE_INSTANCE_BODY}}
+    {{MODULE_NAME}}_DestroyUserModuleInstance(instance);
 }
 
 extern "C"
@@ -139,20 +139,20 @@ extern "C"
 
 BOON_MODULE_EXPORT const Boon::ModuleInfo* Boon_GetModuleInfo()
 {
-    return {{PROJECT_NAME}}_GetModuleInfo();
+    return {{MODULE_NAME}}_GetModuleInfo();
 }
 
 BOON_MODULE_EXPORT Boon::ModuleRegistration Boon_RegisterModule(
     Boon::ModuleContext* context)
 {
-    return {{PROJECT_NAME}}_RegisterModule(context);
+    return {{MODULE_NAME}}_RegisterModule(context);
 }
 
 BOON_MODULE_EXPORT void Boon_UnregisterModule(
     Boon::ModuleContext* context,
     Boon::ModuleInstance* instance)
 {
-    {{PROJECT_NAME}}_UnregisterModule(context, instance);
+    {{MODULE_NAME}}_UnregisterModule(context, instance);
 }
 
 #endif

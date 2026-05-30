@@ -28,8 +28,5 @@ namespace BoonBuild
         std::string GeneratedReflectionDeclarations;
         std::string RegisterReflectionCall;
         std::string UnregisterReflectionCall;
-
-        std::string CreateModuleInstanceBody;
-        std::string DestroyModuleInstanceBody;
     };
 }

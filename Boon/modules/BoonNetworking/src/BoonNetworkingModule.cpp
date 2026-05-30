@@ -17,6 +17,11 @@ namespace Boon
             return true;
         }
 
+        void OnStart(ModuleContext& ctx) override
+        {
+            
+        }
+
         void OnShutdown(ModuleContext& ctx) override
         {
             ctx.EngineContext->Subsystems->Unregister<NetworkingSubsystem>(*ctx.EngineContext);
@@ -24,4 +29,4 @@ namespace Boon
     };
 }
 
-BOON_IMPLEMENT_MODULE_INSTANCE(Boon::BoonNetworkModule)
+BOON_IMPLEMENT_MODULE_INSTANCE(BoonNetworking, Boon::BoonNetworkModule)

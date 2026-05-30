@@ -151,5 +151,9 @@ namespace Boon
         bool m_bRegisterDynamicObject{ true };
 
         EventListenerID m_ClientConnectedEvent;
+        Delegate<void(GameObject)>::Handle m_OnObjectSpawnedHandle;
+        Delegate<void(GameObject)>::Handle m_OnObjectDestroyedHandle;
+        Delegate<void(GameObject)>::Handle m_OnComponentAddedHandle;
+        Delegate<void(GameObject)>::Handle m_OnComponentRemovedHandle;
     };
 }

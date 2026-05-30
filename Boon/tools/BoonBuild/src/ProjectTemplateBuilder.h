@@ -22,9 +22,17 @@ namespace BoonBuild
 
         static std::string MakeReflectionBlock(const ProjectRules& project);
         static std::string MakeReflectionDependencyBlock(const ProjectRules& project);
-        static std::string MakeCompileDefinitionsBlock(const ProjectRules& project);
-        static std::string MakeIncludeDirectoriesBlock(const ProjectRules& project);
-        static std::string MakeLinkLibrariesBlock(const ProjectRules& project);
+        static std::string MakeCompileDefinitionsBlock(
+            const ProjectRules& project,
+            const std::vector<ModuleRules>& selectedEngineModules);
+
+        static std::string MakeIncludeDirectoriesBlock(
+            const ProjectRules& project,
+            const std::vector<ModuleRules>& selectedEngineModules);
+
+        static std::string MakeLinkLibrariesBlock(
+            const ProjectRules& project,
+            const std::vector<ModuleRules>& selectedEngineModules);
         static std::string MakeAssetCopyBlock(const ProjectRules& project);
         static std::string MakeProjectEngineModulesBlock(const std::vector<ModuleRules>& selectedEngineModules);
         static std::vector<std::string> MakeProjectStaticModuleNames(

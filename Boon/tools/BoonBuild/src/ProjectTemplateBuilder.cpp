@@ -16,9 +16,9 @@ namespace BoonBuild
         data.ReflectionBlock = MakeReflectionBlock(project);
         data.ReflectionDependencyBlock = MakeReflectionDependencyBlock(project);
 
-        data.CompileDefinitionsBlock = MakeCompileDefinitionsBlock(project);
-        data.IncludeDirectoriesBlock = MakeIncludeDirectoriesBlock(project);
-        data.LinkLibrariesBlock = MakeLinkLibrariesBlock(project);
+        data.CompileDefinitionsBlock = MakeCompileDefinitionsBlock(project, selectedEngineModules);
+        data.IncludeDirectoriesBlock = MakeIncludeDirectoriesBlock(project, selectedEngineModules);
+        data.LinkLibrariesBlock = MakeLinkLibrariesBlock(project, selectedEngineModules);
         data.AssetCopyBlock = MakeAssetCopyBlock(project);
         data.ProjectEngineModulesBlock = MakeProjectEngineModulesBlock(selectedEngineModules);
 
@@ -88,18 +88,28 @@ namespace BoonBuild
         return "add_dependencies(${GAME_TARGET} GenerateReflection_${GAME_TARGET})";
     }
 
-    std::string ProjectTemplateBuilder::MakeCompileDefinitionsBlock(const ProjectRules& project)
+    std::string ProjectTemplateBuilder::MakeCompileDefinitionsBlock(
+        const ProjectRules& project,
+        const std::vector<ModuleRules>& selectedEngineModules)
     {
+        std::vector<std::string> publicDefinitions = project.PublicDefinitions;
+
+        for (const ModuleRules& module : selectedEngineModules)
+        {
+            for (const std::string& definition : module.PublicDefinitions)
+                publicDefinitions.push_back(definition);
+        }
+
         std::stringstream ss;
 
         ss << "target_compile_definitions(${GAME_TARGET}\n";
         ss << "    PRIVATE\n";
         ss << "        BOON_MODULE_NAME=${GAME_TARGET}\n";
 
-        if (!project.PublicDefinitions.empty())
+        if (!publicDefinitions.empty())
         {
             ss << "    PUBLIC\n";
-            ss << JoinIndented(project.PublicDefinitions);
+            ss << JoinIndented(publicDefinitions);
         }
 
         if (!project.PrivateDefinitions.empty())
@@ -113,7 +123,9 @@ namespace BoonBuild
         return ss.str();
     }
 
-    std::string ProjectTemplateBuilder::MakeIncludeDirectoriesBlock(const ProjectRules& project)
+    std::string ProjectTemplateBuilder::MakeIncludeDirectoriesBlock(
+        const ProjectRules& project,
+        const std::vector<ModuleRules>& selectedEngineModules)
     {
         std::stringstream ss;
 
@@ -133,13 +145,33 @@ namespace BoonBuild
             ss << "        \"${GAME_SOURCE_DIR}/" << path << "\"\n";
 
         ss << "        \"${GAME_GENERATED_DIR}\"\n";
+
+        for (const ModuleRules& module : selectedEngineModules)
+        {
+            for (const std::string& path : module.PublicIncludePaths)
+            {
+                ss << "        \"${BOON_ENGINE_ROOT}/modules/"
+                    << module.Name << "/" << path << "\"\n";
+            }
+        }
+
         ss << ")";
 
         return ss.str();
     }
 
-    std::string ProjectTemplateBuilder::MakeLinkLibrariesBlock(const ProjectRules& project)
+    std::string ProjectTemplateBuilder::MakeLinkLibrariesBlock(
+        const ProjectRules& project,
+        const std::vector<ModuleRules>& selectedEngineModules)
     {
+        std::vector<std::string> publicDependencies = project.PublicDependencies;
+
+        for (const ModuleRules& module : selectedEngineModules)
+        {
+            for (const std::string& dependency : module.PublicDependencies)
+                publicDependencies.push_back(dependency);
+        }
+
         std::stringstream ss;
 
         ss << "set(GAME_STATIC_MODULE_TARGETS)\n\n";
@@ -158,10 +190,10 @@ namespace BoonBuild
         for (const auto& dependency : project.PrivateDependencies)
             ss << "        " << dependency << "\n";
 
-        if (!project.PublicDependencies.empty())
+        if (!publicDependencies.empty())
         {
             ss << "    PUBLIC\n";
-            ss << JoinIndented(project.PublicDependencies);
+            ss << JoinIndented(publicDependencies);
         }
 
         ss << ")";
@@ -367,7 +399,7 @@ namespace BoonBuild
         if (project.ModuleInstance.empty())
             return "    return nullptr;";
 
-        return "    return Boon_CreateUserModuleInstance();";
+        return "    return " + project.Name + "_CreateUserModuleInstance();";
     }
 
     std::string ProjectTemplateBuilder::MakeDestroyModuleInstanceBody(const ProjectRules& project)
@@ -375,6 +407,6 @@ namespace BoonBuild
         if (project.ModuleInstance.empty())
             return "    delete instance;";
 
-        return "    Boon_DestroyUserModuleInstance(instance);";
+        return "    " + project.Name + "_DestroyUserModuleInstance(instance);";
     }
 }

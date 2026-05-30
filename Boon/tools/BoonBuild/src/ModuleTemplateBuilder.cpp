@@ -29,8 +29,6 @@ namespace BoonBuild
         data.GeneratedReflectionDeclarations = MakeGeneratedReflectionDeclarations(module);
         data.RegisterReflectionCall = MakeRegisterReflectionCall(module);
         data.UnregisterReflectionCall = MakeUnregisterReflectionCall(module);
-        data.CreateModuleInstanceBody = MakeCreateModuleInstanceBody(module);
-        data.DestroyModuleInstanceBody = MakeDestroyModuleInstanceBody(module);
         return data;
     }
 
@@ -310,21 +308,5 @@ namespace BoonBuild
         ss << "        }";
 
         return ss.str();
-    }
-
-    std::string ModuleTemplateBuilder::MakeCreateModuleInstanceBody(const ModuleRules& module)
-    {
-        if (module.ModuleInstance.empty())
-            return "    return nullptr;";
-
-        return "    return Boon_CreateUserModuleInstance();";
-    }
-
-    std::string ModuleTemplateBuilder::MakeDestroyModuleInstanceBody(const ModuleRules& module)
-    {
-        if (module.ModuleInstance.empty())
-            return "    delete instance;";
-
-        return "    Boon_DestroyUserModuleInstance(instance);";
     }
 }

@@ -153,9 +153,6 @@ namespace BoonGenerated
 
 {{MODULE_ON_ENTER}}
 
-		if (ctx.Subsystems)
-			ctx.Subsystems->InitAll(ctx);
-
 		LoadStartupScene();
 	}
 
@@ -439,18 +436,9 @@ target_link_libraries(BoonPackagedStaticModules
 		${BOON_PACKAGED_MODULE_TARGETS}
 )
 
-target_link_libraries(BoonPackagedStaticModules
-    PUBLIC
-        BoonEngine
-        {{GAME_PROJECT_TARGET}}
-        ${BOON_PACKAGED_MODULE_TARGETS}
-)
-
 target_link_libraries({{TARGET_NAME}} PRIVATE
-    BoonEngine
-    BoonPackagedStaticModules
-    {{GAME_PROJECT_TARGET}}
-    ${BOON_PACKAGED_MODULE_TARGETS}
+	BoonEngine
+	BoonPackagedStaticModules
 )
 
 set_target_properties({{TARGET_NAME}} PROPERTIES

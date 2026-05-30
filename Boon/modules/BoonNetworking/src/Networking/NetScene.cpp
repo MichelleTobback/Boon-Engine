@@ -24,7 +24,7 @@ namespace Boon
 
         if (m_Driver->GetMode() != ENetDriverMode::Client)
         {
-            m_Scene->GetOnGameObjectSpawned() += [this](GameObject obj) { RegisterDynamicGameObject(obj, 1); };
+            m_Scene->GetOnGameObjectSpawned().Bind([this](GameObject obj) { RegisterDynamicGameObject(obj, 1); });
             m_Scene->GetOnGameObjectDestroyed() += [this](GameObject obj) { BroadcastDespawn(obj.GetUUID()); };
             m_Scene->GetOnComponentAdded() += [this](GameObject  obj, const BClass* cls) {BroadcastComponent(obj.GetUUID(), cls->hash, true); };
             m_Scene->GetOnComponentRemoved() += [this](GameObject  obj, const BClass* cls) {BroadcastComponent(obj.GetUUID(), cls->hash, false); };
@@ -39,6 +39,14 @@ namespace Boon
 
     NetScene::~NetScene()
     {
+        if (m_Scene)
+        {
+            m_Scene->GetOnGameObjectSpawned().Unbind(m_OnObjectSpawnedHandle);
+            m_Scene->GetOnGameObjectSpawned().Unbind(m_OnObjectDestroyedHandle);
+            m_Scene->GetOnGameObjectSpawned().Unbind(m_OnComponentAddedHandle);
+            m_Scene->GetOnGameObjectSpawned().Unbind(m_OnComponentRemovedHandle);
+        }
+
         m_DynamicOwnership = {};
         GetDriver()->GetEventBus().Unsubscribe<NetConnectionEvent>(m_ClientConnectedEvent);
     }

@@ -99,17 +99,17 @@ namespace Boon
 {{GENERATED_REFLECTION_DECLARATIONS}}
 }
 
-extern Boon::ModuleInstance* Boon_CreateUserModuleInstance();
-extern void Boon_DestroyUserModuleInstance(Boon::ModuleInstance* instance);
+extern Boon::ModuleInstance* {{PROJECT_NAME}}_CreateUserModuleInstance();
+extern void {{PROJECT_NAME}}_DestroyUserModuleInstance(Boon::ModuleInstance* instance);
 
 static Boon::ModuleInstance* CreateModuleInstance()
 {
-{{CREATE_MODULE_INSTANCE_BODY}}
+    return {{PROJECT_NAME}}_CreateUserModuleInstance();
 }
 
 static void DestroyModuleInstance(Boon::ModuleInstance* instance)
 {
-{{DESTROY_MODULE_INSTANCE_BODY}}
+    {{PROJECT_NAME}}_DestroyUserModuleInstance(instance);
 }
 
 extern "C"

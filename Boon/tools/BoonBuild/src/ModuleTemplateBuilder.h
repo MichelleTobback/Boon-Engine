@@ -32,8 +32,5 @@ namespace BoonBuild
         static std::string MakeGeneratedReflectionDeclarations(const ModuleRules& module);
         static std::string MakeRegisterReflectionCall(const ModuleRules& module);
         static std::string MakeUnregisterReflectionCall(const ModuleRules& module);
-
-        static std::string MakeCreateModuleInstanceBody(const ModuleRules& module);
-        static std::string MakeDestroyModuleInstanceBody(const ModuleRules& module);
     };
 }

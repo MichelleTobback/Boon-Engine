@@ -5,16 +5,24 @@
 #include "Networking/Events/NetConnectionEvent.h"
 #include "Networking/NetScene.h"
 
+#include "BoonDebug/Logger.h"
+
 using namespace Boon;
 
 void NetworkingSubsystem::OnInit(EngineContext& ctx)
 {
+    BOON_LOG("NetworkingSubsystem::OnInit");
+
+    if (m_Driver)
+        return;
+
     m_Driver = std::move(NetDriver::Create());
     m_pEngineContext = &ctx;
 }
 
 void NetworkingSubsystem::OnShutdown(EngineContext&)
 {
+    BOON_LOG("NetworkingSubsystem::OnShutdown");
     StopNetwork();
 
     m_Driver.reset();
@@ -25,6 +33,12 @@ void NetworkingSubsystem::OnShutdown(EngineContext&)
 void NetworkingSubsystem::StartNetwork(NetworkSettings settings, EngineContext& ctx)
 {
     m_Settings = settings;
+
+    if (!m_Driver)
+    {
+        BOON_LOG("Driver not initialized!");
+        return;
+    }
 
     if (m_Driver->IsRunning())
         return;
@@ -37,7 +51,7 @@ void NetworkingSubsystem::StartNetwork(NetworkSettings settings, EngineContext& 
 		m_Driver->BindOnDisconnectedCallback([this](NetConnection* pConnection) {OnDisconnected(pConnection); });
 		m_Driver->BindOnPacketCallback([this](NetConnection* pConnection, NetPacket& packet) { OnPacketReceived(pConnection, packet); });
 
-        m_BindNetSceneHandle = ctx.Scenes->BindOnSceneChanged([](Scene& scene)
+        auto createNetScene = [](Scene& scene)
             {
                 EngineContext& engine = scene.GetEngineContext();
 
@@ -52,7 +66,11 @@ void NetworkingSubsystem::StartNetwork(NetworkSettings settings, EngineContext& 
 
                 auto netScene = std::make_shared<NetScene>(&scene, &driver, engine.Scenes);
                 driver.BindScene(netScene);
-            });
+            };
+
+        m_BindNetSceneHandle = ctx.Scenes->BindOnSceneChanged(createNetScene);
+        if (ctx.Scenes->HasActiveScene())
+            createNetScene(ctx.Scenes->GetActiveScene());
 
 		if (m_Driver->IsClient())
 		{

@@ -33,13 +33,13 @@ namespace Boon
 }
 
 // TODO: later replace with reflection discovery.
-#define BOON_IMPLEMENT_MODULE_INSTANCE(Type)                         \
-    Boon::ModuleInstance* Boon_CreateUserModuleInstance()            \
-    {                                                                \
-        return new Type();                                           \
-    }                                                                \
-                                                                     \
-    void Boon_DestroyUserModuleInstance(Boon::ModuleInstance* inst)  \
-    {                                                                \
-        delete inst;                                                 \
+#define BOON_IMPLEMENT_MODULE_INSTANCE(ModuleName, Type)                  \
+    Boon::ModuleInstance* ModuleName##_CreateUserModuleInstance()         \
+    {                                                                     \
+        return new Type();                                                \
+    }                                                                     \
+                                                                          \
+    void ModuleName##_DestroyUserModuleInstance(Boon::ModuleInstance* inst)\
+    {                                                                     \
+        delete inst;                                                      \
     }

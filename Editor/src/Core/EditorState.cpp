@@ -190,8 +190,6 @@ void EditorState::OnEnter()
 	module.EngineContext = &ctx;
 	m_pModuleLib->LoadStartupModules(module);
 
-	ctx.Subsystems->InitAll(ctx);
-
 	SceneSerializer serializer(scene);
 	serializer.Deserialize(config.AssetsRoot / config.StartupScene);
 

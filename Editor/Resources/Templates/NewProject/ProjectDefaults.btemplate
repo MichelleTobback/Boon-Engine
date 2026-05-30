@@ -22,7 +22,7 @@ void {{PROJECT_NAME}}Instance::OnShutdown(Boon::ModuleContext&)
 {
 }
 
-BOON_IMPLEMENT_MODULE_INSTANCE({{PROJECT_NAME}}Instance)
+BOON_IMPLEMENT_MODULE_INSTANCE({{PROJECT_NAME}}, {{PROJECT_NAME}}Instance)
 
 @@Assets/Scenes/Main.scene
 {
