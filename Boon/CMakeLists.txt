@@ -67,27 +67,52 @@ target_include_directories(BoonEngine
 # --------------------------------------------------
 # External dependencies
 # --------------------------------------------------
-add_subdirectory(external/glad)
-add_subdirectory(external/glfw)
 add_subdirectory(external/entt)
 add_subdirectory(external/box2d)
 
-find_package(OpenGL REQUIRED)
+if(EMSCRIPTEN)
+    message(STATUS "Including Emscripten/Web support")
 
-target_link_libraries(BoonEngine
-    PUBLIC
-        glad
-        glfw
-        EnTT::EnTT
-        OpenGL::GL
-    PRIVATE
-        box2d
-)
+    target_compile_definitions(BoonEngine
+        PUBLIC
+            BOON_PLATFORM_WEB
+    )
+
+    target_include_directories(BoonEngine
+        PUBLIC
+            ${CMAKE_CURRENT_SOURCE_DIR}/external/glad/include
+            ${CMAKE_CURRENT_SOURCE_DIR}/external/glfw/include
+    )
+
+    target_link_libraries(BoonEngine
+        PUBLIC
+            EnTT::EnTT
+        PRIVATE
+            box2d
+    )
+else()
+    add_subdirectory(external/glad)
+    add_subdirectory(external/glfw)
+
+    find_package(OpenGL REQUIRED)
+
+    target_link_libraries(BoonEngine
+        PUBLIC
+            glad
+            glfw
+            EnTT::EnTT
+            OpenGL::GL
+        PRIVATE
+            box2d
+    )
+endif()
 
 # --------------------------------------------------
 # Platform defines
 # --------------------------------------------------
-if (WIN32)
+if(EMSCRIPTEN)
+    target_compile_definitions(BoonEngine PUBLIC BOON_PLATFORM_WEB)
+elseif(WIN32)
     target_compile_definitions(BoonEngine PUBLIC BOON_PLATFORM_WINDOWS)
 elseif(APPLE)
     target_compile_definitions(BoonEngine PUBLIC BOON_PLATFORM_MACOS)

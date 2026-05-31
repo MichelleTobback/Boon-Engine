@@ -727,7 +727,7 @@ namespace BoonEditor
             // Resolve current label (filename only)
             //
             std::string currentLabel;
-            if (handle != 0 && AssetDatabase::Get().Exists(handle))
+            if (handle.IsValid() && AssetDatabase::Get().Exists(handle))
             {
                 const std::filesystem::path& fullPath = AssetDatabase::Get().GetPath(handle);
                 currentLabel = fullPath.filename().string();

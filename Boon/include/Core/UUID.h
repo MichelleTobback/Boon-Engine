@@ -1,8 +1,9 @@
 #pragma once
 
-#include <xhash>
+#include <cstdint>
+#include <functional>
 
-//https://www.youtube.com/watch?v=O_0nUE4S8T8
+// https://www.youtube.com/watch?v=O_0nUE4S8T8
 
 namespace Boon
 {
@@ -34,6 +35,11 @@ namespace Boon
 		operator uint64_t() const { return m_Uuid; }
 
 		/**
+		 * @brief Equality operators.
+		 */
+		bool operator==(const UUID&) const = default;
+
+		/**
 		 * @brief A sentinel null UUID value.
 		 */
 		static const UUID Null;
@@ -48,9 +54,9 @@ namespace std
 	template<>
 	struct hash<Boon::UUID>
 	{
-		std::size_t operator()(const Boon::UUID& uuid) const
+		std::size_t operator()(const Boon::UUID& uuid) const noexcept
 		{
-			return hash<uint64_t>()(static_cast<uint64_t>(uuid));
+			return std::hash<uint64_t>{}(static_cast<uint64_t>(uuid));
 		}
 	};
 }

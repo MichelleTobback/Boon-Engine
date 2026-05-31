@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 
+using namespace Boon;
 namespace BoonBuild
 {
     namespace

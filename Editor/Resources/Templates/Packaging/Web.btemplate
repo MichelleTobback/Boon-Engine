@@ -175,26 +175,69 @@ echo ========================================
 echo Building Web Package
 echo ========================================
 
+REM --------------------------------------------------
+REM Find EMSDK
+REM --------------------------------------------------
+
 if "%EMSDK%"=="" (
-	echo ERROR: EMSDK environment variable is not set.
-	echo Example:
-	echo   set EMSDK=C:\Tools\emsdk
-	exit /b 1
+    if exist "C:\Tools\emsdk\emsdk_env.bat" (
+        set "EMSDK=C:\Tools\emsdk"
+    )
 )
 
-if not exist "%EMSDK%\emsdk_env.bat" (
-	echo ERROR: Could not find:
-	echo   %EMSDK%\emsdk_env.bat
-	exit /b 1
+if "%EMSDK%"=="" (
+    if exist "%USERPROFILE%\emsdk\emsdk_env.bat" (
+        set "EMSDK=%USERPROFILE%\emsdk"
+    )
 )
+
+if "%EMSDK%"=="" (
+    if exist "%USERPROFILE%\Dev\emsdk\emsdk_env.bat" (
+        set "EMSDK=%USERPROFILE%\Dev\emsdk"
+    )
+)
+
+if "%EMSDK%"=="" (
+    if exist "C:\emsdk\emsdk_env.bat" (
+        set "EMSDK=C:\emsdk"
+    )
+)
+
+if "%EMSDK%"=="" (
+    if exist "%LOCALAPPDATA%\emsdk\emsdk_env.bat" (
+        set "EMSDK=%LOCALAPPDATA%\emsdk"
+    )
+)
+
+if "%EMSDK%"=="" (
+    echo ERROR: Could not locate EMSDK.
+    echo.
+    echo Checked:
+    echo   C:\Tools\emsdk
+    echo   %USERPROFILE%\emsdk
+    echo   C:\emsdk
+    echo   %LOCALAPPDATA%\emsdk
+    echo.
+    echo Future versions can use the EMSDK path from Boon Settings.
+    exit /b 1
+)
+
+echo Using EMSDK:
+echo   %EMSDK%
 
 call "%EMSDK%\emsdk_env.bat"
 if errorlevel 1 exit /b 1
 
 where emcc >nul 2>nul
 if errorlevel 1 (
-	echo ERROR: emcc not found after emsdk_env setup.
-	exit /b 1
+    echo ERROR: emcc not found after emsdk_env setup.
+    exit /b 1
+)
+
+where emcmake >nul 2>nul
+if errorlevel 1 (
+    echo ERROR: emcmake not found after emsdk_env setup.
+    exit /b 1
 )
 
 set "PROFILE={{BUILD_PROFILE}}"
@@ -219,12 +262,12 @@ if errorlevel 1 exit /b 1
 
 echo.
 echo [2/3] Configuring web runtime...
-emcmake cmake -S "{{GENERATED_ROOT}}" -B "{{BUILD_DIR}}" -G Ninja -DCMAKE_BUILD_TYPE={{BUILD_CONFIGURATION}} -DBOON_REPO_ROOT:PATH="{{BOON_REPO_ROOT_CMAKE}}" -DBOON_ENGINE_ROOT:PATH="{{BOON_ENGINE_ROOT_CMAKE}}" -DBOON_SDK_ROOT:PATH="{{BOON_REPO_ROOT_CMAKE}}" -DGAME_PROJECT_ROOT:PATH="{{GAME_PROJECT_ROOT_CMAKE}}"
+call emcmake cmake -S "{{GENERATED_ROOT}}" -B "{{BUILD_DIR}}" -G Ninja -DCMAKE_BUILD_TYPE={{BUILD_CONFIGURATION}} -DBOON_REPO_ROOT:PATH="{{BOON_REPO_ROOT_CMAKE}}" -DBOON_ENGINE_ROOT:PATH="{{BOON_ENGINE_ROOT_CMAKE}}" -DBOON_SDK_ROOT:PATH="{{BOON_REPO_ROOT_CMAKE}}" -DGAME_PROJECT_ROOT:PATH="{{GAME_PROJECT_ROOT_CMAKE}}"
 if errorlevel 1 exit /b 1
 
 echo.
 echo [3/3] Building web runtime...
-cmake --build "{{BUILD_DIR}}" --config {{BUILD_CONFIGURATION}}
+call cmake --build "{{BUILD_DIR}}" --config {{BUILD_CONFIGURATION}}
 if errorlevel 1 exit /b 1
 
 echo.

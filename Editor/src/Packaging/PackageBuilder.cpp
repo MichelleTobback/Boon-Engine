@@ -94,6 +94,8 @@ namespace BoonEditor
 
 		Step("Preparing package folder", 0.05f);
 
+		const std::string platform = ToString(settings.BuildPlatform);
+
 		if (settings.GenerateCode)
 		{
 			Step("Generating packaged runtime code", 0.20f);
@@ -103,7 +105,7 @@ namespace BoonEditor
 				modules,
 				settings,
 				packageTemplateDir / "Common.btemplate",
-				packageTemplateDir / "Windows.btemplate",
+				packageTemplateDir / (platform + ".btemplate"),
 				packageRoot,
 				generatedRoot,
 				repoRoot))
@@ -154,7 +156,7 @@ namespace BoonEditor
 
 		Step("Running CMake build", 0.55f);
 
-		const std::filesystem::path script = std::filesystem::absolute(packageRoot / "BuildWindows.bat");
+		const std::filesystem::path script = std::filesystem::absolute(packageRoot / ("Build" + platform + ".bat"));
 		const std::string command = "cmd.exe /d /s /c \"call \"" + script.string() + "\"\"";
 
 		ProcessResult result = ProcessRunner::Run(command, [&](const std::string& chunk)

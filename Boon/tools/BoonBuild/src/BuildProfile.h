@@ -1,5 +1,5 @@
 #pragma once
-#include "BuildPlatform.h"
+#include "BoonBuild/BuildPlatform.h"
 
 #include <string>
 
@@ -8,7 +8,7 @@ namespace BoonBuild
     struct BuildProfile
     {
         std::string Name = "Windows-Debug";
-        BuildPlatform Platform = BuildPlatform::Windows;
+        Boon::BuildPlatform Platform = Boon::BuildPlatform::Windows;
         std::string Configuration = "Debug";
         std::string Generator = "Ninja";
     };

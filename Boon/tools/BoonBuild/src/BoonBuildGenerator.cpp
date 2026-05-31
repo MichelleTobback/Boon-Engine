@@ -6,7 +6,7 @@
 #include "ProjectTemplateBuilder.h"
 #include "TemplateFileGenerator.h"
 #include "ModuleDependencyGraph.h"
-#include "BuildPlatform.h"
+#include "BoonBuild/BuildPlatform.h"
 #include "BuildProfileReader.h"
 #include "CMakePresetsGenerator.h"
 
@@ -17,6 +17,8 @@
 #include <vector>
 #include <set>
 #include <unordered_map>
+
+using namespace Boon;
 
 namespace BoonBuild
 {
@@ -145,7 +147,7 @@ namespace BoonBuild
                 if (!SupportsPlatform(module, platform))
                 {
                     outError = "Engine module '" + module.Name + "' does not support platform '" + ToString(platform) + "'.";
-                    return false;
+                    continue;
                 }
 
                 outModules.push_back(module);
@@ -157,7 +159,7 @@ namespace BoonBuild
         bool GenerateEngineModuleFiles(
             const std::filesystem::path& repoRoot,
             const std::vector<ModuleRules>& inputModules,
-            BuildPlatform platform)
+            Boon::BuildPlatform platform)
         {
             const std::filesystem::path modulesDir =
                 repoRoot / "Boon" / "modules";

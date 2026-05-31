@@ -20,5 +20,5 @@ Boon::UUID::UUID(uint64_t uuid)
 
 bool Boon::UUID::IsValid() const
 {
-	return m_Uuid != Null;
+	return m_Uuid != static_cast<uint64_t>(Null);
 }

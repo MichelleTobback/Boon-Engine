@@ -52,7 +52,7 @@ namespace
 		}
 
 		if (!component.MaterialInstance ||
-			component.MaterialInstanceSource != 0)
+			component.MaterialInstanceSource.IsValid())
 		{
 			component.MaterialInstance = fallbackMaterial
 				? fallbackMaterial->CreateInstance()
