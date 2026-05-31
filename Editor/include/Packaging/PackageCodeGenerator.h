@@ -1,19 +1,26 @@
 #pragma once
 
-#include "Project/RuntimeConfig.h"
-#include "Packaging/PackageModule.h"
+#include "Packaging/PackageBuilder.h"
+
+#include <Project/RuntimeConfig.h>
 
 #include <filesystem>
 
 namespace BoonEditor
 {
-	class PackageCodeGenerator final
+	struct PackageModuleSet;
+
+	class PackageCodeGenerator
 	{
 	public:
 		static bool Generate(
 			const Boon::RuntimeConfig& config,
 			const PackageModuleSet& modules,
-			const std::filesystem::path& templatePath,
-			const std::filesystem::path& outputDir);
+			const PackageBuildSettings& settings,
+			const std::filesystem::path& commonTemplatePath,
+			const std::filesystem::path& platformTemplatePath,
+			const std::filesystem::path& packageRoot,
+			const std::filesystem::path& generatedRoot,
+			const std::filesystem::path& repoRoot);
 	};
 }

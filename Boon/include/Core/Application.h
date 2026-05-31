@@ -3,6 +3,7 @@
 #include "Networking/NetAuthority.h"
 #include "Project/RuntimeConfig.h"
 #include <Core/EngineContext.h>
+#include <Module/ModuleContext.h>
 #include <string>
 #include <memory>
 #include <functional>
@@ -80,6 +81,10 @@ namespace Boon
 		inline const RuntimeConfig& GetDescriptor() const { return m_Desc; }
 
 	private:
+		void Initialize(std::shared_ptr<AppState>&& pState);
+		void Tick();
+		void Shutdown();
+
 		std::unique_ptr<AppStateMachine> m_pStateMachine;
 		std::unique_ptr<class ServiceRegistry> m_pServiceRegistry;
 		std::unique_ptr<class NetRepRegistry> m_pNetRepRegistry;
@@ -87,6 +92,7 @@ namespace Boon
 
 		RuntimeConfig m_Desc;
 		EngineContext m_Context;
+		ModuleContext m_ModuleContext{};
 
 		std::unique_ptr<class Window> m_pWindow;
 		std::unique_ptr<class Input> m_pInput;
@@ -97,6 +103,8 @@ namespace Boon
 		std::unique_ptr<class SubsystemRegistry> m_pSubsystems;
 
 		uint32_t m_CurrentFrameIndex{};
+
+		bool m_bShouldQuit{ false };
 
 		static Application* s_pInstance;
 	};

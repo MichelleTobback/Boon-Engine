@@ -37,8 +37,13 @@ namespace BoonGenerated
 	{
 		Boon::RuntimeConfig config{};
 
+#if defined(BOON_PLATFORM_WEB)
+		config.ProjectRoot = "/";
+		config.EngineRoot = "/";
+#else
 		config.ProjectRoot = std::filesystem::current_path();
 		config.EngineRoot = std::filesystem::current_path();
+#endif
 
 		config.AssetsRoot = "Assets/Game";
 		config.EngineContentRoot = "Assets/Engine";
@@ -142,8 +147,6 @@ namespace BoonGenerated
 
 	void GeneratedPackagedState::OnEnter()
 	{
-		Boon::EngineContext& ctx = GetContext();
-
 		LoadAssets();
 		CreateRenderer();
 		BindEvents();
@@ -294,180 +297,3 @@ namespace BoonGenerated
 
 {{MODULE_FUNCTIONS}}
 }
-
-@@CMakeLists.txt
-cmake_minimum_required(VERSION 3.20)
-
-project({{TARGET_NAME}} LANGUAGES CXX)
-
-if(NOT DEFINED BOON_REPO_ROOT)
-	if(DEFINED BOON_SDK_ROOT)
-		set(BOON_REPO_ROOT "${BOON_SDK_ROOT}")
-	elseif(DEFINED BOON_ENGINE_ROOT)
-		set(BOON_REPO_ROOT "${BOON_ENGINE_ROOT}")
-	endif()
-endif()
-
-if(EXISTS "${BOON_REPO_ROOT}/tools/BClassGenerator/BoonReflection.cmake")
-	get_filename_component(BOON_REPO_ROOT "${BOON_REPO_ROOT}/.." ABSOLUTE)
-endif()
-
-if(NOT EXISTS "${BOON_REPO_ROOT}/Boon/CMakeLists.txt")
-	message(FATAL_ERROR "BOON_REPO_ROOT is invalid: ${BOON_REPO_ROOT}")
-endif()
-
-get_filename_component(BOON_REPO_ROOT "${BOON_REPO_ROOT}" ABSOLUTE)
-
-set(BOON_SDK_ROOT "${BOON_REPO_ROOT}" CACHE PATH "Boon SDK root" FORCE)
-set(BOON_ENGINE_ROOT "${BOON_REPO_ROOT}/Boon" CACHE PATH "Boon engine root" FORCE)
-set(BOON_CMAKE_DIR "${BOON_ENGINE_ROOT}/cmake" CACHE PATH "Boon cmake root" FORCE)
-
-if(NOT DEFINED GAME_PROJECT_ROOT)
-	message(FATAL_ERROR "GAME_PROJECT_ROOT is not set")
-endif()
-
-get_filename_component(GAME_PROJECT_ROOT "${GAME_PROJECT_ROOT}" ABSOLUTE)
-
-get_filename_component(
-	PACKAGE_OUTPUT_DIR
-	"${CMAKE_CURRENT_SOURCE_DIR}/.."
-	ABSOLUTE
-)
-
-message(STATUS "Package output dir: ${PACKAGE_OUTPUT_DIR}")
-
-function(boon_set_output_dirs target subdir)
-	set_target_properties(${target} PROPERTIES
-		ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin/$<CONFIG>/${subdir}"
-		LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin/$<CONFIG>/${subdir}"
-		RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin/$<CONFIG>/${subdir}"
-	)
-endfunction()
-
-if(NOT TARGET GenerateReflection)
-	add_custom_target(GenerateReflection)
-endif()
-
-if(NOT TARGET BClassGenerator)
-	set(BOON_BCLASSGENERATOR_EXE
-		"${BOON_SDK_ROOT}/bin/Debug/Tools/BClassGenerator.exe"
-	)
-
-	add_executable(BClassGenerator IMPORTED GLOBAL)
-
-	set_target_properties(BClassGenerator PROPERTIES
-		IMPORTED_LOCATION "${BOON_BCLASSGENERATOR_EXE}"
-	)
-endif()
-
-include("${BOON_ENGINE_ROOT}/tools/BClassGenerator/BoonReflection.cmake")
-
-add_subdirectory("${BOON_ENGINE_ROOT}" "${CMAKE_BINARY_DIR}/BoonEngine")
-
-set(BOON_PROJECT_ENGINE_MODULES_FILE
-	"${GAME_PROJECT_ROOT}/generated/EngineModules.cmake"
-)
-
-if(NOT EXISTS "${BOON_PROJECT_ENGINE_MODULES_FILE}")
-	message(FATAL_ERROR
-		"Missing project engine module selection file: ${BOON_PROJECT_ENGINE_MODULES_FILE}\n"
-		"Run BoonBuild for the project before packaging."
-	)
-endif()
-
-include("${BOON_PROJECT_ENGINE_MODULES_FILE}")
-
-if(COMMAND boon_add_project_engine_modules)
-	boon_add_project_engine_modules()
-else()
-	foreach(engine_module IN LISTS BOON_PROJECT_ENGINE_MODULES)
-		include("${BOON_ENGINE_ROOT}/modules/generated/${engine_module}/${engine_module}.cmake")
-	endforeach()
-endif()
-
-set(BOON_PACKAGED_MODULE_TARGETS)
-
-foreach(engine_module IN LISTS BOON_PROJECT_ENGINE_MODULES)
-	if(TARGET ${engine_module})
-		list(APPEND BOON_PACKAGED_MODULE_TARGETS ${engine_module})
-	else()
-		message(FATAL_ERROR
-			"Project requested engine module '${engine_module}', but no CMake target was created for it."
-		)
-	endif()
-endforeach()
-
-set(BOON_BUILD_GAME_SHARED OFF CACHE BOOL "" FORCE)
-
-add_subdirectory(
-	"${GAME_PROJECT_ROOT}/generated"
-	"${CMAKE_BINARY_DIR}/GameProject"
-)
-
-add_executable({{TARGET_NAME}}
-	GeneratedMain.cpp
-	GeneratedRuntimeConfig.cpp
-	GeneratedPackagedState.cpp
-)
-
-target_compile_features({{TARGET_NAME}} PRIVATE cxx_std_20)
-
-target_compile_definitions({{TARGET_NAME}} PRIVATE
-	BOON_MODULE_NAME={{GAME_PROJECT_TARGET}}
-)
-
-target_include_directories({{TARGET_NAME}} PRIVATE
-	"${CMAKE_CURRENT_SOURCE_DIR}"
-)
-
-add_library(BoonPackagedStaticModules STATIC
-    "${GAME_PROJECT_ROOT}/generated/StaticModules.cpp"
-)
-
-target_include_directories(BoonPackagedStaticModules
-	PRIVATE
-		"${BOON_ENGINE_ROOT}/include"
-)
-
-target_link_libraries(BoonPackagedStaticModules
-	PUBLIC
-		BoonEngine
-		{{GAME_PROJECT_TARGET}}
-		${BOON_PACKAGED_MODULE_TARGETS}
-)
-
-target_link_libraries({{TARGET_NAME}} PRIVATE
-	BoonEngine
-	BoonPackagedStaticModules
-)
-
-set_target_properties({{TARGET_NAME}} PROPERTIES
-	RUNTIME_OUTPUT_DIRECTORY "${PACKAGE_OUTPUT_DIR}"
-	RUNTIME_OUTPUT_DIRECTORY_DEBUG "${PACKAGE_OUTPUT_DIR}"
-	RUNTIME_OUTPUT_DIRECTORY_RELEASE "${PACKAGE_OUTPUT_DIR}"
-	RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${PACKAGE_OUTPUT_DIR}"
-	RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${PACKAGE_OUTPUT_DIR}"
-)
-
-get_property(
-	BOON_PACKAGE_RUNTIME_DEPENDENCIES
-	GLOBAL PROPERTY BOON_PACKAGE_RUNTIME_DEPENDENCIES
-)
-
-foreach(runtime_dependency IN LISTS BOON_PACKAGE_RUNTIME_DEPENDENCIES)
-	add_custom_command(TARGET {{TARGET_NAME}} POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_if_different
-			"${runtime_dependency}"
-			"${PACKAGE_OUTPUT_DIR}"
-		COMMAND_EXPAND_LISTS
-		VERBATIM
-	)
-endforeach()
-
-if(UNIX AND NOT APPLE)
-	set_target_properties({{TARGET_NAME}} PROPERTIES
-		BUILD_RPATH "$ORIGIN"
-		INSTALL_RPATH "$ORIGIN"
-	)
-endif()
-

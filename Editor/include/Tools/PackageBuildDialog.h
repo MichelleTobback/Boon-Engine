@@ -4,12 +4,14 @@
 
 #include "Packaging/PackageBuilder.h"
 #include "Packaging/PackageModule.h"
+#include "BoonBuild/BuildPlatform.h"
 
 #include <filesystem>
 #include <string>
 #include <atomic>
 #include <mutex>
 #include <thread>
+#include <vector>
 
 namespace BoonEditor
 {
@@ -34,11 +36,13 @@ namespace BoonEditor
 		void AppendLog(const std::string& text);
 		void SetStep(const std::string& step, float progress);
 
+		void RefreshBuildProfiles();
+		void RenderBuildProfileDropdown();
+
 	private:
-		std::filesystem::path m_OutputRoot = "Build/Packages/Windows";
-		std::filesystem::path m_TemplatePath = "Templates/PackagedRuntime.btemplate";
+		std::filesystem::path m_OutputRoot = "Build";
+		std::filesystem::path m_TemplatePath = "Templates/Packaging";
 		std::filesystem::path m_GeneratedRoot;
-		std::string m_BuildProfileName = "Windows-Release";
 
 		bool m_CopyAssets = true;
 		bool m_GenerateCode = true;
@@ -56,5 +60,15 @@ namespace BoonEditor
 
 		std::string m_CurrentStep;
 		bool m_RunBuild = true;
+
+		struct BuildProfile
+		{
+			std::string Name;
+			std::string Configuration;
+			Boon::BuildPlatform Platform;
+		};
+
+		std::vector<BuildProfile> m_BuildProfiles;
+		int m_SelectedBuildProfileIndex = 0;
 	};
 }

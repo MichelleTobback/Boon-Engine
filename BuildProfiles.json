@@ -12,6 +12,12 @@
       "platform": "Windows",
       "configuration": "Release",
       "generator": "Ninja"
+    },
+
+    "Web-Release": {
+      "platform": "Web",
+      "configuration": "Release",
+      "generator": "Ninja"
     }
   }
 }

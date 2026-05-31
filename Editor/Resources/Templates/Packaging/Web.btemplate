@@ -1,0 +1,237 @@
+@@CMakeLists.txt
+cmake_minimum_required(VERSION 3.20)
+
+project({{TARGET_NAME}} LANGUAGES CXX)
+
+if(NOT EMSCRIPTEN)
+	message(FATAL_ERROR "Web package must be configured with emcmake / Emscripten.")
+endif()
+
+if(NOT DEFINED BOON_REPO_ROOT)
+	if(DEFINED BOON_SDK_ROOT)
+		set(BOON_REPO_ROOT "${BOON_SDK_ROOT}")
+	elseif(DEFINED BOON_ENGINE_ROOT)
+		set(BOON_REPO_ROOT "${BOON_ENGINE_ROOT}")
+	endif()
+endif()
+
+if(EXISTS "${BOON_REPO_ROOT}/tools/BClassGenerator/BoonReflection.cmake")
+	get_filename_component(BOON_REPO_ROOT "${BOON_REPO_ROOT}/.." ABSOLUTE)
+endif()
+
+if(NOT EXISTS "${BOON_REPO_ROOT}/Boon/CMakeLists.txt")
+	message(FATAL_ERROR "BOON_REPO_ROOT is invalid: ${BOON_REPO_ROOT}")
+endif()
+
+get_filename_component(BOON_REPO_ROOT "${BOON_REPO_ROOT}" ABSOLUTE)
+
+set(BOON_SDK_ROOT "${BOON_REPO_ROOT}" CACHE PATH "Boon SDK root" FORCE)
+set(BOON_ENGINE_ROOT "${BOON_REPO_ROOT}/Boon" CACHE PATH "Boon engine root" FORCE)
+set(BOON_CMAKE_DIR "${BOON_ENGINE_ROOT}/cmake" CACHE PATH "Boon cmake root" FORCE)
+
+if(NOT DEFINED GAME_PROJECT_ROOT)
+	message(FATAL_ERROR "GAME_PROJECT_ROOT is not set")
+endif()
+
+get_filename_component(GAME_PROJECT_ROOT "${GAME_PROJECT_ROOT}" ABSOLUTE)
+
+get_filename_component(
+	PACKAGE_OUTPUT_DIR
+	"${CMAKE_CURRENT_SOURCE_DIR}/.."
+	ABSOLUTE
+)
+
+message(STATUS "Package output dir: ${PACKAGE_OUTPUT_DIR}")
+
+function(boon_set_output_dirs target subdir)
+	set_target_properties(${target} PROPERTIES
+		ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin/$<CONFIG>/${subdir}"
+		LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin/$<CONFIG>/${subdir}"
+		RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin/$<CONFIG>/${subdir}"
+	)
+endfunction()
+
+if(NOT TARGET GenerateReflection)
+	add_custom_target(GenerateReflection)
+endif()
+
+if(NOT TARGET BClassGenerator)
+	set(BOON_BCLASSGENERATOR_EXE
+		"${BOON_SDK_ROOT}/bin/Debug/Tools/BClassGenerator.exe"
+	)
+
+	add_executable(BClassGenerator IMPORTED GLOBAL)
+
+	set_target_properties(BClassGenerator PROPERTIES
+		IMPORTED_LOCATION "${BOON_BCLASSGENERATOR_EXE}"
+	)
+endif()
+
+include("${BOON_ENGINE_ROOT}/tools/BClassGenerator/BoonReflection.cmake")
+
+add_subdirectory("${BOON_ENGINE_ROOT}" "${CMAKE_BINARY_DIR}/BoonEngine")
+
+set(BOON_PROJECT_ENGINE_MODULES_FILE
+	"${GAME_PROJECT_ROOT}/generated/EngineModules.cmake"
+)
+
+if(NOT EXISTS "${BOON_PROJECT_ENGINE_MODULES_FILE}")
+	message(FATAL_ERROR
+		"Missing project engine module selection file: ${BOON_PROJECT_ENGINE_MODULES_FILE}\n"
+		"Run BoonBuild for the project before packaging."
+	)
+endif()
+
+include("${BOON_PROJECT_ENGINE_MODULES_FILE}")
+
+if(COMMAND boon_add_project_engine_modules)
+	boon_add_project_engine_modules()
+else()
+	foreach(engine_module IN LISTS BOON_PROJECT_ENGINE_MODULES)
+		include("${BOON_ENGINE_ROOT}/modules/generated/${engine_module}/${engine_module}.cmake")
+	endforeach()
+endif()
+
+set(BOON_PACKAGED_MODULE_TARGETS)
+
+foreach(engine_module IN LISTS BOON_PROJECT_ENGINE_MODULES)
+	if(TARGET ${engine_module})
+		list(APPEND BOON_PACKAGED_MODULE_TARGETS ${engine_module})
+	else()
+		message(FATAL_ERROR
+			"Project requested engine module '${engine_module}', but no CMake target was created for it."
+		)
+	endif()
+endforeach()
+
+set(BOON_BUILD_GAME_SHARED OFF CACHE BOOL "" FORCE)
+
+add_subdirectory(
+	"${GAME_PROJECT_ROOT}/generated"
+	"${CMAKE_BINARY_DIR}/GameProject"
+)
+
+add_executable({{TARGET_NAME}}
+	GeneratedMain.cpp
+	GeneratedRuntimeConfig.cpp
+	GeneratedPackagedState.cpp
+)
+
+target_compile_features({{TARGET_NAME}} PRIVATE cxx_std_20)
+
+target_compile_definitions({{TARGET_NAME}} PRIVATE
+	BOON_MODULE_NAME={{GAME_PROJECT_TARGET}}
+	BOON_PLATFORM_WEB=1
+)
+
+target_include_directories({{TARGET_NAME}} PRIVATE
+	"${CMAKE_CURRENT_SOURCE_DIR}"
+)
+
+add_library(BoonPackagedStaticModules STATIC
+	"${GAME_PROJECT_ROOT}/generated/StaticModules.cpp"
+)
+
+target_include_directories(BoonPackagedStaticModules
+	PRIVATE
+		"${BOON_ENGINE_ROOT}/include"
+)
+
+target_link_libraries(BoonPackagedStaticModules
+	PUBLIC
+		BoonEngine
+		{{GAME_PROJECT_TARGET}}
+		${BOON_PACKAGED_MODULE_TARGETS}
+)
+
+target_link_libraries({{TARGET_NAME}} PRIVATE
+	BoonEngine
+	BoonPackagedStaticModules
+)
+
+set_target_properties({{TARGET_NAME}} PROPERTIES
+	SUFFIX ".html"
+	RUNTIME_OUTPUT_DIRECTORY "${PACKAGE_OUTPUT_DIR}"
+	RUNTIME_OUTPUT_DIRECTORY_DEBUG "${PACKAGE_OUTPUT_DIR}"
+	RUNTIME_OUTPUT_DIRECTORY_RELEASE "${PACKAGE_OUTPUT_DIR}"
+	RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${PACKAGE_OUTPUT_DIR}"
+	RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${PACKAGE_OUTPUT_DIR}"
+)
+
+target_link_options({{TARGET_NAME}} PRIVATE
+	-sUSE_GLFW=3
+	-sFULL_ES3=1
+	-sALLOW_MEMORY_GROWTH=1
+	-sASSERTIONS=1
+	-sWASM=1
+	--preload-file "${PACKAGE_OUTPUT_DIR}/Assets@/Assets"
+)
+
+@@../BuildWeb.bat
+@echo off
+setlocal
+
+echo ========================================
+echo Building Web Package
+echo ========================================
+
+if "%EMSDK%"=="" (
+	echo ERROR: EMSDK environment variable is not set.
+	echo Example:
+	echo   set EMSDK=C:\Tools\emsdk
+	exit /b 1
+)
+
+if not exist "%EMSDK%\emsdk_env.bat" (
+	echo ERROR: Could not find:
+	echo   %EMSDK%\emsdk_env.bat
+	exit /b 1
+)
+
+call "%EMSDK%\emsdk_env.bat"
+if errorlevel 1 exit /b 1
+
+where emcc >nul 2>nul
+if errorlevel 1 (
+	echo ERROR: emcc not found after emsdk_env setup.
+	exit /b 1
+)
+
+set "PROFILE={{BUILD_PROFILE}}"
+set "BOON_REPO_ROOT={{BOON_REPO_ROOT}}"
+set "BOON_SDK_ROOT={{BOON_REPO_ROOT}}"
+set "BOON_ENGINE_ROOT={{BOON_ENGINE_ROOT}}"
+set "GAME_PROJECT_ROOT={{GAME_PROJECT_ROOT}}"
+
+set "BOONBUILD_EXE=%BOON_REPO_ROOT%\Tools\BoonBuild.exe"
+if not exist "%BOONBUILD_EXE%" set "BOONBUILD_EXE=%BOON_REPO_ROOT%\bin\Release\Tools\BoonBuild.exe"
+if not exist "%BOONBUILD_EXE%" set "BOONBUILD_EXE=%BOON_REPO_ROOT%\bin\Debug\Tools\BoonBuild.exe"
+
+if not exist "%BOONBUILD_EXE%" (
+	echo ERROR: BoonBuild.exe not found.
+	exit /b 1
+)
+
+echo.
+echo [1/3] Generating modular build files from BuildRules.json...
+"%BOONBUILD_EXE%" "%GAME_PROJECT_ROOT%" --profile "%PROFILE%"
+if errorlevel 1 exit /b 1
+
+echo.
+echo [2/3] Configuring web runtime...
+emcmake cmake -S "{{GENERATED_ROOT}}" -B "{{BUILD_DIR}}" -G Ninja -DCMAKE_BUILD_TYPE={{BUILD_CONFIGURATION}} -DBOON_REPO_ROOT:PATH="{{BOON_REPO_ROOT_CMAKE}}" -DBOON_ENGINE_ROOT:PATH="{{BOON_ENGINE_ROOT_CMAKE}}" -DBOON_SDK_ROOT:PATH="{{BOON_REPO_ROOT_CMAKE}}" -DGAME_PROJECT_ROOT:PATH="{{GAME_PROJECT_ROOT_CMAKE}}"
+if errorlevel 1 exit /b 1
+
+echo.
+echo [3/3] Building web runtime...
+cmake --build "{{BUILD_DIR}}" --config {{BUILD_CONFIGURATION}}
+if errorlevel 1 exit /b 1
+
+echo.
+echo ========================================
+echo Web Package Complete
+echo ========================================
+echo Output:
+echo   {{PACKAGE_ROOT}}
+
+endlocal

@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace BoonBuild
+namespace Boon
 {
     enum class BuildPlatform
     {
@@ -46,5 +46,15 @@ namespace BoonBuild
         if (value == "Android") { outPlatform = BuildPlatform::Android; return true; }
 
         return false;
+    }
+
+    inline BuildPlatform ToPlatform(const std::string& value)
+    {
+        if (value == "Windows") { return BuildPlatform::Windows; }
+        if (value == "Linux") { return BuildPlatform::Linux; }
+        if (value == "Web") { return BuildPlatform::Web; }
+        if (value == "Android") { return BuildPlatform::Android; }
+
+        return BuildPlatform::Windows;
     }
 }

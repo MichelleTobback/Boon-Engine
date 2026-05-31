@@ -10,17 +10,6 @@
 
 namespace BoonEditor
 {
-	static std::string ToCMakePath(const std::filesystem::path& path)
-	{
-		std::string value = path.string();
-		for (char& c : value)
-		{
-			if (c == '\\')
-				c = '/';
-		}
-		return value;
-	}
-
 	static bool CopyDirectory(
 		const std::filesystem::path& from,
 		const std::filesystem::path& to)
@@ -57,131 +46,7 @@ namespace BoonEditor
 		return root;
 	}
 
-	static bool WriteBuildScript(
-		const std::filesystem::path& packageRoot,
-		const std::filesystem::path& generatedRoot,
-		const std::filesystem::path& repoRoot,
-		const std::filesystem::path& projectRoot,
-		const std::string& profileName,
-		const std::string& configuration)
-	{
-		std::ofstream file(packageRoot / "BuildWindows.bat");
-		if (!file)
-			return false;
-
-		const std::filesystem::path buildDir = packageRoot / "Build";
-		const std::string profile = profileName.empty() ? "Windows-Release" : profileName;
-		const std::string config = configuration.empty() ? "Release" : configuration;
-
-		file
-			<< "@echo off\n"
-			<< "setlocal\n"
-			<< "\n"
-			<< "echo [Setup] Finding Visual Studio build environment...\n"
-			<< "set \"VS_DEV_CMD=\"\n"
-			<< "set \"VSWHERE=%ProgramFiles(x86)%\\Microsoft Visual Studio\\Installer\\vswhere.exe\"\n"
-			<< "\n"
-			<< "if exist \"%VSWHERE%\" (\n"
-			<< "  for /f \"usebackq tokens=*\" %%i in (`\"%VSWHERE%\" -latest -products * -property installationPath`) do (\n"
-			<< "    if exist \"%%i\\Common7\\Tools\\VsDevCmd.bat\" (\n"
-			<< "      set \"VS_DEV_CMD=%%i\\Common7\\Tools\\VsDevCmd.bat\"\n"
-			<< "    )\n"
-			<< "  )\n"
-			<< ")\n"
-			<< "\n"
-			<< "if \"%VS_DEV_CMD%\"==\"\" (\n"
-			<< "  if exist \"C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\VsDevCmd.bat\" (\n"
-			<< "    set \"VS_DEV_CMD=C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\VsDevCmd.bat\"\n"
-			<< "  )\n"
-			<< ")\n"
-			<< "\n"
-			<< "if \"%VS_DEV_CMD%\"==\"\" (\n"
-			<< "  if exist \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\VsDevCmd.bat\" (\n"
-			<< "    set \"VS_DEV_CMD=C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\VsDevCmd.bat\"\n"
-			<< "  )\n"
-			<< ")\n"
-			<< "\n"
-			<< "if \"%VS_DEV_CMD%\"==\"\" (\n"
-			<< "  if exist \"C:\\Program Files\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" (\n"
-			<< "    set \"VS_DEV_CMD=C:\\Program Files\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\"\n"
-			<< "  )\n"
-			<< ")\n"
-			<< "\n"
-			<< "if \"%VS_DEV_CMD%\"==\"\" (\n"
-			<< "  echo ERROR: Could not find VsDevCmd.bat.\n"
-			<< "  exit /b 1\n"
-			<< ")\n"
-			<< "\n"
-			<< "echo Using:\n"
-			<< "echo   %VS_DEV_CMD%\n"
-			<< "call \"%VS_DEV_CMD%\" -arch=x64 -host_arch=x64\n"
-			<< "if errorlevel 1 exit /b 1\n"
-			<< "\n"
-			<< "where cl >nul 2>nul\n"
-			<< "if errorlevel 1 (\n"
-			<< "  echo ERROR: cl.exe not found after VsDevCmd setup.\n"
-			<< "  exit /b 1\n"
-			<< ")\n"
-			<< "\n"
-			<< "where rc >nul 2>nul\n"
-			<< "if errorlevel 1 (\n"
-			<< "  echo ERROR: rc.exe not found after VsDevCmd setup. Install the Windows SDK.\n"
-			<< "  exit /b 1\n"
-			<< ")\n"
-			<< "\n"
-			<< "where mt >nul 2>nul\n"
-			<< "if errorlevel 1 (\n"
-			<< "  echo ERROR: mt.exe not found after VsDevCmd setup. Install the Windows SDK.\n"
-			<< "  exit /b 1\n"
-			<< ")\n"
-			<< "\n"
-			<< "set \"PROFILE=" << profile << "\"\n"
-			<< "set \"BOON_REPO_ROOT=" << repoRoot.string() << "\"\n"
-			<< "set \"BOON_SDK_ROOT=" << repoRoot.string() << "\"\n"
-			<< "set \"BOON_ENGINE_ROOT=" << (repoRoot / "Boon").string() << "\"\n"
-			<< "set \"GAME_PROJECT_ROOT=" << projectRoot.string() << "\"\n"
-			<< "\n"
-			<< "set \"BOONBUILD_EXE=%BOON_REPO_ROOT%\\Tools\\BoonBuild.exe\"\n"
-			<< "if not exist \"%BOONBUILD_EXE%\" set \"BOONBUILD_EXE=%BOON_REPO_ROOT%\\bin\\Release\\Tools\\BoonBuild.exe\"\n"
-			<< "if not exist \"%BOONBUILD_EXE%\" set \"BOONBUILD_EXE=%BOON_REPO_ROOT%\\bin\\Debug\\Tools\\BoonBuild.exe\"\n"
-			<< "\n"
-			<< "if not exist \"%BOONBUILD_EXE%\" (\n"
-			<< "  echo ERROR: BoonBuild.exe not found.\n"
-			<< "  echo Tried:\n"
-			<< "  echo   %BOON_REPO_ROOT%\\Tools\\BoonBuild.exe\n"
-			<< "  echo   %BOON_REPO_ROOT%\\bin\\Release\\Tools\\BoonBuild.exe\n"
-			<< "  echo   %BOON_REPO_ROOT%\\bin\\Debug\\Tools\\BoonBuild.exe\n"
-			<< "  exit /b 1\n"
-			<< ")\n"
-			<< "\n"
-			<< "echo SDK  : %BOON_SDK_ROOT%\n"
-			<< "echo Engine: %BOON_ENGINE_ROOT%\n"
-			<< "echo Tool : %BOONBUILD_EXE%\n"
-			<< "echo.\n"
-			<< "\n"
-			<< "echo [1/3] Generating modular build files from BuildRules.json...\n"
-			<< "\"%BOONBUILD_EXE%\" \"%GAME_PROJECT_ROOT%\" --profile \"%PROFILE%\"\n"
-			<< "if errorlevel 1 exit /b 1\n"
-			<< "\n"
-			<< "echo [2/3] Configuring packaged runtime...\n"
-			<< "cmake -S \"" << generatedRoot.string() << "\" -B \"" << buildDir.string() << "\" -G Ninja "
-			<< "-DCMAKE_BUILD_TYPE=" << config << " "
-			<< "-DBOON_REPO_ROOT:PATH=\"" << ToCMakePath(repoRoot) << "\" "
-			<< "-DBOON_ENGINE_ROOT:PATH=\"" << ToCMakePath(repoRoot / "Boon") << "\" "
-			<< "-DBOON_SDK_ROOT:PATH=\"" << ToCMakePath(repoRoot) << "\" "
-			<< "-DGAME_PROJECT_ROOT:PATH=\"" << ToCMakePath(projectRoot) << "\"\n"
-			<< "if errorlevel 1 exit /b 1\n"
-			<< "\n"
-			<< "echo [3/3] Building packaged runtime...\n"
-			<< "cmake --build \"" << buildDir.string() << "\" --config " << config << "\n"
-			<< "if errorlevel 1 exit /b 1\n"
-			<< "\n"
-			<< "endlocal\n";
-
-		return true;
-	}
-
-	bool PackageBuilder::BuildWindowsPackage(
+	bool PackageBuilder::BuildPackage(
 		const Boon::RuntimeConfig& config,
 		const PackageModuleSet& modules,
 		const PackageBuildSettings& settings,
@@ -220,6 +85,11 @@ namespace BoonEditor
 			? packageRoot / "Generated"
 			: settings.GeneratedRoot;
 
+		const std::filesystem::path repoRoot =
+			NormalizeRepoRoot(settings.WorkspaceRoot);
+
+		const std::filesystem::path packageTemplateDir = settings.TemplatePath;
+
 		std::filesystem::create_directories(packageRoot);
 
 		Step("Preparing package folder", 0.05f);
@@ -231,8 +101,12 @@ namespace BoonEditor
 			if (!PackageCodeGenerator::Generate(
 				config,
 				modules,
-				settings.TemplatePath,
-				generatedRoot))
+				settings,
+				packageTemplateDir / "Common.btemplate",
+				packageTemplateDir / "Windows.btemplate",
+				packageRoot,
+				generatedRoot,
+				repoRoot))
 			{
 				Error("Failed to generate packaged runtime code.");
 				return false;
@@ -264,7 +138,6 @@ namespace BoonEditor
 			}
 		}
 
-		// tempory copy scenes
 		{
 			Step("Copying scenes", 0.48f);
 
@@ -279,29 +152,12 @@ namespace BoonEditor
 			}
 		}
 
-		Step("Writing build script", 0.55f);
+		Step("Running CMake build", 0.55f);
 
-		const std::filesystem::path repoRoot = NormalizeRepoRoot(settings.WorkspaceRoot);
+		const std::filesystem::path script = std::filesystem::absolute(packageRoot / "BuildWindows.bat");
+		const std::string command = "cmd.exe /d /s /c \"call \"" + script.string() + "\"\"";
 
-		if (!WriteBuildScript(
-			packageRoot,
-			generatedRoot,
-			repoRoot,
-			settings.ProjectRoot,
-			settings.BuildProfileName,
-			settings.BuildConfiguration))
-		{
-			Error("Failed to write build script.");
-			return false;
-		}
-
-		Step("Running CMake build", 0.65f);
-
-		const std::filesystem::path script = packageRoot / "BuildWindows.bat";
-
-		ProcessResult result = ProcessRunner::Run(
-			"cmd /c \"" + script.string() + "\"",
-			[&](const std::string& chunk)
+		ProcessResult result = ProcessRunner::Run(command, [&](const std::string& chunk)
 			{
 				if (log)
 					log(chunk);

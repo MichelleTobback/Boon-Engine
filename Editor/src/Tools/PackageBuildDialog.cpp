@@ -3,6 +3,10 @@
 #include "Project/ProjectConfig.h"
 #include "Core/EditorContext.h"
 
+#include <fstream>
+#include <algorithm>
+#include <nlohmann/json.hpp>
+
 #include <UI/UI.h>
 #include <UI/IconsFontAwesome7.h>
 
@@ -25,11 +29,15 @@ namespace BoonEditor
 	{
 		m_Status.clear();
 
-		std::scoped_lock lock(m_LogMutex);
-		m_BuildLog.clear();
+		{
+			std::scoped_lock lock(m_LogMutex);
+			m_BuildLog.clear();
+		}
 
 		m_Progress = 0.0f;
 		m_CurrentStep.clear();
+
+		RefreshBuildProfiles();
 	}
 
 	void PackageBuildDialog::RenderDialog()
@@ -63,7 +71,7 @@ namespace BoonEditor
 		if (UI::Field("Template", templatePath))
 			m_TemplatePath = templatePath;
 
-		UI::Field("Build Profile", m_BuildProfileName);
+		RenderBuildProfileDropdown();
 
 		UI::Checkbox("Generate Code", m_GenerateCode);
 		UI::Checkbox("Copy Assets", m_CopyAssets);
@@ -157,6 +165,40 @@ namespace BoonEditor
 		AppendLog("[Package] " + step);
 	}
 
+	static bool ReadBuildProfile(
+		const std::filesystem::path& projectRoot,
+		const std::string& profileName,
+		BuildPlatform& outPlatform,
+		std::string& outConfiguration)
+	{
+		const std::filesystem::path rulesPath = projectRoot / "BuildRules.json";
+
+		std::ifstream file(rulesPath);
+		if (!file)
+			return false;
+
+		nlohmann::json json;
+		file >> json;
+
+		if (!json.contains("profiles"))
+			return false;
+
+		const auto& profiles = json["profiles"];
+
+		if (!profiles.contains(profileName))
+			return false;
+
+		const auto& profile = profiles[profileName];
+
+		const std::string platform = profile.value("platform", "Windows");
+		const std::string configuration = profile.value("configuration", "Release");
+
+		outPlatform = ToPlatform(platform);
+
+		outConfiguration = configuration;
+		return true;
+	}
+
 	void PackageBuildDialog::StartBuildPackage()
 	{
 		if (m_IsBuilding)
@@ -172,9 +214,6 @@ namespace BoonEditor
 		config.Window.bResizable = true;
 		config.Window.bFullscreen = false;
 
-		// Modules are no longer selected manually here.
-		// BoonBuild reads the active project's BuildRules.json and generates only
-		// the engine/game modules requested by that project for this build profile.
 		PackageModuleSet modules{};
 
 		PackageBuildSettings settings{};
@@ -182,15 +221,13 @@ namespace BoonEditor
 			? m_TemplatePath
 			: prj.Editor.EditorResourcesRoot / m_TemplatePath;
 
-		settings.OutputRoot = m_OutputRoot;
 		settings.GeneratedRoot = m_GeneratedRoot;
 		settings.CopyAssets = m_CopyAssets;
 		settings.GenerateCode = m_GenerateCode;
-		settings.BuildProfileName = m_BuildProfileName;
-		settings.BuildConfiguration =
-			m_BuildProfileName.find("Debug") != std::string::npos
-			? "Debug"
-			: "Release";
+
+		settings.BuildProfileName = m_BuildProfiles[m_SelectedBuildProfileIndex].Name;
+		settings.BuildPlatform = m_BuildProfiles[m_SelectedBuildProfileIndex].Platform;
+		settings.BuildConfiguration = m_BuildProfiles[m_SelectedBuildProfileIndex].Configuration;
 
 		settings.GameAssetsSource = config.ProjectRoot / "generated" / "Assets" / "Game";
 		settings.EngineAssetsSource = config.ProjectRoot / "generated" / "Assets" / "Engine";
@@ -198,6 +235,8 @@ namespace BoonEditor
 		settings.WorkspaceRoot = prj.Runtime.EngineRoot;
 		if (settings.WorkspaceRoot.filename() == "Boon")
 			settings.WorkspaceRoot = settings.WorkspaceRoot.parent_path();
+
+		settings.OutputRoot = m_OutputRoot / ToString(settings.BuildPlatform) / settings.BuildConfiguration;
 
 		m_IsBuilding = true;
 
@@ -219,7 +258,7 @@ namespace BoonEditor
 			{
 				SetStep("Starting package build", 0.02f);
 
-				const bool success = PackageBuilder::BuildWindowsPackage(
+				const bool success = PackageBuilder::BuildPackage(
 					config,
 					modules,
 					settings,
@@ -245,5 +284,94 @@ namespace BoonEditor
 				m_Progress = success ? 1.0f : m_Progress.load();
 				m_IsBuilding = false;
 			});
+	}
+
+	void PackageBuildDialog::RefreshBuildProfiles()
+	{
+		m_BuildProfiles.clear();
+		m_SelectedBuildProfileIndex = 0;
+
+		EditorContext& ctx = GetContext();
+		const Boon::ProjectConfig prj = ctx.GetCurrentProjectConfig();
+
+		const std::filesystem::path rulesPath =
+			prj.Runtime.ProjectRoot / "BuildProfiles.json";
+
+		std::ifstream file(rulesPath);
+		if (!file)
+		{
+			BuildProfile profile{};
+			profile.Name = "Windows-Release";
+			profile.Platform = BuildPlatform::Windows;
+			profile.Configuration = "Release";
+			m_BuildProfiles.push_back(profile);
+			return;
+		}
+
+		nlohmann::json json;
+		file >> json;
+
+		if (!json.contains("profiles") || !json["profiles"].is_object())
+		{
+			BuildProfile profile{};
+			profile.Name = "Windows-Release";
+			profile.Platform = BuildPlatform::Windows;
+			profile.Configuration = "Release";
+			m_BuildProfiles.push_back(profile);
+			return;
+		}
+
+		const std::string defaultProfile =
+			json.value("defaultProfile", "Windows-Release");
+
+		for (auto it = json["profiles"].begin(); it != json["profiles"].end(); ++it)
+		{
+			BuildProfile profile{};
+			profile.Name = it.key();
+			profile.Platform = ToPlatform(it->at("platform"));
+			profile.Configuration = it->at("configuration");
+			m_BuildProfiles.push_back(profile);
+		}
+
+		if (m_BuildProfiles.empty())
+		{
+			BuildProfile profile{};
+			profile.Name = "Windows-Release";
+			profile.Platform = BuildPlatform::Windows;
+			profile.Configuration = "Release";
+			m_BuildProfiles.push_back(profile);
+		}
+
+		const std::string preferredProfile = defaultProfile;
+
+		auto found = std::find_if(
+			m_BuildProfiles.begin(),
+			m_BuildProfiles.end(),
+			[&](const BuildProfile& profile)
+			{
+				return profile.Name == preferredProfile;
+			});
+
+		if (found != m_BuildProfiles.end())
+			m_SelectedBuildProfileIndex = int(std::distance(m_BuildProfiles.begin(), found));
+		else
+			m_SelectedBuildProfileIndex = 0;
+	}
+
+	void PackageBuildDialog::RenderBuildProfileDropdown()
+	{
+		std::vector<const char*> temp;
+		temp.reserve(m_BuildProfiles.size());
+
+		for (const auto& profile : m_BuildProfiles)
+			temp.push_back(profile.Name.c_str());
+
+		if (temp.empty())
+		{
+			ImGui::TextDisabled("No build profiles found.");
+			return;
+		}
+
+		UI::Combo("Build Profile", m_SelectedBuildProfileIndex, temp.data(), static_cast<int>(m_BuildProfiles.size()));
 	}
 }

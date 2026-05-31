@@ -573,7 +573,22 @@ namespace BoonEditor
         {
             BeginProperty(label, currentItem);
 
-            bool result = ImGui::Combo("##val", &currentItem, items, count);
+            bool result = ImGui::Combo(("##" + label).c_str(), &currentItem, items, count);
+
+            return EndProperty(label, result);
+        }
+
+        static PropertyResult Combo(const std::string& label, int& currentItem, const std::vector<std::string>& items)
+        {
+            BeginProperty(label, currentItem);
+
+            std::vector<const char*> temp;
+            temp.reserve(items.size());
+
+            for (const std::string& profile : items)
+                temp.push_back(profile.c_str());
+
+            bool result = ImGui::Combo("##val", &currentItem, temp.data(), static_cast<int>(items.size()));
 
             return EndProperty(label, result);
         }

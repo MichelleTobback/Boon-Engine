@@ -38,6 +38,30 @@ Boon::Application::~Application()
 
 void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 {
+	Initialize(std::move(pState));
+
+#if defined(BOON_PLATFORM_WEB)
+	emscripten_set_main_loop_arg(
+		[](void* app)
+		{
+			static_cast<Application*>(app)->Tick();
+		},
+		this,
+		0,
+		true
+	);
+#else
+	while (!m_bShouldQuit)
+	{
+		Tick();
+	}
+
+	Shutdown();
+#endif
+}
+
+void Boon::Application::Initialize(std::shared_ptr<AppState>&& pState)
+{
 	m_pInput = std::make_unique<Input>();
 	m_pEventBus = std::make_unique<EventBus>();
 	m_pTime = std::make_unique<Time>();
@@ -90,41 +114,52 @@ void Boon::Application::Run(std::shared_ptr<AppState>&& pState)
 
 	BOON_INIT_LOGGER();
 
-	ModuleContext moduleContext{};
-	moduleContext.BClasses = m_pClsRegistry.get();
-	moduleContext.NetReps = m_pNetRepRegistry.get();
-	moduleContext.ServiceRegistry = m_pServiceRegistry.get();
-	moduleContext.EngineContext = &m_Context;
-	RegisterStaticModules(moduleContext);
-
+	m_ModuleContext.BClasses = m_pClsRegistry.get();
+	m_ModuleContext.NetReps = m_pNetRepRegistry.get();
+	m_ModuleContext.ServiceRegistry = m_pServiceRegistry.get();
+	m_ModuleContext.EngineContext = &m_Context;
+	RegisterStaticModules(m_ModuleContext);
+	    
 	m_pSubsystems->InitAll(m_Context);
 
-	StartStaticModules(moduleContext);
+	StartStaticModules(m_ModuleContext);
 
 	m_pStateMachine->PushState(std::move(pState), m_Context);
 	pState = nullptr;
 
-	bool quit{ false };
+	m_pTime->Start();
+}
+
+void Boon::Application::Tick()
+{
 	Time& time{ *m_pTime };
-	time.Start();
-	while (!quit)
+	time.Step();
+	m_bShouldQuit = m_pWindow->Update();
+	m_pSubsystems->UpdateAll(m_Context);
+	m_pStateMachine->Update();
+	m_pInput->Update();
+	m_pWindow->Present();
+	time.Wait();
+	m_pStateMachine->EndUpdate(m_Context);
+
+#if defined(BOON_PLATFORM_WEB)
+	if (m_ShouldQuit)
 	{
-		time.Step();
-		quit = m_pWindow->Update();
-		m_pSubsystems->UpdateAll(m_Context);
-		m_pStateMachine->Update();
-		m_pInput->Update();
-		m_pWindow->Present();
-		time.Wait();
-		m_pStateMachine->EndUpdate(m_Context);
+		emscripten_cancel_main_loop();
+		Shutdown();
 	}
-	StopStaticModules(moduleContext);
+#endif
+}
+
+void Boon::Application::Shutdown()
+{
+	StopStaticModules(m_ModuleContext);
 
 	m_pSubsystems->ShutdownAll(m_Context);
 	m_pScenes->Shutdown();
 	m_pStateMachine->Shutdown();
 
-	UnregisterStaticModules(moduleContext);
+	UnregisterStaticModules(m_ModuleContext);
 
 	ServiceLocator::Shutdown();
 	Renderer::Shutdown();
